@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>编程 on zhi.moe</title>
+    <link>https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
+    <description>Recent content in 编程 on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 11 Apr 2021 21:47:02 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Tour of Rusts Standard Library Traits</title>
+      <link>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</link>
+      <pubDate>Sun, 11 Apr 2021 21:47:02 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</guid>
+      <description>原文Tour of Rust&amp;rsquo;s Standard Library Traits 关于rust trait非常好的介绍，比rust book详细，系统。 Tour of Rust&amp;rsquo;s Standard Library Traits Table of Contents Intro Trait Basics Trait Items Self Functions Methods Associated Types Generic Parameters Generic Types vs Associated Types Scope Derive Macros Default Impls Generic Blanket Impls Subtraits &amp;amp; Supertraits Trait Objects Marker Traits Auto Traits Unsafe Traits Auto Traits Send &amp;amp; Sync Sized General Traits Default Clone Copy Any Formatting Traits Display &amp;amp; ToString Debug Operator Traits Comparison Traits PartialEq &amp;amp; Eq Hash PartialOrd &amp;amp; Ord Arithmetic Traits</description>
+    </item>
+    
+    <item>
+      <title>Py Tips for Impatient Dev</title>
+      <link>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</link>
+      <pubDate>Sun, 31 Jan 2021 21:45:45 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</guid>
+      <description>python在看似简单的语法中，有很多tricks。 tricks python的dict中关于equal和hash计算方式会有意外的效果 [&amp;#39;no&amp;#39;, &amp;#39;yes&amp;#39;][True] # output? {True: &amp;#39;yes&amp;#39;, 1: &amp;#39;no&amp;#39;, 1.0: &amp;#39;maybe&amp;#39;} # output? “布尔类型是整数类型的子类型，布尔值在几乎所有环境中的行为都类似于值 0 和 1，但在转换为字符串</description>
+    </item>
+    
+    <item>
+      <title>Associated Type in Rust</title>
+      <link>https://zhimoe.github.io/post/type-in-rust/</link>
+      <pubDate>Sun, 20 Sep 2020 20:30:41 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/type-in-rust/</guid>
+      <description>&lt;p&gt;Associated Type and generic diff in rust&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python几道常见的笔试题</title>
+      <link>https://zhimoe.github.io/post/python-interview-questions/</link>
+      <pubDate>Thu, 04 Jun 2020 21:31:01 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/python-interview-questions/</guid>
+      <description>&lt;p&gt;4道常见的python面试题和解答,以及一些python陷阱的链接。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scala Python 文件读取跳过转义字符</title>
+      <link>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</link>
+      <pubDate>Thu, 04 Jun 2020 21:30:31 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</guid>
+      <description>&lt;p&gt;在文件读取的时候，会遇到非法转义字符，导致文件按行读取失败。此时可以通过忽略转义字符来解决。本文记录了scala和python的方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Matplotlib图例中文乱码解决方案</title>
+      <link>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</link>
+      <pubDate>Fri, 01 May 2020 19:18:05 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</guid>
+      <description>&lt;p&gt;很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rust Ownerships Lifetimes教程</title>
+      <link>https://zhimoe.github.io/post/rust-ownership-lifetimes/</link>
+      <pubDate>Sat, 22 Feb 2020 15:55:13 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/rust-ownership-lifetimes/</guid>
+      <description>&lt;p&gt;some notes on rust ownership,reference,string and &amp;amp;str, and lifetimes&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot应用和Rust应用的Dockerfile最佳实践</title>
+      <link>https://zhimoe.github.io/post/dockerfile-best-practices/</link>
+      <pubDate>Mon, 03 Feb 2020 11:30:55 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/dockerfile-best-practices/</guid>
+      <description>&lt;p&gt;记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker CMD ENTRYPOINT区别</title>
+      <link>https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/</link>
+      <pubDate>Sun, 02 Feb 2020 21:10:18 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/</guid>
+      <description>&lt;p&gt;记录docker中exec form和shell form的区别,CMD和ENTRYPOINT区别,以及最佳实践.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>scala uniform access principle</title>
+      <link>https://zhimoe.github.io/post/scala-uniform-access-principle/</link>
+      <pubDate>Fri, 31 Jan 2020 18:40:10 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala-uniform-access-principle/</guid>
+      <description>&lt;p&gt;虽然代码写的很水,但是我对各种编程语言一直比较感兴趣. 除了工作中使用的Java之外,自己也了解Python,Groovy,Scala,Kotlin,Clojure,Go,Rust.其中Python和Scala在工作中也偶尔使用. 了解不同的编程语言语法对于编程思维的影响还是蛮有意思的.
+例如, 只会Java的开发者可能没有听过模式匹配(pattern match).在我学习了Scala之后,我对模式匹配的理解就是更强更优雅的switch+if. 而在我看过rust和elixir语言中关于模式匹配之后,我对模式匹配的理解就完全不一样了.&lt;/p&gt;
+&lt;p&gt;这些语言中,论说对编程思维改变最大的当属Clojure莫属. Lisp语言是一种非常优雅的语言. 这种优雅的最大特点就是Lisp(Clojure)从语法上面做到了代码即数据.即Clojure的代码形式和其数据结构list的形式是一样的(这也是lisp名字由来,LISt Processor).
+这个特点的好处就是Clojure赋予了list这种数据结构强大的表达能力,可以在使用极其简练的语法在list数据结构实现复杂的逻辑.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures.&amp;rdquo; —Alan Perlis&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;尽可能的减少语法的规则,这种语法特点在Scala上面也有体现.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Highlights in Scala for Impatient 2nd</title>
+      <link>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</link>
+      <pubDate>Wed, 15 Jan 2020 21:42:33 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</guid>
+      <description>&lt;p&gt;key points in scala-for-impatient 2nd book, best book for java developer to use scala in a rush&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rust Packages Crates Mod Notes</title>
+      <link>https://zhimoe.github.io/post/rust-packages-crates-mod/</link>
+      <pubDate>Sun, 12 Jan 2020 20:03:33 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/rust-packages-crates-mod/</guid>
+      <description>&lt;p&gt;初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>git 常用命令备忘录</title>
+      <link>https://zhimoe.github.io/post/git-useful-tips/</link>
+      <pubDate>Sun, 01 Sep 2019 21:01:06 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/git-useful-tips/</guid>
+      <description>记录日常开发中偶尔会遇到的但是总是记不住的git命令. 以下技巧都来自于oh shit git 和 stackoverflow. 版权归作者所有. delete all history commit and commit current content git checkout --orphan tmp_branch &amp;amp;&amp;amp; git add -A &amp;amp;&amp;amp; git commit -am &amp;#34;first commit&amp;#34; &amp;amp;&amp;amp; git branch -D master &amp;amp;&amp;amp; git branch -m master &amp;amp;&amp;amp; git push -f origin master store password in local git config credential.helper store git reflog git reflog # you will see a list of every thing you&amp;#39;ve # done in git, across all branches! # each one has</description>
+    </item>
+    
+    <item>
+      <title>Scala Collection Tips</title>
+      <link>https://zhimoe.github.io/post/scala-collection-tips/</link>
+      <pubDate>Sun, 19 May 2019 16:49:14 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala-collection-tips/</guid>
+      <description>scala collection 提供了一整套独立于Java的高性能集合,使用上非常灵活,所以需要清楚一些常用的方法: reduce fold scan 集合的符号方法 数组,tuple 2.13的集合架构 reduce fold scan //reduce是一个二元函数,遍历整个集合 List(1, 3, 5).reduceLeft(_ + _) // == ((1+3)+5) //reduceRight start from end of the collection //also you can given initial argument List(1, 3, 5).foldLeft(&amp;#34;&amp;#34;)(_</description>
+    </item>
+    
+    <item>
+      <title>Spring FactoryBean and ContextAware</title>
+      <link>https://zhimoe.github.io/post/spring-factorybean-contextaware/</link>
+      <pubDate>Thu, 16 May 2019 22:44:38 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/spring-factorybean-contextaware/</guid>
+      <description>FactoryBean 一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例. 例如: public class Tool { private int id; // standard constructors, getters and setters } public class ToolFactory implements FactoryBean&amp;lt;Tool&amp;gt; { private int factoryId; private int toolId; @Override public Tool getObject() throws Exception { return new Tool(toolId); } @Override public Class&amp;lt;?&amp;gt; getObjectType() { return Tool.class; } @Override public boolean isSingleton() { return false; } // standard setters and getters } 注册Tool: &amp;lt;!-- factorybean-spring-ctx.xml --&amp;gt; &amp;lt;beans&amp;gt; &amp;lt;bean id=&amp;#34;tool&amp;#34; class=&amp;#34;com.baeldung.factorybean.ToolFactory&amp;#34;&amp;gt; &amp;lt;property name=&amp;#34;factoryId&amp;#34; value=&amp;#34;9090&amp;#34;/&amp;gt; &amp;lt;property</description>
+    </item>
+    
+    <item>
+      <title>Learn Clojure by Example</title>
+      <link>https://zhimoe.github.io/post/learn-clojure-by-example/</link>
+      <pubDate>Mon, 13 May 2019 15:22:05 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/learn-clojure-by-example/</guid>
+      <description>clojure 入门 这份笔记试图打造最强的clojure小抄,keep refactoring it&amp;hellip; (ns clj-notes.core (:gen-class)) ;:gen-class generate java class file ;Parameter is variable in the declaration of function. ;Argument is the actual value of this variable that gets passed to function. ; ;install leiningen: ;put lein.bat in your PATH ;open cmder,run: lein repl ;start repl,use exit,(exit),(quit) or ctrl+d to quit repl (println &amp;#34;hello clojure&amp;#34;) ;Symbols are used to bind names to values ;&amp;#39; will prevent a form from being evaluated ;&amp;#39;() same as (quote ()) ;def global variable ;let local variable binding (def object &amp;#34;light&amp;#34;) (println object) (let [x 10 y 20</description>
+    </item>
+    
+    <item>
+      <title>Elasticsearch Query DSL</title>
+      <link>https://zhimoe.github.io/post/elasticsearch-query-dsl/</link>
+      <pubDate>Wed, 01 May 2019 10:17:46 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/elasticsearch-query-dsl/</guid>
+      <description>diffs in es 2.x and es 5.x query dsl aggr query diffs in es 2.x and es 5.x 没有string类型，改为text和keyword 2个类型了。text字段可以指定fields来不分词。如下： city字段被ingest为city和city.raw2个字段。 { &amp;#34;mappings&amp;#34;: { &amp;#34;_doc&amp;#34;: { &amp;#34;properties&amp;#34;: { &amp;#34;city&amp;#34;: { &amp;#34;type&amp;#34;: &amp;#34;text&amp;#34;, &amp;#34;fields&amp;#34;: { &amp;#34;raw&amp;#34;: {</description>
+    </item>
+    
+    <item>
+      <title>Useful Scala Code Snippets</title>
+      <link>https://zhimoe.github.io/post/useful-scala-code-snippets/</link>
+      <pubDate>Fri, 26 Apr 2019 07:54:00 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/useful-scala-code-snippets/</guid>
+      <description>merge two map and sum its values 多个map合并,key相同时则value相加 val map1 = Map(1 -&amp;gt; 1, 2 -&amp;gt; 2) val map2 = Map(1 -&amp;gt; 11, 3 -&amp;gt; 3) val map3 = Map(1 -&amp;gt; 111, 3 -&amp;gt; 3) val mapList = List(map1, map2, map3) val merged = mapList.reduce((m1, m2) =&amp;gt; m1 ++ m2.map { case (k, v) =&amp;gt; k -&amp;gt; (v + m1.getOrElse(k, 0)) } ) 文件读 // &amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;&amp;#34;可以</description>
+    </item>
+    
+    <item>
+      <title>Scala Future</title>
+      <link>https://zhimoe.github.io/post/scala-future/</link>
+      <pubDate>Sun, 21 Apr 2019 14:36:36 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala-future/</guid>
+      <description>&lt;p&gt;some notes on scala future, includes:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spring Boot Notes</title>
+      <link>https://zhimoe.github.io/post/spring-boot-notes/</link>
+      <pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/spring-boot-notes/</guid>
+      <description>一些容易忘记的spring boot知识要点. 注意,.yaml和.yml文件没任何区别. 配置 SpringBootApplication注解 @SpringBootApplication &amp;lt;=等价=&amp;gt; @Configuration @ComponentScan @EnableAutoConfiguration 自动配置 spring的自动配置依赖以下注解: 配置文件 任何时候硬编码的配置</description>
+    </item>
+    
+    <item>
+      <title>Pattern Matching Anonymous Function</title>
+      <link>https://zhimoe.github.io/post/pattern-matching-anonymous-function/</link>
+      <pubDate>Sun, 31 Mar 2019 13:10:41 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/pattern-matching-anonymous-function/</guid>
+      <description>Scala中很多使用if的地方都可以用match case来替换.常见的就是下面的这种写法: val res = msg match { case it if it.contains(&amp;#34;H&amp;#34;) =&amp;gt; &amp;#34;Hello&amp;#34; case _ =&amp;gt; &amp;#34;Other&amp;#34; } //更常见的用法是去匹配参数的模式: case class Player(name: String, score: Int) def message(player: Player) = player match { case Player(_, score) if score &amp;gt; 100000 =&amp;gt; &amp;#34;Get a job, dude!&amp;#34; case Player(name, _) =&amp;gt; &amp;#34;Hey, $name, nice to see you again!&amp;#34; } def printMessage(player: Player)</description>
+    </item>
+    
+    <item>
+      <title>Scala Type Class</title>
+      <link>https://zhimoe.github.io/post/scala-type-class/</link>
+      <pubDate>Sun, 31 Mar 2019 12:58:17 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala-type-class/</guid>
+      <description>关于scala type class非常好的文章 核心知识点 //scala没有专门的type class语法，而是借助trait + implicit + context bound来实现的， //所以很多时候识别type class比较困难。 //type class 由三部分构成 //1. type class: 即下面的Show，定义一个行</description>
+    </item>
+    
+    <item>
+      <title>Scala 学习笔记</title>
+      <link>https://zhimoe.github.io/post/scala-notes/</link>
+      <pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala-notes/</guid>
+      <description>scala-notes some notes on scala, includes: setup with maven import == and eq case class for&amp;hellip;yield companion object and class method and function(def val) _ in scala =&amp;gt; in scala () {} in scala implicit string setup with maven 目前用sbt的项目比较少,maven的更多. 而且sbt烧cpu. maven项目使用scala参考我的gist:scala_maven_pom.xml 学习scala</description>
+    </item>
+    
+    <item>
+      <title>Scala Implicit</title>
+      <link>https://zhimoe.github.io/post/scala-implicit/</link>
+      <pubDate>Sat, 30 Mar 2019 12:58:17 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala-implicit/</guid>
+      <description>隐式参数 //隐式参数是在调用时可以自动填充的参数， 需要在调用范围内（scope)有一个隐式变量可供填充。 def addInt(i:Int)(implicit n: Int) = i + n //需要提供一个隐式变量n implicit val sn = 1 addInt(2) // 3 //如果有两个满足类型的隐式变量，则在编译addInt(2)时报错 //scal</description>
+    </item>
+    
+    <item>
+      <title>使用travis自动发布markdown到博客</title>
+      <link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Sat, 30 Mar 2019 10:56:47 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/</guid>
+      <description>&lt;p&gt;github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-page分支的内容如果存在index.html, 那么其他人可以通过 &lt;a href=&#34;https://zhimoe.github.io&#34;&gt;https://zhimoe.github.io&lt;/a&gt; 访问这个站点.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>wsl-docker-environment</title>
+      <link>https://zhimoe.github.io/post/wsl-docker-environment/</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/wsl-docker-environment/</guid>
+      <description>&lt;p&gt;使用wsl,MobaXterm,cmder,docker打造可视化的linux开发环境&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>neo4j intro</title>
+      <link>https://zhimoe.github.io/post/neo4j-intro/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/neo4j-intro/</guid>
+      <description>neo4j图数据库介绍 neo4j是目前排名最高的图数据库,分为商业和社区版本,社区版只支持单机,而且查询的运行时(runtime)不同(cypher runtime:interpreted(社区版),slotted(企业版)). 数据库排名可以</description>
+    </item>
+    
+    <item>
+      <title>Java Thread Pool Hierachy</title>
+      <link>https://zhimoe.github.io/post/java-threadpool-hierachy/</link>
+      <pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-threadpool-hierachy/</guid>
+      <description>thread pool classes hierachy java thread pool class hierarchy Executor (java.util.concurrent) |---ExecutorService (java.util.concurrent) |---AbstractExecutorService (java.util.concurrent) | |---AbstractEventExecutor (io.netty.util.concurrent) | |---ForkJoinPool (java.util.concurrent) | |---ThreadPoolExecutor (java.util.concurrent) | | |---ScheduledThreadPoolExecutor (java.util.concurrent) |---DelegatedExecutorService in Executors (java.util.concurrent) |---ScheduledExecutorService (java.util.concurrent) three thread pool interfaces Executor, a simple interface that supports launching new tasks. ExecutorService, a subinterface of Executor, which adds features that help manage the life cycle, both of the individual tasks and of the executor itself. ScheduledExecutorService, a subinterface of ExecutorService, supports future and/or periodic execution of tasks. common thread pool implements ThreadPoolExecutor是thread pool 最常用的实现。</description>
+    </item>
+    
+    <item>
+      <title>Spark Basic</title>
+      <link>https://zhimoe.github.io/post/spark-basic/</link>
+      <pubDate>Sat, 31 Mar 2018 00:17:30 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/spark-basic/</guid>
+      <description>引言 大数据计算和普通的程序并无本质区别：数据输入=&amp;gt;计算=&amp;gt;输出和结果的持久化。这里的挑战在于计算的效率和容错性。由于数据输入巨大，计算的效率是基本的要求。为了在通用硬件上高效完成大量计算，唯一的途径就是将计算任务拆分分布式计算</description>
+    </item>
+    
+    <item>
+      <title>单元测试如何Mock有参数的void方法</title>
+      <link>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</link>
+      <pubDate>Sun, 23 Apr 2017 21:51:20 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</guid>
+      <description>假设有如下的服务依赖： @Service class DepositSvc { @Autowired private AccountSvc accSvc; public List&amp;lt;Account&amp;gt; dps(String user) { List&amp;lt;Account&amp;gt; accounts = new ArrayList(); List&amp;lt;Account&amp;gt; banks = getBanks(); accSvc.addLinkedAccounts(user, accounts, banks);//accounts被改动了如何mock? return accounts; } } @Service class AccountSvc { @Autowired private RestClient restClient; public void addLinkedAccounts(String user, List&amp;lt;Account&amp;gt; accounts, List&amp;lt;Account&amp;gt; banks) { acc = restClient.getAcc(user); accounts.add(acc); } } 这里的AccountSvc只是提供了一个void方法处理了入</description>
+    </item>
+    
+    <item>
+      <title>java generic</title>
+      <link>https://zhimoe.github.io/post/java-generic/</link>
+      <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-generic/</guid>
+      <description>泛型 // 类 class Tuple&amp;lt;T, S&amp;gt; { private T first; private S second; } // 泛型方法也可在非泛型类里面 class ArrayAlg { public static &amp;lt;T&amp;gt; T getMiddle(T... a) { return a[a.length / 2]; } } String middle = ArrayAlg.&amp;lt;String&amp;gt;getMiddle(&amp;#34;]ohnM, &amp;#34;Q.n, &amp;#34;Public&amp;#34;);// right,&amp;lt;String&amp;gt;可以省略 String middle = GenericCls.getMiddle(&amp;#34;hello&amp;#34;,0,null);// error // Errr:(7, 45) java: 不兼容的类型: 推断类型不符合上限 // 推断: java.lang.Object&amp;amp;java.io.Serializable&amp;amp;java.lang.Comparable&amp;lt;? extends java.lang.Object&amp;amp;java.io.Serializable&amp;amp;java.lang.Comparable&amp;lt;?&amp;gt;&amp;gt; // 上限: java.lang.String,java.lang.Object 类型限定 public static &amp;lt;T extends</description>
+    </item>
+    
+    <item>
+      <title>IO-Java-Stream-Write-Reader</title>
+      <link>https://zhimoe.github.io/post/io-java-stream-write-reader/</link>
+      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/io-java-stream-write-reader/</guid>
+      <description>java reader writer stream 上次总结了java 678 中不同读写文件的方法，这次总结一下基本的IO流。网上的总结大部分是以Stream和Reader、Writer来介绍的。这次从封装层次来介绍。 首先是byte流，每次read()读取8 bits，并用一个int的低八位</description>
+    </item>
+    
+    <item>
+      <title>Java-6-7-8-文件读写</title>
+      <link>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</link>
+      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</guid>
+      <description>重要的类 文件读写场景 资料：Reading and writing text files 不要用File对象，改用Path对象，该对象既表示文件路径，也表示文件文本（应该认为文件也是路径的一部分），对于以前的File,可以File.toPath()得到一个Path对象。 Files是</description>
+    </item>
+    
+    <item>
+      <title>gradle笔记1-理解build脚本基本语法</title>
+      <link>https://zhimoe.github.io/post/gradle-%E7%90%86%E8%A7%A3build%E8%84%9A%E6%9C%AC%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/gradle-%E7%90%86%E8%A7%A3build%E8%84%9A%E6%9C%AC%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+      <description>&lt;p&gt;在看这个之前，希望你有用ant或者maven的使用经验，还有，对groovy的语法有一个简单的了解，不懂也没关系，下面会介绍。
+理解gradle文件的前提是理解一个重要的groovy概念:closure&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Java AOP example</title>
+      <link>https://zhimoe.github.io/post/java-aop-example/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-aop-example/</guid>
+      <description>找到一个最简单的介绍，不怎么想翻译，直接看原文吧: A Simple Introduction to AOP 提醒个点，使用注解的方式写切面时，增加了一个空方法，即： @Pointcut(&amp;#34;execution(* org.bk.inventory.service.*.*(..))&amp;#34;) public void serviceMethods(){ } 在使用xml配置的话，就不需要这个方法了，serviceMethods方法名是后面配置切点的引用。 如果不想引入s</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 1 basic</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid>
+      <description>知识点太多了。先列举一些知识点，然后在分别做一点笔记。 模式 1。 共享可变性 2。 隔离可变性 3。 纯粹不可变性:STM, IO密集型任务和计算密集型任务 读写文件和网络请求这种算IO密集型任务，阻塞时间长，任务阻塞系数接近1；线程池大一点好， 判断质数的</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 2 Runnable Callable FutureExecutor</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</guid>
+      <description>定义任务的内容 多线程编程的核心元素就是任务，任务是独立的活动。不依赖其他任务的状态，结果，以及边界效应。 定义任务的内容使用Runnable和Callable。 Runnable 接口表示没有返回的一个过程（procedure），没有受检异常。 Callabe 接口的call</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 3 synchronized or Lock</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</guid>
+      <description>synchronized method和synchronized block的区别 如果是synchronized(this),那么和synchronized 方法没有任何区别，锁定对象都是方法所在的对象。 synchronized void mymethod() { ... } void mymethod() { synchronized (this) { ... } } 但是synchronized blo</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 4 CAS and atomic</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</guid>
+      <description>AtomicLong code: public final long incrementAndGet() { for (;;) { long current = get(); long next = current + 1; if (compareAndSet(current, next)) return next; } } //in java 8: public final long incrementAndGet() { return unsafe.getAndAddLong(this, valueOffset, 1L) + 1L; } 基础 第一个版本是基于cas的，cas基于一个基础：有三个值，新值N，预期内存中的值E，内存中需要更新的值V，如果V == E,那么将V设置为N,返回V，结束；如果</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 5 Synchronizer and AQS</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</guid>
+      <description>好难，看不懂呀！ 先自己写一个CountDownLatch的示例： CountDownLatch是管理一组线程和一个主线程的先后。主线程wait后就阻塞，直到所有的CountDownLatch调用countDown后主线程接着开始。 package angus.intrview.concurrent; import java.util.concurrent.CountDownLatch; import java.util.concurrent.TimeUnit;</description>
+    </item>
+    
+    <item>
+      <title>Java-==-and-equal</title>
+      <link>https://zhimoe.github.io/post/java-and-equal/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-and-equal/</guid>
+      <description>/** * samples for == and equal() * @author hsiung * */ class TestObj { // the class for test == and equal() } public class EqualAndCompare { public static void main(String[] args) { TestObj obj1 = new TestObj(); TestObj obj2 = new TestObj(); TestObj obj3 = obj1; System.out.println(obj1 == obj2);// false , // == Compares references, not values System.out.println(obj1 == obj3);// true System.out.println(obj1.equals(obj2));// false, // equal() method is derived from java.lang.Object, if not override,nor // in superclass,then equal behave as same as == // Always remember to override hashCode if you override equals so as not // to &amp;#34;break the contract&amp;#34;. // As per the API, the result returned from the hashCode() method for // two objects must be</description>
+    </item>
+    
+    <item>
+      <title>Java-动态代理</title>
+      <link>https://zhimoe.github.io/post/java-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+      <description>好文 Java 动态代理机制分析及扩展 更深入的一篇: java设计模式-动态代理模式 优势 相比 静态代理，动态代理具有更强的 灵活性，因为它不用在我们设计实现的时候就指定 某一个代理类来代理哪一个被代理对象，我们可以把这种指定延迟到程序运行时由 JVM来实现。 实</description>
+    </item>
+    
+    <item>
+      <title>Java-注解和注解处理器</title>
+      <link>https://zhimoe.github.io/post/java-%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8/</guid>
+      <description>注解处理 注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的. 关于注解的定义就不说了,主要说说注解处理 本文根据以下资料并进行部分修改： JavaAnnotationProcessing 基本知识 annotation processing integrated into javac compiler – since Java 6.0; known as pluggable</description>
+    </item>
+    
+    <item>
+      <title>单例模式和序列化</title>
+      <link>https://zhimoe.github.io/post/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+      <description>参考资料 饱汉式 public class Singleton { private static Singleton instance = null private Singleton (){} public static Singleton getInstance() { if(instance == null) instance = new Singleton(); return instance; } } //饱汉式，使用时创建 饿汉式 //加载时创建对象 static public class Singleton { private Singleton instance = null; static { instance = new Singleton(); } private Singleton (){} public static Singleton getInstance() { return this.instance; } } 静态内部类 public class Singleton { private Singleton (){} private static class SingletonHolder { private static final Singleton INSTANCE = new Singleton(); } public static final Singleton getInstance() {</description>
+    </item>
+    
+    <item>
+      <title>面试题-类加载过程和子类重写父类方法的调用</title>
+      <link>https://zhimoe.github.io/post/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</guid>
+      <description>最近一道非常火的携程面试题: public class Base { private String baseName = &amp;#34;base&amp;#34;; public Base() { callName(); } public void callName() { System.out.println(baseName); } static class Sub extends Base { private String baseName = &amp;#34;sub&amp;#34;; public void callName() { System.out.println(baseName) ; } } public static void main(String[] args) { Base b = new Sub();//输出？ } } 我的理解： 先理解两个方法: class 的(clinit)方法和(init)方法不同：这两个方法一个</description>
+    </item>
+    
+  </channel>
+</rss>

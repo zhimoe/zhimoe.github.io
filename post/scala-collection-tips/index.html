@@ -1,0 +1,585 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+    <title>Scala Collection Tips - zhi.moe</title>
+    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
+    
+    <meta property="og:title" content="Scala Collection Tips">
+    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:image" content="/img/avatar.png"> 
+    <meta name="title" content="Scala Collection Tips - zhi.moe" />
+    <meta name="description" content="编程是一门手艺"> 
+    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
+    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+     fancybox: true, 
+    motion: true
+  };
+</script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<div class="container one-collumn sidebar-position-left page-home  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-meta  custom-logo ">
+
+  <div class="custom-logo-site-title">
+    <a href="https://zhimoe.github.io"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhi.moe</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">the craft of programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+      
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/post/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/about/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
+          </a>
+        </li>
+      
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
+      </li>
+    </ul>
+    <div class="site-search">
+      <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+    </div>
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://zhimoe.github.io/post/scala-collection-tips/" itemprop="url">
+        Scala Collection Tips
+        </a>
+      </h1>
+      <div class="post-meta">
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text">时间：</span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2019-05-19">
+    2019-05-19
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text">分类：</span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
+        <span itemprop="name">编程</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text">阅读：</span>
+<span class="leancloud-visitors-count">1003 字 ~3分钟</span>
+</span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+    <p>scala collection 提供了一整套独立于Java的高性能集合,使用上非常灵活,所以需要清楚一些常用的方法:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> reduce fold scan</li>
+<li><input checked="" disabled="" type="checkbox"> 集合的符号方法</li>
+<li><input checked="" disabled="" type="checkbox"> 数组,tuple</li>
+<li><input checked="" disabled="" type="checkbox"> 2.13的集合架构</li>
+</ul>
+<h2 id="reduce-fold-scan">reduce fold scan</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//reduce是一个二元函数,遍历整个集合
+</span><span style="color:#008000"></span><span style="color:#2b91af">List</span>(1, 3, 5).reduceLeft(<span style="color:#00f">_</span> + <span style="color:#00f">_</span>)
+<span style="color:#008000">// == ((1+3)+5)
+</span><span style="color:#008000">//reduceRight start from end of the collection
+</span><span style="color:#008000">//also you can given initial argument
+</span><span style="color:#008000"></span><span style="color:#2b91af">List</span>(1, 3, 5).foldLeft(<span style="color:#a31515">&#34;&#34;</span>)(<span style="color:#00f">_</span> + <span style="color:#00f">_</span>)
+<span style="color:#008000">// == 135
+</span><span style="color:#008000">//foldLeft 等价于 \: 操作符
+</span><span style="color:#008000"></span>(0 /: <span style="color:#2b91af">List</span>(1, 3, 5)) (<span style="color:#00f">_</span> - <span style="color:#00f">_</span>)
+
+<span style="color:#008000">//folding 常用于替代for-loop
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> wf1 <span style="color:#00f">=</span> scala.collection.mutable.<span style="color:#2b91af">Map</span>[<span style="color:#2b91af">Char</span>, <span style="color:#2b91af">Int</span>]()
+<span style="color:#00f">for</span> (c <span style="color:#00f">&lt;-</span> <span style="color:#a31515">&#34;Mississippi&#34;</span>) wf1(c) <span style="color:#00f">=</span> wf1.getOrElse(c, 0) + 1
+<span style="color:#008000">// Now freq is Map(&#39;i&#39; -&gt; 4, &#39;M&#39; -&gt; 1, &#39;s&#39; -&gt; 4, &#39;p&#39; -&gt; 2)
+</span><span style="color:#008000"></span>
+<span style="color:#008000">//注意使用了不可变map
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> wf <span style="color:#00f">=</span> (<span style="color:#2b91af">Map</span>[<span style="color:#2b91af">Char</span>, <span style="color:#2b91af">Int</span>]() /: <span style="color:#a31515">&#34;Mississippi&#34;</span>) {
+  (m, c) <span style="color:#00f">=&gt;</span> m + (c -&gt; (m.getOrElse(c, 0) + 1))
+}
+
+<span style="color:#008000">//scan 方法可以获得每一步中间结果集
+</span><span style="color:#008000"></span>(1 to 10).scanLeft(0)(<span style="color:#00f">_</span> + <span style="color:#00f">_</span>)
+<span style="color:#008000">//Vector(0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55)
+</span><span style="color:#008000"></span>
+</code></pre></div><h2 id="集合的符号方法">集合的符号方法</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//+ 表示添加一个元素到无序集合
+</span><span style="color:#008000">// :+ +:表示添加到有序集合的首/尾
+</span><span style="color:#008000">//elem append or prepend to coll (Seq)
+</span><span style="color:#008000"></span>coll <span style="color:#00f">:</span><span style="color:#2b91af">+</span> <span style="color:#2b91af">elem</span>
+elem +: coll
+
+<span style="color:#008000">//add elem to set/map
+</span><span style="color:#008000"></span>coll + elem
+coll + (e1,e2,...)
+
+
+coll ++ coll2
+coll2 ++: coll
+
+<span style="color:#008000">// prepend to lst
+</span><span style="color:#008000"></span>elem <span style="color:#00f">:</span><span style="color:#2b91af">:</span> <span style="color:#2b91af">lst</span> 
+lst2 <span style="color:#00f">:</span><span style="color:#2b91af">::</span> <span style="color:#2b91af">lst</span>
+<span style="color:#008000">// 等价list ++: list2
+</span><span style="color:#008000"></span>list <span style="color:#00f">:</span><span style="color:#2b91af">::</span> <span style="color:#2b91af">list2</span>
+
+<span style="color:#008000">// 含有=的表示修改,必须是mutable的集合
+</span><span style="color:#008000"></span>
+<span style="color:#008000">// TIP: As you can see, Scala provides many operators for adding and removing
+</span><span style="color:#008000">// elements. Here is a summary:
+</span><span style="color:#008000">// 1. Append (:+) or prepend (+:) to a sequence.
+</span><span style="color:#008000">// 2. Add (+) to an unordered collection.
+</span><span style="color:#008000">// 3. Remove with the - operator.
+</span><span style="color:#008000">// 4. Use ++ and -- for bulk add and remove.
+</span><span style="color:#008000">// 5. Mutations are += ++= -= --=.
+</span><span style="color:#008000">// 6. For lists, many Scala programmers prefer the :: and ::: operators.
+</span><span style="color:#008000">// 7. Stay away from ++: +=: ++=:.
+</span></code></pre></div><p>NOTE: For lists, you can use +: instead of :: for consistency, with one
+exception: Pattern matching (case h::t) does not work with the +: operator.</p>
+<h2 id="其他">其他</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//数组的笔记
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> ints <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="color:#2b91af">Array</span>[<span style="color:#2b91af">Int</span>](30) <span style="color:#008000">// empty array
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> ints2 <span style="color:#00f">=</span> <span style="color:#2b91af">Array</span>[<span style="color:#2b91af">Int</span>](1, 2, 3, 4) <span style="color:#008000">// array with init values
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> matrix4x9 <span style="color:#00f">=</span> <span style="color:#2b91af">Array</span>.ofDim[<span style="color:#2b91af">Double</span>](4, 9)
+<span style="color:#008000">//update
+</span><span style="color:#008000"></span>ints2(3) <span style="color:#00f">=</span> 1000
+<span style="color:#008000">// or
+</span><span style="color:#008000"></span>ints2.update(3, 1000)
+<span style="color:#008000">//求和
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> ints2Sum <span style="color:#00f">=</span> ints2.sum
+
+<span style="color:#00f">val</span> days <span style="color:#00f">=</span> <span style="color:#2b91af">Array</span>(<span style="color:#a31515">&#34;Monday&#34;</span>, <span style="color:#a31515">&#34;Tuesday&#34;</span>, <span style="color:#a31515">&#34;Wednesday&#34;</span>, <span style="color:#a31515">&#34;Thrusday&#34;</span>, <span style="color:#a31515">&#34;Friday&#34;</span>, <span style="color:#a31515">&#34;Saturday&#34;</span>, <span style="color:#a31515">&#34;Sunday&#34;</span>)
+<span style="color:#008000">//遍历
+</span><span style="color:#008000"></span><span style="color:#00f">for</span> (i <span style="color:#00f">&lt;-</span> 0 until days.length) println(days(i))
+<span style="color:#00f">for</span> (day <span style="color:#00f">&lt;-</span> days) println(day)
+days foreach println
+
+<span style="color:#008000">//遍历中使用index
+</span><span style="color:#008000"></span>days.zipWithIndex.map { <span style="color:#00f">case</span> (e, i) <span style="color:#00f">=&gt;</span> (i, e) }
+<span style="color:#008000">//faster
+</span><span style="color:#008000"></span><span style="color:#00f">for</span> (i <span style="color:#00f">&lt;-</span> days.indices) <span style="color:#00f">yield</span> (i, days(i))
+<span style="color:#008000">//Possibly fastest
+</span><span style="color:#008000"></span><span style="color:#2b91af">Array</span>.tabulate(days.length) { i <span style="color:#00f">=&gt;</span> (i, days(i)) }
+<span style="color:#008000">//肯定最快
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="color:#2b91af">Array</span>[(<span style="color:#2b91af">Int</span>, <span style="color:#2b91af">String</span>)](days.length)
+<span style="color:#00f">var</span> i <span style="color:#00f">=</span> 0
+<span style="color:#00f">while</span> (i &lt; days.length) {
+  b(i) <span style="color:#00f">=</span> (i, days(i))
+  i += 1
+}
+
+<span style="color:#008000">//filter
+</span><span style="color:#008000"></span>days.filter(day <span style="color:#00f">=&gt;</span> day.length &gt; 4)
+<span style="color:#008000">//map
+</span><span style="color:#008000"></span><span style="color:#2b91af">Array</span>(1, 2, 3, 4, 5).map(x <span style="color:#00f">=&gt;</span> x * x)
+<span style="color:#008000">//sort
+</span><span style="color:#008000"></span><span style="color:#2b91af">Array</span>(3, 6, 2, 0, 8, 5).sortWith((e1, e2) <span style="color:#00f">=&gt;</span> e1 &lt; e2) <span style="color:#008000">//小的在前
+</span><span style="color:#008000">//reduce,下面的会提示使用sum,
+</span><span style="color:#008000"></span><span style="color:#2b91af">Array</span>(1, 2, 3, 4, 5).reduce((e1, e2) <span style="color:#00f">=&gt;</span> e1 + e2)
+
+<span style="color:#008000">//不定长数组
+</span><span style="color:#008000"></span><span style="color:#00f">import</span> scala.collection.mutable.ArrayBuffer
+
+<span style="color:#00f">val</span> arr <span style="color:#00f">=</span> <span style="color:#2b91af">ArrayBuffer</span>[<span style="color:#2b91af">Int</span>]()
+
+
+<span style="color:#008000">//tuple
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> oneAndTwo <span style="color:#00f">=</span> (1, 2)
+<span style="color:#00f">val</span> oneAndTwo1 <span style="color:#00f">=</span> <span style="color:#2b91af">Tuple2</span>(1, 2)
+<span style="color:#008000">//Pair is alias of Tuple2
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> oneAndTwo2 <span style="color:#00f">=</span> <span style="color:#2b91af">Pair</span>(1, <span style="color:#a31515">&#34;two&#34;</span>)
+<span style="color:#00f">val</span> oneAndTwo3 <span style="color:#00f">=</span> 1 -&gt; 2
+<span style="color:#008000">//访问元素下标是从1开始,这是因为tuple里面每个元素类型不一样,为了能够和list等区分开
+</span><span style="color:#008000">//使用了类似Haskell/ML的习惯
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> two <span style="color:#00f">=</span> oneAndTwo._2
+
+<span style="color:#008000">//option
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> emptyOpt<span style="color:#00f">:</span> <span style="color:#2b91af">Option</span>[<span style="color:#2b91af">Int</span>] <span style="color:#00f">=</span> <span style="color:#2b91af">None</span>
+<span style="color:#00f">val</span> fullOpt<span style="color:#00f">:</span> <span style="color:#2b91af">Option</span>[<span style="color:#2b91af">Int</span>] <span style="color:#00f">=</span> <span style="color:#2b91af">Some</span>(42)
+emptyOpt <span style="color:#00f">match</span> {
+  <span style="color:#00f">case</span> <span style="color:#2b91af">Some</span>(value) <span style="color:#00f">=&gt;</span> println(value)
+  <span style="color:#00f">case</span> <span style="color:#2b91af">None</span> <span style="color:#00f">=&gt;</span> println(<span style="color:#a31515">&#34;Empty&#34;</span>)
+}
+fullOpt.get <span style="color:#008000">//42
+</span><span style="color:#008000"></span>emptyOpt.isEmpty <span style="color:#008000">//true
+</span><span style="color:#008000"></span>
+<span style="color:#008000">//either
+</span><span style="color:#008000"></span><span style="color:#00f">def</span> divide(a<span style="color:#00f">:</span> <span style="color:#2b91af">Double</span>, b<span style="color:#00f">:</span> <span style="color:#2b91af">Double</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">Either</span>[<span style="color:#2b91af">String</span>, <span style="color:#2b91af">Double</span>] <span style="color:#00f">=</span> {
+  <span style="color:#00f">if</span> (b == 0.0) <span style="color:#2b91af">Left</span>(<span style="color:#a31515">&#34;Division by zero&#34;</span>) <span style="color:#00f">else</span> <span style="color:#2b91af">Right</span>(a / b)
+}
+divide(4, 0)
+
+
+<span style="color:#00f">def</span> either(flag<span style="color:#00f">:</span> <span style="color:#2b91af">Boolean</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">Either</span>[<span style="color:#2b91af">String</span>, <span style="color:#2b91af">List</span>[<span style="color:#2b91af">Int</span>]] <span style="color:#00f">=</span> {
+  <span style="color:#00f">if</span> (flag) <span style="color:#2b91af">Right</span>(<span style="color:#2b91af">List</span>(1, 2, 3))
+  <span style="color:#00f">else</span> <span style="color:#2b91af">Left</span>(<span style="color:#a31515">&#34;Wrong&#34;</span>)
+}
+
+<span style="color:#00f">val</span> content <span style="color:#00f">=</span> either(<span style="color:#00f">true</span>).right.map(<span style="color:#00f">_</span>.filter(<span style="color:#00f">_</span> &gt; 0))
+
+<span style="color:#008000">//cast
+</span><span style="color:#008000"></span><span style="color:#2b91af">Seq</span>(1).toArray
+<span style="color:#2b91af">Seq</span>(1).toBuffer
+<span style="color:#2b91af">Seq</span>(1).toList
+<span style="color:#2b91af">Seq</span>((1, 2)).toMap
+<span style="color:#2b91af">Seq</span>(1).toStream
+<span style="color:#2b91af">Seq</span>(1).toString
+<span style="color:#2b91af">Seq</span>(1).toVector
+
+<span style="color:#2b91af">Seq</span>(1).toTraversable
+<span style="color:#2b91af">Seq</span>(1).toIndexedSeq
+<span style="color:#2b91af">Seq</span>(1).toIterable
+<span style="color:#2b91af">Set</span>(1).toSeq
+<span style="color:#2b91af">Seq</span>(1).toSet
+
+<span style="color:#008000">//zip, zipAll, zipWithIndex, unzip
+</span><span style="color:#008000"></span><span style="color:#a31515">&#34;abcde&#34;</span> zip 1.to(5)
+<span style="color:#008000">//zipAll:第二个参数是调用者元素缺失使用的默认值,第三个参数是第一个实参不够长的默认值
+</span><span style="color:#008000"></span><span style="color:#a31515">&#34;abcde&#34;</span>.zipAll(1.to(2), <span style="color:#a31515">&#34;caller&#34;</span>, <span style="color:#a31515">&#34;arg&#34;</span>)
+<span style="color:#008000">//尝试自己实现一个zipAll?
+</span><span style="color:#008000">//
+</span><span style="color:#008000"></span><span style="color:#a31515">&#34;abcde&#34;</span> zipWithIndex
+
+<span style="color:#2b91af">Seq</span>((1, 2), (3, 4), (5, 6)) unzip
+<span style="color:#008000">//
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> s <span style="color:#00f">=</span> <span style="color:#2b91af">Seq</span>(<span style="color:#a31515">&#34;a&#34;</span>, <span style="color:#a31515">&#34;b&#34;</span>)
+</code></pre></div><h2 id="scala-213-collection">scala 2.13 collection</h2>
+<p>基本重写了.参考这两个文档:
+<a href="https://docs.scala-lang.org/overviews/core/collections-migration-213.html">collections migration 2.13</a>
+<a href="https://docs.scala-lang.org/overviews/core/architecture-of-scala-213-collections.html">the architecture of scala 2.13’s collections</a></p>
+
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+    <a href="https://zhimoe.github.io/tags/scala" rel="tag" title="scala">#scala#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/devops-maturity-model-checklist/" rel="next" title="DevOps 成熟度检查清单">
+        <i class="fa fa-chevron-left"></i> DevOps 成熟度检查清单
+        </a>
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96/" rel="prev" title="前端静态资源图片优化">
+        前端静态资源图片优化 <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+<div id="disqus_thread"></div>
+<script>
+
+
+var disqus_config = function () {
+  this.page.url = "https://zhimoe.github.io/post/scala-collection-tips/";  
+  this.page.identifier = "https://zhimoe.github.io/post/scala-collection-tips/"; 
+};
+
+(function() { 
+  var d = document, s = d.createElement('script');
+  s.src = 'https://zhimoe.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
+
+    </footer>
+  </article>
+</section>
+
+          </div>
+        </div>
+        <div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      文章目录
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      站点概览
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
+      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+        src="https://zhimoe.github.io/img/avatar.png"
+        alt="zhi.moe" />
+    <p class="site-author-name" itemprop="name">zhi.moe</p>
+    <p class="site-description motion-element" itemprop="description"> 
+        the craft of programming</p>
+</div>
+      <nav class="site-state motion-element">
+    <div class="site-state-item site-state-posts">
+      <a href="https://zhimoe.github.io/post/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">日志</span>
+      </a>
+    </div>
+    <div class="site-state-item site-state-categories">    
+        <a href="https://zhimoe.github.io/categories/">      
+         
+        <span class="site-state-item-count">4</span>
+        
+        <span class="site-state-item-name">分类</span>
+        
+        </a>
+    </div>
+
+    <div class="site-state-item site-state-tags">
+        <a href="https://zhimoe.github.io/tags/">
+         
+        <span class="site-state-item-count">19</span>
+        
+        <span class="site-state-item-name">标签</span>
+        </a>
+    </div>
+</nav>
+      
+<div class="links-of-author motion-element">
+    
+        <span class="links-of-author-item">
+        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
+            <i class="fa fa-fw fa-github"></i>
+            GitHub
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://twitter.com/zhimoee" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
+        </a>
+        </span>
+    
+</div>
+
+
+      
+
+      <div class="links-of-blogroll motion-element inline">
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
+</div>
+
+
+
+
+    </section>
+    
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#reduce-fold-scan">reduce fold scan</a></li>
+    <li><a href="#集合的符号方法">集合的符号方法</a></li>
+    <li><a href="#其他">其他</a></li>
+    <li><a href="#scala-213-collection">scala 2.13 collection</a></li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
+  </div>
+</aside>
+
+      </div>
+    </main>
+   
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  <span itemprop="copyrightYear">  &copy; 
+  2017 - 2021</span>
+  <span class="with-love"><i class="fa fa-heart"></i></span>
+  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+</div>
+<div class="powered-by">
+  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
+</div>
+<div class="theme-info">
+  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
+  </a>
+</div>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span id="scrollpercent"><span>0</span>%</span>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/motion.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/affix.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/schemes/pisces.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/toc.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { fonts: ["TeX"] }
+  });
+</script>
+<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
+</body>
+</html>

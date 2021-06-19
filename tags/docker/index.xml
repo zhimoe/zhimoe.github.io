@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>docker on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/docker/</link>
+    <description>Recent content in docker on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Mon, 03 Feb 2020 11:30:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SpringBoot应用和Rust应用的Dockerfile最佳实践</title>
+      <link>https://zhimoe.github.io/post/dockerfile-best-practices/</link>
+      <pubDate>Mon, 03 Feb 2020 11:30:55 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/dockerfile-best-practices/</guid>
+      <description>&lt;p&gt;记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker CMD ENTRYPOINT区别</title>
+      <link>https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/</link>
+      <pubDate>Sun, 02 Feb 2020 21:10:18 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/</guid>
+      <description>&lt;p&gt;记录docker中exec form和shell form的区别,CMD和ENTRYPOINT区别,以及最佳实践.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

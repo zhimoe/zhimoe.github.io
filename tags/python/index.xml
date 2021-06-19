@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/python/</link>
+    <description>Recent content in python on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 31 Jan 2021 21:45:45 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Py Tips for Impatient Dev</title>
+      <link>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</link>
+      <pubDate>Sun, 31 Jan 2021 21:45:45 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</guid>
+      <description>python在看似简单的语法中，有很多tricks。 tricks python的dict中关于equal和hash计算方式会有意外的效果 [&amp;#39;no&amp;#39;, &amp;#39;yes&amp;#39;][True] # output? {True: &amp;#39;yes&amp;#39;, 1: &amp;#39;no&amp;#39;, 1.0: &amp;#39;maybe&amp;#39;} # output? “布尔类型是整数类型的子类型，布尔值在几乎所有环境中的行为都类似于值 0 和 1，但在转换为字符串</description>
+    </item>
+    
+    <item>
+      <title>如何实现一个拼写检查器</title>
+      <link>https://zhimoe.github.io/post/spell-correct/</link>
+      <pubDate>Sun, 25 Oct 2020 20:01:27 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/spell-correct/</guid>
+      <description>谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文How to Write a Spelling Corrector。 上面的链接已经是16年更新过了，程序也更新到了python3. 中文版的翻译 如何实现一个拼写纠正器 还是基于07年版本的。 博文最有意思的地方</description>
+    </item>
+    
+    <item>
+      <title>Scala Python 文件读取跳过转义字符</title>
+      <link>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</link>
+      <pubDate>Thu, 04 Jun 2020 21:30:31 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</guid>
+      <description>&lt;p&gt;在文件读取的时候，会遇到非法转义字符，导致文件按行读取失败。此时可以通过忽略转义字符来解决。本文记录了scala和python的方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Matplotlib图例中文乱码解决方案</title>
+      <link>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</link>
+      <pubDate>Fri, 01 May 2020 19:18:05 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</guid>
+      <description>&lt;p&gt;很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jupyter Notebook Install New Package</title>
+      <link>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</link>
+      <pubDate>Thu, 01 Nov 2018 19:04:32 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</guid>
+      <description>原文 installing new python package from jupyter notebook 笔记 在pycharm写代码中如果使用到新的package，例如numpy，只需要输入import numpy 然后ALT+ENTER在提示中选择install new package极客。 在notebook中，网上的教程都说是!pip install numpy. 但是</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,503 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+    <title>SpringBoot应用和Rust应用的Dockerfile最佳实践 - zhi.moe</title>
+    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
+    
+    <meta property="og:title" content="SpringBoot应用和Rust应用的Dockerfile最佳实践">
+    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:image" content="/img/avatar.png"> 
+    <meta name="title" content="SpringBoot应用和Rust应用的Dockerfile最佳实践 - zhi.moe" />
+    <meta name="description" content="编程是一门手艺"> 
+    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
+    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+     fancybox: true, 
+    motion: true
+  };
+</script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<div class="container one-collumn sidebar-position-left page-home  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-meta  custom-logo ">
+
+  <div class="custom-logo-site-title">
+    <a href="https://zhimoe.github.io"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhi.moe</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">the craft of programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+      
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/post/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/about/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
+          </a>
+        </li>
+      
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
+      </li>
+    </ul>
+    <div class="site-search">
+      <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+    </div>
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://zhimoe.github.io/post/dockerfile-best-practices/" itemprop="url">
+        SpringBoot应用和Rust应用的Dockerfile最佳实践
+        </a>
+      </h1>
+      <div class="post-meta">
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text">时间：</span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-02-03">
+    2020-02-03
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text">分类：</span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
+        <span itemprop="name">编程</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text">阅读：</span>
+<span class="leancloud-visitors-count">1495 字 ~3分钟</span>
+</span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+    <p>记录spring boot和rust项目的Dockerfile的最佳实践.</p>
+<h2 id="spring-boot应用dockerfile">spring boot应用Dockerfile</h2>
+<p>spring.io提供了一个boot应用的<a href="https://spring.io/guides/topicals/spring-boot-docker">Dockerfile</a>指导.
+不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般项目中显然不规范.</p>
+<p>Dockerfile的最终版:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#008000"># syntax=docker/Dockerfile:experimental</span><span style="">
+</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> maven:3-jdk-8-alpine as build</span><span style="">
+</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /workspace/app</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> pom.xml .<span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> src src<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> --mount=type=cache,target=/root/.m2  mvn package -DskipTests<span style="">
+</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># app base image</span><span style="">
+</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> openjdk:8-jdk-alpine</span><span style="">
+</span><span style=""></span><span style="color:#00f">VOLUME</span><span style="color:#a31515"> /tmp</span><span style="">
+</span><span style=""></span><span style="color:#00f">ARG</span> BUILD=/workspace/app/target<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /app</span><span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> --from=build <span style="color:#a31515">${</span>BUILD<span style="color:#a31515">}</span>/*.jar .<span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> jar -xf  ./*.jar<span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> rm ./*.jar<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">ENTRYPOINT</span> [<span style="color:#a31515">&#34;java&#34;</span>,<span style="color:#a31515">&#34;-cp&#34;</span>,<span style="color:#a31515">&#34;/app&#34;</span>,<span style="color:#a31515">&#34;org.springframework.boot.loader.JarLauncher&#34;</span>]<span style="">
+</span><span style="">
+</span></code></pre></div><p>要点:</p>
+<ol>
+<li><code># syntax=docker/Dockerfile:experimental</code>表示启用docker实验特性BuildKit的mount cache功能,这样可以利用maven lib的cache提高镜像构建速度. 大家可以搜索docker BuildKit了解.
+如果没有这一行,那么下面的<code>--mount=type=cache,target=/root/.m2</code>就是非法的. 由于是实验特性,构建镜像的时候需要设置一个环境变量<code>DOCKER_BUILDKIT=1</code>才能运行:<code> DOCKER_BUILDKIT=1 docker build -t zhimoe/boot-app .</code></li>
+<li>spring.io的教程里面使用的build镜像是<code>openjdk:8-jdk-alpine</code>,这个镜像是没有maven的,因为教程中的Dockerfile从源码复制了<code>mvnw,.mvn/</code>到镜像去.所以这里替换为<code>maven:3-jdk-8-alpine</code></li>
+<li>使用了docker的<a href="https://docs.docker.com/develop/develop-images/multistage-build/">multi-stage build</a>功能,<code>openjdk:8-jdk-alpine</code>由于没有maven,所以会比<code>maven</code>镜像少20M.</li>
+<li>spring.io的教程里面在ENTRYPOINT里面是直接设置main class启动应用的. 这种硬编码方式不通用也不利于维护(修改main class name后Dockerfile也要修改).只要将应用的jar包解压出来的org目录(即org.springframework.boot.loader.jar解压内容,不到1M)保留,即可通过<code>org.springframework.boot.loader.JarLauncher</code>启动应用.</li>
+<li>注意<code>java -cp /app</code>中的classpath:<code>/app</code> 一定是绝对路径,否则java找不到main class,报错:<code>Error: Could not find or load main class org.springframework.boot.loader.JarLauncher</code></li>
+</ol>
+<h2 id="rust应用dockerfile">rust应用Dockerfile</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#008000"># pull the latest version of Rust</span><span style="">
+</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> rust:latest AS builder</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># create a new empty shell project</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> USER=root cargo new --bin prj<span style="">
+</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /prj</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># copy over your manifests</span><span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> ./Cargo.lock ./Cargo.toml ./<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># change the crate.io source</span><span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> ./config $CARGO_HOME/<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># this build step will cache your dependencies</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> cargo build --release<span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> rm -r src/*<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># copy your source files to WORKDIR/src</span><span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> ./src ./src<span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> ./static ./static<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># build for release, note! the Cargo.toml package name in deps is _, not -</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> rm ./target/release/deps/rs_notes*<span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> cargo build --release<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> mv ./target/release/rs-notes .<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000">## 2 stage build</span><span style="">
+</span><span style=""></span><span style="color:#008000"># our final base</span><span style="">
+</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> debian:stretch-slim AS app</span><span style="">
+</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># for connecting to postgres and TLS hosts</span><span style="">
+</span><span style=""></span><span style="color:#008000"># RUN apt update -y &amp;&amp; apt install -y libpq-dev openssl libssl1.0-dev ca-certificates</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># copy the build artifact and static resources from the build stage</span><span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> --from=builder /prj/rs-notes ./<span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> --from=builder /prj/static ./static<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#008000"># set the startup command to run your binary</span><span style="">
+</span><span style=""></span><span style="color:#00f">CMD</span> [<span style="color:#a31515">&#34;./rs-notes&#34;</span>]<span style="">
+</span><span style="">
+</span></code></pre></div><p>要点:</p>
+<ol>
+<li>如果使用scratch或者alpine镜像,那么需要将编译目标设置为<code>MUSL</code>,网络上有教程,个人感觉不需要.rust应用使用debian-slim基本在60M左右,只有spring boot应用镜像的一半大小.</li>
+<li>在国内由于网络问题,所以修改了cargo的crate.io mirror地址:<code>COPY ./config $CARGO_HOME/</code>. config内容如下:</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#00f">[source.crates-io]</span>
+registry = <span style="color:#a31515">&#34;https://github.com/rust-lang/crates.io-index&#34;</span>
+replace-with = <span style="color:#a31515">&#39;ustc&#39;</span>
+<span style="color:#00f">[source.ustc]</span>
+registry = <span style="color:#a31515">&#34;git://mirrors.ustc.edu.cn/crates.io-index&#34;</span>
+
+</code></pre></div><ol start="3">
+<li>build中使用了cargo缓存,即先将项目Cargo.toml和Cargo.lock复制到一个空项目中编译,然后再将源码复制进去编译.</li>
+<li><code>RUN rm ./target/release/deps/rs_notes*</code>,注意这里的<code>rs_notes</code>是下划线.cargo中package name转换为crate name的默认规则.</li>
+</ol>
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+    <a href="https://zhimoe.github.io/tags/docker" rel="tag" title="docker">#docker#</a>
+    
+    <a href="https://zhimoe.github.io/tags/spring" rel="tag" title="spring">#spring#</a>
+    
+    <a href="https://zhimoe.github.io/tags/rust" rel="tag" title="rust">#rust#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/rust-ownership-lifetimes/" rel="next" title="Rust Ownerships Lifetimes教程">
+        <i class="fa fa-chevron-left"></i> Rust Ownerships Lifetimes教程
+        </a>
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/" rel="prev" title="Docker CMD ENTRYPOINT区别">
+        Docker CMD ENTRYPOINT区别 <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+<div id="disqus_thread"></div>
+<script>
+
+
+var disqus_config = function () {
+  this.page.url = "https://zhimoe.github.io/post/dockerfile-best-practices/";  
+  this.page.identifier = "https://zhimoe.github.io/post/dockerfile-best-practices/"; 
+};
+
+(function() { 
+  var d = document, s = d.createElement('script');
+  s.src = 'https://zhimoe.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
+
+    </footer>
+  </article>
+</section>
+
+          </div>
+        </div>
+        <div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      文章目录
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      站点概览
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
+      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+        src="https://zhimoe.github.io/img/avatar.png"
+        alt="zhi.moe" />
+    <p class="site-author-name" itemprop="name">zhi.moe</p>
+    <p class="site-description motion-element" itemprop="description"> 
+        the craft of programming</p>
+</div>
+      <nav class="site-state motion-element">
+    <div class="site-state-item site-state-posts">
+      <a href="https://zhimoe.github.io/post/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">日志</span>
+      </a>
+    </div>
+    <div class="site-state-item site-state-categories">    
+        <a href="https://zhimoe.github.io/categories/">      
+         
+        <span class="site-state-item-count">4</span>
+        
+        <span class="site-state-item-name">分类</span>
+        
+        </a>
+    </div>
+
+    <div class="site-state-item site-state-tags">
+        <a href="https://zhimoe.github.io/tags/">
+         
+        <span class="site-state-item-count">19</span>
+        
+        <span class="site-state-item-name">标签</span>
+        </a>
+    </div>
+</nav>
+      
+<div class="links-of-author motion-element">
+    
+        <span class="links-of-author-item">
+        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
+            <i class="fa fa-fw fa-github"></i>
+            GitHub
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://twitter.com/zhimoee" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
+        </a>
+        </span>
+    
+</div>
+
+
+      
+
+      <div class="links-of-blogroll motion-element inline">
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
+</div>
+
+
+
+
+    </section>
+    
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#spring-boot应用dockerfile">spring boot应用Dockerfile</a></li>
+    <li><a href="#rust应用dockerfile">rust应用Dockerfile</a></li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
+  </div>
+</aside>
+
+      </div>
+    </main>
+   
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  <span itemprop="copyrightYear">  &copy; 
+  2017 - 2021</span>
+  <span class="with-love"><i class="fa fa-heart"></i></span>
+  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+</div>
+<div class="powered-by">
+  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
+</div>
+<div class="theme-info">
+  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
+  </a>
+</div>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span id="scrollpercent"><span>0</span>%</span>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/motion.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/affix.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/schemes/pisces.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/toc.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { fonts: ["TeX"] }
+  });
+</script>
+<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
+</body>
+</html>

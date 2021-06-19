@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+    <title>Python几道常见的笔试题 - zhi.moe</title>
+    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
+    
+    <meta property="og:title" content="Python几道常见的笔试题">
+    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:image" content="/img/avatar.png"> 
+    <meta name="title" content="Python几道常见的笔试题 - zhi.moe" />
+    <meta name="description" content="编程是一门手艺"> 
+    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
+    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+     fancybox: true, 
+    motion: true
+  };
+</script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<div class="container one-collumn sidebar-position-left page-home  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-meta  custom-logo ">
+
+  <div class="custom-logo-site-title">
+    <a href="https://zhimoe.github.io"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhi.moe</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">the craft of programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+      
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/post/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/about/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
+          </a>
+        </li>
+      
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
+      </li>
+    </ul>
+    <div class="site-search">
+      <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+    </div>
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://zhimoe.github.io/post/python-interview-questions/" itemprop="url">
+        Python几道常见的笔试题
+        </a>
+      </h1>
+      <div class="post-meta">
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text">时间：</span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-06-04">
+    2020-06-04
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text">分类：</span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
+        <span itemprop="name">编程</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text">阅读：</span>
+<span class="leancloud-visitors-count">537 字 ~2分钟</span>
+</span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+    <p>4道常见的python面试题和解答,以及一些python陷阱的链接。</p>
+<h2 id="问题">问题</h2>
+<ol>
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">def</span> change(v):
+    v[1] = 4
+    <span style="color:#00f">return</span> v
+    
+    
+a = [1, 2, 3]
+<span style="color:#00f">print</span>(change(a))
+<span style="color:#00f">print</span>(a)    
+</code></pre></div><ol start="2">
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">def</span> append1(x=[]):
+    x.append(1)
+    <span style="color:#00f">return</span> x
+    
+    
+<span style="color:#00f">def</span> now(n=time.time()):
+    time.sleep(1)
+    <span style="color:#00f">return</span> n
+    
+<span style="color:#00f">print</span>(append1(), append1()) <span style="color:#008000">#?</span>
+<span style="color:#00f">print</span>(now(), now()) <span style="color:#008000">#?</span>
+    
+</code></pre></div><ol start="3">
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">def</span> arr_multi():
+    x = [[0] * 3] * 3
+    x[0][0] = 42
+    <span style="color:#00f">return</span> x
+    
+<span style="color:#00f">print</span>(arr_multi())
+</code></pre></div><ol start="4">
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">def</span> fn_for():
+    f = [<span style="color:#00f">lambda</span> x: x * i <span style="color:#00f">for</span> i <span style="color:#00f">in</span> range(3)]
+    <span style="color:#00f">print</span>(f[0](1), f[1](1), f[2](1))
+    
+<span style="color:#00f">print</span>(fn_for())
+</code></pre></div><h2 id="解答">解答</h2>
+<ol>
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">[1, 4, 3]
+[1, 4, 3]
+
+<span style="color:#008000"># 就是简单的引用传递,但是很多人不自信,在选择题里面频频出错.</span>
+<span style="color:#008000"># python中所有的都是对象, id(obj)会返回地址. </span>
+<span style="color:#008000"># 但是如果新建对象是short string,int [-5,256],不可变的空集合(empty tuples) 等情况不会真的创建新对象.</span>
+
+<span style="color:#00f">from</span> copy <span style="color:#00f">import</span> copy, deepcopy
+
+arr1 = [1,2,3,[4,5,6]]
+arr2 = copy(arr1) <span style="color:#008000"># shallow copy, new id, but elements in array is same id</span>
+
+id(arr1[0]) == id(arr2[0]) 
+
+<span style="color:#008000">#deepcopy</span>
+arr3 = deepcopy(arr1) <span style="color:#008000"># elements id is new </span>
+
+</code></pre></div><ol start="2">
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#008000"># 结果:</span>
+[1, 1] [1, 1]
+1590544209.9695618 1590544209.9695618
+
+<span style="color:#008000"># 不少人认为是: [1] [1, 1].其实还是没有深入理解引用的原理,</span>
+<span style="color:#008000"># 翻译一下就很好理解了:</span>
+y = append1()  <span style="color:#008000"># id(y) == id(x), y=[1]</span>
+y = append1()  <span style="color:#008000"># id(y) == id(x), y=[1,1]</span>
+<span style="color:#00f">print</span>(y,y)
+
+
+<span style="">最好不要使用</span>[]<span style="">作为默认参数</span>,<span style="">使用下面的形式</span>:
+<span style="color:#00f">def</span> my_func(working_list=None):
+    <span style="color:#00f">if</span> working_list <span style="color:#00f">is</span> None: 
+        working_list = []
+
+    working_list.append(<span style="color:#a31515">&#34;a&#34;</span>)
+    <span style="color:#00f">print</span>(working_list)
+
+</code></pre></div><ol start="3">
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">[[42, 0, 0], [42, 0, 0], [42, 0, 0]]
+<span style="color:#008000"># list 是mutable, []*3表示是引用复制三次.</span>
+
+<span style="color:#008000"># 赋值后为什么只改变列的值？</span>
+
+</code></pre></div><ol start="4">
+<li></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2 2 2
+None
+</code></pre></div><p>本意其实是想得到一个函数列表[0<em>x,1</em>x,2*x]，
+但是 <strong>Python’s closures are <em>late binding</em>. This means that the values of variables used in closures are looked up at the time the inner function is called.</strong>
+解决方案是偏函数partial</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">from</span> functools <span style="color:#00f">import</span> partial
+<span style="color:#00f">def</span> fix_fn_for():
+    f = [partial(<span style="color:#00f">lambda</span> y, x: y * x, x=i) <span style="color:#00f">for</span> i <span style="color:#00f">in</span> range(3)]
+    <span style="color:#00f">print</span>(f[0](1), f[1](1), f[2](1))
+</code></pre></div><p>或：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fl=[<span style="color:#00f">lambda</span> x, i=i: x*i <span style="color:#00f">for</span> i <span style="color:#00f">in</span> range(3)]
+</code></pre></div><p><a href="https://docs.python-guide.org/writing/gotchas/">常见python陷阱</a>
+<a href="https://www.toptal.com/python/top-10-mistakes-that-python-programmers-make">The 10 Most Common Mistakes in Python</a>
+<a href="https://8thlight.com/blog/shibani-mookerjee/2019/05/07/some-common-gotchas-in-python.html">Some Common Gotchas in Python</a></p>
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/type-in-rust/" rel="next" title="Associated Type in Rust">
+        <i class="fa fa-chevron-left"></i> Associated Type in Rust
+        </a>
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/scala-python-file-encoding-escape/" rel="prev" title="Scala Python 文件读取跳过转义字符">
+        Scala Python 文件读取跳过转义字符 <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+<div id="disqus_thread"></div>
+<script>
+
+
+var disqus_config = function () {
+  this.page.url = "https://zhimoe.github.io/post/python-interview-questions/";  
+  this.page.identifier = "https://zhimoe.github.io/post/python-interview-questions/"; 
+};
+
+(function() { 
+  var d = document, s = d.createElement('script');
+  s.src = 'https://zhimoe.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
+
+    </footer>
+  </article>
+</section>
+
+          </div>
+        </div>
+        <div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      文章目录
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      站点概览
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
+      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+        src="https://zhimoe.github.io/img/avatar.png"
+        alt="zhi.moe" />
+    <p class="site-author-name" itemprop="name">zhi.moe</p>
+    <p class="site-description motion-element" itemprop="description"> 
+        the craft of programming</p>
+</div>
+      <nav class="site-state motion-element">
+    <div class="site-state-item site-state-posts">
+      <a href="https://zhimoe.github.io/post/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">日志</span>
+      </a>
+    </div>
+    <div class="site-state-item site-state-categories">    
+        <a href="https://zhimoe.github.io/categories/">      
+         
+        <span class="site-state-item-count">4</span>
+        
+        <span class="site-state-item-name">分类</span>
+        
+        </a>
+    </div>
+
+    <div class="site-state-item site-state-tags">
+        <a href="https://zhimoe.github.io/tags/">
+         
+        <span class="site-state-item-count">19</span>
+        
+        <span class="site-state-item-name">标签</span>
+        </a>
+    </div>
+</nav>
+      
+<div class="links-of-author motion-element">
+    
+        <span class="links-of-author-item">
+        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
+            <i class="fa fa-fw fa-github"></i>
+            GitHub
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://twitter.com/zhimoee" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
+        </a>
+        </span>
+    
+</div>
+
+
+      
+
+      <div class="links-of-blogroll motion-element inline">
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
+</div>
+
+
+
+
+    </section>
+    
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题">问题</a></li>
+    <li><a href="#解答">解答</a></li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
+  </div>
+</aside>
+
+      </div>
+    </main>
+   
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  <span itemprop="copyrightYear">  &copy; 
+  2017 - 2021</span>
+  <span class="with-love"><i class="fa fa-heart"></i></span>
+  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+</div>
+<div class="powered-by">
+  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
+</div>
+<div class="theme-info">
+  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
+  </a>
+</div>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span id="scrollpercent"><span>0</span>%</span>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/motion.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/affix.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/schemes/pisces.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/toc.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { fonts: ["TeX"] }
+  });
+</script>
+<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
+</body>
+</html>

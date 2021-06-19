@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>elasticsearch on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/elasticsearch/</link>
+    <description>Recent content in elasticsearch on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 01 May 2019 10:17:46 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/elasticsearch/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Elasticsearch Query DSL</title>
+      <link>https://zhimoe.github.io/post/elasticsearch-query-dsl/</link>
+      <pubDate>Wed, 01 May 2019 10:17:46 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/elasticsearch-query-dsl/</guid>
+      <description>diffs in es 2.x and es 5.x query dsl aggr query diffs in es 2.x and es 5.x 没有string类型，改为text和keyword 2个类型了。text字段可以指定fields来不分词。如下： city字段被ingest为city和city.raw2个字段。 { &amp;#34;mappings&amp;#34;: { &amp;#34;_doc&amp;#34;: { &amp;#34;properties&amp;#34;: { &amp;#34;city&amp;#34;: { &amp;#34;type&amp;#34;: &amp;#34;text&amp;#34;, &amp;#34;fields&amp;#34;: { &amp;#34;raw&amp;#34;: {</description>
+    </item>
+    
+  </channel>
+</rss>

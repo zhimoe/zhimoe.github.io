@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>test on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/test/</link>
+    <description>Recent content in test on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 23 Apr 2017 21:51:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>单元测试如何Mock有参数的void方法</title>
+      <link>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</link>
+      <pubDate>Sun, 23 Apr 2017 21:51:20 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</guid>
+      <description>假设有如下的服务依赖： @Service class DepositSvc { @Autowired private AccountSvc accSvc; public List&amp;lt;Account&amp;gt; dps(String user) { List&amp;lt;Account&amp;gt; accounts = new ArrayList(); List&amp;lt;Account&amp;gt; banks = getBanks(); accSvc.addLinkedAccounts(user, accounts, banks);//accounts被改动了如何mock? return accounts; } } @Service class AccountSvc { @Autowired private RestClient restClient; public void addLinkedAccounts(String user, List&amp;lt;Account&amp;gt; accounts, List&amp;lt;Account&amp;gt; banks) { acc = restClient.getAcc(user); accounts.add(acc); } } 这里的AccountSvc只是提供了一个void方法处理了入</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>redis on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/redis/</link>
+    <description>Recent content in redis on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 31 Mar 2019 00:11:50 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用redis的hash优化内存使用</title>
+      <link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</guid>
+      <description>原文 Understanding Redis hash-max-ziplist-entries 问题和方案 场景: 有3亿张图片放在对象存储(DELL ECS/AMAZON EC2)上面,现在需要保存图片的id-&amp;gt;用户id的映射.最直接的思路是: set &amp;#34;media:1155220&amp;#34; &amp;#34;user1&amp;#34; set &amp;#34;media:1155221&amp;#34; &amp;#34;user2&amp;#34; 这样设计key之后3亿张图片需要21GB的内存,因为redis的string是线性增长的</description>
+    </item>
+    
+  </channel>
+</rss>

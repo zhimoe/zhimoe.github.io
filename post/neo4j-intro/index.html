@@ -1,0 +1,532 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+    <title>neo4j intro - zhi.moe</title>
+    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
+    
+    <meta property="og:title" content="neo4j intro">
+    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:image" content="/img/avatar.png"> 
+    <meta name="title" content="neo4j intro - zhi.moe" />
+    <meta name="description" content="编程是一门手艺"> 
+    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
+    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+     fancybox: true, 
+    motion: true
+  };
+</script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<div class="container one-collumn sidebar-position-left page-home  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-meta  custom-logo ">
+
+  <div class="custom-logo-site-title">
+    <a href="https://zhimoe.github.io"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhi.moe</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">the craft of programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+      
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/post/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/about/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
+          </a>
+        </li>
+      
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
+      </li>
+    </ul>
+    <div class="site-search">
+      <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+    </div>
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://zhimoe.github.io/post/neo4j-intro/" itemprop="url">
+        neo4j intro
+        </a>
+      </h1>
+      <div class="post-meta">
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text">时间：</span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2018-12-01">
+    2018-12-01
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text">分类：</span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
+        <span itemprop="name">编程</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text">阅读：</span>
+<span class="leancloud-visitors-count">4470 字 ~9分钟</span>
+</span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+    <h3 id="neo4j图数据库介绍">neo4j图数据库介绍</h3>
+<p>neo4j是目前排名最高的图数据库,分为商业和社区版本,社区版只支持单机,而且查询的运行时(runtime)不同(cypher runtime:interpreted(社区版),slotted(企业版)). 数据库排名可以在 <a href="https://db-engines.com/en/ranking/graph+dbms">https://db-engines.com/en/ranking/graph+dbms</a> 查看,下一代最有前景的开源图数据库是dgraph,目前还积极开发中,生产未就绪,等他的Java客户端再成熟一点可以试用.</p>
+<p>neo4j数据库中只有3个概念: Node, Relationship, Properties. Node表示实体类别,使用Label区分,例如一个节点可以有Person/Father等多个标签,Relationship即关系,雇佣关系,父子关系,投资关系,交易关系等. Node和Relationship都可以有Proerties,属性自身不分是属于节点还是属于关系,例如Person可以有属性name,关系也可以用属性name.你可以在neo4j browser左侧看到当前数据库的所有Node Label,Relationship Type,Properties.</p>
+<h4 id="本地安装和在线沙箱">本地安装和在线沙箱</h4>
+<p>neo4j背后的公司为了吸引用户,提供了一些好玩的数据库沙箱,这些沙箱数据库已经提前放了一些主题数据,例如购物数据,国会关系数据.你可以通过注册登录 <a href="https://neo4j.com/sandbox-v2/,">https://neo4j.com/sandbox-v2/,</a> 选择一个数据沙箱实例进行学习试玩.当然你也可以下载社区版,命令行 <code>neo4j.bat console</code>启动,打开127.0.0.1:7474开始学习.</p>
+<p>一个neo4j支持多个数据库但是一次只能激活一个数据库,一个数据库所有文件都在$neo4j_home\data\databases目录的独立文件夹,在conf/neo4j.conf的<code>dbms.active_database=graph.db</code>指定激活那个数据库.</p>
+<h4 id="cypher查询语言">cypher查询语言</h4>
+<p>neo4j使用cypher语言作为查询语言.这是一种模式匹配的声明式语言.基本语法和SQL相似.
+cypher中常用的子句(clause)有: MATCH,RETURN,WITH,WHERE,UNWIND,LIMIT,UNION,SKIP,SET. RETURN,LIMIT WHERE和SQL中是一样的,UNWIND这些需要用到再查看文档,这里介绍MATCH和WITH.
+<code>MTACH</code>用于指定搜索的模式.例如希望找到&rsquo;Tom Hanks&rsquo;在2018演过的所有电影:<code>MATCH (p:ACTOR {name:'Tom Hanks' }) -[r: ACT_IN]-&gt;(m:MOVIE {time: '2018'})</code>,这是一个模式,可以直接REUREN返回p,r,m等变量.可以看到模式中的节点(Node Label)使用<code>()</code>;关系类型(Relationship Type)使用<code>[]</code>指定,如果不关心type,那么[]可以省略.使用&ndash;; 属性(Properties) 使用{pname: pvalue}指定.
+<code>WITH</code>的作用和python的with非常相似(实际上cypher语言借鉴了python的list处理语法),用于修改一些变量,变量一般都是上一个子句的查询结果,修改之后传给下一个子句.例如下面的语句找到和Anders有关系的人的年龄最大的那个人,返回那个人的所有认识的人的名字.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">MATCH (n { name: <span style="color:#a31515">&#39;Anders&#39;</span> })--(m)
+WITH m
+ORDER BY m.age DESC LIMIT 1
+MATCH (m)--(o)
+RETURN o.name
+</code></pre></div><p>cypher手册: <a href="https://neo4j.com/docs/cypher-manual/3.5/clauses/">https://neo4j.com/docs/cypher-manual/3.5/clauses/</a></p>
+<h4 id="cypher的操作符">cypher的操作符</h4>
+<p>如果需要进行cypher调优,有必要了解一下cypher的操作符. 一般编程语言的代码在被执行前都会被编译得到抽象语法树(AST). 例如Java代码,一个Java文件会被抽象为一个package,class, method,variable declare等不同部分得到一个Class对象. cypher语句一样会被编译得到一棵语法树(AST),每个树节点是一个操作符. 从叶节点的操作符开始执行,得到的结果依次返回给父节点进一步处理.常见的操作符有:AllNodesScan(全局扫描,只能作为叶节点),NodeByLabelScan,Apply等.例如<code>MATCH (n) return n</code>会得到一个<code>AllNodesScan</code>和<code>ProduceResults</code>操作符构成的AST, 你可以通过<code>PROFILE</code>查看你语句编译后得到的操作符构成的执行计划.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s"><span style="color:#008000"># 执行语句得到下面的表格</span>
+PROFILE MATCH (p:Person { name: <span style="color:#a31515">&#39;Tom Hanks&#39;</span> }) RETURN p
+<span style="color:#008000"># 省略了部分列</span>
++-----------------+----------------+------+---------+-----------------+
+| Operator        | Estimated Rows | Rows | DB Hits | Page Cache Hits |
++-----------------+----------------+------+---------+-----------------+
+| +ProduceResults |              1 |    1 |       0 |               0 |
+| |               +----------------+------+---------+-----------------+
+| +NodeIndexSeek  |              1 |    1 |       2 |               0 |
++-----------------+----------------+------+---------+-----------------+
+
+</code></pre></div><h4 id="cypher-runtime">cypher runtime</h4>
+<p>pass</p>
+<h4 id="neo4j-browser介绍">neo4j browser介绍</h4>
+<p>和大多数数据库一样,neo4j是server-client的数据库,支持http和bolt2中协议.neo4j自带一个基于浏览器的客户端,只需在浏览器输入serverIp:7474即可使用.
+neo4j browser自带一个教程和电影关系的数据库初始化脚本.方便你可以学习.下面介绍几个常用的命令.</p>
+<ul>
+<li>:help <!-- raw HTML omitted --> help命令显示各种帮助提示. 常见的topic有 :help cypher :help commands :help keys :help param</li>
+<li>:play 交互式学习命令. 例如,:play movie graph 进入基于电影数据库的教程.</li>
+<li>:param 命令,设置变量.  :param usrname =&gt; &ldquo;zhimoe&rdquo;,注意,变量名和=&gt;之间有空格.设置变量之后可以使用变量<code>MATCH (n:Person) WHERE n.name = $usrname</code></li>
+<li>:params 显示当前已经设置的所有变量.  也可以使用:params {name: &lsquo;Stella&rsquo;, age: 24} 覆盖目前的变量. 但是这个命令没用类型安全.</li>
+</ul>
+<h3 id="spring-neo4j配置">spring-neo4j配置</h3>
+<p>pass</p>
+<h3 id="cypher调优">cypher调优</h3>
+<p>cypher是一种声明式的,模式匹配的查询语言.模式在cypher语言中非常重要.如何合理地设计查询中的模式是cypher性能可调优空间最大的地方.下面给出常见的优化建议.
+需要说明的是,后面的这些建议其实大都可以在<a href="https://neo4j.com/docs/cypher-manual/3.5/query-tuning/">cypher手册</a>找到,如果感兴趣,建议通读这份长文档&hellip;</p>
+<h4 id="避免全局scan">避免全局scan</h4>
+<p>cypher 是一种模式匹配的语言,默认会进行全局扫描,除非你告诉它不要.所以起始节点的label非常重要.起始的模式匹配基数大小也非常重要.</p>
+<h4 id="缓存和硬盘io">缓存和硬盘IO</h4>
+<p>neo4j数据库将数据文件和Page Cache作了映射,如果在缓存中没有查询到,neo4j会从硬盘加载数据文件.第二次查询就可以走缓存.所以需要充分利用Page Cache.记住第一次查询总是会比较慢,因为没用缓存.neo4j 有2级缓存:string cache和AST cache</p>
+<ul>
+<li>string cache
+默认neo4j在cache中保留1000个查询计划,可在<code>conf/neo4j.conf</code>中参数<code> dbms.query_cache_size</code>修改这个设置.</li>
+</ul>
+<p>需要注意的是cache是根据语句的string hash值判断的,所以一样的语句仅仅是大小写不一样或者空白符不一样对缓存来说也是2个语句.</p>
+<p><code>PROFILE/EXPLAIN</code>语句只会cache其去掉<code>PROFILE/EXPLAIN</code>之后的部分.例如:<code>MATCH (n) return COUNT(n);</code>和<code>PROFILE MATCH (n) return COUNT(n);</code>的cache是一致的.</p>
+<ul>
+<li>AST cache
+编程语言都有语法树.如果在string cache中没有找到缓存.那么会将查询正规化,得到语法树并将其缓存.正规化的同时也会做一些优化,例如
+<code>match (n:Person {id:101}) return n;</code>在正规化之后得到<code>match (n:Person) where n.id={param1} return n;   {param1: 101}</code>,AST cache不区分大小写,空格等,所以以下查询是一致的:</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">match (n:Person) where n.id=101 return n;
+match (n:Person {id:101}) return n;
+
+MATCH ( n:Person { id : 101 } )
+RETURN n;
+</code></pre></div><h4 id="execution-plan">execution plan</h4>
+<p>当cypher引擎收到查询语句后如果没用找到对应的缓存,那么Cypher query planner会将语句规范化,优化后编译得到一个执行计划(execution plan).这个执行计划会缓存一切且可以复用. 当查询缓存过多,或者数据库的数据变化大时(设置参数是)这个执行计划则失效被移除.在查询中使用参数而不是字面量值,可以提高一个执行计划的复用率.
+更多信息参考文档:https://neo4j.com/docs/cypher-manual/3.5/execution-plans/#execution-plan-introduction</p>
+<h4 id="查看查询计划">查看查询计划</h4>
+<p>如果想要查看查询语句的执行计划,可以在查询语句前加上 <code>EXPLANIN</code> OR <code>PROFILE</code> 关键字, 你可以在neo4j browser查看query plan找到性能瓶颈.结果左侧边里面第3个tab会给出详细的性能警告(warn).
+<code>EXPLAIN</code>只会给出语句的分析结果;而<code>PROFILE</code>则会执行你的查询语句把给出耗时最多的报告,以及每个操作符返回了多少行记录. 注意,profiling会消耗很多资源,所以不要在生产环境中频繁使用.调优的基础是基于cypher的操作符,所以需要你对操作符有基本的了解.</p>
+<h4 id="索引">索引</h4>
+<p>数据库离不开索引.这里有个小陷阱,最早谱系的节点是企业客户(label: COR_CUSTOMER)+和几十个零售客户节点(label:RTL_CUSTOMER),我在查询语句起始节点没有指定label,没用遇到性能问题,后来加入了3百万的个人节点数据后,原来1s的查询变成了1分半钟. 所以在干扰的label比较少时,你不会察觉到性能问题.务必在起始节点指定label,即使目前只有一个label,最好也提前加上.</p>
+<p>然而,cypher语句目前不允许在一个节点指定多个label,例如你希望起点label是<code>COR_CUSTOMER|RTL_CUSTOMER</code>,这个是不允许的. 只能在where语句指定.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s">MATCH n
+WHERE n:COR_CUSTOMER OR n:RTL_CUSTOMER
+RETURN n
+</code></pre></div><p>在3.0之前的neo4j中使用上面的语句,会导致一个AllNodesScan,在3.0之后,该语句则是将2个NodeByLabelScan匹配结果<code>UNION</code>然后<code>DISTINCT</code>的结果. 所以是搜索2次再合并结果.你可以在上面的cypher语句前面添加<code>EXPLAIN</code>查看执行计划,已确定你的语句是否会导致全局扫描.
+<a href="https://stackoverflow.com/questions/20003769/neo4j-match-multiple-labels-2-or-more">SO上关于多个label匹配的讨论</a></p>
+<h4 id="大结果集">大结果集</h4>
+<p>如果你的查询返回结果集太大,例如几M大小,那么你可能需要考虑你的设计了. 过大的结果集会导致查询返回变慢,要注意,这些结果会占用你的缓存空间,而如果在网络情况不好时,情况家更加糟糕了.</p>
+<p>目前谱系对这一块并没有优化,最大的谱系的返回接口可能达到1M多,加上ES的数据,前端接收数据会有4M多.</p>
+<h4 id="锁">锁</h4>
+<p>当你修改节点的信息时,节点会被锁定;如果修改关系,关系会被锁定;如果增加/删除关系,那么2个节点和这个关系都会被锁定.而如果此时有节点/关系的相关查询请求,这些请求会等待.所以,如果你需要将50个节点加入一个组(group)&ndash;即添加50个关系,如果你调用50次方法,那么这个group节点被lock的时间较长,此时可以通过<code>UNWIND</code>和列表(list)参数处理这个问题.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-S" data-lang="S">MATCH (g:Group { uuid: $groupUuid })
+UNWIND $personUuidList as personUuid
+MATCH (p:Person { uuid : personUuid })
+MERGE (p)-[:IS_MEMBER]-&gt;(g)
+ 
+</code></pre></div><h4 id="常见查询错误">常见查询错误</h4>
+<ul>
+<li>变量名</li>
+<li>label忘记添加冒号,例如MATCH (Person) 和 MATCH (:Person) 是完全不一样的,前者Person是变量,不走索引.</li>
+<li>有过大的中间结果集,优化你的语句时思考:尽早distinct,尽早limit,使用collect减少结果的行数,在正确地方使用order by;</li>
+</ul>
+<h4 id="多个unwind语句导致笛卡尔积">多个UNWIND语句导致笛卡尔积</h4>
+<p>多个UNWIND会导致一个笛卡尔积的结果,这个结果可能会很大.例如下面的结果会得到3*3=9行,所以尽量避免笛卡尔积.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-S" data-lang="S">with [<span style="color:#a31515">&#39;a&#39;</span>,<span style="color:#a31515">&#39;b&#39;</span>,<span style="color:#a31515">&#39;c&#39;</span>] as lts, [1,2,3] as nrs unwind lts as char unwind nrs as nr return char,nr
+</code></pre></div><h4 id="在match中使用多个模式笛卡尔积">在MATCH中使用多个模式笛卡尔积</h4>
+<p>在MATCH中使用多个模式也会导致笛卡尔积,比较下面的2个结果相同的语句,第一个耗时80s,第二个只需8ms.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-s" data-lang="s"><span style="color:#008000">#  1. 笛卡尔积 80000 ms w/ ~900 players, ~40 teams, ~1200 games</span>
+MATCH (pl:Player),(t:Team),(g:Game)
+RETURN COUNT(DISTINCT pl),
+COUNT(DISTINCT t),
+COUNT(DISTINCT g)
+
+<span style="color:#008000"># 2. 8ms w/~900 players, ~40 teams, ~1200 games</span>
+MATCH (pl:Player)
+WITH COUNT(pl) as players
+MATCH (t:Team)
+WITH COUNT(t) as teams, players
+MATCH (g:Game)
+RETURN COUNT(g) as games, teams, players
+</code></pre></div><h4 id="模式中的方向">模式中的方向</h4>
+<p>下面的查询中,如果给关系ACTED_IN添加上方向,可以提高查询速度.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-S" data-lang="S">MATCH (p:Person)-[:ACTED_IN]-(m)
+WHERE p.name = <span style="color:#a31515">&#34;Tom Hanks&#34;</span>
+RETURN m
+</code></pre></div>
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://zhimoe.github.io/tags/neo4j" rel="tag" title="neo4j">#neo4j#</a>
+    
+    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+    <a href="https://zhimoe.github.io/tags/database" rel="tag" title="database">#database#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/wsl-docker-environment/" rel="next" title="wsl-docker-environment">
+        <i class="fa fa-chevron-left"></i> wsl-docker-environment
+        </a>
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/jupyter-notebook-install-new-package/" rel="prev" title="Jupyter Notebook Install New Package">
+        Jupyter Notebook Install New Package <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+<div id="disqus_thread"></div>
+<script>
+
+
+var disqus_config = function () {
+  this.page.url = "https://zhimoe.github.io/post/neo4j-intro/";  
+  this.page.identifier = "https://zhimoe.github.io/post/neo4j-intro/"; 
+};
+
+(function() { 
+  var d = document, s = d.createElement('script');
+  s.src = 'https://zhimoe.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
+
+    </footer>
+  </article>
+</section>
+
+          </div>
+        </div>
+        <div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      文章目录
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      站点概览
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
+      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+        src="https://zhimoe.github.io/img/avatar.png"
+        alt="zhi.moe" />
+    <p class="site-author-name" itemprop="name">zhi.moe</p>
+    <p class="site-description motion-element" itemprop="description"> 
+        the craft of programming</p>
+</div>
+      <nav class="site-state motion-element">
+    <div class="site-state-item site-state-posts">
+      <a href="https://zhimoe.github.io/post/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">日志</span>
+      </a>
+    </div>
+    <div class="site-state-item site-state-categories">    
+        <a href="https://zhimoe.github.io/categories/">      
+         
+        <span class="site-state-item-count">4</span>
+        
+        <span class="site-state-item-name">分类</span>
+        
+        </a>
+    </div>
+
+    <div class="site-state-item site-state-tags">
+        <a href="https://zhimoe.github.io/tags/">
+         
+        <span class="site-state-item-count">19</span>
+        
+        <span class="site-state-item-name">标签</span>
+        </a>
+    </div>
+</nav>
+      
+<div class="links-of-author motion-element">
+    
+        <span class="links-of-author-item">
+        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
+            <i class="fa fa-fw fa-github"></i>
+            GitHub
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://twitter.com/zhimoee" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
+        </a>
+        </span>
+    
+</div>
+
+
+      
+
+      <div class="links-of-blogroll motion-element inline">
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
+</div>
+
+
+
+
+    </section>
+    
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#neo4j图数据库介绍">neo4j图数据库介绍</a></li>
+        <li><a href="#spring-neo4j配置">spring-neo4j配置</a></li>
+        <li><a href="#cypher调优">cypher调优</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
+  </div>
+</aside>
+
+      </div>
+    </main>
+   
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  <span itemprop="copyrightYear">  &copy; 
+  2017 - 2021</span>
+  <span class="with-love"><i class="fa fa-heart"></i></span>
+  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+</div>
+<div class="powered-by">
+  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
+</div>
+<div class="theme-info">
+  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
+  </a>
+</div>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span id="scrollpercent"><span>0</span>%</span>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/motion.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/affix.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/schemes/pisces.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/toc.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { fonts: ["TeX"] }
+  });
+</script>
+<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
+</body>
+</html>

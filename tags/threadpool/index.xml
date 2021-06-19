@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>threadpool on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/threadpool/</link>
+    <description>Recent content in threadpool on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 13 Jun 2018 09:57:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/threadpool/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java Thread Pool Hierachy</title>
+      <link>https://zhimoe.github.io/post/java-threadpool-hierachy/</link>
+      <pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-threadpool-hierachy/</guid>
+      <description>thread pool classes hierachy java thread pool class hierarchy Executor (java.util.concurrent) |---ExecutorService (java.util.concurrent) |---AbstractExecutorService (java.util.concurrent) | |---AbstractEventExecutor (io.netty.util.concurrent) | |---ForkJoinPool (java.util.concurrent) | |---ThreadPoolExecutor (java.util.concurrent) | | |---ScheduledThreadPoolExecutor (java.util.concurrent) |---DelegatedExecutorService in Executors (java.util.concurrent) |---ScheduledExecutorService (java.util.concurrent) three thread pool interfaces Executor, a simple interface that supports launching new tasks. ExecutorService, a subinterface of Executor, which adds features that help manage the life cycle, both of the individual tasks and of the executor itself. ScheduledExecutorService, a subinterface of ExecutorService, supports future and/or periodic execution of tasks. common thread pool implements ThreadPoolExecutor是thread pool 最常用的实现。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,505 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+    <title>Scala Type Class - zhi.moe</title>
+    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
+    
+    <meta property="og:title" content="Scala Type Class">
+    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:image" content="/img/avatar.png"> 
+    <meta name="title" content="Scala Type Class - zhi.moe" />
+    <meta name="description" content="编程是一门手艺"> 
+    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
+    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+     fancybox: true, 
+    motion: true
+  };
+</script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<div class="container one-collumn sidebar-position-left page-home  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-meta  custom-logo ">
+
+  <div class="custom-logo-site-title">
+    <a href="https://zhimoe.github.io"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhi.moe</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">the craft of programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+      
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/post/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/about/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
+          </a>
+        </li>
+      
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
+      </li>
+    </ul>
+    <div class="site-search">
+      <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+    </div>
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://zhimoe.github.io/post/scala-type-class/" itemprop="url">
+        Scala Type Class
+        </a>
+      </h1>
+      <div class="post-meta">
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text">时间：</span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2019-03-31">
+    2019-03-31
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text">分类：</span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
+        <span itemprop="name">编程</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text">阅读：</span>
+<span class="leancloud-visitors-count">992 字 ~2分钟</span>
+</span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+    <p><a href="https://scalac.io/typeclasses-in-scala">关于scala type class非常好的文章</a></p>
+<h2 id="核心知识点">核心知识点</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//scala没有专门的type class语法，而是借助trait + implicit + context bound来实现的，
+</span><span style="color:#008000">//所以很多时候识别type class比较困难。
+</span><span style="color:#008000">//type class 由三部分构成
+</span><span style="color:#008000">//1. type class: 即下面的Show，定义一个行为toHtml。
+</span><span style="color:#008000">//2. type class instances：希望实现toHtml方法的类型实例
+</span><span style="color:#008000">//3. user interface: type class中伴生对象的同名方法或者隐式转换方法。
+</span><span style="color:#008000"></span>
+<span style="color:#008000">// type class
+</span><span style="color:#008000"></span><span style="color:#00f">trait</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>] {
+  <span style="color:#00f">def</span> toHtml(a<span style="color:#00f">:</span> <span style="color:#2b91af">A</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>
+}
+
+<span style="color:#008000">// 定义在伴生对象的好处就是implicit变量自动处于scope内
+</span><span style="color:#008000"></span><span style="color:#00f">object</span> <span style="color:#2b91af">Show</span> {
+  <span style="color:#008000">//利用伴生对象apply特点实现下面Show[A].toHtml调用方式，即隐藏implicit sh
+</span><span style="color:#008000"></span>  <span style="color:#00f">def</span> apply[<span style="color:#2b91af">A</span>](<span style="color:#00f">implicit</span> sh<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>])<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>] <span style="color:#00f">=</span> sh
+
+  <span style="color:#008000">//如果没有apply，那么下面的toHtml需要一个隐式参数：
+</span><span style="color:#008000"></span>  <span style="color:#008000">//def toHtml[A](a: A)(implicit sh: Show[A]): String = sh.toHtml(a)
+</span><span style="color:#008000"></span>  <span style="color:#008000">//或者：
+</span><span style="color:#008000"></span>  <span style="color:#008000">//def toHtml[A: Show](a: A): String = implicitly[Show[A]].toHtml(a)
+</span><span style="color:#008000"></span>
+
+  <span style="color:#008000">//对外接口，提供toHtml(&#34;type&#34;)的调用形式
+</span><span style="color:#008000"></span>  <span style="color:#00f">def</span> toHtml[<span style="color:#2b91af">A:</span> <span style="color:#2b91af">Show</span>](a<span style="color:#00f">:</span> <span style="color:#2b91af">A</span>) <span style="color:#00f">=</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>].toHtml(a)
+  
+  <span style="color:#008000">//对外接口，通过隐式转换提供10 toHtml的调用形式
+</span><span style="color:#008000"></span>  <span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">ShowOps</span>[<span style="color:#2b91af">A:</span> <span style="color:#2b91af">Show</span>](a<span style="color:#00f">:</span> <span style="color:#2b91af">A</span>) { <span style="color:#008000">// 惯例使用TypeCls+Ops
+</span><span style="color:#008000"></span>    <span style="color:#00f">def</span> toHtml <span style="color:#00f">=</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>].toHtml(a)
+  }
+
+  <span style="color:#008000">//为了避免运行开销，可以将Ops类定义为value class：
+</span><span style="color:#008000"></span>  <span style="color:#008000">//  implicit class ShowOps[A](val a: A) extends AnyVal {
+</span><span style="color:#008000"></span>  <span style="color:#008000">//    def toHtml(implicit sh: Show[A]) = sh.toHtml(a)
+</span><span style="color:#008000"></span>  <span style="color:#008000">//  }
+</span><span style="color:#008000"></span>
+  <span style="color:#008000">//上面两个对外接口都利用了伴生对象的apply方法和context bound
+</span><span style="color:#008000"></span>
+  <span style="color:#008000">//type class instance int
+</span><span style="color:#008000"></span>  <span style="color:#00f">implicit</span> <span style="color:#00f">val</span> intCanShow<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">Int</span>] <span style="color:#00f">=</span>
+    int <span style="color:#00f">=&gt;</span> <span style="color:#a31515">s&#34;&lt;int&gt;</span><span style="color:#a31515">$int</span><span style="color:#a31515">&lt;/int&gt;&#34;</span>
+
+  <span style="color:#008000">//type class instance string
+</span><span style="color:#008000"></span>  <span style="color:#00f">implicit</span> <span style="color:#00f">val</span> stringCanShow<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">String</span>] <span style="color:#00f">=</span>
+    str <span style="color:#00f">=&gt;</span> <span style="color:#a31515">s&#34;&lt;string&gt;</span><span style="color:#a31515">$str</span><span style="color:#a31515">&lt;/string&gt;&#34;</span>
+}
+
+<span style="color:#008000">//use type class
+</span><span style="color:#008000"></span><span style="color:#00f">import</span> Show._
+print(10 toHtml)
+print(toHtml(<span style="color:#a31515">&#34;type&#34;</span>))
+</code></pre></div><p>若使用<code>import Show._ </code>导入全部内容，则用户无法自己实现一些 type class instance则会覆盖默认实例导致歧义。
+可以将对外接口移动到单独的ops对象中：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">trait</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>] {
+  <span style="color:#00f">def</span> toHtml(a<span style="color:#00f">:</span> <span style="color:#2b91af">A</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>
+}
+
+<span style="color:#00f">object</span> <span style="color:#2b91af">Show</span> {
+  <span style="color:#00f">def</span> apply[<span style="color:#2b91af">A</span>](<span style="color:#00f">implicit</span> sh<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>])<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>] <span style="color:#00f">=</span> sh
+
+  <span style="color:#00f">object</span> <span style="color:#2b91af">ops</span> {
+    <span style="color:#00f">def</span> toHtml[<span style="color:#2b91af">A:</span> <span style="color:#2b91af">Show</span>](a<span style="color:#00f">:</span> <span style="color:#2b91af">A</span>) <span style="color:#00f">=</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>].toHtml(a)
+
+    <span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">ShowOps</span>[<span style="color:#2b91af">A:</span> <span style="color:#2b91af">Show</span>](a<span style="color:#00f">:</span> <span style="color:#2b91af">A</span>) { <span style="color:#008000">// 惯例使用TypeCls+Ops
+</span><span style="color:#008000"></span>      <span style="color:#00f">def</span> toHtml <span style="color:#00f">=</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>].toHtml(a)
+    }
+
+  }
+
+  <span style="color:#00f">implicit</span> <span style="color:#00f">val</span> intCanShow<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">Int</span>] <span style="color:#00f">=</span> int <span style="color:#00f">=&gt;</span> <span style="color:#a31515">s&#34;&lt;int&gt;</span><span style="color:#a31515">$int</span><span style="color:#a31515">&lt;/int&gt;&#34;</span>
+  <span style="color:#00f">implicit</span> <span style="color:#00f">val</span> stringCanShow<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">String</span>] <span style="color:#00f">=</span> str <span style="color:#00f">=&gt;</span> <span style="color:#a31515">s&#34;&lt;string&gt;</span><span style="color:#a31515">$str</span><span style="color:#a31515">&lt;/string&gt;&#34;</span>
+}
+</code></pre></div><p>使用：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">import</span> xxx.Show <span style="color:#008000">//如果需要实现自定义的type class instance则需要
+</span><span style="color:#008000"></span><span style="color:#00f">import</span> xxx.Show.ops._
+</code></pre></div><h2 id="自定义">自定义</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">    <span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Person</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, age<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)
+    <span style="color:#00f">implicit</span> <span style="color:#00f">val</span> personOps<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">Person</span>] <span style="color:#00f">=</span> p <span style="color:#00f">=&gt;</span> <span style="color:#a31515">s&#34;&lt;person&gt;name=</span><span style="color:#a31515">${</span>p.name<span style="color:#a31515">}</span><span style="color:#a31515">,age=</span><span style="color:#a31515">${</span>p.age<span style="color:#a31515">}</span><span style="color:#a31515">&lt;/person&gt;&#34;</span>
+
+    print(<span style="color:#2b91af">Person</span>(<span style="color:#a31515">&#34;lee&#34;</span>, 19) toHtml)<span style="color:#008000">//&lt;person&gt;name=lee,age=19&lt;/person&gt;
+</span><span style="color:#008000"></span>
+</code></pre></div><h2 id="simulacrum">Simulacrum</h2>
+<p><a href="https://github.com/typelevel/simulacrum">Simulacrum</a>通过宏为 type class 添加便捷语法，是否使用取决于个人判断。
+若使用 Simulacrum，则可以一眼找出代码中所有的 type class，并且可省去很多样板代码。
+另一方面，使用 <code>@typeclass</code>（Simulacrum 主要注解）则意味着需要依赖 macro paradise 编译器插件。</p>
+<p>使用 Simulacrum 重写我们的 Show type class：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">import</span> simulacrum._
+
+@typeclass <span style="color:#00f">trait</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">A</span>] {
+  <span style="color:#00f">def</span> toHtml(a<span style="color:#00f">:</span> <span style="color:#2b91af">A</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>
+}
+</code></pre></div><p>有了 Simulacrum，type class 定义变得非常简洁，我们在其伴生对象中添加 Show[String] 实例：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//Simulacrum 会为 Show 自动生成 ops 对象，与前面自定义的基本一致。
+</span><span style="color:#008000"></span><span style="color:#00f">object</span> <span style="color:#2b91af">Show</span> {
+  <span style="color:#00f">implicit</span> <span style="color:#00f">val</span> stringShow<span style="color:#00f">:</span> <span style="color:#2b91af">Show</span>[<span style="color:#2b91af">String</span>] <span style="color:#00f">=</span> s <span style="color:#00f">⇒</span> <span style="color:#a31515">s&#34;String: </span><span style="color:#a31515">$s</span><span style="color:#a31515">&#34;</span>
+}
+</code></pre></div>
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+    <a href="https://zhimoe.github.io/tags/scala" rel="tag" title="scala">#scala#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/pattern-matching-anonymous-function/" rel="next" title="Pattern Matching Anonymous Function">
+        <i class="fa fa-chevron-left"></i> Pattern Matching Anonymous Function
+        </a>
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/scala-notes/" rel="prev" title="Scala 学习笔记">
+        Scala 学习笔记 <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+<div id="disqus_thread"></div>
+<script>
+
+
+var disqus_config = function () {
+  this.page.url = "https://zhimoe.github.io/post/scala-type-class/";  
+  this.page.identifier = "https://zhimoe.github.io/post/scala-type-class/"; 
+};
+
+(function() { 
+  var d = document, s = d.createElement('script');
+  s.src = 'https://zhimoe.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
+
+    </footer>
+  </article>
+</section>
+
+          </div>
+        </div>
+        <div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      文章目录
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      站点概览
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
+      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+        src="https://zhimoe.github.io/img/avatar.png"
+        alt="zhi.moe" />
+    <p class="site-author-name" itemprop="name">zhi.moe</p>
+    <p class="site-description motion-element" itemprop="description"> 
+        the craft of programming</p>
+</div>
+      <nav class="site-state motion-element">
+    <div class="site-state-item site-state-posts">
+      <a href="https://zhimoe.github.io/post/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">日志</span>
+      </a>
+    </div>
+    <div class="site-state-item site-state-categories">    
+        <a href="https://zhimoe.github.io/categories/">      
+         
+        <span class="site-state-item-count">4</span>
+        
+        <span class="site-state-item-name">分类</span>
+        
+        </a>
+    </div>
+
+    <div class="site-state-item site-state-tags">
+        <a href="https://zhimoe.github.io/tags/">
+         
+        <span class="site-state-item-count">19</span>
+        
+        <span class="site-state-item-name">标签</span>
+        </a>
+    </div>
+</nav>
+      
+<div class="links-of-author motion-element">
+    
+        <span class="links-of-author-item">
+        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
+            <i class="fa fa-fw fa-github"></i>
+            GitHub
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://twitter.com/zhimoee" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
+        </a>
+        </span>
+    
+</div>
+
+
+      
+
+      <div class="links-of-blogroll motion-element inline">
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
+</div>
+
+
+
+
+    </section>
+    
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#核心知识点">核心知识点</a></li>
+    <li><a href="#自定义">自定义</a></li>
+    <li><a href="#simulacrum">Simulacrum</a></li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
+  </div>
+</aside>
+
+      </div>
+    </main>
+   
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  <span itemprop="copyrightYear">  &copy; 
+  2017 - 2021</span>
+  <span class="with-love"><i class="fa fa-heart"></i></span>
+  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+</div>
+<div class="powered-by">
+  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
+</div>
+<div class="theme-info">
+  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
+  </a>
+</div>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span id="scrollpercent"><span>0</span>%</span>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/motion.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/affix.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/schemes/pisces.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/toc.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { fonts: ["TeX"] }
+  });
+</script>
+<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
+</body>
+</html>

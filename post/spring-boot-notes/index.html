@@ -1,0 +1,621 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+    <title>Spring Boot Notes - zhi.moe</title>
+    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
+    
+    <meta property="og:title" content="Spring Boot Notes">
+    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:image" content="/img/avatar.png"> 
+    <meta name="title" content="Spring Boot Notes - zhi.moe" />
+    <meta name="description" content="编程是一门手艺"> 
+    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
+    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+     fancybox: true, 
+    motion: true
+  };
+</script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<div class="container one-collumn sidebar-position-left page-home  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-meta  custom-logo ">
+
+  <div class="custom-logo-site-title">
+    <a href="https://zhimoe.github.io"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhi.moe</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">the craft of programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+      
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/post/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/about/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
+          </a>
+        </li>
+      
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
+      </li>
+    </ul>
+    <div class="site-search">
+      <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+    </div>
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://zhimoe.github.io/post/spring-boot-notes/" itemprop="url">
+        Spring Boot Notes
+        </a>
+      </h1>
+      <div class="post-meta">
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text">时间：</span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2019-04-14">
+    2019-04-14
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text">分类：</span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
+        <span itemprop="name">编程</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text">阅读：</span>
+<span class="leancloud-visitors-count">2101 字 ~5分钟</span>
+</span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+    <p>一些容易忘记的spring boot知识要点.</p>
+<blockquote>
+<p>注意,.yaml和.yml文件没任何区别.</p>
+</blockquote>
+<h1 id="配置">配置</h1>
+<h2 id="springbootapplication注解">SpringBootApplication注解</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">@SpringBootApplication
+&lt;=等价=&gt;
+@Configuration
+@ComponentScan
+@EnableAutoConfiguration
+
+</code></pre></div><h2 id="自动配置">自动配置</h2>
+<p>spring的自动配置依赖以下注解:</p>
+<p><img src="https://zhimoe.github.io/spring/spring-boot-autoconfig-conditional.png" alt="spring-boot-autoconfig-conditional"></p>
+<h2 id="配置文件">配置文件</h2>
+<p>任何时候硬编码的配置总是不好的,spring支持从很多环境中读取配置: 配置文件,yaml文件,环境变量,命令参数.
+配置可以在<code>@Value</code>注解中使用,也可<code>Environment</code>访问,或者通过<code>@ConfigurationProperties</code>将配置属性绑定到特定的bean(<a href="https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config-typesafe-configuration-properties">例子</a>).</p>
+<p>spring boot的配置属性读取顺序为:</p>
+<ul>
+<li>Devtools global settings properties on your home directory (~/.spring-boot-devtools.properties when devtools is active).</li>
+<li>@TestPropertySource annotations on your tests.</li>
+<li>@SpringBootTest#properties annotation attribute on your tests.</li>
+<li>Command line arguments.</li>
+<li>Properties from SPRING_APPLICATION_JSON (inline JSON embedded in an environment variable or system property)</li>
+<li>ServletConfig init parameters.</li>
+<li>ServletContext init parameters.</li>
+<li>JNDI attributes from java:comp/env.</li>
+<li>Java System properties (System.getProperties()).</li>
+<li>OS environment variables.</li>
+<li>A RandomValuePropertySource that only has properties in random.*.</li>
+<li>Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)</li>
+<li>Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants)</li>
+<li>Application properties outside of your packaged jar (application.properties and YAML variants).</li>
+<li>Application properties packaged inside your jar (application.properties and YAML variants).</li>
+<li>@PropertySource annotations on your @Configuration classes.</li>
+<li>Default properties (specified using SpringApplication.setDefaultProperties).</li>
+</ul>
+<p>因为spring-boot主要使用的<code>application.properties/yaml</code>文件,所以后面主要关注这个文件.</p>
+<p>此外,spring代码中使用了大约近千个(300多类)默认值,这些默认值都是可以覆盖的.只需你在你的propeties/yaml文件中用相同的key即可.
+所有的参考值见: <a href="https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/html/common-application-properties.html">example application.properties</a></p>
+<h2 id="applicationproperties">application.properties</h2>
+<p>SpringApplication loads properties from application.properties files in the following locations and adds them to the Spring Environment:</p>
+<ul>
+<li>A /config subdirectory of the current directory</li>
+<li>The current directory</li>
+<li>A classpath /config package</li>
+<li>The classpath root</li>
+</ul>
+<h2 id="applicationyml">application.yml</h2>
+<p>yaml是json的超集,相比properties文件,有着简洁灵活的优势 例如可以设置数组,设置group概念等.
+yaml文件可以配置数组:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#008000"># 数组功能,等价</span>
+<span style="color:#008000"># my.servers[0]=dev.bar.com</span>
+<span style="color:#008000"># my.servers[1]=foo.bar.com</span>
+<span style="color:#00f">my</span>:
+   <span style="color:#00f">servers</span>:
+       - dev.bar.com
+	   - foo.bar.com
+
+<span style="color:#008000">#上面的配置可以通过注解绑定到以下bean中,非常强大.</span>
+@ConfigurationProperties(prefix=<span style="color:#a31515">&#34;my&#34;</span>)
+public class Config {
+	private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();
+}
+
+
+<span style="color:#008000"># 在一个yaml文件设置不同的profile配置,properties文件只能通过拆分文件`application-profiles.properties`实现.</span>
+<span style="color:#00f">server</span>:
+    <span style="color:#00f">address</span>: 192.168.1.100
+---
+<span style="color:#00f">spring</span>:
+    <span style="color:#00f">profiles</span>: DEV
+<span style="color:#00f">server</span>:
+    <span style="color:#00f">address</span>: 127.0.0.1
+---
+<span style="color:#00f">spring</span>:
+    <span style="color:#00f">profiles</span>: PRD
+<span style="color:#00f">server</span>:
+    <span style="color:#00f">address</span>: 192.168.1.120
+
+</code></pre></div><h3 id="yaml缺点">yaml缺点:</h3>
+<blockquote>
+<p>YAML files cannot be loaded by using the <code>@PropertySource</code> annotation. So, in the case that you need to load values that way, you need to use a properties file.</p>
+</blockquote>
+<p>当然使用properties文件缺点也明显,不能分组(yaml的&mdash;功能);同时中文显示容易unicode码.</p>
+<h2 id="读取配置文件">读取配置文件</h2>
+<p>除了application.properties文件,其他的配置属性文件需要我们自己加载读取.注意,下面的<code>PropertySource</code>无法加载yaml文件.</p>
+<h3 id="使用propertysource">使用PropertySource</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cron=0/3 * * * * ?
+
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">@Configuration
+@PropertySource(<span style="color:#a31515">&#34;classpath:foo.properties&#34;</span>)
+<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">PropertiesWithJavaConfig</span> {
+    @Value(${cron})
+    <span style="color:#00f">private</span> String cron;
+    
+}
+
+<span style="color:#008000">//or
+</span><span style="color:#008000"></span>@PropertySource({ 
+  <span style="color:#a31515">&#34;classpath:persistence-${envTarget:mysql}.properties&#34;</span>
+})
+
+<span style="color:#008000">//multi files
+</span><span style="color:#008000">//java 8+
+</span><span style="color:#008000"></span>@PropertySource(<span style="color:#a31515">&#34;classpath:foo.properties&#34;</span>)
+@PropertySource(<span style="color:#a31515">&#34;classpath:bar.properties&#34;</span>)
+<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">PropertiesWithJavaConfig</span> {
+    <span style="color:#008000">//...
+</span><span style="color:#008000"></span>}
+<span style="color:#008000">//java 6+
+</span><span style="color:#008000"></span>@PropertySources({
+    @PropertySource(<span style="color:#a31515">&#34;classpath:foo.properties&#34;</span>),
+    @PropertySource(<span style="color:#a31515">&#34;classpath:bar.properties&#34;</span>)
+})
+<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">PropertiesWithJavaConfig</span> {
+    <span style="color:#008000">//...
+</span><span style="color:#008000"></span>}
+
+<span style="color:#008000">//通过xml加载
+</span><span style="color:#008000">//register file in xml
+</span><span style="color:#008000"></span>&lt;context:property-placeholder location=<span style="color:#a31515">&#34;classpath:foo.properties&#34;</span> /&gt;
+<span style="color:#008000">//foo.properties in src/main/resources
+</span><span style="color:#008000"></span>&lt;context:property-placeholder location=<span style="color:#a31515">&#34;classpath:foo.properties, classpath:bar.properties&#34;</span>/&gt;
+
+</code></pre></div><h3 id="如何加载自定义的yaml文件">如何加载自定义的yaml文件</h3>
+<p>上面提到spring会默认加载<code>application.yml</code>文件的配置.但是其他文件名的yml文件无法通过<code>@PropertySource</code>加载.可以有以下方法.</p>
+<ul>
+<li>使用xml,然后在Java Config类加载xml. 个人不推荐使用xml文件,脱离spring boot的初衷了.</li>
+<li>使用yml加载器: The <code>YamlPropertiesFactoryBean</code> will load YAML as <code>Properties</code> and the <code>YamlMapFactoryBean</code> will load YAML as a <code>Map</code>.</li>
+<li>避免使用,尽量将你的所以配置放在application.yml里面,因为yml可以有分组功能.</li>
+<li>将你文件命名为<code>application-redis.yml</code>,然后在application.yml使用<code>spring.profiles.include: 'redis'</code> 加载.</li>
+</ul>
+<p>使用yaml文件的加载可以通过<code>ConfigurationProperties</code>绑定到配置bean中.还要添加2个注解注册到spring:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">@Configuration
+@EnableConfigurationProperties
+@ConfigurationProperties
+<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">YAMLConfig</span> {
+  
+    <span style="color:#00f">private</span> String name;
+    <span style="color:#00f">private</span> String environment;
+    <span style="color:#00f">private</span> List&lt;String&gt; servers = <span style="color:#00f">new</span> ArrayList&lt;&gt;();
+ 
+    <span style="color:#008000">// standard getters and setters
+</span><span style="color:#008000"></span>}
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#00f">spring</span>:
+    <span style="color:#00f">profiles</span>: prod
+<span style="color:#00f">name</span>: prod-YAML
+<span style="color:#00f">environment</span>: production
+<span style="color:#00f">servers</span>: 
+    - www.abc.com
+    - www.xyz.com
+</code></pre></div><h3 id="profiles">profiles</h3>
+<p>很多配置希望基于环境,spring boot支持<code>application-profile.properties</code>格式的配置,profile可以是DEV,ST,UAT,PRD,TEST等.
+例如某个class希望只有在<code>PRD</code>环境才有:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">@Profile(<span style="color:#a31515">&#34;PRD&#34;</span>)
+@Configuration
+@EnableWebSecurity
+<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">SecurityConfig</span> <span style="color:#00f">extends</span> WebSecurityConfigurerAdapter {}
+
+</code></pre></div><p>然后在<code>application.yml/properties</code>设置profile:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00f">spring</span>:
+  <span style="color:#00f">profiles</span>:
+    <span style="color:#00f">active</span>: PRD
+</code></pre></div><h3 id="properties文件设置profile">properties文件设置profile</h3>
+<p><code>application.properties</code>文件只能使用<code>application-DEV.properties,application-ST.properties</code>设置profile.</p>
+<h3 id="yml文件设置profile">yml文件设置profile</h3>
+<p><code>application.yml</code>既可以像properties文件使用<code>application-DEV.yml</code>来设置profile,也可以使用<code>---</code>分组.如下示例,<code>logging.level=INFO</code>在所有profile中生效,而在生产环境中增加日志文件设置,DEV环境则使用<code>DEBUG</code>级别日志.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#008000"># application.yml</span>
+<span style="color:#00f">logging</span>:
+  <span style="color:#00f">level</span>:
+   <span style="color:#00f">root</span>: INFO
+---
+<span style="color:#00f">spring</span>:
+  <span style="color:#00f">profiles</span>: DEV
+<span style="color:#00f">logging</span>:
+  <span style="color:#00f">level</span>:
+    <span style="color:#00f">root</span>: DEBUG
+---
+<span style="color:#00f">spring</span>:
+  <span style="color:#00f">profiles</span>: PRD
+<span style="color:#00f">logging</span>:
+  <span style="color:#00f">path</span>: /tmp/
+  <span style="color:#00f">file</span>: BookWorm.log
+  <span style="color:#00f">level</span>:
+    <span style="color:#00f">root</span>: WARN
+</code></pre></div><h3 id="激活profiles">激活profiles</h3>
+<p>在<code>application.yml/properties</code>文件中激活某个profile:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00f">spring</span>:
+    <span style="color:#00f">profiles</span>:
+        <span style="color:#00f">active</span>: DEV
+</code></pre></div><p>如果你设置了<code>SPRING_PROFILES_ACTIVE</code>环境变量,那么会覆盖上面的profile设置.当然你也可以使用自定义环境变量和默认值:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#00f">spring</span>:
+    <span style="color:#00f">profiles</span>:
+        <span style="color:#00f">active</span>: ${ENV_TYP:PRD}
+<span style="color:#008000"># 读取ENV_TYP环境变量的值作为激活profile,如果没用这个环境变量,那么设置为PRD.</span>
+</code></pre></div><h1 id="测试">测试</h1>
+
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+    <a href="https://zhimoe.github.io/tags/spring" rel="tag" title="spring">#spring#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/scala-future/" rel="next" title="Scala Future">
+        <i class="fa fa-chevron-left"></i> Scala Future
+        </a>
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/pattern-matching-anonymous-function/" rel="prev" title="Pattern Matching Anonymous Function">
+        Pattern Matching Anonymous Function <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+<div id="disqus_thread"></div>
+<script>
+
+
+var disqus_config = function () {
+  this.page.url = "https://zhimoe.github.io/post/spring-boot-notes/";  
+  this.page.identifier = "https://zhimoe.github.io/post/spring-boot-notes/"; 
+};
+
+(function() { 
+  var d = document, s = d.createElement('script');
+  s.src = 'https://zhimoe.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
+
+    </footer>
+  </article>
+</section>
+
+          </div>
+        </div>
+        <div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      文章目录
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      站点概览
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
+      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+        src="https://zhimoe.github.io/img/avatar.png"
+        alt="zhi.moe" />
+    <p class="site-author-name" itemprop="name">zhi.moe</p>
+    <p class="site-description motion-element" itemprop="description"> 
+        the craft of programming</p>
+</div>
+      <nav class="site-state motion-element">
+    <div class="site-state-item site-state-posts">
+      <a href="https://zhimoe.github.io/post/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">日志</span>
+      </a>
+    </div>
+    <div class="site-state-item site-state-categories">    
+        <a href="https://zhimoe.github.io/categories/">      
+         
+        <span class="site-state-item-count">4</span>
+        
+        <span class="site-state-item-name">分类</span>
+        
+        </a>
+    </div>
+
+    <div class="site-state-item site-state-tags">
+        <a href="https://zhimoe.github.io/tags/">
+         
+        <span class="site-state-item-count">19</span>
+        
+        <span class="site-state-item-name">标签</span>
+        </a>
+    </div>
+</nav>
+      
+<div class="links-of-author motion-element">
+    
+        <span class="links-of-author-item">
+        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
+            <i class="fa fa-fw fa-github"></i>
+            GitHub
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://twitter.com/zhimoee" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
+        </a>
+        </span>
+    
+</div>
+
+
+      
+
+      <div class="links-of-blogroll motion-element inline">
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
+</div>
+
+
+
+
+    </section>
+    
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#springbootapplication注解">SpringBootApplication注解</a></li>
+    <li><a href="#自动配置">自动配置</a></li>
+    <li><a href="#配置文件">配置文件</a></li>
+    <li><a href="#applicationproperties">application.properties</a></li>
+    <li><a href="#applicationyml">application.yml</a>
+      <ul>
+        <li><a href="#yaml缺点">yaml缺点:</a></li>
+      </ul>
+    </li>
+    <li><a href="#读取配置文件">读取配置文件</a>
+      <ul>
+        <li><a href="#使用propertysource">使用PropertySource</a></li>
+        <li><a href="#如何加载自定义的yaml文件">如何加载自定义的yaml文件</a></li>
+        <li><a href="#profiles">profiles</a></li>
+        <li><a href="#properties文件设置profile">properties文件设置profile</a></li>
+        <li><a href="#yml文件设置profile">yml文件设置profile</a></li>
+        <li><a href="#激活profiles">激活profiles</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
+  </div>
+</aside>
+
+      </div>
+    </main>
+   
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  <span itemprop="copyrightYear">  &copy; 
+  2017 - 2021</span>
+  <span class="with-love"><i class="fa fa-heart"></i></span>
+  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+</div>
+<div class="powered-by">
+  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
+</div>
+<div class="theme-info">
+  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
+  </a>
+</div>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span id="scrollpercent"><span>0</span>%</span>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/motion.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/affix.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/schemes/pisces.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/toc.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { fonts: ["TeX"] }
+  });
+</script>
+<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
+</body>
+</html>

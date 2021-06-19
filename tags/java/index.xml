@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/java/</link>
+    <description>Recent content in java on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 13 Jun 2018 09:57:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java Thread Pool Hierachy</title>
+      <link>https://zhimoe.github.io/post/java-threadpool-hierachy/</link>
+      <pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-threadpool-hierachy/</guid>
+      <description>thread pool classes hierachy java thread pool class hierarchy Executor (java.util.concurrent) |---ExecutorService (java.util.concurrent) |---AbstractExecutorService (java.util.concurrent) | |---AbstractEventExecutor (io.netty.util.concurrent) | |---ForkJoinPool (java.util.concurrent) | |---ThreadPoolExecutor (java.util.concurrent) | | |---ScheduledThreadPoolExecutor (java.util.concurrent) |---DelegatedExecutorService in Executors (java.util.concurrent) |---ScheduledExecutorService (java.util.concurrent) three thread pool interfaces Executor, a simple interface that supports launching new tasks. ExecutorService, a subinterface of Executor, which adds features that help manage the life cycle, both of the individual tasks and of the executor itself. ScheduledExecutorService, a subinterface of ExecutorService, supports future and/or periodic execution of tasks. common thread pool implements ThreadPoolExecutor是thread pool 最常用的实现。</description>
+    </item>
+    
+    <item>
+      <title>单元测试如何Mock有参数的void方法</title>
+      <link>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</link>
+      <pubDate>Sun, 23 Apr 2017 21:51:20 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</guid>
+      <description>假设有如下的服务依赖： @Service class DepositSvc { @Autowired private AccountSvc accSvc; public List&amp;lt;Account&amp;gt; dps(String user) { List&amp;lt;Account&amp;gt; accounts = new ArrayList(); List&amp;lt;Account&amp;gt; banks = getBanks(); accSvc.addLinkedAccounts(user, accounts, banks);//accounts被改动了如何mock? return accounts; } } @Service class AccountSvc { @Autowired private RestClient restClient; public void addLinkedAccounts(String user, List&amp;lt;Account&amp;gt; accounts, List&amp;lt;Account&amp;gt; banks) { acc = restClient.getAcc(user); accounts.add(acc); } } 这里的AccountSvc只是提供了一个void方法处理了入</description>
+    </item>
+    
+    <item>
+      <title>java generic</title>
+      <link>https://zhimoe.github.io/post/java-generic/</link>
+      <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-generic/</guid>
+      <description>泛型 // 类 class Tuple&amp;lt;T, S&amp;gt; { private T first; private S second; } // 泛型方法也可在非泛型类里面 class ArrayAlg { public static &amp;lt;T&amp;gt; T getMiddle(T... a) { return a[a.length / 2]; } } String middle = ArrayAlg.&amp;lt;String&amp;gt;getMiddle(&amp;#34;]ohnM, &amp;#34;Q.n, &amp;#34;Public&amp;#34;);// right,&amp;lt;String&amp;gt;可以省略 String middle = GenericCls.getMiddle(&amp;#34;hello&amp;#34;,0,null);// error // Errr:(7, 45) java: 不兼容的类型: 推断类型不符合上限 // 推断: java.lang.Object&amp;amp;java.io.Serializable&amp;amp;java.lang.Comparable&amp;lt;? extends java.lang.Object&amp;amp;java.io.Serializable&amp;amp;java.lang.Comparable&amp;lt;?&amp;gt;&amp;gt; // 上限: java.lang.String,java.lang.Object 类型限定 public static &amp;lt;T extends</description>
+    </item>
+    
+    <item>
+      <title>IO-Java-Stream-Write-Reader</title>
+      <link>https://zhimoe.github.io/post/io-java-stream-write-reader/</link>
+      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/io-java-stream-write-reader/</guid>
+      <description>java reader writer stream 上次总结了java 678 中不同读写文件的方法，这次总结一下基本的IO流。网上的总结大部分是以Stream和Reader、Writer来介绍的。这次从封装层次来介绍。 首先是byte流，每次read()读取8 bits，并用一个int的低八位</description>
+    </item>
+    
+    <item>
+      <title>Java-6-7-8-文件读写</title>
+      <link>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</link>
+      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</guid>
+      <description>重要的类 文件读写场景 资料：Reading and writing text files 不要用File对象，改用Path对象，该对象既表示文件路径，也表示文件文本（应该认为文件也是路径的一部分），对于以前的File,可以File.toPath()得到一个Path对象。 Files是</description>
+    </item>
+    
+    <item>
+      <title>gradle笔记1-理解build脚本基本语法</title>
+      <link>https://zhimoe.github.io/post/gradle-%E7%90%86%E8%A7%A3build%E8%84%9A%E6%9C%AC%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/gradle-%E7%90%86%E8%A7%A3build%E8%84%9A%E6%9C%AC%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+      <description>&lt;p&gt;在看这个之前，希望你有用ant或者maven的使用经验，还有，对groovy的语法有一个简单的了解，不懂也没关系，下面会介绍。
+理解gradle文件的前提是理解一个重要的groovy概念:closure&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Java AOP example</title>
+      <link>https://zhimoe.github.io/post/java-aop-example/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-aop-example/</guid>
+      <description>找到一个最简单的介绍，不怎么想翻译，直接看原文吧: A Simple Introduction to AOP 提醒个点，使用注解的方式写切面时，增加了一个空方法，即： @Pointcut(&amp;#34;execution(* org.bk.inventory.service.*.*(..))&amp;#34;) public void serviceMethods(){ } 在使用xml配置的话，就不需要这个方法了，serviceMethods方法名是后面配置切点的引用。 如果不想引入s</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 1 basic</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid>
+      <description>知识点太多了。先列举一些知识点，然后在分别做一点笔记。 模式 1。 共享可变性 2。 隔离可变性 3。 纯粹不可变性:STM, IO密集型任务和计算密集型任务 读写文件和网络请求这种算IO密集型任务，阻塞时间长，任务阻塞系数接近1；线程池大一点好， 判断质数的</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 2 Runnable Callable FutureExecutor</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</guid>
+      <description>定义任务的内容 多线程编程的核心元素就是任务，任务是独立的活动。不依赖其他任务的状态，结果，以及边界效应。 定义任务的内容使用Runnable和Callable。 Runnable 接口表示没有返回的一个过程（procedure），没有受检异常。 Callabe 接口的call</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 3 synchronized or Lock</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</guid>
+      <description>synchronized method和synchronized block的区别 如果是synchronized(this),那么和synchronized 方法没有任何区别，锁定对象都是方法所在的对象。 synchronized void mymethod() { ... } void mymethod() { synchronized (this) { ... } } 但是synchronized blo</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 4 CAS and atomic</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</guid>
+      <description>AtomicLong code: public final long incrementAndGet() { for (;;) { long current = get(); long next = current + 1; if (compareAndSet(current, next)) return next; } } //in java 8: public final long incrementAndGet() { return unsafe.getAndAddLong(this, valueOffset, 1L) + 1L; } 基础 第一个版本是基于cas的，cas基于一个基础：有三个值，新值N，预期内存中的值E，内存中需要更新的值V，如果V == E,那么将V设置为N,返回V，结束；如果</description>
+    </item>
+    
+    <item>
+      <title>Java concurrency 5 Synchronizer and AQS</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</guid>
+      <description>好难，看不懂呀！ 先自己写一个CountDownLatch的示例： CountDownLatch是管理一组线程和一个主线程的先后。主线程wait后就阻塞，直到所有的CountDownLatch调用countDown后主线程接着开始。 package angus.intrview.concurrent; import java.util.concurrent.CountDownLatch; import java.util.concurrent.TimeUnit;</description>
+    </item>
+    
+    <item>
+      <title>Java-==-and-equal</title>
+      <link>https://zhimoe.github.io/post/java-and-equal/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-and-equal/</guid>
+      <description>/** * samples for == and equal() * @author hsiung * */ class TestObj { // the class for test == and equal() } public class EqualAndCompare { public static void main(String[] args) { TestObj obj1 = new TestObj(); TestObj obj2 = new TestObj(); TestObj obj3 = obj1; System.out.println(obj1 == obj2);// false , // == Compares references, not values System.out.println(obj1 == obj3);// true System.out.println(obj1.equals(obj2));// false, // equal() method is derived from java.lang.Object, if not override,nor // in superclass,then equal behave as same as == // Always remember to override hashCode if you override equals so as not // to &amp;#34;break the contract&amp;#34;. // As per the API, the result returned from the hashCode() method for // two objects must be</description>
+    </item>
+    
+    <item>
+      <title>Java-动态代理</title>
+      <link>https://zhimoe.github.io/post/java-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
+      <description>好文 Java 动态代理机制分析及扩展 更深入的一篇: java设计模式-动态代理模式 优势 相比 静态代理，动态代理具有更强的 灵活性，因为它不用在我们设计实现的时候就指定 某一个代理类来代理哪一个被代理对象，我们可以把这种指定延迟到程序运行时由 JVM来实现。 实</description>
+    </item>
+    
+    <item>
+      <title>Java-注解和注解处理器</title>
+      <link>https://zhimoe.github.io/post/java-%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-%E6%B3%A8%E8%A7%A3%E5%92%8C%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8/</guid>
+      <description>注解处理 注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的. 关于注解的定义就不说了,主要说说注解处理 本文根据以下资料并进行部分修改： JavaAnnotationProcessing 基本知识 annotation processing integrated into javac compiler – since Java 6.0; known as pluggable</description>
+    </item>
+    
+    <item>
+      <title>单例模式和序列化</title>
+      <link>https://zhimoe.github.io/post/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
+      <description>参考资料 饱汉式 public class Singleton { private static Singleton instance = null private Singleton (){} public static Singleton getInstance() { if(instance == null) instance = new Singleton(); return instance; } } //饱汉式，使用时创建 饿汉式 //加载时创建对象 static public class Singleton { private Singleton instance = null; static { instance = new Singleton(); } private Singleton (){} public static Singleton getInstance() { return this.instance; } } 静态内部类 public class Singleton { private Singleton (){} private static class SingletonHolder { private static final Singleton INSTANCE = new Singleton(); } public static final Singleton getInstance() {</description>
+    </item>
+    
+    <item>
+      <title>面试题-类加载过程和子类重写父类方法的调用</title>
+      <link>https://zhimoe.github.io/post/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</guid>
+      <description>最近一道非常火的携程面试题: public class Base { private String baseName = &amp;#34;base&amp;#34;; public Base() { callName(); } public void callName() { System.out.println(baseName); } static class Sub extends Base { private String baseName = &amp;#34;sub&amp;#34;; public void callName() { System.out.println(baseName) ; } } public static void main(String[] args) { Base b = new Sub();//输出？ } } 我的理解： 先理解两个方法: class 的(clinit)方法和(init)方法不同：这两个方法一个</description>
+    </item>
+    
+  </channel>
+</rss>

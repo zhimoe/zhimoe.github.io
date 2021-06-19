@@ -1,0 +1,561 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+    <title>Java-6-7-8-文件读写 - zhi.moe</title>
+    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
+    
+    <meta property="og:title" content="Java-6-7-8-文件读写">
+    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:image" content="/img/avatar.png"> 
+    <meta name="title" content="Java-6-7-8-文件读写 - zhi.moe" />
+    <meta name="description" content="编程是一门手艺"> 
+    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
+    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+     fancybox: true, 
+    motion: true
+  };
+</script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<div class="container one-collumn sidebar-position-left page-home  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-meta  custom-logo ">
+
+  <div class="custom-logo-site-title">
+    <a href="https://zhimoe.github.io"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhi.moe</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">the craft of programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+      
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/post/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/about/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
+          </a>
+        </li>
+      
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
+      </li>
+    </ul>
+    <div class="site-search">
+      <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+    </div>
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/" itemprop="url">
+        Java-6-7-8-文件读写
+        </a>
+      </h1>
+      <div class="post-meta">
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text">时间：</span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2016-02-01">
+    2016-02-01
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text">分类：</span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
+        <span itemprop="name">编程</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text">阅读：</span>
+<span class="leancloud-visitors-count">971 字 ~2分钟</span>
+</span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+    <!-- raw HTML omitted -->
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 重要的类</li>
+<li><input checked="" disabled="" type="checkbox"> 文件读写场景</li>
+</ul>
+<p>资料：<a href="http://www.javapractices.com/topic/TopicAction.do?Id=42">Reading and writing text files</a></p>
+<p>不要用File对象，改用Path对象，该对象既表示文件路径，也表示文件文本（应该认为文件也是路径的一部分），对于以前的File,可以File.toPath()得到一个Path对象。
+Files是一个静态类，操作文件内容。Paths是静态工具类，操作文件路径，例如拼接文件路径，以前要使用平台无关的分隔符表示：File.pathSeparator， File.separator</p>
+<p>现在可以直接使用下面方法</p>
+<p><code>Path path = Paths.get(&quot;~/test/&quot;, &quot;foo&quot;, &quot;bar&quot;, &quot;a.txt&quot;);</code></p>
+<p>下面一段代码很好的显示了在java678中的读取文件方法：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">package</span> angus.java.interview;
+
+<span style="color:#00f">import</span> java.io.BufferedReader;
+<span style="color:#00f">import</span> java.io.FileInputStream;
+<span style="color:#00f">import</span> java.io.IOException;
+<span style="color:#00f">import</span> java.io.InputStream;
+<span style="color:#00f">import</span> java.io.InputStreamReader;
+<span style="color:#00f">import</span> java.nio.charset.StandardCharsets;
+<span style="color:#00f">import</span> java.nio.file.Files;
+<span style="color:#00f">import</span> java.nio.file.Paths;
+
+<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">FileToStringJava678</span> {
+	<span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) <span style="color:#00f">throws</span> IOException {
+		<span style="color:#008000">// How to read file into String before Java 7
+</span><span style="color:#008000"></span>		InputStream is = <span style="color:#00f">new</span> FileInputStream(<span style="color:#a31515">&#34;filetoStringjava678.txt&#34;</span>);
+		BufferedReader buf = <span style="color:#00f">new</span> BufferedReader(<span style="color:#00f">new</span> InputStreamReader(is));
+
+		String line = buf.readLine();
+		StringBuilder sb = <span style="color:#00f">new</span> StringBuilder();
+
+		<span style="color:#00f">while</span> (line != <span style="color:#00f">null</span>) {
+			sb.append(line).append(<span style="color:#a31515">&#34;\n&#34;</span>);
+			line = buf.readLine();
+		}
+
+		String fileAsString = sb.toString();
+		System.out.println(<span style="color:#a31515">&#34;Contents (before Java 7) : &#34;</span> + fileAsString);
+
+		<span style="color:#008000">// Reading file into Stirng in one line in JDK 7
+</span><span style="color:#008000"></span>		String contents = <span style="color:#00f">new</span> String(Files.readAllBytes(Paths.get(<span style="color:#a31515">&#34;filetoStringjava678.txt&#34;</span>)));
+		System.out.println(<span style="color:#a31515">&#34;Contents (Java 7) : &#34;</span> + contents);
+
+		<span style="color:#008000">// Reading file into String using proper character encoding
+</span><span style="color:#008000"></span>		String fileString = <span style="color:#00f">new</span> String(Files.readAllBytes(Paths.get(<span style="color:#a31515">&#34;filetoStringjava678.txt&#34;</span>)),
+				StandardCharsets.UTF_8);
+		System.out.println(<span style="color:#a31515">&#34;Contents (Java 7 with character encoding ) : &#34;</span> + fileString);
+
+		<span style="color:#008000">// It&#39;s even easier in Java 8
+</span><span style="color:#008000"></span>		Files.lines(Paths.get(<span style="color:#a31515">&#34;filetoStringjava678.txt&#34;</span>), StandardCharsets.UTF_8).forEach(System.out::println);
+
+	}
+}
+
+</code></pre></div><p>下面是更新版本，几乎所有文件操作都有了</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#008000">// 记住，bytes 到string 永远指定字符集，即使目前只是英文文件。
+</span><span style="color:#008000">// ### java 8按行读取：
+</span><span style="color:#008000"></span>
+<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Main</span> {
+    <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) {
+        String fileName = <span style="color:#a31515">&#34;c:/lines.txt&#34;</span>;
+        <span style="color:#00f">try</span> (Stream&lt;String&gt; stream = Files.lines(Paths.get(fileName))) {
+            stream.forEach(System.out::println);<span style="color:#008000">//or other thing you do with stream
+</span><span style="color:#008000"></span>        } <span style="color:#00f">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+<span style="color:#008000">// ### java 7：
+</span><span style="color:#008000"></span>        BufferedReader br = <span style="color:#00f">new</span> BufferedReader(<span style="color:#00f">new</span> FileReader(file));
+        String line;
+        <span style="color:#00f">while</span>((line = br.readLine()) != <span style="color:#00f">null</span>) {
+             <span style="color:#008000">// do something with line.
+</span><span style="color:#008000"></span>        }
+
+<span style="color:#008000">// 输入流保存到文件：
+</span><span style="color:#008000"></span>Files.copy(inputStream,filepath,StandardCopyOption.REPLACE_EXISTING);
+
+
+<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Java7IO</span> {
+    <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) <span style="color:#00f">throws</span> IOException {
+<span style="color:#008000">//读取所有字节：
+</span><span style="color:#008000"></span>        Path path = Paths.get(<span style="color:#a31515">&#34;alice.txt&#34;</span>);
+        String content = <span style="color:#00f">new</span> String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+        System.out.println(<span style="color:#a31515">&#34;Characters: &#34;</span> + content.length());
+<span style="color:#008000">//读取所有行：
+</span><span style="color:#008000"></span>        List&lt;String&gt; lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        System.out.println(<span style="color:#a31515">&#34;Lines: &#34;</span> + lines.size());
+<span style="color:#008000">//JAVA 8 延迟处理：
+</span><span style="color:#008000"></span>        <span style="color:#00f">try</span> (Stream&lt;String&gt; lineStream = Files.lines(path, StandardCharsets.UTF_8)) {
+            System.out.println(<span style="color:#a31515">&#34;Average line length: &#34;</span> +  lineStream.mapToInt(String::length).average().orElse(0));
+        }
+
+<span style="color:#008000">//按单词读取：
+</span><span style="color:#008000"></span>        <span style="color:#00f">try</span> (Scanner in = <span style="color:#00f">new</span> Scanner(path, <span style="color:#a31515">&#34;UTF-8&#34;</span>)) {
+            in.useDelimiter(<span style="color:#a31515">&#34;\\PL+&#34;</span>);<span style="color:#008000">//？
+</span><span style="color:#008000"></span>            <span style="color:#2b91af">int</span> words = 0;
+            <span style="color:#00f">while</span> (in.hasNext()) {
+                in.next();
+                words++;
+            }
+            System.out.println(<span style="color:#a31515">&#34;Words: &#34;</span> + words);
+        }
+        
+<span style="color:#008000">//读取一个网页：   
+</span><span style="color:#008000"></span>        URL url = <span style="color:#00f">new</span> URL(<span style="color:#a31515">&#34;http://horstmann.com/index.html&#34;</span>);
+        <span style="color:#00f">try</span> (BufferedReader reader
+                = <span style="color:#00f">new</span> BufferedReader(<span style="color:#00f">new</span> InputStreamReader(url.openStream()))) {
+            Stream&lt;String&gt; lineStream = reader.lines();<span style="color:#008000">////!!!! BufferedReader TO Stream
+</span><span style="color:#008000"></span>            System.out.println(<span style="color:#a31515">&#34;Average line length: &#34;</span> + 
+				lineStream.mapToInt(String::length).average().orElse(0));
+        }
+<span style="color:#008000">//PrintWriter 向文本写文件：
+</span><span style="color:#008000"></span>        
+        path = Paths.get(<span style="color:#a31515">&#34;hello.txt&#34;</span>);
+        <span style="color:#00f">try</span> (PrintWriter out = <span style="color:#00f">new</span> PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
+            out.println(<span style="color:#a31515">&#34;Hello&#34;</span>);
+        }
+<span style="color:#008000">//Files.write向文本写文件：
+</span><span style="color:#008000"></span>        content = <span style="color:#a31515">&#34;World\n&#34;</span>;
+        Files.write(path, content.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+        <span style="color:#008000">//多行写入
+</span><span style="color:#008000"></span>        String fileName = <span style="color:#a31515">&#34;file.txt&#34;</span>;
+        Path path = Paths.get(<span style="color:#a31515">&#34;file1.txt&#34;</span>);
+        List&lt;String&gt; list = <span style="color:#00f">new</span> ArrayList&lt;&gt;();
+        <span style="color:#00f">try</span> (Stream&lt;String&gt; lines = Files.lines(Paths.get(fileName))) {
+            lines.forEach(list::add);
+            Files.write(path, list, StandardCharsets.UTF_8);
+        } <span style="color:#00f">catch</span> (IOException e) {
+            e.printStackTrace();
+        }
+
+<span style="color:#008000">//打印错误栈：  
+</span><span style="color:#008000"></span>        StringWriter writer = <span style="color:#00f">new</span> StringWriter();
+        Throwable throwable = <span style="color:#00f">new</span> IllegalStateException();
+        throwable.printStackTrace(<span style="color:#00f">new</span> PrintWriter(writer));
+        String stackTrace = writer.toString();
+        System.out.println(<span style="color:#a31515">&#34;Stack trace: &#34;</span> + stackTrace);
+    }
+}
+
+
+<span style="color:#008000">// 直接将url中的pdf保存下来：//适用于任何二进制文件：
+</span><span style="color:#008000"></span>URL url = <span style="color:#00f">new</span> URL(<span style="color:#a31515">&#34;http://www.cninfo.com.cn/1202417936.PDF&#34;</span>);
+<span style="color:#00f">try</span> (InputStream in = <span style="color:#00f">new</span> BufferedInputStream(url.openStream())) {
+     Files.copy(in, Paths.get(url.getFile().substring(1)),StandardCopyOption.REPLACE_EXISTING);
+}<span style="color:#008000">//url.getFile().substring(1)去掉起始地斜杠符
+</span><span style="color:#008000">//copy()有三种形式
+</span><span style="color:#008000"></span>	
+<span style="color:#008000">//还有一种方式jdk7之前：
+</span><span style="color:#008000"></span>URL website = <span style="color:#00f">new</span> URL(<span style="color:#a31515">&#34;XXX.pdf&#34;</span>);
+ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+FileOutputStream fos = <span style="color:#00f">new</span> FileOutputStream(url.getFile().substring(1));
+fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+
+<span style="color:#008000">//FileChannel的抽象方法abstract long	transferFrom(ReadableByteChannel src, long position, long count) 
+</span><span style="color:#008000"></span>
+
+</code></pre></div>
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://zhimoe.github.io/tags/java" rel="tag" title="java">#java#</a>
+    
+    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/io-java-stream-write-reader/" rel="next" title="IO-Java-Stream-Write-Reader">
+        <i class="fa fa-chevron-left"></i> IO-Java-Stream-Write-Reader
+        </a>
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/gradle-%E7%90%86%E8%A7%A3build%E8%84%9A%E6%9C%AC%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" rel="prev" title="gradle笔记1-理解build脚本基本语法">
+        gradle笔记1-理解build脚本基本语法 <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+<div id="disqus_thread"></div>
+<script>
+
+
+var disqus_config = function () {
+  this.page.url = "https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/";  
+  this.page.identifier = "https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/"; 
+};
+
+(function() { 
+  var d = document, s = d.createElement('script');
+  s.src = 'https://zhimoe.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
+
+    </footer>
+  </article>
+</section>
+
+          </div>
+        </div>
+        <div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      文章目录
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      站点概览
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
+      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+        src="https://zhimoe.github.io/img/avatar.png"
+        alt="zhi.moe" />
+    <p class="site-author-name" itemprop="name">zhi.moe</p>
+    <p class="site-description motion-element" itemprop="description"> 
+        the craft of programming</p>
+</div>
+      <nav class="site-state motion-element">
+    <div class="site-state-item site-state-posts">
+      <a href="https://zhimoe.github.io/post/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">日志</span>
+      </a>
+    </div>
+    <div class="site-state-item site-state-categories">    
+        <a href="https://zhimoe.github.io/categories/">      
+         
+        <span class="site-state-item-count">4</span>
+        
+        <span class="site-state-item-name">分类</span>
+        
+        </a>
+    </div>
+
+    <div class="site-state-item site-state-tags">
+        <a href="https://zhimoe.github.io/tags/">
+         
+        <span class="site-state-item-count">19</span>
+        
+        <span class="site-state-item-name">标签</span>
+        </a>
+    </div>
+</nav>
+      
+<div class="links-of-author motion-element">
+    
+        <span class="links-of-author-item">
+        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
+            <i class="fa fa-fw fa-github"></i>
+            GitHub
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://twitter.com/zhimoee" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
+        </a>
+        </span>
+    
+</div>
+
+
+      
+
+      <div class="links-of-blogroll motion-element inline">
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
+</div>
+
+
+
+
+    </section>
+    
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents"></nav></div>
+    </div>
+</section>
+
+  </div>
+</aside>
+
+      </div>
+    </main>
+   
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  <span itemprop="copyrightYear">  &copy; 
+  2017 - 2021</span>
+  <span class="with-love"><i class="fa fa-heart"></i></span>
+  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+</div>
+<div class="powered-by">
+  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
+</div>
+<div class="theme-info">
+  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
+  </a>
+</div>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span id="scrollpercent"><span>0</span>%</span>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/motion.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/affix.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/schemes/pisces.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/toc.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { fonts: ["TeX"] }
+  });
+</script>
+<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
+</body>
+</html>

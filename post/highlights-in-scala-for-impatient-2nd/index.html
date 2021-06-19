@@ -1,0 +1,698 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+    <title>Highlights in Scala for Impatient 2nd - zhi.moe</title>
+    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
+    
+    <meta property="og:title" content="Highlights in Scala for Impatient 2nd">
+    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:image" content="/img/avatar.png"> 
+    <meta name="title" content="Highlights in Scala for Impatient 2nd - zhi.moe" />
+    <meta name="description" content="编程是一门手艺"> 
+    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
+    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
+    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+     fancybox: true, 
+    motion: true
+  };
+</script>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<div class="container one-collumn sidebar-position-left page-home  ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-meta  custom-logo ">
+
+  <div class="custom-logo-site-title">
+    <a href="https://zhimoe.github.io"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zhi.moe</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">the craft of programming</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+      
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/post/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          </a>
+        </li>
+      
+        <li class="menu-item ">
+          <a href="https://zhimoe.github.io/about/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
+          </a>
+        </li>
+      
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
+      </li>
+    </ul>
+    <div class="site-search">
+      <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+    </div>
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/" itemprop="url">
+        Highlights in Scala for Impatient 2nd
+        </a>
+      </h1>
+      <div class="post-meta">
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text">时间：</span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-01-15">
+    2020-01-15
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text">分类：</span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
+        <span itemprop="name">编程</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text">阅读：</span>
+<span class="leancloud-visitors-count">1781 字 ~4分钟</span>
+</span>
+      </div>
+    </header>
+    <div class="post-body" itemprop="articleBody">
+    <p>key points in scala-for-impatient 2nd book, best book for java developer to use scala in a rush</p>
+<h3 id="functions">Functions</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• if expression has a value.
+• A block has a value — the value of its last expression.
+• The Scala for loop is like an “enhanced” Java for loop.
+• Semicolons are (mostly) optional.
+• The void type is Unit.
+• Avoid using `return` in a function.
+• Beware of missing = in a function definition.
+• Exceptions work just like in Java or C++, but you use a “pattern matching” syntax for catch.
+• Scala has no checked exceptions.
+
+</code></pre></div><h3 id="arrays">Arrays</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• Use an Array if the length is fixed, and an ArrayBuffer if the length can vary.
+• Don’t use new when supplying initial values.
+• Use () to access elements.
+• Use for (elem &lt;- arr) to traverse the elements.
+• Use for (elem &lt;- arr if . . . ) . . . yield . . . to transform into a new array.
+• Scala and Java arrays are interoperable; with ArrayBuffer, use scala.collection.JavaConverters._ 
+don&#39;t use scala.collection.JavaConversions.
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">import</span> scala.collection.mutable.ArrayBuffer
+<span style="color:#00f">val</span> b <span style="color:#00f">=</span> <span style="color:#2b91af">ArrayBuffer</span>[<span style="color:#2b91af">Int</span>]()
+<span style="color:#008000">// Or new ArrayBuffer[Int]
+</span><span style="color:#008000">// An empty array buffer, ready to hold integers
+</span><span style="color:#008000"></span>
+b += 1
+<span style="color:#008000">// ArrayBuffer(1)
+</span><span style="color:#008000">// Add an element at the end with +=
+</span><span style="color:#008000"></span>
+b += (1, 2, 3, 5)
+<span style="color:#008000">// ArrayBuffer(1, 1, 2, 3, 5)
+</span><span style="color:#008000">// Add multiple elements at the end by enclosing them in parentheses
+</span><span style="color:#008000"></span>
+b ++= <span style="color:#2b91af">Array</span>(8, 13, 21)
+<span style="color:#008000">// ArrayBuffer(1, 1, 2, 3, 5, 8, 13, 21)
+</span><span style="color:#008000">// You can append any collection with the ++= operator
+</span><span style="color:#008000"></span>
+b.trimEnd(5)
+<span style="color:#008000">// ArrayBuffer(1, 1, 2)
+</span><span style="color:#008000">// Removes the last five elements
+</span><span style="color:#008000"></span>
+b.insert(2, 6)
+<span style="color:#008000">// ArrayBuffer(1, 1, 6, 2)
+</span><span style="color:#008000">// Insert before index 2
+</span><span style="color:#008000"></span>
+
+<span style="color:#008000">// iterate array with index 
+</span><span style="color:#008000">// use view or use index(it&#39;s faster)
+</span><span style="color:#008000"></span><span style="color:#00f">for</span> (i<span style="color:#00f">&lt;-</span>b.indices){<span style="color:#00f">val</span> v <span style="color:#00f">=</span> b(i)}
+
+</code></pre></div><h3 id="maps--tuples">Maps &amp; Tuples</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">var</span> scores <span style="color:#00f">=</span> <span style="color:#2b91af">Map</span>(<span style="color:#a31515">&#34;Alice&#34;</span> -&gt; 10, <span style="color:#a31515">&#34;Bob&#34;</span> -&gt; 3, <span style="color:#a31515">&#34;Cindy&#34;</span> -&gt; 8)
+<span style="color:#00f">val</span> scores2 <span style="color:#00f">=</span> <span style="color:#2b91af">Map</span>((<span style="color:#a31515">&#34;Alice&#34;</span>, 10), (<span style="color:#a31515">&#34;Bob&#34;</span>, 3), (<span style="color:#a31515">&#34;Cindy&#34;</span>, 8))
+<span style="color:#00f">val</span> bobsScore <span style="color:#00f">=</span> scores(<span style="color:#a31515">&#34;Bob&#34;</span>) <span style="color:#008000">// Like scores.get(&#34;Bob&#34;) in Java
+</span><span style="color:#008000"></span>
+<span style="color:#00f">val</span> scores1 <span style="color:#00f">=</span> scala.collection.mutable.<span style="color:#2b91af">Map</span>(<span style="color:#a31515">&#34;Alice&#34;</span> -&gt; 10, <span style="color:#a31515">&#34;Bob&#34;</span> -&gt; 3, <span style="color:#a31515">&#34;Cindy&#34;</span> -&gt; 8)
+<span style="color:#00f">val</span> scores3 <span style="color:#00f">=</span> scala.collection.mutable.<span style="color:#2b91af">Map</span>[<span style="color:#2b91af">String</span>, <span style="color:#2b91af">Int</span>]()
+scores1(<span style="color:#a31515">&#34;Bob&#34;</span>) <span style="color:#00f">=</span> 10 
+<span style="color:#00f">val</span> v <span style="color:#00f">=</span> scores1(<span style="color:#a31515">&#34;Bob&#34;</span>) <span style="color:#008000">// NPE if key is not exists
+</span><span style="color:#008000"></span>scores1.get(<span style="color:#a31515">&#34;Bob&#34;</span>) <span style="color:#008000">// None if key is not exists
+</span><span style="color:#008000"></span>scores1.getOrElse(<span style="color:#a31515">&#34;Bob&#34;</span>,10)<span style="color:#008000">// 10 if key is not exists
+</span><span style="color:#008000"></span>scores1 += (<span style="color:#a31515">&#34;Bob&#34;</span> -&gt; 10, <span style="color:#a31515">&#34;Fred&#34;</span> -&gt; 7)
+scores1 -= <span style="color:#a31515">&#34;Alice&#34;</span>
+
+<span style="color:#008000">// for immutable
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> newScores <span style="color:#00f">=</span> scores + (<span style="color:#a31515">&#34;Bob&#34;</span> -&gt; 10, <span style="color:#a31515">&#34;Fred&#34;</span> -&gt; 7) <span style="color:#008000">// New map with update
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> scores4 <span style="color:#00f">=</span> scores - <span style="color:#a31515">&#34;Alice&#34;</span>
+scores -= <span style="color:#a31515">&#34;Alice&#34;</span>
+
+
+<span style="color:#00f">for</span> ((k, v) <span style="color:#00f">&lt;-</span> scores){}
+
+<span style="color:#00f">for</span> ((k, v) <span style="color:#00f">&lt;-</span> scores) <span style="color:#00f">yield</span> (v, k)
+
+<span style="color:#008000">// sorted map
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> sortedScores <span style="color:#00f">=</span> scala.collection.mutable.<span style="color:#2b91af">SortedMap</span>(<span style="color:#a31515">&#34;Alice&#34;</span> -&gt; 10,<span style="color:#a31515">&#34;Fred&#34;</span> -&gt; 7, <span style="color:#a31515">&#34;Bob&#34;</span> -&gt; 3, <span style="color:#a31515">&#34;Cindy&#34;</span> -&gt; 8)
+<span style="color:#008000">// insert order
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> months <span style="color:#00f">=</span> scala.collection.mutable.<span style="color:#2b91af">LinkedHashMap</span>(<span style="color:#a31515">&#34;January&#34;</span> -&gt; 1,<span style="color:#a31515">&#34;February&#34;</span> -&gt; 2, 
+<span style="color:#a31515">&#34;March&#34;</span> -&gt; 3, <span style="color:#a31515">&#34;April&#34;</span> -&gt; 4, <span style="color:#a31515">&#34;May&#34;</span> -&gt; 5)
+
+<span style="color:#00f">import</span> scala.collection.JavaConverters._
+
+<span style="color:#008000">// tuple 
+</span><span style="color:#008000"></span><span style="color:#00f">val</span> t <span style="color:#00f">=</span> (1, 3.14, <span style="color:#a31515">&#34;Fred&#34;</span>)
+<span style="color:#00f">val</span> second <span style="color:#00f">=</span> t._2 <span style="color:#008000">// Sets second to 3.14
+</span><span style="color:#008000"></span>
+
+<span style="color:#00f">val</span> keys <span style="color:#00f">=</span> <span style="color:#2b91af">Array</span>()
+<span style="color:#00f">val</span> values <span style="color:#00f">=</span> <span style="color:#2b91af">Array</span>()
+<span style="color:#00f">val</span> kv <span style="color:#00f">=</span> keys.zip(values).toMap()
+
+</code></pre></div><h3 id="object">Object</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• Use objects for singletons and utility methods.
+• A class can have a companion object with the same name.
+• Objects can extend classes or traits.
+• The apply method of an object is usually used for constructing new instances of the companion class.
+• To avoid the main method, use an object that extends the App trait.
+• You can implement enumerations by extending the Enumeration object.
+</code></pre></div><h3 id="package">Package</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+The key points of this chapter are:
+• Packages nest just like inner classes.
+• Package paths are not absolute.
+• A chain x.y.z in a package clause leaves the intermediate packages x and x.y invisible.
+• Package statements without braces at the top of the file extend to the entire file.
+• A package object can hold functions and variables.
+• Import statements can import packages, classes, and objects.
+• Import statements can be anywhere.
+• Import statements can rename and hide members.
+• java.lang, scala, and Predef are always imported
+</code></pre></div><h3 id="inheritance">Inheritance</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• The `extends` and `final` keywords are as in Java.
+• You must use `override` when you override a method.
+• Only the primary constructor can call the primary superclass constructor.
+• You can `override` fields.
+</code></pre></div><h3 id="files">Files</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• Source.fromFile(...).getLines.toArray yields all lines of a file.
+• Source.fromFile(...).mkString yields the file contents as a string.
+• To convert a string into a number, use the toInt or toDouble method.
+• Use the Java PrintWriter to write text files.
+• &#34;regex&#34;.r is a Regex object.
+• Use &#34;&#34;&#34;...&#34;&#34;&#34; if your regular expression contains backslashes or quotes.
+• If a regex pattern has groups, you can extract their contents using the syntax for 
+  (regex(var1, ...,varn) &lt;- string).
+</code></pre></div><h3 id="traits">Traits</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Key points of this chapter:
+• A class can implement any number of traits.
+• Traits can require implementing classes to have certain fields, methods, or superclasses.
+• Unlike Java interfaces, a Scala trait can provide implementations of methods and fields.
+• When you layer multiple traits, the order matters—the trait whose methods execute first goes to the back.
+</code></pre></div><h3 id="operators">Operators</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">val</span> a <span style="color:#00f">=</span> 10
+<span style="color:#008000">//a: Int = 10
+</span><span style="color:#008000"></span>
+-a
+<span style="color:#008000">// res0: Int = -10
+</span><span style="color:#008000">//means the same as a.unary_-.
+</span><span style="color:#008000"></span>
+a.unary_-
+<span style="color:#008000">//res1: Int = -10
+</span><span style="color:#008000"></span>
+
+</code></pre></div><h3 id="high-order-functions">High Order Functions</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Array(3.14, 1.42, 2.0).map{ (x: Double) =&gt; 3 * x }
+//==
+Array(3.14, 1.42, 2.0) map { (x: Double) =&gt; 3 * x }
+
+// diff method and function
+
+</code></pre></div><h3 id="collections">Collections</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+• All collections extend the Iterable trait.
+• The three major categories of collections are sequences, sets, and maps.
+• Scala has mutable and immutable versions of most collections.
+• A Scala list is either empty, or it has a head and a tail which is again a list.
+• Sets are unordered collections.
+• Use a LinkedHashSet to retain the insertion order or a SortedSet to iterate in sorted order.
+• + adds an element to an unordered collection; +: and :+ prepend or append to a sequence; 
+  ++ concatenates two collections; - and -- remove elements.
+• The Iterable and Seq traits have dozens of useful methods for common operations. 
+  Check them out before writing tedious loops.
+• Mapping, folding, and zipping are useful techniques for applying a function or operation to 
+  the elements of a collection
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"> Iterable trait methods:
+head, last, headOption, lastOption
+tail, init
+length, isEmpty
+map(f), flatMap(f), foreach(f), transform(f), collect(pf)
+reduceLeft(op), reduceRight(op),foldLeft(init)(op), foldRight(init)(op)
+reduce(op), fold(init)(op),aggregate(init)(op, combineOp)
+sum, product, max, min
+count(pred), forall(pred), exists(pred)
+filter(pred), filterNot(pred), partition(pred)
+takeWhile(pred), dropWhile(pred), span(pred)
+take(n), drop(n), splitAt(n)
+takeRight(n), dropRight(n)
+slice(from, to), view(from, to)
+zip(coll2), zipAll(coll2, fill, fill2), zipWithIndex(cation! the 2nd value in tuple is index)
+grouped(n), sliding(n)
+groupBy(k) //
+mkString(before, between, after), addString(sb, before, between, after)
+
+toIterable, toSeq, toIndexedSeq,
+toArray, toBuffer, toList, toStream,
+toSet, toVector, toMap, to[C]
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Important Methods of the Seq Trait:
+
+contains(elem), containsSlice(seq),
+startsWith(seq), endsWith(seq)
+
+indexOf(elem), lastIndexOf(elem),
+indexOfSlice(seq),
+lastIndexOfSlice(seq),
+indexWhere(pred)
+
+prefixLength(pred),
+segmentLength(pred, n)
+
+padTo(n, fill)
+
+intersect(seq), diff(seq)
+
+reverse
+
+sorted, sortWith(less), sortBy(f)
+
+permutations, combinations(n)
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//The map and flatMap methods are important because they are used
+</span><span style="color:#008000">//for translating for expressions. For example, the expression:
+</span><span style="color:#008000"></span>
+<span style="color:#00f">for</span> (i <span style="color:#00f">&lt;-</span> 1 to 10) <span style="color:#00f">yield</span> i * i
+<span style="color:#008000">//is translated to
+</span><span style="color:#008000"></span>(1 to 10).map(i <span style="color:#00f">=&gt;</span> i * i)
+<span style="color:#008000">//and
+</span><span style="color:#008000"></span><span style="color:#00f">for</span> (i <span style="color:#00f">&lt;-</span> 1 to 10; j <span style="color:#00f">&lt;-</span> 1 to i) <span style="color:#00f">yield</span> i * j
+<span style="color:#008000">//becomes
+</span><span style="color:#008000"></span>(1 to 10).flatMap(i <span style="color:#00f">=&gt;</span> (1 to i).map(j <span style="color:#00f">=&gt;</span> i * j))
+
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
+<span style="color:#00f">val</span> coll <span style="color:#00f">=</span> <span style="color:#2b91af">List</span>()
+coll.par.sum
+coll.par.count(<span style="color:#00f">_</span> % 2 == 0)
+<span style="color:#00f">for</span> (i <span style="color:#00f">&lt;-</span> (0 until 100000).par) print(<span style="color:#a31515">s&#34; </span><span style="color:#a31515">$i</span><span style="color:#a31515">&#34;</span>)
+
+(<span style="color:#00f">for</span> (i <span style="color:#00f">&lt;-</span> (0 until 100000).par) <span style="color:#00f">yield</span> i) == (0 until 100000)
+
+</code></pre></div><h3 id="pattern-matching">Pattern Matching</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+• The match expression is a better switch, without fall-through.
+• If no pattern matches, a MatchError is thrown. Use the case _ pattern to avoid that.
+• A pattern can include an arbitrary condition, called a guard.
+• You can match on the type of an expression; prefer this over isInstanceOf/asInstanceOf.
+• You can match patterns of arrays, tuples, and case classes, and bind parts of the pattern to variables.
+• In a for expression, nonmatches are silently skipped.
+• A case class is a class for which the compiler automatically produces the methods that are needed 
+  for pattern matching.
+• The common superclass in a case class hierarchy should be sealed.
+• Use the Option type for values that may or may not be present—it is safer than using null.
+</code></pre></div><h3 id="annotations">Annotations</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+• You can annotate classes, methods, fields, local variables, parameters,expressions, 
+  type parameters, and types.
+• With expressions and types, the annotation follows the annotated item.
+• Annotations have the form @Annotation, @Annotation(value), or @Annotation(name1 =value1, ...).
+• @volatile, @transient, @strictfp, and @native generate the equivalent Java modifiers.
+• Use @throws to generate Java-compatible throws specifications.
+• The @tailrec annotation lets you verify that a recursive function uses tail call optimization.
+• The assert function takes advantage of the @elidable annotation. You can optionally remove 
+  assertions from your Scala programs.
+• Use the @deprecated annotation to mark deprecated features.
+</code></pre></div><h3 id="future">Future</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+• A block of code wrapped in a Future { ... } executes concurrently.
+• A future succeeds with a result or fails with an exception.
+• You can wait for a future to complete, but you don’t usually want to.
+• You can use callbacks to get notified when a future completes, but that gets
+tedious when chaining callbacks.
+• Use methods such as map/flatMap, or the equivalent for expressions, to compose
+futures.
+• A promise has a future whose value can be set (once), which gives added
+flexibility for implementing tasks that produce results.
+• Pick an execution context that is suitable for the concurrent workload of your
+computation.
+</code></pre></div><h3 id="implicits">Implicits</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+• Implicit conversions are used to convert between types.
+• You must import implicit conversions so that they are in scope.
+• An implicit parameter list requests objects of a given type. They can be obtained from 
+  implicit objects that are in scope, or from the companion object of the desired type.
+• If an implicit parameter is a single-argument function, it is also used as an implicit conversion.
+• A context bound of a type parameter requires the existence of an implicit object of the given type.
+• If it is possible to locate an implicit object, this can serve as evidence that a type conversion is valid.
+</code></pre></div><h3 id="type-class">Type Class</h3>
+<h3 id="canbuildfrom">CanBuildFrom</h3>
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+    <a href="https://zhimoe.github.io/tags/scala" rel="tag" title="scala">#scala#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/scala-uniform-access-principle/" rel="next" title="scala uniform access principle">
+        <i class="fa fa-chevron-left"></i> scala uniform access principle
+        </a>
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://zhimoe.github.io/post/rust-packages-crates-mod/" rel="prev" title="Rust Packages Crates Mod Notes">
+        Rust Packages Crates Mod Notes <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+<div id="disqus_thread"></div>
+<script>
+
+
+var disqus_config = function () {
+  this.page.url = "https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/";  
+  this.page.identifier = "https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/"; 
+};
+
+(function() { 
+  var d = document, s = d.createElement('script');
+  s.src = 'https://zhimoe.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
+
+    </footer>
+  </article>
+</section>
+
+          </div>
+        </div>
+        <div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+<aside id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      文章目录
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      站点概览
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
+      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+        src="https://zhimoe.github.io/img/avatar.png"
+        alt="zhi.moe" />
+    <p class="site-author-name" itemprop="name">zhi.moe</p>
+    <p class="site-description motion-element" itemprop="description"> 
+        the craft of programming</p>
+</div>
+      <nav class="site-state motion-element">
+    <div class="site-state-item site-state-posts">
+      <a href="https://zhimoe.github.io/post/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">日志</span>
+      </a>
+    </div>
+    <div class="site-state-item site-state-categories">    
+        <a href="https://zhimoe.github.io/categories/">      
+         
+        <span class="site-state-item-count">4</span>
+        
+        <span class="site-state-item-name">分类</span>
+        
+        </a>
+    </div>
+
+    <div class="site-state-item site-state-tags">
+        <a href="https://zhimoe.github.io/tags/">
+         
+        <span class="site-state-item-count">19</span>
+        
+        <span class="site-state-item-name">标签</span>
+        </a>
+    </div>
+</nav>
+      
+<div class="links-of-author motion-element">
+    
+        <span class="links-of-author-item">
+        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
+            <i class="fa fa-fw fa-github"></i>
+            GitHub
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
+        </a>
+        </span>
+    
+        <span class="links-of-author-item">
+        <a href="https://twitter.com/zhimoee" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
+        </a>
+        </span>
+    
+</div>
+
+
+      
+
+      <div class="links-of-blogroll motion-element inline">
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
+</div>
+
+
+
+
+    </section>
+    
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#functions">Functions</a></li>
+        <li><a href="#arrays">Arrays</a></li>
+        <li><a href="#maps--tuples">Maps &amp; Tuples</a></li>
+        <li><a href="#object">Object</a></li>
+        <li><a href="#package">Package</a></li>
+        <li><a href="#inheritance">Inheritance</a></li>
+        <li><a href="#files">Files</a></li>
+        <li><a href="#traits">Traits</a></li>
+        <li><a href="#operators">Operators</a></li>
+        <li><a href="#high-order-functions">High Order Functions</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#pattern-matching">Pattern Matching</a></li>
+        <li><a href="#annotations">Annotations</a></li>
+        <li><a href="#future">Future</a></li>
+        <li><a href="#implicits">Implicits</a></li>
+        <li><a href="#type-class">Type Class</a></li>
+        <li><a href="#canbuildfrom">CanBuildFrom</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
+  </div>
+</aside>
+
+      </div>
+    </main>
+   
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  <span itemprop="copyrightYear">  &copy; 
+  2017 - 2021</span>
+  <span class="with-love"><i class="fa fa-heart"></i></span>
+  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+</div>
+<div class="powered-by">
+  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
+</div>
+<div class="theme-info">
+  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
+  </a>
+</div>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+      <span id="scrollpercent"><span>0</span>%</span>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
+<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/utils.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/motion.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/affix.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/schemes/pisces.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/toc.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io/js/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      displayMath: [ ['$$','$$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { fonts: ["TeX"] }
+  });
+</script>
+<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
+</body>
+</html>

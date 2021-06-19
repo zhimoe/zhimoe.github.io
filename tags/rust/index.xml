@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rust on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/rust/</link>
+    <description>Recent content in rust on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 20 Sep 2020 20:30:41 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Associated Type in Rust</title>
+      <link>https://zhimoe.github.io/post/type-in-rust/</link>
+      <pubDate>Sun, 20 Sep 2020 20:30:41 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/type-in-rust/</guid>
+      <description>&lt;p&gt;Associated Type and generic diff in rust&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rust Ownerships Lifetimes教程</title>
+      <link>https://zhimoe.github.io/post/rust-ownership-lifetimes/</link>
+      <pubDate>Sat, 22 Feb 2020 15:55:13 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/rust-ownership-lifetimes/</guid>
+      <description>&lt;p&gt;some notes on rust ownership,reference,string and &amp;amp;str, and lifetimes&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot应用和Rust应用的Dockerfile最佳实践</title>
+      <link>https://zhimoe.github.io/post/dockerfile-best-practices/</link>
+      <pubDate>Mon, 03 Feb 2020 11:30:55 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/dockerfile-best-practices/</guid>
+      <description>&lt;p&gt;记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rust Packages Crates Mod Notes</title>
+      <link>https://zhimoe.github.io/post/rust-packages-crates-mod/</link>
+      <pubDate>Sun, 12 Jan 2020 20:03:33 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/rust-packages-crates-mod/</guid>
+      <description>&lt;p&gt;初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
