@@ -285,7 +285,10 @@
       <pubDate>Sat, 30 Mar 2019 10:56:47 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/</guid>
-      <description>&lt;p&gt;github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-page分支的内容如果存在index.html, 那么其他人可以通过 &lt;a href=&#34;https://zhimoe.github.io&#34;&gt;https://zhimoe.github.io&lt;/a&gt; 访问这个站点.&lt;/p&gt;</description>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;更新：github开放action功能后，travis-ci已经没有必要了，目前博客使用zhimoe仓库管理源码，使用action编译后将public目录同步到zhimoe.github.io仓库的gh-pages分支。
+注意，由于使用了jsdelivr的cdn功能，切换分支后theme的相关静态文件的path也要修改。&lt;/p&gt;
+&lt;p&gt;github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-pages分支的内容如果存在index.html, 那么其他人可以通过 &lt;a href=&#34;https://zhimoe.github.io&#34;&gt;https://zhimoe.github.io&lt;/a&gt; 访问这个站点.&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -161,12 +161,15 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1540 字 ~4分钟</span>
+<span class="leancloud-visitors-count">1701 字 ~4分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-page分支的内容如果存在index.html, 那么其他人可以通过 <a href="https://zhimoe.github.io">https://zhimoe.github.io</a> 访问这个站点.</p>
+    <!-- raw HTML omitted -->
+<p>更新：github开放action功能后，travis-ci已经没有必要了，目前博客使用zhimoe仓库管理源码，使用action编译后将public目录同步到zhimoe.github.io仓库的gh-pages分支。
+注意，由于使用了jsdelivr的cdn功能，切换分支后theme的相关静态文件的path也要修改。</p>
+<p>github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-pages分支的内容如果存在index.html, 那么其他人可以通过 <a href="https://zhimoe.github.io">https://zhimoe.github.io</a> 访问这个站点.</p>
 <p>借助于一些static gen工具,你可以将你的markdown转换为一个静态网站(html,js,css). 然后把静态网站的内容上传到刚说的repo中, 就有一个自己的博客站点了. static gen工具非常多, github推荐的是<a href="https://www.staticgen.com/">Jekyll(ruby)</a>, 主流的还有hexo(js)和hugo(go), hexo因为是基于js的,所以高质量的主题多(因为做主题是需要js,css技能), hugo的编译快些, 但是好看的主题不多. 高质量的主题除了美观可能还需要考虑移动端(responsive),评论, 访问统计等各种功能. 每个gen工具都有自己的主题站点. hugo的主题在这里找: <a href="https://themes.gohugo.io/">hugo themes</a>.</p>
 <p>制作github pages站点的一般做法是把代码(放图片和markdown)放在master分支,static gen编译后的(html,js,css,image)内容放在gh-pages分支.然后在settings里面设置. 这样就可以得到一个站点了. 这么做有个缺点,就是markdown文件会被别人整个下载过去,之前就遇到过一次. 正好github现在有3个免费私有仓库. 所以我把源码放在私有仓库zhimoe.github.io.src里面,而编译后的内容发布的 <a href="https://zhimoe.github.io">https://zhimoe.github.io</a>上面去.</p>
 <p>自动编译发布这个过程就是持续集成(continue integration,CI)了, 即我提交一个markdown文件,我的主页会自动看到这篇文章, 不需要我在本地编译再提交编译结果文件.<a href="travis-ci.com">travis-ci</a> 提供了免费的github CI服务. 使用github账号登录就会有提示操作. 这里勾选私有仓库zhimoe.github.io.src, 然后在项目里面添加.travis.yml文件告诉travis如何编译和发布内容到个人站点.</p>

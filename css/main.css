@@ -500,7 +500,7 @@ pre,
 }
 pre,
 code {
-  font-family: pragmataPro, "fira code", consolas, moonaco, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: menlo, consolas, courier, "PingFang SC", "Microsoft YaHei", monospace;
 }
 code {
   padding: 2px 4px;
@@ -918,7 +918,7 @@ pre .javascript .function {
   line-height: 36px;
   font-size: 24px;
   font-weight: normal;
-  font-family: pragmataPro, "fira code", consolas, monaco, monospace;
+  font-family: merriweather, consolas, monaco, monospace;
 }
 .site-subtitle {
   margin-top: 10px;
