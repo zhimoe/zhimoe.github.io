@@ -39,6 +39,15 @@
     </item>
     
     <item>
+      <title>Java 8 Lambda笔记</title>
+      <link>https://zhimoe.github.io/post/java-lambda/</link>
+      <pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-lambda/</guid>
+      <description>问题 Java是OOP语言,使用对象封装。由于函数不是一等公民,无法在方法中传递函数/方法。 在Java 8之前,使用匿名类表示行为： // 监听器接口 public interface ActionListener { void actionPerformed(ActionEvent e); } // 使用匿名类传递一个行为 button.addActionListener(new ActionListener(){ public void actionPerformed(Event e){ System.out.println(&amp;#34;button clicked&amp;#34;); } }); 上面的代码主要的问题在于addActio</description>
+    </item>
+    
+    <item>
       <title>Python几道常见的笔试题</title>
       <link>https://zhimoe.github.io/post/python-interview-questions/</link>
       <pubDate>Thu, 04 Jun 2020 21:31:01 +0800</pubDate>
