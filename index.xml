@@ -66,6 +66,16 @@
     </item>
     
     <item>
+      <title>如何正确地系鞋带</title>
+      <link>https://zhimoe.github.io/post/how-to-tie-shoelace/</link>
+      <pubDate>Fri, 21 Aug 2020 21:42:38 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/how-to-tie-shoelace/</guid>
+      <description>&lt;p&gt;Ian安全结是登山系鞋带的首选，它越穿越紧，不会松开。解鞋带轻轻一拉即开。 而且对称美观，上手简单。值得每个人花十分钟学习。
+本篇不仅给出Ian安全结示意图，还告诉大家如何让安全结和蝴蝶结水平对称，尽可能美观的秘诀。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Java 8 Lambda笔记</title>
       <link>https://zhimoe.github.io/post/java-lambda/</link>
       <pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate>
@@ -506,6 +516,15 @@
       
       <guid>https://zhimoe.github.io/post/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</guid>
       <description>最近一道非常火的携程面试题: public class Base { private String baseName = &amp;#34;base&amp;#34;; public Base() { callName(); } public void callName() { System.out.println(baseName); } static class Sub extends Base { private String baseName = &amp;#34;sub&amp;#34;; public void callName() { System.out.println(baseName) ; } } public static void main(String[] args) { Base b = new Sub();//输出？ } } 我的理解： 先理解两个方法: class 的(clinit)方法和(init)方法不同：这两个方法一个</description>
+    </item>
+    
+    <item>
+      <title>Java新手如何学习SpringMVC框架</title>
+      <link>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</link>
+      <pubDate>Fri, 21 Aug 2015 22:02:50 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</guid>
+      <description>&lt;p&gt;知乎回答备份，原答案写于15年。&lt;/p&gt;</description>
     </item>
     
   </channel>

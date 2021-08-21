@@ -174,5 +174,14 @@
       <description>最近一道非常火的携程面试题: public class Base { private String baseName = &amp;#34;base&amp;#34;; public Base() { callName(); } public void callName() { System.out.println(baseName); } static class Sub extends Base { private String baseName = &amp;#34;sub&amp;#34;; public void callName() { System.out.println(baseName) ; } } public static void main(String[] args) { Base b = new Sub();//输出？ } } 我的理解： 先理解两个方法: class 的(clinit)方法和(init)方法不同：这两个方法一个</description>
     </item>
     
+    <item>
+      <title>Java新手如何学习SpringMVC框架</title>
+      <link>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</link>
+      <pubDate>Fri, 21 Aug 2015 22:02:50 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</guid>
+      <description>&lt;p&gt;知乎回答备份，原答案写于15年。&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>

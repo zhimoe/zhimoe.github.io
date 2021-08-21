@@ -38,5 +38,14 @@
       <description>一些容易忘记的spring boot知识要点. 注意,.yaml和.yml文件没任何区别. 配置 SpringBootApplication注解 @SpringBootApplication &amp;lt;=等价=&amp;gt; @Configuration @ComponentScan @EnableAutoConfiguration 自动配置 spring的自动配置依赖以下注解: 配置文件 任何时候硬编码的配置</description>
     </item>
     
+    <item>
+      <title>Java新手如何学习SpringMVC框架</title>
+      <link>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</link>
+      <pubDate>Fri, 21 Aug 2015 22:02:50 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</guid>
+      <description>&lt;p&gt;知乎回答备份，原答案写于15年。&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
