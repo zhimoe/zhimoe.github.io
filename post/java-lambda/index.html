@@ -161,7 +161,7 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">2332 字 ~5分钟</span>
+<span class="leancloud-visitors-count">2331 字 ~5分钟</span>
 </span>
       </div>
     </header>
@@ -210,7 +210,7 @@ BinaryOperator&lt;Long&gt; add = (x, y) -&gt; {<span style="color:#00f">return</
 </ul>
 <ol>
 <li>this指向调用者,也即是button</li>
-<li>lambda的类型时根据上下文来决定的, 所以相同入参和返回值情况下，目标类型可能不同，在无法判断时，需要补充目标类型信息:</li>
+<li>lambda的类型是根据上下文来决定的, 所以相同入参和返回值情况下，目标类型可能不同，在无法判断时，需要补充目标类型信息:</li>
 </ol>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Callable&lt;String&gt; c = () -&gt; <span style="color:#a31515">&#34;done&#34;</span>;
 PrivilegedAction&lt;String&gt; a = () -&gt; <span style="color:#a31515">&#34;done&#34;</span>;
@@ -273,7 +273,7 @@ PrivilegedAction&lt;String&gt; a = () -&gt; <span style="color:#a31515">&#34;don
 </tr>
 </tbody>
 </table>
-<p>除了是后面的基础接口,还有：</p>
+<p>上面的是基础接口,此外还有：</p>
 <ul>
 <li>Consumer, Function, Predicate各自有一个2个入参的版本,共3个:BiConsumer,BiFunction,BiPredicate.</li>
 <li>6个基础接口对应入参为基本类型int,long,double的接口,共18个:IntSupplier,LongFunction&hellip;</li>
@@ -286,7 +286,7 @@ PrivilegedAction&lt;String&gt; a = () -&gt; <span style="color:#a31515">&#34;don
 <p>上面的基础接口虽然非常通用,但是如果有更好的接口名称时,应该使用更合适的那个。例如Comparator{int compare(T o1, T o2);}和ToIntBiFunction&lt;T, U&gt; {int applyAsInt(T t, U u);}签名完全一致,但是还是在比较的时候使用Comparator。</p>
 <p>在构建自己的函数式接口时,务必使用注解<code>@FunctionalInterface</code>标注你的接口，这样可以给IDE lint和使用者提供更加充分信息。</p>
 <h3 id="方法引用">方法引用</h3>
-<p>如果lambda表达式的方法体过长,那么就需要抽取方法,Java8提供了更近一步的语法——方法引用。 方法引用表示一个lambda表达式。只需要引用的方法签名和lambda目标类型的抽象方法签名一致即可。
+<p>如果lambda表达式的方法体过长,那么需要抽取方法,Java8提供了更近一步的语法——方法引用。 方法引用表示一个lambda表达式。只需要引用的方法签名和lambda目标类型的抽象方法签名一致即可。
 方法引用一共有5种类型,其中,静态方法是最常用的类型。</p>
 <table>
 <thead>
