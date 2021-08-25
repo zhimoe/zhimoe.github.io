@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>git 常用命令备忘录 - zhi.moe</title>
+    <title>在githook中调用nodejs脚本 - zhi.moe</title>
     <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
     
-    <meta property="og:title" content="git 常用命令备忘录">
+    <meta property="og:title" content="在githook中调用nodejs脚本">
     <meta property="og:site_name" content="zhi.moe">
     <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="git 常用命令备忘录 - zhi.moe" />
+    <meta name="title" content="在githook中调用nodejs脚本 - zhi.moe" />
     <meta name="description" content="编程是一门手艺"> 
     <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
@@ -122,8 +122,8 @@
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/git-useful-tips/" itemprop="url">
-        git 常用命令备忘录
+        <a class="post-title-link" href="https://zhimoe.github.io/post/nodejs-as-githook/" itemprop="url">
+        在githook中调用nodejs脚本
         </a>
       </h1>
       <div class="post-meta">
@@ -132,8 +132,8 @@
     <i class="fa fa-calendar-o"></i>
 </span>
 <span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2019-09-01">
-    2019-09-01
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2021-08-22">
+    2021-08-22
 </time>
 </span> 
       
@@ -161,87 +161,106 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">509 字 ~2分钟</span>
+<span class="leancloud-visitors-count">901 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>记录日常开发中偶尔会遇到的但是总是记不住的git命令.</p>
-<p>以下技巧都来自于<a href="https://ohshitgit.com/">oh shit git</a> 和 <a href="https://stackoverflow.com">stackoverflow</a>. 版权归作者所有.</p>
-<h2 id="delete-all-history-commit-and-commit-current-content">delete all history commit and commit current content</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git checkout --orphan tmp_branch &amp;&amp; git add -A &amp;&amp; git commit -am <span style="color:#a31515">&#34;first commit&#34;</span> &amp;&amp; git branch -D master &amp;&amp; git branch -m master &amp;&amp; git push -f origin master
-</code></pre></div><h2 id="store-password-in-local">store password in local</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git config credential.helper store
-</code></pre></div><h2 id="git-reflog">git reflog</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git reflog
-<span style="color:#008000"># you will see a list of every thing you&#39;ve</span>
-<span style="color:#008000"># done in git, across all branches!</span>
-<span style="color:#008000"># each one has an index HEAD@{index}</span>
-<span style="color:#008000"># find the one before you broke everything</span>
-git reset HEAD@{index}
-<span style="color:#008000"># magic time machine</span>
-</code></pre></div><h2 id="git-commit---amend">git commit &ndash;amend</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># make your change</span>
-git add . <span style="color:#008000"># or add individual files</span>
-git commit --amend --no-edit
-<span style="color:#008000"># now your last commit contains that change!</span>
-<span style="color:#008000"># WARNING: never amend public(remote) commits!!!</span>
+    <p>如何在git hook中调用nodejs脚本。主要采坑在于不知道如何在bash中获取node脚本返回值，搜了好大一圈。</p>
+<h2 id="背景">背景</h2>
+<p>微服务模式开发中，每个小组维护自己的应用，通过一个nginx入口反向代理所有的子应用，向用户开放一个站点。nginx应用中需要维护各个子应用的代理，即ng.conf中的location。
+此外，一个应用需要配置DEV,ST,UAT,PRD四个环境的location。目前的做法是www/ngconf/目录下面分为dev、st、uat、prd四个文件夹，在文件夹内部每个小组各自维护一个conf文件。
+每增加一个应用，需要在四个文件夹中自己小组的配置文件添加配置。随着应用越来越多，以及人员流动。会发生不同文件配置相同的location entry。 例如A应用上线一个功能需要依赖B应用，但是新人不知道B已经配置过了，所以又重复添加了一个，导致启动报错。</p>
+<h2 id="需求">需求</h2>
+<p>入口应用是一个nodejs应用，自然选择了js脚本检查conf文件location path是否重复。</p>
+<h2 id="实现">实现</h2>
+<p>在git hook目录下，新增一个<code>pre-commit</code>文件,添加一下内容：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#00f">#!/usr/bin/sh
+</span><span style="color:#00f"></span><span style="color:#008000"># 检查项目中同一个目录下面的nginx conf 所有location是否重复</span>
+<span style="color:#00f">if</span> [ -e ./ngconf_check.js ]; <span style="color:#00f">then</span>
+    node ngconf_check.js
+    <span style="color:#00f">if</span> [[ $? != 0 ]]; <span style="color:#00f">then</span>
+        echo &gt;&amp;2 fix duplicate location entry in nginx conf
+        exit 1
+    <span style="color:#00f">fi</span>
+<span style="color:#00f">fi</span>
 
-<span style="color:#008000"># I need to change the message on my last commit!</span>
-git commit --amend 
-<span style="color:#008000"># follow prompts to change the commit message</span>
-</code></pre></div><h1 id="undo-a-commit">undo a commit</h1>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># Oh shit, I need to undo a commit from like 5 commits ago!</span>
-<span style="color:#008000"># find the commit you need to undo</span>
-git log
-<span style="color:#008000"># use the arrow keys to scroll up and down in history</span>
-<span style="color:#008000"># once you&#39;ve found your commit, save the hash</span>
-git revert [saved hash]
-<span style="color:#008000"># git will create a new commit that undoes that commit</span>
-<span style="color:#008000"># follow prompts to edit the commit message</span>
-<span style="color:#008000"># or just save and commit</span>
-</code></pre></div><h2 id="undo-a-files-changes">undo a file&rsquo;s changes</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># find a hash for a commit before the file was changed</span>
-git log
-<span style="color:#008000"># use the arrow keys to scroll up and down in history</span>
-<span style="color:#008000"># once you&#39;ve found your commit, save the hash</span>
-git checkout [saved hash] -- path/to/file
-<span style="color:#008000"># the old version of the file will be in your index</span>
-git commit -m <span style="color:#a31515">&#34;Wow, you don&#39;t have to copy-paste to undo&#34;</span>
+<span style="color:#008000"># 如果项目有自定义pre-commit，执行</span>
+<span style="color:#00f">if</span> [ -e ././githooks/pre-commit ]; <span style="color:#00f">then</span>
+    ./.git/hooks/pre-commit <span style="color:#a31515">&#34;</span>$@<span style="color:#a31515">&#34;</span>
+<span style="color:#00f">fi</span>
+exit 0
+</code></pre></div><p>要点： bash中<code>$?</code>表示获取上命令的返回值。这里获得的是js脚本的process.exit(code)返回的code。 默认返回是0。
+ngconf_check.js：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// 检查ng conf是否有重复的location entry
+const fs = require(&#39;fs&#39;);
+const path = require(&#39;path&#39;);
 
-</code></pre></div><h2 id="git-stash">git stash</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># 如果临时想要将代码恢复到最近一次commit,帮助同事复现他的问题</span>
-<span style="color:#008000"># 使用git stash 暂存当前修改,这个不是stage,也不是commit</span>
-git stash
+const ConfEnvDirs = new Set();
+ConfEnvDirs.add(&#39;dev&#39;);
+ConfEnvDirs.add(&#39;st&#39;);
+ConfEnvDirs.add(&#39;uat&#39;);
+ConfEnvDirs.add(&#39;prd&#39;);
+const NgconfPath = &#39;www/ngconf&#39;;
 
-<span style="color:#008000"># 显示当前暂存历史</span>
-git stash list
+let result = &#39;pass&#39;;
+countLocationInDir(NgconfPath);
+if(result !== &#39;pass&#39;){
+    process.exit(1);//向bash返回1
+}
 
-<span style="color:#008000"># 找回暂存</span>
-git stash apply
-<span style="color:#008000"># or spec which the stash</span> 
-git stash apply stash@{1}
+/**
+ *
+ * @param rootPath
+ */
+function countLocationInDir(rootPath) {
+    if (!fs.existsSync(rootPath)) return;
+    let dirs = fs.readdirSync(rootPath);
+    dirs.forEach(dir =&gt; {
+        let envDir = path.join(rootPath, dir);
+        //只处理四个环境目录下的conf文件,每个目录用一个map记录
+        const LocationEntryMap = new Map();//location entry -&gt; file,line
+        if (!(fs.statSync(envDir).isDirectory() &amp;&amp; ConfEnvDirs.has(dir))) {
+            return;
+        }
+        let confFiles = fs.readdirSync(envDir);
+        confFiles.forEach(filename =&gt; {
+            let fullPath = path.join(envDir, filename);
+            if (fs.lstatSync(fullPath).isFile() &amp;&amp; /[\w\W.].conf$/.test(filename)) {
+                countLocationsInFile(fullPath, LocationEntryMap);
 
-</code></pre></div><h2 id="git-rebase">git rebase</h2>
-<h2 id="git-pull-request">git pull request</h2>
-<h2 id="git-cherry-pick">git cherry-pick</h2>
-<h2 id="commit-change-in-submodule">commit change in submodule</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># submodule is a independent repo,</span>
-<span style="color:#008000"># so you need commit/push change in submodule first and then</span> 
-<span style="color:#008000"># update(commit) the main project to refer a new submodule commit hash</span>
+            }
+        });
+    });
 
-<span style="color:#008000"># step 1</span>
-cd path/to/submodule
-git add &lt;stuff&gt;
-git commit -m <span style="color:#a31515">&#34;comment&#34;</span>
-git push
+}
 
-<span style="color:#008000"># step 2</span>
-cd /main/project
-git add path/to/submodule
-git commit -m <span style="color:#a31515">&#34;updated my submodule&#34;</span>
-git push
-
+/**
+ *
+ * @param confFile
+ * @param countMap
+ */
+function countLocationsInFile(confFile, countMap) {
+    let lines = fs.readFileSync(confFile, &#34;utf-8&#34;)
+        .split(&#34;\n&#34;)
+        .filter(Boolean);
+    lines.forEach((line, lineNumber) =&gt; {
+        if (line.trim().startsWith(&#34;location&#34;)) {
+            const arr = line.trim().split(&#39; &#39;);
+            const locationEntry = arr[1];
+            const entryInfo = `${confFile}, at line:${lineNumber}`;
+            if (countMap.has(locationEntry)) {
+                console.log(`ERROR: duplicate location entry: ${locationEntry}`);
+                console.log(`location 1:${countMap.get(locationEntry)}`);
+                console.log(`location 2:${entryInfo}`);                
+                //修改result变量
+                result=&#39;error&#39;;
+            } else {
+                countMap.set(locationEntry, entryInfo);
+            }
+        }
+    });
+}
 </code></pre></div>
     </div>
     <footer class="post-footer">
@@ -249,9 +268,9 @@ git push
  
 <div class="post-tags">     
      
-    <a href="https://zhimoe.github.io/tags/git" rel="tag" title="git">#git#</a>
-    
     <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    
+    <a href="https://zhimoe.github.io/tags/nodejs" rel="tag" title="nodejs">#nodejs#</a>
     
 </div>
 
@@ -260,16 +279,12 @@ git push
      <div class="post-nav">
     <div class="post-nav-next post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/rust-packages-crates-mod/" rel="next" title="Rust Packages Crates Mod Notes">
-        <i class="fa fa-chevron-left"></i> Rust Packages Crates Mod Notes
-        </a>
-    
     </div>
 
     <div class="post-nav-prev post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/devops-maturity-model-checklist/" rel="prev" title="DevOps 成熟度检查清单">
-        DevOps 成熟度检查清单 <i class="fa fa-chevron-right"></i>
+        <a href="https://zhimoe.github.io/post/open-source-mental-health/" rel="prev" title="开源与心理健康[翻译]">
+        开源与心理健康[翻译] <i class="fa fa-chevron-right"></i>
         </a>
     
     </div>
@@ -283,8 +298,8 @@ git push
 
 
 var disqus_config = function () {
-  this.page.url = "https://zhimoe.github.io/post/git-useful-tips/";  
-  this.page.identifier = "https://zhimoe.github.io/post/git-useful-tips/"; 
+  this.page.url = "https://zhimoe.github.io/post/nodejs-as-githook/";  
+  this.page.identifier = "https://zhimoe.github.io/post/nodejs-as-githook/"; 
 };
 
 (function() { 
@@ -398,19 +413,9 @@ var disqus_config = function () {
     <div class="post-toc">
         <div class="post-toc-content"><nav id="TableOfContents">
   <ul>
-    <li><a href="#delete-all-history-commit-and-commit-current-content">delete all history commit and commit current content</a></li>
-    <li><a href="#store-password-in-local">store password in local</a></li>
-    <li><a href="#git-reflog">git reflog</a></li>
-    <li><a href="#git-commit---amend">git commit &ndash;amend</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#undo-a-files-changes">undo a file&rsquo;s changes</a></li>
-    <li><a href="#git-stash">git stash</a></li>
-    <li><a href="#git-rebase">git rebase</a></li>
-    <li><a href="#git-pull-request">git pull request</a></li>
-    <li><a href="#git-cherry-pick">git cherry-pick</a></li>
-    <li><a href="#commit-change-in-submodule">commit change in submodule</a></li>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#需求">需求</a></li>
+    <li><a href="#实现">实现</a></li>
   </ul>
 </nav></div>
     </div>
