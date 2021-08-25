@@ -17,7 +17,7 @@
       <pubDate>Sun, 22 Aug 2021 21:55:06 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/nodejs-as-githook/</guid>
-      <description>&lt;p&gt;如何在git hook中调用nodejs脚本。主要采坑在于不知道如何在bash中获取node脚本返回值，搜了好大一圈。&lt;/p&gt;</description>
+      <description>&lt;p&gt;如何在git hook中调用nodejs脚本。主要踩坑在于不知道如何在bash中获取node脚本返回值，搜了好大一圈。&lt;/p&gt;</description>
     </item>
     
     <item>
