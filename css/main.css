@@ -99,7 +99,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
+  font-family: monospace;
   font-size: 1em;
 }
 button,
@@ -185,7 +185,7 @@ th {
 }
 body {
   position: relative;
-  font-family: 'merriweather','Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Merriweather", "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
   line-height: 2;
   color: #555;
@@ -216,7 +216,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: 'merriweather', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Merriweather", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 h2,
 h3,
@@ -500,7 +500,7 @@ pre,
 }
 pre,
 code {
-  font-family: menlo, consolas, courier, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: TheSansMono, SFMono-Regular,'SF Mono', Monaco, Menlo, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
 }
 code {
   padding: 2px 4px;
@@ -916,13 +916,16 @@ pre .javascript .function {
   display: inline-block;
   vertical-align: top;
   line-height: 36px;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: normal;
-  font-family: merriweather, consolas, monaco, monospace;
+  font-family: "Alegreya Sans", "Merriweather", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-style: italic;
 }
 .site-subtitle {
   margin-top: 10px;
   font-size: 13px;
+  font-family: "Alegreya Sans", "Merriweather", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-style: italic;
   color: #ddd;
 }
 .use-motion .brand {
@@ -1504,12 +1507,16 @@ pre .javascript .function {
   margin: 0;
   text-align: center;
   color: #222;
-  font-weight: 600;
+  font-weight: normal;
+  font-family: "Alegreya Sans", "Merriweather", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-style: italic;
 }
 .site-description {
   margin-top: 0;
   text-align: center;
   font-size: 13px;
+  font-family: "Alegreya Sans", "Merriweather", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-style: italic;
   color: #999;
 }
 .site-state {
