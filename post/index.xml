@@ -6,10 +6,19 @@
     <description>Recent content in Posts on zhi.moe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 22 Aug 2021 21:55:06 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 12 Sep 2021 18:02:10 +0800</lastBuildDate>
     
 	<atom:link href="https://zhimoe.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用speed-measure-webpack-plugin和Happypack优化webpack打包速度</title>
+      <link>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</link>
+      <pubDate>Sun, 12 Sep 2021 18:02:10 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</guid>
+      <description>问题 一个ionic app本地编译需要8分钟，提交到流水线编译耗时需要近40分钟，从日志看到webpack打包步骤耗时最严重。 排查与解决 初步判断是流水线使用的容器CPU性能较弱或者存储mount性能导致的。找流水线同事支持配置了一个纯内存编译</description>
+    </item>
     
     <item>
       <title>在githook中调用nodejs脚本</title>

@@ -1,6 +1,23 @@
 <search>
     
      <entry>
+        <title>使用speed-measure-webpack-plugin和Happypack优化webpack打包速度</title>
+        <url>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</url>
+        <categories>
+          <category>编程</category>
+        </categories>
+        <tags>
+          <tag>code</tag><tag>JS</tag><tag>webpack</tag>
+        </tags>
+        <content type="html"> 问题 一个ionic app本地编译需要8分钟，提交到流水线编译耗时需要近40分钟，从日志看到webpack打包步骤耗时最严重。
+排查与解决 初步判断是流水线使用的容器CPU性能较弱或者存储mount性能导致的。找流水线同事支持配置了一个纯内存编译流水线，发现还是很慢。 接下来使用webpack的插件speed-measure-webpack-plugin监控性能。
+在webpack.config.js配置：
+// webpack.config.js  // npm i --save-dev speed-measure-webpack-plugin const SpeedMeasurePlugin = require(&amp;#34;speed-measure-webpack-plugin&amp;#34;); const smp = new SpeedMeasurePlugin(); // ...the webpack configuration const prodConfig = {/*...*/} module.exports = { prod: smp.wrap(prodConfig) }; 得到下图左侧的结果，可以看到主要耗时都在angular的PurifyPlugin上。搜索了一番后找到HappPack这个多核执行的插件。 配置happypack，由于主要耗时都在const PurifyPlugin = require(&#39;@angular-devkit/build-optimizer&#39;).PurifyPlugin;插件上，这里只需要针对这一个插件配置happypack即可。
+// webpack.config.js // const HappyPack = require(&amp;#39;happypack&amp;#39;); const os = require(&amp;#39;os&amp;#39;);//获取cpu core数量  //loaders配置 { test: /\.ts$/, use: [ { loader: &amp;#39;happypack/loader?id=ts&amp;#39;, // 在所有loader之前加上happypack/loader，id是plugins中定义的  }, { loader: process.env.IONIC_CACHE_LOADER }, { loader: &amp;#39;@angular-devkit/build-optimizer/webpack-loader&amp;#39;, options: { sourceMap: true } }, { loader: process.env.IONIC_WEBPACK_LOADER } ] } // 在plugins中配置happypack插件 plugins: [ ionicWebpackFactory.getIonicEnvironmentPlugin(), ionicWebpackFactory.getCommonChunksPlugin(), new ModuleConcatPlugin(), new PurifyPlugin(), new HappyPack({ id: &amp;#39;js&amp;#39;, threads: os.cpus().length, loaders: [&amp;#39;@angular-devkit/build-optimizer/webpack-loader&amp;#39;] }), new HappyPack({ id: &amp;#39;ts&amp;#39;, // 在loader中使用  threads: os.cpus().length, // 开启操作系统cpu的最大核心数  loaders: [&amp;#39;@angular-devkit/build-optimizer/webpack-loader&amp;#39;] }) ] 再次本地执行，性能提升巨大。在流水线上测试，两次build都在15分钟左右。
+</content>
+    </entry>
+    
+     <entry>
         <title>在githook中调用nodejs脚本</title>
         <url>https://zhimoe.github.io/post/nodejs-as-githook/</url>
         <categories>
