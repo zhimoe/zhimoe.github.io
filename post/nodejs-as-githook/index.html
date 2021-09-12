@@ -230,7 +230,6 @@ countLocationInDir(NgconfPath);
             <span style="color:#00f">let</span> fullPath = path.join(envDir, filename);
             <span style="color:#00f">if</span> (fs.lstatSync(fullPath).isFile() &amp;&amp; <span style="color:#a31515">/[\w\W.].conf$/</span>.test(filename)) {
                 countLocationsInFile(fullPath, LocationEntryMap);
-
             }
         });
     });

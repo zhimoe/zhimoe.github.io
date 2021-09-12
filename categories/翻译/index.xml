@@ -62,7 +62,7 @@
       <pubDate>Thu, 01 Nov 2018 19:04:32 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</guid>
-      <description>原文 installing new python package from jupyter notebook 笔记 在pycharm写代码中如果使用到新的package，例如numpy，只需要输入import numpy 然后ALT+ENTER在提示中选择install new package极客。 在notebook中，网上的教程都说是!pip install numpy. 但是</description>
+      <description>原文 installing new python package from jupyter notebook 笔记 在pycharm写代码中如果使用到新的package，例如numpy，只需要输入import numpy 然后ALT+ENTER在提示中选择install new package即可。 在notebook中，网上的教程都说是!pip install numpy. 但是</description>
     </item>
     
   </channel>

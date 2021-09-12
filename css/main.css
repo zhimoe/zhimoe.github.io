@@ -1010,7 +1010,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .post-body {
-  font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Merriweather', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 .post-body h1 {
   border-left: solid 5px #428bca;
@@ -1280,7 +1280,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 30px 0;
   color: #999;
-  font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Merriweather', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 12px;
   text-align: center;
 }
