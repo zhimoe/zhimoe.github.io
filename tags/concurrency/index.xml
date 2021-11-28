@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>concurrency on zhi.moe</title>
+    <link>https://zhimoe.github.io/tags/concurrency/</link>
+    <description>Recent content in concurrency on zhi.moe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 01 Jan 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Java concurrency 1 basic</title>
+      <link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid>
+      <description>知识点太多了。先列举一些知识点，然后在分别做一点笔记。 模式 1。 共享可变性 2。 隔离可变性 3。 纯粹不可变性:STM, IO密集型任务和计算密集型任务 读写文件和网络请求这种算IO密集型任务，阻塞时间长，任务阻塞系数接近1；线程池大一点好， 判断质数的</description>
+    </item>
+    
+  </channel>
+</rss>

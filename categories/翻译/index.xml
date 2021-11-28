@@ -26,7 +26,8 @@
       <pubDate>Sun, 11 Apr 2021 21:47:02 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</guid>
-      <description>原文Tour of Rust&amp;rsquo;s Standard Library Traits 关于rust trait非常好的介绍，比rust book详细，系统。 Tour of Rust&amp;rsquo;s Standard Library Traits Table of Contents Intro Trait Basics Trait Items Self Functions Methods Associated Types Generic Parameters Generic Types vs Associated Types Scope Derive Macros Default Impls Generic Blanket Impls Subtraits &amp;amp; Supertraits Trait Objects Marker Traits Auto Traits Unsafe Traits Auto Traits Send &amp;amp; Sync Sized General Traits Default Clone Copy Any Formatting Traits Display &amp;amp; ToString Debug Operator Traits Comparison Traits PartialEq &amp;amp; Eq Hash PartialOrd &amp;amp; Ord Arithmetic Traits</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md&#34;&gt;原文Tour of Rust&amp;rsquo;s Standard Library Traits&lt;/a&gt;
+关于rust trait非常好的介绍，比rust book详细，系统。&lt;/p&gt;</description>
     </item>
     
     <item>

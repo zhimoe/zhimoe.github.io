@@ -6,7 +6,7 @@
     <description>Recent content in Categories on zhi.moe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 14 Nov 2021 22:06:15 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 12 Sep 2021 18:02:10 +0800</lastBuildDate>
     
 	<atom:link href="https://zhimoe.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>编程</title>
       <link>https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/</link>
-      <pubDate>Sun, 14 Nov 2021 22:06:15 +0800</pubDate>
+      <pubDate>Sun, 12 Sep 2021 18:02:10 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
@@ -39,11 +39,11 @@
     </item>
     
     <item>
-      <title>DevOps</title>
-      <link>https://zhimoe.github.io/categories/devops/</link>
-      <pubDate>Wed, 24 Jul 2019 07:58:12 +0800</pubDate>
+      <title>项目</title>
+      <link>https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Fri, 21 Aug 2020 22:02:50 +0800</pubDate>
       
-      <guid>https://zhimoe.github.io/categories/devops/</guid>
+      <guid>https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/</guid>
       <description></description>
     </item>
     

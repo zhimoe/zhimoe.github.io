@@ -6,7 +6,7 @@
     <description>Recent content in typescript on zhi.moe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 14 Nov 2021 22:06:15 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Aug 2021 22:06:15 +0800</lastBuildDate>
     
 	<atom:link href="https://zhimoe.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,10 +14,10 @@
     <item>
       <title>Typescript Comprehensive Cheatsheet</title>
       <link>https://zhimoe.github.io/post/ts-comprehensive-notes/</link>
-      <pubDate>Sun, 14 Nov 2021 22:06:15 +0800</pubDate>
+      <pubDate>Sat, 14 Aug 2021 22:06:15 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/ts-comprehensive-notes/</guid>
-      <description>install # Install npm install typescript # Run npx tsc # Run with a specific config npx tsc --project configs/my_tsconfig.json # Triple slash directives # Reference built-in types /// &amp;lt;reference lib=&amp;#34;es2016.array.include&amp;#34; /&amp;gt; # Reference other types /// &amp;lt;reference path=&amp;#34;../my_types&amp;#34; /&amp;gt; /// &amp;lt;reference types=&amp;#34;jquery&amp;#34; /&amp;gt; # AMD /// &amp;lt;amd-module name=&amp;#34;Name&amp;#34; /&amp;gt; /// &amp;lt;amd-dependency path=&amp;#34;app/foo&amp;#34; name=&amp;#34;foo&amp;#34; /&amp;gt; # Compiler comments # Don’t check this file // @ts-nocheck # Check this file (JS) // @ts-check # Ignore the next line // @ts-ignore # Expect an error on the next line // @ts-expect-error # ignore ts type error tsc --noEmitOnError hello.ts # tsconfig.json &amp;#34;strict&amp;#34;: true &amp;#34;noImplicitAny&amp;#34; &amp;#34;strictNullChecks&amp;#34; ts syntax cheatsheet //-------------------------------- Basic type any // untyped, use as js, disables</description>
+      <description>&lt;p&gt;一份详尽的ts语法笔记。 这周在看组里前端同事的代码，感觉完全还是在写JS，以我有限的JS/TS知识，也知道可以写得更加规范一点。但是一上手开始改，还真是手生。又重新过了一遍文档，做了一点笔记。&lt;/p&gt;</description>
     </item>
     
   </channel>

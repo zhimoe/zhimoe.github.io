@@ -6,10 +6,20 @@
     <description>Recent content in rust on zhi.moe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 20 Sep 2020 20:30:41 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 11 Apr 2021 21:47:02 +0800</lastBuildDate>
     
 	<atom:link href="https://zhimoe.github.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tour of Rusts Standard Library Traits</title>
+      <link>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</link>
+      <pubDate>Sun, 11 Apr 2021 21:47:02 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md&#34;&gt;原文Tour of Rust&amp;rsquo;s Standard Library Traits&lt;/a&gt;
+关于rust trait非常好的介绍，比rust book详细，系统。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Associated Type in Rust</title>
@@ -18,6 +28,16 @@
       
       <guid>https://zhimoe.github.io/post/type-in-rust/</guid>
       <description>&lt;p&gt;Associated Type and generic diff in rust&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>基于MDX的web词典</title>
+      <link>https://zhimoe.github.io/post/mdict-web/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/mdict-web/</guid>
+      <description>&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典。特别适合部署在内网中学习使用或者给孩子学习使用。
+python版本增加了一个机器学习模型翻译。rust版本也有模型，但是还没来得及加。&lt;/p&gt;</description>
     </item>
     
     <item>

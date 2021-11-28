@@ -30,6 +30,16 @@
     </item>
     
     <item>
+      <title>基于MDX的web词典</title>
+      <link>https://zhimoe.github.io/post/mdict-web/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/mdict-web/</guid>
+      <description>&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典。特别适合部署在内网中学习使用或者给孩子学习使用。
+python版本增加了一个机器学习模型翻译。rust版本也有模型，但是还没来得及加。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Scala Python 文件读取跳过转义字符</title>
       <link>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</link>
       <pubDate>Thu, 04 Jun 2020 21:30:31 +0800</pubDate>

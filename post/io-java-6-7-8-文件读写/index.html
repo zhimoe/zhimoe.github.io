@@ -85,8 +85,8 @@
         </li>
       
         <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E6%80%9D%E8%80%83/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />思考
+          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
           </a>
         </li>
       
@@ -162,7 +162,7 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">971 字 ~2分钟</span>
+<span class="leancloud-visitors-count">960 字 ~2分钟</span>
 </span>
       </div>
     </header>
@@ -223,7 +223,7 @@ Files是一个静态类，操作文件内容。Paths是静态工具类，操作�
 
 </code></pre></div><p>下面是更新版本，几乎所有文件操作都有了</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#008000">// 记住，bytes 到string 永远指定字符集，即使目前只是英文文件。
-</span><span style="color:#008000">// ### java 8按行读取：
+</span><span style="color:#008000">// java 8按行读取：
 </span><span style="color:#008000"></span>
 <span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Main</span> {
     <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) {
@@ -237,7 +237,7 @@ Files是一个静态类，操作文件内容。Paths是静态工具类，操作�
 }
 
 
-<span style="color:#008000">// ### java 7：
+<span style="color:#008000">// java 7：
 </span><span style="color:#008000"></span>        BufferedReader br = <span style="color:#00f">new</span> BufferedReader(<span style="color:#00f">new</span> FileReader(file));
         String line;
         <span style="color:#00f">while</span>((line = br.readLine()) != <span style="color:#00f">null</span>) {
@@ -254,15 +254,15 @@ Files是一个静态类，操作文件内容。Paths是静态工具类，操作�
 </span><span style="color:#008000"></span>        Path path = Paths.get(<span style="color:#a31515">&#34;alice.txt&#34;</span>);
         String content = <span style="color:#00f">new</span> String(Files.readAllBytes(path), StandardCharsets.UTF_8);
         System.out.println(<span style="color:#a31515">&#34;Characters: &#34;</span> + content.length());
-<span style="color:#008000">//读取所有行：
+<span style="color:#008000">// 读取所有行：
 </span><span style="color:#008000"></span>        List&lt;String&gt; lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         System.out.println(<span style="color:#a31515">&#34;Lines: &#34;</span> + lines.size());
-<span style="color:#008000">//JAVA 8 延迟处理：
+<span style="color:#008000">// JAVA 8 延迟处理：
 </span><span style="color:#008000"></span>        <span style="color:#00f">try</span> (Stream&lt;String&gt; lineStream = Files.lines(path, StandardCharsets.UTF_8)) {
             System.out.println(<span style="color:#a31515">&#34;Average line length: &#34;</span> +  lineStream.mapToInt(String::length).average().orElse(0));
         }
 
-<span style="color:#008000">//按单词读取：
+<span style="color:#008000">// 按单词读取：
 </span><span style="color:#008000"></span>        <span style="color:#00f">try</span> (Scanner in = <span style="color:#00f">new</span> Scanner(path, <span style="color:#a31515">&#34;UTF-8&#34;</span>)) {
             in.useDelimiter(<span style="color:#a31515">&#34;\\PL+&#34;</span>);<span style="color:#008000">//？
 </span><span style="color:#008000"></span>            <span style="color:#2b91af">int</span> words = 0;
@@ -273,7 +273,7 @@ Files是一个静态类，操作文件内容。Paths是静态工具类，操作�
             System.out.println(<span style="color:#a31515">&#34;Words: &#34;</span> + words);
         }
         
-<span style="color:#008000">//读取一个网页：   
+<span style="color:#008000">// 读取一个网页：   
 </span><span style="color:#008000"></span>        URL url = <span style="color:#00f">new</span> URL(<span style="color:#a31515">&#34;http://horstmann.com/index.html&#34;</span>);
         <span style="color:#00f">try</span> (BufferedReader reader
                 = <span style="color:#00f">new</span> BufferedReader(<span style="color:#00f">new</span> InputStreamReader(url.openStream()))) {
@@ -281,16 +281,16 @@ Files是一个静态类，操作文件内容。Paths是静态工具类，操作�
 </span><span style="color:#008000"></span>            System.out.println(<span style="color:#a31515">&#34;Average line length: &#34;</span> + 
 				lineStream.mapToInt(String::length).average().orElse(0));
         }
-<span style="color:#008000">//PrintWriter 向文本写文件：
+<span style="color:#008000">// PrintWriter 向文本写文件：
 </span><span style="color:#008000"></span>        
         path = Paths.get(<span style="color:#a31515">&#34;hello.txt&#34;</span>);
         <span style="color:#00f">try</span> (PrintWriter out = <span style="color:#00f">new</span> PrintWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
             out.println(<span style="color:#a31515">&#34;Hello&#34;</span>);
         }
-<span style="color:#008000">//Files.write向文本写文件：
+<span style="color:#008000">// Files.write向文本写文件：
 </span><span style="color:#008000"></span>        content = <span style="color:#a31515">&#34;World\n&#34;</span>;
         Files.write(path, content.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
-        <span style="color:#008000">//多行写入
+        <span style="color:#008000">// 多行写入
 </span><span style="color:#008000"></span>        String fileName = <span style="color:#a31515">&#34;file.txt&#34;</span>;
         Path path = Paths.get(<span style="color:#a31515">&#34;file1.txt&#34;</span>);
         List&lt;String&gt; list = <span style="color:#00f">new</span> ArrayList&lt;&gt;();
@@ -301,7 +301,7 @@ Files是一个静态类，操作文件内容。Paths是静态工具类，操作�
             e.printStackTrace();
         }
 
-<span style="color:#008000">//打印错误栈：  
+<span style="color:#008000">// 打印错误栈：  
 </span><span style="color:#008000"></span>        StringWriter writer = <span style="color:#00f">new</span> StringWriter();
         Throwable throwable = <span style="color:#00f">new</span> IllegalStateException();
         throwable.printStackTrace(<span style="color:#00f">new</span> PrintWriter(writer));
@@ -311,22 +311,23 @@ Files是一个静态类，操作文件内容。Paths是静态工具类，操作�
 }
 
 
-<span style="color:#008000">// 直接将url中的pdf保存下来：//适用于任何二进制文件：
+<span style="color:#008000">// 直接将url中的pdf保存下来：
+</span><span style="color:#008000">// 适用于任何二进制文件：
 </span><span style="color:#008000"></span>URL url = <span style="color:#00f">new</span> URL(<span style="color:#a31515">&#34;http://www.cninfo.com.cn/1202417936.PDF&#34;</span>);
 <span style="color:#00f">try</span> (InputStream in = <span style="color:#00f">new</span> BufferedInputStream(url.openStream())) {
      Files.copy(in, Paths.get(url.getFile().substring(1)),StandardCopyOption.REPLACE_EXISTING);
-}<span style="color:#008000">//url.getFile().substring(1)去掉起始地斜杠符
-</span><span style="color:#008000">//copy()有三种形式
+} 
+<span style="color:#008000">// url.getFile().substring(1)去掉起始地斜杠符
+</span><span style="color:#008000">// copy()有三种形式
 </span><span style="color:#008000"></span>	
-<span style="color:#008000">//还有一种方式jdk7之前：
+<span style="color:#008000">// 还有一种方式jdk7之前：
 </span><span style="color:#008000"></span>URL website = <span style="color:#00f">new</span> URL(<span style="color:#a31515">&#34;XXX.pdf&#34;</span>);
 ReadableByteChannel rbc = Channels.newChannel(website.openStream());
 FileOutputStream fos = <span style="color:#00f">new</span> FileOutputStream(url.getFile().substring(1));
 fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 
-<span style="color:#008000">//FileChannel的抽象方法abstract long	transferFrom(ReadableByteChannel src, long position, long count) 
+<span style="color:#008000">// FileChannel的抽象方法abstract long	transferFrom(ReadableByteChannel src, long position, long count) 
 </span><span style="color:#008000"></span>
-
 </code></pre></div>
     </div>
     <footer class="post-footer">
@@ -353,8 +354,8 @@ fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 
     <div class="post-nav-prev post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/gradle-%E7%90%86%E8%A7%A3build%E8%84%9A%E6%9C%AC%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" rel="prev" title="gradle笔记1-理解build脚本基本语法">
-        gradle笔记1-理解build脚本基本语法 <i class="fa fa-chevron-right"></i>
+        <a href="https://zhimoe.github.io/post/java-aop-example/" rel="prev" title="Java AOP example">
+        Java AOP example <i class="fa fa-chevron-right"></i>
         </a>
     
     </div>
@@ -418,7 +419,7 @@ var disqus_config = function () {
       <nav class="site-state motion-element">
     <div class="site-state-item site-state-posts">
       <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">日志</span>
       </a>
     </div>
@@ -435,7 +436,7 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">34</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
@@ -452,16 +453,16 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/people/boris-hsiung" target="_blank" title="知乎">
-            <i class="fa fa-fw fa-globe"></i>
-            知乎
+        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
+            <i class="fa fa-fw fa-twitter"></i>
+            twitter
         </a>
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+            <i class="fa fa-fw fa-globe"></i>
+            知乎
         </a>
         </span>
     
