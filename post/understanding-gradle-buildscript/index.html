@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>理解Gradle build脚本结构与语法 - zhi.moe</title>
+    <title>理解Gradle build脚本结构与语法 - zhimoe</title>
     <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
     
     <meta property="og:title" content="理解Gradle build脚本结构与语法">
-    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:site_name" content="zhimoe">
     <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="理解Gradle build脚本结构与语法 - zhi.moe" />
+    <meta name="title" content="理解Gradle build脚本结构与语法 - zhimoe" />
     <meta name="description" content="编程是一门手艺"> 
     <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
@@ -41,7 +41,7 @@
   <div class="custom-logo-site-title">
     <a href="https://zhimoe.github.io"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhi.moe</span>
+      <span class="site-title">zhimoe</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -236,7 +236,7 @@ square_root = { Math.sqrt(it) }
 </span><span style="color:#008000"></span>
 </code></pre></div><p>总结一下就是，将你需要的操作封装成一个closure，给一个直观的命名，保证整个DSL调用语句有语义，定义返回一个map的函数作为入口，map的key是方法名，value是closure，这样可以在key后面传递一个closure接着调用这个value。</p>
 <h3 id="委托对象">委托对象</h3>
-<p>gradle脚本是一个配置脚本，类似maven中pom.xml文件，不过gradle脚本更为强大，因为.gradle文件就是grrovy文件，所以还可以在脚本里面直接定义groovy对象让脚本使用。
+<p>gradle脚本是一个配置脚本，类似maven中pom.xml文件，不过gradle脚本更为强大，因为.gradle文件就是groovy文件，所以还可以在脚本里面直接定义groovy对象让脚本使用。
 委托对象就是一个groovy对象，用来执行gradle构建脚本中的closure。</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"> <span style="color:#00f">as</span> a build script executes, it configures an object of type Project. 
  This object is called the delegate object of the script. 
@@ -499,8 +499,8 @@ var disqus_config = function () {
       <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
         src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhi.moe" />
-    <p class="site-author-name" itemprop="name">zhi.moe</p>
+        alt="zhimoe" />
+    <p class="site-author-name" itemprop="name">zhimoe</p>
     <p class="site-description motion-element" itemprop="description"> 
         the craft of programming</p>
 </div>
@@ -598,7 +598,7 @@ var disqus_config = function () {
   <span itemprop="copyrightYear">  &copy; 
   2017 - 2021</span>
   <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+  <span class="author" itemprop="copyrightHolder">zhimoe</span>
 </div>
 <div class="powered-by">
   Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>

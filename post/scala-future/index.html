@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Scala Future - zhi.moe</title>
+    <title>Scala Future - zhimoe</title>
     <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
     
     <meta property="og:title" content="Scala Future">
-    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:site_name" content="zhimoe">
     <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Scala Future - zhi.moe" />
+    <meta name="title" content="Scala Future - zhimoe" />
     <meta name="description" content="编程是一门手艺"> 
     <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
@@ -41,7 +41,7 @@
   <div class="custom-logo-site-title">
     <a href="https://zhimoe.github.io"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhi.moe</span>
+      <span class="site-title">zhimoe</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -175,7 +175,7 @@
 <li><input checked="" disabled="" type="checkbox"> callback</li>
 <li><input disabled="" type="checkbox"> recover</li>
 </ul>
-<h1 id="future">future</h1>
+<h2 id="future">future</h2>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
 <span style="color:#00f">import</span> java.time._
 <span style="color:#00f">import</span> scala.concurrent._
@@ -185,9 +185,9 @@
   println(<span style="color:#a31515">s&#34;This is the future at </span><span style="color:#a31515">${</span><span style="color:#2b91af">LocalTime</span>.now<span style="color:#a31515">}</span><span style="color:#a31515">&#34;</span>)
 }
 println(<span style="color:#a31515">s&#34;This is the present at </span><span style="color:#a31515">${</span><span style="color:#2b91af">LocalTime</span>.now<span style="color:#a31515">}</span><span style="color:#a31515">&#34;</span>)
-</code></pre></div><h1 id="executor-context">executor context</h1>
+</code></pre></div><h2 id="executor-context">executor context</h2>
 <p>future need a new thread to execute it task. <code>import ExecutionContext.Implicits.global</code> is a implicit threadpool.</p>
-<h1 id="await-for-future-result">await for future result</h1>
+<h2 id="await-for-future-result">await for future result</h2>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">// for 10.seconds conversion
 </span><span style="color:#008000"></span><span style="color:#00f">import</span> scala.concurrent.duration._
 <span style="color:#00f">val</span> f <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { <span style="color:#2b91af">Thread</span>.sleep(10000); 42 }
@@ -212,7 +212,7 @@ t <span style="color:#00f">match</span> {
 <span style="color:#008000">// or
 </span><span style="color:#008000"></span><span style="color:#00f">if</span> (t.isSuccess) println(<span style="color:#a31515">s&#34;The answer is </span><span style="color:#a31515">${</span>t.get<span style="color:#a31515">}</span><span style="color:#a31515">&#34;</span>)
 
-</code></pre></div><h1 id="callback">callback</h1>
+</code></pre></div><h2 id="callback">callback</h2>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">val</span> f <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { <span style="color:#2b91af">Thread</span>.sleep(10000)
   <span style="color:#00f">if</span> (random() &lt; 0.5) <span style="color:#00f">throw</span> <span style="color:#00f">new</span> <span style="color:#2b91af">Exception</span>
   42
@@ -337,8 +337,8 @@ var disqus_config = function () {
       <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
         src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhi.moe" />
-    <p class="site-author-name" itemprop="name">zhi.moe</p>
+        alt="zhimoe" />
+    <p class="site-author-name" itemprop="name">zhimoe</p>
     <p class="site-description motion-element" itemprop="description"> 
         the craft of programming</p>
 </div>
@@ -410,6 +410,10 @@ var disqus_config = function () {
     <div class="post-toc">
         <div class="post-toc-content"><nav id="TableOfContents">
   <ul>
+    <li><a href="#future">future</a></li>
+    <li><a href="#executor-context">executor context</a></li>
+    <li><a href="#await-for-future-result">await for future result</a></li>
+    <li><a href="#callback">callback</a></li>
     <li><a href="#callback-hell">callback hell</a></li>
   </ul>
 </nav></div>
@@ -428,7 +432,7 @@ var disqus_config = function () {
   <span itemprop="copyrightYear">  &copy; 
   2017 - 2021</span>
   <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+  <span class="author" itemprop="copyrightHolder">zhimoe</span>
 </div>
 <div class="powered-by">
   Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>

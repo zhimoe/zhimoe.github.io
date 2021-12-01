@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>SpringBoot应用和Rust应用的Dockerfile最佳实践 - zhi.moe</title>
+    <title>SpringBoot应用和Rust应用的Dockerfile最佳实践 - zhimoe</title>
     <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
     
     <meta property="og:title" content="SpringBoot应用和Rust应用的Dockerfile最佳实践">
-    <meta property="og:site_name" content="zhi.moe">
+    <meta property="og:site_name" content="zhimoe">
     <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="SpringBoot应用和Rust应用的Dockerfile最佳实践 - zhi.moe" />
+    <meta name="title" content="SpringBoot应用和Rust应用的Dockerfile最佳实践 - zhimoe" />
     <meta name="description" content="编程是一门手艺"> 
     <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
@@ -41,7 +41,7 @@
   <div class="custom-logo-site-title">
     <a href="https://zhimoe.github.io"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhi.moe</span>
+      <span class="site-title">zhimoe</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -162,7 +162,7 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1495 字 ~3分钟</span>
+<span class="leancloud-visitors-count">1493 字 ~3分钟</span>
 </span>
       </div>
     </header>
@@ -196,7 +196,7 @@
 </span><span style="">
 </span></code></pre></div><p>要点:</p>
 <ol>
-<li><code># syntax=docker/Dockerfile:experimental</code>表示启用docker实验特性BuildKit的mount cache功能,这样可以利用maven lib的cache提高镜像构建速度. 大家可以搜索docker BuildKit了解.
+<li><code># syntax=docker/Dockerfile:experimental</code>表示启用docker实验特性BuildKit的mount cache功能,这样可以利用maven lib的cache提高镜像构建速度. 可以搜索docker BuildKit了解.
 如果没有这一行,那么下面的<code>--mount=type=cache,target=/root/.m2</code>就是非法的. 由于是实验特性,构建镜像的时候需要设置一个环境变量<code>DOCKER_BUILDKIT=1</code>才能运行:<code> DOCKER_BUILDKIT=1 docker build -t zhimoe/boot-app .</code></li>
 <li>spring.io的教程里面使用的build镜像是<code>openjdk:8-jdk-alpine</code>,这个镜像是没有maven的,因为教程中的Dockerfile从源码复制了<code>mvnw,.mvn/</code>到镜像去.所以这里替换为<code>maven:3-jdk-8-alpine</code></li>
 <li>使用了docker的<a href="https://docs.docker.com/develop/develop-images/multistage-build/">multi-stage build</a>功能,<code>openjdk:8-jdk-alpine</code>由于没有maven,所以会比<code>maven</code>镜像少20M.</li>
@@ -347,8 +347,8 @@ var disqus_config = function () {
       <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
         src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhi.moe" />
-    <p class="site-author-name" itemprop="name">zhi.moe</p>
+        alt="zhimoe" />
+    <p class="site-author-name" itemprop="name">zhimoe</p>
     <p class="site-description motion-element" itemprop="description"> 
         the craft of programming</p>
 </div>
@@ -439,7 +439,7 @@ var disqus_config = function () {
   <span itemprop="copyrightYear">  &copy; 
   2017 - 2021</span>
   <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhi.moe</span>
+  <span class="author" itemprop="copyrightHolder">zhimoe</span>
 </div>
 <div class="powered-by">
   Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>

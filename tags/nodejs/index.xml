@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>nodejs on zhi.moe</title>
+    <title>nodejs on zhimoe</title>
     <link>https://zhimoe.github.io/tags/nodejs/</link>
-    <description>Recent content in nodejs on zhi.moe</description>
+    <description>Recent content in nodejs on zhimoe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 22 Aug 2021 21:55:06 +0800</lastBuildDate>
