@@ -218,7 +218,7 @@ individual tasks and of the executor itself.
 </span><span style="color:#008000">  */</span>
 
 </code></pre></div><h3 id="任务提交执行流程">任务提交执行流程</h3>
-<p><img src="https://zhimoe.github.io/javathreadpool/submit-flow.svg" alt="任务提交执行流程"></p>
+<p><img src="https://zhimoe.github.io/javathreadpool/threadpool.svg" alt="任务提交执行流程"></p>
 <h3 id="forkjoin-框架">fork/join 框架</h3>
 <p>fork/join和上面ThreadPoolExecutor的区别在于使用了任务窃取算法，工作线程完成自己的任务后可以从其他线程偷取任务，提高整体的任务效率。
 核心是一个<code>ForkJoinPool</code> class和一个扩展的<code>AbstractExecutorService</code>。   执行<code>ForkJoinTask</code> 任务。
