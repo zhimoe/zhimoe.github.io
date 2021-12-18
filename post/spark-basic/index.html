@@ -162,7 +162,7 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">3674 字 ~8分钟</span>
+<span class="leancloud-visitors-count">3676 字 ~8分钟</span>
 </span>
       </div>
     </header>
@@ -286,8 +286,9 @@ dstream.foreachRDD { rdd <span style="color:#00f">=&gt;</span>
     <span style="color:#2b91af">ConnectionPool</span>.returnConnection(connection)  <span style="color:#008000">// return to the pool for future reuse
 </span><span style="color:#008000"></span>  }
 }
-<span style="color:#2b91af">Note</span> that the connections in the pool should be lazily created on demand and timed out <span style="color:#00f">if</span> not used <span style="color:#00f">for</span> a <span style="color:#00f">while</span>. <span style="color:#2b91af">This</span> achieves the most efficient sending of data to external systems.
-</code></pre></div><ul>
+<span style="color:#008000">// Note that the connections in the pool should be lazily created on demand and timed out if not used for a while. 
+</span><span style="color:#008000">// This achieves the most efficient sending of data to external systems.
+</span></code></pre></div><ul>
 <li>DStream的RDD分区数是由topic分区数相同的。</li>
 </ul>
 <h2 id="最佳实践">最佳实践</h2>
