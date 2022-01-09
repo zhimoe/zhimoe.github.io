@@ -162,7 +162,7 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">3676 字 ~8分钟</span>
+<span class="leancloud-visitors-count">3924 字 ~8分钟</span>
 </span>
       </div>
     </header>
@@ -252,32 +252,36 @@ stream.map(record <span style="color:#00f">=&gt;</span> (record.key, record.valu
 <li>DStream is batches of RDDs.</li>
 </ul>
 <h2 id="常见错误">常见错误</h2>
+<h3 id="数据库mysql-redis连接的可序列化问题">数据库(mysql redis)连接的可序列化问题</h3>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">dstream.foreachRDD { rdd <span style="color:#00f">=&gt;</span>
   <span style="color:#00f">val</span> connection <span style="color:#00f">=</span> createNewConnection()  <span style="color:#008000">// executed at the driver
 </span><span style="color:#008000"></span>  rdd.foreach { record <span style="color:#00f">=&gt;</span>
     connection.send(record) <span style="color:#008000">// executed at the worker
 </span><span style="color:#008000"></span>  }
 }
-<span style="color:#008000">// 上面的写法会导致connection 不可序列化的错误。因为connection需要被发送到worker上，所以必须可以序列化；
-</span><span style="color:#008000">// 但是这样的连接对象其实非常少的（第三方库一般都不支持）；
-</span><span style="color:#008000"></span>dstream.foreachRDD { rdd <span style="color:#00f">=&gt;</span>
-  rdd.foreach { record <span style="color:#00f">=&gt;</span>
-    <span style="color:#00f">val</span> connection <span style="color:#00f">=</span> createNewConnection()
-    connection.send(record)
+<span style="color:#008000">// 上面的写法会导致connection 不可序列化的错误: Task not serializable
+</span><span style="color:#008000">// RDD的函数(map,foreach)会被序列化发送到worker节点执行,但是connection是和tcp连接,和机器绑定的,无法序列化
+</span><span style="color:#008000"></span>
+dstream.foreachRDD { rdd <span style="color:#00f">=&gt;</span>
+  rdd.foreach { record <span style="color:#00f">=&gt;</span>  <span style="color:#008000">// on worker node
+</span><span style="color:#008000"></span>    <span style="color:#00f">val</span> connection <span style="color:#00f">=</span> createNewConnection() <span style="color:#008000">// 给每个record处理时新建一个连接，会导致严重的数据库连接性能问题
+</span><span style="color:#008000"></span>    connection.send(record)
     connection.close()
   }
 }
-<span style="color:#008000">// 上面是给每个record处理时新建一个连接，会导致严重的性能问题。
-</span><span style="color:#008000">// 更好的方式是给每个partation新建一个连接
-</span><span style="color:#008000"></span>
-dstream.foreachRDD { rdd <span style="color:#00f">=&gt;</span>
+
+<span style="color:#008000">// 更好的方式是给每个partation新建一个连接
+</span><span style="color:#008000"></span>dstream.foreachRDD { rdd <span style="color:#00f">=&gt;</span>
   rdd.foreachPartition { partitionOfRecords <span style="color:#00f">=&gt;</span>
-    <span style="color:#00f">val</span> connection <span style="color:#00f">=</span> createNewConnection()
+    <span style="color:#00f">val</span> connection <span style="color:#00f">=</span> createNewConnection() 
     partitionOfRecords.foreach(record <span style="color:#00f">=&gt;</span> connection.send(record))
     connection.close()
   }
 }
+
 <span style="color:#008000">// 最好的方法是维护一个静态线程池：
+</span><span style="color:#008000"></span>[<span style="color:#2b91af">ConnectionPool</span>](https<span style="color:#00f">:</span><span style="color:#008000">//github.com/RedisLabs/spark-redis/blob/master/src/main/scala/com/redislabs/provider/redis/ConnectionPool.scala)
+</span><span style="color:#008000">// then use in partition
 </span><span style="color:#008000"></span>dstream.foreachRDD { rdd <span style="color:#00f">=&gt;</span>
   rdd.foreachPartition { partitionOfRecords <span style="color:#00f">=&gt;</span>
     <span style="color:#008000">// ConnectionPool is a static, lazily initialized pool of connections
@@ -288,7 +292,84 @@ dstream.foreachRDD { rdd <span style="color:#00f">=&gt;</span>
 }
 <span style="color:#008000">// Note that the connections in the pool should be lazily created on demand and timed out if not used for a while. 
 </span><span style="color:#008000">// This achieves the most efficient sending of data to external systems.
-</span></code></pre></div><ul>
+</span><span style="color:#008000"></span>
+<span style="color:#008000">// 示例
+</span><span style="color:#008000"></span><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">RedisCluster</span>(clusterHosts<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, password<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>) <span style="color:#00f">extends</span> <span style="color:#2b91af">Serializable</span> {
+
+  <span style="color:#00f">def</span> <span style="color:#00f">this</span>(conf<span style="color:#00f">:</span> <span style="color:#2b91af">SparkConf</span>) {
+    <span style="color:#00f">this</span>(
+      conf.get(<span style="color:#a31515">&#34;spark.redis.host&#34;</span>, <span style="color:#2b91af">Protocol</span>.<span style="color:#2b91af">DEFAULT_HOST</span>),
+      conf.get(<span style="color:#a31515">&#34;spark.redis.auth&#34;</span>, <span style="color:#00f">null</span>)
+    )
+  }
+
+  <span style="color:#008000">/**
+</span><span style="color:#008000">   *
+</span><span style="color:#008000">   * @return use for JedisCluster or JedisPool
+</span><span style="color:#008000">   */</span>
+  <span style="color:#00f">def</span> toSet()<span style="color:#00f">:</span> <span style="color:#2b91af">java.util.Set</span>[<span style="color:#2b91af">HostAndPort</span>] <span style="color:#00f">=</span> {
+    <span style="color:#00f">val</span> nodes<span style="color:#00f">:</span> <span style="color:#2b91af">mutable.Set</span>[<span style="color:#2b91af">HostAndPort</span>] <span style="color:#00f">=</span> mutable.<span style="color:#2b91af">Set</span>()
+    <span style="color:#00f">for</span> (host_port <span style="color:#00f">&lt;-</span> clusterHosts.split(<span style="color:#a31515">&#34;,&#34;</span>)) {
+      <span style="color:#00f">val</span> hp <span style="color:#00f">=</span> host_port
+      print(hp)
+      nodes += <span style="color:#2b91af">HostAndPort</span>.from(host_port)
+    }
+    nodes.asJava
+  }
+
+}
+
+<span style="color:#00f">object</span> <span style="color:#2b91af">RedisClusterUtils</span> <span style="color:#00f">extends</span> <span style="color:#2b91af">Serializable</span> {
+
+  @transient <span style="color:#00f">private</span> <span style="color:#00f">lazy</span> <span style="color:#00f">val</span> pools<span style="color:#00f">:</span> <span style="color:#2b91af">ConcurrentHashMap</span>[<span style="color:#2b91af">RedisCluster</span>, <span style="color:#2b91af">JedisCluster</span>] <span style="color:#00f">=</span>
+    <span style="color:#00f">new</span> <span style="color:#2b91af">ConcurrentHashMap</span>[<span style="color:#2b91af">RedisCluster</span>, <span style="color:#2b91af">JedisCluster</span>]()
+
+  <span style="color:#008000">/**
+</span><span style="color:#008000">   * 获取一个JedisCluster
+</span><span style="color:#008000">   * @param rc
+</span><span style="color:#008000">   * @return
+</span><span style="color:#008000">   */</span>
+  <span style="color:#00f">def</span> connect(rc<span style="color:#00f">:</span> <span style="color:#2b91af">RedisCluster</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">JedisCluster</span> = {
+
+    pools.getOrElseUpdate(rc, {
+      <span style="color:#00f">val</span> poolConfig <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="color:#2b91af">JedisPoolConfig</span>();
+      poolConfig.setMaxTotal(250)
+      poolConfig.setMaxIdle(32)
+      poolConfig.setTestOnBorrow(<span style="color:#00f">false</span>)
+      poolConfig.setTestOnReturn(<span style="color:#00f">false</span>)
+      poolConfig.setTestWhileIdle(<span style="color:#00f">false</span>)
+      poolConfig.setNumTestsPerEvictionRun(-1)
+
+      <span style="color:#00f">val</span> jedisCluster <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="color:#2b91af">JedisCluster</span>(rc.toSet(),
+        3000,
+        3000,
+        5,
+        rc.password,
+        poolConfig)
+
+      jedisCluster
+    })
+  }
+
+  <span style="color:#008000">/**
+</span><span style="color:#008000">   * 查询币种对应汇率
+</span><span style="color:#008000">   * @param jedisCluster 目标redis
+</span><span style="color:#008000">   * @param ccyCd 币种代码
+</span><span style="color:#008000">   * @return 折美元汇率
+</span><span style="color:#008000">   */</span>
+  <span style="color:#00f">def</span> getCcyRatio(jedisCluster<span style="color:#00f">:</span> <span style="color:#2b91af">JedisCluster</span>, ccyCd<span style="color:#00f">:</span><span style="color:#2b91af">String</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">Double</span> ={
+    <span style="color:#00f">val</span> res <span style="color:#00f">=</span> jedisCluster.get(<span style="color:#a31515">&#34;CCY:&#34;</span>+ccyCd)
+    res.split(<span style="color:#a31515">&#34;:&#34;</span>)(2).toDouble
+  }
+}
+
+
+
+</code></pre></div><p>参考
+<a href="https://spark.apache.org/docs/latest/streaming-programming-guide.html#design-patterns-for-using-foreachrdd">Design Patterns for using foreachRDD</a>
+<a href="https://stackoverflow.com/questions/28006517/redis-on-sparktask-not-serializable">Redis on Spark:Task not serializable</a>
+<a href="https://stackoverflow.com/questions/55190315/how-to-create-connections-to-a-datasource-in-spark-streaming-for-lookups">How to create connection(s) to a Datasource in Spark Streaming for Lookups</a></p>
+<ul>
 <li>DStream的RDD分区数是由topic分区数相同的。</li>
 </ul>
 <h2 id="最佳实践">最佳实践</h2>
@@ -455,7 +536,11 @@ var disqus_config = function () {
     <li><a href="#rdd">RDD</a></li>
     <li><a href="#sparkstreaming">SparkStreaming</a></li>
     <li><a href="#sparkstreamingkafka">SparkStreaming+Kafka</a></li>
-    <li><a href="#常见错误">常见错误</a></li>
+    <li><a href="#常见错误">常见错误</a>
+      <ul>
+        <li><a href="#数据库mysql-redis连接的可序列化问题">数据库(mysql redis)连接的可序列化问题</a></li>
+      </ul>
+    </li>
     <li><a href="#最佳实践">最佳实践</a></li>
   </ul>
 </nav></div>
@@ -472,7 +557,7 @@ var disqus_config = function () {
       <div class="footer-inner">
         <div class="copyright" >
   <span itemprop="copyrightYear">  &copy; 
-  2017 - 2021</span>
+  2017 - 2022</span>
   <span class="with-love"><i class="fa fa-heart"></i></span>
   <span class="author" itemprop="copyrightHolder">zhimoe</span>
 </div>
