@@ -500,7 +500,7 @@ pre,
 }
 pre,
 code {
-  font-family: Aurulent, "Fira Code", SFMono-Regular, Monaco, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: "Fira Code", SFMono-Regular, "SF Mono", Consolas, monospace, "PingFang SC", "Microsoft YaHei";
 }
 code {
   padding: 2px 4px;
