@@ -6,10 +6,37 @@
     <description>Recent content in Tags on zhimoe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 12 Sep 2021 18:02:10 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 02 Feb 2022 10:19:05 +0800</lastBuildDate>
     
 	<atom:link href="https://zhimoe.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>cheatsheet</title>
+      <link>https://zhimoe.github.io/tags/cheatsheet/</link>
+      <pubDate>Wed, 02 Feb 2022 10:19:05 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/tags/cheatsheet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala</title>
+      <link>https://zhimoe.github.io/tags/scala/</link>
+      <pubDate>Wed, 02 Feb 2022 10:19:05 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/tags/scala/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala3</title>
+      <link>https://zhimoe.github.io/tags/scala3/</link>
+      <pubDate>Wed, 02 Feb 2022 10:19:05 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/tags/scala3/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>code</title>
@@ -152,15 +179,6 @@
       <pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/tags/lambda/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scala</title>
-      <link>https://zhimoe.github.io/tags/scala/</link>
-      <pubDate>Thu, 04 Jun 2020 21:30:31 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/tags/scala/</guid>
       <description></description>
     </item>
     

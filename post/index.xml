@@ -6,10 +6,19 @@
     <description>Recent content in Posts on zhimoe</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 12 Sep 2021 18:02:10 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 02 Feb 2022 10:19:05 +0800</lastBuildDate>
     
 	<atom:link href="https://zhimoe.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Scala3 缩进语法总结表</title>
+      <link>https://zhimoe.github.io/post/scala3-indent-syntax/</link>
+      <pubDate>Wed, 02 Feb 2022 10:19:05 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/scala3-indent-syntax/</guid>
+      <description>Scala 3 在语法上面新增了一种Python的缩进格式,两种格式都可以使用. 但是目前部分情况还是需要使用括号. 个人对新语法是支持的. 缩进可以极大地提供代码的可读性和整洁, 最大的体会就是SparkStreaming的rdd处理代码,新手容易写出十几个</description>
+    </item>
     
     <item>
       <title>使用speed-measure-webpack-plugin和Happypack优化webpack打包速度</title>
