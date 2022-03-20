@@ -165,12 +165,14 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">161 字 ~1分钟</span>
+<span class="leancloud-visitors-count">152 字 ~1分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文How to Write a Spelling Corrector。 上面的链接已经是16年更新过了，程序也更新到了python3. 中文版的翻译 如何实现一个拼写纠正器 还是基于07年版本的。 博文最有意思的地方
+    <p>谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文<a href="https://norvig.com/spell-correct.html">How to Write a Spelling Corrector</a>.
+上面的链接已经是16年更新过了,程序也更新到了python3.
+中文版的翻译 <a href="https://blog.csdn.net/suixinsuiyuan33/article/details/69215082">如何实现一个拼写纠正器</a> 还是基于07年版本的.</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -230,6 +232,17 @@
     </header>
     <div class="post-body" itemprop="articleBody">
     <p>Associated Type and generic diff in rust</p>
+<h2 id="type-outside-impl">type outside impl</h2>
+<p>a <code>type Foo = Bar</code> outside is just type alias. most used in generic type.</p>
+<p>like:<code> type Thunk = Box&lt;dyn Fn() + Send + 'static&gt;;</code></p>
+<h2 id="type-inside-impl">type inside impl</h2>
+<p><code>type</code> in an <code>impl</code> defines an associated type. associated type可以理解为一个类型占位符,在trait的方法声明中使用.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">pub</span> <span style="color:#a90d91">trait</span> <span style="color:#a90d91">Iterator</span> {
+    <span style="color:#a90d91">type</span> <span style="color:#3f6e75">Item</span>; <span style="color:#177500">// or type T: Display;
+</span><span style="color:#177500"></span>
+    <span style="color:#a90d91">fn</span> <span style="color:#000">next</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>) -&gt; <span style="color:#a90d91">Option</span><span style="color:#000">&lt;</span><span style="color:#000">Self</span>::<span style="color:#000">Item</span><span style="color:#000">&gt;</span>;
+}
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -283,12 +296,19 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">704 字 ~2分钟</span>
+<span class="leancloud-visitors-count">692 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>个人对于编程字体有一点点洁癖。在尝试十几个字体后，终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code</p>
+    <p>个人对于编程字体有一点点洁癖.在尝试十几个字体后,终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code</p>
+<h3 id="aurulent">Aurulent</h3>
+<p><a href="https://github.com/zhimoe/programming-fonts">字体下载</a></p>
+<ol>
+<li>小写字母来自Aurulent Sans Mono,其他基于Fira Code.Aurulent Sans Mono风格和SourceCodePro非常像,胖宽型,大开大合,简单却有具有设计.特别是字符g,a,p,y,s.</li>
+<li>字母r的思路来自<a href="https://www.programmingfonts.org/#gintronic">gintronic</a>. 优点是在低分辨率屏,r的末尾不会被hint只剩下尖尖.</li>
+<li>问号？也来自gintronic字体,非常漂亮.</li>
+</ol>
     </div>
     
     <div class="post-more-link text-center">
@@ -347,8 +367,8 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>Ian安全结是登山系鞋带的首选，它越穿越紧，不会松开。解鞋带轻轻一拉即开。 而且对称美观，上手简单。值得每个人花十分钟学习。
-本篇不仅给出Ian安全结示意图，还告诉大家如何让安全结和蝴蝶结水平对称，尽可能美观的秘诀。</p>
+    <p>Ian安全结是登山系鞋带的首选,它越穿越紧,不会松开.解鞋带轻轻一拉即开. 而且对称美观,上手简单.值得每个人花十分钟学习.
+本篇不仅给出Ian安全结示意图,还告诉大家如何让安全结和蝴蝶结水平对称,尽可能美观的秘诀.</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -407,7 +427,20 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    问题 Java是OOP语言,使用对象封装。由于函数不是一等公民,无法在方法中传递函数/方法。 在Java 8之前,使用匿名类表示行为： // 监听器接口 public interface ActionListener { void actionPerformed(ActionEvent e); } // 使用匿名类传递一个行为 button.addActionListener(new ActionListener(){ public void actionPerformed(Event e){ System.out.println(&#34;button clicked&#34;); } }); 上面的代码主要的问题在于addActio
+    <h3 id="问题">问题</h3>
+<p>Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">// 监听器接口
+</span><span style="color:#177500"></span><span style="color:#a90d91">public</span> <span style="color:#a90d91">interface</span> <span style="color:#3f6e75">ActionListener</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">void</span> <span style="color:#000">actionPerformed</span><span style="color:#000">(</span><span style="color:#000">ActionEvent</span> <span style="color:#000">e</span><span style="color:#000">);</span>
+<span style="color:#000">}</span>
+<span style="color:#177500">// 使用匿名类传递一个行为
+</span><span style="color:#177500"></span><span style="color:#000">button</span><span style="color:#000">.</span><span style="color:#836c28">addActionListener</span><span style="color:#000">(</span><span style="color:#a90d91">new</span> <span style="color:#000">ActionListener</span><span style="color:#000">(){</span>
+    <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">actionPerformed</span><span style="color:#000">(</span><span style="color:#000">Event</span> <span style="color:#000">e</span><span style="color:#000">){</span>
+        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;button clicked&#34;</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
+<span style="color:#000">});</span>
+
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -466,8 +499,18 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典。特别适合部署在内网中学习使用或者给孩子学习使用。
-python版本增加了一个机器学习模型翻译。rust版本也有模型，但是还没来得及加。</p>
+    <p>Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
+python版本增加了一个机器学习模型翻译.rust版本也有模型,但是还没来得及加.</p>
+<h3 id="mdict-py">mdict-py</h3>
+<p><a href="https://github.com/zhimoe/mdict-py">mdict-py源码</a></p>
+<p>Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.</p>
+<p>特点：</p>
+<ol>
+<li>自动识别中英文选择对应mdx词典,目前英文词典包含牛津8和朗文4,中文词典包含汉语词典3</li>
+<li>英文尝试拼写纠错功能,动词时态纠错</li>
+<li>如果配置了中文会尝试搜索朗文的例句,模糊搜索,对于有英语基础的同学很有用</li>
+<li>如果配置了AI模型,会使用机器学习模型翻译,翻译结果比较粗糙,但是可以参考</li>
+</ol>
     </div>
     
     <div class="post-more-link text-center">
@@ -483,7 +526,7 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
         <a class="post-title-link" href="https://zhimoe.github.io/post/python-interview-questions/" itemprop="url">
-        Python几道常见的笔试题
+        Python 4道笔试题
         </a>
       </h1>
       <div class="post-meta">
@@ -521,12 +564,25 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">537 字 ~2分钟</span>
+<span class="leancloud-visitors-count">599 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>4道常见的python面试题和解答,以及一些python陷阱的链接。</p>
+    <p>4道常见的python面试题和解答,以及一些python陷阱的链接.</p>
+<h2 id="问题">问题</h2>
+<ol>
+<li>题目1</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    <span style="color:#a90d91">def</span> <span style="color:#000">change</span>(<span style="color:#000">v</span>):
+        <span style="color:#000">v</span>[<span style="color:#1c01ce">1</span>] <span style="color:#000">=</span> <span style="color:#1c01ce">4</span>
+        <span style="color:#a90d91">return</span> <span style="color:#000">v</span>
+        
+        
+    <span style="color:#000">a</span> <span style="color:#000">=</span> [<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">3</span>]
+    <span style="color:#a90d91">print</span>(<span style="color:#000">change</span>(<span style="color:#000">a</span>))
+    <span style="color:#a90d91">print</span>(<span style="color:#000">a</span>)    
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -585,7 +641,18 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>在文件读取的时候，会遇到非法转义字符，导致文件按行读取失败。此时可以通过忽略转义字符来解决。本文记录了scala和python的方法。</p>
+    <p>在文件读取的时候,会遇到非法转义字符,导致文件按行读取失败.此时可以通过忽略转义字符来解决.本文记录了scala和python的方法.</p>
+<h2 id="背景">背景</h2>
+<p>有50G的服务器日志,拆分为几千个txt文件,编码是utf8,使用scala和python按行处理：</p>
+<h3 id="scala">scala</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">def</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">args</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Array</span><span style="color:#000">[</span><span style="color:#a90d91">String</span><span style="color:#000">])</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Unit</span> <span style="color:#000">=</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">line</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#3f6e75">Source</span><span style="color:#000">.</span><span style="color:#000">fromFile</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;./txt1.log&#34;</span><span style="color:#000">,</span><span style="color:#c41a16">&#34;UTF8&#34;</span><span style="color:#000">).</span><span style="color:#000">getLines</span><span style="color:#000">())</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">line</span><span style="color:#000">.</span><span style="color:#000">contains</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;ABC&#34;</span><span style="color:#000">))</span> <span style="color:#000">{</span>
+      <span style="color:#177500">//do something      
+</span><span style="color:#177500"></span>    <span style="color:#000">}</span>
+  <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -715,12 +782,20 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
+<div class="feed-link motion-element">
+<a href="https://zhimoe.github.io/index.xml" rel="alternate" type="application/rss+xml" target="_blank">
+    <i class="fa fa-rss"></i>
+    RSS 订阅
+</a>
+</div>
+
       
 <div class="links-of-author motion-element">
     
@@ -732,16 +807,9 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

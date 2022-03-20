@@ -17,7 +17,8 @@
       <pubDate>Thu, 08 Jul 2021 21:29:57 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/open-source-mental-health/</guid>
-      <description>原文-Open Source and Mental Health 我一位亲爱的朋友,也是高产的Redox OS贡献者jD91mZM2在2021年3月去世了，年仅18岁。他参与了2018、2019和2020年的Redox OS夏季代码活动。他在开发Redox OS的各个方面都做出了贡献，从内</description>
+      <description>&lt;p&gt;我一位亲爱的朋友,也是高产的Redox OS贡献者jD91mZM2在2021年3月去世了,年仅18岁.他参与了2018、2019和2020年的Redox OS夏季代码活动.他在开发Redox OS的各个方面都做出了贡献,从内核,到relibc,到移植程序.他的工作详细介绍可以在&lt;a href=&#34;https://www.redox-os.org/news/&#34;&gt;Redox OS新闻&lt;/a&gt;中署名为jD91mZM2的帖子看到.
+这个帖子可能是黑暗的、深沉的、沉重的、原始的、未经编辑的.如果你和我们中的许多人一样有自己的问题,请随时与我联系：https://twitter.com/jeremy_soller.在这种情况下,我不建议阅读这篇文章的其他内容.我的结论是,开源要成为可持续发展,还有大量的工作要做,而其中很大一部分是对社区及其成员的健康的关怀.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,7 +28,7 @@
       
       <guid>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md&#34;&gt;原文Tour of Rust&amp;rsquo;s Standard Library Traits&lt;/a&gt;
-关于rust trait非常好的介绍，比rust book详细，系统。&lt;/p&gt;</description>
+关于rust trait非常好的介绍,比rust book详细,系统.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,7 +37,9 @@
       <pubDate>Sun, 25 Oct 2020 20:01:27 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/spell-correct/</guid>
-      <description>谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文How to Write a Spelling Corrector。 上面的链接已经是16年更新过了，程序也更新到了python3. 中文版的翻译 如何实现一个拼写纠正器 还是基于07年版本的。 博文最有意思的地方</description>
+      <description>&lt;p&gt;谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文&lt;a href=&#34;https://norvig.com/spell-correct.html&#34;&gt;How to Write a Spelling Corrector&lt;/a&gt;.
+上面的链接已经是16年更新过了,程序也更新到了python3.
+中文版的翻译 &lt;a href=&#34;https://blog.csdn.net/suixinsuiyuan33/article/details/69215082&#34;&gt;如何实现一个拼写纠正器&lt;/a&gt; 还是基于07年版本的.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -45,16 +48,19 @@
       <pubDate>Sun, 19 May 2019 11:07:26 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96/</guid>
-      <description>GTmetrix是一个前端页面测试的网站,可以发现你的站点哪些地方速度较慢,并针对性的优化. How to Optimize Images: A Practical Guide</description>
+      <description>&lt;p&gt;GTmetrix是一个前端页面测试的网站,可以发现你的站点哪些地方速度较慢,并针对性的优化.
+&lt;a href=&#34;https://gtmetrix.com/blog/how-to-optimize-images-a-practical-guide/&#34;&gt;How to Optimize Images: A Practical Guide&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>使用redis的hash优化内存使用</title>
+      <title>使用redis的hash优化内存使用[翻译]</title>
       <link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</guid>
-      <description>原文 Understanding Redis hash-max-ziplist-entries 问题和方案 场景: 有3亿张图片放在对象存储(DELL ECS/AMAZON EC2)上面,现在需要保存图片的id-&amp;gt;用户id的映射.最直接的思路是: set &amp;#34;media:1155220&amp;#34; &amp;#34;user1&amp;#34; set &amp;#34;media:1155221&amp;#34; &amp;#34;user2&amp;#34; 这样设计key之后3亿张图片需要21GB的内存,因为redis的string是线性增长的</description>
+      <description>&lt;p&gt;使用redis的hash优化内存使用&lt;/p&gt;
+&lt;h1 id=&#34;原文&#34;&gt;原文&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.peterbe.com/plog/understanding-redis-hash-max-ziplist-entries&#34;&gt;Understanding Redis hash-max-ziplist-entries&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -63,7 +69,12 @@
       <pubDate>Thu, 01 Nov 2018 19:04:32 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</guid>
-      <description>原文 installing new python package from jupyter notebook 笔记 在pycharm写代码中如果使用到新的package，例如numpy，只需要输入import numpy 然后ALT+ENTER在提示中选择install new package即可。 在notebook中，网上的教程都说是!pip install numpy. 但是</description>
+      <description>&lt;p&gt;如何正确地在notebook中安装lib package&lt;/p&gt;
+&lt;h3 id=&#34;原文&#34;&gt;原文&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://jakevdp.github.io/blog/2017/12/05/installing-python-packages-from-jupyter/&#34;&gt;installing new python package from jupyter notebook&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;笔记&#34;&gt;笔记&lt;/h3&gt;
+&lt;p&gt;在pycharm写代码中如果使用到新的package,例如&lt;code&gt;numpy&lt;/code&gt;,只需要输入&lt;code&gt;import numpy&lt;/code&gt; 然后ALT+ENTER在提示中选择install new package即可.&lt;/p&gt;
+&lt;p&gt;在notebook中,网上的教程都说是&lt;code&gt;!pip install numpy&lt;/code&gt;. 但是这个可能有坑.究其原因是因为:&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Scala Implicit - zhimoe</title>
+    <title>Scala 2 Implicit - zhimoe</title>
     <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
     
-    <meta property="og:title" content="Scala Implicit">
+    <meta property="og:title" content="Scala 2 Implicit">
     <meta property="og:site_name" content="zhimoe">
     <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Scala Implicit - zhimoe" />
+    <meta name="title" content="Scala 2 Implicit - zhimoe" />
     <meta name="description" content="编程是一门手艺"> 
     <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
@@ -124,7 +124,7 @@
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
         <a class="post-title-link" href="https://zhimoe.github.io/post/scala-implicit/" itemprop="url">
-        Scala Implicit
+        Scala 2 Implicit
         </a>
       </h1>
       <div class="post-meta">
@@ -162,121 +162,120 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1592 字 ~4分钟</span>
+<span class="leancloud-visitors-count">1580 字 ~4分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
     <h2 id="隐式参数">隐式参数</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//隐式参数是在调用时可以自动填充的参数， 需要在调用范围内（scope)有一个隐式变量可供填充。
-</span><span style="color:#008000"></span><span style="color:#00f">def</span> addInt(i<span style="color:#00f">:</span><span style="color:#2b91af">Int</span>)(<span style="color:#00f">implicit</span> n<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#00f">=</span> i + n
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">//隐式参数是在调用时可以自动填充的参数, 需要在调用范围内（scope)有一个隐式变量可供填充.
+</span><span style="color:#177500"></span><span style="color:#a90d91">def</span> <span style="color:#000">addInt</span><span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#a90d91">:</span><span style="color:#a90d91">Int</span><span style="color:#000">)(</span><span style="color:#a90d91">implicit</span> <span style="color:#000">n</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">i</span> <span style="color:#000">+</span> <span style="color:#000">n</span>
 
 
-<span style="color:#008000">//需要提供一个隐式变量n
-</span><span style="color:#008000"></span><span style="color:#00f">implicit</span> <span style="color:#00f">val</span> sn <span style="color:#00f">=</span> 1
-addInt(2) <span style="color:#008000">// 3
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//如果有两个满足类型的隐式变量，则在编译addInt(2)时报错
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//scala的方法中ExecutionContext一般作为implicit参数。
+<span style="color:#177500">//需要提供一个隐式变量n
+</span><span style="color:#177500"></span><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">val</span> <span style="color:#000">sn</span> <span style="color:#a90d91">=</span> <span style="color:#1c01ce">1</span>
+<span style="color:#000">addInt</span><span style="color:#000">(</span><span style="color:#1c01ce">2</span><span style="color:#000">)</span> <span style="color:#177500">// 3
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//如果有两个满足类型的隐式变量,则在编译addInt(2)时报错
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//scala的方法中ExecutionContext一般作为implicit参数.
 </span></code></pre></div><h2 id="隐式转换方法">隐式转换方法</h2>
-<p>如果想要给String实现一个mkStr方法,简单的给String添加一个Ops!前缀再返回。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//1. 首先实现一个包含目标方法的类型，实现该方法
-</span><span style="color:#008000"></span><span style="color:#00f">class</span> <span style="color:#2b91af">StrOps</span>(s<span style="color:#00f">:</span><span style="color:#2b91af">String</span>) {
-  <span style="color:#00f">def</span> mkStr()<span style="color:#00f">:</span> <span style="color:#2b91af">String</span> = {
-    <span style="color:#00f">return</span> <span style="color:#a31515">&#34;Ops! &#34;</span> + s
-  }
-}
+<p>如果想要给String实现一个mkStr方法,简单的给String添加一个Ops!前缀再返回.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">//1. 首先实现一个包含目标方法的类型,实现该方法
+</span><span style="color:#177500"></span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">StrOps</span><span style="color:#000">(</span><span style="color:#000">s</span><span style="color:#a90d91">:</span><span style="color:#a90d91">String</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">def</span> <span style="color:#000">mkStr</span><span style="color:#000">()</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">String</span> <span style="color:#000">=</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">return</span> <span style="color:#c41a16">&#34;Ops! &#34;</span> <span style="color:#000">+</span> <span style="color:#000">s</span>
+  <span style="color:#000">}</span>
+<span style="color:#000">}</span>
 
-<span style="color:#008000">//2. 告诉scala编译器String可以通过类型转换获得mkStr这个方法：
-</span><span style="color:#008000"></span><span style="color:#00f">implicit</span> <span style="color:#00f">final</span> <span style="color:#00f">def</span> string2StrOps(s<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>) <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="color:#2b91af">StrOps</span>(s)
+<span style="color:#177500">//2. 告诉scala编译器String可以通过类型转换获得mkStr这个方法：
+</span><span style="color:#177500"></span><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">def</span> <span style="color:#000">string2StrOps</span><span style="color:#000">(</span><span style="color:#000">s</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">String</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#a90d91">new</span> <span style="color:#3f6e75">StrOps</span><span style="color:#000">(</span><span style="color:#000">s</span><span style="color:#000">)</span>
 
-<span style="color:#008000">//3. 现在用户可以直接认为String有mkStr方法
-</span><span style="color:#008000"></span><span style="color:#00f">val</span> s <span style="color:#00f">=</span> <span style="color:#a31515">&#34;who changed my string&#34;</span>
-s.mkStr() <span style="color:#008000">//res2: String = Ops! who changed my string
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//在scala.Predef中定义了大量的隐式转换,例如RichInt,RichDouble,StringOps这些
+<span style="color:#177500">//3. 现在用户可以直接认为String有mkStr方法
+</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">s</span> <span style="color:#a90d91">=</span> <span style="color:#c41a16">&#34;who changed my string&#34;</span>
+<span style="color:#000">s</span><span style="color:#000">.</span><span style="color:#000">mkStr</span><span style="color:#000">()</span> <span style="color:#177500">//res2: String = Ops! who changed my string
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//在scala.Predef中定义了大量的隐式转换,例如RichInt,RichDouble,StringOps这些
 </span></code></pre></div><h2 id="implicit-class">implicit class</h2>
-<p>可以看到第2步非常的冗余，于是<a href="https://link.zhihu.com/?target=https%3A//docs.scala-lang.org/sips/implicit-classes.html">SIP-13</a>提出一个implicit class,将上面的1,2步合并:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">StrOps</span>(s<span style="color:#00f">:</span><span style="color:#2b91af">String</span>) {
-  <span style="color:#00f">def</span> mkStr()<span style="color:#00f">:</span> <span style="color:#2b91af">String</span> = {
-    <span style="color:#00f">return</span> <span style="color:#a31515">&#34;Ops! &#34;</span> + s
-  }
-}
-</code></pre></div><p>注意，这个只是一个语法糖。去糖后就是上面的那个形式。 implicit class有3个约束和一个注解问题：</p>
+<p>可以看到第2步非常的冗余,于是<a href="https://link.zhihu.com/?target=https%3A//docs.scala-lang.org/sips/implicit-classes.html">SIP-13</a>提出一个implicit class,将上面的1,2步合并:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">StrOps</span><span style="color:#000">(</span><span style="color:#000">s</span><span style="color:#a90d91">:</span><span style="color:#a90d91">String</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">def</span> <span style="color:#000">mkStr</span><span style="color:#000">()</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">String</span> <span style="color:#000">=</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">return</span> <span style="color:#c41a16">&#34;Ops! &#34;</span> <span style="color:#000">+</span> <span style="color:#000">s</span>
+  <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+</code></pre></div><p>注意,这个只是一个语法糖.去糖后就是上面的那个形式. implicit class有3个约束和一个注解问题：</p>
 <ol>
 <li>
-<p>必须要有主一个构造函数且只能一个构造参数（implicit参数除外）。构造参数就是源类型. 这个构造函数即等价上面第2步的隐式转换方法：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">RichDate</span>(date<span style="color:#00f">:</span> <span style="color:#2b91af">java.util.Date</span>) <span style="color:#008000">// OK!
-</span><span style="color:#008000"></span><span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Indexer</span>[<span style="color:#2b91af">T</span>](collecton<span style="color:#00f">:</span> <span style="color:#2b91af">Seq</span>[<span style="color:#2b91af">T</span>], index<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#008000">// BAD!
-</span><span style="color:#008000"></span><span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Indexer</span>[<span style="color:#2b91af">T</span>](collecton<span style="color:#00f">:</span> <span style="color:#2b91af">Seq</span>[<span style="color:#2b91af">T</span>])(<span style="color:#00f">implicit</span> index<span style="color:#00f">:</span> <span style="color:#2b91af">Index</span>) <span style="color:#008000">// OK!
+<p>必须要有主一个构造函数且只能一个构造参数（implicit参数除外）.构造参数就是源类型. 这个构造函数即等价上面第2步的隐式转换方法：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">RichDate</span><span style="color:#000">(</span><span style="color:#000">date</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">java.util.Date</span><span style="color:#000">)</span> <span style="color:#177500">// OK!
+</span><span style="color:#177500"></span><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Indexer</span><span style="color:#000">[</span><span style="color:#a90d91">T</span><span style="color:#000">](</span><span style="color:#000">collecton</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Seq</span><span style="color:#000">[</span><span style="color:#a90d91">T</span><span style="color:#000">],</span> <span style="color:#000">index</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#177500">// BAD!
+</span><span style="color:#177500"></span><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Indexer</span><span style="color:#000">[</span><span style="color:#a90d91">T</span><span style="color:#000">](</span><span style="color:#000">collecton</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Seq</span><span style="color:#000">[</span><span style="color:#a90d91">T</span><span style="color:#000">])(</span><span style="color:#a90d91">implicit</span> <span style="color:#000">index</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Index</span><span style="color:#000">)</span> <span style="color:#177500">// OK!
 </span></code></pre></div></li>
 <li>
 <p>只能定义在其他trait/class/object中：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">object</span> <span style="color:#2b91af">Helpers</span> {
-    <span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">RichInt</span>(x<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#008000">// OK!
-</span><span style="color:#008000"></span>}
-<span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">RichDouble</span>(x<span style="color:#00f">:</span> <span style="color:#2b91af">Double</span>) <span style="color:#008000">// BAD!
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">object</span> <span style="color:#3f6e75">Helpers</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">RichInt</span><span style="color:#000">(</span><span style="color:#000">x</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#177500">// OK!
+</span><span style="color:#177500"></span><span style="color:#000">}</span>
+<span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">RichDouble</span><span style="color:#000">(</span><span style="color:#000">x</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Double</span><span style="color:#000">)</span> <span style="color:#177500">// BAD!
 </span></code></pre></div></li>
 <li>
-<p>在当前scope内，不允许有和implicit class同名的方法，对象，变量。因为case class会自动生成同名object对象，所以implicit class不能是case class。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">object</span> <span style="color:#2b91af">Bar</span>
-<span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Bar</span>(x<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#008000">// BAD!
-</span><span style="color:#008000"></span>
-<span style="color:#00f">val</span> x <span style="color:#00f">=</span> 5
-<span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">x</span>(y<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#008000">// BAD!
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//cuz case class has companion object by default 
-</span><span style="color:#008000"></span><span style="color:#00f">implicit</span> <span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Baz</span>(x<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#008000">// BAD! conflict with the companion object
+<p>在当前scope内,不允许有和implicit class同名的方法,对象,变量.因为case class会自动生成同名object对象,所以implicit class不能是case class.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">object</span> <span style="color:#3f6e75">Bar</span>
+<span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Bar</span><span style="color:#000">(</span><span style="color:#000">x</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#177500">// BAD!
+</span><span style="color:#177500"></span>
+<span style="color:#a90d91">val</span> <span style="color:#000">x</span> <span style="color:#a90d91">=</span> <span style="color:#1c01ce">5</span>
+<span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">x</span><span style="color:#000">(</span><span style="color:#000">y</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#177500">// BAD!
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//cuz case class has companion object by default 
+</span><span style="color:#177500"></span><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">case</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Baz</span><span style="color:#000">(</span><span style="color:#000">x</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#177500">// BAD! conflict with the companion object
 </span></code></pre></div></li>
 <li>
-<p>还有就是implicit class的注解在去语法糖后会自动添加到类和方法，除非在注解中指明范围：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">@bar
-<span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Foo</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)
+<p>还有就是implicit class的注解在去语法糖后会自动添加到类和方法,除非在注解中指明范围：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#000">@bar</span>
+<span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#000">n</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span>
 
-<span style="color:#008000">//desugar
-</span><span style="color:#008000"></span>@bar <span style="color:#00f">implicit</span> <span style="color:#00f">def</span> <span style="color:#2b91af">Foo</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">Foo</span> = <span style="color:#00f">new</span> <span style="color:#2b91af">Foo</span>(n)
-@bar <span style="color:#00f">class</span> <span style="color:#2b91af">Foo</span>(n<span style="color:#00f">:</span><span style="color:#2b91af">Int</span>)
+<span style="color:#177500">//desugar
+</span><span style="color:#177500"></span><span style="color:#000">@bar</span> <span style="color:#a90d91">implicit</span> <span style="color:#a90d91">def</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#000">n</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Foo</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#000">n</span><span style="color:#000">)</span>
+<span style="color:#000">@bar</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#000">n</span><span style="color:#a90d91">:</span><span style="color:#a90d91">Int</span><span style="color:#000">)</span>
 
-<span style="color:#008000">//除非在注解中指明：genClass / method
-</span><span style="color:#008000"></span>@(bar @genClass) <span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Foo</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)
+<span style="color:#177500">//除非在注解中指明：genClass / method
+</span><span style="color:#177500"></span><span style="color:#000">@(</span><span style="color:#000">bar</span> <span style="color:#000">@genClass</span><span style="color:#000">)</span> <span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#000">n</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span>
 
-<span style="color:#008000">//desugar得到
-</span><span style="color:#008000"></span>@bar <span style="color:#00f">class</span> <span style="color:#2b91af">Foo</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)
-<span style="color:#00f">implicit</span> <span style="color:#00f">def</span> <span style="color:#2b91af">Foo</span>(n<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">Foo</span> = <span style="color:#00f">new</span> <span style="color:#2b91af">Foo</span>(n)
+<span style="color:#177500">//desugar得到
+</span><span style="color:#177500"></span><span style="color:#000">@bar</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#000">n</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span>
+<span style="color:#a90d91">implicit</span> <span style="color:#a90d91">def</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#000">n</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Foo</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#000">n</span><span style="color:#000">)</span>
 </code></pre></div></li>
 </ol>
 <h2 id="implicitly方法">implicitly方法</h2>
-<p>scala的PreDef中有有一个implicitly方法，表示在当前scope征召一个隐式变量并返回该变量。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">//PreDef
-</span><span style="color:#008000"></span>@inline <span style="color:#00f">def</span> implicitly[<span style="color:#2b91af">T</span>](<span style="color:#00f">implicit</span> e<span style="color:#00f">:</span> <span style="color:#2b91af">T</span>) <span style="color:#00f">=</span> e
+<p>scala的PreDef中有有一个implicitly方法,表示在当前scope征召一个隐式变量并返回该变量.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">//PreDef
+</span><span style="color:#177500"></span><span style="color:#000">@inline</span> <span style="color:#a90d91">def</span> <span style="color:#000">implicitly</span><span style="color:#000">[</span><span style="color:#a90d91">T</span><span style="color:#000">](</span><span style="color:#a90d91">implicit</span> <span style="color:#000">e</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">T</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">e</span>
 </code></pre></div><blockquote>
 <p>implitly[T] means return implicit value of type T in the context</p>
 </blockquote>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Foo</span>(<span style="color:#00f">val</span> i<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) {
-   <span style="color:#00f">def</span> addValue(v<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span> = i + v
-} 
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#a90d91">val</span> <span style="color:#000">i</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+   <span style="color:#a90d91">def</span> <span style="color:#000">addValue</span><span style="color:#000">(</span><span style="color:#000">v</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span> <span style="color:#000">=</span> <span style="color:#000">i</span> <span style="color:#000">+</span> <span style="color:#000">v</span>
+<span style="color:#000">}</span> 
 
-<span style="color:#00f">implicit</span> <span style="color:#00f">val</span> foo<span style="color:#00f">:</span><span style="color:#2b91af">Foo</span> = <span style="color:#2b91af">Foo</span>(1)
-<span style="color:#00f">val</span> fooImplicitly <span style="color:#00f">=</span> implicitly[<span style="color:#2b91af">Foo</span>] <span style="color:#008000">// Foo(1)
-</span><span style="color:#008000"></span>
+<span style="color:#a90d91">implicit</span> <span style="color:#a90d91">val</span> <span style="color:#000">foo</span><span style="color:#a90d91">:</span><span style="color:#a90d91">Foo</span> <span style="color:#000">=</span> <span style="color:#3f6e75">Foo</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">)</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">fooImplicitly</span> <span style="color:#a90d91">=</span> <span style="color:#000">implicitly</span><span style="color:#000">[</span><span style="color:#a90d91">Foo</span><span style="color:#000">]</span> <span style="color:#177500">// Foo(1)
+</span><span style="color:#177500"></span>
 </code></pre></div><h2 id="value-class">value class</h2>
 <p>scala 还有一个概念：<a href="https://link.zhihu.com/?target=https%3A//docs.scala-lang.org/overviews/core/value-classes.html">value class</a></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">class</span> <span style="color:#2b91af">Wrapper</span>(<span style="color:#00f">val</span> underlying<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#00f">extends</span> <span style="color:#2b91af">AnyVal</span>
-<span style="color:#008000">//1. 一个public val参数表示runtime类型，这里是Int. 编译时是Wrapper类型，所以value class目的是降低分配开销。
-</span><span style="color:#008000">//2. value class 需要 extends AnyVal
-</span><span style="color:#008000">//3. value class 只能有 defs, 不能有vals, vars, or nested traits, classes or objects，
-</span><span style="color:#008000">//   因为def是通过静态方法实现的，而val，var这些则必须创建相应类型了。
-</span><span style="color:#008000">//4. value class 只能扩展 通用trait（universal traits），
-</span><span style="color:#008000">//   universal traits是A universal trait is a trait that extends Any, only has defs as members, and does no initialization.
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">class</span> <span style="color:#3f6e75">Wrapper</span><span style="color:#000">(</span><span style="color:#a90d91">val</span> <span style="color:#000">underlying</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#a90d91">extends</span> <span style="color:#3f6e75">AnyVal</span>
+<span style="color:#177500">//1. 一个public val参数表示runtime类型,这里是Int. 编译时是Wrapper类型,所以value class目的是降低分配开销.
+</span><span style="color:#177500">//2. value class 需要 extends AnyVal
+</span><span style="color:#177500">//3. value class 只能有 defs, 不能有vals, vars, or nested traits, classes or objects,
+</span><span style="color:#177500">//   因为def是通过静态方法实现的,而val,var这些则必须创建相应类型了.
+</span><span style="color:#177500">//4. value class 只能扩展 通用trait（universal traits）,
+</span><span style="color:#177500">//   universal traits是A universal trait is a trait that extends Any, only has defs as members, and does no initialization.
 </span></code></pre></div><h2 id="extension-method">extension method</h2>
-<p>当implicit class类型参数是<code>AnyVal</code>子类时，value class和上面的implicit class形式相近，所以可以通过value class降低implicit class的分配开销。例如RichtInt</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">implicit</span> <span style="color:#00f">class</span> <span style="color:#2b91af">RichInt</span>(<span style="color:#00f">val</span> self<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>) <span style="color:#00f">extends</span> <span style="color:#2b91af">AnyVal</span> {
-  <span style="color:#00f">def</span> toHexString<span style="color:#00f">:</span> <span style="color:#2b91af">String</span> = java.lang.<span style="color:#2b91af">Integer</span>.toHexString(self)
-}
-</code></pre></div><p>因为RichInt是value class，在运行时（runtime）不会有RichInt这个类，而是Int，而3.toHexString实际是通过静态方法实现的： <code>RichInt$.MODULE$.extension$toHexString(3)</code>,这么做好处是减少对象分配开销（avoid the overhead of allocation）。如果implicit class的类型参数不是AnyVal子类，那么在runtime时会有相应类型对象被创建，用户察觉不到区别。</p>
-<p>value class还有其他作用和局限性，可以参考上面链接.</p>
-
+<p>当implicit class类型参数是<code>AnyVal</code>子类时,value class和上面的implicit class形式相近,所以可以通过value class降低implicit class的分配开销.例如RichtInt</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">RichInt</span><span style="color:#000">(</span><span style="color:#a90d91">val</span> <span style="color:#000">self</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#a90d91">extends</span> <span style="color:#3f6e75">AnyVal</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">def</span> <span style="color:#000">toHexString</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">String</span> <span style="color:#000">=</span> <span style="color:#000">java</span><span style="color:#000">.</span><span style="color:#000">lang</span><span style="color:#000">.</span><span style="color:#3f6e75">Integer</span><span style="color:#000">.</span><span style="color:#000">toHexString</span><span style="color:#000">(</span><span style="color:#000">self</span><span style="color:#000">)</span>
+<span style="color:#000">}</span>
+</code></pre></div><p>因为RichInt是value class,在运行时（runtime）不会有RichInt这个类,而是Int,而3.toHexString实际是通过静态方法实现的： <code>RichInt$.MODULE$.extension$toHexString(3)</code>,这么做好处是减少对象分配开销（avoid the overhead of allocation）.如果implicit class的类型参数不是AnyVal子类,那么在runtime时会有相应类型对象被创建,用户察觉不到区别.</p>
+<p>value class还有其他作用和局限性,可以参考上面链接.</p>
     </div>
     <footer class="post-footer">
      
@@ -294,8 +293,8 @@ s.mkStr() <span style="color:#008000">//res2: String = Ops! who changed my strin
      <div class="post-nav">
     <div class="post-nav-next post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/" rel="next" title="使用redis的hash优化内存使用">
-        <i class="fa fa-chevron-left"></i> 使用redis的hash优化内存使用
+        <a href="https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/" rel="next" title="使用redis的hash优化内存使用[翻译]">
+        <i class="fa fa-chevron-left"></i> 使用redis的hash优化内存使用[翻译]
         </a>
     
     </div>
@@ -384,12 +383,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -401,16 +401,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

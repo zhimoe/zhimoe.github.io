@@ -167,26 +167,26 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.</p>
-<p><a href="https://www.zhihu.com/question/25404709/answer/67672003">zhihu.com</a></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># https://www.zhihu.com/question/25404709/answer/67672003</span>
-<span style="color:#00f">import</span> matplotlib.font_manager <span style="color:#00f">as</span> fm
-<span style="color:#008000"># 微软雅黑,如果需要宋体,可以用simsun.ttc</span>
-myfont = fm.FontProperties(fname=<span style="color:#a31515">&#39;C:/Windows/Fonts/msyh.ttc&#39;</span>)
-<span style="color:#008000"># Linux字体在&#34;/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc&#34;, </span>
-<span style="color:#008000"># 需要先安装字体&#34;&gt;sudo apt install fonts-noto-cjk -y&#34;</span>
-<span style="color:#008000"># MacOS中文字体文件在&#34;/System/Library/Fonts/PingFang.ttc&#34;</span>
-<span style="color:#008000"># Win10,Linux已测试,MacOS未验证</span>
+    <p>很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.
+<a href="https://www.zhihu.com/question/25404709/answer/67672003">zhihu.com</a></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#177500"># https://www.zhihu.com/question/25404709/answer/67672003</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">matplotlib.font_manager</span> <span style="color:#a90d91">as</span> <span style="color:#000">fm</span>
+<span style="color:#177500"># 微软雅黑,如果需要宋体,可以用simsun.ttc</span>
+<span style="color:#000">myfont</span> <span style="color:#000">=</span> <span style="color:#000">fm</span><span style="color:#000">.</span><span style="color:#000">FontProperties</span>(<span style="color:#000">fname</span><span style="color:#000">=</span><span style="color:#c41a16">&#39;C:/Windows/Fonts/msyh.ttc&#39;</span>)
+<span style="color:#177500"># Linux字体在&#34;/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc&#34;, </span>
+<span style="color:#177500"># 需要先安装字体&#34;&gt;sudo apt install fonts-noto-cjk -y&#34;</span>
+<span style="color:#177500"># MacOS中文字体文件在&#34;/System/Library/Fonts/PingFang.ttc&#34;</span>
+<span style="color:#177500"># Win10,Linux已测试,MacOS未验证</span>
 
-<span style="color:#00f">import</span> matplotlib.pyplot <span style="color:#00f">as</span> plt
+<span style="color:#a90d91">import</span> <span style="color:#000">matplotlib.pyplot</span> <span style="color:#a90d91">as</span> <span style="color:#000">plt</span>
 
-plt.clf()  <span style="color:#008000"># 清空画布</span>
-plt.plot([1, 2, 3], [4, 5, 6])
-plt.xlabel(<span style="color:#a31515">&#34;横轴&#34;</span>,fontproperties=myfont)
-plt.ylabel(<span style="color:#a31515">&#34;纵轴&#34;</span>,fontproperties=myfont)
-plt.title(<span style="color:#a31515">&#34;pythoner.com&#34;</span>,fontproperties=myfont)
-plt.legend([<span style="color:#a31515">&#39;图例&#39;</span>],prop=myfont)
-plt.show()
+<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">clf</span>()  <span style="color:#177500"># 清空画布</span>
+<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">plot</span>([<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">3</span>], [<span style="color:#1c01ce">4</span>, <span style="color:#1c01ce">5</span>, <span style="color:#1c01ce">6</span>])
+<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">xlabel</span>(<span style="color:#c41a16">&#34;横轴&#34;</span>,<span style="color:#000">fontproperties</span><span style="color:#000">=</span><span style="color:#000">myfont</span>)
+<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">ylabel</span>(<span style="color:#c41a16">&#34;纵轴&#34;</span>,<span style="color:#000">fontproperties</span><span style="color:#000">=</span><span style="color:#000">myfont</span>)
+<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">title</span>(<span style="color:#c41a16">&#34;pythoner.com&#34;</span>,<span style="color:#000">fontproperties</span><span style="color:#000">=</span><span style="color:#000">myfont</span>)
+<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">legend</span>([<span style="color:#c41a16">&#39;图例&#39;</span>],<span style="color:#000">prop</span><span style="color:#000">=</span><span style="color:#000">myfont</span>)
+<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">show</span>()
 </code></pre></div>
     </div>
     <footer class="post-footer">
@@ -295,12 +295,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -312,16 +313,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

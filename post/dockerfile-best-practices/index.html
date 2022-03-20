@@ -162,7 +162,7 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1493 字 ~3分钟</span>
+<span class="leancloud-visitors-count">1515 字 ~4分钟</span>
 </span>
       </div>
     </header>
@@ -170,30 +170,30 @@
     <p>记录spring boot和rust项目的Dockerfile的最佳实践.</p>
 <h2 id="spring-boot应用dockerfile">spring boot应用Dockerfile</h2>
 <p>spring.io提供了一个boot应用的<a href="https://spring.io/guides/topicals/spring-boot-docker">Dockerfile</a>指导.
-不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般项目中显然不规范.</p>
+不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般企业项目中这么做显然不规范,直接使用maven基础镜像更合理.</p>
 <p>Dockerfile的最终版:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#008000"># syntax=docker/Dockerfile:experimental</span><span style="">
-</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> maven:3-jdk-8-alpine as build</span><span style="">
-</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /workspace/app</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> pom.xml .<span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> src src<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> --mount=type=cache,target=/root/.m2  mvn package -DskipTests<span style="">
-</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># app base image</span><span style="">
-</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> openjdk:8-jdk-alpine</span><span style="">
-</span><span style=""></span><span style="color:#00f">VOLUME</span><span style="color:#a31515"> /tmp</span><span style="">
-</span><span style=""></span><span style="color:#00f">ARG</span> BUILD=/workspace/app/target<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /app</span><span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> --from=build <span style="color:#a31515">${</span>BUILD<span style="color:#a31515">}</span>/*.jar .<span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> jar -xf  ./*.jar<span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> rm ./*.jar<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#00f">ENTRYPOINT</span> [<span style="color:#a31515">&#34;java&#34;</span>,<span style="color:#a31515">&#34;-cp&#34;</span>,<span style="color:#a31515">&#34;/app&#34;</span>,<span style="color:#a31515">&#34;org.springframework.boot.loader.JarLauncher&#34;</span>]<span style="">
-</span><span style="">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#177500"># syntax=docker/Dockerfile:experimental</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">FROM</span><span style="color:#c41a16"> maven:3-jdk-8-alpine as build</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">WORKDIR</span><span style="color:#c41a16"> /workspace/app</span><span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> pom.xml .<span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> src src<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> --mount<span style="color:#000">=</span><span style="color:#000">type</span><span style="color:#000">=</span>cache,target<span style="color:#000">=</span>/root/.m2  mvn package -DskipTests<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># app base image</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">FROM</span><span style="color:#c41a16"> openjdk:8-jdk-alpine</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">VOLUME</span><span style="color:#c41a16"> /tmp</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">ARG</span> <span style="color:#000">BUILD</span><span style="color:#000">=</span>/workspace/app/target<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">WORKDIR</span><span style="color:#c41a16"> /app</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> --from<span style="color:#000">=</span>build <span style="color:#c41a16">${</span><span style="color:#000">BUILD</span><span style="color:#c41a16">}</span>/*.jar .<span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> jar -xf  ./*.jar<span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> rm ./*.jar<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">ENTRYPOINT</span> [<span style="color:#c41a16">&#34;java&#34;</span>,<span style="color:#c41a16">&#34;-cp&#34;</span>,<span style="color:#c41a16">&#34;/app&#34;</span>,<span style="color:#c41a16">&#34;org.springframework.boot.loader.JarLauncher&#34;</span>]<span style="color:#000">
+</span><span style="color:#000">
 </span></code></pre></div><p>要点:</p>
 <ol>
 <li><code># syntax=docker/Dockerfile:experimental</code>表示启用docker实验特性BuildKit的mount cache功能,这样可以利用maven lib的cache提高镜像构建速度. 可以搜索docker BuildKit了解.
@@ -204,58 +204,58 @@
 <li>注意<code>java -cp /app</code>中的classpath:<code>/app</code> 一定是绝对路径,否则java找不到main class,报错:<code>Error: Could not find or load main class org.springframework.boot.loader.JarLauncher</code></li>
 </ol>
 <h2 id="rust应用dockerfile">rust应用Dockerfile</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#008000"># pull the latest version of Rust</span><span style="">
-</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> rust:latest AS builder</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># create a new empty shell project</span><span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> USER=root cargo new --bin prj<span style="">
-</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /prj</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># copy over your manifests</span><span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> ./Cargo.lock ./Cargo.toml ./<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># change the crate.io source</span><span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> ./config $CARGO_HOME/<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># this build step will cache your dependencies</span><span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> cargo build --release<span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> rm -r src/*<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># copy your source files to WORKDIR/src</span><span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> ./src ./src<span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> ./static ./static<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># build for release, note! the Cargo.toml package name in deps is _, not -</span><span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> rm ./target/release/deps/rs_notes*<span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> cargo build --release<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#00f">RUN</span> mv ./target/release/rs-notes .<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000">## 2 stage build</span><span style="">
-</span><span style=""></span><span style="color:#008000"># our final base</span><span style="">
-</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> debian:stretch-slim AS app</span><span style="">
-</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># for connecting to postgres and TLS hosts</span><span style="">
-</span><span style=""></span><span style="color:#008000"># RUN apt update -y &amp;&amp; apt install -y libpq-dev openssl libssl1.0-dev ca-certificates</span><span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># copy the build artifact and static resources from the build stage</span><span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> --from=builder /prj/rs-notes ./<span style="">
-</span><span style=""></span><span style="color:#00f">COPY</span> --from=builder /prj/static ./static<span style="">
-</span><span style="">
-</span><span style=""></span><span style="color:#008000"># set the startup command to run your binary</span><span style="">
-</span><span style=""></span><span style="color:#00f">CMD</span> [<span style="color:#a31515">&#34;./rs-notes&#34;</span>]<span style="">
-</span><span style="">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#177500"># pull the latest version of Rust</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">FROM</span><span style="color:#c41a16"> rust:latest AS builder</span><span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># create a new empty shell project</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> <span style="color:#000">USER</span><span style="color:#000">=</span>root cargo new --bin prj<span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">WORKDIR</span><span style="color:#c41a16"> /prj</span><span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># copy over your manifests</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> ./Cargo.lock ./Cargo.toml ./<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># change the crate.io source</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> ./config <span style="color:#000">$CARGO_HOME</span>/<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># this build step will cache your dependencies</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> cargo build --release<span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> rm -r src/*<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># copy your source files to WORKDIR/src</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> ./src ./src<span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> ./static ./static<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># build for release, note! the Cargo.toml package name in deps is _, not -</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> rm ./target/release/deps/rs_notes*<span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> cargo build --release<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">RUN</span> mv ./target/release/rs-notes .<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500">## 2 stage build</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># our final base</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">FROM</span><span style="color:#c41a16"> debian:stretch-slim AS app</span><span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># for connecting to postgres and TLS hosts</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># RUN apt update -y &amp;&amp; apt install -y libpq-dev openssl libssl1.0-dev ca-certificates</span><span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># copy the build artifact and static resources from the build stage</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> --from<span style="color:#000">=</span>builder /prj/rs-notes ./<span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">COPY</span> --from<span style="color:#000">=</span>builder /prj/static ./static<span style="color:#000">
+</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#177500"># set the startup command to run your binary</span><span style="color:#000">
+</span><span style="color:#000"></span><span style="color:#a90d91">CMD</span> [<span style="color:#c41a16">&#34;./rs-notes&#34;</span>]<span style="color:#000">
+</span><span style="color:#000">
 </span></code></pre></div><p>要点:</p>
 <ol>
 <li>如果使用scratch或者alpine镜像,那么需要将编译目标设置为<code>MUSL</code>,网络上有教程,个人感觉不需要.rust应用使用debian-slim基本在60M左右,只有spring boot应用镜像的一半大小.</li>
 <li>在国内由于网络问题,所以修改了cargo的crate.io mirror地址:<code>COPY ./config $CARGO_HOME/</code>. config内容如下:</li>
 </ol>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#00f">[source.crates-io]</span>
-registry = <span style="color:#a31515">&#34;https://github.com/rust-lang/crates.io-index&#34;</span>
-replace-with = <span style="color:#a31515">&#39;ustc&#39;</span>
-<span style="color:#00f">[source.ustc]</span>
-registry = <span style="color:#a31515">&#34;git://mirrors.ustc.edu.cn/crates.io-index&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a90d91">[source.crates-io]</span>
+<span style="color:#836c28">registry</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;https://github.com/rust-lang/crates.io-index&#34;</span>
+<span style="color:#836c28">replace-with</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;ustc&#39;</span>
+<span style="color:#a90d91">[source.ustc]</span>
+<span style="color:#836c28">registry</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;git://mirrors.ustc.edu.cn/crates.io-index&#34;</span>
 
 </code></pre></div><ol start="3">
 <li>build中使用了cargo缓存,即先将项目Cargo.toml和Cargo.lock复制到一个空项目中编译,然后再将源码复制进去编译.</li>
@@ -372,12 +372,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -389,16 +390,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

@@ -17,7 +17,20 @@
       <pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/java-lambda/</guid>
-      <description>问题 Java是OOP语言,使用对象封装。由于函数不是一等公民,无法在方法中传递函数/方法。 在Java 8之前,使用匿名类表示行为： // 监听器接口 public interface ActionListener { void actionPerformed(ActionEvent e); } // 使用匿名类传递一个行为 button.addActionListener(new ActionListener(){ public void actionPerformed(Event e){ System.out.println(&amp;#34;button clicked&amp;#34;); } }); 上面的代码主要的问题在于addActio</description>
+      <description>&lt;h3 id=&#34;问题&#34;&gt;问题&lt;/h3&gt;
+&lt;p&gt;Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;// 监听器接口
+&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;ActionListener&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;actionPerformed&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ActionEvent&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#177500&#34;&gt;// 使用匿名类传递一个行为
+&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;button&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;addActionListener&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ActionListener&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(){&lt;/span&gt;
+    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;actionPerformed&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Event&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;){&lt;/span&gt;
+        &lt;span style=&#34;color:#000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;button clicked&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;});&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

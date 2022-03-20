@@ -17,8 +17,11 @@
       <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
       
       <guid>https://zhimoe.github.io/post/understanding-gradle-buildscript/</guid>
-      <description>&lt;p&gt;在看这个之前，希望你有用ant或者maven的使用经验，还有，对groovy的语法有一个简单的了解，不懂也没关系，下面会介绍。
-理解gradle文件的前提是理解一个重要的groovy概念:closure&lt;/p&gt;</description>
+      <description>&lt;p&gt;在看这个之前,希望你有用ant或者maven的使用经验,还有,对groovy的语法有一个简单的了解,不懂也没关系,下面会介绍.
+理解gradle文件的前提是理解一个重要的groovy概念:closure&lt;/p&gt;
+&lt;h4 id=&#34;closure&#34;&gt;closure&lt;/h4&gt;
+&lt;p&gt;一个closure是一个定义在groovy文件中的{}代码块,这个代码块类似js中的匿名函数,它可以被赋值给变量,可以被调用,可以接收参数,还可以作为参数传递给别的函数.&lt;/p&gt;
+&lt;p&gt;closure中最重要的两个概念是委托对象和作为参数传递的语法格式（理解gradle文件很重要）.&lt;/p&gt;</description>
     </item>
     
   </channel>

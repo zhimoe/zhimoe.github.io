@@ -191,7 +191,7 @@ ENTRYPOINT是容器执行入口,CMD是参数设置.</p>
 由于ubuntu镜像设置了默认CMD: <code>CMD [&quot;bash&quot;]</code>,所以<code>docker run -i -t ubuntu</code>和<code>docker run -i -t ubuntu bash</code>是完全一样的效果.</p>
 <p>所以到此,可以总结: ENTRYPOINT 是容器的执行入口,CMD是参数设置,不过参数也可以是bash中的可执行命令(例如,<code>CMD [&quot;echo&quot;,&quot;hello&quot;]</code>,实际执行<code> /bin/sh -c &quot;echo hello&quot;</code>).</p>
 <p>ENTRYPOINT和CMD的搭配可以实现将容器作为一个可执行文件启动,这个特性也是我们日常使用docker的主要目的.例如在Dockerfile中设置:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#00f">ENTRYPOINT</span> [<span style="color:#a31515">&#34;/bin/cat&#34;</span>]<span style="">
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#a90d91">ENTRYPOINT</span> [<span style="color:#c41a16">&#34;/bin/cat&#34;</span>]<span style="color:#000">
 </span></code></pre></div><p>运行<code>docker run cat-img /etc/passwd</code>,<code>/etc/passwd</code> 是cmd, 实际执行的是<code>/bin/cat /etc/passwd</code>. 恭喜你,得到一个cat程序,假设你安装了一个linux系统,里面没有cat命令,cat-img镜像就可以实现你想要的功能.</p>
 <p>再例如你有个redis镜像,与其运行 <code>docker run redis-img redis -H srv-host -u toto get key</code>,
 不如设置<code>ENTRYPOINT [&quot;redis&quot;, &quot;-H&quot;, &quot;srv-host&quot;, &quot;-u&quot;, &quot;toto&quot;]</code> 然后运行<code>docker run redis-img get key</code>.</p>
@@ -307,12 +307,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -324,16 +325,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

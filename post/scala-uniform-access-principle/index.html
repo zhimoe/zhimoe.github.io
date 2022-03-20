@@ -175,6 +175,7 @@
 <p>&ldquo;It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures.&rdquo; —Alan Perlis</p>
 </blockquote>
 <p>尽可能的减少语法的规则,这种语法特点在Scala上面也有体现.</p>
+<!-- raw HTML omitted -->
 <h2 id="uniform-access-principle">uniform access principle</h2>
 <p>scala 中统一访问原则将class的方法和属性访问统一,都是通过<code>obj.mbr</code>访问.
 这么做的好处是代码更加统一,而且重构更加方便.</p>
@@ -184,17 +185,17 @@ Invocations of parameter less functions may not supply parentheses.
 This supports the uniform access principle, which enables the def to be changed into a val without
 requiring a change to client code.</p>
 </blockquote>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">class</span> <span style="color:#2b91af">Person</span> {
-    <span style="color:#00f">private</span> <span style="color:#00f">var</span> privateName <span style="color:#00f">=</span> <span style="color:#a31515">&#34;&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">class</span> <span style="color:#3f6e75">Person</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">private</span> <span style="color:#a90d91">var</span> <span style="color:#000">privateName</span> <span style="color:#a90d91">=</span> <span style="color:#c41a16">&#34;&#34;</span>
     
-    <span style="color:#00f">def</span> name <span style="color:#00f">=</span> privateName
+    <span style="color:#a90d91">def</span> <span style="color:#000">name</span> <span style="color:#a90d91">=</span> <span style="color:#000">privateName</span>
     
-    <span style="color:#00f">def</span> name_=(value<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>) <span style="color:#00f">=</span> privateName <span style="color:#00f">=</span> value
-}
+    <span style="color:#a90d91">def</span> <span style="color:#000">name_=</span><span style="color:#000">(</span><span style="color:#000">value</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">String</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">privateName</span> <span style="color:#a90d91">=</span> <span style="color:#000">value</span>
+<span style="color:#000">}</span>
 
-<span style="color:#00f">val</span> john <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="color:#2b91af">Person</span>
-john.name <span style="color:#00f">=</span> <span style="color:#a31515">&#34;John Doe&#34;</span>
-println(john.name)
+<span style="color:#a90d91">val</span> <span style="color:#000">john</span> <span style="color:#a90d91">=</span> <span style="color:#a90d91">new</span> <span style="color:#3f6e75">Person</span>
+<span style="color:#000">john</span><span style="color:#000">.</span><span style="color:#000">name</span> <span style="color:#a90d91">=</span> <span style="color:#c41a16">&#34;John Doe&#34;</span>
+<span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#000">john</span><span style="color:#000">.</span><span style="color:#000">name</span><span style="color:#000">)</span>
 
 </code></pre></div><p>统一也体现在集合访问形式上,在Scala中,Map,List,Array的元素访问都是通过<code>coll(ki)</code>形式. <code>ki</code>表示key或者index.个人非常喜欢这种统一.</p>
     </div>
@@ -304,12 +305,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -321,16 +323,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

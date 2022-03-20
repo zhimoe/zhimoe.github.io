@@ -17,7 +17,19 @@
       <pubDate>Sun, 31 Jan 2021 21:45:45 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</guid>
-      <description>python在看似简单的语法中，有很多tricks。 tricks python的dict中关于equal和hash计算方式会有意外的效果 [&amp;#39;no&amp;#39;, &amp;#39;yes&amp;#39;][True] # output? {True: &amp;#39;yes&amp;#39;, 1: &amp;#39;no&amp;#39;, 1.0: &amp;#39;maybe&amp;#39;} # output? “布尔类型是整数类型的子类型，布尔值在几乎所有环境中的行为都类似于值 0 和 1，但在转换为字符串</description>
+      <description>&lt;h2 id=&#34;tricks&#34;&gt;tricks&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;python的dict中关于equal和hash计算方式会有意外的效果&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;[&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;no&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#5b269a&#34;&gt;True&lt;/span&gt;] &lt;span style=&#34;color:#177500&#34;&gt;# output?&lt;/span&gt;
+{&lt;span style=&#34;color:#5b269a&#34;&gt;True&lt;/span&gt;: &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;no&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;1.0&lt;/span&gt;: &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;maybe&amp;#39;&lt;/span&gt;} &lt;span style=&#34;color:#177500&#34;&gt;# output?&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;“布尔类型是整数类型的子类型,布尔值在几乎所有环境中的行为都类似于值 0 和 1,但在转换为字符串时,分别得到的是字符串 False 或 True.”&lt;br&gt;
+&amp;ndash; The Standard Type Hierarchy&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;由于True,1, 1.0的__eq__和__hash__都一样,所以出现了神奇的结果.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -26,7 +38,9 @@
       <pubDate>Sun, 25 Oct 2020 20:01:27 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/spell-correct/</guid>
-      <description>谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文How to Write a Spelling Corrector。 上面的链接已经是16年更新过了，程序也更新到了python3. 中文版的翻译 如何实现一个拼写纠正器 还是基于07年版本的。 博文最有意思的地方</description>
+      <description>&lt;p&gt;谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文&lt;a href=&#34;https://norvig.com/spell-correct.html&#34;&gt;How to Write a Spelling Corrector&lt;/a&gt;.
+上面的链接已经是16年更新过了,程序也更新到了python3.
+中文版的翻译 &lt;a href=&#34;https://blog.csdn.net/suixinsuiyuan33/article/details/69215082&#34;&gt;如何实现一个拼写纠正器&lt;/a&gt; 还是基于07年版本的.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,8 +49,40 @@
       <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://zhimoe.github.io/post/mdict-web/</guid>
-      <description>&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典。特别适合部署在内网中学习使用或者给孩子学习使用。
-python版本增加了一个机器学习模型翻译。rust版本也有模型，但是还没来得及加。&lt;/p&gt;</description>
+      <description>&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
+python版本增加了一个机器学习模型翻译.rust版本也有模型,但是还没来得及加.&lt;/p&gt;
+&lt;h3 id=&#34;mdict-py&#34;&gt;mdict-py&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhimoe/mdict-py&#34;&gt;mdict-py源码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.&lt;/p&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;自动识别中英文选择对应mdx词典,目前英文词典包含牛津8和朗文4,中文词典包含汉语词典3&lt;/li&gt;
+&lt;li&gt;英文尝试拼写纠错功能,动词时态纠错&lt;/li&gt;
+&lt;li&gt;如果配置了中文会尝试搜索朗文的例句,模糊搜索,对于有英语基础的同学很有用&lt;/li&gt;
+&lt;li&gt;如果配置了AI模型,会使用机器学习模型翻译,翻译结果比较粗糙,但是可以参考&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python 4道笔试题</title>
+      <link>https://zhimoe.github.io/post/python-interview-questions/</link>
+      <pubDate>Thu, 04 Jun 2020 21:31:01 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/python-interview-questions/</guid>
+      <description>&lt;p&gt;4道常见的python面试题和解答,以及一些python陷阱的链接.&lt;/p&gt;
+&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;题目1&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    &lt;span style=&#34;color:#a90d91&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;change&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;):
+        &lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;[&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;4&lt;/span&gt;
+        &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;
+        
+        
+    &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;3&lt;/span&gt;]
+    &lt;span style=&#34;color:#a90d91&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;change&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;))
+    &lt;span style=&#34;color:#a90d91&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;)    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -45,7 +91,18 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
       <pubDate>Thu, 04 Jun 2020 21:30:31 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</guid>
-      <description>&lt;p&gt;在文件读取的时候，会遇到非法转义字符，导致文件按行读取失败。此时可以通过忽略转义字符来解决。本文记录了scala和python的方法。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在文件读取的时候,会遇到非法转义字符,导致文件按行读取失败.此时可以通过忽略转义字符来解决.本文记录了scala和python的方法.&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;有50G的服务器日志,拆分为几千个txt文件,编码是utf8,使用scala和python按行处理：&lt;/p&gt;
+&lt;h3 id=&#34;scala&#34;&gt;scala&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Array&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;])&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Unit&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
+  &lt;span style=&#34;color:#a90d91&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;line&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Source&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;fromFile&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;./txt1.log&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;UTF8&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;getLines&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;())&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#a90d91&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;line&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;contains&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;ABC&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
+      &lt;span style=&#34;color:#177500&#34;&gt;//do something      
+&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+  &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -54,7 +111,27 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
       <pubDate>Fri, 01 May 2020 19:18:05 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</guid>
-      <description>&lt;p&gt;很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.&lt;/p&gt;</description>
+      <description>&lt;p&gt;很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.
+&lt;a href=&#34;https://www.zhihu.com/question/25404709/answer/67672003&#34;&gt;zhihu.com&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;# https://www.zhihu.com/question/25404709/answer/67672003&lt;/span&gt;
+&lt;span style=&#34;color:#a90d91&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;matplotlib.font_manager&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;fm&lt;/span&gt;
+&lt;span style=&#34;color:#177500&#34;&gt;# 微软雅黑,如果需要宋体,可以用simsun.ttc&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;fm&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;FontProperties&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;fname&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;C:/Windows/Fonts/msyh.ttc&amp;#39;&lt;/span&gt;)
+&lt;span style=&#34;color:#177500&#34;&gt;# Linux字体在&amp;#34;/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc&amp;#34;, &lt;/span&gt;
+&lt;span style=&#34;color:#177500&#34;&gt;# 需要先安装字体&amp;#34;&amp;gt;sudo apt install fonts-noto-cjk -y&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#177500&#34;&gt;# MacOS中文字体文件在&amp;#34;/System/Library/Fonts/PingFang.ttc&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#177500&#34;&gt;# Win10,Linux已测试,MacOS未验证&lt;/span&gt;
+
+&lt;span style=&#34;color:#a90d91&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;
+
+&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;clf&lt;/span&gt;()  &lt;span style=&#34;color:#177500&#34;&gt;# 清空画布&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;plot&lt;/span&gt;([&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;3&lt;/span&gt;], [&lt;span style=&#34;color:#1c01ce&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;6&lt;/span&gt;])
+&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;xlabel&lt;/span&gt;(&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;横轴&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#000&#34;&gt;fontproperties&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt;)
+&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ylabel&lt;/span&gt;(&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;纵轴&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#000&#34;&gt;fontproperties&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt;)
+&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;title&lt;/span&gt;(&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;pythoner.com&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#000&#34;&gt;fontproperties&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt;)
+&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;legend&lt;/span&gt;([&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;图例&amp;#39;&lt;/span&gt;],&lt;span style=&#34;color:#000&#34;&gt;prop&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt;)
+&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;show&lt;/span&gt;()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -63,7 +140,12 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
       <pubDate>Thu, 01 Nov 2018 19:04:32 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</guid>
-      <description>原文 installing new python package from jupyter notebook 笔记 在pycharm写代码中如果使用到新的package，例如numpy，只需要输入import numpy 然后ALT+ENTER在提示中选择install new package即可。 在notebook中，网上的教程都说是!pip install numpy. 但是</description>
+      <description>&lt;p&gt;如何正确地在notebook中安装lib package&lt;/p&gt;
+&lt;h3 id=&#34;原文&#34;&gt;原文&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://jakevdp.github.io/blog/2017/12/05/installing-python-packages-from-jupyter/&#34;&gt;installing new python package from jupyter notebook&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;笔记&#34;&gt;笔记&lt;/h3&gt;
+&lt;p&gt;在pycharm写代码中如果使用到新的package,例如&lt;code&gt;numpy&lt;/code&gt;,只需要输入&lt;code&gt;import numpy&lt;/code&gt; 然后ALT+ENTER在提示中选择install new package即可.&lt;/p&gt;
+&lt;p&gt;在notebook中,网上的教程都说是&lt;code&gt;!pip install numpy&lt;/code&gt;. 但是这个可能有坑.究其原因是因为:&lt;/p&gt;</description>
     </item>
     
   </channel>

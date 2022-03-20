@@ -167,632 +167,632 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <h2 id="clojure-入门">clojure 入门</h2>
-<p>这份笔记试图打造最强的clojure小抄,keep refactoring it&hellip;</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#00f">ns </span>clj-notes.core
-  (<span style="color:#a31515">:gen-class</span>))
-<span style="color:#008000">;:gen-class generate java class file</span>
-
-<span style="color:#008000">;Parameter is variable in the declaration of function.</span>
-<span style="color:#008000">;Argument is the actual value of this variable that gets passed to function.</span>
-<span style="color:#008000">;</span>
-<span style="color:#008000">;install leiningen:</span>
-<span style="color:#008000">;put lein.bat in your PATH</span>
-<span style="color:#008000">;open cmder,run: lein repl</span>
-<span style="color:#008000">;start repl,use exit,(exit),(quit) or ctrl+d to quit repl</span>
-(println <span style="color:#a31515">&#34;hello clojure&#34;</span>)
-
-<span style="color:#008000">;Symbols are used to bind names to values</span>
-<span style="color:#008000">;&#39; will prevent a form from being evaluated</span>
-<span style="color:#008000">;&#39;() same as (quote ())</span>
-
-<span style="color:#008000">;def global variable</span>
-<span style="color:#008000">;let local variable binding</span>
-(<span style="color:#00f">def </span>object <span style="color:#a31515">&#34;light&#34;</span>)
-(println object)
-
-(<span style="color:#00f">let </span>[x 10
-      y 20
-      z 30]
-  (+ x y z))
-<span style="color:#008000">;=&gt; 60</span>
-
-<span style="color:#008000">;data collection</span>
-<span style="color:#008000">;seq is abstract for list vector array</span>
-<span style="color:#008000">;map</span>
-(<span style="color:#00f">def </span>dict {<span style="color:#a31515">:k1</span> <span style="color:#a31515">&#34;v1&#34;</span> <span style="color:#a31515">:k2</span> <span style="color:#a31515">&#34;v2&#34;</span>})
-<span style="color:#008000">;keyword as function</span>
-(<span style="color:#a31515">:k1</span> dict)                                                  <span style="color:#008000">;return v1</span>
-<span style="color:#008000">;map as function</span>
-(dict <span style="color:#a31515">:k1</span>)                                                  <span style="color:#008000">;return v1</span>
-(<span style="color:#00f">let </span>[v (dict <span style="color:#a31515">:k1</span>)]
-  (println v))
-
-<span style="color:#008000">;also you can use get on seq or map</span>
-(get {<span style="color:#a31515">:a</span> 1 <span style="color:#a31515">:b</span> 2} <span style="color:#a31515">:b</span>)
-<span style="color:#008000">;=&gt; 2</span>
-<span style="color:#008000">;clojure.core/seq is a function that produces a sequence over the given argument. </span>
-<span style="color:#008000">;Data types that clojure.core/seq can produce a sequence over are called seqable:</span>
-<span style="color:#008000">;</span>
-<span style="color:#008000">;Clojure collections</span>
-<span style="color:#008000">;Java maps</span>
-<span style="color:#008000">;All iterable types (types that implement java.util.Iterable)</span>
-<span style="color:#008000">;Java collections (java.util.Set, java.util.List, etc)</span>
-<span style="color:#008000">;Java arrays</span>
-<span style="color:#008000">;All types that implement java.lang.CharSequence interface, including Java strings</span>
-<span style="color:#008000">;All types that implement clojure.lang.Seqable interface</span>
-<span style="color:#008000">;nil</span>
-
-<span style="color:#008000">;function for seq or collection</span>
-<span style="color:#008000">;=</span>
-<span style="color:#008000">;count</span>
-<span style="color:#008000">;conj</span>
-<span style="color:#008000">;empty</span>
-<span style="color:#008000">;seq</span>
-<span style="color:#008000">;first</span>
-<span style="color:#008000">;rest</span>
-<span style="color:#008000">;next</span>
-<span style="color:#008000">;count</span>
-<span style="color:#008000">;counted?</span>
-<span style="color:#008000">;conj</span>
-<span style="color:#008000">;get</span>
-<span style="color:#008000">;assoc</span>
-
-
-<span style="color:#008000">;defn 定义函数</span>
-<span style="color:#008000">;defn- 定义ns内私有函数</span>
-(<span style="color:#00f">defn </span>f
-  <span style="color:#a31515">&#34;the second line is doc-string&#34;</span>
-  {<span style="color:#a31515">:added</span>  <span style="color:#a31515">&#34;1.2&#34;</span>                                            <span style="color:#008000">;this is attr-map</span>
-   <span style="color:#a31515">:static</span> true}
-  [param]
-  (print <span style="color:#a31515">&#34;hello &#34;</span> param))
-
-(meta (<span style="color:#00f">var </span>f))
-<span style="color:#008000">;#&#39; is the reader macro for var and works the exactly same</span>
-(meta #<span style="color:#a31515">&#39;f</span>)
-
-<span style="color:#008000">;fn create a function</span>
-(<span style="color:#00f">def </span>f (<span style="color:#00f">fn </span>[] (println <span style="color:#a31515">&#34;this is from fn function&#34;</span>)))
-<span style="color:#008000">;#() is the shortcut for fn</span>
-(<span style="color:#00f">def </span>plus-one #(+ 1 %))
-<span style="color:#008000">;% will be replaced with arguments passed to the function</span>
-<span style="color:#008000">;%1 is for the first argument, %2 is for the second and so on</span>
-
-(<span style="color:#00f">defn </span>des
-  [{k1 <span style="color:#a31515">:k1</span>}]                                                <span style="color:#008000">;get :k1 value from argument (map) and binding it to k1(parameter)</span>
-  (println <span style="color:#a31515">&#34;destructing in map&#34;</span> k1))
-
-(des dict)                                                  <span style="color:#008000">;destructing in map v1</span>
-<span style="color:#008000">;key don&#39;t have to be keyword</span>
-(<span style="color:#00f">defn </span>currency-of
-  [{currency <span style="color:#a31515">&#34;currency&#34;</span>}]
-  currency)
-(<span style="color:#00f">defn </span>currency-of
-  [{currency <span style="color:#a31515">&#39;currency</span>}]
-  currency)
-<span style="color:#008000">;if want to destructing multi key,use :keys, in this case,parameter name(currency amount) </span>
-<span style="color:#008000">;must same as arguments&#39;s keys(:currency :amount),can not use string as key</span>
-(<span style="color:#00f">defn </span>currency-of
-  [{<span style="color:#a31515">:keys</span> [currency amount]}]
-  (* currency amount))
-
-(currency-of {<span style="color:#a31515">:currency</span> <span style="color:#a31515">&#34;RMB&#34;</span> <span style="color:#a31515">:amount</span> 100000})              <span style="color:#008000">;ok</span>
-(currency-of {<span style="color:#a31515">&#34;currency&#34;</span> <span style="color:#a31515">&#34;RMB&#34;</span> <span style="color:#a31515">&#34;amount&#34;</span> 100000})            <span style="color:#008000">;currency will be nil,you will need use :strs or syms</span>
-
-(<span style="color:#00f">defn </span>currency-strs
-  [{<span style="color:#a31515">:strs</span> [currency amount]}]
-  currency)
-(currency-strs {<span style="color:#a31515">&#34;currency&#34;</span> <span style="color:#a31515">&#34;RMB&#34;</span> <span style="color:#a31515">&#34;amount&#34;</span> 100000})          <span style="color:#008000">;ok</span>
-
-
-(<span style="color:#00f">defn </span>currency-syms
-  [{<span style="color:#a31515">:syms</span> [currency amount]}]
-  currency)
-(currency-syms {<span style="color:#a31515">&#39;currency</span> <span style="color:#a31515">&#34;CNY&#34;</span> <span style="color:#a31515">&#39;amount</span> 100000})            <span style="color:#008000">;ok</span>
-
-<span style="color:#008000">;use :or to give a default value for parameter</span>
-(<span style="color:#00f">defn </span>currency-or
-  [{<span style="color:#a31515">:keys</span> [currency amount] <span style="color:#a31515">:or</span> {currency <span style="color:#a31515">&#34;USD&#34;</span>}}]
-  currency)
-(currency-or {<span style="color:#a31515">:amount</span> 100000})                              <span style="color:#008000">;=&gt; &#34;USD&#34;</span>
-
-<span style="color:#008000">;use &amp; for Variadic Functions parameters</span>
-(<span style="color:#00f">defn </span>log
-  [message &amp; args]
-  (println <span style="color:#a31515">&#34;args: &#34;</span> args))
-
-<span style="color:#008000">;named params , achieved by Variadic Functions destructing</span>
-(<span style="color:#00f">defn </span>job-info
-  [&amp; {<span style="color:#a31515">:keys</span> [name job income] <span style="color:#a31515">:or</span> {job <span style="color:#a31515">&#34;unemployed&#34;</span> income <span style="color:#a31515">&#34;$0.00&#34;</span>}}]
-  (<span style="color:#00f">if </span>name
-    [name job income]
-    (println <span style="color:#a31515">&#34;No name specified&#34;</span>)))
-
-<span style="color:#008000">;cation! arguments to job-info is not a map</span>
-(job-info <span style="color:#a31515">:name</span> <span style="color:#a31515">&#34;Robert&#34;</span> <span style="color:#a31515">:job</span> <span style="color:#a31515">&#34;Engineer&#34;</span>)
-<span style="color:#008000">;[&#34;Robert&#34; &#34;Engineer&#34; &#34;$0.00&#34;]</span>
-<span style="color:#008000">;Without the use of a variadic argument list, </span>
-<span style="color:#008000">;you would have to call the function with a single map argument such as</span>
-(job-info {<span style="color:#a31515">:name</span> <span style="color:#a31515">&#34;Robert&#34;</span> <span style="color:#a31515">:job</span> <span style="color:#a31515">&#34;Engineer&#34;</span>})
-
-<span style="color:#008000">;destructuring example</span>
-<span style="color:#008000">;https://gist.github.com/john2x/e1dca953548bfdfb9844</span>
-(<span style="color:#00f">def </span>my-vec [1 2 3])
-
-(<span style="color:#00f">let </span>[[a b c d] my-vec]
-  (println a b c d))
-<span style="color:#008000">;1 2 3 nil</span>
-(<span style="color:#00f">let </span>[[a b &amp; the-rest] my-vec]
-  (println <span style="color:#a31515">&#34;a=&#34;</span> a <span style="color:#a31515">&#34;b=&#34;</span> b <span style="color:#a31515">&#34;the-rest=&#34;</span> the-rest))
-<span style="color:#008000">;a= 1 b= 2 the-rest= (3)</span>
-(<span style="color:#00f">let </span>[[<span style="color:#a31515">:as</span> all] my-vec]
-  (println all))
-<span style="color:#008000">;[1 2 3]</span>
-(<span style="color:#00f">let </span>[[a <span style="color:#a31515">:as</span> all] my-vec]
-  (println a all))
-<span style="color:#008000">;1 [1 2 3]</span>
-(<span style="color:#00f">let </span>[[a b &amp; the-rest <span style="color:#a31515">:as</span> all] my-vec]
-  (println a b the-rest all))
-<span style="color:#008000">;1 2 (3) [1 2 3]</span>
-<span style="color:#008000">;note: &amp; the-rest convert vector to list,</span>
-<span style="color:#008000">;but :as preserves them (as a list, or as a vector)</span>
-(<span style="color:#00f">def </span>my-vec [<span style="color:#a31515">&#34;first&#34;</span> <span style="color:#a31515">&#34;second&#34;</span>])
-(<span style="color:#00f">let </span>[{a 0 b 1} my-vec]
-  (println a b))                                            <span style="color:#008000">;=&gt; &#34;first second&#34;</span>
-
-<span style="color:#008000">;optional arguments to functions</span>
-(<span style="color:#00f">defn </span>foo [a b &amp; more-args]
-  (println a b more-args))
-(foo <span style="color:#a31515">:a</span> <span style="color:#a31515">:b</span>)                                                 <span style="color:#008000">;; =&gt; :a :b nil</span>
-(foo <span style="color:#a31515">:a</span> <span style="color:#a31515">:b</span> <span style="color:#a31515">:x</span>)                                              <span style="color:#008000">;; =&gt; :a :b (:x)</span>
-(foo <span style="color:#a31515">:a</span> <span style="color:#a31515">:b</span> <span style="color:#a31515">:x</span> <span style="color:#a31515">:y</span> <span style="color:#a31515">:z</span>)                                        <span style="color:#008000">;; =&gt; :a :b (:x :y :z)</span>
-
-<span style="color:#008000">;map destructuring</span>
-(<span style="color:#00f">def </span>my-hashmap {<span style="color:#a31515">:a</span> <span style="color:#a31515">&#34;A&#34;</span> <span style="color:#a31515">:b</span> <span style="color:#a31515">&#34;B&#34;</span> <span style="color:#a31515">:c</span> <span style="color:#a31515">&#34;C&#34;</span> <span style="color:#a31515">:d</span> <span style="color:#a31515">&#34;D&#34;</span>})
-(<span style="color:#00f">def </span>my-nested-hashmap {<span style="color:#a31515">:a</span> <span style="color:#a31515">&#34;A&#34;</span> <span style="color:#a31515">:b</span> <span style="color:#a31515">&#34;B&#34;</span> <span style="color:#a31515">:c</span> <span style="color:#a31515">&#34;C&#34;</span> <span style="color:#a31515">:d</span> <span style="color:#a31515">&#34;D&#34;</span> <span style="color:#a31515">:q</span> {<span style="color:#a31515">:x</span> <span style="color:#a31515">&#34;X&#34;</span> <span style="color:#a31515">:y</span> <span style="color:#a31515">&#34;Y&#34;</span> <span style="color:#a31515">:z</span> <span style="color:#a31515">&#34;Z&#34;</span>}})
-
-(<span style="color:#00f">let </span>[{a <span style="color:#a31515">:a</span> d <span style="color:#a31515">:d</span>} my-hashmap]
-  (println a d))
-<span style="color:#008000">;; =&gt; A D</span>
-
-(<span style="color:#00f">let </span>[{a <span style="color:#a31515">:a</span>, b <span style="color:#a31515">:b</span>, {x <span style="color:#a31515">:x</span>, y <span style="color:#a31515">:y</span>} <span style="color:#a31515">:q</span>} my-nested-hashmap]
-  (println a b x y))
-<span style="color:#008000">;; =&gt; A B X Y</span>
-(<span style="color:#00f">let </span>[{a <span style="color:#a31515">:a</span>, b <span style="color:#a31515">:b</span>, not-found <span style="color:#a31515">:not-found</span>, <span style="color:#a31515">:or</span> {not-found <span style="color:#a31515">&#34;:)&#34;</span>}, <span style="color:#a31515">:as</span> all} my-hashmap]
-  (println a b not-found all))
-<span style="color:#008000">;; =&gt; A B :) {:a A :b B :c C :d D}</span>
-
-<span style="color:#008000">;!!! There is no &amp; rest for maps.</span>
-
-
-
-<span style="color:#008000">;everything but false and nil evaluates to true in Clojure.</span>
-
-<span style="color:#008000">;:as bind entire map to param</span>
-<span style="color:#008000">;See https://github.com/ring-clojure/ring/wiki/File-Uploads for explanation</span>
-(<span style="color:#00f">defn </span>file-handler
-  <span style="color:#008000">;表示入参是一个map,里面有:params这个key,将:params</span>
-  <span style="color:#008000">;[{{{tempfile :tempfile filename :filename} &#34;file&#34;} :params :as request}]</span>
-  [{{{tempfile <span style="color:#a31515">:tempfile</span> filename <span style="color:#a31515">:filename</span>} <span style="color:#a31515">&#34;file&#34;</span>} <span style="color:#a31515">:params</span> <span style="color:#a31515">:as</span> request}]
-  (println request)
-  (<span style="color:#00f">let </span>[n (num-lines tempfile)]
-    (response (str <span style="color:#a31515">&#34;File &#34;</span> filename <span style="color:#a31515">&#34; has &#34;</span> n <span style="color:#a31515">&#34; lines &#34;</span>))))
-
-<span style="color:#008000">;a simple example</span>
-(<span style="color:#00f">defn </span>first-first
-  [[[i _] _]]
-  i)
-
-(first-first [[1 2] [3 4]])
-<span style="color:#008000">;return 1</span>
-
-<span style="color:#008000">;(defn name doc-string? attr-map? [params*] prepost-map? body)</span>
-<span style="color:#008000">;(defn name doc-string? attr-map? ([params*] prepost-map? body) + attr-map?)</span>
-<span style="color:#008000">;function can have params type hint</span>
-(<span style="color:#00f">defn </span>round
-  <span style="color:#a31515">&#34;^double here is type hint&#34;</span>
-  [^double d ^long precision]
-  (<span style="color:#00f">let </span>[factor (Math/pow 10 precision)]
-    (/ (Math/floor (* d factor)) factor)))
-
-<span style="color:#008000">;不定长参数</span>
-<span style="color:#008000">;重载函数</span>
-(<span style="color:#00f">defn </span>bar
-  ([a b] (bar a b 100))
-  ([a b c] (* a b c)))
-
-(bar 5 6)
-(bar 5 6 3)
-
-
-(<span style="color:#00f">defn </span>keyworded-map [&amp; {<span style="color:#a31515">:keys</span> [function sequence]}]
-  (map function sequence))
-
-(keyworded-map <span style="color:#a31515">:sequence</span> [1 2 3] <span style="color:#a31515">:function</span> #(+ % 2))
-
-<span style="color:#008000">;trampoline</span>
-<span style="color:#008000">;trampoline</span>
-
-
-<span style="color:#008000">;namespace</span>
-<span style="color:#008000">;create-ns create a namespace</span>
-(create-ns <span style="color:#a31515">&#39;zhi.moe.clj</span>)
-
-<span style="color:#008000">;in-ns move to a namespace</span>
-<span style="color:#008000">;require loads a namespace and</span>
-<span style="color:#008000">;refer refers the namespace.</span>
-<span style="color:#008000">;To do these at once, you can use use</span>
-(require <span style="color:#a31515">&#39;clojure.by.example</span>)
-(clojure.by.example/favorite-language)
-(use <span style="color:#a31515">&#39;clojure.by.example</span>)
-<span style="color:#008000">;you can rename namespace</span>
-(require &#39;[clojure.by.example <span style="color:#a31515">:as</span> temp-ns])
-
-<span style="color:#008000">;ns macro creates a new namespace and gives you an opportunity to load other namespaces at the creation time</span>
-
-<span style="color:#008000">;import java class</span>
-(import java.util.Date)
-(println (str  (<span style="color:#00f">new </span>Date)))
-<span style="color:#008000">;Wed Jul 24 22:55:24 CST 2019</span>
-
-<span style="color:#008000">;boolean</span>
-<span style="color:#008000">;In Clojure, everything except false and nil are true.</span>
-(<span style="color:#00f">if </span>1
-  (println <span style="color:#a31515">&#34;it is true&#34;</span>)
-  (println <span style="color:#a31515">&#34;will never print&#34;</span>))
-
-<span style="color:#008000">;if</span>
-(<span style="color:#00f">if </span>true
-  (println <span style="color:#a31515">&#34;executed when true&#34;</span>)
-  (println <span style="color:#a31515">&#34;executed when false&#34;</span>))
-
-<span style="color:#008000">;use do to execute multi expressions</span>
-(<span style="color:#00f">if </span>true
-  (do
-    (println <span style="color:#a31515">&#34;one&#34;</span>)
-    (println <span style="color:#a31515">&#34;two&#34;</span>)))
-
-<span style="color:#008000">;if-let:</span>
-(<span style="color:#00f">defn </span>positive-number [numbers]
-  (if-let [pos-nums (not-empty (filter pos? numbers))]
-    pos-nums
-    <span style="color:#a31515">&#34;no positive numbers&#34;</span>))
-
-<span style="color:#008000">;when when-let case cond condp</span>
-<span style="color:#008000">;</span>
-(<span style="color:#00f">defn </span>cond-test
-  [n]
-  (cond
-    (= n 1) <span style="color:#a31515">&#34;n is 1&#34;</span>
-    (and (&gt; n 3) (&lt; n 10)) <span style="color:#a31515">&#34;n is over 3 and under 10&#34;</span>
-    <span style="color:#a31515">:else</span> <span style="color:#a31515">&#34;n is other&#34;</span>))
-
-(cond-test 1000)
-
-
-<span style="color:#008000">;string</span>
-(<span style="color:#00f">let </span>[first <span style="color:#a31515">&#34;Hirokuni&#34;</span>
-      last <span style="color:#a31515">&#34;Kim&#34;</span>]
-  (str <span style="color:#a31515">&#34;My name is &#34;</span> first <span style="color:#a31515">&#34; &#34;</span> last))
-
-<span style="color:#008000">;format</span>
-(format <span style="color:#a31515">&#34;My name is %s %s&#34;</span> <span style="color:#a31515">&#34;Hirokuni&#34;</span> <span style="color:#a31515">&#34;Kim&#34;</span>)
-
-<span style="color:#008000">;power function</span>
-(<span style="color:#00f">defn </span>power
-  [x n]
-  (reduce * (repeat n x)))
-
-<span style="color:#008000">;bigint,N is a literal for bigint</span>
-(+ 9223372036854775807 10N)
-
-<span style="color:#008000">;list conj nth count</span>
-&#39;(1 2 3)
-<span style="color:#008000">;vector conj nth count .indexOf</span>
-[1 2 3]
-(.indexOf [1 2 3] 4)
-
-(count [1 2])
-
-<span style="color:#008000">;set conj nth count disj sort contains? subset? superset?</span>
-#{1 2 3}
-
-<span style="color:#008000">;map assoc merge keys vals</span>
-(<span style="color:#00f">let </span>[os {<span style="color:#a31515">:Apple</span> <span style="color:#a31515">&#34;Mac&#34;</span> <span style="color:#a31515">:Microsoft</span> <span style="color:#a31515">&#34;Windows&#34;</span>}]
-  (get os <span style="color:#a31515">:Apple</span>))
-
-(assoc {<span style="color:#a31515">:Apple</span> <span style="color:#a31515">&#34;Mac&#34;</span> <span style="color:#a31515">:Microsoft</span> <span style="color:#a31515">&#34;Windows&#34;</span>} <span style="color:#a31515">:Commodore</span> <span style="color:#a31515">&#34;Amiga&#34;</span>)
-
-<span style="color:#008000">;Sequences are data types that abstract all more concrete data types with unified functions. </span>
-<span style="color:#008000">;These functions are called the Seq library in Clojure.</span>
-<span style="color:#008000">;seq first rest cons concat map reduce into</span>
-<span style="color:#008000">;To add an element to the head of sequence, use cons.</span>
-(cons 4 [1 2 3])
-(into [] `(1 2 3))
-(reverse [1 2 3])
-<span style="color:#008000">;get a sequence of infinite integers with iterate. Be careful, </span>
-<span style="color:#008000">;though. Running this example will freeze your terminal since the evaluation of this expression never returns.</span>
-(doc iterate)
-
-(doc range)
-(repeatedly 5 (<span style="color:#00f">fn </span>[] (println <span style="color:#a31515">&#34;hi!&#34;</span>)))
-<span style="color:#008000">;for each</span>
-(doseq [animal [<span style="color:#a31515">&#34;cat&#34;</span> <span style="color:#a31515">&#34;dog&#34;</span> <span style="color:#a31515">&#34;horse&#34;</span>]] (println animal))
-
-(take 5 (range 0 100))
-(take-while neg? [-3 -2 -1 0 1 2 3])
-<span style="color:#008000">;drop will remove the first n elements</span>
-(drop 5 (range 0 10))
-(drop-while neg? [-3 -2 -1 0 1 2 3])
-<span style="color:#008000">;(0 1 2 3)</span>
-
-(remove pos? [-1 -2 3 4])
-<span style="color:#008000">;(-1 -2)</span>
-
-(filter pos? [-1 2 3])
-(partition-by #(&lt; 3 %) [1 2 3 4 5 6])
-(group-by #(&lt; 3 %) [1 2 3 4 5 6 1 2 3])
-(println (take 5 (iterate inc 0)))
-
-<span style="color:#008000">;for compression</span>
-(for [x &#39;(1 2 3)]
-  (+ 10 x))
-
-(doc for)
-<span style="color:#008000">;双重for 循环</span>
-(for [x (range 10)
-      y (range 20)
-      <span style="color:#a31515">:while</span> (&lt; y x)]
-  [x y])
-
-<span style="color:#008000">;&lt;==&gt; {x | x &gt;0}</span>
-(for [x &#39;(-1 1 2)
-      <span style="color:#a31515">:when</span> (&gt; x 0)]
-  x)
-
-(for [x [0 1 2 3 4 5]
-      <span style="color:#a31515">:let</span> [y (* x 3)]
-      <span style="color:#a31515">:when</span> (even? y)]
-  y)
-
-<span style="color:#008000">;meta data for function parameters</span>
-(<span style="color:#00f">defn </span>round
-  [^double d ^long precision]
-  (<span style="color:#00f">let </span>[factor (Math/pow 10 precision)]
-    (/ (Math/floor (* d factor)) factor)))
-
-<span style="color:#008000">;# is Dispatch character that tells the Clojure reader how to interpret the next character using a read table</span>
-<span style="color:#008000">;set</span>
-#{1 2 3}
-<span style="color:#008000">;discard</span>
-{<span style="color:#a31515">:a</span> 1, #_#_<span style="color:#a31515">:b</span> 2, <span style="color:#a31515">:c</span> 3}
-<span style="color:#008000">;regular expression</span>
-(re-matches #<span style="color:#a31515">&#34;^test$&#34;</span> <span style="color:#a31515">&#34;test&#34;</span>)
-<span style="color:#008000">;anonymous function</span>
-#(println %)
-<span style="color:#008000">;var quote</span>
-(read-string <span style="color:#a31515">&#34;#&#39;foo&#34;</span>)
-<span style="color:#008000">;symbolic values</span>
-(/ 1.0 0.0)                                                 <span style="color:#008000">;##Inf</span>
-<span style="color:#008000">;tagged literals</span>
-(type #inst <span style="color:#a31515">&#34;2014-05-19T19:12:37.925-00:00&#34;</span>)                <span style="color:#008000">;java.util.Date</span>
-<span style="color:#008000">;meta</span>
-(meta #<span style="color:#a31515">&#39;fn-name</span>)
-<span style="color:#008000">;reader conditionals </span>
-#?(<span style="color:#a31515">:clj</span>     (Clojure expression)
-   <span style="color:#a31515">:cljs</span>    (ClojureScript expression)
-   <span style="color:#a31515">:cljr</span>    (Clojure CLR expression)
-   <span style="color:#a31515">:default</span> (fallthrough expression))
-<span style="color:#008000">;#?@ splicing reader conditional</span>
-(<span style="color:#00f">defn </span>build-list []
-  (list #?@(<span style="color:#a31515">:clj</span>  [5 6 7 8]
-            <span style="color:#a31515">:cljs</span> [1 2 3 4])))                              <span style="color:#008000">;return [5 6 7 8] when run on clojure</span>
-<span style="color:#008000">;#= allows the reader to evaluate an arbitrary form during read time</span>
-(read-string <span style="color:#a31515">&#34;#=(+ 3 4)&#34;</span>)                                   <span style="color:#008000">;7</span>
-
-
-<span style="color:#008000">;Recursion</span>
-<span style="color:#008000">;simple recursion</span>
-(<span style="color:#00f">defn </span>fibo
-  <span style="color:#a31515">&#34;this is recursion function&#34;</span>
-  [n]
-  (<span style="color:#00f">if </span>(or (= n 0) (= n 1))
-    n
-    (+ (fibo (- n 1)) (fibo (- n 2)))))
-<span style="color:#008000">;do not do this!!! take a long time to finish</span>
-(fibo 1000)
-
-<span style="color:#008000">;use recur</span>
-(<span style="color:#00f">defn </span>fibo-recur [iteration]
-  (<span style="color:#00f">let </span>[fibo (<span style="color:#00f">fn </span>[one two n]
-               (<span style="color:#00f">if </span>(= iteration n)
-                 one
-                 (recur two (+ one two) (inc n))))]
-    <span style="color:#008000">;recur re-binds it&#39;s arguments to new values and call the function with the new values</span>
-    <span style="color:#008000">;fibo is an inner function</span>
-    (fibo 0N 1N 0)))
-
-(fibo-recur 1000)
-<span style="color:#008000">;it is really fast</span>
-<span style="color:#008000">;notes</span>
-<span style="color:#008000">;with simple recursion, each recursive call creates a stack frame which is </span>
-<span style="color:#008000">;a data to store the information of the called function on memory.</span>
-<span style="color:#008000">;Doing deep recursion requires large memory for stack frames, but since it cannot, </span>
-<span style="color:#008000">;we get StackOverflowError</span>
-<span style="color:#008000">;尾递归</span>
-<span style="color:#008000">;A function is tail recursive when the recursion is happening at the end of it&#39;s definition</span>
-<span style="color:#008000">;In other words, a tail recursive function must return itself as it&#39;s returned value.</span>
-<span style="color:#008000">;When you use recur, it makes sure you are doing tail recursion</span>
-
-(doc loop)
-<span style="color:#008000">;loop/recur is merely a friendly way to write recursion code.</span>
-<span style="color:#008000">;All imperative loops can be converted to recursions and all recursions can be converted to loops,</span>
-<span style="color:#008000">;so Clojure chose recursions.</span>
-<span style="color:#008000">;Although you can write code that looks like an imperative loop with loop/recur,</span>
-<span style="color:#008000">;Clojure is doing recursion under the hood.</span>
-
-<span style="color:#008000">;</span>
-(<span style="color:#00f">defmacro </span>unless [test then]
-  <span style="color:#a31515">&#34;Evaluates then when test evaluates to be falsey&#34;</span>
-  (list <span style="color:#a31515">&#39;if</span> (list <span style="color:#a31515">&#39;not</span> test)
-        then))
-
-(macroexpand &#39;(unless false (println <span style="color:#a31515">&#34;hi&#34;</span>)))
-<span style="color:#008000">;&#39; quoting</span>
-<span style="color:#008000">;` syntax-quoting returns the fully qualified namespace.</span>
-<span style="color:#008000">;Using fully qualified namespace is very important in order to avoid name conflicts when defining macro.</span>
-<span style="color:#008000">;~ unquote</span>
-
-`(+ ~(list 1 2 3))
-<span style="color:#008000">;(clojure.core/+ (1 2 3))</span>
-
-`(+ ~@(list 1 2 3))
-<span style="color:#008000">;(clojure.core/+ 1 2 3)</span>
-<span style="color:#008000">;The ~@ unquote splice works just like ~ unquote,</span>
-<span style="color:#008000">;except it expands a sequence and splice the contents of </span>
-<span style="color:#008000">;the sequence into the enclosing syntax-quoted data structure</span>
-
-<span style="color:#008000">;thread first macro</span>
-(-&gt; []
-    (conj 1)
-    (conj 2)
-    (conj 3))
-<span style="color:#008000">;[1 2 3]</span>
-
-(first (.split (.replace (.toUpperCase <span style="color:#a31515">&#34;a b c d&#34;</span>) <span style="color:#a31515">&#34;A&#34;</span> <span style="color:#a31515">&#34;X&#34;</span>) <span style="color:#a31515">&#34; &#34;</span>))
-<span style="color:#008000">;&#34;X&#34;</span>
-
-<span style="color:#008000">;;Perhaps easier to read:</span>
-<span style="color:#008000">;-&gt; 后面是初始参数,第2行开始每一行是一个函数调用,</span>
-<span style="color:#008000">;且上一行的返回值会作为这一行第一个参数(这就是thread first)的first含义</span>
-<span style="color:#008000">;这里的thread是管道的意思,而不是并发编程的线程</span>
-<span style="color:#008000">;如果省略(),那么野生符号(bare symbol)和keyword都会当作一个函数调用,</span>
-<span style="color:#008000">;例如,这里的.toUpperCase是bare symbol,等效于(.toUpperCase ,,,)</span>
-<span style="color:#008000">;clojure中 逗号等于空白符,所以上面用,,,表示将会插入的参数(即&#34;a b c d&#34;)</span>
-(-&gt; <span style="color:#a31515">&#34;a b c d&#34;</span>
-    .toUpperCase
-    (.replace <span style="color:#a31515">&#34;A&#34;</span> <span style="color:#a31515">&#34;X&#34;</span>)
-    (.split <span style="color:#a31515">&#34; &#34;</span>)
-    first)
-<span style="color:#008000">;same as follow, ,,, is equals whitespace</span>
-(-&gt; <span style="color:#a31515">&#34;a b c d&#34;</span>
-    (.toUpperCase,,,)
-    (.replace <span style="color:#a31515">&#34;A&#34;</span> <span style="color:#a31515">&#34;X&#34;</span>)
-    (.split <span style="color:#a31515">&#34; &#34;</span>)
-    first)
-
-<span style="color:#008000">;suppose a function</span>
-(<span style="color:#00f">defn </span>calculate []
-  (reduce + (map #(* % %) (filter odd? (range 10)))))
-
-<span style="color:#008000">;same as</span>
-<span style="color:#008000">;上一行的结果作为最后一个参数插入,这叫thread last</span>
-(<span style="color:#00f">defn </span>calculate* []
-  (-&gt;&gt; (range 10)
-       (filter odd?,,,)
-       (map #(* % %),,,)
-       (reduce +,,,)))
-
-<span style="color:#008000">;如果想要指定每次插入的位置那么需要用 as-&gt;</span>
-<span style="color:#008000">;v是每一行的返回值的名称,这样你可以在下一行任意参数位置指定</span>
-(as-&gt; [<span style="color:#a31515">:foo</span> <span style="color:#a31515">:bar</span>] v
-      (map name v)
-      (first v)
-      (.substring v 1))
-
-
-<span style="color:#008000">;</span>
-<span style="color:#008000">;destructing</span>
-({<span style="color:#a31515">:keys</span> [firstname lastname] <span style="color:#a31515">:as</span> person} {<span style="color:#a31515">:firstname</span> <span style="color:#a31515">&#34;John&#34;</span> <span style="color:#a31515">:lastname</span> <span style="color:#a31515">&#34;Smith&#34;</span>})
-
-
-<span style="color:#008000">;future and deref</span>
-(<span style="color:#00f">let </span>[future-val (future (inc 1))]
-  (println (deref future-val)))
-<span style="color:#008000">;deref == @</span>
-(<span style="color:#00f">let </span>[future-val (future (inc 1))]
-  (println @future-val))
-
-(<span style="color:#00f">def </span>my-future (future (Thread/sleep 5000)))
-(repeatedly 6
-            (<span style="color:#00f">fn </span>[]
-              (println (realized? my-future))
-              (Thread/sleep 1000)))
-
-(doc future)
-
-
-<span style="color:#008000">;promise</span>
-(<span style="color:#00f">def </span>my-promise (promise))
-<span style="color:#008000">;you define a promise</span>
-(<span style="color:#00f">def </span>listen-and-callback (<span style="color:#00f">fn </span>[]
-                           (println <span style="color:#a31515">&#34;Start listening...&#34;</span>)
-                           (future (println <span style="color:#a31515">&#34;Callback fired: &#34;</span> @my-promise))))
-
-(<span style="color:#00f">defn </span>do-time-consuming-job []
-  (Thread/sleep 5000)
-  (deliver my-promise <span style="color:#a31515">&#34;delivered value&#34;</span>))
-
-(listen-and-callback)
-(do-time-consuming-job)
-
-<span style="color:#008000">;atom is like mutable var in other languages but atom is thread safe</span>
-
-<span style="color:#008000">;ref dosync ref-set alter</span>
-(<span style="color:#00f">def </span>my-ref (ref 0))
-(dosync
-  (alter my-ref
-         (<span style="color:#00f">fn </span>[current_ref]
-           (inc current_ref))))
-
-(print @my-ref)
-
-(<span style="color:#00f">def </span>user (ref {}))
-(dosync
-  (alter user merge {<span style="color:#a31515">:name</span> <span style="color:#a31515">&#34;Kim&#34;</span>})
-  (throw (Exception. <span style="color:#a31515">&#34;something wrong happens!&#34;</span>))
-  (alter user merge {<span style="color:#a31515">:age</span> 32}))
-
-(<span style="color:#00f">def </span>user-record (atom {}))
-
-(<span style="color:#00f">do </span>(swap! user-record merge {<span style="color:#a31515">:name</span> <span style="color:#a31515">&#34;Kim&#34;</span>})
-    (throw (Exception. <span style="color:#a31515">&#34;something wrong happens!&#34;</span>))
-    (swap! user-record merge {<span style="color:#a31515">:age</span> 32}))
-
-
-<span style="color:#008000">;Java</span>
-(<span style="color:#00f">new </span>java.util.Date <span style="color:#a31515">&#34;2016/2/19&#34;</span>)
-(java.util.Date.)
-(java.util.Date. <span style="color:#a31515">&#34;2016/2/19&#34;</span>)
-(Math/pow 2 3)                                              <span style="color:#008000">;static method</span>
-(<span style="color:#00f">def </span>rnd (<span style="color:#00f">new </span>java.util.Random))
-(<span style="color:#00f">. </span>rnd nextInt 10)
-
-(<span style="color:#00f">let </span>[date1 (<span style="color:#00f">new </span>java.util.Date)
-      date2 (<span style="color:#00f">new </span>java.util.Date)]
-  (.equals date1 date2))
-
-<span style="color:#008000">;(.instanceMember instance args*)</span>
-<span style="color:#008000">;(.instanceMember Classname args*)</span>
-<span style="color:#008000">;(.-instanceField instance)</span>
-<span style="color:#008000">;(Classname/staticMethod args*)</span>
-<span style="color:#008000">;Classname/staticField</span>
-
-<span style="color:#008000">;;;</span>
-
-(<span style="color:#00f">defn </span>geohash [lat lng]
-  (println <span style="color:#a31515">&#34;geohash:&#34;</span> lat lng)
-  <span style="color:#008000">;;this function take two separate values as params.</span>
-  <span style="color:#008000">;;and it return a geohash for that position</span>
+    <p>这份笔记试图打造最强的clojure小抄,keep refactoring it&hellip;</p>
+<h2 id="clojure-入门">clojure 入门</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">(<span style="color:#a90d91">ns </span><span style="color:#000">clj-notes.core</span>
+  (<span style="color:#c41a16">:gen-class</span>))
+<span style="color:#177500">;:gen-class generate java class file</span>
+
+<span style="color:#177500">;Parameter is variable in the declaration of function.</span>
+<span style="color:#177500">;Argument is the actual value of this variable that gets passed to function.</span>
+<span style="color:#177500">;</span>
+<span style="color:#177500">;install leiningen:</span>
+<span style="color:#177500">;put lein.bat in your PATH</span>
+<span style="color:#177500">;open cmder,run: lein repl</span>
+<span style="color:#177500">;start repl,use exit,(exit),(quit) or ctrl+d to quit repl</span>
+(<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;hello clojure&#34;</span>)
+
+<span style="color:#177500">;Symbols are used to bind names to values</span>
+<span style="color:#177500">;&#39; will prevent a form from being evaluated</span>
+<span style="color:#177500">;&#39;() same as (quote ())</span>
+
+<span style="color:#177500">;def global variable</span>
+<span style="color:#177500">;let local variable binding</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">object</span> <span style="color:#c41a16">&#34;light&#34;</span>)
+(<span style="color:#a90d91">println </span><span style="color:#000">object</span>)
+
+(<span style="color:#a90d91">let </span>[<span style="color:#000">x</span> <span style="color:#1c01ce">10</span>
+      <span style="color:#000">y</span> <span style="color:#1c01ce">20</span>
+      <span style="color:#000">z</span> <span style="color:#1c01ce">30</span>]
+  (<span style="color:#a90d91">+ </span><span style="color:#000">x</span> <span style="color:#000">y</span> <span style="color:#000">z</span>))
+<span style="color:#177500">;=&gt; 60</span>
+
+<span style="color:#177500">;data collection</span>
+<span style="color:#177500">;seq is abstract for list vector array</span>
+<span style="color:#177500">;map</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">dict</span> {<span style="color:#c41a16">:k1</span> <span style="color:#c41a16">&#34;v1&#34;</span> <span style="color:#c41a16">:k2</span> <span style="color:#c41a16">&#34;v2&#34;</span>})
+<span style="color:#177500">;keyword as function</span>
+(<span style="color:#c41a16">:k1</span> <span style="color:#000">dict</span>)                                                  <span style="color:#177500">;return v1</span>
+<span style="color:#177500">;map as function</span>
+(<span style="color:#000">dict</span> <span style="color:#c41a16">:k1</span>)                                                  <span style="color:#177500">;return v1</span>
+(<span style="color:#a90d91">let </span>[<span style="color:#000">v</span> (<span style="color:#000">dict</span> <span style="color:#c41a16">:k1</span>)]
+  (<span style="color:#a90d91">println </span><span style="color:#000">v</span>))
+
+<span style="color:#177500">;also you can use get on seq or map</span>
+(<span style="color:#a90d91">get </span>{<span style="color:#c41a16">:a</span> <span style="color:#1c01ce">1</span> <span style="color:#c41a16">:b</span> <span style="color:#1c01ce">2</span>} <span style="color:#c41a16">:b</span>)
+<span style="color:#177500">;=&gt; 2</span>
+<span style="color:#177500">;clojure.core/seq is a function that produces a sequence over the given argument. </span>
+<span style="color:#177500">;Data types that clojure.core/seq can produce a sequence over are called seqable:</span>
+<span style="color:#177500">;</span>
+<span style="color:#177500">;Clojure collections</span>
+<span style="color:#177500">;Java maps</span>
+<span style="color:#177500">;All iterable types (types that implement java.util.Iterable)</span>
+<span style="color:#177500">;Java collections (java.util.Set, java.util.List, etc)</span>
+<span style="color:#177500">;Java arrays</span>
+<span style="color:#177500">;All types that implement java.lang.CharSequence interface, including Java strings</span>
+<span style="color:#177500">;All types that implement clojure.lang.Seqable interface</span>
+<span style="color:#177500">;nil</span>
+
+<span style="color:#177500">;function for seq or collection</span>
+<span style="color:#177500">;=</span>
+<span style="color:#177500">;count</span>
+<span style="color:#177500">;conj</span>
+<span style="color:#177500">;empty</span>
+<span style="color:#177500">;seq</span>
+<span style="color:#177500">;first</span>
+<span style="color:#177500">;rest</span>
+<span style="color:#177500">;next</span>
+<span style="color:#177500">;count</span>
+<span style="color:#177500">;counted?</span>
+<span style="color:#177500">;conj</span>
+<span style="color:#177500">;get</span>
+<span style="color:#177500">;assoc</span>
+
+
+<span style="color:#177500">;defn 定义函数</span>
+<span style="color:#177500">;defn- 定义ns内私有函数</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">f</span>
+  <span style="color:#c41a16">&#34;the second line is doc-string&#34;</span>
+  {<span style="color:#c41a16">:added</span>  <span style="color:#c41a16">&#34;1.2&#34;</span>                                            <span style="color:#177500">;this is attr-map</span>
+   <span style="color:#c41a16">:static</span> <span style="color:#000">true</span>}
+  [<span style="color:#000">param</span>]
+  (<span style="color:#a90d91">print </span><span style="color:#c41a16">&#34;hello &#34;</span> <span style="color:#000">param</span>))
+
+(<span style="color:#a90d91">meta </span>(<span style="color:#a90d91">var </span><span style="color:#000">f</span>))
+<span style="color:#177500">;#&#39; is the reader macro for var and works the exactly same</span>
+(<span style="color:#a90d91">meta </span><span style="color:#000">#</span><span style="color:#c41a16">&#39;f</span>)
+
+<span style="color:#177500">;fn create a function</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">f</span> (<span style="color:#a90d91">fn </span>[] (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;this is from fn function&#34;</span>)))
+<span style="color:#177500">;#() is the shortcut for fn</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">plus-one</span> <span style="color:#000">#</span>(<span style="color:#a90d91">+ </span><span style="color:#1c01ce">1</span> <span style="color:#000">%</span>))
+<span style="color:#177500">;% will be replaced with arguments passed to the function</span>
+<span style="color:#177500">;%1 is for the first argument, %2 is for the second and so on</span>
+
+(<span style="color:#a90d91">defn </span><span style="color:#000">des</span>
+  [{<span style="color:#000">k1</span> <span style="color:#c41a16">:k1</span>}]                                                <span style="color:#177500">;get :k1 value from argument (map) and binding it to k1(parameter)</span>
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;destructing in map&#34;</span> <span style="color:#000">k1</span>))
+
+(<span style="color:#000">des</span> <span style="color:#000">dict</span>)                                                  <span style="color:#177500">;destructing in map v1</span>
+<span style="color:#177500">;key don&#39;t have to be keyword</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">currency-of</span>
+  [{<span style="color:#000">currency</span> <span style="color:#c41a16">&#34;currency&#34;</span>}]
+  <span style="color:#000">currency</span>)
+(<span style="color:#a90d91">defn </span><span style="color:#000">currency-of</span>
+  [{<span style="color:#000">currency</span> <span style="color:#c41a16">&#39;currency</span>}]
+  <span style="color:#000">currency</span>)
+<span style="color:#177500">;if want to destructing multi key,use :keys, in this case,parameter name(currency amount) </span>
+<span style="color:#177500">;must same as arguments&#39;s keys(:currency :amount),can not use string as key</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">currency-of</span>
+  [{<span style="color:#c41a16">:keys</span> [<span style="color:#000">currency</span> <span style="color:#000">amount</span>]}]
+  (<span style="color:#a90d91">* </span><span style="color:#000">currency</span> <span style="color:#000">amount</span>))
+
+(<span style="color:#000">currency-of</span> {<span style="color:#c41a16">:currency</span> <span style="color:#c41a16">&#34;RMB&#34;</span> <span style="color:#c41a16">:amount</span> <span style="color:#1c01ce">100000</span>})              <span style="color:#177500">;ok</span>
+(<span style="color:#000">currency-of</span> {<span style="color:#c41a16">&#34;currency&#34;</span> <span style="color:#c41a16">&#34;RMB&#34;</span> <span style="color:#c41a16">&#34;amount&#34;</span> <span style="color:#1c01ce">100000</span>})            <span style="color:#177500">;currency will be nil,you will need use :strs or syms</span>
+
+(<span style="color:#a90d91">defn </span><span style="color:#000">currency-strs</span>
+  [{<span style="color:#c41a16">:strs</span> [<span style="color:#000">currency</span> <span style="color:#000">amount</span>]}]
+  <span style="color:#000">currency</span>)
+(<span style="color:#000">currency-strs</span> {<span style="color:#c41a16">&#34;currency&#34;</span> <span style="color:#c41a16">&#34;RMB&#34;</span> <span style="color:#c41a16">&#34;amount&#34;</span> <span style="color:#1c01ce">100000</span>})          <span style="color:#177500">;ok</span>
+
+
+(<span style="color:#a90d91">defn </span><span style="color:#000">currency-syms</span>
+  [{<span style="color:#c41a16">:syms</span> [<span style="color:#000">currency</span> <span style="color:#000">amount</span>]}]
+  <span style="color:#000">currency</span>)
+(<span style="color:#000">currency-syms</span> {<span style="color:#c41a16">&#39;currency</span> <span style="color:#c41a16">&#34;CNY&#34;</span> <span style="color:#c41a16">&#39;amount</span> <span style="color:#1c01ce">100000</span>})            <span style="color:#177500">;ok</span>
+
+<span style="color:#177500">;use :or to give a default value for parameter</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">currency-or</span>
+  [{<span style="color:#c41a16">:keys</span> [<span style="color:#000">currency</span> <span style="color:#000">amount</span>] <span style="color:#c41a16">:or</span> {<span style="color:#000">currency</span> <span style="color:#c41a16">&#34;USD&#34;</span>}}]
+  <span style="color:#000">currency</span>)
+(<span style="color:#000">currency-or</span> {<span style="color:#c41a16">:amount</span> <span style="color:#1c01ce">100000</span>})                              <span style="color:#177500">;=&gt; &#34;USD&#34;</span>
+
+<span style="color:#177500">;use &amp; for Variadic Functions parameters</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">log</span>
+  [<span style="color:#000">message</span> <span style="color:#000">&amp;</span> <span style="color:#000">args</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;args: &#34;</span> <span style="color:#000">args</span>))
+
+<span style="color:#177500">;named params , achieved by Variadic Functions destructing</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">job-info</span>
+  [<span style="color:#000">&amp;</span> {<span style="color:#c41a16">:keys</span> [<span style="color:#a90d91">name </span><span style="color:#000">job</span> <span style="color:#000">income</span>] <span style="color:#c41a16">:or</span> {<span style="color:#000">job</span> <span style="color:#c41a16">&#34;unemployed&#34;</span> <span style="color:#000">income</span> <span style="color:#c41a16">&#34;$0.00&#34;</span>}}]
+  (<span style="color:#a90d91">if </span><span style="color:#000">name</span>
+    [<span style="color:#a90d91">name </span><span style="color:#000">job</span> <span style="color:#000">income</span>]
+    (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;No name specified&#34;</span>)))
+
+<span style="color:#177500">;cation! arguments to job-info is not a map</span>
+(<span style="color:#000">job-info</span> <span style="color:#c41a16">:name</span> <span style="color:#c41a16">&#34;Robert&#34;</span> <span style="color:#c41a16">:job</span> <span style="color:#c41a16">&#34;Engineer&#34;</span>)
+<span style="color:#177500">;[&#34;Robert&#34; &#34;Engineer&#34; &#34;$0.00&#34;]</span>
+<span style="color:#177500">;Without the use of a variadic argument list, </span>
+<span style="color:#177500">;you would have to call the function with a single map argument such as</span>
+(<span style="color:#000">job-info</span> {<span style="color:#c41a16">:name</span> <span style="color:#c41a16">&#34;Robert&#34;</span> <span style="color:#c41a16">:job</span> <span style="color:#c41a16">&#34;Engineer&#34;</span>})
+
+<span style="color:#177500">;destructuring example</span>
+<span style="color:#177500">;https://gist.github.com/john2x/e1dca953548bfdfb9844</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">my-vec</span> [<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>])
+
+(<span style="color:#a90d91">let </span>[[<span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">c</span> <span style="color:#000">d</span>] <span style="color:#000">my-vec</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">c</span> <span style="color:#000">d</span>))
+<span style="color:#177500">;1 2 3 nil</span>
+(<span style="color:#a90d91">let </span>[[<span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">&amp;</span> <span style="color:#000">the-rest</span>] <span style="color:#000">my-vec</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;a=&#34;</span> <span style="color:#000">a</span> <span style="color:#c41a16">&#34;b=&#34;</span> <span style="color:#000">b</span> <span style="color:#c41a16">&#34;the-rest=&#34;</span> <span style="color:#000">the-rest</span>))
+<span style="color:#177500">;a= 1 b= 2 the-rest= (3)</span>
+(<span style="color:#a90d91">let </span>[[<span style="color:#c41a16">:as</span> <span style="color:#000">all</span>] <span style="color:#000">my-vec</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">all</span>))
+<span style="color:#177500">;[1 2 3]</span>
+(<span style="color:#a90d91">let </span>[[<span style="color:#000">a</span> <span style="color:#c41a16">:as</span> <span style="color:#000">all</span>] <span style="color:#000">my-vec</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">a</span> <span style="color:#000">all</span>))
+<span style="color:#177500">;1 [1 2 3]</span>
+(<span style="color:#a90d91">let </span>[[<span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">&amp;</span> <span style="color:#000">the-rest</span> <span style="color:#c41a16">:as</span> <span style="color:#000">all</span>] <span style="color:#000">my-vec</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">the-rest</span> <span style="color:#000">all</span>))
+<span style="color:#177500">;1 2 (3) [1 2 3]</span>
+<span style="color:#177500">;note: &amp; the-rest convert vector to list,</span>
+<span style="color:#177500">;but :as preserves them (as a list, or as a vector)</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">my-vec</span> [<span style="color:#c41a16">&#34;first&#34;</span> <span style="color:#c41a16">&#34;second&#34;</span>])
+(<span style="color:#a90d91">let </span>[{<span style="color:#000">a</span> <span style="color:#1c01ce">0</span> <span style="color:#000">b</span> <span style="color:#1c01ce">1</span>} <span style="color:#000">my-vec</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">a</span> <span style="color:#000">b</span>))                                            <span style="color:#177500">;=&gt; &#34;first second&#34;</span>
+
+<span style="color:#177500">;optional arguments to functions</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">foo</span> [<span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">&amp;</span> <span style="color:#000">more-args</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">more-args</span>))
+(<span style="color:#000">foo</span> <span style="color:#c41a16">:a</span> <span style="color:#c41a16">:b</span>)                                                 <span style="color:#177500">;; =&gt; :a :b nil</span>
+(<span style="color:#000">foo</span> <span style="color:#c41a16">:a</span> <span style="color:#c41a16">:b</span> <span style="color:#c41a16">:x</span>)                                              <span style="color:#177500">;; =&gt; :a :b (:x)</span>
+(<span style="color:#000">foo</span> <span style="color:#c41a16">:a</span> <span style="color:#c41a16">:b</span> <span style="color:#c41a16">:x</span> <span style="color:#c41a16">:y</span> <span style="color:#c41a16">:z</span>)                                        <span style="color:#177500">;; =&gt; :a :b (:x :y :z)</span>
+
+<span style="color:#177500">;map destructuring</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">my-hashmap</span> {<span style="color:#c41a16">:a</span> <span style="color:#c41a16">&#34;A&#34;</span> <span style="color:#c41a16">:b</span> <span style="color:#c41a16">&#34;B&#34;</span> <span style="color:#c41a16">:c</span> <span style="color:#c41a16">&#34;C&#34;</span> <span style="color:#c41a16">:d</span> <span style="color:#c41a16">&#34;D&#34;</span>})
+(<span style="color:#a90d91">def </span><span style="color:#000">my-nested-hashmap</span> {<span style="color:#c41a16">:a</span> <span style="color:#c41a16">&#34;A&#34;</span> <span style="color:#c41a16">:b</span> <span style="color:#c41a16">&#34;B&#34;</span> <span style="color:#c41a16">:c</span> <span style="color:#c41a16">&#34;C&#34;</span> <span style="color:#c41a16">:d</span> <span style="color:#c41a16">&#34;D&#34;</span> <span style="color:#c41a16">:q</span> {<span style="color:#c41a16">:x</span> <span style="color:#c41a16">&#34;X&#34;</span> <span style="color:#c41a16">:y</span> <span style="color:#c41a16">&#34;Y&#34;</span> <span style="color:#c41a16">:z</span> <span style="color:#c41a16">&#34;Z&#34;</span>}})
+
+(<span style="color:#a90d91">let </span>[{<span style="color:#000">a</span> <span style="color:#c41a16">:a</span> <span style="color:#000">d</span> <span style="color:#c41a16">:d</span>} <span style="color:#000">my-hashmap</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">a</span> <span style="color:#000">d</span>))
+<span style="color:#177500">;; =&gt; A D</span>
+
+(<span style="color:#a90d91">let </span>[{<span style="color:#000">a</span> <span style="color:#c41a16">:a</span>, <span style="color:#000">b</span> <span style="color:#c41a16">:b</span>, {<span style="color:#000">x</span> <span style="color:#c41a16">:x</span>, <span style="color:#000">y</span> <span style="color:#c41a16">:y</span>} <span style="color:#c41a16">:q</span>} <span style="color:#000">my-nested-hashmap</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">x</span> <span style="color:#000">y</span>))
+<span style="color:#177500">;; =&gt; A B X Y</span>
+(<span style="color:#a90d91">let </span>[{<span style="color:#000">a</span> <span style="color:#c41a16">:a</span>, <span style="color:#000">b</span> <span style="color:#c41a16">:b</span>, <span style="color:#000">not-found</span> <span style="color:#c41a16">:not-found</span>, <span style="color:#c41a16">:or</span> {<span style="color:#000">not-found</span> <span style="color:#c41a16">&#34;:)&#34;</span>}, <span style="color:#c41a16">:as</span> <span style="color:#000">all</span>} <span style="color:#000">my-hashmap</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">not-found</span> <span style="color:#000">all</span>))
+<span style="color:#177500">;; =&gt; A B :) {:a A :b B :c C :d D}</span>
+
+<span style="color:#177500">;!!! There is no &amp; rest for maps.</span>
+
+
+
+<span style="color:#177500">;everything but false and nil evaluates to true in Clojure.</span>
+
+<span style="color:#177500">;:as bind entire map to param</span>
+<span style="color:#177500">;See https://github.com/ring-clojure/ring/wiki/File-Uploads for explanation</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">file-handler</span>
+  <span style="color:#177500">;表示入参是一个map,里面有:params这个key,将:params</span>
+  <span style="color:#177500">;[{{{tempfile :tempfile filename :filename} &#34;file&#34;} :params :as request}]</span>
+  [{{{<span style="color:#000">tempfile</span> <span style="color:#c41a16">:tempfile</span> <span style="color:#000">filename</span> <span style="color:#c41a16">:filename</span>} <span style="color:#c41a16">&#34;file&#34;</span>} <span style="color:#c41a16">:params</span> <span style="color:#c41a16">:as</span> <span style="color:#000">request</span>}]
+  (<span style="color:#a90d91">println </span><span style="color:#000">request</span>)
+  (<span style="color:#a90d91">let </span>[<span style="color:#000">n</span> (<span style="color:#000">num-lines</span> <span style="color:#000">tempfile</span>)]
+    (<span style="color:#000">response</span> (<span style="color:#a90d91">str </span><span style="color:#c41a16">&#34;File &#34;</span> <span style="color:#000">filename</span> <span style="color:#c41a16">&#34; has &#34;</span> <span style="color:#000">n</span> <span style="color:#c41a16">&#34; lines &#34;</span>))))
+
+<span style="color:#177500">;a simple example</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">first-first</span>
+  [[[<span style="color:#000">i</span> <span style="color:#000">_</span>] <span style="color:#000">_</span>]]
+  <span style="color:#000">i</span>)
+
+(<span style="color:#000">first-first</span> [[<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span>] [<span style="color:#1c01ce">3</span> <span style="color:#1c01ce">4</span>]])
+<span style="color:#177500">;return 1</span>
+
+<span style="color:#177500">;(defn name doc-string? attr-map? [params*] prepost-map? body)</span>
+<span style="color:#177500">;(defn name doc-string? attr-map? ([params*] prepost-map? body) + attr-map?)</span>
+<span style="color:#177500">;function can have params type hint</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">round</span>
+  <span style="color:#c41a16">&#34;^double here is type hint&#34;</span>
+  [<span style="color:#000">^</span><span style="color:#a90d91">double </span><span style="color:#000">d</span> <span style="color:#000">^</span><span style="color:#a90d91">long </span><span style="color:#000">precision</span>]
+  (<span style="color:#a90d91">let </span>[<span style="color:#000">factor</span> (<span style="color:#000">Math/pow</span> <span style="color:#1c01ce">10</span> <span style="color:#000">precision</span>)]
+    (<span style="color:#a90d91">/ </span>(<span style="color:#000">Math/floor</span> (<span style="color:#a90d91">* </span><span style="color:#000">d</span> <span style="color:#000">factor</span>)) <span style="color:#000">factor</span>)))
+
+<span style="color:#177500">;不定长参数</span>
+<span style="color:#177500">;重载函数</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">bar</span>
+  ([<span style="color:#000">a</span> <span style="color:#000">b</span>] (<span style="color:#000">bar</span> <span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#1c01ce">100</span>))
+  ([<span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">c</span>] (<span style="color:#a90d91">* </span><span style="color:#000">a</span> <span style="color:#000">b</span> <span style="color:#000">c</span>)))
+
+(<span style="color:#000">bar</span> <span style="color:#1c01ce">5</span> <span style="color:#1c01ce">6</span>)
+(<span style="color:#000">bar</span> <span style="color:#1c01ce">5</span> <span style="color:#1c01ce">6</span> <span style="color:#1c01ce">3</span>)
+
+
+(<span style="color:#a90d91">defn </span><span style="color:#000">keyworded-map</span> [<span style="color:#000">&amp;</span> {<span style="color:#c41a16">:keys</span> [<span style="color:#000">function</span> <span style="color:#000">sequence</span>]}]
+  (<span style="color:#a90d91">map </span><span style="color:#000">function</span> <span style="color:#000">sequence</span>))
+
+(<span style="color:#000">keyworded-map</span> <span style="color:#c41a16">:sequence</span> [<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>] <span style="color:#c41a16">:function</span> <span style="color:#000">#</span>(<span style="color:#a90d91">+ </span><span style="color:#000">%</span> <span style="color:#1c01ce">2</span>))
+
+<span style="color:#177500">;trampoline</span>
+<span style="color:#177500">;trampoline</span>
+
+
+<span style="color:#177500">;namespace</span>
+<span style="color:#177500">;create-ns create a namespace</span>
+(<span style="color:#a90d91">create-ns </span><span style="color:#c41a16">&#39;zhi.moe.clj</span>)
+
+<span style="color:#177500">;in-ns move to a namespace</span>
+<span style="color:#177500">;require loads a namespace and</span>
+<span style="color:#177500">;refer refers the namespace.</span>
+<span style="color:#177500">;To do these at once, you can use use</span>
+(<span style="color:#000">require</span> <span style="color:#c41a16">&#39;clojure.by.example</span>)
+(<span style="color:#000">clojure.by.example/favorite-language</span>)
+(<span style="color:#000">use</span> <span style="color:#c41a16">&#39;clojure.by.example</span>)
+<span style="color:#177500">;you can rename namespace</span>
+(<span style="color:#000">require</span> <span style="color:#000">&#39;</span>[<span style="color:#000">clojure.by.example</span> <span style="color:#c41a16">:as</span> <span style="color:#000">temp-ns</span>])
+
+<span style="color:#177500">;ns macro creates a new namespace and gives you an opportunity to load other namespaces at the creation time</span>
+
+<span style="color:#177500">;import java class</span>
+(<span style="color:#a90d91">import </span><span style="color:#000">java.util.Date</span>)
+(<span style="color:#a90d91">println </span>(<span style="color:#a90d91">str </span> (<span style="color:#a90d91">new </span><span style="color:#000">Date</span>)))
+<span style="color:#177500">;Wed Jul 24 22:55:24 CST 2019</span>
+
+<span style="color:#177500">;boolean</span>
+<span style="color:#177500">;In Clojure, everything except false and nil are true.</span>
+(<span style="color:#a90d91">if </span><span style="color:#1c01ce">1</span>
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;it is true&#34;</span>)
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;will never print&#34;</span>))
+
+<span style="color:#177500">;if</span>
+(<span style="color:#a90d91">if </span><span style="color:#000">true</span>
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;executed when true&#34;</span>)
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;executed when false&#34;</span>))
+
+<span style="color:#177500">;use do to execute multi expressions</span>
+(<span style="color:#a90d91">if </span><span style="color:#000">true</span>
+  (<span style="color:#000">do</span>
+    (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;one&#34;</span>)
+    (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;two&#34;</span>)))
+
+<span style="color:#177500">;if-let:</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">positive-number</span> [<span style="color:#000">numbers</span>]
+  (<span style="color:#a90d91">if-let </span>[<span style="color:#000">pos-nums</span> (<span style="color:#000">not-empty</span> (<span style="color:#a90d91">filter pos? </span><span style="color:#000">numbers</span>))]
+    <span style="color:#000">pos-nums</span>
+    <span style="color:#c41a16">&#34;no positive numbers&#34;</span>))
+
+<span style="color:#177500">;when when-let case cond condp</span>
+<span style="color:#177500">;</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">cond-test</span>
+  [<span style="color:#000">n</span>]
+  (<span style="color:#000">cond</span>
+    (<span style="color:#a90d91">= </span><span style="color:#000">n</span> <span style="color:#1c01ce">1</span>) <span style="color:#c41a16">&#34;n is 1&#34;</span>
+    (<span style="color:#a90d91">and </span>(<span style="color:#a90d91">&gt; </span><span style="color:#000">n</span> <span style="color:#1c01ce">3</span>) (<span style="color:#a90d91">&lt; </span><span style="color:#000">n</span> <span style="color:#1c01ce">10</span>)) <span style="color:#c41a16">&#34;n is over 3 and under 10&#34;</span>
+    <span style="color:#c41a16">:else</span> <span style="color:#c41a16">&#34;n is other&#34;</span>))
+
+(<span style="color:#000">cond-test</span> <span style="color:#1c01ce">1000</span>)
+
+
+<span style="color:#177500">;string</span>
+(<span style="color:#a90d91">let </span>[<span style="color:#a90d91">first </span><span style="color:#c41a16">&#34;Hirokuni&#34;</span>
+      <span style="color:#a90d91">last </span><span style="color:#c41a16">&#34;Kim&#34;</span>]
+  (<span style="color:#a90d91">str </span><span style="color:#c41a16">&#34;My name is &#34;</span> <span style="color:#a90d91">first </span><span style="color:#c41a16">&#34; &#34;</span> <span style="color:#000">last</span>))
+
+<span style="color:#177500">;format</span>
+(<span style="color:#000">format</span> <span style="color:#c41a16">&#34;My name is %s %s&#34;</span> <span style="color:#c41a16">&#34;Hirokuni&#34;</span> <span style="color:#c41a16">&#34;Kim&#34;</span>)
+
+<span style="color:#177500">;power function</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">power</span>
+  [<span style="color:#000">x</span> <span style="color:#000">n</span>]
+  (<span style="color:#a90d91">reduce * </span>(<span style="color:#a90d91">repeat </span><span style="color:#000">n</span> <span style="color:#000">x</span>)))
+
+<span style="color:#177500">;bigint,N is a literal for bigint</span>
+(<span style="color:#a90d91">+ </span><span style="color:#1c01ce">9223372036854775807</span> <span style="color:#1c01ce">10</span><span style="color:#000">N</span>)
+
+<span style="color:#177500">;list conj nth count</span>
+<span style="color:#000">&#39;</span>(<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>)
+<span style="color:#177500">;vector conj nth count .indexOf</span>
+[<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>]
+(<span style="color:#000">.indexOf</span> [<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>] <span style="color:#1c01ce">4</span>)
+
+(<span style="color:#a90d91">count </span>[<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span>])
+
+<span style="color:#177500">;set conj nth count disj sort contains? subset? superset?</span>
+<span style="color:#000">#</span>{<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>}
+
+<span style="color:#177500">;map assoc merge keys vals</span>
+(<span style="color:#a90d91">let </span>[<span style="color:#000">os</span> {<span style="color:#c41a16">:Apple</span> <span style="color:#c41a16">&#34;Mac&#34;</span> <span style="color:#c41a16">:Microsoft</span> <span style="color:#c41a16">&#34;Windows&#34;</span>}]
+  (<span style="color:#a90d91">get </span><span style="color:#000">os</span> <span style="color:#c41a16">:Apple</span>))
+
+(<span style="color:#a90d91">assoc </span>{<span style="color:#c41a16">:Apple</span> <span style="color:#c41a16">&#34;Mac&#34;</span> <span style="color:#c41a16">:Microsoft</span> <span style="color:#c41a16">&#34;Windows&#34;</span>} <span style="color:#c41a16">:Commodore</span> <span style="color:#c41a16">&#34;Amiga&#34;</span>)
+
+<span style="color:#177500">;Sequences are data types that abstract all more concrete data types with unified functions. </span>
+<span style="color:#177500">;These functions are called the Seq library in Clojure.</span>
+<span style="color:#177500">;seq first rest cons concat map reduce into</span>
+<span style="color:#177500">;To add an element to the head of sequence, use cons.</span>
+(<span style="color:#a90d91">cons </span><span style="color:#1c01ce">4</span> [<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>])
+(<span style="color:#a90d91">into </span>[] <span style="color:#000">`</span>(<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>))
+(<span style="color:#a90d91">reverse </span>[<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>])
+<span style="color:#177500">;get a sequence of infinite integers with iterate. Be careful, </span>
+<span style="color:#177500">;though. Running this example will freeze your terminal since the evaluation of this expression never returns.</span>
+(<span style="color:#a90d91">doc </span><span style="color:#000">iterate</span>)
+
+(<span style="color:#a90d91">doc </span><span style="color:#000">range</span>)
+(<span style="color:#000">repeatedly</span> <span style="color:#1c01ce">5</span> (<span style="color:#a90d91">fn </span>[] (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;hi!&#34;</span>)))
+<span style="color:#177500">;for each</span>
+(<span style="color:#a90d91">doseq </span>[<span style="color:#000">animal</span> [<span style="color:#c41a16">&#34;cat&#34;</span> <span style="color:#c41a16">&#34;dog&#34;</span> <span style="color:#c41a16">&#34;horse&#34;</span>]] (<span style="color:#a90d91">println </span><span style="color:#000">animal</span>))
+
+(<span style="color:#a90d91">take </span><span style="color:#1c01ce">5</span> (<span style="color:#a90d91">range </span><span style="color:#1c01ce">0</span> <span style="color:#1c01ce">100</span>))
+(<span style="color:#a90d91">take-while neg? </span>[<span style="color:#1c01ce">-3</span> <span style="color:#1c01ce">-2</span> <span style="color:#1c01ce">-1</span> <span style="color:#1c01ce">0</span> <span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>])
+<span style="color:#177500">;drop will remove the first n elements</span>
+(<span style="color:#a90d91">drop </span><span style="color:#1c01ce">5</span> (<span style="color:#a90d91">range </span><span style="color:#1c01ce">0</span> <span style="color:#1c01ce">10</span>))
+(<span style="color:#a90d91">drop-while neg? </span>[<span style="color:#1c01ce">-3</span> <span style="color:#1c01ce">-2</span> <span style="color:#1c01ce">-1</span> <span style="color:#1c01ce">0</span> <span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>])
+<span style="color:#177500">;(0 1 2 3)</span>
+
+(<span style="color:#a90d91">remove pos? </span>[<span style="color:#1c01ce">-1</span> <span style="color:#1c01ce">-2</span> <span style="color:#1c01ce">3</span> <span style="color:#1c01ce">4</span>])
+<span style="color:#177500">;(-1 -2)</span>
+
+(<span style="color:#a90d91">filter pos? </span>[<span style="color:#1c01ce">-1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>])
+(<span style="color:#000">partition-by</span> <span style="color:#000">#</span>(<span style="color:#a90d91">&lt; </span><span style="color:#1c01ce">3</span> <span style="color:#000">%</span>) [<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span> <span style="color:#1c01ce">4</span> <span style="color:#1c01ce">5</span> <span style="color:#1c01ce">6</span>])
+(<span style="color:#000">group-by</span> <span style="color:#000">#</span>(<span style="color:#a90d91">&lt; </span><span style="color:#1c01ce">3</span> <span style="color:#000">%</span>) [<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span> <span style="color:#1c01ce">4</span> <span style="color:#1c01ce">5</span> <span style="color:#1c01ce">6</span> <span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>])
+(<span style="color:#a90d91">println </span>(<span style="color:#a90d91">take </span><span style="color:#1c01ce">5</span> (<span style="color:#a90d91">iterate inc </span><span style="color:#1c01ce">0</span>)))
+
+<span style="color:#177500">;for compression</span>
+(<span style="color:#a90d91">for </span>[<span style="color:#000">x</span> <span style="color:#000">&#39;</span>(<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>)]
+  (<span style="color:#a90d91">+ </span><span style="color:#1c01ce">10</span> <span style="color:#000">x</span>))
+
+(<span style="color:#a90d91">doc </span><span style="color:#000">for</span>)
+<span style="color:#177500">;双重for 循环</span>
+(<span style="color:#a90d91">for </span>[<span style="color:#000">x</span> (<span style="color:#a90d91">range </span><span style="color:#1c01ce">10</span>)
+      <span style="color:#000">y</span> (<span style="color:#a90d91">range </span><span style="color:#1c01ce">20</span>)
+      <span style="color:#c41a16">:while</span> (<span style="color:#a90d91">&lt; </span><span style="color:#000">y</span> <span style="color:#000">x</span>)]
+  [<span style="color:#000">x</span> <span style="color:#000">y</span>])
+
+<span style="color:#177500">;&lt;==&gt; {x | x &gt;0}</span>
+(<span style="color:#a90d91">for </span>[<span style="color:#000">x</span> <span style="color:#000">&#39;</span>(<span style="color:#1c01ce">-1</span> <span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span>)
+      <span style="color:#c41a16">:when</span> (<span style="color:#a90d91">&gt; </span><span style="color:#000">x</span> <span style="color:#1c01ce">0</span>)]
+  <span style="color:#000">x</span>)
+
+(<span style="color:#a90d91">for </span>[<span style="color:#000">x</span> [<span style="color:#1c01ce">0</span> <span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span> <span style="color:#1c01ce">4</span> <span style="color:#1c01ce">5</span>]
+      <span style="color:#c41a16">:let</span> [<span style="color:#000">y</span> (<span style="color:#a90d91">* </span><span style="color:#000">x</span> <span style="color:#1c01ce">3</span>)]
+      <span style="color:#c41a16">:when</span> (<span style="color:#000">even?</span> <span style="color:#000">y</span>)]
+  <span style="color:#000">y</span>)
+
+<span style="color:#177500">;meta data for function parameters</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">round</span>
+  [<span style="color:#000">^</span><span style="color:#a90d91">double </span><span style="color:#000">d</span> <span style="color:#000">^</span><span style="color:#a90d91">long </span><span style="color:#000">precision</span>]
+  (<span style="color:#a90d91">let </span>[<span style="color:#000">factor</span> (<span style="color:#000">Math/pow</span> <span style="color:#1c01ce">10</span> <span style="color:#000">precision</span>)]
+    (<span style="color:#a90d91">/ </span>(<span style="color:#000">Math/floor</span> (<span style="color:#a90d91">* </span><span style="color:#000">d</span> <span style="color:#000">factor</span>)) <span style="color:#000">factor</span>)))
+
+<span style="color:#177500">;# is Dispatch character that tells the Clojure reader how to interpret the next character using a read table</span>
+<span style="color:#177500">;set</span>
+<span style="color:#000">#</span>{<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>}
+<span style="color:#177500">;discard</span>
+{<span style="color:#c41a16">:a</span> <span style="color:#1c01ce">1</span>, <span style="color:#000">#</span><span style="color:#000">_#_</span><span style="color:#c41a16">:b</span> <span style="color:#1c01ce">2</span>, <span style="color:#c41a16">:c</span> <span style="color:#1c01ce">3</span>}
+<span style="color:#177500">;regular expression</span>
+(<span style="color:#a90d91">re-matches </span><span style="color:#000">#</span><span style="color:#c41a16">&#34;^test$&#34;</span> <span style="color:#c41a16">&#34;test&#34;</span>)
+<span style="color:#177500">;anonymous function</span>
+<span style="color:#000">#</span>(<span style="color:#a90d91">println </span><span style="color:#000">%</span>)
+<span style="color:#177500">;var quote</span>
+(<span style="color:#000">read-string</span> <span style="color:#c41a16">&#34;#&#39;foo&#34;</span>)
+<span style="color:#177500">;symbolic values</span>
+(<span style="color:#a90d91">/ </span><span style="color:#1c01ce">1.0</span> <span style="color:#1c01ce">0.0</span>)                                                 <span style="color:#177500">;##Inf</span>
+<span style="color:#177500">;tagged literals</span>
+(<span style="color:#000">type</span> <span style="color:#000">#</span><span style="color:#000">inst</span> <span style="color:#c41a16">&#34;2014-05-19T19:12:37.925-00:00&#34;</span>)                <span style="color:#177500">;java.util.Date</span>
+<span style="color:#177500">;meta</span>
+(<span style="color:#a90d91">meta </span><span style="color:#000">#</span><span style="color:#c41a16">&#39;fn-name</span>)
+<span style="color:#177500">;reader conditionals </span>
+<span style="color:#000">#</span><span style="color:#000">?</span>(<span style="color:#c41a16">:clj</span>     (<span style="color:#000">Clojure</span> <span style="color:#000">expression</span>)
+   <span style="color:#c41a16">:cljs</span>    (<span style="color:#000">ClojureScript</span> <span style="color:#000">expression</span>)
+   <span style="color:#c41a16">:cljr</span>    (<span style="color:#000">Clojure</span> <span style="color:#000">CLR</span> <span style="color:#000">expression</span>)
+   <span style="color:#c41a16">:default</span> (<span style="color:#000">fallthrough</span> <span style="color:#000">expression</span>))
+<span style="color:#177500">;#?@ splicing reader conditional</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">build-list</span> []
+  (<span style="color:#a90d91">list </span><span style="color:#000">#</span><span style="color:#000">?</span><span style="color:#000">@</span>(<span style="color:#c41a16">:clj</span>  [<span style="color:#1c01ce">5</span> <span style="color:#1c01ce">6</span> <span style="color:#1c01ce">7</span> <span style="color:#1c01ce">8</span>]
+            <span style="color:#c41a16">:cljs</span> [<span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span> <span style="color:#1c01ce">4</span>])))                              <span style="color:#177500">;return [5 6 7 8] when run on clojure</span>
+<span style="color:#177500">;#= allows the reader to evaluate an arbitrary form during read time</span>
+(<span style="color:#000">read-string</span> <span style="color:#c41a16">&#34;#=(+ 3 4)&#34;</span>)                                   <span style="color:#177500">;7</span>
+
+
+<span style="color:#177500">;Recursion</span>
+<span style="color:#177500">;simple recursion</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">fibo</span>
+  <span style="color:#c41a16">&#34;this is recursion function&#34;</span>
+  [<span style="color:#000">n</span>]
+  (<span style="color:#a90d91">if </span>(<span style="color:#a90d91">or </span>(<span style="color:#a90d91">= </span><span style="color:#000">n</span> <span style="color:#1c01ce">0</span>) (<span style="color:#a90d91">= </span><span style="color:#000">n</span> <span style="color:#1c01ce">1</span>))
+    <span style="color:#000">n</span>
+    (<span style="color:#a90d91">+ </span>(<span style="color:#000">fibo</span> (<span style="color:#a90d91">- </span><span style="color:#000">n</span> <span style="color:#1c01ce">1</span>)) (<span style="color:#000">fibo</span> (<span style="color:#a90d91">- </span><span style="color:#000">n</span> <span style="color:#1c01ce">2</span>)))))
+<span style="color:#177500">;do not do this!!! take a long time to finish</span>
+(<span style="color:#000">fibo</span> <span style="color:#1c01ce">1000</span>)
+
+<span style="color:#177500">;use recur</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">fibo-recur</span> [<span style="color:#000">iteration</span>]
+  (<span style="color:#a90d91">let </span>[<span style="color:#000">fibo</span> (<span style="color:#a90d91">fn </span>[<span style="color:#000">one</span> <span style="color:#000">two</span> <span style="color:#000">n</span>]
+               (<span style="color:#a90d91">if </span>(<span style="color:#a90d91">= </span><span style="color:#000">iteration</span> <span style="color:#000">n</span>)
+                 <span style="color:#000">one</span>
+                 (<span style="color:#000">recur</span> <span style="color:#000">two</span> (<span style="color:#a90d91">+ </span><span style="color:#000">one</span> <span style="color:#000">two</span>) (<span style="color:#a90d91">inc </span><span style="color:#000">n</span>))))]
+    <span style="color:#177500">;recur re-binds it&#39;s arguments to new values and call the function with the new values</span>
+    <span style="color:#177500">;fibo is an inner function</span>
+    (<span style="color:#000">fibo</span> <span style="color:#1c01ce">0</span><span style="color:#000">N</span> <span style="color:#1c01ce">1</span><span style="color:#000">N</span> <span style="color:#1c01ce">0</span>)))
+
+(<span style="color:#000">fibo-recur</span> <span style="color:#1c01ce">1000</span>)
+<span style="color:#177500">;it is really fast</span>
+<span style="color:#177500">;notes</span>
+<span style="color:#177500">;with simple recursion, each recursive call creates a stack frame which is </span>
+<span style="color:#177500">;a data to store the information of the called function on memory.</span>
+<span style="color:#177500">;Doing deep recursion requires large memory for stack frames, but since it cannot, </span>
+<span style="color:#177500">;we get StackOverflowError</span>
+<span style="color:#177500">;尾递归</span>
+<span style="color:#177500">;A function is tail recursive when the recursion is happening at the end of it&#39;s definition</span>
+<span style="color:#177500">;In other words, a tail recursive function must return itself as it&#39;s returned value.</span>
+<span style="color:#177500">;When you use recur, it makes sure you are doing tail recursion</span>
+
+(<span style="color:#a90d91">doc </span><span style="color:#000">loop</span>)
+<span style="color:#177500">;loop/recur is merely a friendly way to write recursion code.</span>
+<span style="color:#177500">;All imperative loops can be converted to recursions and all recursions can be converted to loops,</span>
+<span style="color:#177500">;so Clojure chose recursions.</span>
+<span style="color:#177500">;Although you can write code that looks like an imperative loop with loop/recur,</span>
+<span style="color:#177500">;Clojure is doing recursion under the hood.</span>
+
+<span style="color:#177500">;</span>
+(<span style="color:#a90d91">defmacro </span><span style="color:#000">unless</span> [<span style="color:#a90d91">test </span><span style="color:#000">then</span>]
+  <span style="color:#c41a16">&#34;Evaluates then when test evaluates to be falsey&#34;</span>
+  (<span style="color:#a90d91">list </span><span style="color:#c41a16">&#39;if</span> (<span style="color:#a90d91">list </span><span style="color:#c41a16">&#39;not</span> <span style="color:#000">test</span>)
+        <span style="color:#000">then</span>))
+
+(<span style="color:#a90d91">macroexpand </span><span style="color:#000">&#39;</span>(<span style="color:#000">unless</span> <span style="color:#000">false</span> (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;hi&#34;</span>)))
+<span style="color:#177500">;&#39; quoting</span>
+<span style="color:#177500">;` syntax-quoting returns the fully qualified namespace.</span>
+<span style="color:#177500">;Using fully qualified namespace is very important in order to avoid name conflicts when defining macro.</span>
+<span style="color:#177500">;~ unquote</span>
+
+<span style="color:#000">`</span>(<span style="color:#a90d91">+ </span><span style="color:#000">~</span>(<span style="color:#a90d91">list </span><span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>))
+<span style="color:#177500">;(clojure.core/+ (1 2 3))</span>
+
+<span style="color:#000">`</span>(<span style="color:#a90d91">+ </span><span style="color:#000">~@</span>(<span style="color:#a90d91">list </span><span style="color:#1c01ce">1</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>))
+<span style="color:#177500">;(clojure.core/+ 1 2 3)</span>
+<span style="color:#177500">;The ~@ unquote splice works just like ~ unquote,</span>
+<span style="color:#177500">;except it expands a sequence and splice the contents of </span>
+<span style="color:#177500">;the sequence into the enclosing syntax-quoted data structure</span>
+
+<span style="color:#177500">;thread first macro</span>
+(<span style="color:#a90d91">-&gt; </span>[]
+    (<span style="color:#a90d91">conj </span><span style="color:#1c01ce">1</span>)
+    (<span style="color:#a90d91">conj </span><span style="color:#1c01ce">2</span>)
+    (<span style="color:#a90d91">conj </span><span style="color:#1c01ce">3</span>))
+<span style="color:#177500">;[1 2 3]</span>
+
+(<span style="color:#a90d91">first </span>(<span style="color:#000">.split</span> (<span style="color:#000">.replace</span> (<span style="color:#000">.toUpperCase</span> <span style="color:#c41a16">&#34;a b c d&#34;</span>) <span style="color:#c41a16">&#34;A&#34;</span> <span style="color:#c41a16">&#34;X&#34;</span>) <span style="color:#c41a16">&#34; &#34;</span>))
+<span style="color:#177500">;&#34;X&#34;</span>
+
+<span style="color:#177500">;;Perhaps easier to read:</span>
+<span style="color:#177500">;-&gt; 后面是初始参数,第2行开始每一行是一个函数调用,</span>
+<span style="color:#177500">;且上一行的返回值会作为这一行第一个参数(这就是thread first)的first含义</span>
+<span style="color:#177500">;这里的thread是管道的意思,而不是并发编程的线程</span>
+<span style="color:#177500">;如果省略(),那么野生符号(bare symbol)和keyword都会当作一个函数调用,</span>
+<span style="color:#177500">;例如,这里的.toUpperCase是bare symbol,等效于(.toUpperCase ,,,)</span>
+<span style="color:#177500">;clojure中 逗号等于空白符,所以上面用,,,表示将会插入的参数(即&#34;a b c d&#34;)</span>
+(<span style="color:#a90d91">-&gt; </span><span style="color:#c41a16">&#34;a b c d&#34;</span>
+    <span style="color:#000">.toUpperCase</span>
+    (<span style="color:#000">.replace</span> <span style="color:#c41a16">&#34;A&#34;</span> <span style="color:#c41a16">&#34;X&#34;</span>)
+    (<span style="color:#000">.split</span> <span style="color:#c41a16">&#34; &#34;</span>)
+    <span style="color:#000">first</span>)
+<span style="color:#177500">;same as follow, ,,, is equals whitespace</span>
+(<span style="color:#a90d91">-&gt; </span><span style="color:#c41a16">&#34;a b c d&#34;</span>
+    (<span style="color:#000">.toUpperCase</span>,,,)
+    (<span style="color:#000">.replace</span> <span style="color:#c41a16">&#34;A&#34;</span> <span style="color:#c41a16">&#34;X&#34;</span>)
+    (<span style="color:#000">.split</span> <span style="color:#c41a16">&#34; &#34;</span>)
+    <span style="color:#000">first</span>)
+
+<span style="color:#177500">;suppose a function</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">calculate</span> []
+  (<span style="color:#a90d91">reduce + </span>(<span style="color:#a90d91">map </span><span style="color:#000">#</span>(<span style="color:#a90d91">* </span><span style="color:#000">%</span> <span style="color:#000">%</span>) (<span style="color:#a90d91">filter </span><span style="color:#000">odd?</span> (<span style="color:#a90d91">range </span><span style="color:#1c01ce">10</span>)))))
+
+<span style="color:#177500">;same as</span>
+<span style="color:#177500">;上一行的结果作为最后一个参数插入,这叫thread last</span>
+(<span style="color:#a90d91">defn </span><span style="color:#000">calculate*</span> []
+  (<span style="color:#000">-&gt;&gt;</span> (<span style="color:#a90d91">range </span><span style="color:#1c01ce">10</span>)
+       (<span style="color:#a90d91">filter </span><span style="color:#000">odd?</span>,,,)
+       (<span style="color:#a90d91">map </span><span style="color:#000">#</span>(<span style="color:#a90d91">* </span><span style="color:#000">%</span> <span style="color:#000">%</span>),,,)
+       (<span style="color:#a90d91">reduce </span><span style="color:#000">+</span>,,,)))
+
+<span style="color:#177500">;如果想要指定每次插入的位置那么需要用 as-&gt;</span>
+<span style="color:#177500">;v是每一行的返回值的名称,这样你可以在下一行任意参数位置指定</span>
+(<span style="color:#000">as-&gt;</span> [<span style="color:#c41a16">:foo</span> <span style="color:#c41a16">:bar</span>] <span style="color:#000">v</span>
+      (<span style="color:#a90d91">map name </span><span style="color:#000">v</span>)
+      (<span style="color:#a90d91">first </span><span style="color:#000">v</span>)
+      (<span style="color:#000">.substring</span> <span style="color:#000">v</span> <span style="color:#1c01ce">1</span>))
+
+
+<span style="color:#177500">;</span>
+<span style="color:#177500">;destructing</span>
+({<span style="color:#c41a16">:keys</span> [<span style="color:#000">firstname</span> <span style="color:#000">lastname</span>] <span style="color:#c41a16">:as</span> <span style="color:#000">person</span>} {<span style="color:#c41a16">:firstname</span> <span style="color:#c41a16">&#34;John&#34;</span> <span style="color:#c41a16">:lastname</span> <span style="color:#c41a16">&#34;Smith&#34;</span>})
+
+
+<span style="color:#177500">;future and deref</span>
+(<span style="color:#a90d91">let </span>[<span style="color:#000">future-val</span> (<span style="color:#000">future</span> (<span style="color:#a90d91">inc </span><span style="color:#1c01ce">1</span>))]
+  (<span style="color:#a90d91">println </span>(<span style="color:#a90d91">deref </span><span style="color:#000">future-val</span>)))
+<span style="color:#177500">;deref == @</span>
+(<span style="color:#a90d91">let </span>[<span style="color:#000">future-val</span> (<span style="color:#000">future</span> (<span style="color:#a90d91">inc </span><span style="color:#1c01ce">1</span>))]
+  (<span style="color:#a90d91">println </span><span style="color:#000">@</span><span style="color:#000">future-val</span>))
+
+(<span style="color:#a90d91">def </span><span style="color:#000">my-future</span> (<span style="color:#000">future</span> (<span style="color:#000">Thread/sleep</span> <span style="color:#1c01ce">5000</span>)))
+(<span style="color:#000">repeatedly</span> <span style="color:#1c01ce">6</span>
+            (<span style="color:#a90d91">fn </span>[]
+              (<span style="color:#a90d91">println </span>(<span style="color:#000">realized?</span> <span style="color:#000">my-future</span>))
+              (<span style="color:#000">Thread/sleep</span> <span style="color:#1c01ce">1000</span>)))
+
+(<span style="color:#a90d91">doc </span><span style="color:#000">future</span>)
+
+
+<span style="color:#177500">;promise</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">my-promise</span> (<span style="color:#000">promise</span>))
+<span style="color:#177500">;you define a promise</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">listen-and-callback</span> (<span style="color:#a90d91">fn </span>[]
+                           (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;Start listening...&#34;</span>)
+                           (<span style="color:#000">future</span> (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;Callback fired: &#34;</span> <span style="color:#000">@</span><span style="color:#000">my-promise</span>))))
+
+(<span style="color:#a90d91">defn </span><span style="color:#000">do-time-consuming-job</span> []
+  (<span style="color:#000">Thread/sleep</span> <span style="color:#1c01ce">5000</span>)
+  (<span style="color:#000">deliver</span> <span style="color:#000">my-promise</span> <span style="color:#c41a16">&#34;delivered value&#34;</span>))
+
+(<span style="color:#000">listen-and-callback</span>)
+(<span style="color:#000">do-time-consuming-job</span>)
+
+<span style="color:#177500">;atom is like mutable var in other languages but atom is thread safe</span>
+
+<span style="color:#177500">;ref dosync ref-set alter</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">my-ref</span> (<span style="color:#a90d91">ref </span><span style="color:#1c01ce">0</span>))
+(<span style="color:#000">dosync</span>
+  (<span style="color:#a90d91">alter </span><span style="color:#000">my-ref</span>
+         (<span style="color:#a90d91">fn </span>[<span style="color:#000">current_ref</span>]
+           (<span style="color:#a90d91">inc </span><span style="color:#000">current_ref</span>))))
+
+(<span style="color:#a90d91">print </span><span style="color:#000">@</span><span style="color:#000">my-ref</span>)
+
+(<span style="color:#a90d91">def </span><span style="color:#000">user</span> (<span style="color:#a90d91">ref </span>{}))
+(<span style="color:#000">dosync</span>
+  (<span style="color:#a90d91">alter </span><span style="color:#000">user</span> <span style="color:#a90d91">merge </span>{<span style="color:#c41a16">:name</span> <span style="color:#c41a16">&#34;Kim&#34;</span>})
+  (<span style="color:#000">throw</span> (<span style="color:#000">Exception.</span> <span style="color:#c41a16">&#34;something wrong happens!&#34;</span>))
+  (<span style="color:#a90d91">alter </span><span style="color:#000">user</span> <span style="color:#a90d91">merge </span>{<span style="color:#c41a16">:age</span> <span style="color:#1c01ce">32</span>}))
+
+(<span style="color:#a90d91">def </span><span style="color:#000">user-record</span> (<span style="color:#000">atom</span> {}))
+
+(<span style="color:#a90d91">do </span>(<span style="color:#000">swap!</span> <span style="color:#000">user-record</span> <span style="color:#a90d91">merge </span>{<span style="color:#c41a16">:name</span> <span style="color:#c41a16">&#34;Kim&#34;</span>})
+    (<span style="color:#000">throw</span> (<span style="color:#000">Exception.</span> <span style="color:#c41a16">&#34;something wrong happens!&#34;</span>))
+    (<span style="color:#000">swap!</span> <span style="color:#000">user-record</span> <span style="color:#a90d91">merge </span>{<span style="color:#c41a16">:age</span> <span style="color:#1c01ce">32</span>}))
+
+
+<span style="color:#177500">;Java</span>
+(<span style="color:#a90d91">new </span><span style="color:#000">java.util.Date</span> <span style="color:#c41a16">&#34;2016/2/19&#34;</span>)
+(<span style="color:#000">java.util.Date.</span>)
+(<span style="color:#000">java.util.Date.</span> <span style="color:#c41a16">&#34;2016/2/19&#34;</span>)
+(<span style="color:#000">Math/pow</span> <span style="color:#1c01ce">2</span> <span style="color:#1c01ce">3</span>)                                              <span style="color:#177500">;static method</span>
+(<span style="color:#a90d91">def </span><span style="color:#000">rnd</span> (<span style="color:#a90d91">new </span><span style="color:#000">java.util.Random</span>))
+(<span style="color:#a90d91">. </span><span style="color:#000">rnd</span> <span style="color:#000">nextInt</span> <span style="color:#1c01ce">10</span>)
+
+(<span style="color:#a90d91">let </span>[<span style="color:#000">date1</span> (<span style="color:#a90d91">new </span><span style="color:#000">java.util.Date</span>)
+      <span style="color:#000">date2</span> (<span style="color:#a90d91">new </span><span style="color:#000">java.util.Date</span>)]
+  (<span style="color:#000">.equals</span> <span style="color:#000">date1</span> <span style="color:#000">date2</span>))
+
+<span style="color:#177500">;(.instanceMember instance args*)</span>
+<span style="color:#177500">;(.instanceMember Classname args*)</span>
+<span style="color:#177500">;(.-instanceField instance)</span>
+<span style="color:#177500">;(Classname/staticMethod args*)</span>
+<span style="color:#177500">;Classname/staticField</span>
+
+<span style="color:#177500">;;;</span>
+
+(<span style="color:#a90d91">defn </span><span style="color:#000">geohash</span> [<span style="color:#000">lat</span> <span style="color:#000">lng</span>]
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;geohash:&#34;</span> <span style="color:#000">lat</span> <span style="color:#000">lng</span>)
+  <span style="color:#177500">;;this function take two separate values as params.</span>
+  <span style="color:#177500">;;and it return a geohash for that position</span>
   )
 
-(<span style="color:#00f">let </span>[{<span style="color:#a31515">:strs</span> [lat lng] <span style="color:#a31515">:as</span> coord} {<span style="color:#a31515">&#34;lat&#34;</span> 51.503331, <span style="color:#a31515">&#34;lng&#34;</span> -0.119500}]
-  (println <span style="color:#a31515">&#34;calculating geohash for coordinates: &#34;</span> coord)
-  (geohash lat lng))
+(<span style="color:#a90d91">let </span>[{<span style="color:#c41a16">:strs</span> [<span style="color:#000">lat</span> <span style="color:#000">lng</span>] <span style="color:#c41a16">:as</span> <span style="color:#000">coord</span>} {<span style="color:#c41a16">&#34;lat&#34;</span> <span style="color:#1c01ce">51.503331</span>, <span style="color:#c41a16">&#34;lng&#34;</span> <span style="color:#1c01ce">-0.119500</span>}]
+  (<span style="color:#a90d91">println </span><span style="color:#c41a16">&#34;calculating geohash for coordinates: &#34;</span> <span style="color:#000">coord</span>)
+  (<span style="color:#000">geohash</span> <span style="color:#000">lat</span> <span style="color:#000">lng</span>))
 
 
-<span style="color:#008000">;assoc-in associate使加入</span>
+<span style="color:#177500">;assoc-in associate使加入</span>
 
 
 </code></pre></div>
@@ -821,8 +821,8 @@
 
     <div class="post-nav-prev post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/elasticsearch-query-dsl/" rel="prev" title="Elasticsearch Query DSL">
-        Elasticsearch Query DSL <i class="fa fa-chevron-right"></i>
+        <a href="https://zhimoe.github.io/post/elasticsearch-query-dsl/" rel="prev" title="理解Elasticsearch Query DSL中的JSON结构">
+        理解Elasticsearch Query DSL中的JSON结构 <i class="fa fa-chevron-right"></i>
         </a>
     
     </div>
@@ -903,12 +903,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -920,16 +921,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

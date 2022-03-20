@@ -168,30 +168,29 @@
     </header>
     <div class="post-body" itemprop="articleBody">
     <h3 id="synchronized-method和synchronized-block的区别">synchronized method和synchronized block的区别</h3>
-<p>如果是synchronized(this),那么和synchronized 方法没有任何区别，锁定对象都是方法所在的对象。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">synchronized</span> <span style="color:#2b91af">void</span> mymethod() { ... }
+<p>如果是synchronized(this),那么和synchronized 方法没有任何区别,锁定对象都是方法所在的对象.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">synchronized</span> <span style="color:#a90d91">void</span> <span style="color:#000">mymethod</span><span style="color:#000">()</span> <span style="color:#000">{</span> <span style="color:#000">...</span> <span style="color:#000">}</span>
 
-<span style="color:#2b91af">void</span> mymethod() {
-  <span style="color:#00f">synchronized</span> (<span style="color:#00f">this</span>) { ... }
-}
-</code></pre></div><p>但是synchronized block可以锁定其他对象，而且synchronized block的范围是可以控制更灵活，synchronized 方法的边界只能是整个方法</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#00f">private</span> <span style="color:#2b91af">void</span> method() {
-    <span style="color:#008000">//  code here
-</span><span style="color:#008000"></span>    <span style="color:#008000">//  code here
-</span><span style="color:#008000"></span>    <span style="color:#008000">//  code here
-</span><span style="color:#008000"></span>    <span style="color:#00f">synchronized</span>( lock ) { 
-        <span style="color:#008000">// very few lines of code here
-</span><span style="color:#008000"></span>    }     
-    <span style="color:#008000">//  code here
-</span><span style="color:#008000"></span>    <span style="color:#008000">//  code here
-</span><span style="color:#008000"></span>    <span style="color:#008000">//  code here
-</span><span style="color:#008000"></span>}
+<span style="color:#a90d91">void</span> <span style="color:#000">mymethod</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">synchronized</span> <span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">)</span> <span style="color:#000">{</span> <span style="color:#000">...</span> <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+</code></pre></div><p>但是synchronized block可以锁定其他对象,而且synchronized block的范围是可以控制更灵活,synchronized 方法的边界只能是整个方法</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"> <span style="color:#a90d91">private</span> <span style="color:#a90d91">void</span> <span style="color:#000">method</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+    <span style="color:#177500">//  code here
+</span><span style="color:#177500"></span>    <span style="color:#177500">//  code here
+</span><span style="color:#177500"></span>    <span style="color:#177500">//  code here
+</span><span style="color:#177500"></span>    <span style="color:#a90d91">synchronized</span><span style="color:#000">(</span> <span style="color:#000">lock</span> <span style="color:#000">)</span> <span style="color:#000">{</span> 
+        <span style="color:#177500">// very few lines of code here
+</span><span style="color:#177500"></span>    <span style="color:#000">}</span>     
+    <span style="color:#177500">//  code here
+</span><span style="color:#177500"></span>    <span style="color:#177500">//  code here
+</span><span style="color:#177500"></span>    <span style="color:#177500">//  code here
+</span><span style="color:#177500"></span><span style="color:#000">}</span>
 </code></pre></div><h3 id="不要忘记synchronized">不要忘记synchronized</h3>
-<p>这个指令是JVM内置的，也是未来可以优化的。如果只是简单的同步一个资源对象，就使用synchronized，而且，使用Lock有就必须出现一堆的try/finally。</p>
+<p>这个指令是JVM内置的,也是未来可以优化的.如果只是简单的同步一个资源对象,就使用synchronized,而且,使用Lock有就必须出现一堆的try/finally.</p>
 <p>使用ReentrantLock场景：<br>
-需要以下高级特性时 ： 可定时的，可轮询的，可中断的锁，公平队列，非块结构。</p>
+需要以下高级特性时 ： 可定时的,可轮询的,可中断的锁,公平队列,非块结构.</p>
 <p><a href="http://stackoverflow.com/questions/4201713/synchronization-vs-lock">stackoverflow回答</a></p>
-
     </div>
     <footer class="post-footer">
      
@@ -299,12 +298,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -316,16 +316,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

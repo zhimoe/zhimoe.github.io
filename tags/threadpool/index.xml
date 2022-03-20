@@ -17,7 +17,19 @@
       <pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/java-threadpool-hierachy/</guid>
-      <description>thread pool classes hierachy java thread pool class hierarchy Executor (java.util.concurrent) |---ExecutorService (java.util.concurrent) |---AbstractExecutorService (java.util.concurrent) | |---AbstractEventExecutor (io.netty.util.concurrent) | |---ForkJoinPool (java.util.concurrent) | |---ThreadPoolExecutor (java.util.concurrent) | | |---ScheduledThreadPoolExecutor (java.util.concurrent) |---DelegatedExecutorService in Executors (java.util.concurrent) |---ScheduledExecutorService (java.util.concurrent) three thread pool interfaces Executor, a simple interface that supports launching new tasks. ExecutorService, a subinterface of Executor, which adds features that help manage the life cycle, both of the individual tasks and of the executor itself. ScheduledExecutorService, a subinterface of ExecutorService, supports future and/or periodic execution of tasks. common thread pool implements ThreadPoolExecutor是thread pool 最常用的实现。</description>
+      <description>&lt;h3 id=&#34;thread-pool-classes-hierachy&#34;&gt;thread pool classes hierachy&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;java thread pool class hierarchy
+Executor (java.util.concurrent)
+|---ExecutorService (java.util.concurrent)
+    |---AbstractExecutorService (java.util.concurrent)
+    |   |---AbstractEventExecutor (io.netty.util.concurrent)
+    |   |---ForkJoinPool (java.util.concurrent)
+    |   |---ThreadPoolExecutor (java.util.concurrent)
+    |   |   |---ScheduledThreadPoolExecutor (java.util.concurrent)
+    |---DelegatedExecutorService in Executors (java.util.concurrent)
+    |---ScheduledExecutorService (java.util.concurrent)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

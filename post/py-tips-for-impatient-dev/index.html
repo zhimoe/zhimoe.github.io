@@ -162,168 +162,160 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">2318 字 ~5分钟</span>
+<span class="leancloud-visitors-count">2217 字 ~5分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>python在看似简单的语法中，有很多tricks。</p>
-<h2 id="tricks">tricks</h2>
+    <h2 id="tricks">tricks</h2>
 <ol>
-<li>python的dict中关于equal和hash计算方式会有意外的效果
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#a31515">&#39;no&#39;</span>, <span style="color:#a31515">&#39;yes&#39;</span>][True] <span style="color:#008000"># output?</span>
-{True: <span style="color:#a31515">&#39;yes&#39;</span>, 1: <span style="color:#a31515">&#39;no&#39;</span>, 1.0: <span style="color:#a31515">&#39;maybe&#39;</span>} <span style="color:#008000"># output?</span>
+<li>
+<p>python的dict中关于equal和hash计算方式会有意外的效果</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#c41a16">&#39;no&#39;</span>, <span style="color:#c41a16">&#39;yes&#39;</span>][<span style="color:#5b269a">True</span>] <span style="color:#177500"># output?</span>
+{<span style="color:#5b269a">True</span>: <span style="color:#c41a16">&#39;yes&#39;</span>, <span style="color:#1c01ce">1</span>: <span style="color:#c41a16">&#39;no&#39;</span>, <span style="color:#1c01ce">1.0</span>: <span style="color:#c41a16">&#39;maybe&#39;</span>} <span style="color:#177500"># output?</span>
 </code></pre></div><blockquote>
-<p>“布尔类型是整数类型的子类型，布尔值在几乎所有环境中的行为都类似于值 0 和 1，但在转换为字符串时，分别得到的是字符串 False 或 True。”<br>
+<p>“布尔类型是整数类型的子类型,布尔值在几乎所有环境中的行为都类似于值 0 和 1,但在转换为字符串时,分别得到的是字符串 False 或 True.”<br>
 &ndash; The Standard Type Hierarchy</p>
 </blockquote>
 </li>
 </ol>
-<p>由于True，1， 1.0的__eq__和__hash__都一样，所以出现了神奇的结果。</p>
+<p>由于True,1, 1.0的__eq__和__hash__都一样,所以出现了神奇的结果.</p>
 <ol start="2">
 <li>
-<p><code>(1) != (1,) #第一个就是int，第二个是tuple</code></p>
+<p><code>(1) != (1,) #第一个就是int,第二个是tuple</code></p>
 </li>
 <li>
-<p>避免可变的默认参数, 例如:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">def</span> fun(count=[]):
-    count.append(2) <span style="color:#008000">#这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险!</span>
-    <span style="color:#00f">return</span> count
-fun()   <span style="color:#008000">#[2]</span>
-fun()   <span style="color:#008000">#[2,2]</span>
-</code></pre></div></li>
-<li>
-<p><code>...</code>和<code>pass</code>几乎等效的，这是一个ellipsis type的单例。</p>
+<p><code>...</code>和<code>pass</code>几乎等效的,这是一个ellipsis type的单例.</p>
 </li>
 </ol>
 <h2 id="staticmethod-classmethod">staticmethod classmethod</h2>
 <blockquote>
-<p>staticmethod和classmethod都可以通过Cls.m()或instance.m()方式访问，都可以被继承，都可以访问全局变量。区别是
-classmethod访问的class变量信息会自动在Derive子类中改变，而staticmethod因为缺少第一个cls参数，所以访问的全局变量始终是父类的变量。
-staticmethod可以理解为Java的StringUtils类，只是和Cls放在一起方便代码阅读和组织。
-classmethod则是可以通过cls参数访问到当前类信息的。</p>
+<p>staticmethod和classmethod都可以通过Cls.m()或instance.m()方式访问,都可以被继承,都可以访问全局变量.区别是
+classmethod访问的class变量信息会自动在Derive子类中改变,而staticmethod因为缺少第一个cls参数,所以访问的全局变量始终是父类的变量.
+staticmethod可以理解为Java的StringUtils类,只是和Cls放在一起方便代码阅读和组织.
+classmethod则是可以通过cls参数访问到当前类信息的.</p>
 </blockquote>
 <h2 id="str和bytes">str和bytes</h2>
 <ol>
-<li>py3.6开始，推荐使用f-string,不要使用<code> %s</code>或者 <code>&quot;&quot;.format()</code>。如果接收用户输入，使用Template做安全校验</li>
+<li>py3.6开始,推荐使用f-string,不要使用<code> %s</code>或者 <code>&quot;&quot;.format()</code>.如果接收用户输入,使用Template做安全校验</li>
 <li>多行string
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_very_big_string = (
-    <span style="color:#a31515">&#34;For a long time I used to go to bed early. Sometimes, &#34;</span>
-    <span style="color:#a31515">&#34;when I had put out my candle, my eyes would close so quickly &#34;</span>
-    <span style="color:#a31515">&#34;that I had not even time to say “I’m going to sleep.”&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000">my_very_big_string</span> <span style="color:#000">=</span> (
+    <span style="color:#c41a16">&#34;For a long time I used to go to bed early. Sometimes, &#34;</span>
+    <span style="color:#c41a16">&#34;when I had put out my candle, my eyes would close so quickly &#34;</span>
+    <span style="color:#c41a16">&#34;that I had not even time to say “I’m going to sleep.”&#34;</span>
 )
 </code></pre></div></li>
-<li>bytes 是不可变的数组，每个元素必须在0～255之间。
-bytearray是可变的，可以修改，增加，删除元素。
+<li>bytes 是不可变的数组,每个元素必须在0～255之间.
+bytearray是可变的,可以修改,增加,删除元素.
 转换 <code>bytes(ba)</code></li>
-<li>小整数池是[-5，256], string也有 string intern。</li>
+<li>小整数池是[-5,256], string也有 string intern.</li>
 </ol>
 <h2 id="pythonic的代码">pythonic的代码</h2>
 <ol>
-<li>使用for推导式,不要for..in遍历, 也少用map，filter</li>
+<li>使用for推导式,不要for..in遍历, 也少用map,filter</li>
 <li>多使用destructing,这点在Java/Go都不支持,可以在方法内部省很多代码
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">long_list = [x <span style="color:#00f">for</span> x <span style="color:#00f">in</span> range(100)]
-a, b, *c, d, e, f = long_list <span style="color:#008000">#e==98 f=99</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000">long_list</span> <span style="color:#000">=</span> [<span style="color:#000">x</span> <span style="color:#a90d91">for</span> <span style="color:#000">x</span> <span style="color:#000">in</span> <span style="color:#a90d91">range</span>(<span style="color:#1c01ce">100</span>)]
+<span style="color:#000">a</span>, <span style="color:#000">b</span>, <span style="color:#000">*</span><span style="color:#000">c</span>, <span style="color:#000">d</span>, <span style="color:#000">e</span>, <span style="color:#000">f</span> <span style="color:#000">=</span> <span style="color:#000">long_list</span> <span style="color:#177500">#e==98 f=99</span>
 </code></pre></div></li>
-<li>with语句可以同时打开多个文件,不要嵌套with，更多功能查看<code>contextlib</code></li>
+<li>with语句可以同时打开多个文件,不要嵌套with,更多功能查看<code>contextlib</code></li>
 <li>使用<code>if x is None</code>,而不是 <code>if x == None </code></li>
 <li>避免可变的默认参数, 例如:
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">def</span> fun(count=[]):
-    count.append(2) <span style="color:#008000">#这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险!</span>
-    <span style="color:#00f">return</span> count
-fun()   <span style="color:#008000">#[2]</span>
-fun()   <span style="color:#008000">#[2,2]</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">def</span> <span style="color:#000">fun</span>(<span style="color:#000">count</span><span style="color:#000">=</span>[]):
+    <span style="color:#000">count</span><span style="color:#000">.</span><span style="color:#000">append</span>(<span style="color:#1c01ce">2</span>) <span style="color:#177500">#这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险!</span>
+    <span style="color:#a90d91">return</span> <span style="color:#000">count</span>
+<span style="color:#000">fun</span>()   <span style="color:#177500">#[2]</span>
+<span style="color:#000">fun</span>()   <span style="color:#177500">#[2,2]</span>
 </code></pre></div></li>
 <li>新手多使用格式化,多看pycharm的提示,多在逻辑复杂处使用空行</li>
 <li>异常处理: 清楚except和assert场合,logging.error(&lsquo;xxxxxxx&rsquo;, exc_info=True).
 自定义异常必须重写__init__() 和 __str__()</li>
-<li>使用for i in range(len(a)):或者for i, v in enumerate(a):都是危险的。
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000"># 方法1</span>
-<span style="color:#008000"># 将list拷贝一下,遍历新数组的过程中,修改原list:</span>
-num_list = [1, 2, 3, 4, 5] 
-<span style="color:#00f">print</span>(num_list) 
-<span style="color:#00f">for</span> item <span style="color:#00f">in</span> num_list[:]:  <span style="color:#008000"># 这里list[:]是对原数组的拷贝,trick!!!</span>
-    <span style="color:#00f">if</span> item == 2: num_list.remove(item) 
-    <span style="color:#00f">else</span>: 
-        <span style="color:#00f">print</span>(item) 
-<span style="color:#00f">print</span>(num_list)
+<li>使用for i in range(len(a)):或者for i, v in enumerate(a):都是危险的.
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#177500"># 方法1</span>
+<span style="color:#177500"># 将list拷贝一下,遍历新数组的过程中,修改原list:</span>
+<span style="color:#000">num_list</span> <span style="color:#000">=</span> [<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">3</span>, <span style="color:#1c01ce">4</span>, <span style="color:#1c01ce">5</span>] 
+<span style="color:#a90d91">print</span>(<span style="color:#000">num_list</span>) 
+<span style="color:#a90d91">for</span> <span style="color:#000">item</span> <span style="color:#000">in</span> <span style="color:#000">num_list</span>[:]:  <span style="color:#177500"># 这里list[:]是对原数组的拷贝,trick!!!</span>
+    <span style="color:#a90d91">if</span> <span style="color:#000">item</span> <span style="color:#000">==</span> <span style="color:#1c01ce">2</span>: <span style="color:#000">num_list</span><span style="color:#000">.</span><span style="color:#000">remove</span>(<span style="color:#000">item</span>) 
+    <span style="color:#a90d91">else</span>: 
+        <span style="color:#a90d91">print</span>(<span style="color:#000">item</span>) 
+<span style="color:#a90d91">print</span>(<span style="color:#000">num_list</span>)
    
-<span style="color:#008000"># 方法2</span>
-<span style="color:#008000"># 如果数组很大,那应该使用倒序遍历:</span>
-<span style="color:#00f">for</span> i <span style="color:#00f">in</span> range(len(num_list)-1, -1, -1):
-    <span style="color:#00f">if</span> num_list[i] == 2:
-        num_list.pop(i)
-    <span style="color:#00f">else</span>:
-        <span style="color:#00f">print</span>(num_list[i])
+<span style="color:#177500"># 方法2</span>
+<span style="color:#177500"># 如果数组很大,那应该使用倒序遍历:</span>
+<span style="color:#a90d91">for</span> <span style="color:#000">i</span> <span style="color:#000">in</span> <span style="color:#a90d91">range</span>(<span style="color:#a90d91">len</span>(<span style="color:#000">num_list</span>)<span style="color:#000">-</span><span style="color:#1c01ce">1</span>, <span style="color:#000">-</span><span style="color:#1c01ce">1</span>, <span style="color:#000">-</span><span style="color:#1c01ce">1</span>):
+    <span style="color:#a90d91">if</span> <span style="color:#000">num_list</span>[<span style="color:#000">i</span>] <span style="color:#000">==</span> <span style="color:#1c01ce">2</span>:
+        <span style="color:#000">num_list</span><span style="color:#000">.</span><span style="color:#000">pop</span>(<span style="color:#000">i</span>)
+    <span style="color:#a90d91">else</span>:
+        <span style="color:#a90d91">print</span>(<span style="color:#000">num_list</span>[<span style="color:#000">i</span>])
            
-<span style="color:#008000"># 方法3 还是使用for推导式</span>
-[4 <span style="color:#00f">if</span> x==3 <span style="color:#00f">else</span> x <span style="color:#00f">for</span> x <span style="color:#00f">in</span> num_list]
+<span style="color:#177500"># 方法3 还是使用for推导式</span>
+[<span style="color:#1c01ce">4</span> <span style="color:#a90d91">if</span> <span style="color:#000">x</span><span style="color:#000">==</span><span style="color:#1c01ce">3</span> <span style="color:#a90d91">else</span> <span style="color:#000">x</span> <span style="color:#a90d91">for</span> <span style="color:#000">x</span> <span style="color:#000">in</span> <span style="color:#000">num_list</span>]
 </code></pre></div></li>
 <li>打印容器可以使用pprint.pprint</li>
 <li><code>x if x &lt; 10 else y</code></li>
 <li>use <code>reversed(lis)</code> over <code>lis[::-1]</code></li>
-<li>use pathlib over os.pathlib。 pathlib的方法不全。</li>
+<li>use pathlib over os.pathlib. pathlib的方法不全.</li>
 <li>os module is for system, sys this module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter.</li>
 <li>@property make a method to class&rsquo;s property. can not use () when access the method cuz it is prop.</li>
-<li>use assert protect your code. 不要使用assert检查数据， 断言可能被全局禁用，导致数据检查（或者更恐怖的权限检查）被跳过</li>
+<li>use assert protect your code. 不要使用assert检查数据, 断言可能被全局禁用,导致数据检查（或者更恐怖的权限检查）被跳过</li>
 </ol>
 <h2 id="容器">容器</h2>
 <ol>
 <li>dict.get()可以指定missing-key-value</li>
 <li>判断key是否存在: <code>if k in d:</code></li>
 <li>带索引遍历: <code>for idx, item in enumerate(x):</code></li>
-<li>list(l)等方式构建的list dict set属于浅复制，如果容器的元素还是容器，那么元素属于引用。
+<li>list(l)等方式构建的list dict set属于浅复制,如果容器的元素还是容器,那么元素属于引用.
 深度复制需要使用copy module
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> copy
-xs = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-zs = copy.deepcopy(xs)
-<span style="color:#008000"># 对象同样可以使用copy,还有__copy__等魔法方法可以探索</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">import</span> <span style="color:#000">copy</span>
+<span style="color:#000">xs</span> <span style="color:#000">=</span> [[<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">3</span>], [<span style="color:#1c01ce">4</span>, <span style="color:#1c01ce">5</span>, <span style="color:#1c01ce">6</span>], [<span style="color:#1c01ce">7</span>, <span style="color:#1c01ce">8</span>, <span style="color:#1c01ce">9</span>]]
+<span style="color:#000">zs</span> <span style="color:#000">=</span> <span style="color:#000">copy</span><span style="color:#000">.</span><span style="color:#000">deepcopy</span>(<span style="color:#000">xs</span>)
+<span style="color:#177500"># 对象同样可以使用copy,还有__copy__等魔法方法可以探索</span>
 </code></pre></div></li>
 <li>使用namedtuple可以让代码更容易阅读
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">from</span> collections <span style="color:#00f">import</span> namedtuple
-<span style="color:#00f">class</span> <span style="color:#2b91af">Car</span>:
-    <span style="color:#a31515">&#34;&#34;&#34;you do not modify the name and date attributes &#34;&#34;&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">from</span> <span style="color:#000">collections</span> <span style="color:#a90d91">import</span> <span style="color:#000">namedtuple</span>
+<span style="color:#a90d91">class</span> <span style="color:#3f6e75">Car</span>:
+    <span style="color:#c41a16">&#34;&#34;&#34;you do not modify the name and date attributes &#34;&#34;&#34;</span>
    
-    <span style="color:#00f">def</span> __init__(self, name, date):
-        self._name = name
-        self._date = date
+    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>, <span style="color:#000">name</span>, <span style="color:#000">date</span>):
+        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_name</span> <span style="color:#000">=</span> <span style="color:#000">name</span>
+        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_date</span> <span style="color:#000">=</span> <span style="color:#000">date</span>
    
    
-<span style="color:#008000"># use namedtuple</span>
-Car = namedtuple(<span style="color:#a31515">&#39;Car&#39;</span>, <span style="color:#a31515">&#39;name date&#39;</span>)  <span style="color:#008000"># 注意，这里多个属性可以一次性传入，使用空格分割</span>
-<span style="color:#008000"># 然后你可以将Car作为data class使用</span>
+<span style="color:#177500"># use namedtuple</span>
+<span style="color:#000">Car</span> <span style="color:#000">=</span> <span style="color:#000">namedtuple</span>(<span style="color:#c41a16">&#39;Car&#39;</span>, <span style="color:#c41a16">&#39;name date&#39;</span>)  <span style="color:#177500"># 注意,这里多个属性可以一次性传入,使用空格分割</span>
+<span style="color:#177500"># 然后你可以将Car作为data class使用</span>
    
-<span style="color:#008000">#还有一个type hint的版本</span>
-<span style="color:#00f">from</span> typing <span style="color:#00f">import</span> NamedTuple
+<span style="color:#177500">#还有一个type hint的版本</span>
+<span style="color:#a90d91">from</span> <span style="color:#000">typing</span> <span style="color:#a90d91">import</span> <span style="color:#000">NamedTuple</span>
 </code></pre></div></li>
 <li>不常用的一些容器
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">class</span> <span style="color:#2b91af">CountedObject</span>:
-    num_instances = 0
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">class</span> <span style="color:#3f6e75">CountedObject</span>:
+    <span style="color:#000">num_instances</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>
    
-    <span style="color:#00f">def</span> init(self):
-        self.__class__.num_instances += 1
+    <span style="color:#a90d91">def</span> <span style="color:#000">init</span>(<span style="color:#5b269a">self</span>):
+        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">__class__</span><span style="color:#000">.</span><span style="color:#000">num_instances</span> <span style="color:#000">+=</span> <span style="color:#1c01ce">1</span>
    
-<span style="color:#00f">from</span> types <span style="color:#00f">import</span> MappingProxyType <span style="color:#008000">#对外提供视图</span>
-<span style="color:#00f">from</span> collections <span style="color:#00f">import</span> defaultdict
-<span style="color:#00f">from</span> collections <span style="color:#00f">import</span> ChainMap
+<span style="color:#a90d91">from</span> <span style="color:#000">types</span> <span style="color:#a90d91">import</span> <span style="color:#000">MappingProxyType</span> <span style="color:#177500">#对外提供视图</span>
+<span style="color:#a90d91">from</span> <span style="color:#000">collections</span> <span style="color:#a90d91">import</span> <span style="color:#000">defaultdict</span>
+<span style="color:#a90d91">from</span> <span style="color:#000">collections</span> <span style="color:#a90d91">import</span> <span style="color:#000">ChainMap</span>
    
-frozenset
+<span style="color:#a90d91">frozenset</span>
 </code></pre></div></li>
-<li>list的元素可以不同，更为紧凑的单一类型是array 类型</li>
+<li>list的元素可以不同,更为紧凑的单一类型是array 类型</li>
 <li><code>Counter(string).most_common(3)</code></li>
 <li>sort map by key: print(sorted(dic, key=dic.get)), output: key in asc order</li>
 <li>deque
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">from</span> collections <span style="color:#00f">import</span> deque
-names = deque([<span style="color:#a31515">&#39;raymond&#39;</span>, <span style="color:#a31515">&#39;rachel&#39;</span>, <span style="color:#a31515">&#39;matthew&#39;</span>, <span style="color:#a31515">&#39;roger&#39;</span>,
-               <span style="color:#a31515">&#39;betty&#39;</span>, <span style="color:#a31515">&#39;melissa&#39;</span>, <span style="color:#a31515">&#39;judith&#39;</span>, <span style="color:#a31515">&#39;charlie&#39;</span>])
-names.popleft()
-names.appendleft(<span style="color:#a31515">&#39;mark&#39;</span>)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">from</span> <span style="color:#000">collections</span> <span style="color:#a90d91">import</span> <span style="color:#000">deque</span>
+<span style="color:#000">names</span> <span style="color:#000">=</span> <span style="color:#000">deque</span>([<span style="color:#c41a16">&#39;raymond&#39;</span>, <span style="color:#c41a16">&#39;rachel&#39;</span>, <span style="color:#c41a16">&#39;matthew&#39;</span>, <span style="color:#c41a16">&#39;roger&#39;</span>,
+               <span style="color:#c41a16">&#39;betty&#39;</span>, <span style="color:#c41a16">&#39;melissa&#39;</span>, <span style="color:#c41a16">&#39;judith&#39;</span>, <span style="color:#c41a16">&#39;charlie&#39;</span>])
+<span style="color:#000">names</span><span style="color:#000">.</span><span style="color:#000">popleft</span>()
+<span style="color:#000">names</span><span style="color:#000">.</span><span style="color:#000">appendleft</span>(<span style="color:#c41a16">&#39;mark&#39;</span>)
 </code></pre></div></li>
 <li>合并dict
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">system = dict(<span style="color:#a31515">&#34;path&#34;</span>, <span style="color:#a31515">&#34;c:/&#34;</span>, <span style="color:#a31515">&#34;env&#34;</span>, <span style="color:#a31515">&#34;prd&#34;</span>)
-user = dict(<span style="color:#a31515">&#34;path&#34;</span>, <span style="color:#a31515">&#34;d:/&#34;</span>, <span style="color:#a31515">&#34;env&#34;</span>, <span style="color:#a31515">&#34;dev&#34;</span>)
-system.update(user) <span style="color:#008000"># 遍历user，更新到system</span>
-final = {**system, **user}  <span style="color:#008000"># 右边的优先级高</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000">system</span> <span style="color:#000">=</span> <span style="color:#a90d91">dict</span>(<span style="color:#c41a16">&#34;path&#34;</span>, <span style="color:#c41a16">&#34;c:/&#34;</span>, <span style="color:#c41a16">&#34;env&#34;</span>, <span style="color:#c41a16">&#34;prd&#34;</span>)
+<span style="color:#000">user</span> <span style="color:#000">=</span> <span style="color:#a90d91">dict</span>(<span style="color:#c41a16">&#34;path&#34;</span>, <span style="color:#c41a16">&#34;d:/&#34;</span>, <span style="color:#c41a16">&#34;env&#34;</span>, <span style="color:#c41a16">&#34;dev&#34;</span>)
+<span style="color:#000">system</span><span style="color:#000">.</span><span style="color:#000">update</span>(<span style="color:#000">user</span>) <span style="color:#177500"># 遍历user,更新到system</span>
+<span style="color:#000">final</span> <span style="color:#000">=</span> {<span style="color:#000">**</span><span style="color:#000">system</span>, <span style="color:#000">**</span><span style="color:#000">user</span>}  <span style="color:#177500"># 右边的优先级高</span>
     
 </code></pre></div></li>
 </ol>
@@ -332,35 +324,35 @@ final = {**system, **user}  <span style="color:#008000"># 右边的优先级高<
 <li>@functools.wraps(func)</li>
 <li><code>__var</code> 在class环境中会被改写</li>
 <li>使用abc模块可以避免抽象类只有在未实现方法被调用时才抛出NotImplementedError</li>
-<li>理解python的dunder方法，可以写出超级简洁的方法：</li>
+<li>理解python的dunder方法,可以写出超级简洁的方法：</li>
 </ol>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">import</span> collections
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">import</span> <span style="color:#000">collections</span>
 
-Card = collections.namedtuple(<span style="color:#a31515">&#39;Card&#39;</span>, [<span style="color:#a31515">&#39;rank&#39;</span>, <span style="color:#a31515">&#39;suit&#39;</span>])
+<span style="color:#000">Card</span> <span style="color:#000">=</span> <span style="color:#000">collections</span><span style="color:#000">.</span><span style="color:#000">namedtuple</span>(<span style="color:#c41a16">&#39;Card&#39;</span>, [<span style="color:#c41a16">&#39;rank&#39;</span>, <span style="color:#c41a16">&#39;suit&#39;</span>])
 
-<span style="color:#00f">class</span> <span style="color:#2b91af">FrenchDeck</span>:
-    ranks = [str(n) <span style="color:#00f">for</span> n <span style="color:#00f">in</span> range(2, 11)] + list(<span style="color:#a31515">&#39;JQKA&#39;</span>)
-    suits = <span style="color:#a31515">&#39;spades diamonds clubs hearts&#39;</span>.split()
+<span style="color:#a90d91">class</span> <span style="color:#3f6e75">FrenchDeck</span>:
+    <span style="color:#000">ranks</span> <span style="color:#000">=</span> [<span style="color:#a90d91">str</span>(<span style="color:#000">n</span>) <span style="color:#a90d91">for</span> <span style="color:#000">n</span> <span style="color:#000">in</span> <span style="color:#a90d91">range</span>(<span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">11</span>)] <span style="color:#000">+</span> <span style="color:#a90d91">list</span>(<span style="color:#c41a16">&#39;JQKA&#39;</span>)
+    <span style="color:#000">suits</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;spades diamonds clubs hearts&#39;</span><span style="color:#000">.</span><span style="color:#000">split</span>()
 
-    <span style="color:#00f">def</span> __init__(self):
-        self._cards = [Card(rank, suit) <span style="color:#00f">for</span> suit <span style="color:#00f">in</span> self.suits
-                                        <span style="color:#00f">for</span> rank <span style="color:#00f">in</span> self.ranks]
+    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
+        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_cards</span> <span style="color:#000">=</span> [<span style="color:#000">Card</span>(<span style="color:#000">rank</span>, <span style="color:#000">suit</span>) <span style="color:#a90d91">for</span> <span style="color:#000">suit</span> <span style="color:#000">in</span> <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">suits</span>
+                                        <span style="color:#a90d91">for</span> <span style="color:#000">rank</span> <span style="color:#000">in</span> <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">ranks</span>]
 
-    <span style="color:#00f">def</span> __len__(self):
-        <span style="color:#00f">return</span> len(self._cards)
+    <span style="color:#a90d91">def</span> <span style="color:#000">__len__</span>(<span style="color:#5b269a">self</span>):
+        <span style="color:#a90d91">return</span> <span style="color:#a90d91">len</span>(<span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_cards</span>)
 
-    <span style="color:#00f">def</span> __getitem__(self, position):
-        <span style="color:#00f">return</span> self._cards[position]
+    <span style="color:#a90d91">def</span> <span style="color:#000">__getitem__</span>(<span style="color:#5b269a">self</span>, <span style="color:#000">position</span>):
+        <span style="color:#a90d91">return</span> <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_cards</span>[<span style="color:#000">position</span>]
 
-deck = new FrenchDeck()
-<span style="color:#00f">from</span> random <span style="color:#00f">import</span> choice
-choice(deck)
-<span style="color:#008000"># Card(rank=&#39;3&#39;, suit=&#39;hearts&#39;)</span>
-</code></pre></div><p>上面的例子我们使用了__len__方法和__getitem__方法，好处就是你可以使用python的len(deck)，deck[1]这种语法,也就是说<code>FrenchDeck</code>几乎就是一个容器类型，还可以使用for遍历。</p>
+<span style="color:#000">deck</span> <span style="color:#000">=</span> <span style="color:#000">new</span> <span style="color:#000">FrenchDeck</span>()
+<span style="color:#a90d91">from</span> <span style="color:#000">random</span> <span style="color:#a90d91">import</span> <span style="color:#000">choice</span>
+<span style="color:#000">choice</span>(<span style="color:#000">deck</span>)
+<span style="color:#177500"># Card(rank=&#39;3&#39;, suit=&#39;hearts&#39;)</span>
+</code></pre></div><p>上面的例子我们使用了__len__方法和__getitem__方法,好处就是你可以使用python的len(deck),deck[1]这种语法,也就是说<code>FrenchDeck</code>几乎就是一个容器类型,还可以使用for遍历.</p>
 <h2 id="调试与编译">调试与编译</h2>
 <ol>
 <li>使用help(),dir()获取信息</li>
-<li>python中的每个函数都有__code__属性，包含字节码信息</li>
+<li>python中的每个函数都有__code__属性,包含字节码信息</li>
 <li>使用dis模块的dis函数可以查看更容易阅读的汇编(dis == disassembler)</li>
 <li>sys.getsizeof(x)获取对象大小</li>
 </ol>
@@ -368,7 +360,6 @@ choice(deck)
 <p><a href="https://github.com/piglei/one-python-craftsman">python 工匠系列</a>
 <a href="https://realpython.com/learning-paths/">realpython学习路径</a>
 <a href="https://github.com/gto76/python-cheatsheet">一份非常详尽的python小抄</a></p>
-
     </div>
     <footer class="post-footer">
      
@@ -476,12 +467,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -493,16 +485,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

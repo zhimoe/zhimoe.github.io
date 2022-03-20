@@ -165,12 +165,22 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">152 字 ~1分钟</span>
+<span class="leancloud-visitors-count">155 字 ~1分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    找到一个最简单的介绍，不怎么想翻译，直接看原文吧: A Simple Introduction to AOP 提醒个点，使用注解的方式写切面时，增加了一个空方法，即： @Pointcut(&#34;execution(* org.bk.inventory.service.*.*(..))&#34;) public void serviceMethods(){ } 在使用xml配置的话，就不需要这个方法了，serviceMethods方法名是后面配置切点的引用。 如果不想引入s
+    <p>Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:
+<a href="https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html">A Simple Introduction to AOP</a></p>
+<p>提醒个点,使用注解的方式写切面时,增加了一个空方法,即：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">class</span> <span style="color:#3f6e75">Test</span><span style="color:#000">{</span>
+    <span style="color:#000">@Pointcut</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;execution(* org.bk.inventory.service.*.*(..))&#34;</span><span style="color:#000">)</span>
+    <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">serviceMethods</span><span style="color:#000">(){</span>
+        <span style="color:#177500">//...
+</span><span style="color:#177500"></span>    <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -224,12 +234,18 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1004 字 ~3分钟</span>
+<span class="leancloud-visitors-count">999 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    知识点太多了。先列举一些知识点，然后在分别做一点笔记。 模式 1。 共享可变性 2。 隔离可变性 3。 纯粹不可变性:STM, IO密集型任务和计算密集型任务 读写文件和网络请求这种算IO密集型任务，阻塞时间长，任务阻塞系数接近1；线程池大一点好， 判断质数的
+    <p>知识点太多了.先列举一些知识点,然后在分别做一点笔记.</p>
+<h4 id="模式">模式</h4>
+<ol>
+<li>共享可变性</li>
+<li>隔离可变性</li>
+<li>纯粹不可变性:STM,</li>
+</ol>
     </div>
     
     <div class="post-more-link text-center">
@@ -288,7 +304,9 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    定义任务的内容 多线程编程的核心元素就是任务，任务是独立的活动。不依赖其他任务的状态，结果，以及边界效应。 定义任务的内容使用Runnable和Callable。 Runnable 接口表示没有返回的一个过程（procedure），没有受检异常。 Callabe 接口的call
+    <h3 id="定义任务的内容">定义任务的内容</h3>
+<p>多线程编程的核心元素就是任务,任务是独立的活动.不依赖其他任务的状态,结果,以及边界效应.<br>
+定义任务的内容使用Runnable和Callable.</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -347,7 +365,14 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    synchronized method和synchronized block的区别 如果是synchronized(this),那么和synchronized 方法没有任何区别，锁定对象都是方法所在的对象。 synchronized void mymethod() { ... } void mymethod() { synchronized (this) { ... } } 但是synchronized blo
+    <h3 id="synchronized-method和synchronized-block的区别">synchronized method和synchronized block的区别</h3>
+<p>如果是synchronized(this),那么和synchronized 方法没有任何区别,锁定对象都是方法所在的对象.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">synchronized</span> <span style="color:#a90d91">void</span> <span style="color:#000">mymethod</span><span style="color:#000">()</span> <span style="color:#000">{</span> <span style="color:#000">...</span> <span style="color:#000">}</span>
+
+<span style="color:#a90d91">void</span> <span style="color:#000">mymethod</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">synchronized</span> <span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">)</span> <span style="color:#000">{</span> <span style="color:#000">...</span> <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -406,7 +431,21 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    AtomicLong code: public final long incrementAndGet() { for (;;) { long current = get(); long next = current + 1; if (compareAndSet(current, next)) return next; } } //in java 8: public final long incrementAndGet() { return unsafe.getAndAddLong(this, valueOffset, 1L) + 1L; } 基础 第一个版本是基于cas的，cas基于一个基础：有三个值，新值N，预期内存中的值E，内存中需要更新的值V，如果V == E,那么将V设置为N,返回V，结束；如果
+    <h4 id="atomiclong-code">AtomicLong code:</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">long</span> <span style="color:#000">incrementAndGet</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">for</span> <span style="color:#000">(;;)</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">long</span> <span style="color:#000">current</span> <span style="color:#000">=</span> <span style="color:#000">get</span><span style="color:#000">();</span>
+        <span style="color:#a90d91">long</span> <span style="color:#000">next</span> <span style="color:#000">=</span> <span style="color:#000">current</span> <span style="color:#000">+</span> <span style="color:#000">1</span><span style="color:#000">;</span>
+        <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">compareAndSet</span><span style="color:#000">(</span><span style="color:#000">current</span><span style="color:#000">,</span> <span style="color:#000">next</span><span style="color:#000">))</span>
+          <span style="color:#a90d91">return</span> <span style="color:#000">next</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+<span style="color:#177500">//in java 8:
+</span><span style="color:#177500"></span><span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">long</span> <span style="color:#000">incrementAndGet</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">return</span> <span style="color:#000">unsafe</span><span style="color:#000">.</span><span style="color:#836c28">getAndAddLong</span><span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">,</span> <span style="color:#000">valueOffset</span><span style="color:#000">,</span> <span style="color:#000">1L</span><span style="color:#000">)</span> <span style="color:#000">+</span> <span style="color:#000">1L</span><span style="color:#000">;</span>
+<span style="color:#000">}</span>
+
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -460,12 +499,12 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">342 字 ~1分钟</span>
+<span class="leancloud-visitors-count">364 字 ~1分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    好难，看不懂呀！ 先自己写一个CountDownLatch的示例： CountDownLatch是管理一组线程和一个主线程的先后。主线程wait后就阻塞，直到所有的CountDownLatch调用countDown后主线程接着开始。 package angus.intrview.concurrent; import java.util.concurrent.CountDownLatch; import java.util.concurrent.TimeUnit;
+    <p>CountDownLatch和CyclicBarrier示例</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -481,7 +520,7 @@
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
         <a class="post-title-link" href="https://zhimoe.github.io/post/java-and-equal/" itemprop="url">
-        Java-==-and-equal
+        Java-==-and-equals
         </a>
       </h1>
       <div class="post-meta">
@@ -519,12 +558,12 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">351 字 ~1分钟</span>
+<span class="leancloud-visitors-count">347 字 ~1分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    /** * samples for == and equal() * @author hsiung * */ class TestObj { // the class for test == and equal() } public class EqualAndCompare { public static void main(String[] args) { TestObj obj1 = new TestObj(); TestObj obj2 = new TestObj(); TestObj obj3 = obj1; System.out.println(obj1 == obj2);// false , // == Compares references, not values System.out.println(obj1 == obj3);// true System.out.println(obj1.equals(obj2));// false, // equal() method is derived from java.lang.Object, if not override,nor // in superclass,then equal behave as same as == // Always remember to override hashCode if you override equals so as not // to &#34;break the contract&#34;. // As per the API, the result returned from the hashCode() method for // two objects must be
+    <p>samples code and notes on java == and equals</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -583,7 +622,10 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    好文 Java 动态代理机制分析及扩展 更深入的一篇: java设计模式-动态代理模式 优势 相比 静态代理，动态代理具有更强的 灵活性，因为它不用在我们设计实现的时候就指定 某一个代理类来代理哪一个被代理对象，我们可以把这种指定延迟到程序运行时由 JVM来实现。 实
+    <h3 id="好文">好文</h3>
+<p><a href="http://www.ibm.com/developerworks/cn/java/j-lo-proxy1/">Java 动态代理机制分析及扩展</a></p>
+<p>更深入的一篇:
+<a href="http://nemotan.github.io/2015/11/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">java设计模式-动态代理模式</a></p>
     </div>
     
     <div class="post-more-link text-center">
@@ -713,12 +755,20 @@
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
+<div class="feed-link motion-element">
+<a href="https://zhimoe.github.io/index.xml" rel="alternate" type="application/rss+xml" target="_blank">
+    <i class="fa fa-rss"></i>
+    RSS 订阅
+</a>
+</div>
+
       
 <div class="links-of-author motion-element">
     
@@ -730,16 +780,9 @@
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

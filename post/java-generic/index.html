@@ -168,100 +168,99 @@
     </header>
     <div class="post-body" itemprop="articleBody">
     <h3 id="泛型">泛型</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#008000">// 类
-</span><span style="color:#008000"></span><span style="color:#00f">class</span> <span style="color:#2b91af">Tuple</span>&lt;T, S&gt; {
-    <span style="color:#00f">private</span> T first;
-    <span style="color:#00f">private</span> S second;
-}
-<span style="color:#008000">// 泛型方法也可在非泛型类里面
-</span><span style="color:#008000"></span><span style="color:#00f">class</span> <span style="color:#2b91af">ArrayAlg</span> {
-    <span style="color:#00f">public</span> <span style="color:#00f">static</span> &lt;T&gt; T getMiddle(T... a) {
-        <span style="color:#00f">return</span> a[a.length / 2];
-    }
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">// 类
+</span><span style="color:#177500"></span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">Tuple</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">,</span> <span style="color:#000">S</span><span style="color:#000">&gt;</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">private</span> <span style="color:#000">T</span> <span style="color:#000">first</span><span style="color:#000">;</span>
+    <span style="color:#a90d91">private</span> <span style="color:#000">S</span> <span style="color:#000">second</span><span style="color:#000">;</span>
+<span style="color:#000">}</span>
+<span style="color:#177500">// 泛型方法也可在非泛型类里面
+</span><span style="color:#177500"></span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">ArrayAlg</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">T</span> <span style="color:#000">getMiddle</span><span style="color:#000">(</span><span style="color:#000">T</span><span style="color:#000">...</span> <span style="color:#000">a</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">return</span> <span style="color:#000">a</span><span style="color:#000">[</span><span style="color:#000">a</span><span style="color:#000">.</span><span style="color:#836c28">length</span> <span style="color:#000">/</span> <span style="color:#000">2</span><span style="color:#000">];</span>
+    <span style="color:#000">}</span>
 
-}
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String middle = ArrayAlg.&lt;String&gt;getMiddle(<span style="color:#a31515">&#34;]ohnM, &#34;</span>Q.n, <span style="color:#a31515">&#34;Public&#34;</span>);<span style="color:#008000">// right,&lt;String&gt;可以省略
-</span><span style="color:#008000"></span>
-String middle = GenericCls.getMiddle(<span style="color:#a31515">&#34;hello&#34;</span>,0,<span style="color:#00f">null</span>);<span style="color:#008000">// error
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//  Errr:(7, 45) java: 不兼容的类型: 推断类型不符合上限
-</span><span style="color:#008000">//     推断: java.lang.Object&amp;java.io.Serializable&amp;java.lang.Comparable&lt;? extends java.lang.Object&amp;java.io.Serializable&amp;java.lang.Comparable&lt;?&gt;&gt;
-</span><span style="color:#008000">//     上限: java.lang.String,java.lang.Object 
+<span style="color:#000">}</span>
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">String</span> <span style="color:#000">middle</span> <span style="color:#000">=</span> <span style="color:#000">ArrayAlg</span><span style="color:#000">.&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;</span><span style="color:#000">getMiddle</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;]ohnM, &#34;</span><span style="color:#000">Q</span><span style="color:#000">.</span><span style="color:#836c28">n</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Public&#34;</span><span style="color:#000">);</span><span style="color:#177500">// right,&lt;String&gt;可以省略
+</span><span style="color:#177500"></span>
+<span style="color:#000">String</span> <span style="color:#000">middle</span> <span style="color:#000">=</span> <span style="color:#000">GenericCls</span><span style="color:#000">.</span><span style="color:#836c28">getMiddle</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;hello&#34;</span><span style="color:#000">,</span><span style="color:#000">0</span><span style="color:#000">,</span><span style="color:#a90d91">null</span><span style="color:#000">);</span><span style="color:#177500">// error
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//  Errr:(7, 45) java: 不兼容的类型: 推断类型不符合上限
+</span><span style="color:#177500">//     推断: java.lang.Object&amp;java.io.Serializable&amp;java.lang.Comparable&lt;? extends java.lang.Object&amp;java.io.Serializable&amp;java.lang.Comparable&lt;?&gt;&gt;
+</span><span style="color:#177500">//     上限: java.lang.String,java.lang.Object 
 </span></code></pre></div><h4 id="类型限定">类型限定</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">static</span> &lt;T <span style="color:#00f">extends</span> Comparable&gt; T min(T a)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#000">&lt;</span><span style="color:#000">T</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Comparable</span><span style="color:#000">&gt;</span> <span style="color:#000">T</span> <span style="color:#000">min</span><span style="color:#000">(</span><span style="color:#000">T</span> <span style="color:#000">a</span><span style="color:#000">)</span>
 
-<span style="color:#008000">// 如果多个类型，则：T extends Comparable &amp; Serializable
-</span><span style="color:#008000">// 只能有一个类，且类必须紧跟extends，但是可以有多个接口
-</span><span style="color:#008000"></span>
+<span style="color:#177500">// 如果多个类型,则：T extends Comparable &amp; Serializable
+</span><span style="color:#177500">// 只能有一个类,且类必须紧跟extends,但是可以有多个接口
+</span><span style="color:#177500"></span>
 </code></pre></div><h3 id="类型擦除">类型擦除</h3>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
-<span style="color:#008000">//Tuple&lt;T,S&gt;在虚拟机变为
-</span><span style="color:#008000"></span><span style="color:#00f">class</span> <span style="color:#2b91af">Tuple</span> {
-    <span style="color:#00f">private</span> Object first;<span style="color:#008000">//当调用getFirst时,则发生强制转换
-</span><span style="color:#008000"></span>    <span style="color:#00f">private</span> Object second;
-}
+<span style="color:#177500">//Tuple&lt;T,S&gt;在虚拟机变为
+</span><span style="color:#177500"></span><span style="color:#a90d91">class</span> <span style="color:#3f6e75">Tuple</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">private</span> <span style="color:#000">Object</span> <span style="color:#000">first</span><span style="color:#000">;</span><span style="color:#177500">//当调用getFirst时,则发生强制转换
+</span><span style="color:#177500"></span>    <span style="color:#a90d91">private</span> <span style="color:#000">Object</span> <span style="color:#000">second</span><span style="color:#000">;</span>
+<span style="color:#000">}</span>
 
-<span style="color:#008000">//泛型方法同样有擦除
-</span><span style="color:#008000"></span><span style="color:#00f">public</span> <span style="color:#00f">static</span> &lt;T <span style="color:#00f">extends</span> Comparable&gt; T min(T a)
-<span style="color:#008000">// =&gt;
-</span><span style="color:#008000"></span><span style="color:#00f">public</span> <span style="color:#00f">static</span> Comparable min(Comparable a)
+<span style="color:#177500">//泛型方法同样有擦除
+</span><span style="color:#177500"></span><span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#000">&lt;</span><span style="color:#000">T</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Comparable</span><span style="color:#000">&gt;</span> <span style="color:#000">T</span> <span style="color:#000">min</span><span style="color:#000">(</span><span style="color:#000">T</span> <span style="color:#000">a</span><span style="color:#000">)</span>
+<span style="color:#177500">// =&gt;
+</span><span style="color:#177500"></span><span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#000">Comparable</span> <span style="color:#000">min</span><span style="color:#000">(</span><span style="color:#000">Comparable</span> <span style="color:#000">a</span><span style="color:#000">)</span>
 
 </code></pre></div><h3 id="约束">约束</h3>
 <ul>
 <li>不能用基本类型实例化泛型,<code>Pair&lt;double&gt;</code>不允许</li>
 <li>运行时参数类型检查只能检查原始类型</li>
 </ul>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">if</span> (a <span style="color:#00f">instanceof</span> Pair&lt;String&gt;) <span style="color:#008000">// Error
-</span><span style="color:#008000"></span><span style="color:#00f">if</span> (a <span style="color:#00f">instanceof</span> Pair&lt;T&gt;) <span style="color:#008000">// Error
-</span><span style="color:#008000"></span>Pair&lt;String&gt; p = (Pair&lt;String&gt;) a; <span style="color:#008000">//warning
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">a</span> <span style="color:#a90d91">instanceof</span> <span style="color:#000">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;)</span> <span style="color:#177500">// Error
+</span><span style="color:#177500"></span><span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">a</span> <span style="color:#a90d91">instanceof</span> <span style="color:#000">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;)</span> <span style="color:#177500">// Error
+</span><span style="color:#177500"></span><span style="color:#000">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;</span> <span style="color:#000">p</span> <span style="color:#000">=</span> <span style="color:#000">(</span><span style="color:#000">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;)</span> <span style="color:#000">a</span><span style="color:#000">;</span> <span style="color:#177500">//warning
 </span></code></pre></div><ul>
 <li>不能创建参数化类型的数组</li>
 </ul>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Pair&lt;String&gt;[] table = <span style="color:#00f">new</span> Pair&lt;String&gt;[10]; <span style="color:#008000">// Error
-</span><span style="color:#008000"></span>Pair&lt;String&gt;[] table; <span style="color:#008000">//声明是合法的,只是无法实例化
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;[]</span> <span style="color:#000">table</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;[</span><span style="color:#000">10</span><span style="color:#000">];</span> <span style="color:#177500">// Error
+</span><span style="color:#177500"></span><span style="color:#000">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;[]</span> <span style="color:#000">table</span><span style="color:#000">;</span> <span style="color:#177500">//声明是合法的,只是无法实例化
 </span></code></pre></div><ul>
 <li>借助@SafeVarargs参数化类型的数组</li>
 </ul>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">@SafeVarargs
-<span style="color:#00f">public</span> <span style="color:#00f">static</span> &lt;T&gt; <span style="color:#2b91af">void</span> addAll(Collection&lt;T&gt; coll, T... ts)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">@SafeVarargs</span>
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#a90d91">void</span> <span style="color:#000">addAll</span><span style="color:#000">(</span><span style="color:#000">Collection</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">coll</span><span style="color:#000">,</span> <span style="color:#000">T</span><span style="color:#000">...</span> <span style="color:#000">ts</span><span style="color:#000">)</span>
 </code></pre></div><ul>
-<li>Class类本身是泛型。 例如，String.daSS 是一个 Class<!-- raw HTML omitted --> 的实例（事实上，它是唯一的实例。) 因此，makePair 方法能够推断出 pair 的类型</li>
+<li>Class类本身是泛型. 例如,String.daSS 是一个 Class<!-- raw HTML omitted --> 的实例（事实上,它是唯一的实例.) 因此,makePair 方法能够推断出 pair 的类型</li>
 <li>泛型类的静态上下文中类型变量无效</li>
 </ul>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Singleton</span>&lt;T&gt; {
-    <span style="color:#00f">private</span> <span style="color:#00f">static</span> T singlelnstance; <span style="color:#008000">// Error
-</span><span style="color:#008000"></span>    <span style="color:#00f">public</span> <span style="color:#00f">static</span> T getSinglelnstance{<span style="color:#008000">// Error
-</span><span style="color:#008000"></span>        <span style="color:#00f">if</span> (singleinstance == <span style="color:#00f">null</span>) {<span style="color:#008000">//construct new instance of T
-</span><span style="color:#008000"></span>            <span style="color:#00f">return</span> singlelnstance;
-        }
-    }
-}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Singleton</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#000">T</span> <span style="color:#000">singlelnstance</span><span style="color:#000">;</span> <span style="color:#177500">// Error
+</span><span style="color:#177500"></span>    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#000">T</span> <span style="color:#000">getSinglelnstance</span><span style="color:#000">{</span><span style="color:#177500">// Error
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">singleinstance</span> <span style="color:#000">==</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span><span style="color:#177500">//construct new instance of T
+</span><span style="color:#177500"></span>            <span style="color:#a90d91">return</span> <span style="color:#000">singlelnstance</span><span style="color:#000">;</span>
+        <span style="color:#000">}</span>
+    <span style="color:#000">}</span>
+<span style="color:#000">}</span>
 </code></pre></div><ul>
 <li>不能抛出或捕获泛型类的实例</li>
 </ul>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Problem</span>&lt;T&gt; <span style="color:#00f">extends</span> Exception { <span style="color:#008000">/* . . . */</span> } <span style="color:#008000">// Error can&#39;t extend Throwable
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Problem</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Exception</span> <span style="color:#000">{</span> <span style="color:#177500">/* . . . */</span> <span style="color:#000">}</span> <span style="color:#177500">// Error can&#39;t extend Throwable
 </span></code></pre></div><ul>
 <li>泛型擦除的方法冲突</li>
 </ul>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Pair</span>&lt;T&gt; {
-    T first;
-    T second;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">{</span>
+    <span style="color:#000">T</span> <span style="color:#000">first</span><span style="color:#000">;</span>
+    <span style="color:#000">T</span> <span style="color:#000">second</span><span style="color:#000">;</span>
 
-    <span style="color:#00f">public</span> <span style="color:#2b91af">boolean</span> equals(T value) { <span style="color:#008000">//error 和Object.equals冲突
-</span><span style="color:#008000"></span>        <span style="color:#00f">return</span> first.equals(value) &amp;&amp; second, equals(value);
-    }
-}
+    <span style="color:#a90d91">public</span> <span style="color:#a90d91">boolean</span> <span style="color:#000">equals</span><span style="color:#000">(</span><span style="color:#000">T</span> <span style="color:#000">value</span><span style="color:#000">)</span> <span style="color:#000">{</span> <span style="color:#177500">//error 和Object.equals冲突
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">return</span> <span style="color:#000">first</span><span style="color:#000">.</span><span style="color:#836c28">equals</span><span style="color:#000">(</span><span style="color:#000">value</span><span style="color:#000">)</span> <span style="color:#000">&amp;&amp;</span> <span style="color:#000">second</span><span style="color:#000">,</span> <span style="color:#000">equals</span><span style="color:#000">(</span><span style="color:#000">value</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
+<span style="color:#000">}</span>
 </code></pre></div><h3 id="泛型继承">泛型继承</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">class</span> <span style="color:#2b91af">Employee</span>
-<span style="color:#00f">class</span> <span style="color:#2b91af">Manager</span> <span style="color:#00f">extends</span> Employee
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">class</span> <span style="color:#3f6e75">Employee</span>
+<span style="color:#a90d91">class</span> <span style="color:#3f6e75">Manager</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Employee</span>
 
-<span style="color:#008000">//Pair&lt;Employee&gt; 和Pair&lt;Manager&gt; 没用任何继承关系
-</span><span style="color:#008000"></span>
+<span style="color:#177500">//Pair&lt;Employee&gt; 和Pair&lt;Manager&gt; 没用任何继承关系
+</span><span style="color:#177500"></span>
 </code></pre></div><h3 id="通配符-和-pecs">通配符 和 PECS</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Pair&lt;? <span style="color:#00f">extends</span> Employee<span style="">〉</span>
-Pair&lt;? <span style="color:#00f">super</span> Manager
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">Pair</span><span style="color:#000">&lt;?</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Employee</span><span style="color:#000">〉</span>
+<span style="color:#000">Pair</span><span style="color:#000">&lt;?</span> <span style="color:#a90d91">super</span> <span style="color:#000">Manager</span>
 </code></pre></div><h3 id="反射和泛型">反射和泛型</h3>
-
     </div>
     <footer class="post-footer">
      
@@ -369,12 +368,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -386,16 +386,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scala-for-impatient on zhimoe</title>
+    <link>https://zhimoe.github.io/tags/scala-for-impatient/</link>
+    <description>Recent content in scala-for-impatient on zhimoe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 15 Jan 2020 21:42:33 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhimoe.github.io/tags/scala-for-impatient/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Highlights in Scala for Impatient 2nd</title>
+      <link>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</link>
+      <pubDate>Wed, 15 Jan 2020 21:42:33 +0800</pubDate>
+      
+      <guid>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</guid>
+      <description>&lt;p&gt;key points in scala-for-impatient 2nd book, best book for java developer to use scala in a rush.
+scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala帮助很大.&lt;/p&gt;
+&lt;h3 id=&#34;functions&#34;&gt;Functions&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;• if expression has a value.
+• A block has a value — the value of its last expression.
+• The Scala for loop is like an “enhanced” Java for loop.
+• Semicolons are (mostly) optional.
+• The void type is Unit.
+• Avoid using `return` in a function.
+• Beware of missing = in a function definition.
+• Exceptions work just like in Java or C++, but you use a “pattern matching” syntax for catch.
+• Scala has no checked exceptions.
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

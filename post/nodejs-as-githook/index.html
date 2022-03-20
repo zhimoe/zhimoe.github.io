@@ -162,102 +162,102 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">901 字 ~2分钟</span>
+<span class="leancloud-visitors-count">896 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>如何在git hook中调用nodejs脚本。主要踩坑在于不知道如何在bash中获取node脚本返回值，搜了好大一圈。</p>
+    <p>如何在git hook中调用nodejs脚本.主要踩坑在于不知道如何在bash中获取node脚本返回值,搜了好大一圈.</p>
 <h2 id="背景">背景</h2>
-<p>微服务模式开发中，每个小组维护自己的应用，通过一个nginx入口反向代理所有的子应用，向用户开放一个站点。nginx应用中需要维护各个子应用的代理，即ng.conf中的location。
-此外，一个应用需要配置DEV,ST,UAT,PRD四个环境的location。目前的做法是www/ngconf/目录下面分为dev、st、uat、prd四个文件夹，在文件夹内部每个小组各自维护一个conf文件。
-每增加一个应用，需要在四个文件夹中自己小组的配置文件添加配置。随着应用越来越多，以及人员流动，会发生不同文件配置相同的location entry。
-例如A应用上线一个功能需要依赖B应用，但是新人不知道B已经配置过了，所以又重复添加了一个，导致启动报错。</p>
+<p>微服务模式开发中,每个小组维护自己的应用,通过一个nginx入口反向代理所有的子应用,向用户开放一个站点.nginx应用中需要维护各个子应用的代理,即ng.conf中的location.
+此外,一个应用需要配置DEV,ST,UAT,PRD四个环境的location.目前的做法是www/ngconf/目录下面分为dev、st、uat、prd四个文件夹,在文件夹内部每个小组各自维护一个conf文件.
+每增加一个应用,需要在四个文件夹中自己小组的配置文件添加配置.随着应用越来越多,以及人员流动,会发生不同文件配置相同的location entry.
+例如A应用上线一个功能需要依赖B应用,但是新人不知道B已经配置过了,所以又重复添加了一个,导致启动报错.</p>
 <h2 id="需求">需求</h2>
-<p>入口应用是一个nodejs应用，自然选择了js脚本检查conf文件location path配置是否重复。</p>
+<p>入口应用是一个nodejs应用,自然选择了js脚本检查conf文件location path配置是否重复.</p>
 <h2 id="实现">实现</h2>
-<p>在git hook目录下，新增一个<code>pre-commit</code>文件,添加内容：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#00f">#!/usr/bin/sh
-</span><span style="color:#00f"></span><span style="color:#008000"># 检查项目中同一个目录下面的nginx conf 所有location是否重复</span>
-<span style="color:#00f">if</span> [ -e ./ngconf_check.js ]; <span style="color:#00f">then</span>
+<p>在git hook目录下,新增一个<code>pre-commit</code>文件,添加内容：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#633820">#!/usr/bin/sh
+</span><span style="color:#633820"></span><span style="color:#177500"># 检查项目中同一个目录下面的nginx conf 所有location是否重复</span>
+<span style="color:#a90d91">if</span> <span style="color:#000">[</span> -e ./ngconf_check.js <span style="color:#000">]</span>; <span style="color:#a90d91">then</span>
     node ngconf_check.js
-    <span style="color:#00f">if</span> [[ $? != 0 ]]; <span style="color:#00f">then</span>
-        echo &gt;&amp;2 fix duplicate location entry in nginx conf
-        exit 1
-    <span style="color:#00f">fi</span>
-<span style="color:#00f">fi</span>
+    <span style="color:#a90d91">if</span> <span style="color:#000">[[</span> <span style="color:#000">$?</span> !<span style="color:#000">=</span> <span style="color:#1c01ce">0</span> <span style="color:#000">]]</span>; <span style="color:#a90d91">then</span>
+        <span style="color:#a90d91">echo</span> &gt;&amp;<span style="color:#1c01ce">2</span> fix duplicate location entry in nginx conf
+        <span style="color:#a90d91">exit</span> <span style="color:#1c01ce">1</span>
+    <span style="color:#a90d91">fi</span>
+<span style="color:#a90d91">fi</span>
 
-<span style="color:#008000"># 如果项目有自定义pre-commit，执行</span>
-<span style="color:#00f">if</span> [ -e ./.git/hooks/pre-commit ]; <span style="color:#00f">then</span>
-    ./.git/hooks/pre-commit <span style="color:#a31515">&#34;</span>$@<span style="color:#a31515">&#34;</span>
-<span style="color:#00f">fi</span>
-exit 0
-</code></pre></div><p>要点： bash中<code>$?</code>表示获取上命令的返回值。这里获得的是js脚本的process.exit(code)返回的code。 默认返回是0。</p>
+<span style="color:#177500"># 如果项目有自定义pre-commit,执行</span>
+<span style="color:#a90d91">if</span> <span style="color:#000">[</span> -e ./.git/hooks/pre-commit <span style="color:#000">]</span>; <span style="color:#a90d91">then</span>
+    ./.git/hooks/pre-commit <span style="color:#c41a16">&#34;</span><span style="color:#000">$@</span><span style="color:#c41a16">&#34;</span>
+<span style="color:#a90d91">fi</span>
+<span style="color:#a90d91">exit</span> <span style="color:#1c01ce">0</span>
+</code></pre></div><p>要点： bash中<code>$?</code>表示获取上命令的返回值.这里获得的是js脚本的process.exit(code)返回的code. 默认返回是0.</p>
 <p>ngconf_check.js：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000">// 检查ng conf是否有重复的location entry
-</span><span style="color:#008000"></span><span style="color:#00f">const</span> fs = require(<span style="color:#a31515">&#39;fs&#39;</span>);
-<span style="color:#00f">const</span> path = require(<span style="color:#a31515">&#39;path&#39;</span>);
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#177500">// 检查ng conf是否有重复的location entry
+</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">fs</span> <span style="color:#000">=</span> <span style="color:#000">require</span>(<span style="color:#c41a16">&#39;fs&#39;</span>);
+<span style="color:#a90d91">const</span> <span style="color:#000">path</span> <span style="color:#000">=</span> <span style="color:#000">require</span>(<span style="color:#c41a16">&#39;path&#39;</span>);
 
-<span style="color:#00f">const</span> ConfEnvDirs = <span style="color:#00f">new</span> Set();
-ConfEnvDirs.add(<span style="color:#a31515">&#39;dev&#39;</span>);
-ConfEnvDirs.add(<span style="color:#a31515">&#39;st&#39;</span>);
-ConfEnvDirs.add(<span style="color:#a31515">&#39;uat&#39;</span>);
-ConfEnvDirs.add(<span style="color:#a31515">&#39;prd&#39;</span>);
-<span style="color:#00f">const</span> NgconfPath = <span style="color:#a31515">&#39;www/ngconf&#39;</span>;
+<span style="color:#a90d91">const</span> <span style="color:#000">ConfEnvDirs</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">Set</span>();
+<span style="color:#000">ConfEnvDirs</span>.<span style="color:#000">add</span>(<span style="color:#c41a16">&#39;dev&#39;</span>);
+<span style="color:#000">ConfEnvDirs</span>.<span style="color:#000">add</span>(<span style="color:#c41a16">&#39;st&#39;</span>);
+<span style="color:#000">ConfEnvDirs</span>.<span style="color:#000">add</span>(<span style="color:#c41a16">&#39;uat&#39;</span>);
+<span style="color:#000">ConfEnvDirs</span>.<span style="color:#000">add</span>(<span style="color:#c41a16">&#39;prd&#39;</span>);
+<span style="color:#a90d91">const</span> <span style="color:#000">NgconfPath</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;www/ngconf&#39;</span>;
 
-<span style="color:#00f">let</span> result = <span style="color:#a31515">&#39;pass&#39;</span>;
-countLocationInDir(NgconfPath);
-<span style="color:#00f">if</span>(result !== <span style="color:#a31515">&#39;pass&#39;</span>){
-    process.exit(1);<span style="color:#008000">//向bash返回1
-</span><span style="color:#008000"></span>}
+<span style="color:#a90d91">let</span> <span style="color:#000">result</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;pass&#39;</span>;
+<span style="color:#000">countLocationInDir</span>(<span style="color:#000">NgconfPath</span>);
+<span style="color:#a90d91">if</span>(<span style="color:#000">result</span> <span style="color:#000">!==</span> <span style="color:#c41a16">&#39;pass&#39;</span>){
+    <span style="color:#000">process</span>.<span style="color:#000">exit</span>(<span style="color:#1c01ce">1</span>);<span style="color:#177500">//向bash返回1
+</span><span style="color:#177500"></span>}
 
-<span style="color:#008000">/**
-</span><span style="color:#008000"> *
-</span><span style="color:#008000"> * @param rootPath
-</span><span style="color:#008000"> */</span>
-<span style="color:#00f">function</span> countLocationInDir(rootPath) {
-    <span style="color:#00f">if</span> (!fs.existsSync(rootPath)) <span style="color:#00f">return</span>;
-    <span style="color:#00f">let</span> dirs = fs.readdirSync(rootPath);
-    dirs.forEach(dir =&gt; {
-        <span style="color:#00f">let</span> envDir = path.join(rootPath, dir);
-        <span style="color:#008000">//只处理四个环境目录下的conf文件,每个目录用一个map记录
-</span><span style="color:#008000"></span>        <span style="color:#00f">const</span> LocationEntryMap = <span style="color:#00f">new</span> Map();<span style="color:#008000">//location entry -&gt; file,line
-</span><span style="color:#008000"></span>        <span style="color:#00f">if</span> (!(fs.statSync(envDir).isDirectory() &amp;&amp; ConfEnvDirs.has(dir))) {
-            <span style="color:#00f">return</span>;
+<span style="color:#177500">/**
+</span><span style="color:#177500"> *
+</span><span style="color:#177500"> * @param rootPath
+</span><span style="color:#177500"> */</span>
+<span style="color:#a90d91">function</span> <span style="color:#000">countLocationInDir</span>(<span style="color:#000">rootPath</span>) {
+    <span style="color:#a90d91">if</span> (<span style="color:#000">!</span><span style="color:#000">fs</span>.<span style="color:#000">existsSync</span>(<span style="color:#000">rootPath</span>)) <span style="color:#a90d91">return</span>;
+    <span style="color:#a90d91">let</span> <span style="color:#000">dirs</span> <span style="color:#000">=</span> <span style="color:#000">fs</span>.<span style="color:#000">readdirSync</span>(<span style="color:#000">rootPath</span>);
+    <span style="color:#000">dirs</span>.<span style="color:#000">forEach</span>(<span style="color:#000">dir</span> =&gt; {
+        <span style="color:#a90d91">let</span> <span style="color:#000">envDir</span> <span style="color:#000">=</span> <span style="color:#000">path</span>.<span style="color:#000">join</span>(<span style="color:#000">rootPath</span>, <span style="color:#000">dir</span>);
+        <span style="color:#177500">//只处理四个环境目录下的conf文件,每个目录用一个map记录
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">const</span> <span style="color:#000">LocationEntryMap</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">Map</span>();<span style="color:#177500">//location entry -&gt; file,line
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">if</span> (<span style="color:#000">!</span>(<span style="color:#000">fs</span>.<span style="color:#000">statSync</span>(<span style="color:#000">envDir</span>).<span style="color:#000">isDirectory</span>() <span style="color:#000">&amp;&amp;</span> <span style="color:#000">ConfEnvDirs</span>.<span style="color:#000">has</span>(<span style="color:#000">dir</span>))) {
+            <span style="color:#a90d91">return</span>;
         }
-        <span style="color:#00f">let</span> confFiles = fs.readdirSync(envDir);
-        confFiles.forEach(filename =&gt; {
-            <span style="color:#00f">let</span> fullPath = path.join(envDir, filename);
-            <span style="color:#00f">if</span> (fs.lstatSync(fullPath).isFile() &amp;&amp; <span style="color:#a31515">/[\w\W.].conf$/</span>.test(filename)) {
-                countLocationsInFile(fullPath, LocationEntryMap);
+        <span style="color:#a90d91">let</span> <span style="color:#000">confFiles</span> <span style="color:#000">=</span> <span style="color:#000">fs</span>.<span style="color:#000">readdirSync</span>(<span style="color:#000">envDir</span>);
+        <span style="color:#000">confFiles</span>.<span style="color:#000">forEach</span>(<span style="color:#000">filename</span> =&gt; {
+            <span style="color:#a90d91">let</span> <span style="color:#000">fullPath</span> <span style="color:#000">=</span> <span style="color:#000">path</span>.<span style="color:#000">join</span>(<span style="color:#000">envDir</span>, <span style="color:#000">filename</span>);
+            <span style="color:#a90d91">if</span> (<span style="color:#000">fs</span>.<span style="color:#000">lstatSync</span>(<span style="color:#000">fullPath</span>).<span style="color:#000">isFile</span>() <span style="color:#000">&amp;&amp;</span> <span style="color:#c41a16">/[\w\W.].conf$/</span>.<span style="color:#000">test</span>(<span style="color:#000">filename</span>)) {
+                <span style="color:#000">countLocationsInFile</span>(<span style="color:#000">fullPath</span>, <span style="color:#000">LocationEntryMap</span>);
             }
         });
     });
 
 }
 
-<span style="color:#008000">/**
-</span><span style="color:#008000"> *
-</span><span style="color:#008000"> * @param confFile
-</span><span style="color:#008000"> * @param countMap
-</span><span style="color:#008000"> */</span>
-<span style="color:#00f">function</span> countLocationsInFile(confFile, countMap) {
-    <span style="color:#00f">let</span> lines = fs.readFileSync(confFile, <span style="color:#a31515">&#34;utf-8&#34;</span>)
-        .split(<span style="color:#a31515">&#34;\n&#34;</span>)
-        .filter(Boolean);
-    lines.forEach((line, lineNumber) =&gt; {
-        <span style="color:#00f">if</span> (line.trim().startsWith(<span style="color:#a31515">&#34;location&#34;</span>)) {
-            <span style="color:#00f">const</span> arr = line.trim().split(<span style="color:#a31515">&#39; &#39;</span>);
-            <span style="color:#00f">const</span> locationEntry = arr[1];
-            <span style="color:#00f">const</span> entryInfo = <span style="color:#a31515">`</span><span style="color:#a31515">${</span>confFile<span style="color:#a31515">}</span><span style="color:#a31515">, at line:</span><span style="color:#a31515">${</span>lineNumber<span style="color:#a31515">}</span><span style="color:#a31515">`</span>;
-            <span style="color:#00f">if</span> (countMap.has(locationEntry)) {
-                console.log(<span style="color:#a31515">`ERROR: duplicate location entry: </span><span style="color:#a31515">${</span>locationEntry<span style="color:#a31515">}</span><span style="color:#a31515">`</span>);
-                console.log(<span style="color:#a31515">`location 1:</span><span style="color:#a31515">${</span>countMap.get(locationEntry)<span style="color:#a31515">}</span><span style="color:#a31515">`</span>);
-                console.log(<span style="color:#a31515">`location 2:</span><span style="color:#a31515">${</span>entryInfo<span style="color:#a31515">}</span><span style="color:#a31515">`</span>);                
-                <span style="color:#008000">//修改result变量
-</span><span style="color:#008000"></span>                result=<span style="color:#a31515">&#39;error&#39;</span>;
-            } <span style="color:#00f">else</span> {
-                countMap.set(locationEntry, entryInfo);
+<span style="color:#177500">/**
+</span><span style="color:#177500"> *
+</span><span style="color:#177500"> * @param confFile
+</span><span style="color:#177500"> * @param countMap
+</span><span style="color:#177500"> */</span>
+<span style="color:#a90d91">function</span> <span style="color:#000">countLocationsInFile</span>(<span style="color:#000">confFile</span>, <span style="color:#000">countMap</span>) {
+    <span style="color:#a90d91">let</span> <span style="color:#000">lines</span> <span style="color:#000">=</span> <span style="color:#000">fs</span>.<span style="color:#000">readFileSync</span>(<span style="color:#000">confFile</span>, <span style="color:#c41a16">&#34;utf-8&#34;</span>)
+        .<span style="color:#000">split</span>(<span style="color:#c41a16">&#34;\n&#34;</span>)
+        .<span style="color:#000">filter</span>(<span style="color:#a90d91">Boolean</span>);
+    <span style="color:#000">lines</span>.<span style="color:#000">forEach</span>((<span style="color:#000">line</span>, <span style="color:#000">lineNumber</span>) =&gt; {
+        <span style="color:#a90d91">if</span> (<span style="color:#000">line</span>.<span style="color:#000">trim</span>().<span style="color:#000">startsWith</span>(<span style="color:#c41a16">&#34;location&#34;</span>)) {
+            <span style="color:#a90d91">const</span> <span style="color:#000">arr</span> <span style="color:#000">=</span> <span style="color:#000">line</span>.<span style="color:#000">trim</span>().<span style="color:#000">split</span>(<span style="color:#c41a16">&#39; &#39;</span>);
+            <span style="color:#a90d91">const</span> <span style="color:#000">locationEntry</span> <span style="color:#000">=</span> <span style="color:#000">arr</span>[<span style="color:#1c01ce">1</span>];
+            <span style="color:#a90d91">const</span> <span style="color:#000">entryInfo</span> <span style="color:#000">=</span> <span style="color:#c41a16">`</span><span style="color:#c41a16">${</span><span style="color:#000">confFile</span><span style="color:#c41a16">}</span><span style="color:#c41a16">, at line:</span><span style="color:#c41a16">${</span><span style="color:#000">lineNumber</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>;
+            <span style="color:#a90d91">if</span> (<span style="color:#000">countMap</span>.<span style="color:#000">has</span>(<span style="color:#000">locationEntry</span>)) {
+                <span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#c41a16">`ERROR: duplicate location entry: </span><span style="color:#c41a16">${</span><span style="color:#000">locationEntry</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>);
+                <span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#c41a16">`location 1:</span><span style="color:#c41a16">${</span><span style="color:#000">countMap</span>.<span style="color:#000">get</span>(<span style="color:#000">locationEntry</span>)<span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>);
+                <span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#c41a16">`location 2:</span><span style="color:#c41a16">${</span><span style="color:#000">entryInfo</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>);                
+                <span style="color:#177500">//修改result变量
+</span><span style="color:#177500"></span>                <span style="color:#000">result</span><span style="color:#000">=</span><span style="color:#c41a16">&#39;error&#39;</span>;
+            } <span style="color:#a90d91">else</span> {
+                <span style="color:#000">countMap</span>.<span style="color:#000">set</span>(<span style="color:#000">locationEntry</span>, <span style="color:#000">entryInfo</span>);
             }
         }
     });
@@ -370,12 +370,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -387,16 +388,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

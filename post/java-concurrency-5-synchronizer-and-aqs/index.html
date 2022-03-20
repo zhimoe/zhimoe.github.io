@@ -162,76 +162,76 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">342 字 ~1分钟</span>
+<span class="leancloud-visitors-count">364 字 ~1分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <h4 id="好难看不懂呀">好难，看不懂呀！</h4>
+    <p>CountDownLatch和CyclicBarrier示例</p>
 <h4 id="先自己写一个countdownlatch的示例">先自己写一个CountDownLatch的示例：</h4>
-<p>CountDownLatch是管理一组线程和一个主线程的先后。主线程wait后就阻塞，直到所有的CountDownLatch调用countDown后主线程接着开始。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">package</span> angus.intrview.concurrent;
+<p>CountDownLatch是管理一组线程和一个主线程的先后.主线程wait后就阻塞,直到所有的CountDownLatch调用countDown后主线程接着开始.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">package</span> <span style="color:#000">angus.intrview.concurrent</span><span style="color:#000">;</span>
 
-<span style="color:#00f">import</span> java.util.concurrent.CountDownLatch;
-<span style="color:#00f">import</span> java.util.concurrent.TimeUnit;
+<span style="color:#a90d91">import</span> <span style="color:#000">java.util.concurrent.CountDownLatch</span><span style="color:#000">;</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">java.util.concurrent.TimeUnit</span><span style="color:#000">;</span>
 
-<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">CountDownLatchTest</span> {
-	<span style="color:#008000">// 这个方法将启动多个任务，并让它们同时执行，计算完成的时间
-</span><span style="color:#008000"></span>	<span style="color:#00f">public</span> <span style="color:#2b91af">long</span> timer(<span style="color:#2b91af">int</span> taskNums) <span style="color:#00f">throws</span> InterruptedException {
-		CountDownLatch startLatch = <span style="color:#00f">new</span> CountDownLatch(1);
-		CountDownLatch finishLatch = <span style="color:#00f">new</span> CountDownLatch(taskNums);
-		<span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> i = 0; i &lt; taskNums; i++) {
-			Task task = <span style="color:#00f">new</span> Task(startLatch, finishLatch, i);
-			<span style="color:#00f">new</span> Thread(task).start();
-		}
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">CountDownLatchTest</span> <span style="color:#000">{</span>
+	<span style="color:#177500">// 这个方法将启动多个任务,并让它们同时执行,计算完成的时间
+</span><span style="color:#177500"></span>	<span style="color:#a90d91">public</span> <span style="color:#a90d91">long</span> <span style="color:#000">timer</span><span style="color:#000">(</span><span style="color:#a90d91">int</span> <span style="color:#000">taskNums</span><span style="color:#000">)</span> <span style="color:#a90d91">throws</span> <span style="color:#000">InterruptedException</span> <span style="color:#000">{</span>
+		<span style="color:#000">CountDownLatch</span> <span style="color:#000">startLatch</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">CountDownLatch</span><span style="color:#000">(</span><span style="color:#000">1</span><span style="color:#000">);</span>
+		<span style="color:#000">CountDownLatch</span> <span style="color:#000">finishLatch</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">CountDownLatch</span><span style="color:#000">(</span><span style="color:#000">taskNums</span><span style="color:#000">);</span>
+		<span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#a90d91">int</span> <span style="color:#000">i</span> <span style="color:#000">=</span> <span style="color:#000">0</span><span style="color:#000">;</span> <span style="color:#000">i</span> <span style="color:#000">&lt;</span> <span style="color:#000">taskNums</span><span style="color:#000">;</span> <span style="color:#000">i</span><span style="color:#000">++)</span> <span style="color:#000">{</span>
+			<span style="color:#000">Task</span> <span style="color:#000">task</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">Task</span><span style="color:#000">(</span><span style="color:#000">startLatch</span><span style="color:#000">,</span> <span style="color:#000">finishLatch</span><span style="color:#000">,</span> <span style="color:#000">i</span><span style="color:#000">);</span>
+			<span style="color:#a90d91">new</span> <span style="color:#000">Thread</span><span style="color:#000">(</span><span style="color:#000">task</span><span style="color:#000">).</span><span style="color:#836c28">start</span><span style="color:#000">();</span>
+		<span style="color:#000">}</span>
 
-		<span style="color:#2b91af">long</span> start = System.nanoTime();
-		startLatch.countDown();<span style="color:#008000">// 准备好线程后开始同时启动所有任务
-</span><span style="color:#008000"></span>		finishLatch.await();<span style="color:#008000">// 等待任务完成
-</span><span style="color:#008000"></span>		<span style="color:#2b91af">long</span> end = System.nanoTime();
-		<span style="color:#00f">return</span> end - start;
+		<span style="color:#a90d91">long</span> <span style="color:#000">start</span> <span style="color:#000">=</span> <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">nanoTime</span><span style="color:#000">();</span>
+		<span style="color:#000">startLatch</span><span style="color:#000">.</span><span style="color:#836c28">countDown</span><span style="color:#000">();</span><span style="color:#177500">// 准备好线程后开始同时启动所有任务
+</span><span style="color:#177500"></span>		<span style="color:#000">finishLatch</span><span style="color:#000">.</span><span style="color:#836c28">await</span><span style="color:#000">();</span><span style="color:#177500">// 等待任务完成
+</span><span style="color:#177500"></span>		<span style="color:#a90d91">long</span> <span style="color:#000">end</span> <span style="color:#000">=</span> <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">nanoTime</span><span style="color:#000">();</span>
+		<span style="color:#a90d91">return</span> <span style="color:#000">end</span> <span style="color:#000">-</span> <span style="color:#000">start</span><span style="color:#000">;</span>
 
-	}
+	<span style="color:#000">}</span>
 
-	<span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) <span style="color:#00f">throws</span> InterruptedException {
-		CountDownLatchTest ct = <span style="color:#00f">new</span> CountDownLatchTest();
-		<span style="color:#2b91af">long</span> time = ct.timer(100);
-		System.out.println(TimeUnit.NANOSECONDS.toSeconds(time) + <span style="color:#a31515">&#34;   SENCODS&#34;</span>);
-	}
+	<span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#a90d91">throws</span> <span style="color:#000">InterruptedException</span> <span style="color:#000">{</span>
+		<span style="color:#000">CountDownLatchTest</span> <span style="color:#000">ct</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">CountDownLatchTest</span><span style="color:#000">();</span>
+		<span style="color:#a90d91">long</span> <span style="color:#000">time</span> <span style="color:#000">=</span> <span style="color:#000">ct</span><span style="color:#000">.</span><span style="color:#836c28">timer</span><span style="color:#000">(</span><span style="color:#000">100</span><span style="color:#000">);</span>
+		<span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#000">TimeUnit</span><span style="color:#000">.</span><span style="color:#836c28">NANOSECONDS</span><span style="color:#000">.</span><span style="color:#836c28">toSeconds</span><span style="color:#000">(</span><span style="color:#000">time</span><span style="color:#000">)</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34;   SENCODS&#34;</span><span style="color:#000">);</span>
+	<span style="color:#000">}</span>
 
-}
+<span style="color:#000">}</span>
 
-<span style="color:#00f">class</span> <span style="color:#2b91af">Task</span> <span style="color:#00f">implements</span> Runnable {
-	CountDownLatch startLatch;
-	CountDownLatch finishLatch;
-	<span style="color:#2b91af">int</span> time;
+<span style="color:#a90d91">class</span> <span style="color:#3f6e75">Task</span> <span style="color:#a90d91">implements</span> <span style="color:#000">Runnable</span> <span style="color:#000">{</span>
+	<span style="color:#000">CountDownLatch</span> <span style="color:#000">startLatch</span><span style="color:#000">;</span>
+	<span style="color:#000">CountDownLatch</span> <span style="color:#000">finishLatch</span><span style="color:#000">;</span>
+	<span style="color:#a90d91">int</span> <span style="color:#000">time</span><span style="color:#000">;</span>
 
-	Task(CountDownLatch startLatch, CountDownLatch finishLatch, <span style="color:#2b91af">int</span> time) {
-		<span style="color:#00f">this</span>.startLatch = startLatch;
-		<span style="color:#00f">this</span>.finishLatch = finishLatch;
-		<span style="color:#00f">this</span>.time = time;
-	}
+	<span style="color:#000">Task</span><span style="color:#000">(</span><span style="color:#000">CountDownLatch</span> <span style="color:#000">startLatch</span><span style="color:#000">,</span> <span style="color:#000">CountDownLatch</span> <span style="color:#000">finishLatch</span><span style="color:#000">,</span> <span style="color:#a90d91">int</span> <span style="color:#000">time</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+		<span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">startLatch</span> <span style="color:#000">=</span> <span style="color:#000">startLatch</span><span style="color:#000">;</span>
+		<span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">finishLatch</span> <span style="color:#000">=</span> <span style="color:#000">finishLatch</span><span style="color:#000">;</span>
+		<span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">time</span> <span style="color:#000">=</span> <span style="color:#000">time</span><span style="color:#000">;</span>
+	<span style="color:#000">}</span>
 
-	@Override
-	<span style="color:#00f">public</span> <span style="color:#2b91af">void</span> run() {
-		<span style="color:#00f">try</span> {
-			startLatch.await();<span style="color:#008000">// 等待主线程通知任务开始
-</span><span style="color:#008000"></span>			System.out.println(<span style="color:#a31515">&#34;doing the task!&#34;</span>);
-			Thread.sleep(time * 100); <span style="color:#008000">// 模拟任务过程
-</span><span style="color:#008000"></span>		} <span style="color:#00f">catch</span> (InterruptedException e1) {
-			<span style="color:#008000">// TODO Auto-generated catch block
-</span><span style="color:#008000"></span>			e1.printStackTrace();
-		} <span style="color:#00f">finally</span> {
-			System.out.println(<span style="color:#a31515">&#34;task done&#34;</span>);
-			finishLatch.countDown();<span style="color:#008000">// 告诉主线程任务完成
-</span><span style="color:#008000"></span>		}
+	<span style="color:#000">@Override</span>
+	<span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">run</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+		<span style="color:#a90d91">try</span> <span style="color:#000">{</span>
+			<span style="color:#000">startLatch</span><span style="color:#000">.</span><span style="color:#836c28">await</span><span style="color:#000">();</span><span style="color:#177500">// 等待主线程通知任务开始
+</span><span style="color:#177500"></span>			<span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;doing the task!&#34;</span><span style="color:#000">);</span>
+			<span style="color:#000">Thread</span><span style="color:#000">.</span><span style="color:#836c28">sleep</span><span style="color:#000">(</span><span style="color:#000">time</span> <span style="color:#000">*</span> <span style="color:#000">100</span><span style="color:#000">);</span> <span style="color:#177500">// 模拟任务过程
+</span><span style="color:#177500"></span>		<span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">InterruptedException</span> <span style="color:#000">e1</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+			<span style="color:#177500">// TODO Auto-generated catch block
+</span><span style="color:#177500"></span>			<span style="color:#000">e1</span><span style="color:#000">.</span><span style="color:#836c28">printStackTrace</span><span style="color:#000">();</span>
+		<span style="color:#000">}</span> <span style="color:#a90d91">finally</span> <span style="color:#000">{</span>
+			<span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;task done&#34;</span><span style="color:#000">);</span>
+			<span style="color:#000">finishLatch</span><span style="color:#000">.</span><span style="color:#836c28">countDown</span><span style="color:#000">();</span><span style="color:#177500">// 告诉主线程任务完成
+</span><span style="color:#177500"></span>		<span style="color:#000">}</span>
 
-	}
+	<span style="color:#000">}</span>
 
-}
+<span style="color:#000">}</span>
 </code></pre></div><h4 id="cyclicbarrier">CyclicBarrier</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#008000">// pass
-</span><span style="color:#008000"></span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">// pass
+</span><span style="color:#177500"></span>
 </code></pre></div>
     </div>
     <footer class="post-footer">
@@ -258,8 +258,8 @@
 
     <div class="post-nav-prev post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/java-and-equal/" rel="prev" title="Java-==-and-equal">
-        Java-==-and-equal <i class="fa fa-chevron-right"></i>
+        <a href="https://zhimoe.github.io/post/java-and-equal/" rel="prev" title="Java-==-and-equals">
+        Java-==-and-equals <i class="fa fa-chevron-right"></i>
         </a>
     
     </div>
@@ -340,12 +340,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -357,16 +358,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

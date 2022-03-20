@@ -12,12 +12,14 @@
     
     
     <item>
-      <title>使用redis的hash优化内存使用</title>
+      <title>使用redis的hash优化内存使用[翻译]</title>
       <link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</guid>
-      <description>原文 Understanding Redis hash-max-ziplist-entries 问题和方案 场景: 有3亿张图片放在对象存储(DELL ECS/AMAZON EC2)上面,现在需要保存图片的id-&amp;gt;用户id的映射.最直接的思路是: set &amp;#34;media:1155220&amp;#34; &amp;#34;user1&amp;#34; set &amp;#34;media:1155221&amp;#34; &amp;#34;user2&amp;#34; 这样设计key之后3亿张图片需要21GB的内存,因为redis的string是线性增长的</description>
+      <description>&lt;p&gt;使用redis的hash优化内存使用&lt;/p&gt;
+&lt;h1 id=&#34;原文&#34;&gt;原文&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.peterbe.com/plog/understanding-redis-hash-max-ziplist-entries&#34;&gt;Understanding Redis hash-max-ziplist-entries&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

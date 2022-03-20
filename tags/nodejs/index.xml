@@ -17,7 +17,12 @@
       <pubDate>Sun, 22 Aug 2021 21:55:06 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/nodejs-as-githook/</guid>
-      <description>&lt;p&gt;如何在git hook中调用nodejs脚本。主要踩坑在于不知道如何在bash中获取node脚本返回值，搜了好大一圈。&lt;/p&gt;</description>
+      <description>&lt;p&gt;如何在git hook中调用nodejs脚本.主要踩坑在于不知道如何在bash中获取node脚本返回值,搜了好大一圈.&lt;/p&gt;
+&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
+&lt;p&gt;微服务模式开发中,每个小组维护自己的应用,通过一个nginx入口反向代理所有的子应用,向用户开放一个站点.nginx应用中需要维护各个子应用的代理,即ng.conf中的location.
+此外,一个应用需要配置DEV,ST,UAT,PRD四个环境的location.目前的做法是www/ngconf/目录下面分为dev、st、uat、prd四个文件夹,在文件夹内部每个小组各自维护一个conf文件.
+每增加一个应用,需要在四个文件夹中自己小组的配置文件添加配置.随着应用越来越多,以及人员流动,会发生不同文件配置相同的location entry.
+例如A应用上线一个功能需要依赖B应用,但是新人不知道B已经配置过了,所以又重复添加了一个,导致启动报错.&lt;/p&gt;</description>
     </item>
     
   </channel>

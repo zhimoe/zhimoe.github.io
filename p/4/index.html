@@ -165,12 +165,13 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">336 字 ~1分钟</span>
+<span class="leancloud-visitors-count">357 字 ~1分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    之前听说过AWS的软件工程师是需要自己写需求说明书,前后端代码,测试和上线。还有ins的工程师可以做到python的代码提交如果合并到主分支后可以在一个小时内自动部署到生产被用户使用到,感觉这个非常神奇。如果需要做到这个,对组织级可个人都有
+    <p>之前听说过AWS的软件工程师是需要自己写需求说明书,前后端代码,测试和上线.还有instagram的工程师可以做到python的代码提交如果合并到主分支后可以在<a href="https://instagram-engineering.com/static-analysis-at-scale-an-instagram-story-8f498ab71a0c">一个小时内</a>自动部署到生产被用户使用到,感觉这个非常神奇.如果需要做到这个,对组织级与个人都有极高的devops能力成熟度要求.
+上周代表CRM项目通过了信通院的DevOps三级认证.感觉提升的空间很大. 专门看了一下成熟度模型的标准.</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -229,7 +230,13 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    scala collection 提供了一整套独立于Java的高性能集合,使用上非常灵活,所以需要清楚一些常用的方法: reduce fold scan 集合的符号方法 数组,tuple 2.13的集合架构 reduce fold scan //reduce是一个二元函数,遍历整个集合 List(1, 3, 5).reduceLeft(_ + _) // == ((1+3)+5) //reduceRight start from end of the collection //also you can given initial argument List(1, 3, 5).foldLeft(&#34;&#34;)(_
+    <p>scala collection 提供了一整套独立于Java的高性能集合,使用上非常灵活,所以需要清楚一些常用的方法:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> reduce fold scan</li>
+<li><input checked="" disabled="" type="checkbox"> 集合的符号方法</li>
+<li><input checked="" disabled="" type="checkbox"> 数组,tuple</li>
+<li><input checked="" disabled="" type="checkbox"> 2.13的集合架构</li>
+</ul>
     </div>
     
     <div class="post-more-link text-center">
@@ -288,7 +295,8 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    GTmetrix是一个前端页面测试的网站,可以发现你的站点哪些地方速度较慢,并针对性的优化. How to Optimize Images: A Practical Guide
+    <p>GTmetrix是一个前端页面测试的网站,可以发现你的站点哪些地方速度较慢,并针对性的优化.
+<a href="https://gtmetrix.com/blog/how-to-optimize-images-a-practical-guide/">How to Optimize Images: A Practical Guide</a></p>
     </div>
     
     <footer class="post-footer"><div class="post-eof"></div></footer>
@@ -336,12 +344,14 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">280 字 ~1分钟</span>
+<span class="leancloud-visitors-count">313 字 ~1分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    FactoryBean 一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例. 例如: public class Tool { private int id; // standard constructors, getters and setters } public class ToolFactory implements FactoryBean&lt;Tool&gt; { private int factoryId; private int toolId; @Override public Tool getObject() throws Exception { return new Tool(toolId); } @Override public Class&lt;?&gt; getObjectType() { return Tool.class; } @Override public boolean isSingleton() { return false; } // standard setters and getters } 注册Tool: &lt;!-- factorybean-spring-ctx.xml --&gt; &lt;beans&gt; &lt;bean id=&#34;tool&#34; class=&#34;com.baeldung.factorybean.ToolFactory&#34;&gt; &lt;property name=&#34;factoryId&#34; value=&#34;9090&#34;/&gt; &lt;property
+    <p>理解Spring的FactoryBean 和 ContextAware接口.</p>
+<h2 id="factorybean">FactoryBean</h2>
+<p>一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例.</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -400,7 +410,7 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    clojure 入门 这份笔记试图打造最强的clojure小抄,keep refactoring it&hellip; (ns clj-notes.core (:gen-class)) ;:gen-class generate java class file ;Parameter is variable in the declaration of function. ;Argument is the actual value of this variable that gets passed to function. ; ;install leiningen: ;put lein.bat in your PATH ;open cmder,run: lein repl ;start repl,use exit,(exit),(quit) or ctrl+d to quit repl (println &#34;hello clojure&#34;) ;Symbols are used to bind names to values ;&#39; will prevent a form from being evaluated ;&#39;() same as (quote ()) ;def global variable ;let local variable binding (def object &#34;light&#34;) (println object) (let [x 10 y 20
+    <p>这份笔记试图打造最强的clojure小抄,keep refactoring it&hellip;</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -416,7 +426,7 @@
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
         <a class="post-title-link" href="https://zhimoe.github.io/post/elasticsearch-query-dsl/" itemprop="url">
-        Elasticsearch Query DSL
+        理解Elasticsearch Query DSL中的JSON结构
         </a>
       </h1>
       <div class="post-meta">
@@ -454,12 +464,17 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">870 字 ~2分钟</span>
+<span class="leancloud-visitors-count">911 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    diffs in es 2.x and es 5.x query dsl aggr query diffs in es 2.x and es 5.x 没有string类型，改为text和keyword 2个类型了。text字段可以指定fields来不分词。如下： city字段被ingest为city和city.raw2个字段。 { &#34;mappings&#34;: { &#34;_doc&#34;: { &#34;properties&#34;: { &#34;city&#34;: { &#34;type&#34;: &#34;text&#34;, &#34;fields&#34;: { &#34;raw&#34;: {
+    <p>理解ES搜索中JSON DSL有助于自己写JSON查询,特别是手写复杂嵌套json.</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> diffs in es 2.x and es 5.x</li>
+<li><input checked="" disabled="" type="checkbox"> query dsl</li>
+<li><input checked="" disabled="" type="checkbox"> aggr query</li>
+</ul>
     </div>
     
     <div class="post-more-link text-center">
@@ -518,7 +533,19 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    merge two map and sum its values 多个map合并,key相同时则value相加 val map1 = Map(1 -&gt; 1, 2 -&gt; 2) val map2 = Map(1 -&gt; 11, 3 -&gt; 3) val map3 = Map(1 -&gt; 111, 3 -&gt; 3) val mapList = List(map1, map2, map3) val merged = mapList.reduce((m1, m2) =&gt; m1 ++ m2.map { case (k, v) =&gt; k -&gt; (v + m1.getOrElse(k, 0)) } ) 文件读 // &#34;&#34;&#34;&#34;&#34;&#34;可以
+    <h2 id="merge-two-map-and-sum-its-values">merge two map and sum its values</h2>
+<p>多个map合并,key相同时则value相加</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">val</span> <span style="color:#000">map1</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Map</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">2</span><span style="color:#000">)</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">map2</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Map</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">11</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">3</span><span style="color:#000">)</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">map3</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Map</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">111</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">3</span><span style="color:#000">)</span>
+
+<span style="color:#a90d91">val</span> <span style="color:#000">mapList</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">List</span><span style="color:#000">(</span><span style="color:#000">map1</span><span style="color:#000">,</span> <span style="color:#000">map2</span><span style="color:#000">,</span> <span style="color:#000">map3</span><span style="color:#000">)</span>
+
+<span style="color:#a90d91">val</span> <span style="color:#000">merged</span> <span style="color:#a90d91">=</span> <span style="color:#000">mapList</span><span style="color:#000">.</span><span style="color:#000">reduce</span><span style="color:#000">((</span><span style="color:#000">m1</span><span style="color:#000">,</span> <span style="color:#000">m2</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span>
+
+  <span style="color:#000">m1</span> <span style="color:#000">++</span> <span style="color:#000">m2</span><span style="color:#000">.</span><span style="color:#000">map</span> <span style="color:#000">{</span> <span style="color:#a90d91">case</span> <span style="color:#000">(</span><span style="color:#000">k</span><span style="color:#000">,</span> <span style="color:#000">v</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">k</span> <span style="color:#000">-&gt;</span> <span style="color:#000">(</span><span style="color:#000">v</span> <span style="color:#000">+</span> <span style="color:#000">m1</span><span style="color:#000">.</span><span style="color:#000">getOrElse</span><span style="color:#000">(</span><span style="color:#000">k</span><span style="color:#000">,</span> <span style="color:#1c01ce">0</span><span style="color:#000">))</span> <span style="color:#000">}</span>
+<span style="color:#000">)</span>
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -578,6 +605,13 @@
     </header>
     <div class="post-body" itemprop="articleBody">
     <p>some notes on scala future, includes:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> future</li>
+<li><input checked="" disabled="" type="checkbox"> executor context</li>
+<li><input checked="" disabled="" type="checkbox"> await future result</li>
+<li><input checked="" disabled="" type="checkbox"> callback</li>
+<li><input disabled="" type="checkbox"> recover</li>
+</ul>
     </div>
     
     <div class="post-more-link text-center">
@@ -704,12 +738,20 @@
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
+<div class="feed-link motion-element">
+<a href="https://zhimoe.github.io/index.xml" rel="alternate" type="application/rss+xml" target="_blank">
+    <i class="fa fa-rss"></i>
+    RSS 订阅
+</a>
+</div>
+
       
 <div class="links-of-author motion-element">
     
@@ -721,16 +763,9 @@
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

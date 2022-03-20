@@ -172,47 +172,47 @@
 <p>a <code>type Foo = Bar</code> outside is just type alias. most used in generic type.</p>
 <p>like:<code> type Thunk = Box&lt;dyn Fn() + Send + 'static&gt;;</code></p>
 <h2 id="type-inside-impl">type inside impl</h2>
-<p><code>type</code> in an <code>impl</code> defines an associated type. associated type可以理解为一个类型占位符，在trait的方法声明中使用。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00f">pub</span> <span style="color:#00f">trait</span> Iterator {
-    <span style="color:#00f">type</span> <span style="color:#2b91af">Item</span>; <span style="color:#008000">// or type T: Display;
-</span><span style="color:#008000"></span>
-    <span style="color:#00f">fn</span> next(&amp;<span style="color:#00f">mut</span> self) -&gt; Option&lt;Self::Item&gt;;
+<p><code>type</code> in an <code>impl</code> defines an associated type. associated type可以理解为一个类型占位符,在trait的方法声明中使用.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">pub</span> <span style="color:#a90d91">trait</span> <span style="color:#a90d91">Iterator</span> {
+    <span style="color:#a90d91">type</span> <span style="color:#3f6e75">Item</span>; <span style="color:#177500">// or type T: Display;
+</span><span style="color:#177500"></span>
+    <span style="color:#a90d91">fn</span> <span style="color:#000">next</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>) -&gt; <span style="color:#a90d91">Option</span><span style="color:#000">&lt;</span><span style="color:#000">Self</span>::<span style="color:#000">Item</span><span style="color:#000">&gt;</span>;
 }
-</code></pre></div><p>这里Iterator的Implementors将会指定Item的具体类型。例如：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00f">impl</span> Iterator <span style="color:#00f">for</span> Counter {
-    <span style="color:#00f">type</span> <span style="color:#2b91af">Item</span> = <span style="color:#2b91af">u32</span>;
+</code></pre></div><p>这里Iterator的Implementors将会指定Item的具体类型.例如：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">impl</span> <span style="color:#a90d91">Iterator</span> <span style="color:#a90d91">for</span> <span style="color:#000">Counter</span> {
+    <span style="color:#a90d91">type</span> <span style="color:#3f6e75">Item</span> <span style="color:#000">=</span> <span style="color:#a90d91">u32</span>;
 
-    <span style="color:#00f">fn</span> next(&amp;<span style="color:#00f">mut</span> self) -&gt; Option&lt;Self::Item&gt; {
-        <span style="color:#008000">// --snip--
-</span><span style="color:#008000"></span>    }
+    <span style="color:#a90d91">fn</span> <span style="color:#000">next</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>) -&gt; <span style="color:#a90d91">Option</span><span style="color:#000">&lt;</span><span style="color:#000">Self</span>::<span style="color:#000">Item</span><span style="color:#000">&gt;</span> {
+        <span style="color:#177500">// --snip--
+</span><span style="color:#177500"></span>    }
 }
 </code></pre></div><h2 id="diff-in-associated-type-and-generic">diff in associated type and generic</h2>
 <p>直接将上面的<code>Iterator</code>声明为如下泛型不是更简单么？</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00f">pub</span> <span style="color:#00f">trait</span> Iterator&lt;T&gt; { 
-    <span style="color:#00f">fn</span> next(&amp;<span style="color:#00f">mut</span> self) -&gt; Option&lt;T&gt;;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">pub</span> <span style="color:#a90d91">trait</span> <span style="color:#a90d91">Iterator</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> { 
+    <span style="color:#a90d91">fn</span> <span style="color:#000">next</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>) -&gt; <span style="color:#a90d91">Option</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span>;
 }
-<span style="color:#008000">//  with generice, you can set default type:
-</span><span style="color:#008000"></span><span style="color:#a31515">/// trait Generic&lt;T = String&gt;
-</span><span style="color:#a31515">///    where T: Display,
-</span><span style="color:#a31515"></span>
-</code></pre></div><p>主要的区别就是generic可是有任意多个实现，因为<code>Add&lt;Foo&gt;</code>和<code>Add&lt;Bar&gt;</code>是两个不同的类型。
-而associated type只能有一个实现，因为<code>Iterator</code>只有一个类型,所以associated type可以用于限制类型。</p>
+<span style="color:#177500">//  with generice, you can set default type:
+</span><span style="color:#177500"></span><span style="color:#c41a16">/// trait Generic&lt;T = String&gt;
+</span><span style="color:#c41a16">///    where T: Display,
+</span><span style="color:#c41a16"></span>
+</code></pre></div><p>主要的区别就是generic可是有任意多个实现,因为<code>Add&lt;Foo&gt;</code>和<code>Add&lt;Bar&gt;</code>是两个不同的类型.
+而associated type只能有一个实现,因为<code>Iterator</code>只有一个类型,所以associated type可以用于限制类型.</p>
 <h2 id="when-use">when use</h2>
 <p>The quick and dirty answer to when to use generics and when to use associated types is:
 Use generics if it makes sense to have multiple implementations of a trait for a specific type (such as the <code>From&lt;T&gt;</code> trait).
 Otherwise, use associated types (like <code>Iterator</code> and <code>Deref</code>).</p>
-<p>假设我们实现一个redis 客户端，那么比较适合使用associated types:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00f">trait</span> RedisCommand{
-    <span style="color:#00f">type</span> <span style="color:#2b91af">Response</span>;
-    <span style="color:#00f">fn</span> receive(&amp;self, message: String) -&gt; Result&lt;Self::Response&gt;;
+<p>假设我们实现一个redis 客户端,那么比较适合使用associated types:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">trait</span> <span style="color:#000">RedisCommand</span>{
+    <span style="color:#a90d91">type</span> <span style="color:#3f6e75">Response</span>;
+    <span style="color:#a90d91">fn</span> <span style="color:#000">receive</span>(<span style="color:#000">&amp;</span><span style="color:#5b269a">self</span>, <span style="color:#000">message</span>: <span style="color:#a90d91">String</span>) -&gt; <span style="color:#a90d91">Result</span><span style="color:#000">&lt;</span><span style="color:#000">Self</span>::<span style="color:#000">Response</span><span style="color:#000">&gt;</span>;
 }
 
-<span style="color:#00f">impl</span> RedisCommand <span style="color:#00f">for</span> PingCommand {
-    <span style="color:#00f">type</span> <span style="color:#2b91af">Response</span> = String
+<span style="color:#a90d91">impl</span> <span style="color:#000">RedisCommand</span> <span style="color:#a90d91">for</span> <span style="color:#000">PingCommand</span> {
+    <span style="color:#a90d91">type</span> <span style="color:#3f6e75">Response</span> <span style="color:#000">=</span> <span style="color:#a90d91">String</span>
     
-    <span style="color:#00f">fn</span> receive(&amp;self, message: String) -&gt; Result&lt;Self::Response&gt;{
-        <span style="color:#008000">// -- snip --
-</span><span style="color:#008000"></span>    }
+    <span style="color:#a90d91">fn</span> <span style="color:#000">receive</span>(<span style="color:#000">&amp;</span><span style="color:#5b269a">self</span>, <span style="color:#000">message</span>: <span style="color:#a90d91">String</span>) -&gt; <span style="color:#a90d91">Result</span><span style="color:#000">&lt;</span><span style="color:#000">Self</span>::<span style="color:#000">Response</span><span style="color:#000">&gt;</span>{
+        <span style="color:#177500">// -- snip --
+</span><span style="color:#177500"></span>    }
 }
 
 </code></pre></div>
@@ -321,12 +321,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -338,16 +339,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

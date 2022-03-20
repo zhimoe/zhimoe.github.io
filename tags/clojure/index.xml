@@ -17,7 +17,7 @@
       <pubDate>Mon, 13 May 2019 15:22:05 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/learn-clojure-by-example/</guid>
-      <description>clojure 入门 这份笔记试图打造最强的clojure小抄,keep refactoring it&amp;hellip; (ns clj-notes.core (:gen-class)) ;:gen-class generate java class file ;Parameter is variable in the declaration of function. ;Argument is the actual value of this variable that gets passed to function. ; ;install leiningen: ;put lein.bat in your PATH ;open cmder,run: lein repl ;start repl,use exit,(exit),(quit) or ctrl+d to quit repl (println &amp;#34;hello clojure&amp;#34;) ;Symbols are used to bind names to values ;&amp;#39; will prevent a form from being evaluated ;&amp;#39;() same as (quote ()) ;def global variable ;let local variable binding (def object &amp;#34;light&amp;#34;) (println object) (let [x 10 y 20</description>
+      <description>&lt;p&gt;这份笔记试图打造最强的clojure小抄,keep refactoring it&amp;hellip;&lt;/p&gt;</description>
     </item>
     
   </channel>

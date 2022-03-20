@@ -168,54 +168,54 @@
     </header>
     <div class="post-body" itemprop="articleBody">
     <h3 id="定义任务的内容">定义任务的内容</h3>
-<p>多线程编程的核心元素就是任务，任务是独立的活动。不依赖其他任务的状态，结果，以及边界效应。<br>
-定义任务的内容使用Runnable和Callable。</p>
-<p>Runnable 接口表示没有返回的一个过程（procedure），没有受检异常。<br>
-Callabe 接口的call方法会返回一个结果，并有可能抛出受检异常。如果要表示没有返回值，可以使用<code>Callable&lt;Void&gt; </code>,但是不鼓励使用这个代替Runable，但一个任务内容没有返回值，只是利用副作用时，应该优先使用Runable，使得含义清晰，并且JDK中ScheduledExecutorService也有只能接收Runable的方法。</p>
-<p>可以将Runnable定义的任务提交给Thread直接运行，但是这个线程是不可重用的。更好的方法是提交给执行器ExecutorService。</p>
-<p>Future接口描述了任务的生命周期，并提供方法获得任务执行的结果。该接口有一个实现类：FutureTask。该类的实例一定和一个具体任务相关。ExecutorService所有的submit方法都会返回一个Future实例。你也可以直接通过FutureTask构造函数将Runnable/Callable构建一个FutureTask实例。该实例将管理该任务的生命周期</p>
-<p>注意，FutureTask   实现了Runnable和Future（通过实现RunnableFuture<!-- raw HTML omitted --> 接口，如下），所以既可以使用ExecutorService，也可以使用Thread执行任务内容。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">FutureTask</span>&lt;V&gt; <span style="color:#00f">implements</span> RunnableFuture&lt;V&gt;   
-<span style="color:#00f">public</span> <span style="color:#00f">interface</span> <span style="color:#2b91af">RunnableFuture</span>&lt;V&gt; <span style="color:#00f">extends</span> Runnable, Future&lt;V&gt;
-</code></pre></div><p>Future.get是一个阻塞方法，如果任务没有结束或者没有抛出异常，那么会一直等待下去，如果需要异步的使用ComletionService。</p>
+<p>多线程编程的核心元素就是任务,任务是独立的活动.不依赖其他任务的状态,结果,以及边界效应.<br>
+定义任务的内容使用Runnable和Callable.</p>
+<p>Runnable 接口表示没有返回的一个过程（procedure）,没有受检异常.<br>
+Callabe 接口的call方法会返回一个结果,并有可能抛出受检异常.如果要表示没有返回值,可以使用<code>Callable&lt;Void&gt; </code>,但是不鼓励使用这个代替Runable,但一个任务内容没有返回值,只是利用副作用时,应该优先使用Runable,使得含义清晰,并且JDK中ScheduledExecutorService也有只能接收Runable的方法.</p>
+<p>可以将Runnable定义的任务提交给Thread直接运行,但是这个线程是不可重用的.更好的方法是提交给执行器ExecutorService.</p>
+<p>Future接口描述了任务的生命周期,并提供方法获得任务执行的结果.该接口有一个实现类：FutureTask.该类的实例一定和一个具体任务相关.ExecutorService所有的submit方法都会返回一个Future实例.你也可以直接通过FutureTask构造函数将Runnable/Callable构建一个FutureTask实例.该实例将管理该任务的生命周期</p>
+<p>注意,FutureTask   实现了Runnable和Future（通过实现RunnableFuture<!-- raw HTML omitted --> 接口,如下）,所以既可以使用ExecutorService,也可以使用Thread执行任务内容.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">FutureTask</span><span style="color:#000">&lt;</span><span style="color:#000">V</span><span style="color:#000">&gt;</span> <span style="color:#a90d91">implements</span> <span style="color:#000">RunnableFuture</span><span style="color:#000">&lt;</span><span style="color:#000">V</span><span style="color:#000">&gt;</span>   
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">interface</span> <span style="color:#3f6e75">RunnableFuture</span><span style="color:#000">&lt;</span><span style="color:#000">V</span><span style="color:#000">&gt;</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Runnable</span><span style="color:#000">,</span> <span style="color:#000">Future</span><span style="color:#000">&lt;</span><span style="color:#000">V</span><span style="color:#000">&gt;</span>
+</code></pre></div><p>Future.get是一个阻塞方法,如果任务没有结束或者没有抛出异常,那么会一直等待下去,如果需要异步的使用ComletionService.</p>
 <h3 id="executorservice">ExecutorService</h3>
-<p>执行器框架，root 接口是Executor，只有一个execute方法执行runnable实例。更常用是子接口ExecutorService，除了可以执行runnable，callable，还可以invoke一callable集合：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">&lt;T&gt; List&lt;Future&lt;T&gt;&gt;	invokeAll(Collection&lt;? <span style="color:#00f">extends</span> Callable&lt;T&gt;&gt; tasks)
-&lt;T&gt; T	invokeAny(Collection&lt;? <span style="color:#00f">extends</span> Callable&lt;T&gt;&gt; tasks)
+<p>执行器框架,root 接口是Executor,只有一个execute方法执行runnable实例.更常用是子接口ExecutorService,除了可以执行runnable,callable,还可以invoke一callable集合：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">List</span><span style="color:#000">&lt;</span><span style="color:#000">Future</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;&gt;</span>	<span style="color:#000">invokeAll</span><span style="color:#000">(</span><span style="color:#000">Collection</span><span style="color:#000">&lt;?</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Callable</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;&gt;</span> <span style="color:#000">tasks</span><span style="color:#000">)</span>
+<span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">T</span>	<span style="color:#000">invokeAny</span><span style="color:#000">(</span><span style="color:#000">Collection</span><span style="color:#000">&lt;?</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Callable</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;&gt;</span> <span style="color:#000">tasks</span><span style="color:#000">)</span>
 
-&lt;T&gt; Future&lt;T&gt;	submit(Callable&lt;T&gt; task)
-Future&lt;?&gt;	submit(Runnable task)
+<span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">Future</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span>	<span style="color:#000">submit</span><span style="color:#000">(</span><span style="color:#000">Callable</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">task</span><span style="color:#000">)</span>
+<span style="color:#000">Future</span><span style="color:#000">&lt;?&gt;</span>	<span style="color:#000">submit</span><span style="color:#000">(</span><span style="color:#000">Runnable</span> <span style="color:#000">task</span><span style="color:#000">)</span>
 </code></pre></div><h3 id="scheduledexecutorservice">ScheduledExecutorService</h3>
 <p>The <code>ScheduledExecutorService</code> interface supplements the methods of its parent <code>ExecutorService</code> with schedule, which executes a <code>Runnable</code> or <code>Callable</code> task after a specified delay. In addition, the interface defines <code>scheduleAtFixedRate</code> and <code>scheduleWithFixedDelay</code>, which executes specified tasks repeatedly, at defined intervals.</p>
-<p><code>scheduleAtFixedRate</code>: 第一次是initialDelay 后执行，第二次是initialDelay + 1 * period 后执行，类推。</p>
-<p><code>scheduleWithFixedDelay</code>: 是前面任务执行结束后开始计算间隔计时。</p>
-<p>两个方法都不会并发执行任务，特别是第一个方法，如果任务时间比参数中等待时间period长，那么只会延期执行。对于第二个方法，本来就是要等前面结束才执行，所以没有这个问题。两个方法遇到异常，那么后面任务也不会执行，因为任务是重复的，后面也会遇到异常。周期任务可以取消，或者遇到执行器终结才结束。</p>
+<p><code>scheduleAtFixedRate</code>: 第一次是initialDelay 后执行,第二次是initialDelay + 1 * period 后执行,类推.</p>
+<p><code>scheduleWithFixedDelay</code>: 是前面任务执行结束后开始计算间隔计时.</p>
+<p>两个方法都不会并发执行任务,特别是第一个方法,如果任务时间比参数中等待时间period长,那么只会延期执行.对于第二个方法,本来就是要等前面结束才执行,所以没有这个问题.两个方法遇到异常,那么后面任务也不会执行,因为任务是重复的,后面也会遇到异常.周期任务可以取消,或者遇到执行器终结才结束.</p>
 <h3 id="completionservice">CompletionService</h3>
-<p>如果有多个任务，那么ExecutorService只能不停的轮询Future看是否有任务结束，并取得结果。CompletionService则是另外是自动的告诉你那些任务结果已经准备好。注意构造方法需要一个ExecutorService</p>
+<p>如果有多个任务,那么ExecutorService只能不停的轮询Future看是否有任务结束,并取得结果.CompletionService则是另外是自动的告诉你那些任务结果已经准备好.注意构造方法需要一个ExecutorService</p>
 <blockquote>
 <p>ExecutorService = incoming queue + worker threads <br>
 CompletionService = incoming queue + worker threads + output queue</p>
 </blockquote>
 <p><a href="http://stackoverflow.com/questions/4912228/when-should-i-use-a-completionservice-over-an-executorservice">参考</a></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">ExecutorService executor = Executors.newFixedThreadPool(numberOfThreadsInThePool);
-CompletionService&lt;String&gt; completionService = <span style="color:#00f">new</span> ExecutorCompletionService&lt;String&gt;(executor);
-                <span style="color:#00f">for</span> (<span style="color:#00f">final</span> String num: nums) {
-                        completionService.submit(<span style="color:#00f">new</span> Task(num)); <span style="color:#008000">//Task is Callable
-</span><span style="color:#008000"></span>                }
-                <span style="color:#00f">try</span> {
-                        <span style="color:#00f">for</span> (<span style="color:#2b91af">int</span> t = 0, n = nums.size(); t &lt; n; t++) {
-                                Future&lt;String&gt; f = completionService.take();
-                                System.out.print(f.get());
-                        }
-                } <span style="color:#00f">catch</span> (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                } <span style="color:#00f">catch</span> (ExecutionException e) {
-                        Thread.currentThread().interrupt();
-                } <span style="color:#00f">finally</span> {
-                        <span style="color:#00f">if</span> (executor != <span style="color:#00f">null</span>) {
-                            executor.shutdownNow();
-                        }
-                }
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">ExecutorService</span> <span style="color:#000">executor</span> <span style="color:#000">=</span> <span style="color:#000">Executors</span><span style="color:#000">.</span><span style="color:#836c28">newFixedThreadPool</span><span style="color:#000">(</span><span style="color:#000">numberOfThreadsInThePool</span><span style="color:#000">);</span>
+<span style="color:#000">CompletionService</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;</span> <span style="color:#000">completionService</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">ExecutorCompletionService</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;(</span><span style="color:#000">executor</span><span style="color:#000">);</span>
+                <span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#a90d91">final</span> <span style="color:#000">String</span> <span style="color:#000">num</span><span style="color:#000">:</span> <span style="color:#000">nums</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                        <span style="color:#000">completionService</span><span style="color:#000">.</span><span style="color:#836c28">submit</span><span style="color:#000">(</span><span style="color:#a90d91">new</span> <span style="color:#000">Task</span><span style="color:#000">(</span><span style="color:#000">num</span><span style="color:#000">));</span> <span style="color:#177500">//Task is Callable
+</span><span style="color:#177500"></span>                <span style="color:#000">}</span>
+                <span style="color:#a90d91">try</span> <span style="color:#000">{</span>
+                        <span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#a90d91">int</span> <span style="color:#000">t</span> <span style="color:#000">=</span> <span style="color:#000">0</span><span style="color:#000">,</span> <span style="color:#000">n</span> <span style="color:#000">=</span> <span style="color:#000">nums</span><span style="color:#000">.</span><span style="color:#836c28">size</span><span style="color:#000">();</span> <span style="color:#000">t</span> <span style="color:#000">&lt;</span> <span style="color:#000">n</span><span style="color:#000">;</span> <span style="color:#000">t</span><span style="color:#000">++)</span> <span style="color:#000">{</span>
+                                <span style="color:#000">Future</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;</span> <span style="color:#000">f</span> <span style="color:#000">=</span> <span style="color:#000">completionService</span><span style="color:#000">.</span><span style="color:#836c28">take</span><span style="color:#000">();</span>
+                                <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">print</span><span style="color:#000">(</span><span style="color:#000">f</span><span style="color:#000">.</span><span style="color:#836c28">get</span><span style="color:#000">());</span>
+                        <span style="color:#000">}</span>
+                <span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">InterruptedException</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                        <span style="color:#000">Thread</span><span style="color:#000">.</span><span style="color:#836c28">currentThread</span><span style="color:#000">().</span><span style="color:#836c28">interrupt</span><span style="color:#000">();</span>
+                <span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">ExecutionException</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                        <span style="color:#000">Thread</span><span style="color:#000">.</span><span style="color:#836c28">currentThread</span><span style="color:#000">().</span><span style="color:#836c28">interrupt</span><span style="color:#000">();</span>
+                <span style="color:#000">}</span> <span style="color:#a90d91">finally</span> <span style="color:#000">{</span>
+                        <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">executor</span> <span style="color:#000">!=</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                            <span style="color:#000">executor</span><span style="color:#000">.</span><span style="color:#836c28">shutdownNow</span><span style="color:#000">();</span>
+                        <span style="color:#000">}</span>
+                <span style="color:#000">}</span>
 </code></pre></div>
     </div>
     <footer class="post-footer">
@@ -324,12 +324,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -341,16 +342,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

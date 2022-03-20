@@ -168,39 +168,38 @@
     </header>
     <div class="post-body" itemprop="articleBody">
     <p>Scala中很多使用if的地方都可以用match case来替换.常见的就是下面的这种写法:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">val</span> res <span style="color:#00f">=</span> msg <span style="color:#00f">match</span> {
-	<span style="color:#00f">case</span> it <span style="color:#00f">if</span> it.contains(<span style="color:#a31515">&#34;H&#34;</span>) <span style="color:#00f">=&gt;</span> <span style="color:#a31515">&#34;Hello&#34;</span>
-	<span style="color:#00f">case</span> <span style="color:#00f">_</span> <span style="color:#00f">=&gt;</span> <span style="color:#a31515">&#34;Other&#34;</span>
-}
-<span style="color:#008000">//更常见的用法是去匹配参数的模式:
-</span><span style="color:#008000"></span><span style="color:#00f">case</span> <span style="color:#00f">class</span> <span style="color:#2b91af">Player</span>(name<span style="color:#00f">:</span> <span style="color:#2b91af">String</span>, score<span style="color:#00f">:</span> <span style="color:#2b91af">Int</span>)
-<span style="color:#00f">def</span> message(player<span style="color:#00f">:</span> <span style="color:#2b91af">Player</span>) <span style="color:#00f">=</span> player <span style="color:#00f">match</span> {
-  <span style="color:#00f">case</span> <span style="color:#2b91af">Player</span>(<span style="color:#00f">_</span>, score) <span style="color:#00f">if</span> score &gt; 100000 <span style="color:#00f">=&gt;</span>
-    <span style="color:#a31515">&#34;Get a job, dude!&#34;</span>
-  <span style="color:#00f">case</span> <span style="color:#2b91af">Player</span>(name, <span style="color:#00f">_</span>) <span style="color:#00f">=&gt;</span>
-    <span style="color:#a31515">&#34;Hey, $name, nice to see you again!&#34;</span>
-}
-<span style="color:#00f">def</span> printMessage(player<span style="color:#00f">:</span> <span style="color:#2b91af">Player</span>) <span style="color:#00f">=</span> println(message(player))
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">val</span> <span style="color:#000">res</span> <span style="color:#a90d91">=</span> <span style="color:#000">msg</span> <span style="color:#a90d91">match</span> <span style="color:#000">{</span>
+	<span style="color:#a90d91">case</span> <span style="color:#000">it</span> <span style="color:#a90d91">if</span> <span style="color:#000">it</span><span style="color:#000">.</span><span style="color:#000">contains</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;H&#34;</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#c41a16">&#34;Hello&#34;</span>
+	<span style="color:#a90d91">case</span> <span style="color:#a90d91">_</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#c41a16">&#34;Other&#34;</span>
+<span style="color:#000">}</span>
+<span style="color:#177500">//更常见的用法是去匹配参数的模式:
+</span><span style="color:#177500"></span><span style="color:#a90d91">case</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Player</span><span style="color:#000">(</span><span style="color:#000">name</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">String</span><span style="color:#000">,</span> <span style="color:#000">score</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span>
+<span style="color:#a90d91">def</span> <span style="color:#000">message</span><span style="color:#000">(</span><span style="color:#000">player</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Player</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">player</span> <span style="color:#a90d91">match</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Player</span><span style="color:#000">(</span><span style="color:#a90d91">_</span><span style="color:#000">,</span> <span style="color:#000">score</span><span style="color:#000">)</span> <span style="color:#a90d91">if</span> <span style="color:#000">score</span> <span style="color:#000">&gt;</span> <span style="color:#1c01ce">100000</span> <span style="color:#a90d91">=&gt;</span>
+    <span style="color:#c41a16">&#34;Get a job, dude!&#34;</span>
+  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Player</span><span style="color:#000">(</span><span style="color:#000">name</span><span style="color:#000">,</span> <span style="color:#a90d91">_</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span>
+    <span style="color:#c41a16">&#34;Hey, $name, nice to see you again!&#34;</span>
+<span style="color:#000">}</span>
+<span style="color:#a90d91">def</span> <span style="color:#000">printMessage</span><span style="color:#000">(</span><span style="color:#000">player</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Player</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#000">message</span><span style="color:#000">(</span><span style="color:#000">player</span><span style="color:#000">))</span>
 </code></pre></div><p>其实case还有一种在匿名函数中的用法,看如下的代码,在词频统计或者过滤中很常见:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">val</span> wordFrequencies <span style="color:#00f">=</span> (<span style="color:#a31515">&#34;habitual&#34;</span>, 6) <span style="color:#00f">:</span><span style="color:#2b91af">:</span> (<span style="">&#34;</span><span style="color:#2b91af">and</span><span style="">&#34;</span>, <span style="">56</span>) <span style="color:#00f">:</span><span style="color:#2b91af">:</span> (<span style="">&#34;</span><span style="color:#2b91af">consuetudinary</span><span style="">&#34;</span>, <span style="">2</span>)  <span style="color:#00f">:</span><span style="color:#2b91af">:</span> <span style="color:#2b91af">Nil</span>
-<span style="color:#00f">def</span> wordsWithoutOutliers(wordFrequencies<span style="color:#00f">:</span> <span style="color:#2b91af">Seq</span>[(<span style="color:#2b91af">String</span>, <span style="color:#2b91af">Int</span>)])<span style="color:#00f">:</span> <span style="color:#2b91af">Seq</span>[<span style="color:#2b91af">String</span>] <span style="color:#00f">=</span>
-  wordFrequencies.filter(wf <span style="color:#00f">=&gt;</span> wf._2 &gt; 3 &amp;&amp; wf._2 &lt; 25).map(<span style="color:#00f">_</span>._1)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">val</span> <span style="color:#000">wordFrequencies</span> <span style="color:#a90d91">=</span> <span style="color:#000">(</span><span style="color:#c41a16">&#34;habitual&#34;</span><span style="color:#000">,</span> <span style="color:#1c01ce">6</span><span style="color:#000">)</span> <span style="color:#a90d91">:</span><span style="color:#a90d91">:</span> <span style="color:#000">(</span><span style="color:#000">&#34;</span><span style="color:#a90d91">and</span><span style="color:#000">&#34;</span><span style="color:#000">,</span> <span style="color:#000">56</span><span style="color:#000">)</span> <span style="color:#a90d91">:</span><span style="color:#a90d91">:</span> <span style="color:#000">(</span><span style="color:#000">&#34;</span><span style="color:#a90d91">consuetudinary</span><span style="color:#000">&#34;</span><span style="color:#000">,</span> <span style="color:#000">2</span><span style="color:#000">)</span>  <span style="color:#a90d91">:</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Nil</span>
+<span style="color:#a90d91">def</span> <span style="color:#000">wordsWithoutOutliers</span><span style="color:#000">(</span><span style="color:#000">wordFrequencies</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Seq</span><span style="color:#000">[(</span><span style="color:#a90d91">String</span>, <span style="color:#a90d91">Int</span><span style="color:#000">)])</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Seq</span><span style="color:#000">[</span><span style="color:#a90d91">String</span><span style="color:#000">]</span> <span style="color:#a90d91">=</span>
+  <span style="color:#000">wordFrequencies</span><span style="color:#000">.</span><span style="color:#000">filter</span><span style="color:#000">(</span><span style="color:#000">wf</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">wf</span><span style="color:#000">.</span><span style="color:#000">_2</span> <span style="color:#000">&gt;</span> <span style="color:#1c01ce">3</span> <span style="color:#000">&amp;&amp;</span> <span style="color:#000">wf</span><span style="color:#000">.</span><span style="color:#000">_2</span> <span style="color:#000">&lt;</span> <span style="color:#1c01ce">25</span><span style="color:#000">).</span><span style="color:#000">map</span><span style="color:#000">(</span><span style="color:#a90d91">_</span><span style="color:#000">.</span><span style="color:#000">_1</span><span style="color:#000">)</span>
 </code></pre></div><p>上面的代码有比较大的问题是访问tuple元素的方式比较难看,Scala提供了一种pattern matching anonymous function解决这个问题:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">def</span> wordsWithoutOutliers(wordFrequencies<span style="color:#00f">:</span> <span style="color:#2b91af">Seq</span>[(<span style="color:#2b91af">String</span>, <span style="color:#2b91af">Int</span>)])<span style="color:#00f">:</span> <span style="color:#2b91af">Seq</span>[<span style="color:#2b91af">String</span>] <span style="color:#00f">=</span>
- wordFrequencies.filter { <span style="color:#00f">case</span> (<span style="color:#00f">_</span>, f) <span style="color:#00f">=&gt;</span> f &gt; 3 &amp;&amp; f &lt; 25 } map { <span style="color:#00f">case</span> (w, <span style="color:#00f">_</span>) <span style="color:#00f">=&gt;</span> w }
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">def</span> <span style="color:#000">wordsWithoutOutliers</span><span style="color:#000">(</span><span style="color:#000">wordFrequencies</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Seq</span><span style="color:#000">[(</span><span style="color:#a90d91">String</span>, <span style="color:#a90d91">Int</span><span style="color:#000">)])</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Seq</span><span style="color:#000">[</span><span style="color:#a90d91">String</span><span style="color:#000">]</span> <span style="color:#a90d91">=</span>
+ <span style="color:#000">wordFrequencies</span><span style="color:#000">.</span><span style="color:#000">filter</span> <span style="color:#000">{</span> <span style="color:#a90d91">case</span> <span style="color:#000">(</span><span style="color:#a90d91">_</span><span style="color:#000">,</span> <span style="color:#000">f</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">f</span> <span style="color:#000">&gt;</span> <span style="color:#1c01ce">3</span> <span style="color:#000">&amp;&amp;</span> <span style="color:#000">f</span> <span style="color:#000">&lt;</span> <span style="color:#1c01ce">25</span> <span style="color:#000">}</span> <span style="color:#000">map</span> <span style="color:#000">{</span> <span style="color:#a90d91">case</span> <span style="color:#000">(</span><span style="color:#000">w</span><span style="color:#000">,</span> <span style="color:#a90d91">_</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">w</span> <span style="color:#000">}</span>
 </code></pre></div><p>注意到省略了最早版本的 <code>wf =&gt;</code>,IDEA其实会提示你省略这个冗余部分.
-另一个问题就是上面的操作中我们先过滤想要的序列,然后对序列进行了map映射操作.Scala 集合的 API 有一个叫做 <code>collect</code> 的方法，对于 <code>Seq[A]</code> ，它有如下方法签名：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">def</span> collect[<span style="color:#2b91af">B</span>](pf<span style="color:#00f">:</span> <span style="color:#2b91af">PartialFunction</span>[<span style="color:#2b91af">A</span>, <span style="color:#2b91af">B</span>])<span style="color:#00f">:</span> <span style="color:#2b91af">Seq</span>[<span style="color:#2b91af">B</span>]
-</code></pre></div><p>这个方法将给定的_偏函数(partial function)_ 应用到序列的每一个元素上， 最后返回一个满足条件并处理后新的序列 ,这里偏函数做了 <code>filter</code> 和 <code>map</code> 要做的事情。
-现在，我们来重构 <code>wordsWithoutOutliers</code> ，首先定义需要的偏函数：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">val</span> pf<span style="color:#00f">:</span> <span style="color:#2b91af">PartialFunction</span>[(<span style="color:#2b91af">String</span>, <span style="color:#2b91af">Int</span>), <span style="color:#2b91af">String</span>] <span style="color:#00f">=</span> {
- <span style="color:#00f">case</span> (word, freq) <span style="color:#00f">if</span> freq &gt; 3 &amp;&amp; freq &lt; 25 <span style="color:#00f">=&gt;</span> word
-}
-wordFrequencies.collect(pf)
-</code></pre></div><p>我们为这个案例加入了 <em>守卫语句</em>，不在区间里的元素就没有定义。
+另一个问题就是上面的操作中我们先过滤想要的序列,然后对序列进行了map映射操作.Scala 集合的 API 有一个叫做 <code>collect</code> 的方法,对于 <code>Seq[A]</code> ,它有如下方法签名：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">def</span> <span style="color:#000">collect</span><span style="color:#000">[</span><span style="color:#a90d91">B</span><span style="color:#000">](</span><span style="color:#000">pf</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">PartialFunction</span><span style="color:#000">[</span><span style="color:#a90d91">A</span>, <span style="color:#a90d91">B</span><span style="color:#000">])</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Seq</span><span style="color:#000">[</span><span style="color:#a90d91">B</span><span style="color:#000">]</span>
+</code></pre></div><p>这个方法将给定的_偏函数(partial function)_ 应用到序列的每一个元素上, 最后返回一个满足条件并处理后新的序列 ,这里偏函数做了 <code>filter</code> 和 <code>map</code> 要做的事情.
+现在,我们来重构 <code>wordsWithoutOutliers</code> ,首先定义需要的偏函数：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">val</span> <span style="color:#000">pf</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">PartialFunction</span><span style="color:#000">[(</span><span style="color:#a90d91">String</span>, <span style="color:#a90d91">Int</span><span style="color:#000">)</span>, <span style="color:#a90d91">String</span><span style="color:#000">]</span> <span style="color:#a90d91">=</span> <span style="color:#000">{</span>
+ <span style="color:#a90d91">case</span> <span style="color:#000">(</span><span style="color:#000">word</span><span style="color:#000">,</span> <span style="color:#000">freq</span><span style="color:#000">)</span> <span style="color:#a90d91">if</span> <span style="color:#000">freq</span> <span style="color:#000">&gt;</span> <span style="color:#1c01ce">3</span> <span style="color:#000">&amp;&amp;</span> <span style="color:#000">freq</span> <span style="color:#000">&lt;</span> <span style="color:#1c01ce">25</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">word</span>
+<span style="color:#000">}</span>
+<span style="color:#000">wordFrequencies</span><span style="color:#000">.</span><span style="color:#000">collect</span><span style="color:#000">(</span><span style="color:#000">pf</span><span style="color:#000">)</span>
+</code></pre></div><p>我们为这个案例加入了 <em>守卫语句</em>,不在区间里的元素就没有定义.
 以上来自<a href="http://danielwestheide.com/scala/neophytes.html">Scala初学者指南</a>
 当然有中文版:<a href="https://www.gitbook.com/book/windor/beginners-guide-to-scala/details">Scala初学者指南-gitbook</a></p>
-
     </div>
     <footer class="post-footer">
      
@@ -308,12 +307,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -325,16 +325,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

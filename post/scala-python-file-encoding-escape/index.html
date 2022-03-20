@@ -167,23 +167,23 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>在文件读取的时候，会遇到非法转义字符，导致文件按行读取失败。此时可以通过忽略转义字符来解决。本文记录了scala和python的方法。</p>
+    <p>在文件读取的时候,会遇到非法转义字符,导致文件按行读取失败.此时可以通过忽略转义字符来解决.本文记录了scala和python的方法.</p>
 <h2 id="背景">背景</h2>
-<p>有50G的服务器日志，拆分为几千个txt文件，编码是utf8,使用scala和python按行处理：</p>
-<p>scala</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">def</span> main(args<span style="color:#00f">:</span> <span style="color:#2b91af">Array</span>[<span style="color:#2b91af">String</span>])<span style="color:#00f">:</span> <span style="color:#2b91af">Unit</span> = {
-  <span style="color:#00f">for</span> (line <span style="color:#00f">&lt;-</span> <span style="color:#2b91af">Source</span>.fromFile(<span style="color:#a31515">&#34;./txt1.log&#34;</span>,<span style="color:#a31515">&#34;UTF8&#34;</span>).getLines()) {
-    <span style="color:#00f">if</span> (line.contains(<span style="color:#a31515">&#34;ABC&#34;</span>)) {
-      <span style="color:#008000">//do something      
-</span><span style="color:#008000"></span>    }
-  }
-}
-</code></pre></div><p>python</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">with</span> open(<span style="color:#a31515">&#39;./txt1.log&#39;</span>,<span style="color:#a31515">&#39;r&#39;</span>,encoding=<span style="color:#a31515">&#39;utf-8&#39;</span>) <span style="color:#00f">as</span> f:
-    <span style="color:#00f">for</span> line <span style="color:#00f">in</span> f:
-        <span style="color:#00f">pass</span> <span style="color:#008000">#do something</span>
+<p>有50G的服务器日志,拆分为几千个txt文件,编码是utf8,使用scala和python按行处理：</p>
+<h3 id="scala">scala</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">def</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">args</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Array</span><span style="color:#000">[</span><span style="color:#a90d91">String</span><span style="color:#000">])</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Unit</span> <span style="color:#000">=</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">line</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#3f6e75">Source</span><span style="color:#000">.</span><span style="color:#000">fromFile</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;./txt1.log&#34;</span><span style="color:#000">,</span><span style="color:#c41a16">&#34;UTF8&#34;</span><span style="color:#000">).</span><span style="color:#000">getLines</span><span style="color:#000">())</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">line</span><span style="color:#000">.</span><span style="color:#000">contains</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;ABC&#34;</span><span style="color:#000">))</span> <span style="color:#000">{</span>
+      <span style="color:#177500">//do something      
+</span><span style="color:#177500"></span>    <span style="color:#000">}</span>
+  <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+</code></pre></div><h3 id="python">python</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">with</span> <span style="color:#a90d91">open</span>(<span style="color:#c41a16">&#39;./txt1.log&#39;</span>,<span style="color:#c41a16">&#39;r&#39;</span>,<span style="color:#000">encoding</span><span style="color:#000">=</span><span style="color:#c41a16">&#39;utf-8&#39;</span>) <span style="color:#a90d91">as</span> <span style="color:#000">f</span>:
+    <span style="color:#a90d91">for</span> <span style="color:#000">line</span> <span style="color:#000">in</span> <span style="color:#000">f</span>:
+        <span style="color:#a90d91">pass</span> <span style="color:#177500">#do something</span>
     
-</code></pre></div><p>但是文本中有一些行包含非法的转义字符，例如：</p>
+</code></pre></div><p>但是文本中有一些行包含非法的转义字符,例如：</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">http://bbc.com/search.html \xa3\xa9 404 \r\n 李晓明
 </code></pre></div><p>导致程序异常:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#scala
@@ -192,30 +192,30 @@ java.nio.charset.MalformedInputException: Input length = 1
 #python
 &#39;utf-8&#39; codec can&#39;t decode byte 0xa3 in position 168: invalid start byte
 </code></pre></div><h2 id="方案">方案</h2>
-<p>一般遇到这种非法转义字符，可以跳过这个错误，看成raw string来处理。</p>
-<p>scala</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">import</span> java.nio.charset.CodingErrorAction
-<span style="color:#00f">import</span> scala.io.{<span style="color:#2b91af">Codec</span>, <span style="color:#2b91af">Source</span>}
+<p>一般遇到这种非法转义字符,可以跳过这个错误,看成raw string来处理.</p>
+<h3 id="scala-1">scala</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">import</span> <span style="color:#000">java.nio.charset.CodingErrorAction</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">scala.io.</span><span style="color:#000">{</span><span style="color:#3f6e75">Codec</span><span style="color:#000">,</span> <span style="color:#3f6e75">Source</span><span style="color:#000">}</span>
 
-<span style="color:#00f">implicit</span> <span style="color:#00f">val</span> codec <span style="color:#00f">=</span> <span style="color:#2b91af">Codec</span>(<span style="color:#a31515">&#34;UTF-8&#34;</span>)
-codec.onMalformedInput(<span style="color:#2b91af">CodingErrorAction</span>.<span style="color:#2b91af">REPLACE</span>)
-codec.onUnmappableCharacter(<span style="color:#2b91af">CodingErrorAction</span>.<span style="color:#2b91af">REPLACE</span>)
+<span style="color:#a90d91">implicit</span> <span style="color:#a90d91">val</span> <span style="color:#000">codec</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Codec</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;UTF-8&#34;</span><span style="color:#000">)</span>
+<span style="color:#000">codec</span><span style="color:#000">.</span><span style="color:#000">onMalformedInput</span><span style="color:#000">(</span><span style="color:#3f6e75">CodingErrorAction</span><span style="color:#000">.</span><span style="color:#3f6e75">REPLACE</span><span style="color:#000">)</span>
+<span style="color:#000">codec</span><span style="color:#000">.</span><span style="color:#000">onUnmappableCharacter</span><span style="color:#000">(</span><span style="color:#3f6e75">CodingErrorAction</span><span style="color:#000">.</span><span style="color:#3f6e75">REPLACE</span><span style="color:#000">)</span>
 
-<span style="color:#008000">// 注意，fromFile方法没有提供&#34;UTF8&#34;参数
-</span><span style="color:#008000"></span><span style="color:#00f">def</span> main(args<span style="color:#00f">:</span> <span style="color:#2b91af">Array</span>[<span style="color:#2b91af">String</span>])<span style="color:#00f">:</span> <span style="color:#2b91af">Unit</span> = {
-  <span style="color:#00f">for</span> (line <span style="color:#00f">&lt;-</span> <span style="color:#2b91af">Source</span>.fromFile(<span style="color:#a31515">&#34;./test.file&#34;</span>).getLines()) {
-    <span style="color:#00f">if</span> (line.contains(<span style="color:#a31515">&#34;ABC&#34;</span>)) {
-      <span style="color:#008000">//do something
-</span><span style="color:#008000"></span>    }
-  }
-}
-</code></pre></div><p>python</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">with</span> open(<span style="color:#a31515">&#39;./txt1.log&#39;</span>,<span style="color:#a31515">&#39;r&#39;</span>,encoding=<span style="color:#a31515">&#39;utf-8&#39;</span>,errors=<span style="color:#a31515">&#39;ignore&#39;</span>) <span style="color:#00f">as</span> f:
-    <span style="color:#00f">for</span> line <span style="color:#00f">in</span> f:
-        <span style="color:#00f">pass</span> <span style="color:#008000">#do something</span>
+<span style="color:#177500">// 注意,fromFile方法没有提供&#34;UTF8&#34;参数
+</span><span style="color:#177500"></span><span style="color:#a90d91">def</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">args</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Array</span><span style="color:#000">[</span><span style="color:#a90d91">String</span><span style="color:#000">])</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Unit</span> <span style="color:#000">=</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">line</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#3f6e75">Source</span><span style="color:#000">.</span><span style="color:#000">fromFile</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;./test.file&#34;</span><span style="color:#000">).</span><span style="color:#000">getLines</span><span style="color:#000">())</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">line</span><span style="color:#000">.</span><span style="color:#000">contains</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;ABC&#34;</span><span style="color:#000">))</span> <span style="color:#000">{</span>
+      <span style="color:#177500">//do something
+</span><span style="color:#177500"></span>    <span style="color:#000">}</span>
+  <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+</code></pre></div><h3 id="python-1">python</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">with</span> <span style="color:#a90d91">open</span>(<span style="color:#c41a16">&#39;./txt1.log&#39;</span>,<span style="color:#c41a16">&#39;r&#39;</span>,<span style="color:#000">encoding</span><span style="color:#000">=</span><span style="color:#c41a16">&#39;utf-8&#39;</span>,<span style="color:#000">errors</span><span style="color:#000">=</span><span style="color:#c41a16">&#39;ignore&#39;</span>) <span style="color:#a90d91">as</span> <span style="color:#000">f</span>:
+    <span style="color:#a90d91">for</span> <span style="color:#000">line</span> <span style="color:#000">in</span> <span style="color:#000">f</span>:
+        <span style="color:#a90d91">pass</span> <span style="color:#177500">#do something</span>
     
-</code></pre></div><p>如果确认文本中没有中文的话，也可以使用下面的方式直接将其转义掉</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#00f">with</span> open(<span style="color:#a31515">&#39;./txt1.log&#39;</span>,<span style="color:#a31515">&#39;r&#39;</span>,encoding=<span style="color:#a31515">&#39;unicode_escape&#39;</span>) <span style="color:#00f">as</span> f:
+</code></pre></div><p>如果确认文本中没有中文的话,也可以使用下面的方式直接将其转义掉</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">with</span> <span style="color:#a90d91">open</span>(<span style="color:#c41a16">&#39;./txt1.log&#39;</span>,<span style="color:#c41a16">&#39;r&#39;</span>,<span style="color:#000">encoding</span><span style="color:#000">=</span><span style="color:#c41a16">&#39;unicode_escape&#39;</span>) <span style="color:#a90d91">as</span> <span style="color:#000">f</span>:
 </code></pre></div>
     </div>
     <footer class="post-footer">
@@ -236,8 +236,8 @@ codec.onUnmappableCharacter(<span style="color:#2b91af">CodingErrorAction</span>
      <div class="post-nav">
     <div class="post-nav-next post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/python-interview-questions/" rel="next" title="Python几道常见的笔试题">
-        <i class="fa fa-chevron-left"></i> Python几道常见的笔试题
+        <a href="https://zhimoe.github.io/post/python-interview-questions/" rel="next" title="Python 4道笔试题">
+        <i class="fa fa-chevron-left"></i> Python 4道笔试题
         </a>
     
     </div>
@@ -326,12 +326,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -343,16 +344,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     
@@ -374,8 +368,18 @@ var disqus_config = function () {
     <div class="post-toc">
         <div class="post-toc-content"><nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#方案">方案</a></li>
+    <li><a href="#背景">背景</a>
+      <ul>
+        <li><a href="#scala">scala</a></li>
+        <li><a href="#python">python</a></li>
+      </ul>
+    </li>
+    <li><a href="#方案">方案</a>
+      <ul>
+        <li><a href="#scala-1">scala</a></li>
+        <li><a href="#python-1">python</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
     </div>

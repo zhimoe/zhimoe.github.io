@@ -165,12 +165,16 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">2207 字 ~5分钟</span>
+<span class="leancloud-visitors-count">2235 字 ~5分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    注解处理 注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的. 关于注解的定义就不说了,主要说说注解处理 本文根据以下资料并进行部分修改： JavaAnnotationProcessing 基本知识 annotation processing integrated into javac compiler – since Java 6.0; known as pluggable
+    <h3 id="注解处理">注解处理</h3>
+<p>注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的.
+关于注解的定义就不说了,主要说说注解处理
+本文根据以下资料并进行部分修改：
+<a href="http://www.angelikalanger.com/Conferences/Slides/JavaAnnotationProcessing-JSpring-2008.pdf">JavaAnnotationProcessing</a></p>
     </div>
     
     <div class="post-more-link text-center">
@@ -224,12 +228,23 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">532 字 ~2分钟</span>
+<span class="leancloud-visitors-count">549 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    参考资料 饱汉式 public class Singleton { private static Singleton instance = null private Singleton (){} public static Singleton getInstance() { if(instance == null) instance = new Singleton(); return instance; } } //饱汉式，使用时创建 饿汉式 //加载时创建对象 static public class Singleton { private Singleton instance = null; static { instance = new Singleton(); } private Singleton (){} public static Singleton getInstance() { return this.instance; } } 静态内部类 public class Singleton { private Singleton (){} private static class SingletonHolder { private static final Singleton INSTANCE = new Singleton(); } public static final Singleton getInstance() {
+    <p>Java单例模式的各种写法和序列化
+<a href="http://www.hollischuang.com/archives/205">参考资料</a></p>
+<h3 id="饱汉式">饱汉式</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Singleton</span> <span style="color:#000">{</span>  
+    <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#000">Singleton</span> <span style="color:#000">instance</span> <span style="color:#000">=</span> <span style="color:#a90d91">null</span>  
+    <span style="color:#a90d91">private</span> <span style="color:#000">Singleton</span> <span style="color:#000">(){}</span>   
+	    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#000">Singleton</span> <span style="color:#000">getInstance</span><span style="color:#000">()</span> <span style="color:#000">{</span>  
+	        <span style="color:#a90d91">if</span><span style="color:#000">(</span><span style="color:#000">instance</span> <span style="color:#000">==</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span>             <span style="color:#000">instance</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">Singleton</span><span style="color:#000">();</span>         <span style="color:#a90d91">return</span> <span style="color:#000">instance</span><span style="color:#000">;</span>  
+    <span style="color:#000">}</span>  
+<span style="color:#000">}</span>  <span style="color:#177500">//饱汉式,使用时创建
+</span><span style="color:#177500"></span>
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -283,13 +298,16 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">4116 字 ~9分钟</span>
+<span class="leancloud-visitors-count">4111 字 ~9分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>在看这个之前，希望你有用ant或者maven的使用经验，还有，对groovy的语法有一个简单的了解，不懂也没关系，下面会介绍。
+    <p>在看这个之前,希望你有用ant或者maven的使用经验,还有,对groovy的语法有一个简单的了解,不懂也没关系,下面会介绍.
 理解gradle文件的前提是理解一个重要的groovy概念:closure</p>
+<h4 id="closure">closure</h4>
+<p>一个closure是一个定义在groovy文件中的{}代码块,这个代码块类似js中的匿名函数,它可以被赋值给变量,可以被调用,可以接收参数,还可以作为参数传递给别的函数.</p>
+<p>closure中最重要的两个概念是委托对象和作为参数传递的语法格式（理解gradle文件很重要）.</p>
     </div>
     
     <div class="post-more-link text-center">
@@ -343,12 +361,35 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1438 字 ~3分钟</span>
+<span class="leancloud-visitors-count">1440 字 ~3分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    最近一道非常火的携程面试题: public class Base { private String baseName = &#34;base&#34;; public Base() { callName(); } public void callName() { System.out.println(baseName); } static class Sub extends Base { private String baseName = &#34;sub&#34;; public void callName() { System.out.println(baseName); } } public static void main(String[] args) { Base b = new Sub(); // 输出？ } } 我的理解： 先理解两个方法: class 的(clinit)方法和(init)方法不同：这两个方法一个是虚拟机在装载
+    <p>最近非常火的一道携程面试题Java</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Base</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">baseName</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;base&#34;</span><span style="color:#000">;</span>
+    <span style="color:#a90d91">public</span> <span style="color:#000">Base</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+        <span style="color:#000">callName</span><span style="color:#000">();</span>
+    <span style="color:#000">}</span>
+
+    <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">callName</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+        <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#000">baseName</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
+
+    <span style="color:#a90d91">static</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Sub</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Base</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">private</span> <span style="color:#000">String</span> <span style="color:#000">baseName</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;sub&#34;</span><span style="color:#000">;</span>
+
+        <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">callName</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+            <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#000">baseName</span><span style="color:#000">);</span>
+        <span style="color:#000">}</span>
+    <span style="color:#000">}</span>
+
+    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+        <span style="color:#000">Base</span> <span style="color:#000">b</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">Sub</span><span style="color:#000">();</span> <span style="color:#177500">// 输出？
+</span><span style="color:#177500"></span>    <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -407,7 +448,7 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>知乎回答备份，<a href="https://www.zhihu.com/question/21142149/answer/52383396">原答案写于15年</a>。
+    <p>知乎回答备份,<a href="https://www.zhihu.com/question/21142149/answer/52383396">原答案写于15年</a>.
 6,404 人赞同了该回答</p>
     </div>
     
@@ -538,12 +579,20 @@
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
+<div class="feed-link motion-element">
+<a href="https://zhimoe.github.io/index.xml" rel="alternate" type="application/rss+xml" target="_blank">
+    <i class="fa fa-rss"></i>
+    RSS 订阅
+</a>
+</div>
+
       
 <div class="links-of-author motion-element">
     
@@ -555,16 +604,9 @@
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

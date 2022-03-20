@@ -168,30 +168,29 @@
     </header>
     <div class="post-body" itemprop="articleBody">
     <h4 id="atomiclong-code">AtomicLong code:</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#2b91af">long</span> incrementAndGet() {
-    <span style="color:#00f">for</span> (;;) {
-        <span style="color:#2b91af">long</span> current = get();
-        <span style="color:#2b91af">long</span> next = current + 1;
-        <span style="color:#00f">if</span> (compareAndSet(current, next))
-          <span style="color:#00f">return</span> next;
-    }
-}
-<span style="color:#008000">//in java 8:
-</span><span style="color:#008000"></span><span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#2b91af">long</span> incrementAndGet() {
-        <span style="color:#00f">return</span> unsafe.getAndAddLong(<span style="color:#00f">this</span>, valueOffset, 1L) + 1L;
-}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">long</span> <span style="color:#000">incrementAndGet</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+    <span style="color:#a90d91">for</span> <span style="color:#000">(;;)</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">long</span> <span style="color:#000">current</span> <span style="color:#000">=</span> <span style="color:#000">get</span><span style="color:#000">();</span>
+        <span style="color:#a90d91">long</span> <span style="color:#000">next</span> <span style="color:#000">=</span> <span style="color:#000">current</span> <span style="color:#000">+</span> <span style="color:#000">1</span><span style="color:#000">;</span>
+        <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">compareAndSet</span><span style="color:#000">(</span><span style="color:#000">current</span><span style="color:#000">,</span> <span style="color:#000">next</span><span style="color:#000">))</span>
+          <span style="color:#a90d91">return</span> <span style="color:#000">next</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
+<span style="color:#000">}</span>
+<span style="color:#177500">//in java 8:
+</span><span style="color:#177500"></span><span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">long</span> <span style="color:#000">incrementAndGet</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">return</span> <span style="color:#000">unsafe</span><span style="color:#000">.</span><span style="color:#836c28">getAndAddLong</span><span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">,</span> <span style="color:#000">valueOffset</span><span style="color:#000">,</span> <span style="color:#000">1L</span><span style="color:#000">)</span> <span style="color:#000">+</span> <span style="color:#000">1L</span><span style="color:#000">;</span>
+<span style="color:#000">}</span>
 
 </code></pre></div><h4 id="基础">基础</h4>
-<p>第一个版本是基于cas的，cas基于一个基础：有三个值，新值N，预期内存中的值E，内存中需要更新的值V，如果V == E,那么将V设置为N,返回V，结束；如果V != E，说明有别的线程动了这个v,那么不做修改直接返回V。cas在X86下对应的是 CMPXCHG 汇编指令</p>
-<p>java8中则使用了x86的优化指令atomic fetch-and-add ，上面的代码直接等价于cpu的一条指令atomic fetch-and-add .[性能更好](atomic fetch-and-add vs compare-and-swap)</p>
-<p>而compareAndSet利用JNI来完成CPU指令的操作。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#2b91af">boolean</span> compareAndSet(<span style="color:#2b91af">int</span> expect, <span style="color:#2b91af">int</span> update) {   
-    <span style="color:#00f">return</span> unsafe.compareAndSwapInt(<span style="color:#00f">this</span>, valueOffset, expect, update);
-    }
+<p>第一个版本是基于cas的,cas基于一个基础：有三个值,新值N,预期内存中的值E,内存中需要更新的值V,如果V == E,那么将V设置为N,返回V,结束；如果V != E,说明有别的线程动了这个v,那么不做修改直接返回V.cas在X86下对应的是 CMPXCHG 汇编指令</p>
+<p>java8中则使用了x86的优化指令atomic fetch-and-add ,上面的代码直接等价于cpu的一条指令atomic fetch-and-add .[性能更好](atomic fetch-and-add vs compare-and-swap)</p>
+<p>而compareAndSet利用JNI来完成CPU指令的操作.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">boolean</span> <span style="color:#000">compareAndSet</span><span style="color:#000">(</span><span style="color:#a90d91">int</span> <span style="color:#000">expect</span><span style="color:#000">,</span> <span style="color:#a90d91">int</span> <span style="color:#000">update</span><span style="color:#000">)</span> <span style="color:#000">{</span>   
+    <span style="color:#a90d91">return</span> <span style="color:#000">unsafe</span><span style="color:#000">.</span><span style="color:#836c28">compareAndSwapInt</span><span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">,</span> <span style="color:#000">valueOffset</span><span style="color:#000">,</span> <span style="color:#000">expect</span><span style="color:#000">,</span> <span style="color:#000">update</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
 </code></pre></div><h4 id="注意">注意</h4>
-<p>java.util.concurrent.atomic中的原子类使用了很多cas，但是这个方法一个是自己实现和使用需要很仔细，另一个在真的高并发中可能陷入死循环，因为方法中本身就是一个死循环：<code>for (;;)</code>.java8为此提供了LongAdder.</p>
+<p>java.util.concurrent.atomic中的原子类使用了很多cas,但是这个方法一个是自己实现和使用需要很仔细,另一个在真的高并发中可能陷入死循环,因为方法中本身就是一个死循环：<code>for (;;)</code>.java8为此提供了LongAdder.</p>
 <p>关于垃圾自动回收的语言不会出现cas中aba问题的原理：<a href="http://stackoverflow.com/questions/19660737/aba-in-lock-free-algorithms">stackoverflow</a></p>
-
     </div>
     <footer class="post-footer">
      
@@ -299,12 +298,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -316,16 +316,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

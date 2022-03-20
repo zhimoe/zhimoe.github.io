@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>使用redis的hash优化内存使用 - zhimoe</title>
+    <title>使用redis的hash优化内存使用[翻译] - zhimoe</title>
     <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
     
-    <meta property="og:title" content="使用redis的hash优化内存使用">
+    <meta property="og:title" content="使用redis的hash优化内存使用[翻译]">
     <meta property="og:site_name" content="zhimoe">
     <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="使用redis的hash优化内存使用 - zhimoe" />
+    <meta name="title" content="使用redis的hash优化内存使用[翻译] - zhimoe" />
     <meta name="description" content="编程是一门手艺"> 
     <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
@@ -124,7 +124,7 @@
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
         <a class="post-title-link" href="https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/" itemprop="url">
-        使用redis的hash优化内存使用
+        使用redis的hash优化内存使用[翻译]
         </a>
       </h1>
       <div class="post-meta">
@@ -162,47 +162,47 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">701 字 ~2分钟</span>
+<span class="leancloud-visitors-count">719 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <h1 id="原文">原文</h1>
+    <p>使用redis的hash优化内存使用</p>
+<h1 id="原文">原文</h1>
 <p><a href="https://www.peterbe.com/plog/understanding-redis-hash-max-ziplist-entries">Understanding Redis hash-max-ziplist-entries</a></p>
 <h1 id="问题和方案">问题和方案</h1>
 <p>场景: 有3亿张图片放在对象存储(DELL ECS/AMAZON EC2)上面,现在需要保存图片的id-&gt;用户id的映射.最直接的思路是:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set <span style="color:#a31515">&#34;media:1155220&#34;</span> <span style="color:#a31515">&#34;user1&#34;</span>
-set <span style="color:#a31515">&#34;media:1155221&#34;</span> <span style="color:#a31515">&#34;user2&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#a90d91">set</span> <span style="color:#c41a16">&#34;media:1155220&#34;</span> <span style="color:#c41a16">&#34;user1&#34;</span>
+<span style="color:#a90d91">set</span> <span style="color:#c41a16">&#34;media:1155221&#34;</span> <span style="color:#c41a16">&#34;user2&#34;</span>
 </code></pre></div><p>这样设计key之后3亿张图片需要21GB的内存,因为redis的string是线性增长的.
 此时可以使用hash优化内存使用.hash是类似java hashmap的数据结构: key field1 value1 field2 value2 &hellip;
 hash的强大在于它可以只获取一个field的value,而无需返回整个key.
 再仔细想想,hash的key可以类比于分库分表的bucket概念.</p>
 <p>回到上面的问题,Mike Krieger,Instagram的创始人<a href="https://engineering.instagram.com/storing-hundreds-of-millions-of-simple-key-value-pairs-in-redis-1091ae80f74c">提出</a>将图片的id除以1000分片(sharding)到1000个hash key上:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">HSET <span style="color:#a31515">&#34;mda-bkt:1155&#34;</span> <span style="color:#a31515">&#34;1155220&#34;</span> <span style="color:#a31515">&#34;user1&#34;</span> <span style="color:#a31515">&#34;1155221&#34;</span> <span style="color:#a31515">&#34;user2&#34;</span>
-<span style="color:#008000"># mda-bkt:1155 是1155220/1000之后得到的bucket.</span>
-HGET <span style="color:#a31515">&#34;mda-bkt:1155&#34;</span> <span style="color:#a31515">&#34;1155220&#34;</span>
-<span style="color:#008000"># 这里key的前缀*mda-bkt:)只重复了1000次,而上面的string方式重复了3亿次.</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">HSET <span style="color:#c41a16">&#34;mda-bkt:1155&#34;</span> <span style="color:#c41a16">&#34;1155220&#34;</span> <span style="color:#c41a16">&#34;user1&#34;</span> <span style="color:#c41a16">&#34;1155221&#34;</span> <span style="color:#c41a16">&#34;user2&#34;</span>
+<span style="color:#177500"># mda-bkt:1155 是1155220/1000之后得到的bucket.</span>
+HGET <span style="color:#c41a16">&#34;mda-bkt:1155&#34;</span> <span style="color:#c41a16">&#34;1155220&#34;</span>
+<span style="color:#177500"># 这里key的前缀*mda-bkt:)只重复了1000次,而上面的string方式重复了3亿次.</span>
 </code></pre></div><p>因为redis针对<code>hash list zset</code>三种结构使用了<code>ziplist</code>高效存储方案.</p>
 <p>新的问题又来了,redis对于<code>ziplist</code>结构的key数量有限制的,即<code>hash-max-ziplist-entries</code>的含义是: 可使用内部空间优化存储的最多hash key</p>
 <p>使用<code>ziplist</code>的数据结构有三个<code>list hash zset</code>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">list-max-ziplist-entries 512
-list-max-ziplist-value 64
-<span style="color:#008000">#Limits for ziplist use with LISTs.</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">list-max-ziplist-entries <span style="color:#1c01ce">512</span>
+list-max-ziplist-value <span style="color:#1c01ce">64</span>
+<span style="color:#177500">#Limits for ziplist use with LISTs.</span>
 
-hash-max-ziplist-entries 512
-hash-max-ziplist-value 64
-<span style="color:#008000">#Limits for ziplist use with HASHes (previous versions of Redis used a different name and encoding for this)</span>
-<span style="color:#008000">#hash-max-zipmap-entries 512 (for Redis &lt; 2.6).</span>
+hash-max-ziplist-entries <span style="color:#1c01ce">512</span>
+hash-max-ziplist-value <span style="color:#1c01ce">64</span>
+<span style="color:#177500">#Limits for ziplist use with HASHes (previous versions of Redis used a different name and encoding for this)</span>
+<span style="color:#177500">#hash-max-zipmap-entries 512 (for Redis &lt; 2.6).</span>
 
-zset-max-ziplist-entries 128
-zset-max-ziplist-value 64
-<span style="color:#008000">#Limits for ziplist use with ZSETs.</span>
+zset-max-ziplist-entries <span style="color:#1c01ce">128</span>
+zset-max-ziplist-value <span style="color:#1c01ce">64</span>
+<span style="color:#177500">#Limits for ziplist use with ZSETs.</span>
 </code></pre></div><p>你可以使用<code>debug_object(key)</code>查看你的key是否使用了<code>ziplist</code>结构.
 建议<code>hash-max-ziplist-entries</code>最大设置为1000,过大会影响redis性能.</p>
 <h1 id="参考资料">参考资料</h1>
 <p><a href="https://redis.io/topics/memory-optimization">redis moemory optimize</a>
 <a href="https://redislabs.com/ebook/part-2-core-concepts/01chapter-9-reducing-memory-use/9-1-short-structures/9-1-1-the-ziplist-representation/">9.1.1 The ziplist representation-EBOOK – REDIS IN ACTION</a></p>
-
     </div>
     <footer class="post-footer">
      
@@ -228,8 +228,8 @@ zset-max-ziplist-value 64
 
     <div class="post-nav-prev post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/scala-implicit/" rel="prev" title="Scala Implicit">
-        Scala Implicit <i class="fa fa-chevron-right"></i>
+        <a href="https://zhimoe.github.io/post/scala-implicit/" rel="prev" title="Scala 2 Implicit">
+        Scala 2 Implicit <i class="fa fa-chevron-right"></i>
         </a>
     
     </div>
@@ -310,12 +310,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -327,16 +328,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

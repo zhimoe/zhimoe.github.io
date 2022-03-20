@@ -170,46 +170,46 @@
     <p>初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.</p>
 <h2 id="packages-crates-and-modules">packages, crates and modules</h2>
 <p>A Cargo.toml is a package. and must have a package name, like</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[package]
-name = <span style="color:#a31515">&#34;actix-web&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#000">package</span>]
+<span style="color:#000">name</span> = <span style="color:#c41a16">&#34;actix-web&#34;</span>
 </code></pre></div><p>A package(project) contains one or more crates;</p>
 <p>A package CAN contain as many binary crates as you’d like, but it must contain at least one crate (either library or binary);
 use src/main.rs, will build to package-name binary, or use src/bin/b1.rs,src/bin/b2.rs, wil get 2 binaries: b1,b2.</p>
 <p>A package must contain zero or one(0或者1个) library crates, and no more.</p>
 <p>by convention, package-name is use <code>-</code> (dash,can be <code>_</code>), but lib_name must use <code>_</code> (underscores, can not be <code>-</code>);</p>
 <p>cargo will auto replace the <code>-</code> with <code>_</code> in package-name to name the  default library crate(lib.rs in src root). Also you can name it in [lib]:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[lib]
-name = <span style="color:#a31515">&#34;actix_web&#34;</span>
-path = <span style="color:#a31515">&#34;src/lib.rs&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#000">lib</span>]
+<span style="color:#000">name</span> = <span style="color:#c41a16">&#34;actix_web&#34;</span>
+<span style="color:#000">path</span> = <span style="color:#c41a16">&#34;src/lib.rs&#34;</span>
 
 
-<span style="color:#008000"># also you can rename the binary:</span>
-<span style="color:#008000"># it use [[]], array in toml</span>
-[[bin]]
-name = <span style="color:#a31515">&#34;my-cool-binary&#34;</span>
-path = <span style="color:#a31515">&#34;src/my-cool-binary.rs&#34;</span>
+<span style="color:#177500"># also you can rename the binary:</span>
+<span style="color:#177500"># it use [[]], array in toml</span>
+[[<span style="color:#000">bin</span>]]
+<span style="color:#000">name</span> = <span style="color:#c41a16">&#34;my-cool-binary&#34;</span>
+<span style="color:#000">path</span> = <span style="color:#c41a16">&#34;src/my-cool-binary.rs&#34;</span>
 </code></pre></div><p>one package(project) can only have one library crate, when the lib continues to get bigger, you want to split up the lib into multiple packages.
 cargo introduce you with workspace.</p>
 <blockquote>
 <p>A workspace is a set of packages that share the same Cargo.lock and output directory.</p>
 </blockquote>
 <p>here is the actix-web package Cargo.toml file:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[workspace]
-members = [
-  <span style="color:#a31515">&#34;.&#34;</span>,
-  <span style="color:#a31515">&#34;awc&#34;</span>,
-  <span style="color:#a31515">&#34;actix-http&#34;</span>,
-  <span style="color:#a31515">&#34;actix-cors&#34;</span>,
-  <span style="color:#a31515">&#34;actix-files&#34;</span>,
-  <span style="color:#a31515">&#34;actix-framed&#34;</span>,
-  <span style="color:#a31515">&#34;actix-session&#34;</span>,
-  <span style="color:#a31515">&#34;actix-identity&#34;</span>,
-  <span style="color:#a31515">&#34;actix-multipart&#34;</span>,
-  <span style="color:#a31515">&#34;actix-web-actors&#34;</span>,
-  <span style="color:#a31515">&#34;actix-web-codegen&#34;</span>,
-  <span style="color:#a31515">&#34;test-server&#34;</span>,
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#000">workspace</span>]
+<span style="color:#000">members</span> = [
+  <span style="color:#c41a16">&#34;.&#34;</span>,
+  <span style="color:#c41a16">&#34;awc&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-http&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-cors&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-files&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-framed&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-session&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-identity&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-multipart&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-web-actors&#34;</span>,
+  <span style="color:#c41a16">&#34;actix-web-codegen&#34;</span>,
+  <span style="color:#c41a16">&#34;test-server&#34;</span>,
 ]
-<span style="color:#008000"># awc,actix-http... all are packages that contains their own Cargo.toml and src/lib.rs; </span>
+<span style="color:#177500"># awc,actix-http... all are packages that contains their own Cargo.toml and src/lib.rs; </span>
 </code></pre></div><p>A crate is a compilation unit in Rust.</p>
 <p>Whenever rustc some_file.rs is called, some_file.rs is treated as the crate file.
 If some_file.rs has mod declarations in it, then the contents of the module files would be inserted
@@ -219,30 +219,30 @@ In other words, modules do not get compiled individually, only crates get compil
 <p><code>mod mod_name; </code> cargo will look for mod_name.rs or mod_name/mod.rs and insert the content to current file.</p>
 <p>by default the mod is private; but nested mod is allowed to use any code in super mod;</p>
 <p><code>self</code> and <code>super</code> is to ref the current mod and super mod;</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#00f">fn</span> main(){
-<span style="color:#008000">// absolute path
-</span><span style="color:#008000"></span><span style="color:#00f">crate</span>::music::popular::play();
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">fn</span> <span style="color:#000">main</span>(){
+<span style="color:#177500">// absolute path
+</span><span style="color:#177500"></span><span style="color:#a90d91">crate</span>::<span style="color:#000">music</span>::<span style="color:#000">popular</span>::<span style="color:#000">play</span>();
           
-<span style="color:#008000">// relative path
-</span><span style="color:#008000"></span>music::popular::play();
+<span style="color:#177500">// relative path
+</span><span style="color:#177500"></span><span style="color:#000">music</span>::<span style="color:#000">popular</span>::<span style="color:#000">play</span>();
 }
 </code></pre></div><p>the Structs members is all private by default even struct name is pub;</p>
 <p>the Enums members is all public by default if the name is pub;</p>
 <h2 id="use-keyword">use keyword</h2>
 <p>the <code>use</code> keyword brings path(crate mod path) into scope;</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#008000">//bring a module into scope with `use` and a relative path need start `self`:
-</span><span style="color:#008000"></span><span style="color:#00f">use</span> self::music::popular;
-<span style="color:#a31515">//!!!the self:: is no needed in rust 2018+
-</span><span style="color:#a31515"></span>
-<span style="color:#008000">//use the absolute path
-</span><span style="color:#008000"></span><span style="color:#00f">use</span> <span style="color:#00f">crate</span>::music::popular;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">//bring a module into scope with `use` and a relative path need start `self`:
+</span><span style="color:#177500"></span><span style="color:#a90d91">use</span> <span style="color:#5b269a">self</span>::<span style="color:#000">music</span>::<span style="color:#000">popular</span>;
+<span style="color:#c41a16">//!!!the self:: is no needed in rust 2018+
+</span><span style="color:#c41a16"></span>
+<span style="color:#177500">//use the absolute path
+</span><span style="color:#177500"></span><span style="color:#a90d91">use</span> <span style="color:#a90d91">crate</span>::<span style="color:#000">music</span>::<span style="color:#000">popular</span>;
 
-<span style="color:#008000">//make the path to public
-</span><span style="color:#008000"></span><span style="color:#00f">pub</span> <span style="color:#00f">use</span> <span style="color:#00f">crate</span>::music::popular;
+<span style="color:#177500">//make the path to public
+</span><span style="color:#177500"></span><span style="color:#a90d91">pub</span> <span style="color:#a90d91">use</span> <span style="color:#a90d91">crate</span>::<span style="color:#000">music</span>::<span style="color:#000">popular</span>;
 
-<span style="color:#008000">//use
-</span><span style="color:#008000"></span><span style="color:#00f">use</span> std::{cmp::Ordering,io};
-<span style="color:#00f">use</span> std::{self,Write};
+<span style="color:#177500">//use
+</span><span style="color:#177500"></span><span style="color:#a90d91">use</span> <span style="color:#000">std</span>::{<span style="color:#000">cmp</span>::<span style="color:#000">Ordering</span>,<span style="color:#000">io</span>};
+<span style="color:#a90d91">use</span> <span style="color:#000">std</span>::{<span style="color:#5b269a">self</span>,<span style="color:#000">Write</span>};
 </code></pre></div><h2 id="split-up-mod-into-files">split up mod into files</h2>
 <ol>
 <li>the mod can be defined in mod_name.rs or mod_name/mod.rs. and nested mod can be in mod_name/nested_mod.rs.</li>
@@ -376,12 +376,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -393,16 +394,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

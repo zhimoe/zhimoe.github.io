@@ -169,94 +169,94 @@
     <div class="post-body" itemprop="articleBody">
     <p>some notes on rust ownership,reference,string and &amp;str, and lifetimes</p>
 <h3 id="rust-ownership">rust ownership</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#008000">//heap and stack: stack is store data that known,fixed size.
-</span><span style="color:#008000">//Keeping track of what parts of code are using what data on the heap, minimizing
-</span><span style="color:#008000">//the amount of duplicate data on the heap, and cleaning up unused data on the heap
-</span><span style="color:#008000">//so you don’t run out of space are all problems that ownership addresses.
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//ownership rules:
-</span><span style="color:#008000">//Each value in Rust has a variable that’s called its owner.
-</span><span style="color:#008000">//There can only be one owner at a time.
-</span><span style="color:#008000">//When the owner goes out of scope, the value will be dropped.
-</span><span style="color:#008000"></span>
-<span style="color:#008000">// stack only data assignment(栈上数据) will make a copy operation, since it is fixed size, the copy is fast
-</span><span style="color:#008000">// use h.clone() make a heap data deeply copy.
-</span><span style="color:#008000">// impl the Copy trait can make a type still usable after assignment
-</span><span style="color:#008000">// Copy trait can not use with Drop trait,Drop可以理解为destructor,当数据超过自己的scope时,drop()方法被调用;
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> copy() {
-    <span style="color:#00f">let</span> x = 5;
-    <span style="color:#00f">let</span> y = x; <span style="color:#008000">//copy the value(5) in the stack,since it is fixed-size, the copy operation is fast
-</span><span style="color:#008000"></span>
-    <span style="color:#00f">let</span> s1 = String::from(<span style="color:#a31515">&#34;hello&#34;</span>); <span style="color:#008000">//String 和 &amp;str区别见后文
-</span><span style="color:#008000"></span>    <span style="color:#00f">let</span> s2 = s1; <span style="color:#008000">//s1 is invalid
-</span><span style="color:#008000"></span>    <span style="color:#008000">// println!(&#34;{}, world!&#34;, s1); //error, the &#34;hello&#34; ownership move to s2
-</span><span style="color:#008000"></span>
-    <span style="color:#00f">let</span> s3 = s2.clone(); <span style="color:#008000">//copy the heap value(&#34;hello&#34;), impl the Clone trait
-</span><span style="color:#008000"></span>    println!(<span style="color:#a31515">&#34;{}, world!&#34;</span>, s2); <span style="color:#008000">// s2 still usable
-</span><span style="color:#008000"></span>}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">//heap and stack: stack is store data that known,fixed size.
+</span><span style="color:#177500">//Keeping track of what parts of code are using what data on the heap, minimizing
+</span><span style="color:#177500">//the amount of duplicate data on the heap, and cleaning up unused data on the heap
+</span><span style="color:#177500">//so you don’t run out of space are all problems that ownership addresses.
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//ownership rules:
+</span><span style="color:#177500">//Each value in Rust has a variable that’s called its owner.
+</span><span style="color:#177500">//There can only be one owner at a time.
+</span><span style="color:#177500">//When the owner goes out of scope, the value will be dropped.
+</span><span style="color:#177500"></span>
+<span style="color:#177500">// stack only data assignment(栈上数据) will make a copy operation, since it is fixed size, the copy is fast
+</span><span style="color:#177500">// use h.clone() make a heap data deeply copy.
+</span><span style="color:#177500">// impl the Copy trait can make a type still usable after assignment
+</span><span style="color:#177500">// Copy trait can not use with Drop trait,Drop可以理解为destructor,当数据超过自己的scope时,drop()方法被调用;
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">copy</span>() {
+    <span style="color:#a90d91">let</span> <span style="color:#000">x</span> <span style="color:#000">=</span> <span style="color:#1c01ce">5</span>;
+    <span style="color:#a90d91">let</span> <span style="color:#000">y</span> <span style="color:#000">=</span> <span style="color:#000">x</span>; <span style="color:#177500">//copy the value(5) in the stack,since it is fixed-size, the copy operation is fast
+</span><span style="color:#177500"></span>
+    <span style="color:#a90d91">let</span> <span style="color:#000">s1</span> <span style="color:#000">=</span> <span style="color:#a90d91">String</span>::<span style="color:#000">from</span>(<span style="color:#c41a16">&#34;hello&#34;</span>); <span style="color:#177500">//String 和 &amp;str区别见后文
+</span><span style="color:#177500"></span>    <span style="color:#a90d91">let</span> <span style="color:#000">s2</span> <span style="color:#000">=</span> <span style="color:#000">s1</span>; <span style="color:#177500">//s1 is invalid
+</span><span style="color:#177500"></span>    <span style="color:#177500">// println!(&#34;{}, world!&#34;, s1); //error, the &#34;hello&#34; ownership move to s2
+</span><span style="color:#177500"></span>
+    <span style="color:#a90d91">let</span> <span style="color:#000">s3</span> <span style="color:#000">=</span> <span style="color:#000">s2</span>.<span style="color:#000">clone</span>(); <span style="color:#177500">//copy the heap value(&#34;hello&#34;), impl the Clone trait
+</span><span style="color:#177500"></span>    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}, world!&#34;</span>, <span style="color:#000">s2</span>); <span style="color:#177500">// s2 still usable
+</span><span style="color:#177500"></span>}
 
-<span style="color:#008000">// passing function arguments or return value by function is same as 
-</span><span style="color:#008000">// assigning a value to a variable, you need take care the ownership of heap value,
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> ownership() {
-    <span style="color:#00f">let</span> x = 5;
-    <span style="color:#00f">let</span> x10 = plus10(x);<span style="color:#008000">// x still usable since the x is stack data
-</span><span style="color:#008000"></span>    println!(<span style="color:#a31515">&#34;{}&#34;</span>, x);
-    println!(<span style="color:#a31515">&#34;{}&#34;</span>, x10);
+<span style="color:#177500">// passing function arguments or return value by function is same as 
+</span><span style="color:#177500">// assigning a value to a variable, you need take care the ownership of heap value,
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">ownership</span>() {
+    <span style="color:#a90d91">let</span> <span style="color:#000">x</span> <span style="color:#000">=</span> <span style="color:#1c01ce">5</span>;
+    <span style="color:#a90d91">let</span> <span style="color:#000">x10</span> <span style="color:#000">=</span> <span style="color:#000">plus10</span>(<span style="color:#000">x</span>);<span style="color:#177500">// x still usable since the x is stack data
+</span><span style="color:#177500"></span>    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}&#34;</span>, <span style="color:#000">x</span>);
+    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}&#34;</span>, <span style="color:#000">x10</span>);
 
-    <span style="color:#00f">let</span> s = String::from(<span style="color:#a31515">&#34;hello&#34;</span>);
-    takes_ownership(s); <span style="color:#008000">//s&#39;s value moves into the function and so is no longer valid here
-</span><span style="color:#008000"></span>    <span style="color:#008000">//println!(s) ;//error!
-</span><span style="color:#008000"></span>}
+    <span style="color:#a90d91">let</span> <span style="color:#000">s</span> <span style="color:#000">=</span> <span style="color:#a90d91">String</span>::<span style="color:#000">from</span>(<span style="color:#c41a16">&#34;hello&#34;</span>);
+    <span style="color:#000">takes_ownership</span>(<span style="color:#000">s</span>); <span style="color:#177500">//s&#39;s value moves into the function and so is no longer valid here
+</span><span style="color:#177500"></span>    <span style="color:#177500">//println!(s) ;//error!
+</span><span style="color:#177500"></span>}
 
-<span style="color:#00f">fn</span> plus10(i: <span style="color:#2b91af">i32</span>) -&gt; <span style="color:#2b91af">i32</span> { <span style="color:#008000">// since the i is primitive in stack, so the function return a new value  
-</span><span style="color:#008000"></span>    i + 10 
+<span style="color:#a90d91">fn</span> <span style="color:#000">plus10</span>(<span style="color:#000">i</span>: <span style="color:#a90d91">i32</span>) -&gt; <span style="color:#a90d91">i32</span> { <span style="color:#177500">// since the i is primitive in stack, so the function return a new value  
+</span><span style="color:#177500"></span>    <span style="color:#000">i</span> <span style="color:#000">+</span> <span style="color:#1c01ce">10</span> 
 }
 
-<span style="color:#00f">fn</span> takes_ownership(some_string: String) { <span style="color:#008000">// some_string comes into scope
-</span><span style="color:#008000"></span>    println!(<span style="color:#a31515">&#34;{}&#34;</span>, some_string);
-} <span style="color:#008000">// Here, some_string goes out of scope and `drop()` is called. The backing memory is freed.
+<span style="color:#a90d91">fn</span> <span style="color:#000">takes_ownership</span>(<span style="color:#000">some_string</span>: <span style="color:#a90d91">String</span>) { <span style="color:#177500">// some_string comes into scope
+</span><span style="color:#177500"></span>    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}&#34;</span>, <span style="color:#000">some_string</span>);
+} <span style="color:#177500">// Here, some_string goes out of scope and `drop()` is called. The backing memory is freed.
 </span></code></pre></div><p>推荐阅读<a href="https://blog.thoughtram.io/ownership-in-rust/">A closer look at Ownership in Rust</a></p>
 <h3 id="references-and-borrowing">References and Borrowing:</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#008000">// since the ownership is too hard to track by coder&#39;s eye, rust introduce the ref and borrowing
-</span><span style="color:#008000">// a function that accept a ref will not takeover a value&#39;s ownership when the function is called
-</span><span style="color:#008000">// also will not drop the value&#39;s backend memory when function is return.
-</span><span style="color:#008000"></span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">// since the ownership is too hard to track by coder&#39;s eye, rust introduce the ref and borrowing
+</span><span style="color:#177500">// a function that accept a ref will not takeover a value&#39;s ownership when the function is called
+</span><span style="color:#177500">// also will not drop the value&#39;s backend memory when function is return.
+</span><span style="color:#177500"></span>
 
-<span style="color:#008000">// a variable can only have one mut ref or many immutable ref in a same scope;
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//dangling reference
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> dangle() -&gt; <span style="color:#00f">&amp;</span>String {
-    <span style="color:#00f">let</span> s = String::from(<span style="color:#a31515">&#34;dangle ref&#34;</span>);
-    &amp;s <span style="color:#008000">//error
-</span><span style="color:#008000"></span>}<span style="color:#008000">// the s is dropped, but the function try to return s reference
-</span><span style="color:#008000"></span>
+<span style="color:#177500">// a variable can only have one mut ref or many immutable ref in a same scope;
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//dangling reference
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">dangle</span>() -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#a90d91">String</span> {
+    <span style="color:#a90d91">let</span> <span style="color:#000">s</span> <span style="color:#000">=</span> <span style="color:#a90d91">String</span>::<span style="color:#000">from</span>(<span style="color:#c41a16">&#34;dangle ref&#34;</span>);
+    <span style="color:#000">&amp;</span><span style="color:#000">s</span> <span style="color:#177500">//error
+</span><span style="color:#177500"></span>}<span style="color:#177500">// the s is dropped, but the function try to return s reference
+</span><span style="color:#177500"></span>
 
-<span style="">###</span> String vs <span style="color:#2b91af">str</span> vs &amp;String vs &amp;<span style="color:#2b91af">str</span>
-<span style="color:#008000">//1. String is heap string buffer
-</span><span style="color:#008000">//2. &amp;String is a ref of String
-</span><span style="color:#008000">//3. str is unknown immutable sequence of utf8 bytes stored somewhere in memory. the memory may be:
-</span><span style="color:#008000">//  3a. in binary: a string literal &#34;foo&#34; is a &amp;&#39;static str. The data is hardcoded into the executable and loaded into memory when the program runs.
-</span><span style="color:#008000">//  3b. in heap: Strings implement Deref&lt;Target=str&gt;, and so inherit all of str&#39;s methods.
-</span><span style="color:#008000">//  3c. in stack: when use str::from_utf8(x).unwrap(); x is stack-value ref
-</span><span style="color:#008000"></span>
-<span style="color:#008000">//&gt; the &amp;str param can accept a &amp;String since the String implement Deref&lt;Target=str&gt;.
-</span><span style="color:#008000">// 即接受&amp;str的地方都可以使用&amp;String
-</span><span style="color:#008000"></span>
-<span style="color:#a31515">//!!! since the str is unknown size, one can only use it by &amp;str, called slice. slice is a view of some data. 
-</span><span style="color:#a31515"></span>
+<span style="color:#000">###</span> <span style="color:#a90d91">String</span> <span style="color:#000">vs</span> <span style="color:#a90d91">str</span> <span style="color:#000">vs</span> <span style="color:#000">&amp;</span><span style="color:#a90d91">String</span> <span style="color:#000">vs</span> <span style="color:#000">&amp;</span><span style="color:#a90d91">str</span>
+<span style="color:#177500">//1. String is heap string buffer
+</span><span style="color:#177500">//2. &amp;String is a ref of String
+</span><span style="color:#177500">//3. str is unknown immutable sequence of utf8 bytes stored somewhere in memory. the memory may be:
+</span><span style="color:#177500">//  3a. in binary: a string literal &#34;foo&#34; is a &amp;&#39;static str. The data is hardcoded into the executable and loaded into memory when the program runs.
+</span><span style="color:#177500">//  3b. in heap: Strings implement Deref&lt;Target=str&gt;, and so inherit all of str&#39;s methods.
+</span><span style="color:#177500">//  3c. in stack: when use str::from_utf8(x).unwrap(); x is stack-value ref
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//&gt; the &amp;str param can accept a &amp;String since the String implement Deref&lt;Target=str&gt;.
+</span><span style="color:#177500">// 即接受&amp;str的地方都可以使用&amp;String
+</span><span style="color:#177500"></span>
+<span style="color:#c41a16">//!!! since the str is unknown size, one can only use it by &amp;str, called slice. slice is a view of some data. 
+</span><span style="color:#c41a16"></span>
 
-<span style="color:#00f">fn</span> str() {
-    <span style="color:#00f">let</span> s = <span style="color:#a31515">&#34;hello str&#34;</span>;<span style="color:#008000">//The type of s here is &amp;str: it’s a slice pointing to that specific point of the binary.
-</span><span style="color:#008000"></span>    <span style="color:#008000">// This is also why string literals are immutable; &amp;str is an immutable reference.
-</span><span style="color:#008000"></span>    <span style="color:#00f">let</span> <span style="color:#00f">mut</span> string = s.to_string(); <span style="color:#008000">//&amp;str to String
-</span><span style="color:#008000"></span>    string.push_str(<span style="color:#a31515">&#34; append&#34;</span>);
-    println!(<span style="color:#a31515">&#34;{}&#34;</span>, string);
+<span style="color:#a90d91">fn</span> <span style="color:#000">str</span>() {
+    <span style="color:#a90d91">let</span> <span style="color:#000">s</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;hello str&#34;</span>;<span style="color:#177500">//The type of s here is &amp;str: it’s a slice pointing to that specific point of the binary.
+</span><span style="color:#177500"></span>    <span style="color:#177500">// This is also why string literals are immutable; &amp;str is an immutable reference.
+</span><span style="color:#177500"></span>    <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">string</span> <span style="color:#000">=</span> <span style="color:#000">s</span>.<span style="color:#000">to_string</span>(); <span style="color:#177500">//&amp;str to String
+</span><span style="color:#177500"></span>    <span style="color:#000">string</span>.<span style="color:#000">push_str</span>(<span style="color:#c41a16">&#34; append&#34;</span>);
+    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}&#34;</span>, <span style="color:#000">string</span>);
 }
 
-<span style="color:#008000">//a string slice has static lifetime
-</span><span style="color:#008000"></span><span style="color:#00f">let</span> s = <span style="color:#a31515">&#34;hello&#34;</span>;
-<span style="color:#008000">//means
-</span><span style="color:#008000"></span><span style="color:#00f">let</span> s: <span style="color:#00f">&amp;</span><span style="">’</span><span style="color:#00f">static</span> <span style="color:#2b91af">str</span> = <span style="color:#a31515">&#34;hello&#34;</span>;
+<span style="color:#177500">//a string slice has static lifetime
+</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">s</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;hello&#34;</span>;
+<span style="color:#177500">//means
+</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">s</span>: <span style="color:#a90d91">&amp;</span><span style="color:#000">’</span><span style="color:#a90d91">static</span> <span style="color:#a90d91">str</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;hello&#34;</span>;
 </code></pre></div><h2 id="lifetimes-are-only-about-reference">lifetimes are only about reference</h2>
 <p>a ref must die before its referent</p>
 <p>in rust:</p>
@@ -274,45 +274,45 @@
 <p>⭐ But because of lifetime annotations make the code more verbose, in order to make common patterns more ergonomic, Rust allows lifetimes to be elided/omitted in fn definitions. In this case, the compiler assigns lifetime annotations implicitly.</p>
 </li>
 </ul>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#008000">// No inputs, return a reference
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> function1&lt;&#39;a&gt;() -&gt; <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span> {}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">// No inputs, return a reference
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function1</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>() -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {}
 
-<span style="color:#008000">// Single input
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> function2&lt;&#39;a&gt;(x: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>) {}
+<span style="color:#177500">// Single input
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function2</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>) {}
 
-<span style="color:#008000">// Single input and output, both have the same lifetime
-</span><span style="color:#008000">// The output should live at least as long as input exists
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> function3&lt;&#39;a&gt;(x: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>) -&gt; <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span> {} <span style="color:#008000">// no need the lifetime annotation,lifetime elision
-</span><span style="color:#008000"></span>
-<span style="color:#008000">// Multiple inputs, only one input and the output share same lifetime
-</span><span style="color:#008000">// The output should live at least as long as y exists
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> function4&lt;&#39;a&gt;(x: <span style="color:#2b91af">i32</span>, y: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>) -&gt; <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span> {}
+<span style="color:#177500">// Single input and output, both have the same lifetime
+</span><span style="color:#177500">// The output should live at least as long as input exists
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function3</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {} <span style="color:#177500">// no need the lifetime annotation,lifetime elision
+</span><span style="color:#177500"></span>
+<span style="color:#177500">// Multiple inputs, only one input and the output share same lifetime
+</span><span style="color:#177500">// The output should live at least as long as y exists
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function4</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">i32</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {}
 
-<span style="color:#008000">// Multiple inputs, both inputs and the output share same lifetime
-</span><span style="color:#008000">// The output should live at least as long as x and y exist
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> function5&lt;&#39;a&gt;(x: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>, y: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>) -&gt; <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span> {}
+<span style="color:#177500">// Multiple inputs, both inputs and the output share same lifetime
+</span><span style="color:#177500">// The output should live at least as long as x and y exist
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function5</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {}
 
-<span style="color:#008000">// Multiple inputs, inputs can have different lifetimes 🔎
-</span><span style="color:#008000">// The output should live at least as long as x exists
-</span><span style="color:#008000"></span><span style="color:#00f">fn</span> function6&lt;&#39;a, &#39;b&gt;(x: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>, y: <span style="color:#00f">&amp;</span>&#39;b <span style="color:#2b91af">str</span>) -&gt; <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span> {}
+<span style="color:#177500">// Multiple inputs, inputs can have different lifetimes 🔎
+</span><span style="color:#177500">// The output should live at least as long as x exists
+</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function6</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span>, <span style="color:#836c28">&#39;b</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;b</span> <span style="color:#a90d91">str</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {}
 </code></pre></div><h2 id="lifetimes-in-structenum">lifetimes in struct/enum</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#008000">// Single element
-</span><span style="color:#008000">// Data of x should live at least as long as Struct exists
-</span><span style="color:#008000"></span><span style="color:#00f">struct</span> <span style="color:#2b91af">Struct1</span>&lt;&#39;a&gt; {
-    x: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">// Single element
+</span><span style="color:#177500">// Data of x should live at least as long as Struct exists
+</span><span style="color:#177500"></span><span style="color:#a90d91">struct</span> <span style="color:#3f6e75">Struct1</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
+    <span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>
 }
 
-<span style="color:#008000">// Multiple elements
-</span><span style="color:#008000">// Data of x and y should live at least as long as Struct exists
-</span><span style="color:#008000"></span><span style="color:#00f">struct</span> <span style="color:#2b91af">Struct2</span>&lt;&#39;a&gt; {
-    x: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>,
-    y: <span style="color:#00f">&amp;</span>&#39;a <span style="color:#2b91af">str</span>
+<span style="color:#177500">// Multiple elements
+</span><span style="color:#177500">// Data of x and y should live at least as long as Struct exists
+</span><span style="color:#177500"></span><span style="color:#a90d91">struct</span> <span style="color:#3f6e75">Struct2</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
+    <span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>,
+    <span style="color:#000">y</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>
 }
 
-<span style="color:#008000">// Variant with a single element
-</span><span style="color:#008000">// Data of the variant should live at least as long as Enum exists
-</span><span style="color:#008000"></span><span style="color:#00f">enum</span> <span style="color:#2b91af">Enum</span>&lt;&#39;a&gt; {
-    Variant(&amp;&#39;a Type)
+<span style="color:#177500">// Variant with a single element
+</span><span style="color:#177500">// Data of the variant should live at least as long as Enum exists
+</span><span style="color:#177500"></span><span style="color:#a90d91">enum</span> <span style="color:#3f6e75">Enum</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
+    <span style="color:#000">Variant</span>(<span style="color:#000">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#000">Type</span>)
 }
 </code></pre></div>
     </div>
@@ -422,12 +422,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -439,16 +440,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

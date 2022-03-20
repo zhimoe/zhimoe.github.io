@@ -187,38 +187,38 @@
 <p>cmder是Windows下最强的命令行功能. 不要下载mini那个,里面没用vim和git.第一次启动cmder记得修改cmder启动目录(默认是c盘)和显示中文设置,具体方法请google.</p>
 <h3 id="wsl修改软件源使用阿里云的源">wsl修改软件源,使用阿里云的源.</h3>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
-&gt; sudo sed -i <span style="color:#a31515">&#39;s/archive.ubuntu.com/mirrors.aliyun.com/g&#39;</span> /etc/apt/sources.list
+&gt; sudo sed -i <span style="color:#c41a16">&#39;s/archive.ubuntu.com/mirrors.aliyun.com/g&#39;</span> /etc/apt/sources.list
 &gt; sudo apt update
 &gt; sudo apt upgrade -y
 </code></pre></div><h3 id="wsl安装必要软件">wsl安装必要软件</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># 安装你需要的软件,git和vim是必须的,后面的编辑命令是使用vim</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500"># 安装你需要的软件,git和vim是必须的,后面的编辑命令是使用vim</span>
 &gt;sudo apt install openjdk-8-jdk-headless openjdk-8-jre-headless maven git unzip vim -y
 </code></pre></div><h3 id="修改wsl下windows磁盘挂载点">修改wsl下Windows磁盘挂载点</h3>
 <p>默认的Windows磁盘在wsl的访问方式是<code>/mnt/d/</code>开头,d表示d盘.但是docker on linux的访问路径是 <code>/d</code>,所以这里需要修改挂载点路径.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo vim /etc/wsl.conf
-<span style="color:#008000">##添加3行内容</span>
-[automount] 
-root = / 
-options = <span style="color:#a31515">&#34;metadata&#34;</span>
+<span style="color:#177500">##添加3行内容</span>
+<span style="color:#000">[</span>automount<span style="color:#000">]</span> 
+<span style="color:#000">root</span> <span style="color:#000">=</span> / 
+<span style="color:#000">options</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;metadata&#34;</span>
 </code></pre></div><p>退出wsl重启,发现<code>/mnt</code>已经没了,当前目录应该是<code>/c/xxx</code>或者<code>/d/xxx</code>.</p>
 <h3 id="wsl安装vs-code和中文字体">wsl安装vs code和中文字体</h3>
 <p>因为wsl没用中文字体将显示豆腐块.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># install chinese fonts for wsl,font name:  &#39;Noto Sans Mono CJK SC&#39;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500"># install chinese fonts for wsl,font name:  &#39;Noto Sans Mono CJK SC&#39;</span>
 sudo apt install -y fonts-noto-cjk fonts-noto-cjk-extra
-<span style="color:#008000"># Win10下载vs code的deb包,cd到该目录,使用下面命令安装</span>
+<span style="color:#177500"># Win10下载vs code的deb包,cd到该目录,使用下面命令安装</span>
 sudo apt install ./code_1.31.1-1549938243_amd64.deb
-<span style="color:#008000"># 在wsl要启动code必要依赖</span>
+<span style="color:#177500"># 在wsl要启动code必要依赖</span>
 sudo apt install libgtk2.0-0 libxss1 libasound2
 </code></pre></div><h3 id="wsl设置ssh功能">wsl设置SSH功能</h3>
 <p>这样可以借助VcXsrv的X11转发功能打开GUI软件</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt;sudo vim /etc/ssh/sshd_config
-<span style="color:#008000">#取消Port的注释,并将端口改为2222 (端口需要大于1000)</span>
-<span style="color:#008000">#将PasswordAuthentication的值改为yes.</span>
+<span style="color:#177500">#取消Port的注释,并将端口改为2222 (端口需要大于1000)</span>
+<span style="color:#177500">#将PasswordAuthentication的值改为yes.</span>
 
-<span style="color:#008000">#重启 ssh server:</span>
+<span style="color:#177500">#重启 ssh server:</span>
 sudo service ssh --full-restart
 
-<span style="color:#008000">#将ssh server设置为服务:</span>
+<span style="color:#177500">#将ssh server设置为服务:</span>
 sudo service ssh start
 </code></pre></div><h3 id="windows安装vcxsrv">windows安装VcXsrv</h3>
 <p>用它的X11转发功能.安装后默认选项即可,可以设置为开机启动.</p>
@@ -226,14 +226,14 @@ sudo service ssh start
 <p>在wsl输入<code>code .</code>,等待2秒,你会发现Windows任务栏启动了一个vs code,如果没用启动成功,说明你的VcXsrv的X11转发功能有问题.</p>
 <h3 id="配置vs-code">配置vs code.</h3>
 <p>上面打开的vs code有2个问题:中文显示豆腐块,和不能全屏. 打开vs code的设置</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000">#在字体里面先设置你想要英文字体,逗号跟上&#39;Noto Sans Mono CJK SC&#39;</span>
-<span style="color:#008000">#搜索titleBarStyle,将&#39;Window: title Bar Style&#39;设置为 native</span>
-<span style="color:#008000">#上面2个设置也可通过直接编辑文件设置,例如我的vs code文件设置是</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500">#在字体里面先设置你想要英文字体,逗号跟上&#39;Noto Sans Mono CJK SC&#39;</span>
+<span style="color:#177500">#搜索titleBarStyle,将&#39;Window: title Bar Style&#39;设置为 native</span>
+<span style="color:#177500">#上面2个设置也可通过直接编辑文件设置,例如我的vs code文件设置是</span>
 &gt; cat ~/.config/Code/User/settings.json
-{
-    <span style="color:#a31515">&#34;Window.titleBarStyle&#34;</span>: <span style="color:#a31515">&#34;native&#34;</span>,
-    <span style="color:#a31515">&#34;editor.fontFamily&#34;</span>: <span style="color:#a31515">&#34;monospace,&#39;Noto Sans Mono CJK SC&#39;&#34;</span>
-}
+<span style="color:#000">{</span>
+    <span style="color:#c41a16">&#34;Window.titleBarStyle&#34;</span>: <span style="color:#c41a16">&#34;native&#34;</span>,
+    <span style="color:#c41a16">&#34;editor.fontFamily&#34;</span>: <span style="color:#c41a16">&#34;monospace,&#39;Noto Sans Mono CJK SC&#39;&#34;</span>
+<span style="color:#000">}</span>
 </code></pre></div><p>至此,已经可以在linux下面开发了.当然,其他GUI软件没用测试不确定是不是会有小问题.但是vs code已经可以应付很多开发工作了.</p>
 <h2 id="在wsl使用docker">在wsl使用docker</h2>
 <p>目前的wsl是不支持运行docker的,但是可以在wsl使用Windows的docker,在使用上面是无感的.</p>
@@ -246,30 +246,30 @@ sudo service ssh start
 </li>
 <li>
 <p>wsl安装docker,详细内容可以参考官方文档,下面仅列出必要bash命令.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000">#安装必要组件</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500">#安装必要组件</span>
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-<span style="color:#008000">#gpg签名</span>
+<span style="color:#177500">#gpg签名</span>
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo apt-key fingerprint 0EBFCD88
-<span style="color:#008000">#添加docker安装源</span>
-sudo add-apt-repository    <span style="color:#a31515">&#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-</span><span style="color:#a31515">  </span><span style="color:#00f">$(</span>lsb_release -cs<span style="color:#00f">)</span><span style="color:#a31515"> \
-</span><span style="color:#a31515">  stable&#34;</span>
+<span style="color:#177500">#添加docker安装源</span>
+sudo add-apt-repository    <span style="color:#c41a16">&#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+</span><span style="color:#c41a16">  </span><span style="color:#a90d91">$(</span>lsb_release -cs<span style="color:#a90d91">)</span><span style="color:#c41a16"> \
+</span><span style="color:#c41a16">  stable&#34;</span>
 
 sudo apt update
 sudo apt install -y docker-ce
-<span style="color:#008000">#通过pip安装docker-compose</span>
+<span style="color:#177500">#通过pip安装docker-compose</span>
 sudo apt install -y python python-pip
-sudo usermod -aG docker $USER
+sudo usermod -aG docker <span style="color:#000">$USER</span>
 pip install --user docker-compose
-<span style="color:#008000">#验证docker安装是否成功</span>
+<span style="color:#177500">#验证docker安装是否成功</span>
 docker info
 docker-compose --version
 
-<span style="color:#008000">#修改docker服务为Windows的docker</span>
-echo <span style="color:#a31515">&#34;export DOCKER_HOST=tcp://localhost:2375&#34;</span> &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc
+<span style="color:#177500">#修改docker服务为Windows的docker</span>
+<span style="color:#a90d91">echo</span> <span style="color:#c41a16">&#34;export DOCKER_HOST=tcp://localhost:2375&#34;</span> &gt;&gt; ~/.bashrc <span style="color:#000">&amp;&amp;</span> <span style="color:#a90d91">source</span> ~/.bashrc
 
-<span style="color:#008000">#验证是否可以访问Windows的docker服务,看image list命令输出和Windows的命令行下面的image list输出是不是完全一样. 可以先在Windows下用docker拉几个镜像.然后在wsl验证</span>
+<span style="color:#177500">#验证是否可以访问Windows的docker服务,看image list命令输出和Windows的命令行下面的image list输出是不是完全一样. 可以先在Windows下用docker拉几个镜像.然后在wsl验证</span>
 docker image list
 </code></pre></div></li>
 </ul>
@@ -372,12 +372,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -389,16 +390,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

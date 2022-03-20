@@ -172,355 +172,355 @@
 <p>更深入的一篇:
 <a href="http://nemotan.github.io/2015/11/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">java设计模式-动态代理模式</a></p>
 <h3 id="优势">优势</h3>
-<p>相比 静态代理，动态代理具有更强的 灵活性，因为它不用在我们设计实现的时候就指定 某一个代理类来代理哪一个被代理对象，我们可以把这种指定延迟到程序运行时由 JVM来实现。</p>
+<p>相比 静态代理,动态代理具有更强的 灵活性,因为它不用在我们设计实现的时候就指定 某一个代理类来代理哪一个被代理对象,我们可以把这种指定延迟到程序运行时由 JVM来实现.</p>
 <h3 id="实例">实例</h3>
-<p>动态代理类接口，接口规范方法。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">package</span> angus.interview.proxy;
+<p>动态代理类接口,接口规范方法.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">package</span> <span style="color:#000">angus.interview.proxy</span><span style="color:#000">;</span>
 
-<span style="color:#00f">public</span> <span style="color:#00f">interface</span> <span style="color:#2b91af">Subject</span> {
-	<span style="color:#00f">public</span> <span style="color:#2b91af">void</span> request();
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">interface</span> <span style="color:#3f6e75">Subject</span> <span style="color:#000">{</span>
+	<span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">request</span><span style="color:#000">();</span>
 
-}
+<span style="color:#000">}</span>
 
 </code></pre></div><p>需要被代理的真实的类:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">package</span> angus.interview.proxy;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">package</span> <span style="color:#000">angus.interview.proxy</span><span style="color:#000">;</span>
 
-<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">SubjectImpl</span> <span style="color:#00f">implements</span> Subject {
-	@Override
-	<span style="color:#00f">public</span> <span style="color:#2b91af">void</span> request() {
-		System.out.println(<span style="color:#a31515">&#34; subject request&#34;</span>);
-	}
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">SubjectImpl</span> <span style="color:#a90d91">implements</span> <span style="color:#000">Subject</span> <span style="color:#000">{</span>
+	<span style="color:#000">@Override</span>
+	<span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">request</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+		<span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34; subject request&#34;</span><span style="color:#000">);</span>
+	<span style="color:#000">}</span>
 
-}
+<span style="color:#000">}</span>
 
-</code></pre></div><p>先创建一个代理类。然后利用反射创建一个用真实类加载器创建的一个对象。该对象调用request方法实际上调用的是代理类的invoke方法。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">package</span> angus.interview.proxy;
+</code></pre></div><p>先创建一个代理类.然后利用反射创建一个用真实类加载器创建的一个对象.该对象调用request方法实际上调用的是代理类的invoke方法.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">package</span> <span style="color:#000">angus.interview.proxy</span><span style="color:#000">;</span>
 
-<span style="color:#00f">import</span> java.lang.reflect.InvocationHandler;
-<span style="color:#00f">import</span> java.lang.reflect.Method;
-<span style="color:#00f">import</span> java.lang.reflect.Proxy;
+<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.reflect.InvocationHandler</span><span style="color:#000">;</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.reflect.Method</span><span style="color:#000">;</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.reflect.Proxy</span><span style="color:#000">;</span>
 
-<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">DynamicProxy</span> <span style="color:#00f">implements</span> InvocationHandler {
-	<span style="color:#00f">private</span> Object target;
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">DynamicProxy</span> <span style="color:#a90d91">implements</span> <span style="color:#000">InvocationHandler</span> <span style="color:#000">{</span>
+	<span style="color:#a90d91">private</span> <span style="color:#000">Object</span> <span style="color:#000">target</span><span style="color:#000">;</span>
 
-	<span style="color:#00f">public</span> Object bind(Object target) {
-		<span style="color:#00f">this</span>.target = target;
-		<span style="color:#00f">return</span> Proxy.newProxyInstance(target.getClass().getClassLoader(),
-                                              target.getClass().getInterfaces(), 
-                                              <span style="color:#00f">this</span>); 
-		<span style="color:#008000">// 要绑定接口this(这是一个缺陷，cglib弥补了这一缺陷)
-</span><span style="color:#008000"></span>	}
+	<span style="color:#a90d91">public</span> <span style="color:#000">Object</span> <span style="color:#000">bind</span><span style="color:#000">(</span><span style="color:#000">Object</span> <span style="color:#000">target</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+		<span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">target</span> <span style="color:#000">=</span> <span style="color:#000">target</span><span style="color:#000">;</span>
+		<span style="color:#a90d91">return</span> <span style="color:#000">Proxy</span><span style="color:#000">.</span><span style="color:#836c28">newProxyInstance</span><span style="color:#000">(</span><span style="color:#000">target</span><span style="color:#000">.</span><span style="color:#836c28">getClass</span><span style="color:#000">().</span><span style="color:#836c28">getClassLoader</span><span style="color:#000">(),</span>
+                                              <span style="color:#000">target</span><span style="color:#000">.</span><span style="color:#836c28">getClass</span><span style="color:#000">().</span><span style="color:#836c28">getInterfaces</span><span style="color:#000">(),</span> 
+                                              <span style="color:#a90d91">this</span><span style="color:#000">);</span> 
+		<span style="color:#177500">// 要绑定接口this(这是一个缺陷,cglib弥补了这一缺陷)
+</span><span style="color:#177500"></span>	<span style="color:#000">}</span>
 
-	@Override
-	<span style="color:#00f">public</span> Object invoke(Object proxy, Method method, Object[] args) <span style="color:#00f">throws</span> Throwable {
-		System.out.println(<span style="color:#a31515">&#34;------------------before------------------&#34;</span>);
-		Object result = method.invoke(target, args);
-		System.out.println(<span style="color:#a31515">&#34;-------------------after------------------&#34;</span>);
-		<span style="color:#00f">return</span> result;
-	}
+	<span style="color:#000">@Override</span>
+	<span style="color:#a90d91">public</span> <span style="color:#000">Object</span> <span style="color:#000">invoke</span><span style="color:#000">(</span><span style="color:#000">Object</span> <span style="color:#000">proxy</span><span style="color:#000">,</span> <span style="color:#000">Method</span> <span style="color:#000">method</span><span style="color:#000">,</span> <span style="color:#000">Object</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#a90d91">throws</span> <span style="color:#000">Throwable</span> <span style="color:#000">{</span>
+		<span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;------------------before------------------&#34;</span><span style="color:#000">);</span>
+		<span style="color:#000">Object</span> <span style="color:#000">result</span> <span style="color:#000">=</span> <span style="color:#000">method</span><span style="color:#000">.</span><span style="color:#836c28">invoke</span><span style="color:#000">(</span><span style="color:#000">target</span><span style="color:#000">,</span> <span style="color:#000">args</span><span style="color:#000">);</span>
+		<span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;-------------------after------------------&#34;</span><span style="color:#000">);</span>
+		<span style="color:#a90d91">return</span> <span style="color:#000">result</span><span style="color:#000">;</span>
+	<span style="color:#000">}</span>
 
-}
+<span style="color:#000">}</span>
 
 
-<span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(){
-    DynamicProxy proxy = <span style="color:#00f">new</span> DynamicProxy();
-    Subject subject= proxy.bind(SubjectImpl);
-    subject.request();
-}
+<span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(){</span>
+    <span style="color:#000">DynamicProxy</span> <span style="color:#000">proxy</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">DynamicProxy</span><span style="color:#000">();</span>
+    <span style="color:#000">Subject</span> <span style="color:#000">subject</span><span style="color:#000">=</span> <span style="color:#000">proxy</span><span style="color:#000">.</span><span style="color:#836c28">bind</span><span style="color:#000">(</span><span style="color:#000">SubjectImpl</span><span style="color:#000">);</span>
+    <span style="color:#000">subject</span><span style="color:#000">.</span><span style="color:#836c28">request</span><span style="color:#000">();</span>
+<span style="color:#000">}</span>
 
 </code></pre></div><p>和静态代理模式比较的好处</p>
-<p>在静态代理模式时,一个真实角色必须对应一个代理角色,如果大量使用会导致类的急剧膨胀;而动态代理则不会有这个问题，我们将接口中的方法委托给invoke方法，并在invoke中实现拦截。</p>
+<p>在静态代理模式时,一个真实角色必须对应一个代理角色,如果大量使用会导致类的急剧膨胀;而动态代理则不会有这个问题,我们将接口中的方法委托给invoke方法,并在invoke中实现拦截.</p>
 <h3 id="源码分析">源码分析</h3>
-<p>参考:http://rejoy.iteye.com/blog/1627405 主要原来:生成了一个代理类的class文件。 Proxy.newProInstance()方法</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">public</span> <span style="color:#00f">static</span> Object newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)
-    <span style="color:#00f">throws</span> IllegalArgumentException {
+<p>参考:http://rejoy.iteye.com/blog/1627405 主要原来:生成了一个代理类的class文件. Proxy.newProInstance()方法</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#000">Object</span> <span style="color:#000">newProxyInstance</span><span style="color:#000">(</span><span style="color:#000">ClassLoader</span> <span style="color:#000">loader</span><span style="color:#000">,</span><span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;[]</span> <span style="color:#000">interfaces</span><span style="color:#000">,</span><span style="color:#000">InvocationHandler</span> <span style="color:#000">h</span><span style="color:#000">)</span>
+    <span style="color:#a90d91">throws</span> <span style="color:#000">IllegalArgumentException</span> <span style="color:#000">{</span>
 
-    <span style="color:#00f">if</span> (h == <span style="color:#00f">null</span>) {
-        <span style="color:#00f">throw</span> <span style="color:#00f">new</span> NullPointerException();
-    }  
+    <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">h</span> <span style="color:#000">==</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">NullPointerException</span><span style="color:#000">();</span>
+    <span style="color:#000">}</span>  
 
-    <span style="color:#00f">final</span> Class&lt;?&gt;[] intfs = interfaces.clone();
+    <span style="color:#a90d91">final</span> <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;[]</span> <span style="color:#000">intfs</span> <span style="color:#000">=</span> <span style="color:#000">interfaces</span><span style="color:#000">.</span><span style="color:#836c28">clone</span><span style="color:#000">();</span>
 
-    <span style="color:#00f">final</span> SecurityManager sm = System.getSecurityManager();
+    <span style="color:#a90d91">final</span> <span style="color:#000">SecurityManager</span> <span style="color:#000">sm</span> <span style="color:#000">=</span> <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">getSecurityManager</span><span style="color:#000">();</span>
 
-    <span style="color:#00f">if</span> (sm != <span style="color:#00f">null</span>) {
-        checkProxyAccess(Reflection.getCallerClass(), loader, intfs);
-    }
+    <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">sm</span> <span style="color:#000">!=</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+        <span style="color:#000">checkProxyAccess</span><span style="color:#000">(</span><span style="color:#000">Reflection</span><span style="color:#000">.</span><span style="color:#836c28">getCallerClass</span><span style="color:#000">(),</span> <span style="color:#000">loader</span><span style="color:#000">,</span> <span style="color:#000">intfs</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
 
-    <span style="color:#008000">// 这里是生成class的地方  
-</span><span style="color:#008000"></span>    Class&lt;?&gt; cl = getProxyClass0(loader, intfs);
+    <span style="color:#177500">// 这里是生成class的地方  
+</span><span style="color:#177500"></span>    <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;</span> <span style="color:#000">cl</span> <span style="color:#000">=</span> <span style="color:#000">getProxyClass0</span><span style="color:#000">(</span><span style="color:#000">loader</span><span style="color:#000">,</span> <span style="color:#000">intfs</span><span style="color:#000">);</span>
 
-    <span style="color:#008000">// 使用我们实现的InvocationHandler作为参数调用构造方法来获得代理类的实例  
-</span><span style="color:#008000"></span>    <span style="color:#00f">try</span> {
-        <span style="color:#00f">final</span> Constructor&lt;?&gt; cons = cl.getConstructor(constructorParams);
-        <span style="color:#00f">final</span> InvocationHandler ih = h;
-        <span style="color:#00f">if</span> (sm != <span style="color:#00f">null</span> &amp;&amp; ProxyAccessHelper.needsNewInstanceCheck(cl)) {
-            <span style="color:#00f">return</span> AccessController.doPrivileged(<span style="color:#00f">new</span> PrivilegedAction&lt;Object&gt;() {
-                <span style="color:#00f">public</span> Object run() {
-                    <span style="color:#00f">return</span> newInstance(cons, ih);
-                }
-            });
-        } <span style="color:#00f">else</span> {
-            <span style="color:#00f">return</span> newInstance(cons, ih);
-        }
-    } <span style="color:#00f">catch</span> (NoSuchMethodException e) {
-        <span style="color:#00f">throw</span> <span style="color:#00f">new</span> InternalError(e.toString());
-    }
+    <span style="color:#177500">// 使用我们实现的InvocationHandler作为参数调用构造方法来获得代理类的实例  
+</span><span style="color:#177500"></span>    <span style="color:#a90d91">try</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">final</span> <span style="color:#000">Constructor</span><span style="color:#000">&lt;?&gt;</span> <span style="color:#000">cons</span> <span style="color:#000">=</span> <span style="color:#000">cl</span><span style="color:#000">.</span><span style="color:#836c28">getConstructor</span><span style="color:#000">(</span><span style="color:#000">constructorParams</span><span style="color:#000">);</span>
+        <span style="color:#a90d91">final</span> <span style="color:#000">InvocationHandler</span> <span style="color:#000">ih</span> <span style="color:#000">=</span> <span style="color:#000">h</span><span style="color:#000">;</span>
+        <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">sm</span> <span style="color:#000">!=</span> <span style="color:#a90d91">null</span> <span style="color:#000">&amp;&amp;</span> <span style="color:#000">ProxyAccessHelper</span><span style="color:#000">.</span><span style="color:#836c28">needsNewInstanceCheck</span><span style="color:#000">(</span><span style="color:#000">cl</span><span style="color:#000">))</span> <span style="color:#000">{</span>
+            <span style="color:#a90d91">return</span> <span style="color:#000">AccessController</span><span style="color:#000">.</span><span style="color:#836c28">doPrivileged</span><span style="color:#000">(</span><span style="color:#a90d91">new</span> <span style="color:#000">PrivilegedAction</span><span style="color:#000">&lt;</span><span style="color:#000">Object</span><span style="color:#000">&gt;()</span> <span style="color:#000">{</span>
+                <span style="color:#a90d91">public</span> <span style="color:#000">Object</span> <span style="color:#000">run</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+                    <span style="color:#a90d91">return</span> <span style="color:#000">newInstance</span><span style="color:#000">(</span><span style="color:#000">cons</span><span style="color:#000">,</span> <span style="color:#000">ih</span><span style="color:#000">);</span>
+                <span style="color:#000">}</span>
+            <span style="color:#000">});</span>
+        <span style="color:#000">}</span> <span style="color:#a90d91">else</span> <span style="color:#000">{</span>
+            <span style="color:#a90d91">return</span> <span style="color:#000">newInstance</span><span style="color:#000">(</span><span style="color:#000">cons</span><span style="color:#000">,</span> <span style="color:#000">ih</span><span style="color:#000">);</span>
+        <span style="color:#000">}</span>
+    <span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">NoSuchMethodException</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">InternalError</span><span style="color:#000">(</span><span style="color:#000">e</span><span style="color:#000">.</span><span style="color:#836c28">toString</span><span style="color:#000">());</span>
+    <span style="color:#000">}</span>
 
-}  
+<span style="color:#000">}</span>  
 
-</code></pre></div><p>其中newInstance只是调用Constructor.newInstance来构造相应的代理类实例，这里重点是看getProxyClass0这个方法的实现:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">private</span> <span style="color:#00f">static</span> Class&lt;?&gt; getProxyClass0(ClassLoader loader,
-                                          Class&lt;?&gt;... interfaces) {
-        <span style="color:#008000">// 代理的接口数量不能超过65535，这是class文件格式决定的
-</span><span style="color:#008000"></span>        <span style="color:#00f">if</span> (interfaces.length &gt; 65535) {
-            <span style="color:#00f">throw</span> <span style="color:#00f">new</span> IllegalArgumentException(<span style="color:#a31515">&#34;interface limit exceeded&#34;</span>);
-        }
-        <span style="color:#008000">// JDK对代理进行了缓存，如果已经存在相应的代理类，则直接返回，否则才会通过ProxyClassFactory来创建代理
-</span><span style="color:#008000"></span>        <span style="color:#00f">return</span> proxyClassCache.get(loader, interfaces);
-    }
+</code></pre></div><p>其中newInstance只是调用Constructor.newInstance来构造相应的代理类实例,这里重点是看getProxyClass0这个方法的实现:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;</span> <span style="color:#000">getProxyClass0</span><span style="color:#000">(</span><span style="color:#000">ClassLoader</span> <span style="color:#000">loader</span><span style="color:#000">,</span>
+                                          <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;...</span> <span style="color:#000">interfaces</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+        <span style="color:#177500">// 代理的接口数量不能超过65535,这是class文件格式决定的
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">interfaces</span><span style="color:#000">.</span><span style="color:#836c28">length</span> <span style="color:#000">&gt;</span> <span style="color:#000">65535</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+            <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">IllegalArgumentException</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;interface limit exceeded&#34;</span><span style="color:#000">);</span>
+        <span style="color:#000">}</span>
+        <span style="color:#177500">// JDK对代理进行了缓存,如果已经存在相应的代理类,则直接返回,否则才会通过ProxyClassFactory来创建代理
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">return</span> <span style="color:#000">proxyClassCache</span><span style="color:#000">.</span><span style="color:#836c28">get</span><span style="color:#000">(</span><span style="color:#000">loader</span><span style="color:#000">,</span> <span style="color:#000">interfaces</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
 
-</code></pre></div><p>其中代理缓存是使用WeakCache实现的，如下</p>
+</code></pre></div><p>其中代理缓存是使用WeakCache实现的,如下</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
-    <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">final</span> WeakCache&lt;ClassLoader, Class&lt;?&gt;[], Class&lt;?&gt;&gt;
-        proxyClassCache = <span style="color:#00f">new</span> WeakCache&lt;&gt;(<span style="color:#00f">new</span> KeyFactory(), <span style="color:#00f">new</span> ProxyClassFactory());
+    <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">final</span> <span style="color:#000">WeakCache</span><span style="color:#000">&lt;</span><span style="color:#000">ClassLoader</span><span style="color:#000">,</span> <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;[],</span> <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;&gt;</span>
+        <span style="color:#000">proxyClassCache</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">WeakCache</span><span style="color:#000">&lt;&gt;(</span><span style="color:#a90d91">new</span> <span style="color:#000">KeyFactory</span><span style="color:#000">(),</span> <span style="color:#a90d91">new</span> <span style="color:#000">ProxyClassFactory</span><span style="color:#000">());</span>
 
 
-</code></pre></div><p>具体的缓存逻辑这里暂不关心，只需要关心ProxyClassFactory是如何生成代理类的，ProxyClassFactory是Proxy的一个静态内部类，实现了WeakCache的内部接口BiFunction的apply方法:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">final</span> <span style="color:#00f">class</span> <span style="color:#2b91af">ProxyClassFactory</span>
-        <span style="color:#00f">implements</span> BiFunction&lt;ClassLoader, Class&lt;?&gt;[], Class&lt;?&gt;&gt; {
-        <span style="color:#008000">// 所有代理类名字的前缀
-</span><span style="color:#008000"></span>        <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">final</span> String proxyClassNamePrefix = <span style="color:#a31515">&#34;$Proxy&#34;</span>;
-        <span style="color:#008000">// 用于生成代理类名字的计数器
-</span><span style="color:#008000"></span>        <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">final</span> AtomicLong nextUniqueNumber = <span style="color:#00f">new</span> AtomicLong();
-        @Override
-        <span style="color:#00f">public</span> Class&lt;?&gt; apply(ClassLoader loader, Class&lt;?&gt;[] interfaces) {
-            <span style="color:#008000">// 省略验证代理接口的代码……
-</span><span style="color:#008000"></span>            String proxyPkg = <span style="color:#00f">null</span>;     <span style="color:#008000">// 生成的代理类的包名
-</span><span style="color:#008000"></span>            <span style="color:#008000">// 对于非公共接口，代理类的包名与接口的相同
-</span><span style="color:#008000"></span>            <span style="color:#00f">for</span> (Class&lt;?&gt; intf : interfaces) {
-                <span style="color:#2b91af">int</span> flags = intf.getModifiers();
-                <span style="color:#00f">if</span> (!Modifier.isPublic(flags)) {
-                    String name = intf.getName();
-                    <span style="color:#2b91af">int</span> n = name.lastIndexOf(<span style="color:#a31515">&#39;.&#39;</span>);
-                    String pkg = ((n == -1) ? <span style="color:#a31515">&#34;&#34;</span> : name.substring(0, n + 1));
-                    <span style="color:#00f">if</span> (proxyPkg == <span style="color:#00f">null</span>) {
-                        proxyPkg = pkg;
-                    } <span style="color:#00f">else</span> <span style="color:#00f">if</span> (!pkg.equals(proxyPkg)) {
-                        <span style="color:#00f">throw</span> <span style="color:#00f">new</span> IllegalArgumentException(
-                            <span style="color:#a31515">&#34;non-public interfaces from different packages&#34;</span>);
-                    }
-                }
-            }
-            <span style="color:#008000">// 对于公共接口的包名，默认为com.sun.proxy[源码](http://hg.openjdk.java.net/jdk6/jdk6/jdk/rev/695dd7ceb9e3)
-</span><span style="color:#008000"></span>            <span style="color:#00f">if</span> (proxyPkg == <span style="color:#00f">null</span>) {
-                proxyPkg = ReflectUtil.PROXY_PACKAGE + <span style="color:#a31515">&#34;.&#34;</span>;
-            }
-            <span style="color:#008000">// 获取计数
-</span><span style="color:#008000"></span>            <span style="color:#2b91af">long</span> num = nextUniqueNumber.getAndIncrement();
-            <span style="color:#008000">// 默认情况下，代理类的完全限定名为:com.sun.proxy.$Proxy0，com.sun.proxy.$Proxy1……依次递增
-</span><span style="color:#008000"></span>            String proxyName = proxyPkg + proxyClassNamePrefix + num;
-            <span style="color:#008000">// 这里才是真正的生成代理类的字节码的地方
-</span><span style="color:#008000"></span>            <span style="color:#2b91af">byte</span>[] proxyClassFile = ProxyGenerator.generateProxyClass(
-                proxyName, interfaces);
-            <span style="color:#00f">try</span> {
-                <span style="color:#008000">// 根据二进制字节码返回相应的Class实例
-</span><span style="color:#008000"></span>                <span style="color:#00f">return</span> defineClass0(loader, proxyName,
-                                    proxyClassFile, 0, proxyClassFile.length);
-            } <span style="color:#00f">catch</span> (ClassFormatError e) {
-                <span style="color:#00f">throw</span> <span style="color:#00f">new</span> IllegalArgumentException(e.toString());
-            }
-        }
-    }
+</code></pre></div><p>具体的缓存逻辑这里暂不关心,只需要关心ProxyClassFactory是如何生成代理类的,ProxyClassFactory是Proxy的一个静态内部类,实现了WeakCache的内部接口BiFunction的apply方法:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">ProxyClassFactory</span>
+        <span style="color:#a90d91">implements</span> <span style="color:#000">BiFunction</span><span style="color:#000">&lt;</span><span style="color:#000">ClassLoader</span><span style="color:#000">,</span> <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;[],</span> <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;&gt;</span> <span style="color:#000">{</span>
+        <span style="color:#177500">// 所有代理类名字的前缀
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">final</span> <span style="color:#000">String</span> <span style="color:#000">proxyClassNamePrefix</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;$Proxy&#34;</span><span style="color:#000">;</span>
+        <span style="color:#177500">// 用于生成代理类名字的计数器
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">final</span> <span style="color:#000">AtomicLong</span> <span style="color:#000">nextUniqueNumber</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">AtomicLong</span><span style="color:#000">();</span>
+        <span style="color:#000">@Override</span>
+        <span style="color:#a90d91">public</span> <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;</span> <span style="color:#000">apply</span><span style="color:#000">(</span><span style="color:#000">ClassLoader</span> <span style="color:#000">loader</span><span style="color:#000">,</span> <span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;[]</span> <span style="color:#000">interfaces</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+            <span style="color:#177500">// 省略验证代理接口的代码……
+</span><span style="color:#177500"></span>            <span style="color:#000">String</span> <span style="color:#000">proxyPkg</span> <span style="color:#000">=</span> <span style="color:#a90d91">null</span><span style="color:#000">;</span>     <span style="color:#177500">// 生成的代理类的包名
+</span><span style="color:#177500"></span>            <span style="color:#177500">// 对于非公共接口,代理类的包名与接口的相同
+</span><span style="color:#177500"></span>            <span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">Class</span><span style="color:#000">&lt;?&gt;</span> <span style="color:#000">intf</span> <span style="color:#000">:</span> <span style="color:#000">interfaces</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                <span style="color:#a90d91">int</span> <span style="color:#000">flags</span> <span style="color:#000">=</span> <span style="color:#000">intf</span><span style="color:#000">.</span><span style="color:#836c28">getModifiers</span><span style="color:#000">();</span>
+                <span style="color:#a90d91">if</span> <span style="color:#000">(!</span><span style="color:#000">Modifier</span><span style="color:#000">.</span><span style="color:#836c28">isPublic</span><span style="color:#000">(</span><span style="color:#000">flags</span><span style="color:#000">))</span> <span style="color:#000">{</span>
+                    <span style="color:#000">String</span> <span style="color:#000">name</span> <span style="color:#000">=</span> <span style="color:#000">intf</span><span style="color:#000">.</span><span style="color:#836c28">getName</span><span style="color:#000">();</span>
+                    <span style="color:#a90d91">int</span> <span style="color:#000">n</span> <span style="color:#000">=</span> <span style="color:#000">name</span><span style="color:#000">.</span><span style="color:#836c28">lastIndexOf</span><span style="color:#000">(</span><span style="color:#2300ce">&#39;.&#39;</span><span style="color:#000">);</span>
+                    <span style="color:#000">String</span> <span style="color:#000">pkg</span> <span style="color:#000">=</span> <span style="color:#000">((</span><span style="color:#000">n</span> <span style="color:#000">==</span> <span style="color:#000">-</span><span style="color:#000">1</span><span style="color:#000">)</span> <span style="color:#000">?</span> <span style="color:#c41a16">&#34;&#34;</span> <span style="color:#000">:</span> <span style="color:#000">name</span><span style="color:#000">.</span><span style="color:#836c28">substring</span><span style="color:#000">(</span><span style="color:#000">0</span><span style="color:#000">,</span> <span style="color:#000">n</span> <span style="color:#000">+</span> <span style="color:#000">1</span><span style="color:#000">));</span>
+                    <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">proxyPkg</span> <span style="color:#000">==</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                        <span style="color:#000">proxyPkg</span> <span style="color:#000">=</span> <span style="color:#000">pkg</span><span style="color:#000">;</span>
+                    <span style="color:#000">}</span> <span style="color:#a90d91">else</span> <span style="color:#a90d91">if</span> <span style="color:#000">(!</span><span style="color:#000">pkg</span><span style="color:#000">.</span><span style="color:#836c28">equals</span><span style="color:#000">(</span><span style="color:#000">proxyPkg</span><span style="color:#000">))</span> <span style="color:#000">{</span>
+                        <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">IllegalArgumentException</span><span style="color:#000">(</span>
+                            <span style="color:#c41a16">&#34;non-public interfaces from different packages&#34;</span><span style="color:#000">);</span>
+                    <span style="color:#000">}</span>
+                <span style="color:#000">}</span>
+            <span style="color:#000">}</span>
+            <span style="color:#177500">// 对于公共接口的包名,默认为com.sun.proxy[源码](http://hg.openjdk.java.net/jdk6/jdk6/jdk/rev/695dd7ceb9e3)
+</span><span style="color:#177500"></span>            <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">proxyPkg</span> <span style="color:#000">==</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                <span style="color:#000">proxyPkg</span> <span style="color:#000">=</span> <span style="color:#000">ReflectUtil</span><span style="color:#000">.</span><span style="color:#836c28">PROXY_PACKAGE</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34;.&#34;</span><span style="color:#000">;</span>
+            <span style="color:#000">}</span>
+            <span style="color:#177500">// 获取计数
+</span><span style="color:#177500"></span>            <span style="color:#a90d91">long</span> <span style="color:#000">num</span> <span style="color:#000">=</span> <span style="color:#000">nextUniqueNumber</span><span style="color:#000">.</span><span style="color:#836c28">getAndIncrement</span><span style="color:#000">();</span>
+            <span style="color:#177500">// 默认情况下,代理类的完全限定名为:com.sun.proxy.$Proxy0,com.sun.proxy.$Proxy1……依次递增
+</span><span style="color:#177500"></span>            <span style="color:#000">String</span> <span style="color:#000">proxyName</span> <span style="color:#000">=</span> <span style="color:#000">proxyPkg</span> <span style="color:#000">+</span> <span style="color:#000">proxyClassNamePrefix</span> <span style="color:#000">+</span> <span style="color:#000">num</span><span style="color:#000">;</span>
+            <span style="color:#177500">// 这里才是真正的生成代理类的字节码的地方
+</span><span style="color:#177500"></span>            <span style="color:#a90d91">byte</span><span style="color:#000">[]</span> <span style="color:#000">proxyClassFile</span> <span style="color:#000">=</span> <span style="color:#000">ProxyGenerator</span><span style="color:#000">.</span><span style="color:#836c28">generateProxyClass</span><span style="color:#000">(</span>
+                <span style="color:#000">proxyName</span><span style="color:#000">,</span> <span style="color:#000">interfaces</span><span style="color:#000">);</span>
+            <span style="color:#a90d91">try</span> <span style="color:#000">{</span>
+                <span style="color:#177500">// 根据二进制字节码返回相应的Class实例
+</span><span style="color:#177500"></span>                <span style="color:#a90d91">return</span> <span style="color:#000">defineClass0</span><span style="color:#000">(</span><span style="color:#000">loader</span><span style="color:#000">,</span> <span style="color:#000">proxyName</span><span style="color:#000">,</span>
+                                    <span style="color:#000">proxyClassFile</span><span style="color:#000">,</span> <span style="color:#000">0</span><span style="color:#000">,</span> <span style="color:#000">proxyClassFile</span><span style="color:#000">.</span><span style="color:#836c28">length</span><span style="color:#000">);</span>
+            <span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">ClassFormatError</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">IllegalArgumentException</span><span style="color:#000">(</span><span style="color:#000">e</span><span style="color:#000">.</span><span style="color:#836c28">toString</span><span style="color:#000">());</span>
+            <span style="color:#000">}</span>
+        <span style="color:#000">}</span>
+    <span style="color:#000">}</span>
 
 
-</code></pre></div><p>ProxyGenerator是sun.misc包中的类，它没有开源，但是可以反编译来一探究竟:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">byte</span>[] generateProxyClass(<span style="color:#00f">final</span> String var0, Class[] var1) {
-        ProxyGenerator var2 = <span style="color:#00f">new</span> ProxyGenerator(var0, var1);
-        <span style="color:#00f">final</span> <span style="color:#2b91af">byte</span>[] var3 = var2.generateClassFile();
-        <span style="color:#008000">// 这里根据参数配置，决定是否把生成的字节码（.class文件）保存到本地磁盘，
-</span><span style="color:#008000"></span>        <span style="color:#008000">//我们可以通过把相应的class文件保存到本地，再反编译来看看具体的实现，这样更直观
-</span><span style="color:#008000"></span>        <span style="color:#00f">if</span>(saveGeneratedFiles) {
-            AccessController.doPrivileged(<span style="color:#00f">new</span> PrivilegedAction() {
-                <span style="color:#00f">public</span> Void run() {
-                    <span style="color:#00f">try</span> {
-                        FileOutputStream var1 = <span style="color:#00f">new</span> FileOutputStream(ProxyGenerator.dotToSlash(var0) + <span style="color:#a31515">&#34;.class&#34;</span>);
-                        var1.write(var3);
-                        var1.close();
-                        <span style="color:#00f">return</span> <span style="color:#00f">null</span>;
-                    } <span style="color:#00f">catch</span> (IOException var2) {
-                        <span style="color:#00f">throw</span> <span style="color:#00f">new</span> InternalError(<span style="color:#a31515">&#34;I/O exception saving generated file: &#34;</span> + var2);
-                    }
-                }
-            });
-        }
-        <span style="color:#00f">return</span> var3;
-    }
+</code></pre></div><p>ProxyGenerator是sun.misc包中的类,它没有开源,但是可以反编译来一探究竟:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">byte</span><span style="color:#000">[]</span> <span style="color:#000">generateProxyClass</span><span style="color:#000">(</span><span style="color:#a90d91">final</span> <span style="color:#000">String</span> <span style="color:#000">var0</span><span style="color:#000">,</span> <span style="color:#000">Class</span><span style="color:#000">[]</span> <span style="color:#000">var1</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+        <span style="color:#000">ProxyGenerator</span> <span style="color:#000">var2</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">ProxyGenerator</span><span style="color:#000">(</span><span style="color:#000">var0</span><span style="color:#000">,</span> <span style="color:#000">var1</span><span style="color:#000">);</span>
+        <span style="color:#a90d91">final</span> <span style="color:#a90d91">byte</span><span style="color:#000">[]</span> <span style="color:#000">var3</span> <span style="color:#000">=</span> <span style="color:#000">var2</span><span style="color:#000">.</span><span style="color:#836c28">generateClassFile</span><span style="color:#000">();</span>
+        <span style="color:#177500">// 这里根据参数配置,决定是否把生成的字节码（.class文件）保存到本地磁盘,
+</span><span style="color:#177500"></span>        <span style="color:#177500">//我们可以通过把相应的class文件保存到本地,再反编译来看看具体的实现,这样更直观
+</span><span style="color:#177500"></span>        <span style="color:#a90d91">if</span><span style="color:#000">(</span><span style="color:#000">saveGeneratedFiles</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+            <span style="color:#000">AccessController</span><span style="color:#000">.</span><span style="color:#836c28">doPrivileged</span><span style="color:#000">(</span><span style="color:#a90d91">new</span> <span style="color:#000">PrivilegedAction</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+                <span style="color:#a90d91">public</span> <span style="color:#000">Void</span> <span style="color:#000">run</span><span style="color:#000">()</span> <span style="color:#000">{</span>
+                    <span style="color:#a90d91">try</span> <span style="color:#000">{</span>
+                        <span style="color:#000">FileOutputStream</span> <span style="color:#000">var1</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">FileOutputStream</span><span style="color:#000">(</span><span style="color:#000">ProxyGenerator</span><span style="color:#000">.</span><span style="color:#836c28">dotToSlash</span><span style="color:#000">(</span><span style="color:#000">var0</span><span style="color:#000">)</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34;.class&#34;</span><span style="color:#000">);</span>
+                        <span style="color:#000">var1</span><span style="color:#000">.</span><span style="color:#836c28">write</span><span style="color:#000">(</span><span style="color:#000">var3</span><span style="color:#000">);</span>
+                        <span style="color:#000">var1</span><span style="color:#000">.</span><span style="color:#836c28">close</span><span style="color:#000">();</span>
+                        <span style="color:#a90d91">return</span> <span style="color:#a90d91">null</span><span style="color:#000">;</span>
+                    <span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">IOException</span> <span style="color:#000">var2</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+                        <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">InternalError</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;I/O exception saving generated file: &#34;</span> <span style="color:#000">+</span> <span style="color:#000">var2</span><span style="color:#000">);</span>
+                    <span style="color:#000">}</span>
+                <span style="color:#000">}</span>
+            <span style="color:#000">});</span>
+        <span style="color:#000">}</span>
+        <span style="color:#a90d91">return</span> <span style="color:#000">var3</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
 
 </code></pre></div><p>saveGeneratedFiles这个属性的值从哪里来呢:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#00f">private</span> <span style="color:#00f">static</span> <span style="color:#00f">final</span> <span style="color:#2b91af">boolean</span> saveGeneratedFiles = ((Boolean)AccessController.doPrivileged(
-    <span style="color:#00f">new</span> GetBooleanAction(<span style="color:#a31515">&#34;sun.misc.ProxyGenerator.saveGeneratedFiles&#34;</span>))).booleanValue();
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">boolean</span> <span style="color:#000">saveGeneratedFiles</span> <span style="color:#000">=</span> <span style="color:#000">((</span><span style="color:#000">Boolean</span><span style="color:#000">)</span><span style="color:#000">AccessController</span><span style="color:#000">.</span><span style="color:#836c28">doPrivileged</span><span style="color:#000">(</span>
+    <span style="color:#a90d91">new</span> <span style="color:#000">GetBooleanAction</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;sun.misc.ProxyGenerator.saveGeneratedFiles&#34;</span><span style="color:#000">))).</span><span style="color:#836c28">booleanValue</span><span style="color:#000">();</span>
 
 
-</code></pre></div><p>GetBooleanAction实际上是调用Boolean.getBoolean(propName)来获得的，而Boolean.getBoolean(propName)调用了System.getProperty(name)，所以我们可以设置sun.misc.ProxyGenerator.saveGeneratedFiles这个系统属性为true来把生成的class保存到本地文件来查看。</p>
+</code></pre></div><p>GetBooleanAction实际上是调用Boolean.getBoolean(propName)来获得的,而Boolean.getBoolean(propName)调用了System.getProperty(name),所以我们可以设置sun.misc.ProxyGenerator.saveGeneratedFiles这个系统属性为true来把生成的class保存到本地文件来查看.</p>
 <p>反编译class文件</p>
 <p>自己创建文件写入生成的动态代理类:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">package</span> angus.interview.proxy;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">package</span> <span style="color:#000">angus.interview.proxy</span><span style="color:#000">;</span>
 
-<span style="color:#00f">import</span> java.io.FileOutputStream;
-<span style="color:#00f">import</span> java.io.IOException;
+<span style="color:#a90d91">import</span> <span style="color:#000">java.io.FileOutputStream</span><span style="color:#000">;</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">java.io.IOException</span><span style="color:#000">;</span>
 
-<span style="color:#00f">import</span> sun.misc.ProxyGenerator;
+<span style="color:#a90d91">import</span> <span style="color:#000">sun.misc.ProxyGenerator</span><span style="color:#000">;</span>
 
-@SuppressWarnings(<span style="color:#a31515">&#34;restriction&#34;</span>)
-<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">ProxyGeneratorUtils</span> {
-	<span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> writeProxyClassToHardDisk(String path) {
-		<span style="color:#008000">// 获取代理类的字节码
-</span><span style="color:#008000"></span>		<span style="color:#2b91af">byte</span>[] classFile = ProxyGenerator.generateProxyClass(<span style="color:#a31515">&#34;$Proxy11&#34;</span>, SubjectImpl.class.getInterfaces());
+<span style="color:#000">@SuppressWarnings</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;restriction&#34;</span><span style="color:#000">)</span>
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">ProxyGeneratorUtils</span> <span style="color:#000">{</span>
+	<span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">writeProxyClassToHardDisk</span><span style="color:#000">(</span><span style="color:#000">String</span> <span style="color:#000">path</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+		<span style="color:#177500">// 获取代理类的字节码
+</span><span style="color:#177500"></span>		<span style="color:#a90d91">byte</span><span style="color:#000">[]</span> <span style="color:#000">classFile</span> <span style="color:#000">=</span> <span style="color:#000">ProxyGenerator</span><span style="color:#000">.</span><span style="color:#836c28">generateProxyClass</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;$Proxy11&#34;</span><span style="color:#000">,</span> <span style="color:#000">SubjectImpl</span><span style="color:#000">.</span><span style="color:#836c28">class</span><span style="color:#000">.</span><span style="color:#836c28">getInterfaces</span><span style="color:#000">());</span>
 
-		FileOutputStream out = <span style="color:#00f">null</span>;
+		<span style="color:#000">FileOutputStream</span> <span style="color:#000">out</span> <span style="color:#000">=</span> <span style="color:#a90d91">null</span><span style="color:#000">;</span>
 
-		<span style="color:#00f">try</span> {
-			out = <span style="color:#00f">new</span> FileOutputStream(path);
-			out.write(classFile);
-			out.flush();
-		} <span style="color:#00f">catch</span> (Exception e) {
-			e.printStackTrace();
-		} <span style="color:#00f">finally</span> {
-			<span style="color:#00f">try</span> {
-				out.close();
-			} <span style="color:#00f">catch</span> (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+		<span style="color:#a90d91">try</span> <span style="color:#000">{</span>
+			<span style="color:#000">out</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">FileOutputStream</span><span style="color:#000">(</span><span style="color:#000">path</span><span style="color:#000">);</span>
+			<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">write</span><span style="color:#000">(</span><span style="color:#000">classFile</span><span style="color:#000">);</span>
+			<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">flush</span><span style="color:#000">();</span>
+		<span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Exception</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+			<span style="color:#000">e</span><span style="color:#000">.</span><span style="color:#836c28">printStackTrace</span><span style="color:#000">();</span>
+		<span style="color:#000">}</span> <span style="color:#a90d91">finally</span> <span style="color:#000">{</span>
+			<span style="color:#a90d91">try</span> <span style="color:#000">{</span>
+				<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">close</span><span style="color:#000">();</span>
+			<span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">IOException</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+				<span style="color:#000">e</span><span style="color:#000">.</span><span style="color:#836c28">printStackTrace</span><span style="color:#000">();</span>
+			<span style="color:#000">}</span>
+		<span style="color:#000">}</span>
+	<span style="color:#000">}</span>
 
-}
+<span style="color:#000">}</span>
 
 </code></pre></div><p>测试我们的工具类:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">package</span> angus.interview.proxy;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">package</span> <span style="color:#000">angus.interview.proxy</span><span style="color:#000">;</span>
 
-<span style="color:#00f">public</span> <span style="color:#00f">class</span> <span style="color:#2b91af">TestProxy</span> {
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">TestProxy</span> <span style="color:#000">{</span>
 
-	<span style="color:#00f">public</span> <span style="color:#00f">static</span> <span style="color:#2b91af">void</span> main(String[] args) {
-		System.getProperties().put(<span style="color:#a31515">&#34;sun.misc.ProxyGenerator.saveGeneratedFiles&#34;</span>, <span style="color:#a31515">&#34;true&#34;</span>);
-		DynamicProxy proxy = <span style="color:#00f">new</span> DynamicProxy();
-		Subject sproxy = (Subject) proxy.bind(<span style="color:#00f">new</span> SubjectImpl());
-		sproxy.request();
-		ProxyGeneratorUtils.writeProxyClassToHardDisk(<span style="color:#a31515">&#34;$Proxy11.class&#34;</span>);
+	<span style="color:#a90d91">public</span> <span style="color:#a90d91">static</span> <span style="color:#a90d91">void</span> <span style="color:#000">main</span><span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">[]</span> <span style="color:#000">args</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+		<span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">getProperties</span><span style="color:#000">().</span><span style="color:#836c28">put</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;sun.misc.ProxyGenerator.saveGeneratedFiles&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;true&#34;</span><span style="color:#000">);</span>
+		<span style="color:#000">DynamicProxy</span> <span style="color:#000">proxy</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">DynamicProxy</span><span style="color:#000">();</span>
+		<span style="color:#000">Subject</span> <span style="color:#000">sproxy</span> <span style="color:#000">=</span> <span style="color:#000">(</span><span style="color:#000">Subject</span><span style="color:#000">)</span> <span style="color:#000">proxy</span><span style="color:#000">.</span><span style="color:#836c28">bind</span><span style="color:#000">(</span><span style="color:#a90d91">new</span> <span style="color:#000">SubjectImpl</span><span style="color:#000">());</span>
+		<span style="color:#000">sproxy</span><span style="color:#000">.</span><span style="color:#836c28">request</span><span style="color:#000">();</span>
+		<span style="color:#000">ProxyGeneratorUtils</span><span style="color:#000">.</span><span style="color:#836c28">writeProxyClassToHardDisk</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;$Proxy11.class&#34;</span><span style="color:#000">);</span>
 
-	}
+	<span style="color:#000">}</span>
 
-}
+<span style="color:#000">}</span>
 
-</code></pre></div><p>刷新目录，得到一个$Proxy11.class,反编译使用Java Decompiler，GUI傻瓜式，支持最新语法，编译慢，效果好:<br>
+</code></pre></div><p>刷新目录,得到一个$Proxy11.class,反编译使用Java Decompiler,GUI傻瓜式,支持最新语法,编译慢,效果好:<br>
 可以看到 <br>
-$Proxy11继承Proxy，并实现了Subject，同时我们写的那个InvocationHandler的子类DynamicProxy也被传递进去了。
-重点看request方法的代码，只有一行 <code>  this.h.invoke(this, m3, null);</code>其中h的引用就是<code>DynamicProxy</code>.<br>
+$Proxy11继承Proxy,并实现了Subject,同时我们写的那个InvocationHandler的子类DynamicProxy也被传递进去了.
+重点看request方法的代码,只有一行 <code>  this.h.invoke(this, m3, null);</code>其中h的引用就是<code>DynamicProxy</code>.<br>
 m3就是<code>  m3 = Class.forName(&quot;angus.interview.proxy.Subject&quot;).getMethod(&quot;request&quot;, new Class[0]);</code></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00f">import</span> angus.interview.proxy.Subject;
-<span style="color:#00f">import</span> java.lang.reflect.InvocationHandler;
-<span style="color:#00f">import</span> java.lang.reflect.Method;
-<span style="color:#00f">import</span> java.lang.reflect.Proxy;
-<span style="color:#00f">import</span> java.lang.reflect.UndeclaredThrowableException;
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">import</span> <span style="color:#000">angus.interview.proxy.Subject</span><span style="color:#000">;</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.reflect.InvocationHandler</span><span style="color:#000">;</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.reflect.Method</span><span style="color:#000">;</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.reflect.Proxy</span><span style="color:#000">;</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.reflect.UndeclaredThrowableException</span><span style="color:#000">;</span>
 
-<span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#00f">class</span> <span style="color:#2b91af">$Proxy11</span> <span style="color:#00f">extends</span> Proxy  <span style="color:#00f">implements</span> Subject
-{
-  <span style="color:#00f">private</span> <span style="color:#00f">static</span> Method m1;
-  <span style="color:#00f">private</span> <span style="color:#00f">static</span> Method m2;
-  <span style="color:#00f">private</span> <span style="color:#00f">static</span> Method m3;
-  <span style="color:#00f">private</span> <span style="color:#00f">static</span> Method m0;
+<span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">$Proxy11</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Proxy</span>  <span style="color:#a90d91">implements</span> <span style="color:#000">Subject</span>
+<span style="color:#000">{</span>
+  <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#000">Method</span> <span style="color:#000">m1</span><span style="color:#000">;</span>
+  <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#000">Method</span> <span style="color:#000">m2</span><span style="color:#000">;</span>
+  <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#000">Method</span> <span style="color:#000">m3</span><span style="color:#000">;</span>
+  <span style="color:#a90d91">private</span> <span style="color:#a90d91">static</span> <span style="color:#000">Method</span> <span style="color:#000">m0</span><span style="color:#000">;</span>
   
-  <span style="color:#00f">public</span> $Proxy11(InvocationHandler paramInvocationHandler)
-  {
-    <span style="color:#00f">super</span>(paramInvocationHandler);
-  }
+  <span style="color:#a90d91">public</span> <span style="color:#000">$Proxy11</span><span style="color:#000">(</span><span style="color:#000">InvocationHandler</span> <span style="color:#000">paramInvocationHandler</span><span style="color:#000">)</span>
+  <span style="color:#000">{</span>
+    <span style="color:#a90d91">super</span><span style="color:#000">(</span><span style="color:#000">paramInvocationHandler</span><span style="color:#000">);</span>
+  <span style="color:#000">}</span>
   
-  <span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#2b91af">boolean</span> equals(Object paramObject)
-  {
-    <span style="color:#00f">try</span>
-    {
-      <span style="color:#00f">return</span> ((Boolean)<span style="color:#00f">this</span>.h.invoke(<span style="color:#00f">this</span>, m1, <span style="color:#00f">new</span> Object[] { paramObject })).booleanValue();
-    }
-    <span style="color:#00f">catch</span> (Error|RuntimeException localError)
-    {
-      <span style="color:#00f">throw</span> localError;
-    }
-    <span style="color:#00f">catch</span> (Throwable localThrowable)
-    {
-      <span style="color:#00f">throw</span> <span style="color:#00f">new</span> UndeclaredThrowableException(localThrowable);
-    }
-  }
+  <span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">boolean</span> <span style="color:#000">equals</span><span style="color:#000">(</span><span style="color:#000">Object</span> <span style="color:#000">paramObject</span><span style="color:#000">)</span>
+  <span style="color:#000">{</span>
+    <span style="color:#a90d91">try</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">return</span> <span style="color:#000">((</span><span style="color:#000">Boolean</span><span style="color:#000">)</span><span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">h</span><span style="color:#000">.</span><span style="color:#836c28">invoke</span><span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">,</span> <span style="color:#000">m1</span><span style="color:#000">,</span> <span style="color:#a90d91">new</span> <span style="color:#000">Object</span><span style="color:#000">[]</span> <span style="color:#000">{</span> <span style="color:#000">paramObject</span> <span style="color:#000">})).</span><span style="color:#836c28">booleanValue</span><span style="color:#000">();</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Error</span><span style="color:#000">|</span><span style="color:#000">RuntimeException</span> <span style="color:#000">localError</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#000">localError</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Throwable</span> <span style="color:#000">localThrowable</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">UndeclaredThrowableException</span><span style="color:#000">(</span><span style="color:#000">localThrowable</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
+  <span style="color:#000">}</span>
   
-  <span style="color:#00f">public</span> <span style="color:#00f">final</span> String toString()
-  {
-    <span style="color:#00f">try</span>
-    {
-      <span style="color:#00f">return</span> (String)<span style="color:#00f">this</span>.h.invoke(<span style="color:#00f">this</span>, m2, <span style="color:#00f">null</span>);
-    }
-    <span style="color:#00f">catch</span> (Error|RuntimeException localError)
-    {
-      <span style="color:#00f">throw</span> localError;
-    }
-    <span style="color:#00f">catch</span> (Throwable localThrowable)
-    {
-      <span style="color:#00f">throw</span> <span style="color:#00f">new</span> UndeclaredThrowableException(localThrowable);
-    }
-  }
+  <span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#000">String</span> <span style="color:#000">toString</span><span style="color:#000">()</span>
+  <span style="color:#000">{</span>
+    <span style="color:#a90d91">try</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">return</span> <span style="color:#000">(</span><span style="color:#000">String</span><span style="color:#000">)</span><span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">h</span><span style="color:#000">.</span><span style="color:#836c28">invoke</span><span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">,</span> <span style="color:#000">m2</span><span style="color:#000">,</span> <span style="color:#a90d91">null</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Error</span><span style="color:#000">|</span><span style="color:#000">RuntimeException</span> <span style="color:#000">localError</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#000">localError</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Throwable</span> <span style="color:#000">localThrowable</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">UndeclaredThrowableException</span><span style="color:#000">(</span><span style="color:#000">localThrowable</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
+  <span style="color:#000">}</span>
   
-  <span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#2b91af">void</span> request()
-  {
-    <span style="color:#00f">try</span>
-    {
-      <span style="color:#00f">this</span>.h.invoke(<span style="color:#00f">this</span>, m3, <span style="color:#00f">null</span>);
-      <span style="color:#00f">return</span>;
-    }
-    <span style="color:#00f">catch</span> (Error|RuntimeException localError)
-    {
-      <span style="color:#00f">throw</span> localError;
-    }
-    <span style="color:#00f">catch</span> (Throwable localThrowable)
-    {
-      <span style="color:#00f">throw</span> <span style="color:#00f">new</span> UndeclaredThrowableException(localThrowable);
-    }
-  }
+  <span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">void</span> <span style="color:#000">request</span><span style="color:#000">()</span>
+  <span style="color:#000">{</span>
+    <span style="color:#a90d91">try</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">h</span><span style="color:#000">.</span><span style="color:#836c28">invoke</span><span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">,</span> <span style="color:#000">m3</span><span style="color:#000">,</span> <span style="color:#a90d91">null</span><span style="color:#000">);</span>
+      <span style="color:#a90d91">return</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Error</span><span style="color:#000">|</span><span style="color:#000">RuntimeException</span> <span style="color:#000">localError</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#000">localError</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Throwable</span> <span style="color:#000">localThrowable</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">UndeclaredThrowableException</span><span style="color:#000">(</span><span style="color:#000">localThrowable</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
+  <span style="color:#000">}</span>
   
-  <span style="color:#00f">public</span> <span style="color:#00f">final</span> <span style="color:#2b91af">int</span> hashCode()
-  {
-    <span style="color:#00f">try</span>
-    {
-      <span style="color:#00f">return</span> ((Integer)<span style="color:#00f">this</span>.h.invoke(<span style="color:#00f">this</span>, m0, <span style="color:#00f">null</span>)).intValue();
-    }
-    <span style="color:#00f">catch</span> (Error|RuntimeException localError)
-    {
-      <span style="color:#00f">throw</span> localError;
-    }
-    <span style="color:#00f">catch</span> (Throwable localThrowable)
-    {
-      <span style="color:#00f">throw</span> <span style="color:#00f">new</span> UndeclaredThrowableException(localThrowable);
-    }
-  }
+  <span style="color:#a90d91">public</span> <span style="color:#a90d91">final</span> <span style="color:#a90d91">int</span> <span style="color:#000">hashCode</span><span style="color:#000">()</span>
+  <span style="color:#000">{</span>
+    <span style="color:#a90d91">try</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">return</span> <span style="color:#000">((</span><span style="color:#000">Integer</span><span style="color:#000">)</span><span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">h</span><span style="color:#000">.</span><span style="color:#836c28">invoke</span><span style="color:#000">(</span><span style="color:#a90d91">this</span><span style="color:#000">,</span> <span style="color:#000">m0</span><span style="color:#000">,</span> <span style="color:#a90d91">null</span><span style="color:#000">)).</span><span style="color:#836c28">intValue</span><span style="color:#000">();</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Error</span><span style="color:#000">|</span><span style="color:#000">RuntimeException</span> <span style="color:#000">localError</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#000">localError</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">Throwable</span> <span style="color:#000">localThrowable</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">UndeclaredThrowableException</span><span style="color:#000">(</span><span style="color:#000">localThrowable</span><span style="color:#000">);</span>
+    <span style="color:#000">}</span>
+  <span style="color:#000">}</span>
   
-  <span style="color:#00f">static</span>
-  {
-    <span style="color:#00f">try</span>
-    {
-      m1 = Class.forName(<span style="color:#a31515">&#34;java.lang.Object&#34;</span>).getMethod(<span style="color:#a31515">&#34;equals&#34;</span>, <span style="color:#00f">new</span> Class[] { Class.forName(<span style="color:#a31515">&#34;java.lang.Object&#34;</span>) });
-      m2 = Class.forName(<span style="color:#a31515">&#34;java.lang.Object&#34;</span>).getMethod(<span style="color:#a31515">&#34;toString&#34;</span>, <span style="color:#00f">new</span> Class[0]);
-      m3 = Class.forName(<span style="color:#a31515">&#34;angus.interview.proxy.Subject&#34;</span>).getMethod(<span style="color:#a31515">&#34;request&#34;</span>, <span style="color:#00f">new</span> Class[0]);
-      m0 = Class.forName(<span style="color:#a31515">&#34;java.lang.Object&#34;</span>).getMethod(<span style="color:#a31515">&#34;hashCode&#34;</span>, <span style="color:#00f">new</span> Class[0]);
-      <span style="color:#00f">return</span>;
-    }
-    <span style="color:#00f">catch</span> (NoSuchMethodException localNoSuchMethodException)
-    {
-      <span style="color:#00f">throw</span> <span style="color:#00f">new</span> NoSuchMethodError(localNoSuchMethodException.getMessage());
-    }
-    <span style="color:#00f">catch</span> (ClassNotFoundException localClassNotFoundException)
-    {
-      <span style="color:#00f">throw</span> <span style="color:#00f">new</span> NoClassDefFoundError(localClassNotFoundException.getMessage());
-    }
-  }
-}
+  <span style="color:#a90d91">static</span>
+  <span style="color:#000">{</span>
+    <span style="color:#a90d91">try</span>
+    <span style="color:#000">{</span>
+      <span style="color:#000">m1</span> <span style="color:#000">=</span> <span style="color:#000">Class</span><span style="color:#000">.</span><span style="color:#836c28">forName</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;java.lang.Object&#34;</span><span style="color:#000">).</span><span style="color:#836c28">getMethod</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;equals&#34;</span><span style="color:#000">,</span> <span style="color:#a90d91">new</span> <span style="color:#000">Class</span><span style="color:#000">[]</span> <span style="color:#000">{</span> <span style="color:#000">Class</span><span style="color:#000">.</span><span style="color:#836c28">forName</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;java.lang.Object&#34;</span><span style="color:#000">)</span> <span style="color:#000">});</span>
+      <span style="color:#000">m2</span> <span style="color:#000">=</span> <span style="color:#000">Class</span><span style="color:#000">.</span><span style="color:#836c28">forName</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;java.lang.Object&#34;</span><span style="color:#000">).</span><span style="color:#836c28">getMethod</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;toString&#34;</span><span style="color:#000">,</span> <span style="color:#a90d91">new</span> <span style="color:#000">Class</span><span style="color:#000">[</span><span style="color:#000">0</span><span style="color:#000">]);</span>
+      <span style="color:#000">m3</span> <span style="color:#000">=</span> <span style="color:#000">Class</span><span style="color:#000">.</span><span style="color:#836c28">forName</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;angus.interview.proxy.Subject&#34;</span><span style="color:#000">).</span><span style="color:#836c28">getMethod</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;request&#34;</span><span style="color:#000">,</span> <span style="color:#a90d91">new</span> <span style="color:#000">Class</span><span style="color:#000">[</span><span style="color:#000">0</span><span style="color:#000">]);</span>
+      <span style="color:#000">m0</span> <span style="color:#000">=</span> <span style="color:#000">Class</span><span style="color:#000">.</span><span style="color:#836c28">forName</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;java.lang.Object&#34;</span><span style="color:#000">).</span><span style="color:#836c28">getMethod</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;hashCode&#34;</span><span style="color:#000">,</span> <span style="color:#a90d91">new</span> <span style="color:#000">Class</span><span style="color:#000">[</span><span style="color:#000">0</span><span style="color:#000">]);</span>
+      <span style="color:#a90d91">return</span><span style="color:#000">;</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">NoSuchMethodException</span> <span style="color:#000">localNoSuchMethodException</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">NoSuchMethodError</span><span style="color:#000">(</span><span style="color:#000">localNoSuchMethodException</span><span style="color:#000">.</span><span style="color:#836c28">getMessage</span><span style="color:#000">());</span>
+    <span style="color:#000">}</span>
+    <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">ClassNotFoundException</span> <span style="color:#000">localClassNotFoundException</span><span style="color:#000">)</span>
+    <span style="color:#000">{</span>
+      <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#000">NoClassDefFoundError</span><span style="color:#000">(</span><span style="color:#000">localClassNotFoundException</span><span style="color:#000">.</span><span style="color:#836c28">getMessage</span><span style="color:#000">());</span>
+    <span style="color:#000">}</span>
+  <span style="color:#000">}</span>
+<span style="color:#000">}</span>
 
 
 </code></pre></div>
@@ -541,8 +541,8 @@ m3就是<code>  m3 = Class.forName(&quot;angus.interview.proxy.Subject&quot;).ge
      <div class="post-nav">
     <div class="post-nav-next post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/java-and-equal/" rel="next" title="Java-==-and-equal">
-        <i class="fa fa-chevron-left"></i> Java-==-and-equal
+        <a href="https://zhimoe.github.io/post/java-and-equal/" rel="next" title="Java-==-and-equals">
+        <i class="fa fa-chevron-left"></i> Java-==-and-equals
         </a>
     
     </div>
@@ -631,12 +631,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -648,16 +649,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

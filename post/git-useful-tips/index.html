@@ -167,80 +167,80 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>记录日常开发中偶尔会遇到的但是总是记不住的git命令.</p>
-<p>以下技巧都来自于<a href="https://ohshitgit.com/">oh shit git</a> 和 <a href="https://stackoverflow.com">stackoverflow</a>. 版权归作者所有.</p>
+    <p>记录日常开发中偶尔会遇到的但是总是记不住的git命令.
+以下技巧都来自于<a href="https://ohshitgit.com/">oh shit git</a> 和 <a href="https://stackoverflow.com">stackoverflow</a>. 版权归作者所有.</p>
 <h2 id="delete-all-history-commit-and-commit-current-content">delete all history commit and commit current content</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git checkout --orphan tmp_branch &amp;&amp; git add -A &amp;&amp; git commit -am <span style="color:#a31515">&#34;first commit&#34;</span> &amp;&amp; git branch -D master &amp;&amp; git branch -m master &amp;&amp; git push -f origin master
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git checkout --orphan tmp_branch <span style="color:#000">&amp;&amp;</span> git add -A <span style="color:#000">&amp;&amp;</span> git commit -am <span style="color:#c41a16">&#34;first commit&#34;</span> <span style="color:#000">&amp;&amp;</span> git branch -D master <span style="color:#000">&amp;&amp;</span> git branch -m master <span style="color:#000">&amp;&amp;</span> git push -f origin master
 </code></pre></div><h2 id="store-password-in-local">store password in local</h2>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git config credential.helper store
 </code></pre></div><h2 id="git-reflog">git reflog</h2>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git reflog
-<span style="color:#008000"># you will see a list of every thing you&#39;ve</span>
-<span style="color:#008000"># done in git, across all branches!</span>
-<span style="color:#008000"># each one has an index HEAD@{index}</span>
-<span style="color:#008000"># find the one before you broke everything</span>
-git reset HEAD@{index}
-<span style="color:#008000"># magic time machine</span>
+<span style="color:#177500"># you will see a list of every thing you&#39;ve</span>
+<span style="color:#177500"># done in git, across all branches!</span>
+<span style="color:#177500"># each one has an index HEAD@{index}</span>
+<span style="color:#177500"># find the one before you broke everything</span>
+git reset HEAD@<span style="color:#000">{</span>index<span style="color:#000">}</span>
+<span style="color:#177500"># magic time machine</span>
 </code></pre></div><h2 id="git-commit---amend">git commit &ndash;amend</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># make your change</span>
-git add . <span style="color:#008000"># or add individual files</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500"># make your change</span>
+git add . <span style="color:#177500"># or add individual files</span>
 git commit --amend --no-edit
-<span style="color:#008000"># now your last commit contains that change!</span>
-<span style="color:#008000"># WARNING: never amend public(remote) commits!!!</span>
+<span style="color:#177500"># now your last commit contains that change!</span>
+<span style="color:#177500"># WARNING: never amend public(remote) commits!!!</span>
 
-<span style="color:#008000"># I need to change the message on my last commit!</span>
+<span style="color:#177500"># I need to change the message on my last commit!</span>
 git commit --amend 
-<span style="color:#008000"># follow prompts to change the commit message</span>
+<span style="color:#177500"># follow prompts to change the commit message</span>
 </code></pre></div><h2 id="undo-a-commit">undo a commit</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># Oh shit, I need to undo a commit from like 5 commits ago!</span>
-<span style="color:#008000"># find the commit you need to undo</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500"># Oh shit, I need to undo a commit from like 5 commits ago!</span>
+<span style="color:#177500"># find the commit you need to undo</span>
 git log
-<span style="color:#008000"># use the arrow keys to scroll up and down in history</span>
-<span style="color:#008000"># once you&#39;ve found your commit, save the hash</span>
-git revert [saved hash]
-<span style="color:#008000"># git will create a new commit that undoes that commit</span>
-<span style="color:#008000"># follow prompts to edit the commit message</span>
-<span style="color:#008000"># or just save and commit</span>
+<span style="color:#177500"># use the arrow keys to scroll up and down in history</span>
+<span style="color:#177500"># once you&#39;ve found your commit, save the hash</span>
+git revert <span style="color:#000">[</span>saved hash<span style="color:#000">]</span>
+<span style="color:#177500"># git will create a new commit that undoes that commit</span>
+<span style="color:#177500"># follow prompts to edit the commit message</span>
+<span style="color:#177500"># or just save and commit</span>
 </code></pre></div><h2 id="undo-a-files-changes">undo a file&rsquo;s changes</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># find a hash for a commit before the file was changed</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500"># find a hash for a commit before the file was changed</span>
 git log
-<span style="color:#008000"># use the arrow keys to scroll up and down in history</span>
-<span style="color:#008000"># once you&#39;ve found your commit, save the hash</span>
-git checkout [saved hash] -- path/to/file
-<span style="color:#008000"># the old version of the file will be in your index</span>
-git commit -m <span style="color:#a31515">&#34;Wow, you don&#39;t have to copy-paste to undo&#34;</span>
+<span style="color:#177500"># use the arrow keys to scroll up and down in history</span>
+<span style="color:#177500"># once you&#39;ve found your commit, save the hash</span>
+git checkout <span style="color:#000">[</span>saved hash<span style="color:#000">]</span> -- path/to/file
+<span style="color:#177500"># the old version of the file will be in your index</span>
+git commit -m <span style="color:#c41a16">&#34;Wow, you don&#39;t have to copy-paste to undo&#34;</span>
 
 </code></pre></div><h2 id="git-stash">git stash</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># 如果临时想要将代码恢复到最近一次commit,帮助同事复现他的问题</span>
-<span style="color:#008000"># 使用git stash 暂存当前修改,这个不是stage,也不是commit</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500"># 如果临时想要将代码恢复到最近一次commit,帮助同事复现他的问题</span>
+<span style="color:#177500"># 使用git stash 暂存当前修改,这个不是stage,也不是commit</span>
 git stash
 
-<span style="color:#008000"># 显示当前暂存历史</span>
+<span style="color:#177500"># 显示当前暂存历史</span>
 git stash list
 
-<span style="color:#008000"># 找回暂存</span>
+<span style="color:#177500"># 找回暂存</span>
 git stash apply
-<span style="color:#008000"># or spec which the stash</span> 
-git stash apply stash@{1}
+<span style="color:#177500"># or spec which the stash</span> 
+git stash apply stash@<span style="color:#000">{</span>1<span style="color:#000">}</span>
 
 </code></pre></div><h2 id="git-rebase">git rebase</h2>
 <h2 id="git-pull-request">git pull request</h2>
 <h2 id="git-cherry-pick">git cherry-pick</h2>
 <h2 id="commit-change-in-submodule">commit change in submodule</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#008000"># submodule is a independent repo,</span>
-<span style="color:#008000"># so you need commit/push change in submodule first and then</span> 
-<span style="color:#008000"># update(commit) the main project to refer a new submodule commit hash</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500"># submodule is a independent repo,</span>
+<span style="color:#177500"># so you need commit/push change in submodule first and then</span> 
+<span style="color:#177500"># update(commit) the main project to refer a new submodule commit hash</span>
 
-<span style="color:#008000"># step 1</span>
-cd path/to/submodule
+<span style="color:#177500"># step 1</span>
+<span style="color:#a90d91">cd</span> path/to/submodule
 git add &lt;stuff&gt;
-git commit -m <span style="color:#a31515">&#34;comment&#34;</span>
+git commit -m <span style="color:#c41a16">&#34;comment&#34;</span>
 git push
 
-<span style="color:#008000"># step 2</span>
-cd /main/project
+<span style="color:#177500"># step 2</span>
+<span style="color:#a90d91">cd</span> /main/project
 git add path/to/submodule
-git commit -m <span style="color:#a31515">&#34;updated my submodule&#34;</span>
+git commit -m <span style="color:#c41a16">&#34;updated my submodule&#34;</span>
 git push
 
 </code></pre></div>
@@ -351,12 +351,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -368,16 +369,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

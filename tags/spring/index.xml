@@ -17,7 +17,10 @@
       <pubDate>Mon, 03 Feb 2020 11:30:55 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/dockerfile-best-practices/</guid>
-      <description>&lt;p&gt;记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p&gt;</description>
+      <description>&lt;p&gt;记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p&gt;
+&lt;h2 id=&#34;spring-boot应用dockerfile&#34;&gt;spring boot应用Dockerfile&lt;/h2&gt;
+&lt;p&gt;spring.io提供了一个boot应用的&lt;a href=&#34;https://spring.io/guides/topicals/spring-boot-docker&#34;&gt;Dockerfile&lt;/a&gt;指导.
+不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般企业项目中这么做显然不规范,直接使用maven基础镜像更合理.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -26,7 +29,9 @@
       <pubDate>Thu, 16 May 2019 22:44:38 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/spring-factorybean-contextaware/</guid>
-      <description>FactoryBean 一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例. 例如: public class Tool { private int id; // standard constructors, getters and setters } public class ToolFactory implements FactoryBean&amp;lt;Tool&amp;gt; { private int factoryId; private int toolId; @Override public Tool getObject() throws Exception { return new Tool(toolId); } @Override public Class&amp;lt;?&amp;gt; getObjectType() { return Tool.class; } @Override public boolean isSingleton() { return false; } // standard setters and getters } 注册Tool: &amp;lt;!-- factorybean-spring-ctx.xml --&amp;gt; &amp;lt;beans&amp;gt; &amp;lt;bean id=&amp;#34;tool&amp;#34; class=&amp;#34;com.baeldung.factorybean.ToolFactory&amp;#34;&amp;gt; &amp;lt;property name=&amp;#34;factoryId&amp;#34; value=&amp;#34;9090&amp;#34;/&amp;gt; &amp;lt;property</description>
+      <description>&lt;p&gt;理解Spring的FactoryBean 和 ContextAware接口.&lt;/p&gt;
+&lt;h2 id=&#34;factorybean&#34;&gt;FactoryBean&lt;/h2&gt;
+&lt;p&gt;一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,7 +40,19 @@
       <pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/spring-boot-notes/</guid>
-      <description>一些容易忘记的spring boot知识要点. 注意,.yaml和.yml文件没任何区别. 配置 SpringBootApplication注解 @SpringBootApplication &amp;lt;=等价=&amp;gt; @Configuration @ComponentScan @EnableAutoConfiguration 自动配置 spring的自动配置依赖以下注解: 配置文件 任何时候硬编码的配置</description>
+      <description>&lt;p&gt;一些容易忘记的spring boot知识要点.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意,.yaml和.yml文件没任何区别.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;h2 id=&#34;springbootapplication注解&#34;&gt;SpringBootApplication注解&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span style=&#34;color:#177500&#34;&gt;// &amp;lt;=等价=&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;@Configuration&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;@ComponentScan&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;@EnableAutoConfiguration&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -44,7 +61,7 @@
       <pubDate>Fri, 21 Aug 2015 22:02:50 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</guid>
-      <description>&lt;p&gt;知乎回答备份，&lt;a href=&#34;https://www.zhihu.com/question/21142149/answer/52383396&#34;&gt;原答案写于15年&lt;/a&gt;。
+      <description>&lt;p&gt;知乎回答备份,&lt;a href=&#34;https://www.zhihu.com/question/21142149/answer/52383396&#34;&gt;原答案写于15年&lt;/a&gt;.
 6,404 人赞同了该回答&lt;/p&gt;</description>
     </item>
     

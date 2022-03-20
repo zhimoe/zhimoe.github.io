@@ -165,12 +165,24 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">2101 字 ~5分钟</span>
+<span class="leancloud-visitors-count">2102 字 ~5分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    一些容易忘记的spring boot知识要点. 注意,.yaml和.yml文件没任何区别. 配置 SpringBootApplication注解 @SpringBootApplication &lt;=等价=&gt; @Configuration @ComponentScan @EnableAutoConfiguration 自动配置 spring的自动配置依赖以下注解: 配置文件 任何时候硬编码的配置
+    <p>一些容易忘记的spring boot知识要点.</p>
+<blockquote>
+<p>注意,.yaml和.yml文件没任何区别.</p>
+</blockquote>
+<h2 id="配置">配置</h2>
+<h2 id="springbootapplication注解">SpringBootApplication注解</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">@SpringBootApplication</span>
+<span style="color:#177500">// &lt;=等价=&gt;
+</span><span style="color:#177500"></span><span style="color:#000">@Configuration</span>
+<span style="color:#000">@ComponentScan</span>
+<span style="color:#000">@EnableAutoConfiguration</span>
+
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -229,7 +241,21 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    Scala中很多使用if的地方都可以用match case来替换.常见的就是下面的这种写法: val res = msg match { case it if it.contains(&#34;H&#34;) =&gt; &#34;Hello&#34; case _ =&gt; &#34;Other&#34; } //更常见的用法是去匹配参数的模式: case class Player(name: String, score: Int) def message(player: Player) = player match { case Player(_, score) if score &gt; 100000 =&gt; &#34;Get a job, dude!&#34; case Player(name, _) =&gt; &#34;Hey, $name, nice to see you again!&#34; } def printMessage(player: Player)
+    <p>Scala中很多使用if的地方都可以用match case来替换.常见的就是下面的这种写法:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">val</span> <span style="color:#000">res</span> <span style="color:#a90d91">=</span> <span style="color:#000">msg</span> <span style="color:#a90d91">match</span> <span style="color:#000">{</span>
+	<span style="color:#a90d91">case</span> <span style="color:#000">it</span> <span style="color:#a90d91">if</span> <span style="color:#000">it</span><span style="color:#000">.</span><span style="color:#000">contains</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;H&#34;</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#c41a16">&#34;Hello&#34;</span>
+	<span style="color:#a90d91">case</span> <span style="color:#a90d91">_</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#c41a16">&#34;Other&#34;</span>
+<span style="color:#000">}</span>
+<span style="color:#177500">//更常见的用法是去匹配参数的模式:
+</span><span style="color:#177500"></span><span style="color:#a90d91">case</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Player</span><span style="color:#000">(</span><span style="color:#000">name</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">String</span><span style="color:#000">,</span> <span style="color:#000">score</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span>
+<span style="color:#a90d91">def</span> <span style="color:#000">message</span><span style="color:#000">(</span><span style="color:#000">player</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Player</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">player</span> <span style="color:#a90d91">match</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Player</span><span style="color:#000">(</span><span style="color:#a90d91">_</span><span style="color:#000">,</span> <span style="color:#000">score</span><span style="color:#000">)</span> <span style="color:#a90d91">if</span> <span style="color:#000">score</span> <span style="color:#000">&gt;</span> <span style="color:#1c01ce">100000</span> <span style="color:#a90d91">=&gt;</span>
+    <span style="color:#c41a16">&#34;Get a job, dude!&#34;</span>
+  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Player</span><span style="color:#000">(</span><span style="color:#000">name</span><span style="color:#000">,</span> <span style="color:#a90d91">_</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span>
+    <span style="color:#c41a16">&#34;Hey, $name, nice to see you again!&#34;</span>
+<span style="color:#000">}</span>
+<span style="color:#a90d91">def</span> <span style="color:#000">printMessage</span><span style="color:#000">(</span><span style="color:#000">player</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Player</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#000">message</span><span style="color:#000">(</span><span style="color:#000">player</span><span style="color:#000">))</span>
+</code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -283,12 +309,13 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">992 字 ~2分钟</span>
+<span class="leancloud-visitors-count">982 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    关于scala type class非常好的文章 核心知识点 //scala没有专门的type class语法，而是借助trait + implicit + context bound来实现的， //所以很多时候识别type class比较困难。 //type class 由三部分构成 //1. type class: 即下面的Show，定义一个行
+    <p>scala type class notes:
+<a href="https://scalac.io/typeclasses-in-scala">关于scala type class非常好的文章</a></p>
     </div>
     
     <div class="post-more-link text-center">
@@ -342,12 +369,26 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">6597 字 ~14分钟</span>
+<span class="leancloud-visitors-count">6578 字 ~14分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    scala-notes some notes on scala, includes: setup with maven import == and eq case class for&hellip;yield companion object and class method and function(def val) _ in scala =&gt; in scala () {} in scala implicit string setup with maven 目前用sbt的项目比较少,maven的更多. 而且sbt烧cpu. maven项目使用scala参考我的gist:scala_maven_pom.xml 学习scala
+    <p>some notes on scala, includes:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> setup with maven</li>
+<li><input checked="" disabled="" type="checkbox"> import</li>
+<li><input checked="" disabled="" type="checkbox"> == and eq</li>
+<li><input checked="" disabled="" type="checkbox"> case class</li>
+<li><input checked="" disabled="" type="checkbox"> for&hellip;yield</li>
+<li><input checked="" disabled="" type="checkbox"> companion object and class</li>
+<li><input checked="" disabled="" type="checkbox"> method and function(def val)</li>
+<li><input checked="" disabled="" type="checkbox"> _ in scala</li>
+<li><input checked="" disabled="" type="checkbox"> =&gt; in scala</li>
+<li><input checked="" disabled="" type="checkbox"> () {} in scala</li>
+<li><input checked="" disabled="" type="checkbox"> implicit</li>
+<li><input checked="" disabled="" type="checkbox"> string</li>
+</ul>
     </div>
     
     <div class="post-more-link text-center">
@@ -363,7 +404,7 @@
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
         <a class="post-title-link" href="https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/" itemprop="url">
-        使用redis的hash优化内存使用
+        使用redis的hash优化内存使用[翻译]
         </a>
       </h1>
       <div class="post-meta">
@@ -401,12 +442,14 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">701 字 ~2分钟</span>
+<span class="leancloud-visitors-count">719 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    原文 Understanding Redis hash-max-ziplist-entries 问题和方案 场景: 有3亿张图片放在对象存储(DELL ECS/AMAZON EC2)上面,现在需要保存图片的id-&gt;用户id的映射.最直接的思路是: set &#34;media:1155220&#34; &#34;user1&#34; set &#34;media:1155221&#34; &#34;user2&#34; 这样设计key之后3亿张图片需要21GB的内存,因为redis的string是线性增长的
+    <p>使用redis的hash优化内存使用</p>
+<h1 id="原文">原文</h1>
+<p><a href="https://www.peterbe.com/plog/understanding-redis-hash-max-ziplist-entries">Understanding Redis hash-max-ziplist-entries</a></p>
     </div>
     
     <div class="post-more-link text-center">
@@ -422,7 +465,7 @@
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
         <a class="post-title-link" href="https://zhimoe.github.io/post/scala-implicit/" itemprop="url">
-        Scala Implicit
+        Scala 2 Implicit
         </a>
       </h1>
       <div class="post-meta">
@@ -460,12 +503,24 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1592 字 ~4分钟</span>
+<span class="leancloud-visitors-count">1580 字 ~4分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    隐式参数 //隐式参数是在调用时可以自动填充的参数， 需要在调用范围内（scope)有一个隐式变量可供填充。 def addInt(i:Int)(implicit n: Int) = i + n //需要提供一个隐式变量n implicit val sn = 1 addInt(2) // 3 //如果有两个满足类型的隐式变量，则在编译addInt(2)时报错 //scal
+    <h2 id="隐式参数">隐式参数</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">//隐式参数是在调用时可以自动填充的参数, 需要在调用范围内（scope)有一个隐式变量可供填充.
+</span><span style="color:#177500"></span><span style="color:#a90d91">def</span> <span style="color:#000">addInt</span><span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#a90d91">:</span><span style="color:#a90d91">Int</span><span style="color:#000">)(</span><span style="color:#a90d91">implicit</span> <span style="color:#000">n</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Int</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">i</span> <span style="color:#000">+</span> <span style="color:#000">n</span>
+
+
+<span style="color:#177500">//需要提供一个隐式变量n
+</span><span style="color:#177500"></span><span style="color:#a90d91">implicit</span> <span style="color:#a90d91">val</span> <span style="color:#000">sn</span> <span style="color:#a90d91">=</span> <span style="color:#1c01ce">1</span>
+<span style="color:#000">addInt</span><span style="color:#000">(</span><span style="color:#1c01ce">2</span><span style="color:#000">)</span> <span style="color:#177500">// 3
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//如果有两个满足类型的隐式变量,则在编译addInt(2)时报错
+</span><span style="color:#177500"></span>
+<span style="color:#177500">//scala的方法中ExecutionContext一般作为implicit参数.
+</span></code></pre></div>
     </div>
     
     <div class="post-more-link text-center">
@@ -519,14 +574,15 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1701 字 ~4分钟</span>
+<span class="leancloud-visitors-count">1743 字 ~4分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <!-- raw HTML omitted -->
-<p>更新：github开放action功能后，travis-ci已经没有必要了，目前博客使用zhimoe仓库管理源码，使用action编译后将public目录同步到zhimoe.github.io仓库的gh-pages分支。
-注意，由于使用了jsdelivr的cdn功能，切换分支后theme的相关静态文件的path也要修改。</p>
+    <p>如何使用github pages和github actions构建静态个人博客站点</p>
+<h3 id="update-at-2021">update at 2021</h3>
+<p>更新：github开放action功能后,travis-ci已经没有必要了,目前博客使用zhimoe仓库管理源码,使用action编译后将public目录同步到zhimoe.github.io仓库的gh-pages分支.
+注意,由于使用了jsdelivr的cdn功能,切换分支后theme的相关静态文件的path也要修改.</p>
 <p>github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-pages分支的内容如果存在index.html, 那么其他人可以通过 <a href="https://zhimoe.github.io">https://zhimoe.github.io</a> 访问这个站点.</p>
     </div>
     
@@ -587,6 +643,15 @@
     </header>
     <div class="post-body" itemprop="articleBody">
     <p>使用wsl,MobaXterm,cmder,docker打造可视化的linux开发环境</p>
+<p>离不开Windows的理由很多,作为后端开发需要使用linux的情况也很多,双系统总归是不方便,而且linux下的GUI体验也没用Win 10好. 如果使用虚拟机,那么文件交换和网络等各种问题也需要解决,对系统的内存要求也更高一些.微软为了让更多的开发人员留在Win10上面,开发了wsl功能.目前的实际体验已经很棒,今天介绍一下如何打造一个可视化的linux开发环境&ndash;即在Win10启动linux的GUI软件,例如vs code等.在wsl启动vs code写代码可以有效避免一些Windows和linux的编码和换行问题.</p>
+<p>本教程分为2部分:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 配置wsl可视化</li>
+<li><input checked="" disabled="" type="checkbox"> 在wsl使用docker</li>
+</ul>
+<blockquote>
+<p>以下内容中 <code>wsl</code>和<code>ubuntu</code>含义相同,<code>console</code>和<code>命令行</code>含义相同.</p>
+</blockquote>
     </div>
     
     <div class="post-more-link text-center">
@@ -716,12 +781,20 @@
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
+<div class="feed-link motion-element">
+<a href="https://zhimoe.github.io/index.xml" rel="alternate" type="application/rss+xml" target="_blank">
+    <i class="fa fa-rss"></i>
+    RSS 订阅
+</a>
+</div>
+
       
 <div class="links-of-author motion-element">
     
@@ -733,16 +806,9 @@
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

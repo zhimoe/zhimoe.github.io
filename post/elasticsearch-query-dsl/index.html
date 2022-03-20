@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Elasticsearch Query DSL - zhimoe</title>
+    <title>理解Elasticsearch Query DSL中的JSON结构 - zhimoe</title>
     <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
     
-    <meta property="og:title" content="Elasticsearch Query DSL">
+    <meta property="og:title" content="理解Elasticsearch Query DSL中的JSON结构">
     <meta property="og:site_name" content="zhimoe">
     <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Elasticsearch Query DSL - zhimoe" />
+    <meta name="title" content="理解Elasticsearch Query DSL中的JSON结构 - zhimoe" />
     <meta name="description" content="编程是一门手艺"> 
     <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
@@ -124,7 +124,7 @@
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
         <a class="post-title-link" href="https://zhimoe.github.io/post/elasticsearch-query-dsl/" itemprop="url">
-        Elasticsearch Query DSL
+        理解Elasticsearch Query DSL中的JSON结构
         </a>
       </h1>
       <div class="post-meta">
@@ -162,27 +162,28 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">870 字 ~2分钟</span>
+<span class="leancloud-visitors-count">911 字 ~2分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <ul>
+    <p>理解ES搜索中JSON DSL有助于自己写JSON查询,特别是手写复杂嵌套json.</p>
+<ul>
 <li><input checked="" disabled="" type="checkbox"> diffs in es 2.x and es 5.x</li>
 <li><input checked="" disabled="" type="checkbox"> query dsl</li>
 <li><input checked="" disabled="" type="checkbox"> aggr query</li>
 </ul>
 <h1 id="diffs-in-es-2x-and-es-5x">diffs in es 2.x and es 5.x</h1>
-<h2 id="没有string类型改为text和keyword-2个类型了text字段可以指定fields来不分词如下-city字段被ingest为city和cityraw2个字段">没有string类型，改为text和keyword 2个类型了。text字段可以指定fields来不分词。如下： city字段被ingest为city和city.raw2个字段。</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+<h2 id="没有string类型改为text和keyword-2个类型了text字段可以指定fields来不分词如下-city字段被ingest为city和cityraw2个字段">没有string类型,改为text和keyword 2个类型了.text字段可以指定fields来不分词.如下： city字段被ingest为city和city.raw2个字段.</h2>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
     &#34;mappings&#34;: {
         &#34;_doc&#34;: {
             &#34;properties&#34;: {
                 &#34;city&#34;: {
-                    &#34;type&#34;: <span style="color:#a31515">&#34;text&#34;</span>,
+                    &#34;type&#34;: &#34;text&#34;,
                     &#34;fields&#34;: {
                         &#34;raw&#34;: {
-                            &#34;type&#34;: <span style="color:#a31515">&#34;keyword&#34;</span>,
+                            &#34;type&#34;: &#34;keyword&#34;,
                             &#34;ignore_above&#34;: 256
                         }
                     }
@@ -194,23 +195,23 @@
   
 </code></pre></div><h2 id="default-double---float">default double -&gt; float</h2>
 <h2 id="geo_point">geo_point</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="">//</span>2<span style="">.x</span>
-<span style="color:#a31515">&#34;location&#34;</span><span style="">:</span> {
-    &#34;type&#34;: <span style="color:#a31515">&#34;geo_point&#34;</span>,
-    &#34;lat_lon&#34;: <span style="color:#00f">true</span>,
-    &#34;geohash&#34;: <span style="color:#00f">true</span>,
-    &#34;geohash_prefix&#34;: <span style="color:#00f">true</span>,
-    &#34;geohash_precision&#34;: <span style="color:#a31515">&#34;1m&#34;</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">//2.x
+&#34;location&#34;: {
+    &#34;type&#34;: &#34;geo_point&#34;,
+    &#34;lat_lon&#34;: true,
+    &#34;geohash&#34;: true,
+    &#34;geohash_prefix&#34;: true,
+    &#34;geohash_precision&#34;: &#34;1m&#34;
 }
-<span style="">//</span>5<span style="">.x</span>
-<span style="color:#a31515">&#34;location&#34;</span><span style="">:</span> {
-    &#34;type&#34;: <span style="color:#a31515">&#34;geo_point&#34;</span>
+//5.x
+&#34;location&#34;: {
+    &#34;type&#34;: &#34;geo_point&#34;
 }
 </code></pre></div><h1 id="query-dsl">query dsl</h1>
 <h2 id="basic-query">basic query</h2>
-<p>就像砌房子的砖头，基本查询就是ES查询的砖头。基本查询是组合查询(bool查询等)的单元。基本查询有：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#008000">//basic query element
-</span><span style="color:#008000"></span>match,
+<p>就像砌房子的砖头,基本查询就是ES查询的砖头.基本查询是组合查询(bool查询等)的单元.基本查询有：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">//basic query element
+match,
 multi_match,
 common,
 geoshape,
@@ -225,62 +226,62 @@ span_term,
 term,
 terms,
 wildcard
-</code></pre></div><p>其中<code>common, ids, prefix, span_term, term, terms, wildcard</code> 是不分析(即不能用于text字段)搜索，<code>match,	multi_match,	query_string,	simple_query_string</code>是全文检索，几乎可以确保可以返回结果。而<code>prefix,regexp,wildcard</code>是模式检索。这里分别给一些例子:</p>
+</code></pre></div><p>其中<code>common, ids, prefix, span_term, term, terms, wildcard</code> 是不分析(即不能用于text字段)搜索,<code>match,	multi_match,	query_string,	simple_query_string</code>是全文检索,几乎可以确保可以返回结果.而<code>prefix,regexp,wildcard</code>是模式检索.这里分别给一些例子:</p>
 <h3 id="multi_match">multi_match</h3>
 <blockquote>
 <p>multi_match 查询为能在多个字段上反复执行相同查询提供了一种便捷方式
 既然时多字段查询,则有3中场景:best_fields 、 most_fields 和 cross_fields （最佳字段、多数字段、跨字段）</p>
 </blockquote>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
     &#34;multi_match&#34;: {
-        &#34;query&#34;:                <span style="color:#a31515">&#34;Quick brown fox&#34;</span>,
-        &#34;type&#34;:                 <span style="color:#a31515">&#34;best_fields&#34;</span>, <span style="">//默认的,可不填</span>
-        &#34;fields&#34;:               [ <span style="color:#a31515">&#34;title&#34;</span>, <span style="color:#a31515">&#34;body&#34;</span> ],
+        &#34;query&#34;:                &#34;Quick brown fox&#34;,
+        &#34;type&#34;:                 &#34;best_fields&#34;,  //默认的,可不填
+        &#34;fields&#34;:               [ &#34;title&#34;, &#34;body&#34; ],
         &#34;tie_breaker&#34;:          0.3,
-        &#34;minimum_should_match&#34;: <span style="color:#a31515">&#34;30%&#34;</span> 
+        &#34;minimum_should_match&#34;: &#34;30%&#34; 
     }
 }
 </code></pre></div><p>等价于下面的形式:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  &#34;dis_max&#34;: {
-    &#34;queries&#34;:  [
+  <span style="color:#000">&#34;dis_max&#34;</span>: {
+    <span style="color:#000">&#34;queries&#34;</span>:  [
       {
-        &#34;match&#34;: {
-          &#34;title&#34;: {
-            &#34;query&#34;: <span style="color:#a31515">&#34;Quick brown fox&#34;</span>,
-            &#34;minimum_should_match&#34;: <span style="color:#a31515">&#34;30%&#34;</span>
+        <span style="color:#000">&#34;match&#34;</span>: {
+          <span style="color:#000">&#34;title&#34;</span>: {
+            <span style="color:#000">&#34;query&#34;</span>: <span style="color:#c41a16">&#34;Quick brown fox&#34;</span>,
+            <span style="color:#000">&#34;minimum_should_match&#34;</span>: <span style="color:#c41a16">&#34;30%&#34;</span>
           }
         }
       },
       {
-        &#34;match&#34;: {
-          &#34;body&#34;: {
-            &#34;query&#34;: <span style="color:#a31515">&#34;Quick brown fox&#34;</span>,
-            &#34;minimum_should_match&#34;: <span style="color:#a31515">&#34;30%&#34;</span>
+        <span style="color:#000">&#34;match&#34;</span>: {
+          <span style="color:#000">&#34;body&#34;</span>: {
+            <span style="color:#000">&#34;query&#34;</span>: <span style="color:#c41a16">&#34;Quick brown fox&#34;</span>,
+            <span style="color:#000">&#34;minimum_should_match&#34;</span>: <span style="color:#c41a16">&#34;30%&#34;</span>
           }
         }
       },
     ],
-    &#34;tie_breaker&#34;: 0.3
+    <span style="color:#000">&#34;tie_breaker&#34;</span>: <span style="color:#1c01ce">0.3</span>
   }
 }
 
 </code></pre></div><p>还可以使用通配符指定字段,以及给某些字段添加权重.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    &#34;multi_match&#34;: {
-        &#34;query&#34;:  <span style="color:#a31515">&#34;Quick brown fox&#34;</span>,
-        &#34;fields&#34;: [ <span style="color:#a31515">&#34;*_title&#34;</span>, <span style="color:#a31515">&#34;chapter_title^2&#34;</span> ] 
+    <span style="color:#000">&#34;multi_match&#34;</span>: {
+        <span style="color:#000">&#34;query&#34;</span>:  <span style="color:#c41a16">&#34;Quick brown fox&#34;</span>,
+        <span style="color:#000">&#34;fields&#34;</span>: [ <span style="color:#c41a16">&#34;*_title&#34;</span>, <span style="color:#c41a16">&#34;chapter_title^2&#34;</span> ] 
     }
 }
 
 </code></pre></div><h3 id="query_string-和--simple_query_string">query_string 和  simple_query_string</h3>
 <p>非常灵活的一个查询方式:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="">GET</span> <span style="">/_search</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// GET index_name/_search
 {
     &#34;query&#34;: {
         &#34;query_string&#34; : {
-            &#34;default_field&#34; : <span style="color:#a31515">&#34;content&#34;</span>,
-            &#34;query&#34; : <span style="color:#a31515">&#34;(new york city) OR (big apple)&#34;</span> 
+            &#34;default_field&#34; : &#34;content&#34;,
+            &#34;query&#34; : &#34;(new york city) OR (big apple)&#34; 
         }
     }
 }
@@ -288,35 +289,34 @@ wildcard
 </code></pre></div><p>上面的query字段语法可以参考: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax">query_string_syntax</a>
 <code>simple_query_string</code>不会抛出异常,直接忽略无效语句.</p>
 <h3 id="term-terms">term terms</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="">//不要用于text字段</span>
-<span style="">GET</span> <span style="">/_search</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// 不要用于text字段
+// GET /_search
 {
     &#34;query&#34;: {
         &#34;term&#34;: {
             &#34;user&#34;: {
-                &#34;value&#34;: <span style="color:#a31515">&#34;Kimchy&#34;</span>,
+                &#34;value&#34;: &#34;Kimchy&#34;,
                 &#34;boost&#34;: 1.0
             }
         }
     }
 }
-<span style="">//terms和term一样,不过可以指定多个值,</span> <span style="color:#a31515">&#34;user&#34;</span> <span style="">:</span> [<span style="color:#a31515">&#34;kimchy&#34;</span>, <span style="color:#a31515">&#34;elasticsearch&#34;</span>]<span style="">//</span> <span style="">返回user为kimchy或elasticsearch的文档</span>
+//terms和term一样,不过可以指定多个值, &#34;user&#34; : [&#34;kimchy&#34;, &#34;elasticsearch&#34;]// 返回user为kimchy或elasticsearch的文档
 </code></pre></div><h3 id="prefix">prefix</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="">//user字段(不分词字段)中以</span><span style="color:#a31515">&#34;ki&#34;</span><span style="">开头的文档</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// user字段(不分词字段)中以&#34;ki&#34;开头的文档
 { &#34;query&#34;: {
-    &#34;prefix&#34; : { &#34;user&#34; : <span style="color:#a31515">&#34;ki&#34;</span> }
+    &#34;prefix&#34; : { &#34;user&#34; : &#34;ki&#34; }
   }
 }
 </code></pre></div><h2 id="组合查询">组合查询</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">bool, boosting, constant_score, dis_max, 
-function_score, has_child, has_parent, 
-indices, nested, span_first, span_multi,span_first, 
-span_multi, span_near, span_not, span_or, span_term, top_children,
-filtered(废弃,使用bool包含一个must和一个filter替代)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000">bool</span>, <span style="color:#000">boosting</span>, <span style="color:#000">constant_score</span>, <span style="color:#000">dis_max</span>, 
+<span style="color:#000">function_score</span>, <span style="color:#000">has_child</span>, <span style="color:#000">has_parent</span>, 
+<span style="color:#000">indices</span>, <span style="color:#000">nested</span>, <span style="color:#000">span_first</span>, <span style="color:#000">span_multi</span>,<span style="color:#000">span_first</span>, 
+<span style="color:#000">span_multi</span>, <span style="color:#000">span_near</span>, <span style="color:#000">span_not</span>, <span style="color:#000">span_or</span>, <span style="color:#000">span_term</span>, <span style="color:#000">top_children</span>,
+<span style="color:#000">filtered</span>(<span style="color:#000">废弃</span>,<span style="color:#000">使用bool包含一个must和一个filter替代</span>)
 </code></pre></div><h3 id="bool">bool</h3>
-<pre><code>bool查询的外框架结构为：
-</code></pre>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    {
+<p>bool查询的外框架结构为：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">    {
         &#34;query&#34;: {
             &#34;bool&#34;: {
                 &#34;must&#34;: [
@@ -334,8 +334,8 @@ filtered(废弃,使用bool包含一个must和一个filter替代)
             }
         }
     }
-<span style="">//some</span> <span style="">other</span> <span style="">parameter</span> <span style="">for</span> <span style="">bool:</span>
-<span style="">//boost,minimum_should_match,disable_coord</span>
+//some other parameter for bool:
+//boost,minimum_should_match,disable_coord
 </code></pre></div>
     </div>
     <footer class="post-footer">
@@ -444,12 +444,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -461,16 +462,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     
@@ -492,7 +486,7 @@ var disqus_config = function () {
     <div class="post-toc">
         <div class="post-toc-content"><nav id="TableOfContents">
   <ul>
-    <li><a href="#没有string类型改为text和keyword-2个类型了text字段可以指定fields来不分词如下-city字段被ingest为city和cityraw2个字段">没有string类型，改为text和keyword 2个类型了。text字段可以指定fields来不分词。如下： city字段被ingest为city和city.raw2个字段。</a></li>
+    <li><a href="#没有string类型改为text和keyword-2个类型了text字段可以指定fields来不分词如下-city字段被ingest为city和cityraw2个字段">没有string类型,改为text和keyword 2个类型了.text字段可以指定fields来不分词.如下： city字段被ingest为city和city.raw2个字段.</a></li>
     <li><a href="#default-double---float">default double -&gt; float</a></li>
     <li><a href="#geo_point">geo_point</a></li>
   </ul>

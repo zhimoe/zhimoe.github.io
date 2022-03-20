@@ -17,7 +17,7 @@
       <pubDate>Sun, 23 Apr 2017 21:51:20 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</guid>
-      <description>假设有如下的服务依赖： @Service class DepositSvc { @Autowired private AccountSvc accSvc; public List&amp;lt;Account&amp;gt; dps(String user) { List&amp;lt;Account&amp;gt; accounts = new ArrayList(); List&amp;lt;Account&amp;gt; banks = getBanks(); accSvc.addLinkedAccounts(user, accounts, banks);//accounts被改动了如何mock? return accounts; } } @Service class AccountSvc { @Autowired private RestClient restClient; public void addLinkedAccounts(String user, List&amp;lt;Account&amp;gt; accounts, List&amp;lt;Account&amp;gt; banks) { acc = restClient.getAcc(user); accounts.add(acc); } } 这里的AccountSvc只是提供了一个void方法处理了入</description>
+      <description>&lt;p&gt;测试中如果遇到被测试方法调用void方法，在Mockito中改如何处理?&lt;/p&gt;</description>
     </item>
     
   </channel>

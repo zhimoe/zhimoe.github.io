@@ -17,7 +17,14 @@
       <pubDate>Fri, 21 Aug 2020 22:02:50 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/programmingfonts/</guid>
-      <description>&lt;p&gt;个人对于编程字体有一点点洁癖。在尝试十几个字体后，终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code&lt;/p&gt;</description>
+      <description>&lt;p&gt;个人对于编程字体有一点点洁癖.在尝试十几个字体后,终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code&lt;/p&gt;
+&lt;h3 id=&#34;aurulent&#34;&gt;Aurulent&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhimoe/programming-fonts&#34;&gt;字体下载&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;小写字母来自Aurulent Sans Mono,其他基于Fira Code.Aurulent Sans Mono风格和SourceCodePro非常像,胖宽型,大开大合,简单却有具有设计.特别是字符g,a,p,y,s.&lt;/li&gt;
+&lt;li&gt;字母r的思路来自&lt;a href=&#34;https://www.programmingfonts.org/#gintronic&#34;&gt;gintronic&lt;/a&gt;. 优点是在低分辨率屏,r的末尾不会被hint只剩下尖尖.&lt;/li&gt;
+&lt;li&gt;问号？也来自gintronic字体,非常漂亮.&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
   </channel>

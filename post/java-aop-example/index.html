@@ -162,23 +162,23 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">152 字 ~1分钟</span>
+<span class="leancloud-visitors-count">155 字 ~1分钟</span>
 </span>
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p>找到一个最简单的介绍，不怎么想翻译，直接看原文吧:</p>
-<p><a href="https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html">A Simple Introduction to AOP</a></p>
-<p>提醒个点，使用注解的方式写切面时，增加了一个空方法，即：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
-    @Pointcut(<span style="color:#a31515">&#34;execution(* org.bk.inventory.service.*.*(..))&#34;</span>)
-    <span style="color:#00f">public</span> <span style="color:#2b91af">void</span> serviceMethods(){
+    <p>Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:
+<a href="https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html">A Simple Introduction to AOP</a></p>
+<p>提醒个点,使用注解的方式写切面时,增加了一个空方法,即：</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">class</span> <span style="color:#3f6e75">Test</span><span style="color:#000">{</span>
+    <span style="color:#000">@Pointcut</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;execution(* org.bk.inventory.service.*.*(..))&#34;</span><span style="color:#000">)</span>
+    <span style="color:#a90d91">public</span> <span style="color:#a90d91">void</span> <span style="color:#000">serviceMethods</span><span style="color:#000">(){</span>
+        <span style="color:#177500">//...
+</span><span style="color:#177500"></span>    <span style="color:#000">}</span>
+<span style="color:#000">}</span>
 
-    }
-
-</code></pre></div><p>在使用xml配置的话，就不需要这个方法了，serviceMethods方法名是后面配置切点的引用。</p>
-<p>如果不想引入spring的话，可以直接使用aspectj或者jboss aop。</p>
-
+</code></pre></div><p>在使用xml配置的话,就不需要这个方法了,serviceMethods方法名是后面配置切点的引用.</p>
+<p>如果不想引入spring的话,可以直接使用aspectj或者jboss aop.</p>
     </div>
     <footer class="post-footer">
      
@@ -187,7 +187,7 @@
      
     <a href="https://zhimoe.github.io/tags/java" rel="tag" title="java">#java#</a>
     
-    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
+    <a href="https://zhimoe.github.io/tags/aop" rel="tag" title="aop">#aop#</a>
     
 </div>
 
@@ -196,8 +196,8 @@
      <div class="post-nav">
     <div class="post-nav-next post-nav-item">
     
-        <a href="https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/" rel="next" title="Java-6-7-8-文件读写">
-        <i class="fa fa-chevron-left"></i> Java-6-7-8-文件读写
+        <a href="https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/" rel="next" title="Java 6/7/8中文件读写">
+        <i class="fa fa-chevron-left"></i> Java 6/7/8中文件读写
         </a>
     
     </div>
@@ -286,12 +286,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -303,16 +304,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

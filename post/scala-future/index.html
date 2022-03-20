@@ -177,82 +177,82 @@
 </ul>
 <h2 id="future">future</h2>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
-<span style="color:#00f">import</span> java.time._
-<span style="color:#00f">import</span> scala.concurrent._
-<span style="color:#00f">import</span> ExecutionContext.Implicits.global
-<span style="color:#2b91af">Future</span> {
-  <span style="color:#2b91af">Thread</span>.sleep(10000)
-  println(<span style="color:#a31515">s&#34;This is the future at </span><span style="color:#a31515">${</span><span style="color:#2b91af">LocalTime</span>.now<span style="color:#a31515">}</span><span style="color:#a31515">&#34;</span>)
-}
-println(<span style="color:#a31515">s&#34;This is the present at </span><span style="color:#a31515">${</span><span style="color:#2b91af">LocalTime</span>.now<span style="color:#a31515">}</span><span style="color:#a31515">&#34;</span>)
+<span style="color:#a90d91">import</span> <span style="color:#000">java.time._</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">scala.concurrent._</span>
+<span style="color:#a90d91">import</span> <span style="color:#000">ExecutionContext.Implicits.global</span>
+<span style="color:#3f6e75">Future</span> <span style="color:#000">{</span>
+  <span style="color:#3f6e75">Thread</span><span style="color:#000">.</span><span style="color:#000">sleep</span><span style="color:#000">(</span><span style="color:#1c01ce">10000</span><span style="color:#000">)</span>
+  <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#c41a16">s&#34;This is the future at </span><span style="color:#c41a16">${</span><span style="color:#3f6e75">LocalTime</span><span style="color:#000">.</span><span style="color:#000">now</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#34;</span><span style="color:#000">)</span>
+<span style="color:#000">}</span>
+<span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#c41a16">s&#34;This is the present at </span><span style="color:#c41a16">${</span><span style="color:#3f6e75">LocalTime</span><span style="color:#000">.</span><span style="color:#000">now</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#34;</span><span style="color:#000">)</span>
 </code></pre></div><h2 id="executor-context">executor context</h2>
 <p>future need a new thread to execute it task. <code>import ExecutionContext.Implicits.global</code> is a implicit threadpool.</p>
 <h2 id="await-for-future-result">await for future result</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#008000">// for 10.seconds conversion
-</span><span style="color:#008000"></span><span style="color:#00f">import</span> scala.concurrent.duration._
-<span style="color:#00f">val</span> f <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { <span style="color:#2b91af">Thread</span>.sleep(10000); 42 }
-<span style="color:#00f">val</span> result <span style="color:#00f">=</span> <span style="color:#2b91af">Await</span>.result(f, <span style="color:#2b91af">Duration</span>.<span style="color:#2b91af">Inf</span>)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">// for 10.seconds conversion
+</span><span style="color:#177500"></span><span style="color:#a90d91">import</span> <span style="color:#000">scala.concurrent.duration._</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">f</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Future</span> <span style="color:#000">{</span> <span style="color:#3f6e75">Thread</span><span style="color:#000">.</span><span style="color:#000">sleep</span><span style="color:#000">(</span><span style="color:#1c01ce">10000</span><span style="color:#000">);</span> <span style="color:#1c01ce">42</span> <span style="color:#000">}</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">result</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Await</span><span style="color:#000">.</span><span style="color:#000">result</span><span style="color:#000">(</span><span style="color:#000">f</span><span style="color:#000">,</span> <span style="color:#3f6e75">Duration</span><span style="color:#000">.</span><span style="color:#3f6e75">Inf</span><span style="color:#000">)</span>
 
-<span style="color:#008000">// if f throw exception, it will rethrow to Await.result
-</span><span style="color:#008000">// use ready() solve this
-</span><span style="color:#008000"></span><span style="color:#00f">val</span> f <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { ... }
-<span style="color:#2b91af">Await</span>.ready(f, 10.seconds)
-<span style="color:#00f">val</span> <span style="color:#2b91af">Some</span>(t) <span style="color:#00f">=</span> f.value
-<span style="color:#008000">// The f.value method returns an Option[Try[T]], 
-</span><span style="color:#008000">// which is None when the future is not completed
-</span><span style="color:#008000">// and Some(t) when it is is
-</span><span style="color:#008000"></span>
-<span style="color:#008000">// t is Try type instance
-</span><span style="color:#008000">// A Try[T] instance is either a Success(v), where v is a value of type T or a Failure(ex)
-</span><span style="color:#008000"></span><span style="color:#00f">val</span> t <span style="color:#00f">=</span> <span style="color:#2b91af">Some</span>(t).get
-t <span style="color:#00f">match</span> {
-<span style="color:#00f">case</span> <span style="color:#2b91af">Success</span>(v) <span style="color:#00f">=&gt;</span> println(<span style="color:#a31515">s&#34;The answer is </span><span style="color:#a31515">$v</span><span style="color:#a31515">&#34;</span>)
-<span style="color:#00f">case</span> <span style="color:#2b91af">Failure</span>(ex) <span style="color:#00f">=&gt;</span> println(ex.getMessage)
-}
-<span style="color:#008000">// or
-</span><span style="color:#008000"></span><span style="color:#00f">if</span> (t.isSuccess) println(<span style="color:#a31515">s&#34;The answer is </span><span style="color:#a31515">${</span>t.get<span style="color:#a31515">}</span><span style="color:#a31515">&#34;</span>)
+<span style="color:#177500">// if f throw exception, it will rethrow to Await.result
+</span><span style="color:#177500">// use ready() solve this
+</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">f</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Future</span> <span style="color:#000">{</span> <span style="color:#000">...</span> <span style="color:#000">}</span>
+<span style="color:#3f6e75">Await</span><span style="color:#000">.</span><span style="color:#000">ready</span><span style="color:#000">(</span><span style="color:#000">f</span><span style="color:#000">,</span> <span style="color:#1c01ce">10.</span><span style="color:#000">seconds</span><span style="color:#000">)</span>
+<span style="color:#a90d91">val</span> <span style="color:#3f6e75">Some</span><span style="color:#000">(</span><span style="color:#000">t</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">f</span><span style="color:#000">.</span><span style="color:#000">value</span>
+<span style="color:#177500">// The f.value method returns an Option[Try[T]], 
+</span><span style="color:#177500">// which is None when the future is not completed
+</span><span style="color:#177500">// and Some(t) when it is is
+</span><span style="color:#177500"></span>
+<span style="color:#177500">// t is Try type instance
+</span><span style="color:#177500">// A Try[T] instance is either a Success(v), where v is a value of type T or a Failure(ex)
+</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">t</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Some</span><span style="color:#000">(</span><span style="color:#000">t</span><span style="color:#000">).</span><span style="color:#000">get</span>
+<span style="color:#000">t</span> <span style="color:#a90d91">match</span> <span style="color:#000">{</span>
+<span style="color:#a90d91">case</span> <span style="color:#3f6e75">Success</span><span style="color:#000">(</span><span style="color:#000">v</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#c41a16">s&#34;The answer is </span><span style="color:#c41a16">$v</span><span style="color:#c41a16">&#34;</span><span style="color:#000">)</span>
+<span style="color:#a90d91">case</span> <span style="color:#3f6e75">Failure</span><span style="color:#000">(</span><span style="color:#000">ex</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#000">ex</span><span style="color:#000">.</span><span style="color:#000">getMessage</span><span style="color:#000">)</span>
+<span style="color:#000">}</span>
+<span style="color:#177500">// or
+</span><span style="color:#177500"></span><span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">t</span><span style="color:#000">.</span><span style="color:#000">isSuccess</span><span style="color:#000">)</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#c41a16">s&#34;The answer is </span><span style="color:#c41a16">${</span><span style="color:#000">t</span><span style="color:#000">.</span><span style="color:#000">get</span><span style="color:#c41a16">}</span><span style="color:#c41a16">&#34;</span><span style="color:#000">)</span>
 
 </code></pre></div><h2 id="callback">callback</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">val</span> f <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { <span style="color:#2b91af">Thread</span>.sleep(10000)
-  <span style="color:#00f">if</span> (random() &lt; 0.5) <span style="color:#00f">throw</span> <span style="color:#00f">new</span> <span style="color:#2b91af">Exception</span>
-  42
-}
-f.onComplete {
-  <span style="color:#00f">case</span> <span style="color:#2b91af">Success</span>(v) <span style="color:#00f">=&gt;</span> println(<span style="color:#a31515">s&#34;The answer is </span><span style="color:#a31515">$v</span><span style="color:#a31515">&#34;</span>)
-  <span style="color:#00f">case</span> <span style="color:#2b91af">Failure</span>(ex) <span style="color:#00f">=&gt;</span> println(ex.getMessage)
-}
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">val</span> <span style="color:#000">f</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Future</span> <span style="color:#000">{</span> <span style="color:#3f6e75">Thread</span><span style="color:#000">.</span><span style="color:#000">sleep</span><span style="color:#000">(</span><span style="color:#1c01ce">10000</span><span style="color:#000">)</span>
+  <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">random</span><span style="color:#000">()</span> <span style="color:#000">&lt;</span> <span style="color:#1c01ce">0.5</span><span style="color:#000">)</span> <span style="color:#a90d91">throw</span> <span style="color:#a90d91">new</span> <span style="color:#3f6e75">Exception</span>
+  <span style="color:#1c01ce">42</span>
+<span style="color:#000">}</span>
+<span style="color:#000">f</span><span style="color:#000">.</span><span style="color:#000">onComplete</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Success</span><span style="color:#000">(</span><span style="color:#000">v</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#c41a16">s&#34;The answer is </span><span style="color:#c41a16">$v</span><span style="color:#c41a16">&#34;</span><span style="color:#000">)</span>
+  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Failure</span><span style="color:#000">(</span><span style="color:#000">ex</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#000">ex</span><span style="color:#000">.</span><span style="color:#000">getMessage</span><span style="color:#000">)</span>
+<span style="color:#000">}</span>
 
 </code></pre></div><h2 id="callback-hell">callback hell</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#00f">val</span> future1 <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { getData1() }
-<span style="color:#00f">val</span> future2 <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { getData2() }
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">val</span> <span style="color:#000">future1</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Future</span> <span style="color:#000">{</span> <span style="color:#000">getData1</span><span style="color:#000">()</span> <span style="color:#000">}</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">future2</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Future</span> <span style="color:#000">{</span> <span style="color:#000">getData2</span><span style="color:#000">()</span> <span style="color:#000">}</span>
 
-future1 onComplete {
-  <span style="color:#00f">case</span> <span style="color:#2b91af">Success</span>(n1) <span style="color:#00f">=&gt;</span>
-    future2 onComplete {
-      <span style="color:#00f">case</span> <span style="color:#2b91af">Success</span>(n2) <span style="color:#00f">=&gt;</span> {
-        <span style="color:#00f">val</span> n <span style="color:#00f">=</span> n1 + n2
-        println(<span style="color:#a31515">s&#34;Result: </span><span style="color:#a31515">$n</span><span style="color:#a31515">&#34;</span>)
-      }
-      <span style="color:#00f">case</span> <span style="color:#2b91af">Failure</span>(ex) <span style="color:#00f">=&gt;</span> ...
-    }
-  <span style="color:#00f">case</span> <span style="color:#2b91af">Failure</span>(ex) <span style="color:#00f">=&gt;</span> ...
-}
+<span style="color:#000">future1</span> <span style="color:#000">onComplete</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Success</span><span style="color:#000">(</span><span style="color:#000">n1</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span>
+    <span style="color:#000">future2</span> <span style="color:#000">onComplete</span> <span style="color:#000">{</span>
+      <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Success</span><span style="color:#000">(</span><span style="color:#000">n2</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">{</span>
+        <span style="color:#a90d91">val</span> <span style="color:#000">n</span> <span style="color:#a90d91">=</span> <span style="color:#000">n1</span> <span style="color:#000">+</span> <span style="color:#000">n2</span>
+        <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#c41a16">s&#34;Result: </span><span style="color:#c41a16">$n</span><span style="color:#c41a16">&#34;</span><span style="color:#000">)</span>
+      <span style="color:#000">}</span>
+      <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Failure</span><span style="color:#000">(</span><span style="color:#000">ex</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">...</span>
+    <span style="color:#000">}</span>
+  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Failure</span><span style="color:#000">(</span><span style="color:#000">ex</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">...</span>
+<span style="color:#000">}</span>
 
-<span style="color:#008000">// improve
-</span><span style="color:#008000"></span><span style="color:#00f">val</span> future1 <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { getData1() }
-<span style="color:#00f">val</span> combined <span style="color:#00f">=</span> future1.map(n1 <span style="color:#00f">=&gt;</span> n1 + getData2())
+<span style="color:#177500">// improve
+</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">future1</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Future</span> <span style="color:#000">{</span> <span style="color:#000">getData1</span><span style="color:#000">()</span> <span style="color:#000">}</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">combined</span> <span style="color:#a90d91">=</span> <span style="color:#000">future1</span><span style="color:#000">.</span><span style="color:#000">map</span><span style="color:#000">(</span><span style="color:#000">n1</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">n1</span> <span style="color:#000">+</span> <span style="color:#000">getData2</span><span style="color:#000">())</span>
 
-<span style="color:#008000">// 
-</span><span style="color:#008000"></span><span style="color:#00f">val</span> future1 <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { getData1() }
-<span style="color:#00f">val</span> future2 <span style="color:#00f">=</span> <span style="color:#2b91af">Future</span> { getData2() }
-<span style="color:#00f">val</span> combined <span style="color:#00f">=</span> future1.map(n1 <span style="color:#00f">=&gt;</span> future2.map(n2 <span style="color:#00f">=&gt;</span> n1 + n2))
+<span style="color:#177500">// 
+</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">future1</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Future</span> <span style="color:#000">{</span> <span style="color:#000">getData1</span><span style="color:#000">()</span> <span style="color:#000">}</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">future2</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Future</span> <span style="color:#000">{</span> <span style="color:#000">getData2</span><span style="color:#000">()</span> <span style="color:#000">}</span>
+<span style="color:#a90d91">val</span> <span style="color:#000">combined</span> <span style="color:#a90d91">=</span> <span style="color:#000">future1</span><span style="color:#000">.</span><span style="color:#000">map</span><span style="color:#000">(</span><span style="color:#000">n1</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">future2</span><span style="color:#000">.</span><span style="color:#000">map</span><span style="color:#000">(</span><span style="color:#000">n2</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">n1</span> <span style="color:#000">+</span> <span style="color:#000">n2</span><span style="color:#000">))</span>
 
-<span style="color:#008000">// use for-yield
-</span><span style="color:#008000"></span>
-<span style="color:#00f">for</span> (
-  n1 <span style="color:#00f">&lt;-</span> future1
-  n2 <span style="color:#00f">&lt;-</span> future2
-) <span style="color:#00f">yield</span> n1+n2
+<span style="color:#177500">// use for-yield
+</span><span style="color:#177500"></span>
+<span style="color:#a90d91">for</span> <span style="color:#000">(</span>
+  <span style="color:#000">n1</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#000">future1</span>
+  <span style="color:#000">n2</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#000">future2</span>
+<span style="color:#000">)</span> <span style="color:#a90d91">yield</span> <span style="color:#000">n1</span><span style="color:#000">+</span><span style="color:#000">n2</span>
 
 </code></pre></div>
     </div>
@@ -362,12 +362,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -379,16 +380,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

@@ -162,7 +162,7 @@
     <i class="fa fa-eye"></i>
 </span>
 <span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">767 字 ~2分钟</span>
+<span class="leancloud-visitors-count">758 字 ~2分钟</span>
 </span>
       </div>
     </header>
@@ -185,46 +185,45 @@ Executor (java.util.concurrent)
 individual tasks and of the executor itself.
 <code>ScheduledExecutorService</code>, a subinterface of ExecutorService, supports future and/or periodic execution of tasks.</p>
 <h3 id="common-thread-pool-implements">common thread pool implements</h3>
-<p><code>ThreadPoolExecutor</code>是thread pool 最常用的实现。 一般通过<code>Executors</code>静态工厂方法来创建。</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#008000">//Executors.newFixedThreadPool
-</span><span style="color:#008000">//Executors.newCachedThreadPool
-</span><span style="color:#008000">//Executors.newSingleThreadExecutor
-</span><span style="color:#008000">//同样的，Executors还提供了ScheduledExecutorService的工具方法
-</span><span style="color:#008000">// Executors.newSingleThreadScheduledExecutor
-</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#008000">/**
-</span><span style="color:#008000"> * corePoolSize - 保留存活的线程个数
-</span><span style="color:#008000"> * maximumPoolSize - 最大线程个数
-</span><span style="color:#008000"> * keepAliveTime - 线程数超过corePoolSize时，空闲线程存活时间
-</span><span style="color:#008000"> * unit - keepAliveTime的单位，毫秒秒分等
-</span><span style="color:#008000"> * workQueue – 任务队列，只保存通过 execute()方法提交的 Runnable任务
-</span><span style="color:#008000"> * threadFactory – 给自己创建一个线程的工厂方法
-</span><span style="color:#008000"> * handler – 当线程池达到数量限制或者任务队列满了，对新任务提交的处理策略
-</span><span style="color:#008000"> */</span>
-<span style="color:#00f">class</span> <span style="color:#2b91af">ThreadPoolExecutor</span> {
-  <span style="color:#00f">public</span> ThreadPoolExecutor(<span style="color:#2b91af">int</span> corePoolSize,
-                            <span style="color:#2b91af">int</span> maximumPoolSize,
-                            <span style="color:#2b91af">long</span> keepAliveTime,
-                            TimeUnit unit,
-                            BlockingQueue&lt;Runnable&gt; workQueue,
-                            ThreadFactory threadFactory,
-                            RejectedExecutionHandler handler) {}
-}
+<p><code>ThreadPoolExecutor</code>是thread pool 最常用的实现. 一般通过<code>Executors</code>静态工厂方法来创建.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">//Executors.newFixedThreadPool
+</span><span style="color:#177500">//Executors.newCachedThreadPool
+</span><span style="color:#177500">//Executors.newSingleThreadExecutor
+</span><span style="color:#177500">//同样的,Executors还提供了ScheduledExecutorService的工具方法
+</span><span style="color:#177500">// Executors.newSingleThreadScheduledExecutor
+</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">/**
+</span><span style="color:#177500"> * corePoolSize - 保留存活的线程个数
+</span><span style="color:#177500"> * maximumPoolSize - 最大线程个数
+</span><span style="color:#177500"> * keepAliveTime - 线程数超过corePoolSize时,空闲线程存活时间
+</span><span style="color:#177500"> * unit - keepAliveTime的单位,毫秒秒分等
+</span><span style="color:#177500"> * workQueue – 任务队列,只保存通过 execute()方法提交的 Runnable任务
+</span><span style="color:#177500"> * threadFactory – 给自己创建一个线程的工厂方法
+</span><span style="color:#177500"> * handler – 当线程池达到数量限制或者任务队列满了,对新任务提交的处理策略
+</span><span style="color:#177500"> */</span>
+<span style="color:#a90d91">class</span> <span style="color:#3f6e75">ThreadPoolExecutor</span> <span style="color:#000">{</span>
+  <span style="color:#a90d91">public</span> <span style="color:#000">ThreadPoolExecutor</span><span style="color:#000">(</span><span style="color:#a90d91">int</span> <span style="color:#000">corePoolSize</span><span style="color:#000">,</span>
+                            <span style="color:#a90d91">int</span> <span style="color:#000">maximumPoolSize</span><span style="color:#000">,</span>
+                            <span style="color:#a90d91">long</span> <span style="color:#000">keepAliveTime</span><span style="color:#000">,</span>
+                            <span style="color:#000">TimeUnit</span> <span style="color:#000">unit</span><span style="color:#000">,</span>
+                            <span style="color:#000">BlockingQueue</span><span style="color:#000">&lt;</span><span style="color:#000">Runnable</span><span style="color:#000">&gt;</span> <span style="color:#000">workQueue</span><span style="color:#000">,</span>
+                            <span style="color:#000">ThreadFactory</span> <span style="color:#000">threadFactory</span><span style="color:#000">,</span>
+                            <span style="color:#000">RejectedExecutionHandler</span> <span style="color:#000">handler</span><span style="color:#000">)</span> <span style="color:#000">{}</span>
+<span style="color:#000">}</span>
 </code></pre></div><p>JDK默认的拒绝策略RejectedExecutionHandler有：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#008000">/**
-</span><span style="color:#008000"> * ThreadPoolExecutor.AbortPolicy - 默认的handler，抛出一个RejectedExecutionException
-</span><span style="color:#008000"> * ThreadPoolExecutor.CallerRunsPolicy - 提交任务的线程自己执行这个任务
-</span><span style="color:#008000"> * ThreadPoolExecutor.DiscardPolicy - 抛弃这个任务
-</span><span style="color:#008000"> * ThreadPoolExecutor.DiscardOldestPolicy - 抛弃任务队列中最早提交上来的任务，然后尝试重新提交当前这个任务
-</span><span style="color:#008000">  */</span>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">/**
+</span><span style="color:#177500"> * ThreadPoolExecutor.AbortPolicy - 默认的handler,抛出一个RejectedExecutionException
+</span><span style="color:#177500"> * ThreadPoolExecutor.CallerRunsPolicy - 提交任务的线程自己执行这个任务
+</span><span style="color:#177500"> * ThreadPoolExecutor.DiscardPolicy - 抛弃这个任务
+</span><span style="color:#177500"> * ThreadPoolExecutor.DiscardOldestPolicy - 抛弃任务队列中最早提交上来的任务,然后尝试重新提交当前这个任务
+</span><span style="color:#177500">  */</span>
 
 </code></pre></div><h3 id="任务提交执行流程">任务提交执行流程</h3>
 <p><img src="https://zhimoe.github.io/javathreadpool/threadpool.svg" alt="任务提交执行流程"></p>
 <h3 id="forkjoin-框架">fork/join 框架</h3>
-<p>fork/join和上面ThreadPoolExecutor的区别在于使用了任务窃取算法，工作线程完成自己的任务后可以从其他线程偷取任务，提高整体的任务效率。
-核心是一个<code>ForkJoinPool</code> class和一个扩展的<code>AbstractExecutorService</code>。   执行<code>ForkJoinTask</code> 任务。
-在JDK8中有个<code>java.util.Arrays.parallelSort()</code>使用的就是 fork/join。</p>
-<p>当然，<a href="http://coopsoft.com/ar/CalamityArticle.html">不是所有人都满意JDK7引入的Fork/Join框架</a>.</p>
-
+<p>fork/join和上面ThreadPoolExecutor的区别在于使用了任务窃取算法,工作线程完成自己的任务后可以从其他线程偷取任务,提高整体的任务效率.
+核心是一个<code>ForkJoinPool</code> class和一个扩展的<code>AbstractExecutorService</code>.   执行<code>ForkJoinTask</code> 任务.
+在JDK8中有个<code>java.util.Arrays.parallelSort()</code>使用的就是 fork/join.</p>
+<p>当然,<a href="http://coopsoft.com/ar/CalamityArticle.html">不是所有人都满意JDK7引入的Fork/Join框架</a>.</p>
     </div>
     <footer class="post-footer">
      
@@ -334,12 +333,13 @@ var disqus_config = function () {
     <div class="site-state-item site-state-tags">
         <a href="https://zhimoe.github.io/tags/">
          
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">38</span>
         
         <span class="site-state-item-name">标签</span>
         </a>
     </div>
 </nav>
+      
       
 <div class="links-of-author motion-element">
     
@@ -351,16 +351,9 @@ var disqus_config = function () {
         </span>
     
         <span class="links-of-author-item">
-        <a href="https://twitter.com/_zhimoe" target="_blank" title="twitter">
-            <i class="fa fa-fw fa-twitter"></i>
-            twitter
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="知乎">
+        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
             <i class="fa fa-fw fa-globe"></i>
-            知乎
+            ZhiHu
         </a>
         </span>
     

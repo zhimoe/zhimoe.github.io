@@ -17,7 +17,8 @@
       <pubDate>Wed, 24 Jul 2019 07:58:12 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/devops-maturity-model-checklist/</guid>
-      <description>之前听说过AWS的软件工程师是需要自己写需求说明书,前后端代码,测试和上线。还有ins的工程师可以做到python的代码提交如果合并到主分支后可以在一个小时内自动部署到生产被用户使用到,感觉这个非常神奇。如果需要做到这个,对组织级可个人都有</description>
+      <description>&lt;p&gt;之前听说过AWS的软件工程师是需要自己写需求说明书,前后端代码,测试和上线.还有instagram的工程师可以做到python的代码提交如果合并到主分支后可以在&lt;a href=&#34;https://instagram-engineering.com/static-analysis-at-scale-an-instagram-story-8f498ab71a0c&#34;&gt;一个小时内&lt;/a&gt;自动部署到生产被用户使用到,感觉这个非常神奇.如果需要做到这个,对组织级与个人都有极高的devops能力成熟度要求.
+上周代表CRM项目通过了信通院的DevOps三级认证.感觉提升的空间很大. 专门看了一下成熟度模型的标准.&lt;/p&gt;</description>
     </item>
     
   </channel>

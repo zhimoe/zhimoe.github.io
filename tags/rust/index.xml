@@ -18,7 +18,7 @@
       
       <guid>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md&#34;&gt;原文Tour of Rust&amp;rsquo;s Standard Library Traits&lt;/a&gt;
-关于rust trait非常好的介绍，比rust book详细，系统。&lt;/p&gt;</description>
+关于rust trait非常好的介绍,比rust book详细,系统.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,7 +27,18 @@
       <pubDate>Sun, 20 Sep 2020 20:30:41 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/type-in-rust/</guid>
-      <description>&lt;p&gt;Associated Type and generic diff in rust&lt;/p&gt;</description>
+      <description>&lt;p&gt;Associated Type and generic diff in rust&lt;/p&gt;
+&lt;h2 id=&#34;type-outside-impl&#34;&gt;type outside impl&lt;/h2&gt;
+&lt;p&gt;a &lt;code&gt;type Foo = Bar&lt;/code&gt; outside is just type alias. most used in generic type.&lt;/p&gt;
+&lt;p&gt;like:&lt;code&gt; type Thunk = Box&amp;lt;dyn Fn() + Send + &#39;static&amp;gt;;&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;type-inside-impl&#34;&gt;type inside impl&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;type&lt;/code&gt; in an &lt;code&gt;impl&lt;/code&gt; defines an associated type. associated type可以理解为一个类型占位符,在trait的方法声明中使用.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;pub&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;trait&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Iterator&lt;/span&gt; {
+    &lt;span style=&#34;color:#a90d91&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Item&lt;/span&gt;; &lt;span style=&#34;color:#177500&#34;&gt;// or type T: Display;
+&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;
+    &lt;span style=&#34;color:#a90d91&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;next&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;mut&lt;/span&gt; &lt;span style=&#34;color:#5b269a&#34;&gt;self&lt;/span&gt;) -&amp;gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Option&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Self&lt;/span&gt;::&lt;span style=&#34;color:#000&#34;&gt;Item&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;gt;&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -36,8 +47,18 @@
       <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://zhimoe.github.io/post/mdict-web/</guid>
-      <description>&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典。特别适合部署在内网中学习使用或者给孩子学习使用。
-python版本增加了一个机器学习模型翻译。rust版本也有模型，但是还没来得及加。&lt;/p&gt;</description>
+      <description>&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
+python版本增加了一个机器学习模型翻译.rust版本也有模型,但是还没来得及加.&lt;/p&gt;
+&lt;h3 id=&#34;mdict-py&#34;&gt;mdict-py&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/zhimoe/mdict-py&#34;&gt;mdict-py源码&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.&lt;/p&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;自动识别中英文选择对应mdx词典,目前英文词典包含牛津8和朗文4,中文词典包含汉语词典3&lt;/li&gt;
+&lt;li&gt;英文尝试拼写纠错功能,动词时态纠错&lt;/li&gt;
+&lt;li&gt;如果配置了中文会尝试搜索朗文的例句,模糊搜索,对于有英语基础的同学很有用&lt;/li&gt;
+&lt;li&gt;如果配置了AI模型,会使用机器学习模型翻译,翻译结果比较粗糙,但是可以参考&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
     <item>
@@ -55,7 +76,10 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
       <pubDate>Mon, 03 Feb 2020 11:30:55 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/dockerfile-best-practices/</guid>
-      <description>&lt;p&gt;记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p&gt;</description>
+      <description>&lt;p&gt;记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p&gt;
+&lt;h2 id=&#34;spring-boot应用dockerfile&#34;&gt;spring boot应用Dockerfile&lt;/h2&gt;
+&lt;p&gt;spring.io提供了一个boot应用的&lt;a href=&#34;https://spring.io/guides/topicals/spring-boot-docker&#34;&gt;Dockerfile&lt;/a&gt;指导.
+不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般企业项目中这么做显然不规范,直接使用maven基础镜像更合理.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -64,7 +88,12 @@ python版本增加了一个机器学习模型翻译。rust版本也有模型，�
       <pubDate>Sun, 12 Jan 2020 20:03:33 +0800</pubDate>
       
       <guid>https://zhimoe.github.io/post/rust-packages-crates-mod/</guid>
-      <description>&lt;p&gt;初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.&lt;/p&gt;</description>
+      <description>&lt;p&gt;初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.&lt;/p&gt;
+&lt;h2 id=&#34;packages-crates-and-modules&#34;&gt;packages, crates and modules&lt;/h2&gt;
+&lt;p&gt;A Cargo.toml is a package. and must have a package name, like&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;[&lt;span style=&#34;color:#000&#34;&gt;package&lt;/span&gt;]
+&lt;span style=&#34;color:#000&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;actix-web&amp;#34;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>
