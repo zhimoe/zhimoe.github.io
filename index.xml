@@ -1,343 +1,125 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>zhimoe</title>
-    <link>https://zhimoe.github.io/</link>
-    <description>Recent content on zhimoe</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Sun, 09 Apr 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://zhimoe.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Scala3 缩进语法总结表</title>
-      <link>https://zhimoe.github.io/post/scala3-indent-syntax/</link>
-      <pubDate>Wed, 02 Feb 2022 10:19:05 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/scala3-indent-syntax/</guid>
-      <description>&lt;p&gt;Scala 3 在语法上面新增了一种Python的缩进格式,两种格式都可以使用. 但是目前部分情况还是需要使用括号.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>zhimoe</title><link>https://zhimoe.github.io/</link><description>Recent content on zhimoe</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Sun, 09 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://zhimoe.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Scala3 缩进语法总结表</title><link>https://zhimoe.github.io/post/scala3-indent-syntax/</link><pubDate>Wed, 02 Feb 2022 10:19:05 +0800</pubDate><guid>https://zhimoe.github.io/post/scala3-indent-syntax/</guid><description>&lt;p>Scala 3 在语法上面新增了一种Python的缩进格式,两种格式都可以使用. 但是目前部分情况还是需要使用括号.
 个人对新语法是支持的. 缩进可以极大地提供代码的可读性和整洁, 最大的体会就是SparkStreaming的rdd处理代码,新手容易写出十几个}括号嵌套代码.
-当然缺点是缩进不利于代码复制和格式化.&lt;/p&gt;
-&lt;p&gt;下面是书本上关于Scala3的语法对比. 注意,两个语法格式都是支持的. for和if去掉小括号真的是太棒了.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>使用speed-measure-webpack-plugin和Happypack优化webpack打包速度</title>
-      <link>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</link>
-      <pubDate>Sun, 12 Sep 2021 18:02:10 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</guid>
-      <description>&lt;h3 id=&#34;问题&#34;&gt;问题&lt;/h3&gt;
-&lt;p&gt;一个ionic app本地编译需要8分钟,提交到流水线编译耗时需要近40分钟,从日志看到webpack打包步骤耗时最严重.&lt;/p&gt;
-&lt;h3 id=&#34;排查与解决&#34;&gt;排查与解决&lt;/h3&gt;
-&lt;p&gt;初步判断是流水线使用的容器CPU性能较弱或者存储mount性能导致的.找流水线同事支持配置了一个纯内存编译流水线,发现还是很慢.
-接下来使用webpack的插件&lt;a href=&#34;https://www.npmjs.com/package/speed-measure-webpack-plugin&#34;&gt;speed-measure-webpack-plugin&lt;/a&gt;监控性能.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>在githook中调用nodejs脚本</title>
-      <link>https://zhimoe.github.io/post/nodejs-as-githook/</link>
-      <pubDate>Sun, 22 Aug 2021 21:55:06 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/nodejs-as-githook/</guid>
-      <description>&lt;p&gt;如何在git hook中调用nodejs脚本.主要踩坑在于不知道如何在bash中获取node脚本返回值,搜了好大一圈.&lt;/p&gt;
-&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
-&lt;p&gt;微服务模式开发中,每个小组维护自己的应用,通过一个nginx入口反向代理所有的子应用,向用户开放一个站点.nginx应用中需要维护各个子应用的代理,即ng.conf中的location.
+当然缺点是缩进不利于代码复制和格式化.&lt;/p>
+&lt;p>下面是书本上关于Scala3的语法对比. 注意,两个语法格式都是支持的. for和if去掉小括号真的是太棒了.&lt;/p></description></item><item><title>使用speed-measure-webpack-plugin和Happypack优化webpack打包速度</title><link>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</link><pubDate>Sun, 12 Sep 2021 18:02:10 +0800</pubDate><guid>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</guid><description>&lt;h3 id="问题">问题&lt;/h3>
+&lt;p>一个ionic app本地编译需要8分钟,提交到流水线编译耗时需要近40分钟,从日志看到webpack打包步骤耗时最严重.&lt;/p>
+&lt;h3 id="排查与解决">排查与解决&lt;/h3>
+&lt;p>初步判断是流水线使用的容器CPU性能较弱或者存储mount性能导致的.找流水线同事支持配置了一个纯内存编译流水线,发现还是很慢.
+接下来使用webpack的插件&lt;a href="https://www.npmjs.com/package/speed-measure-webpack-plugin">speed-measure-webpack-plugin&lt;/a>监控性能.&lt;/p></description></item><item><title>在githook中调用nodejs脚本</title><link>https://zhimoe.github.io/post/nodejs-as-githook/</link><pubDate>Sun, 22 Aug 2021 21:55:06 +0800</pubDate><guid>https://zhimoe.github.io/post/nodejs-as-githook/</guid><description>&lt;p>如何在git hook中调用nodejs脚本.主要踩坑在于不知道如何在bash中获取node脚本返回值,搜了好大一圈.&lt;/p>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>微服务模式开发中,每个小组维护自己的应用,通过一个nginx入口反向代理所有的子应用,向用户开放一个站点.nginx应用中需要维护各个子应用的代理,即ng.conf中的location.
 此外,一个应用需要配置DEV,ST,UAT,PRD四个环境的location.目前的做法是www/ngconf/目录下面分为dev、st、uat、prd四个文件夹,在文件夹内部每个小组各自维护一个conf文件.
 每增加一个应用,需要在四个文件夹中自己小组的配置文件添加配置.随着应用越来越多,以及人员流动,会发生不同文件配置相同的location entry.
-例如A应用上线一个功能需要依赖B应用,但是新人不知道B已经配置过了,所以又重复添加了一个,导致启动报错.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Typescript Comprehensive Cheatsheet</title>
-      <link>https://zhimoe.github.io/post/ts-comprehensive-notes/</link>
-      <pubDate>Sat, 14 Aug 2021 22:06:15 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/ts-comprehensive-notes/</guid>
-      <description>&lt;p&gt;一份详尽的ts语法笔记. 这周在看组里前端同事的代码,感觉完全还是在写JS,以我有限的JS/TS知识,也知道可以写得更加规范一点.但是一上手开始改,还真是手生.又重新过了一遍文档,做了一点笔记.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>开源与心理健康[翻译]</title>
-      <link>https://zhimoe.github.io/post/open-source-mental-health/</link>
-      <pubDate>Thu, 08 Jul 2021 21:29:57 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/open-source-mental-health/</guid>
-      <description>&lt;p&gt;我一位亲爱的朋友,也是高产的Redox OS贡献者jD91mZM2在2021年3月去世了,年仅18岁.他参与了2018、2019和2020年的Redox OS夏季代码活动.他在开发Redox OS的各个方面都做出了贡献,从内核,到relibc,到移植程序.他的工作详细介绍可以在&lt;a href=&#34;https://www.redox-os.org/news/&#34;&gt;Redox OS新闻&lt;/a&gt;中署名为jD91mZM2的帖子看到.
-这个帖子可能是黑暗的、深沉的、沉重的、原始的、未经编辑的.如果你和我们中的许多人一样有自己的问题,请随时与我联系：https://twitter.com/jeremy_soller.在这种情况下,我不建议阅读这篇文章的其他内容.我的结论是,开源要成为可持续发展,还有大量的工作要做,而其中很大一部分是对社区及其成员的健康的关怀.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>买房装修总结</title>
-      <link>https://zhimoe.github.io/post/hangzhou-house-tip/</link>
-      <pubDate>Sun, 09 May 2021 09:05:32 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/hangzhou-house-tip/</guid>
-      <description>&lt;p&gt;简单记录一下自己买房和装修的一点经验.&lt;/p&gt;
-&lt;h2 id=&#34;买房&#34;&gt;买房&lt;/h2&gt;
-&lt;p&gt;自己买房比较离奇,杭州开始实行摇号的半年后,端午节在老家刷微信,看到有个红盘有6000多人报名,感觉买房都要开始碰运气了想到了车牌的悲剧,于是返杭后下车就去那个楼盘看了一下,小区旁边在修地铁,看了几眼沙盘,第二天就借钱登记摇号了,没想到第一次就中了.现在回想起就做梦一样.网上关于如何买房的经验特别多,例如&lt;a href=&#34;https://github.com/houshanren/hangzhou_house_knowledge&#34;&gt;杭州房产知识扫盲&lt;/a&gt;,&lt;a href=&#34;https://github.com/ayuer/shanghai_house_knowledge&#34;&gt;上海买房&lt;/a&gt;等等. 这些我都没用上. 这里说说自己的一些经验和踩坑.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Tour of Rusts Standard Library Traits</title>
-      <link>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</link>
-      <pubDate>Sun, 11 Apr 2021 21:47:02 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md&#34;&gt;原文Tour of Rust&amp;rsquo;s Standard Library Traits&lt;/a&gt;
-关于rust trait非常好的介绍,比rust book详细,系统.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Py Tips for Impatient Dev</title>
-      <link>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</link>
-      <pubDate>Sun, 31 Jan 2021 21:45:45 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</guid>
-      <description>&lt;h2 id=&#34;tricks&#34;&gt;tricks&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;python的dict中关于equal和hash计算方式会有意外的效果&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;[&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;no&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#5b269a&#34;&gt;True&lt;/span&gt;] &lt;span style=&#34;color:#177500&#34;&gt;# output?&lt;/span&gt;
-{&lt;span style=&#34;color:#5b269a&#34;&gt;True&lt;/span&gt;: &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;yes&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;no&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;1.0&lt;/span&gt;: &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;maybe&amp;#39;&lt;/span&gt;} &lt;span style=&#34;color:#177500&#34;&gt;# output?&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;“布尔类型是整数类型的子类型,布尔值在几乎所有环境中的行为都类似于值 0 和 1,但在转换为字符串时,分别得到的是字符串 False 或 True.”&lt;br&gt;
-&amp;ndash; The Standard Type Hierarchy&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;由于True,1, 1.0的__eq__和__hash__都一样,所以出现了神奇的结果.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>如何实现一个拼写检查器[翻译]</title>
-      <link>https://zhimoe.github.io/post/spell-correct/</link>
-      <pubDate>Sun, 25 Oct 2020 20:01:27 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/spell-correct/</guid>
-      <description>&lt;p&gt;谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文&lt;a href=&#34;https://norvig.com/spell-correct.html&#34;&gt;How to Write a Spelling Corrector&lt;/a&gt;.
+例如A应用上线一个功能需要依赖B应用,但是新人不知道B已经配置过了,所以又重复添加了一个,导致启动报错.&lt;/p></description></item><item><title>Typescript Comprehensive Cheatsheet</title><link>https://zhimoe.github.io/post/ts-comprehensive-notes/</link><pubDate>Sat, 14 Aug 2021 22:06:15 +0800</pubDate><guid>https://zhimoe.github.io/post/ts-comprehensive-notes/</guid><description>&lt;p>一份详尽的ts语法笔记. 这周在看组里前端同事的代码,感觉完全还是在写JS,以我有限的JS/TS知识,也知道可以写得更加规范一点.但是一上手开始改,还真是手生.又重新过了一遍文档,做了一点笔记.&lt;/p></description></item><item><title>开源与心理健康[翻译]</title><link>https://zhimoe.github.io/post/open-source-mental-health/</link><pubDate>Thu, 08 Jul 2021 21:29:57 +0800</pubDate><guid>https://zhimoe.github.io/post/open-source-mental-health/</guid><description>&lt;p>我一位亲爱的朋友,也是高产的Redox OS贡献者jD91mZM2在2021年3月去世了,年仅18岁.他参与了2018、2019和2020年的Redox OS夏季代码活动.他在开发Redox OS的各个方面都做出了贡献,从内核,到relibc,到移植程序.他的工作详细介绍可以在&lt;a href="https://www.redox-os.org/news/">Redox OS新闻&lt;/a>中署名为jD91mZM2的帖子看到.
+这个帖子可能是黑暗的、深沉的、沉重的、原始的、未经编辑的.如果你和我们中的许多人一样有自己的问题,请随时与我联系：https://twitter.com/jeremy_soller.在这种情况下,我不建议阅读这篇文章的其他内容.我的结论是,开源要成为可持续发展,还有大量的工作要做,而其中很大一部分是对社区及其成员的健康的关怀.&lt;/p></description></item><item><title>买房装修总结</title><link>https://zhimoe.github.io/post/hangzhou-house-tip/</link><pubDate>Sun, 09 May 2021 09:05:32 +0800</pubDate><guid>https://zhimoe.github.io/post/hangzhou-house-tip/</guid><description>&lt;p>简单记录一下自己买房和装修的一点经验.&lt;/p>
+&lt;h2 id="买房">买房&lt;/h2>
+&lt;p>自己买房比较离奇,杭州开始实行摇号的半年后,端午节在老家刷微信,看到有个红盘有6000多人报名,感觉买房都要开始碰运气了想到了车牌的悲剧,于是返杭后下车就去那个楼盘看了一下,小区旁边在修地铁,看了几眼沙盘,第二天就借钱登记摇号了,没想到第一次就中了.现在回想起就做梦一样.网上关于如何买房的经验特别多,例如&lt;a href="https://github.com/houshanren/hangzhou_house_knowledge">杭州房产知识扫盲&lt;/a>,&lt;a href="https://github.com/ayuer/shanghai_house_knowledge">上海买房&lt;/a>等等. 这些我都没用上. 这里说说自己的一些经验和踩坑.&lt;/p></description></item><item><title>Tour of Rusts Standard Library Traits</title><link>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</link><pubDate>Sun, 11 Apr 2021 21:47:02 +0800</pubDate><guid>https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/</guid><description>&lt;p>&lt;a href="https://github.com/pretzelhammer/rust-blog/blob/master/posts/tour-of-rusts-standard-library-traits.md">原文Tour of Rust&amp;rsquo;s Standard Library Traits&lt;/a>
+关于rust trait非常好的介绍,比rust book详细,系统.&lt;/p></description></item><item><title>Py Tips for Impatient Dev</title><link>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</link><pubDate>Sun, 31 Jan 2021 21:45:45 +0800</pubDate><guid>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</guid><description>&lt;h2 id="tricks">tricks&lt;/h2>
+&lt;h3 id="python的dict中关于equal和hash计算方式会有意外的效果">python的dict中关于equal和hash计算方式会有意外的效果&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-python" data-lang="python">[&lt;span style="color:#c41a16">&amp;#39;no&amp;#39;&lt;/span>, &lt;span style="color:#c41a16">&amp;#39;yes&amp;#39;&lt;/span>][&lt;span style="color:#5b269a">True&lt;/span>] &lt;span style="color:#177500"># output?&lt;/span>
+{&lt;span style="color:#5b269a">True&lt;/span>: &lt;span style="color:#c41a16">&amp;#39;yes&amp;#39;&lt;/span>, &lt;span style="color:#1c01ce">1&lt;/span>: &lt;span style="color:#c41a16">&amp;#39;no&amp;#39;&lt;/span>, &lt;span style="color:#1c01ce">1.0&lt;/span>: &lt;span style="color:#c41a16">&amp;#39;maybe&amp;#39;&lt;/span>} &lt;span style="color:#177500"># output?&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>“布尔类型是整数类型的子类型,布尔值在几乎所有环境中的行为都类似于值 0 和 1,但在转换为字符串时,分别得到的是字符串 False 或 True.”&lt;br>
+&amp;ndash; The Standard Type Hierarchy&lt;/p>
+&lt;/blockquote>
+&lt;p>由于True,1, 1.0的__eq__和__hash__都一样,所以出现了神奇的结果.&lt;/p></description></item><item><title>如何实现一个拼写检查器[翻译]</title><link>https://zhimoe.github.io/post/spell-correct/</link><pubDate>Sun, 25 Oct 2020 20:01:27 +0800</pubDate><guid>https://zhimoe.github.io/post/spell-correct/</guid><description>&lt;p>谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文&lt;a href="https://norvig.com/spell-correct.html">How to Write a Spelling Corrector&lt;/a>.
 上面的链接已经是16年更新过了,程序也更新到了python3.
-中文版的翻译 &lt;a href=&#34;https://blog.csdn.net/suixinsuiyuan33/article/details/69215082&#34;&gt;如何实现一个拼写纠正器&lt;/a&gt; 还是基于07年版本的.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Associated Type in Rust</title>
-      <link>https://zhimoe.github.io/post/type-in-rust/</link>
-      <pubDate>Sun, 20 Sep 2020 20:30:41 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/type-in-rust/</guid>
-      <description>&lt;p&gt;Associated Type and generic diff in rust&lt;/p&gt;
-&lt;h2 id=&#34;type-outside-impl&#34;&gt;type outside impl&lt;/h2&gt;
-&lt;p&gt;a &lt;code&gt;type Foo = Bar&lt;/code&gt; outside is just type alias. most used in generic type.&lt;/p&gt;
-&lt;p&gt;like:&lt;code&gt; type Thunk = Box&amp;lt;dyn Fn() + Send + &#39;static&amp;gt;;&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&#34;type-inside-impl&#34;&gt;type inside impl&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;type&lt;/code&gt; in an &lt;code&gt;impl&lt;/code&gt; defines an associated type. associated type可以理解为一个类型占位符,在trait的方法声明中使用.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-rust&#34; data-lang=&#34;rust&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;pub&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;trait&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Iterator&lt;/span&gt; {
-    &lt;span style=&#34;color:#a90d91&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Item&lt;/span&gt;; &lt;span style=&#34;color:#177500&#34;&gt;// or type T: Display;
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;next&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;mut&lt;/span&gt; &lt;span style=&#34;color:#5b269a&#34;&gt;self&lt;/span&gt;) -&amp;gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Option&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Self&lt;/span&gt;::&lt;span style=&#34;color:#000&#34;&gt;Item&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;gt;&lt;/span&gt;;
+中文版的翻译 &lt;a href="https://blog.csdn.net/suixinsuiyuan33/article/details/69215082">如何实现一个拼写纠正器&lt;/a> 还是基于07年版本的.&lt;/p></description></item><item><title>Associated Type in Rust</title><link>https://zhimoe.github.io/post/type-in-rust/</link><pubDate>Sun, 20 Sep 2020 20:30:41 +0800</pubDate><guid>https://zhimoe.github.io/post/type-in-rust/</guid><description>&lt;p>Associated Type and generic diff in rust&lt;/p>
+&lt;h2 id="type-outside-impl">type outside impl&lt;/h2>
+&lt;p>a &lt;code>type Foo = Bar&lt;/code> outside is just type alias. most used in generic type.&lt;/p>
+&lt;p>like:&lt;code> type Thunk = Box&amp;lt;dyn Fn() + Send + 'static&amp;gt;;&lt;/code>&lt;/p>
+&lt;h2 id="type-inside-impl">type inside impl&lt;/h2>
+&lt;p>&lt;code>type&lt;/code> in an &lt;code>impl&lt;/code> defines an associated type. associated type可以理解为一个类型占位符,在trait的方法声明中使用.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-rust" data-lang="rust">&lt;span style="color:#a90d91">pub&lt;/span> &lt;span style="color:#a90d91">trait&lt;/span> &lt;span style="color:#a90d91">Iterator&lt;/span> {
+&lt;span style="color:#a90d91">type&lt;/span> &lt;span style="color:#3f6e75">Item&lt;/span>; &lt;span style="color:#177500">// or type T: Display;
+&lt;/span>&lt;span style="color:#177500">&lt;/span>
+&lt;span style="color:#a90d91">fn&lt;/span> &lt;span style="color:#000">next&lt;/span>(&lt;span style="color:#000">&amp;amp;&lt;/span>&lt;span style="color:#a90d91">mut&lt;/span> &lt;span style="color:#5b269a">self&lt;/span>) -&amp;gt; &lt;span style="color:#a90d91">Option&lt;/span>&lt;span style="color:#000">&amp;lt;&lt;/span>&lt;span style="color:#000">Self&lt;/span>::&lt;span style="color:#000">Item&lt;/span>&lt;span style="color:#000">&amp;gt;&lt;/span>;
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>最佳编程字体</title>
-      <link>https://zhimoe.github.io/post/programmingfonts/</link>
-      <pubDate>Fri, 21 Aug 2020 22:02:50 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/programmingfonts/</guid>
-      <description>&lt;p&gt;个人对于编程字体有一点点洁癖.在尝试十几个字体后,终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code&lt;/p&gt;
-&lt;h3 id=&#34;aurulent&#34;&gt;Aurulent&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/zhimoe/programming-fonts&#34;&gt;字体下载&lt;/a&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;小写字母来自Aurulent Sans Mono,其他基于Fira Code.Aurulent Sans Mono风格和SourceCodePro非常像,胖宽型,大开大合,简单却有具有设计.特别是字符g,a,p,y,s.&lt;/li&gt;
-&lt;li&gt;字母r的思路来自&lt;a href=&#34;https://www.programmingfonts.org/#gintronic&#34;&gt;gintronic&lt;/a&gt;. 优点是在低分辨率屏,r的末尾不会被hint只剩下尖尖.&lt;/li&gt;
-&lt;li&gt;问号？也来自gintronic字体,非常漂亮.&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    
-    <item>
-      <title>如何正确地系鞋带</title>
-      <link>https://zhimoe.github.io/post/how-to-tie-shoelace/</link>
-      <pubDate>Fri, 21 Aug 2020 21:42:38 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/how-to-tie-shoelace/</guid>
-      <description>&lt;p&gt;Ian安全结是登山系鞋带的首选,它越穿越紧,不会松开.解鞋带轻轻一拉即开. 而且对称美观,上手简单.值得每个人花十分钟学习.
-本篇不仅给出Ian安全结示意图,还告诉大家如何让安全结和蝴蝶结水平对称,尽可能美观的秘诀.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java 8 Lambda笔记</title>
-      <link>https://zhimoe.github.io/post/java-lambda/</link>
-      <pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-lambda/</guid>
-      <description>&lt;h3 id=&#34;问题&#34;&gt;问题&lt;/h3&gt;
-&lt;p&gt;Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;// 监听器接口
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;ActionListener&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;actionPerformed&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ActionEvent&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;// 使用匿名类传递一个行为
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;button&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;addActionListener&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ActionListener&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(){&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;actionPerformed&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Event&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;){&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;button clicked&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;});&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>基于MDX的web词典</title>
-      <link>https://zhimoe.github.io/post/mdict-web/</link>
-      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/mdict-web/</guid>
-      <description>&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
-python版本增加了一个机器学习模型翻译.rust版本也有模型,但是还没来得及加.&lt;/p&gt;
-&lt;h3 id=&#34;mdict-py&#34;&gt;mdict-py&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/zhimoe/mdict-py&#34;&gt;mdict-py源码&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.&lt;/p&gt;
-&lt;p&gt;特点：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;自动识别中英文选择对应mdx词典,目前英文词典包含牛津8和朗文4,中文词典包含汉语词典3&lt;/li&gt;
-&lt;li&gt;英文尝试拼写纠错功能,动词时态纠错&lt;/li&gt;
-&lt;li&gt;如果配置了中文会尝试搜索朗文的例句,模糊搜索,对于有英语基础的同学很有用&lt;/li&gt;
-&lt;li&gt;如果配置了AI模型,会使用机器学习模型翻译,翻译结果比较粗糙,但是可以参考&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    
-    <item>
-      <title>Python 4道笔试题</title>
-      <link>https://zhimoe.github.io/post/python-interview-questions/</link>
-      <pubDate>Thu, 04 Jun 2020 21:31:01 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/python-interview-questions/</guid>
-      <description>&lt;p&gt;4道常见的python面试题和解答,以及一些python陷阱的链接.&lt;/p&gt;
-&lt;h2 id=&#34;问题&#34;&gt;问题&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;题目1&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;    &lt;span style=&#34;color:#a90d91&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;change&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;):
-        &lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;[&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;4&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;
-        
-        
-    &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;3&lt;/span&gt;]
-    &lt;span style=&#34;color:#a90d91&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;change&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;))
-    &lt;span style=&#34;color:#a90d91&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;)    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Scala Python 文件读取跳过转义字符</title>
-      <link>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</link>
-      <pubDate>Thu, 04 Jun 2020 21:30:31 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</guid>
-      <description>&lt;p&gt;在文件读取的时候,会遇到非法转义字符,导致文件按行读取失败.此时可以通过忽略转义字符来解决.本文记录了scala和python的方法.&lt;/p&gt;
-&lt;h2 id=&#34;背景&#34;&gt;背景&lt;/h2&gt;
-&lt;p&gt;有50G的服务器日志,拆分为几千个txt文件,编码是utf8,使用scala和python按行处理：&lt;/p&gt;
-&lt;h3 id=&#34;scala&#34;&gt;scala&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Array&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;])&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Unit&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#a90d91&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;line&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Source&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;fromFile&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;./txt1.log&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;UTF8&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;).&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;getLines&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;())&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;line&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;contains&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;ABC&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-      &lt;span style=&#34;color:#177500&#34;&gt;//do something      
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-  &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Matplotlib图例中文乱码解决方案</title>
-      <link>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</link>
-      <pubDate>Fri, 01 May 2020 19:18:05 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</guid>
-      <description>&lt;p&gt;很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.
-&lt;a href=&#34;https://www.zhihu.com/question/25404709/answer/67672003&#34;&gt;zhihu.com&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;# https://www.zhihu.com/question/25404709/answer/67672003&lt;/span&gt;
-&lt;span style=&#34;color:#a90d91&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;matplotlib.font_manager&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;fm&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;# 微软雅黑,如果需要宋体,可以用simsun.ttc&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;fm&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;FontProperties&lt;/span&gt;(&lt;span style=&#34;color:#000&#34;&gt;fname&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;C:/Windows/Fonts/msyh.ttc&amp;#39;&lt;/span&gt;)
-&lt;span style=&#34;color:#177500&#34;&gt;# Linux字体在&amp;#34;/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc&amp;#34;, &lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;# 需要先安装字体&amp;#34;&amp;gt;sudo apt install fonts-noto-cjk -y&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;# MacOS中文字体文件在&amp;#34;/System/Library/Fonts/PingFang.ttc&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;# Win10,Linux已测试,MacOS未验证&lt;/span&gt;
-
-&lt;span style=&#34;color:#a90d91&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;
-
-&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;clf&lt;/span&gt;()  &lt;span style=&#34;color:#177500&#34;&gt;# 清空画布&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;plot&lt;/span&gt;([&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;3&lt;/span&gt;], [&lt;span style=&#34;color:#1c01ce&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#1c01ce&#34;&gt;6&lt;/span&gt;])
-&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;xlabel&lt;/span&gt;(&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;横轴&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#000&#34;&gt;fontproperties&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt;)
-&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ylabel&lt;/span&gt;(&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;纵轴&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#000&#34;&gt;fontproperties&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt;)
-&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;title&lt;/span&gt;(&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;pythoner.com&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#000&#34;&gt;fontproperties&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt;)
-&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;legend&lt;/span&gt;([&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#39;图例&amp;#39;&lt;/span&gt;],&lt;span style=&#34;color:#000&#34;&gt;prop&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;myfont&lt;/span&gt;)
-&lt;span style=&#34;color:#000&#34;&gt;plt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;show&lt;/span&gt;()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rust Ownerships Lifetimes教程</title>
-      <link>https://zhimoe.github.io/post/rust-ownership-lifetimes/</link>
-      <pubDate>Sat, 22 Feb 2020 15:55:13 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/rust-ownership-lifetimes/</guid>
-      <description>&lt;p&gt;some notes on rust ownership,reference,string and &amp;amp;str, and lifetimes&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>SpringBoot应用和Rust应用的Dockerfile最佳实践</title>
-      <link>https://zhimoe.github.io/post/dockerfile-best-practices/</link>
-      <pubDate>Mon, 03 Feb 2020 11:30:55 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/dockerfile-best-practices/</guid>
-      <description>&lt;p&gt;记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p&gt;
-&lt;h2 id=&#34;spring-boot应用dockerfile&#34;&gt;spring boot应用Dockerfile&lt;/h2&gt;
-&lt;p&gt;spring.io提供了一个boot应用的&lt;a href=&#34;https://spring.io/guides/topicals/spring-boot-docker&#34;&gt;Dockerfile&lt;/a&gt;指导.
-不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般企业项目中这么做显然不规范,直接使用maven基础镜像更合理.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Docker CMD ENTRYPOINT区别</title>
-      <link>https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/</link>
-      <pubDate>Sun, 02 Feb 2020 21:10:18 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/</guid>
-      <description>&lt;p&gt;记录docker中exec form和shell form的区别,CMD和ENTRYPOINT区别,以及最佳实践.&lt;/p&gt;
-&lt;h2 id=&#34;exec-form-vs-shell-form&#34;&gt;exec form VS shell form&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;# exec form
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>最佳编程字体</title><link>https://zhimoe.github.io/post/programmingfonts/</link><pubDate>Fri, 21 Aug 2020 22:02:50 +0800</pubDate><guid>https://zhimoe.github.io/post/programmingfonts/</guid><description>&lt;p>个人对于编程字体有一点点洁癖.在尝试十几个字体后,终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code&lt;/p>
+&lt;h3 id="aurulent">Aurulent&lt;/h3>
+&lt;p>&lt;a href="https://github.com/zhimoe/programming-fonts">字体下载&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>小写字母来自Aurulent Sans Mono,其他基于Fira Code.Aurulent Sans Mono风格和SourceCodePro非常像,胖宽型,大开大合,简单却有具有设计.特别是字符g,a,p,y,s.&lt;/li>
+&lt;li>字母r的思路来自&lt;a href="https://www.programmingfonts.org/#gintronic">gintronic&lt;/a>. 优点是在低分辨率屏,r的末尾不会被hint只剩下尖尖.&lt;/li>
+&lt;li>问号？也来自gintronic字体,非常漂亮.&lt;/li>
+&lt;/ol></description></item><item><title>如何正确地系鞋带</title><link>https://zhimoe.github.io/post/how-to-tie-shoelace/</link><pubDate>Fri, 21 Aug 2020 21:42:38 +0800</pubDate><guid>https://zhimoe.github.io/post/how-to-tie-shoelace/</guid><description>&lt;p>Ian安全结是登山系鞋带的首选,它越穿越紧,不会松开.解鞋带轻轻一拉即开. 而且对称美观,上手简单.值得每个人花十分钟学习.
+本篇不仅给出Ian安全结示意图,还告诉大家如何让安全结和蝴蝶结水平对称,尽可能美观的秘诀.&lt;/p></description></item><item><title>Java 8 Lambda笔记</title><link>https://zhimoe.github.io/post/java-lambda/</link><pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate><guid>https://zhimoe.github.io/post/java-lambda/</guid><description>&lt;h3 id="问题">问题&lt;/h3>
+&lt;p>Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#177500">// 监听器接口
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">interface&lt;/span> &lt;span style="color:#3f6e75">ActionListener&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">actionPerformed&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">ActionEvent&lt;/span> &lt;span style="color:#000">e&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#177500">// 使用匿名类传递一个行为
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#000">button&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">addActionListener&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#a90d91">new&lt;/span> &lt;span style="color:#000">ActionListener&lt;/span>&lt;span style="color:#000">(){&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">actionPerformed&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">Event&lt;/span> &lt;span style="color:#000">e&lt;/span>&lt;span style="color:#000">){&lt;/span>
+&lt;span style="color:#000">System&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">out&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">println&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;button clicked&amp;#34;&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>基于MDX的web词典</title><link>https://zhimoe.github.io/post/mdict-web/</link><pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/mdict-web/</guid><description>&lt;p>Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
+python版本增加了一个机器学习模型翻译.rust版本也有模型,但是还没来得及加.&lt;/p>
+&lt;h3 id="mdict-py">mdict-py&lt;/h3>
+&lt;p>&lt;a href="https://github.com/zhimoe/mdict-py">mdict-py源码&lt;/a>&lt;/p>
+&lt;p>Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.&lt;/p>
+&lt;p>特点：&lt;/p>
+&lt;ol>
+&lt;li>自动识别中英文选择对应mdx词典,目前英文词典包含牛津8和朗文4,中文词典包含汉语词典3&lt;/li>
+&lt;li>英文尝试拼写纠错功能,动词时态纠错&lt;/li>
+&lt;li>如果配置了中文会尝试搜索朗文的例句,模糊搜索,对于有英语基础的同学很有用&lt;/li>
+&lt;li>如果配置了AI模型,会使用机器学习模型翻译,翻译结果比较粗糙,但是可以参考&lt;/li>
+&lt;/ol></description></item><item><title>Python 4道笔试题</title><link>https://zhimoe.github.io/post/python-interview-questions/</link><pubDate>Thu, 04 Jun 2020 21:31:01 +0800</pubDate><guid>https://zhimoe.github.io/post/python-interview-questions/</guid><description>&lt;p>4道常见的python面试题和解答,以及一些python陷阱的链接.&lt;/p>
+&lt;h2 id="问题">问题&lt;/h2>
+&lt;ol>
+&lt;li>题目1&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-python" data-lang="python"> &lt;span style="color:#a90d91">def&lt;/span> &lt;span style="color:#000">change&lt;/span>(&lt;span style="color:#000">v&lt;/span>):
+&lt;span style="color:#000">v&lt;/span>[&lt;span style="color:#1c01ce">1&lt;/span>] &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#1c01ce">4&lt;/span>
+&lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">v&lt;/span>
+&lt;span style="color:#000">a&lt;/span> &lt;span style="color:#000">=&lt;/span> [&lt;span style="color:#1c01ce">1&lt;/span>, &lt;span style="color:#1c01ce">2&lt;/span>, &lt;span style="color:#1c01ce">3&lt;/span>]
+&lt;span style="color:#a90d91">print&lt;/span>(&lt;span style="color:#000">change&lt;/span>(&lt;span style="color:#000">a&lt;/span>))
+&lt;span style="color:#a90d91">print&lt;/span>(&lt;span style="color:#000">a&lt;/span>)
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Scala Python 文件读取跳过转义字符</title><link>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</link><pubDate>Thu, 04 Jun 2020 21:30:31 +0800</pubDate><guid>https://zhimoe.github.io/post/scala-python-file-encoding-escape/</guid><description>&lt;p>在文件读取的时候,会遇到非法转义字符,导致文件按行读取失败.此时可以通过忽略转义字符来解决.本文记录了scala和python的方法.&lt;/p>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>有50G的服务器日志,拆分为几千个txt文件,编码是utf8,使用scala和python按行处理：&lt;/p>
+&lt;h3 id="scala">scala&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-scala" data-lang="scala">&lt;span style="color:#a90d91">def&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">args&lt;/span>&lt;span style="color:#a90d91">:&lt;/span> &lt;span style="color:#a90d91">Array&lt;/span>&lt;span style="color:#000">[&lt;/span>&lt;span style="color:#a90d91">String&lt;/span>&lt;span style="color:#000">])&lt;/span>&lt;span style="color:#a90d91">:&lt;/span> &lt;span style="color:#a90d91">Unit&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">for&lt;/span> &lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">line&lt;/span> &lt;span style="color:#a90d91">&amp;lt;-&lt;/span> &lt;span style="color:#3f6e75">Source&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">fromFile&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;./txt1.log&amp;#34;&lt;/span>&lt;span style="color:#000">,&lt;/span>&lt;span style="color:#c41a16">&amp;#34;UTF8&amp;#34;&lt;/span>&lt;span style="color:#000">).&lt;/span>&lt;span style="color:#000">getLines&lt;/span>&lt;span style="color:#000">())&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">if&lt;/span> &lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">line&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">contains&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;ABC&amp;#34;&lt;/span>&lt;span style="color:#000">))&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#177500">//do something
+&lt;/span>&lt;span style="color:#177500">&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Matplotlib图例中文乱码解决方案</title><link>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</link><pubDate>Fri, 01 May 2020 19:18:05 +0800</pubDate><guid>https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/</guid><description>&lt;p>很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.
+&lt;a href="https://www.zhihu.com/question/25404709/answer/67672003">zhihu.com&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-python" data-lang="python">&lt;span style="color:#177500"># https://www.zhihu.com/question/25404709/answer/67672003&lt;/span>
+&lt;span style="color:#a90d91">import&lt;/span> &lt;span style="color:#000">matplotlib.font_manager&lt;/span> &lt;span style="color:#a90d91">as&lt;/span> &lt;span style="color:#000">fm&lt;/span>
+&lt;span style="color:#177500"># 微软雅黑,如果需要宋体,可以用simsun.ttc&lt;/span>
+&lt;span style="color:#000">myfont&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#000">fm&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">FontProperties&lt;/span>(&lt;span style="color:#000">fname&lt;/span>&lt;span style="color:#000">=&lt;/span>&lt;span style="color:#c41a16">&amp;#39;C:/Windows/Fonts/msyh.ttc&amp;#39;&lt;/span>)
+&lt;span style="color:#177500"># Linux字体在&amp;#34;/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc&amp;#34;, &lt;/span>
+&lt;span style="color:#177500"># 需要先安装字体&amp;#34;&amp;gt;sudo apt install fonts-noto-cjk -y&amp;#34;&lt;/span>
+&lt;span style="color:#177500"># MacOS中文字体文件在&amp;#34;/System/Library/Fonts/PingFang.ttc&amp;#34;&lt;/span>
+&lt;span style="color:#177500"># Win10,Linux已测试,MacOS未验证&lt;/span>
+&lt;span style="color:#a90d91">import&lt;/span> &lt;span style="color:#000">matplotlib.pyplot&lt;/span> &lt;span style="color:#a90d91">as&lt;/span> &lt;span style="color:#000">plt&lt;/span>
+&lt;span style="color:#000">plt&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">clf&lt;/span>() &lt;span style="color:#177500"># 清空画布&lt;/span>
+&lt;span style="color:#000">plt&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">plot&lt;/span>([&lt;span style="color:#1c01ce">1&lt;/span>, &lt;span style="color:#1c01ce">2&lt;/span>, &lt;span style="color:#1c01ce">3&lt;/span>], [&lt;span style="color:#1c01ce">4&lt;/span>, &lt;span style="color:#1c01ce">5&lt;/span>, &lt;span style="color:#1c01ce">6&lt;/span>])
+&lt;span style="color:#000">plt&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">xlabel&lt;/span>(&lt;span style="color:#c41a16">&amp;#34;横轴&amp;#34;&lt;/span>,&lt;span style="color:#000">fontproperties&lt;/span>&lt;span style="color:#000">=&lt;/span>&lt;span style="color:#000">myfont&lt;/span>)
+&lt;span style="color:#000">plt&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">ylabel&lt;/span>(&lt;span style="color:#c41a16">&amp;#34;纵轴&amp;#34;&lt;/span>,&lt;span style="color:#000">fontproperties&lt;/span>&lt;span style="color:#000">=&lt;/span>&lt;span style="color:#000">myfont&lt;/span>)
+&lt;span style="color:#000">plt&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">title&lt;/span>(&lt;span style="color:#c41a16">&amp;#34;pythoner.com&amp;#34;&lt;/span>,&lt;span style="color:#000">fontproperties&lt;/span>&lt;span style="color:#000">=&lt;/span>&lt;span style="color:#000">myfont&lt;/span>)
+&lt;span style="color:#000">plt&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">legend&lt;/span>([&lt;span style="color:#c41a16">&amp;#39;图例&amp;#39;&lt;/span>],&lt;span style="color:#000">prop&lt;/span>&lt;span style="color:#000">=&lt;/span>&lt;span style="color:#000">myfont&lt;/span>)
+&lt;span style="color:#000">plt&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">show&lt;/span>()
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Rust Ownerships Lifetimes教程</title><link>https://zhimoe.github.io/post/rust-ownership-lifetimes/</link><pubDate>Sat, 22 Feb 2020 15:55:13 +0800</pubDate><guid>https://zhimoe.github.io/post/rust-ownership-lifetimes/</guid><description>&lt;p>some notes on rust ownership,reference,string and &amp;amp;str, and lifetimes&lt;/p></description></item><item><title>SpringBoot应用和Rust应用的Dockerfile最佳实践</title><link>https://zhimoe.github.io/post/dockerfile-best-practices/</link><pubDate>Mon, 03 Feb 2020 11:30:55 +0800</pubDate><guid>https://zhimoe.github.io/post/dockerfile-best-practices/</guid><description>&lt;p>记录spring boot和rust项目的Dockerfile的最佳实践.&lt;/p>
+&lt;h2 id="spring-boot应用dockerfile">spring boot应用Dockerfile&lt;/h2>
+&lt;p>spring.io提供了一个boot应用的&lt;a href="https://spring.io/guides/topicals/spring-boot-docker">Dockerfile&lt;/a>指导.
+不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般企业项目中这么做显然不规范,直接使用maven基础镜像更合理.&lt;/p></description></item><item><title>Docker CMD ENTRYPOINT区别</title><link>https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/</link><pubDate>Sun, 02 Feb 2020 21:10:18 +0800</pubDate><guid>https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/</guid><description>&lt;p>记录docker中exec form和shell form的区别,CMD和ENTRYPOINT区别,以及最佳实践.&lt;/p>
+&lt;h2 id="exec-form-vs-shell-form">exec form VS shell form&lt;/h2>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text"># exec form
 &amp;lt;instruction&amp;gt; [&amp;#34;executable&amp;#34;, &amp;#34;param1&amp;#34;, &amp;#34;param2&amp;#34;, ...]
-
 # shell form
 &amp;lt;instruction&amp;gt; &amp;lt;command&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>scala uniform access principle</title>
-      <link>https://zhimoe.github.io/post/scala-uniform-access-principle/</link>
-      <pubDate>Fri, 31 Jan 2020 18:40:10 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/scala-uniform-access-principle/</guid>
-      <description>&lt;p&gt;虽然代码写的很水,但是我对各种编程语言一直比较感兴趣. 除了工作中使用的Java之外,自己也了解Python,Groovy,Scala,Kotlin,Clojure,Go,Rust.其中Python和Scala在工作中也偶尔使用. 了解不同的编程语言语法对于编程思维的影响还是蛮有意思的.
-例如, 只会Java的开发者可能没有听过模式匹配(pattern match).在我学习了Scala之后,我对模式匹配的理解就是更强更优雅的switch+if. 而在我看过rust和elixir语言中关于模式匹配之后,我对模式匹配的理解就完全不一样了.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Highlights in Scala for Impatient 2nd</title>
-      <link>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</link>
-      <pubDate>Wed, 15 Jan 2020 21:42:33 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</guid>
-      <description>&lt;p&gt;key points in scala-for-impatient 2nd book, best book for java developer to use scala in a rush.
-scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala帮助很大.&lt;/p&gt;
-&lt;h3 id=&#34;functions&#34;&gt;Functions&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;• if expression has a value.
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>scala uniform access principle</title><link>https://zhimoe.github.io/post/scala-uniform-access-principle/</link><pubDate>Fri, 31 Jan 2020 18:40:10 +0800</pubDate><guid>https://zhimoe.github.io/post/scala-uniform-access-principle/</guid><description>&lt;p>虽然代码写的很水,但是我对各种编程语言一直比较感兴趣. 除了工作中使用的Java之外,自己也了解Python,Groovy,Scala,Kotlin,Clojure,Go,Rust.其中Python和Scala在工作中也偶尔使用. 了解不同的编程语言语法对于编程思维的影响还是蛮有意思的.
+例如, 只会Java的开发者可能没有听过模式匹配(pattern match).在我学习了Scala之后,我对模式匹配的理解就是更强更优雅的switch+if. 而在我看过rust和elixir语言中关于模式匹配之后,我对模式匹配的理解就完全不一样了.&lt;/p></description></item><item><title>Highlights in Scala for Impatient 2nd</title><link>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</link><pubDate>Wed, 15 Jan 2020 21:42:33 +0800</pubDate><guid>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</guid><description>&lt;p>key points in scala-for-impatient 2nd book, best book for java developer to use scala in a rush.
+scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala帮助很大.&lt;/p>
+&lt;h3 id="functions">Functions&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">• if expression has a value.
 • A block has a value — the value of its last expression.
 • The Scala for loop is like an “enhanced” Java for loop.
 • Semicolons are (mostly) optional.
@@ -346,600 +128,220 @@ scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala�
 • Beware of missing = in a function definition.
 • Exceptions work just like in Java or C++, but you use a “pattern matching” syntax for catch.
 • Scala has no checked exceptions.
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rust Packages Crates Mod Notes</title>
-      <link>https://zhimoe.github.io/post/rust-packages-crates-mod/</link>
-      <pubDate>Sun, 12 Jan 2020 20:03:33 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/rust-packages-crates-mod/</guid>
-      <description>&lt;p&gt;初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.&lt;/p&gt;
-&lt;h2 id=&#34;packages-crates-and-modules&#34;&gt;packages, crates and modules&lt;/h2&gt;
-&lt;p&gt;A Cargo.toml is a package. and must have a package name, like&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;[&lt;span style=&#34;color:#000&#34;&gt;package&lt;/span&gt;]
-&lt;span style=&#34;color:#000&#34;&gt;name&lt;/span&gt; = &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;actix-web&amp;#34;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>git 常用命令备忘录</title>
-      <link>https://zhimoe.github.io/post/git-useful-tips/</link>
-      <pubDate>Sun, 01 Sep 2019 21:01:06 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/git-useful-tips/</guid>
-      <description>&lt;p&gt;记录日常开发中偶尔会遇到的但是总是记不住的git命令.
-以下技巧都来自于&lt;a href=&#34;https://ohshitgit.com/&#34;&gt;oh shit git&lt;/a&gt; 和 &lt;a href=&#34;https://stackoverflow.com&#34;&gt;stackoverflow&lt;/a&gt;. 版权归作者所有.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>DevOps能力成熟度模型</title>
-      <link>https://zhimoe.github.io/post/devops-maturity-model-checklist/</link>
-      <pubDate>Wed, 24 Jul 2019 07:58:12 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/devops-maturity-model-checklist/</guid>
-      <description>&lt;p&gt;之前听说过AWS的软件工程师是需要自己写需求说明书,前后端代码,测试和上线.还有instagram的工程师可以做到python的代码提交如果合并到主分支后可以在&lt;a href=&#34;https://instagram-engineering.com/static-analysis-at-scale-an-instagram-story-8f498ab71a0c&#34;&gt;一个小时内&lt;/a&gt;自动部署到生产被用户使用到,感觉这个非常神奇.如果需要做到这个,对组织级与个人都有极高的devops能力成熟度要求.
-上周代表CRM项目通过了信通院的DevOps三级认证.感觉提升的空间很大. 专门看了一下成熟度模型的标准.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Scala Collection Tips</title>
-      <link>https://zhimoe.github.io/post/scala-collection-tips/</link>
-      <pubDate>Sun, 19 May 2019 16:49:14 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/scala-collection-tips/</guid>
-      <description>&lt;p&gt;scala collection 提供了一整套独立于Java的高性能集合,使用上非常灵活,所以需要清楚一些常用的方法:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; reduce fold scan&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 集合的符号方法&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 数组,tuple&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 2.13的集合架构&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>前端静态资源图片优化</title>
-      <link>https://zhimoe.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Sun, 19 May 2019 11:07:26 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96/</guid>
-      <description>&lt;p&gt;GTmetrix是一个前端页面测试的网站,可以发现你的站点哪些地方速度较慢,并针对性的优化.
-&lt;a href=&#34;https://gtmetrix.com/blog/how-to-optimize-images-a-practical-guide/&#34;&gt;How to Optimize Images: A Practical Guide&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Spring FactoryBean and ContextAware</title>
-      <link>https://zhimoe.github.io/post/spring-factorybean-contextaware/</link>
-      <pubDate>Thu, 16 May 2019 22:44:38 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/spring-factorybean-contextaware/</guid>
-      <description>&lt;p&gt;理解Spring的FactoryBean 和 ContextAware接口.&lt;/p&gt;
-&lt;h2 id=&#34;factorybean&#34;&gt;FactoryBean&lt;/h2&gt;
-&lt;p&gt;一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>通过例子学习Clojure</title>
-      <link>https://zhimoe.github.io/post/learn-clojure-by-example/</link>
-      <pubDate>Mon, 13 May 2019 15:22:05 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/learn-clojure-by-example/</guid>
-      <description>&lt;p&gt;这份笔记试图打造最强的clojure小抄,keep refactoring it&amp;hellip;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>理解Elasticsearch Query DSL中的JSON结构</title>
-      <link>https://zhimoe.github.io/post/elasticsearch-query-dsl/</link>
-      <pubDate>Wed, 01 May 2019 10:17:46 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/elasticsearch-query-dsl/</guid>
-      <description>&lt;p&gt;理解ES搜索中JSON DSL有助于自己写JSON查询,特别是手写复杂嵌套json.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; diffs in es 2.x and es 5.x&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; query dsl&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; aggr query&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>Useful Scala Code Snippets</title>
-      <link>https://zhimoe.github.io/post/useful-scala-code-snippets/</link>
-      <pubDate>Fri, 26 Apr 2019 07:54:00 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/useful-scala-code-snippets/</guid>
-      <description>&lt;h2 id=&#34;merge-two-map-and-sum-its-values&#34;&gt;merge two map and sum its values&lt;/h2&gt;
-&lt;p&gt;多个map合并,key相同时则value相加&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;val&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;map1&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Map&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#a90d91&#34;&gt;val&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;map2&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Map&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;11&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#a90d91&#34;&gt;val&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;map3&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Map&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;111&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-
-&lt;span style=&#34;color:#a90d91&#34;&gt;val&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mapList&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;List&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;map1&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;map2&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;map3&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-
-&lt;span style=&#34;color:#a90d91&#34;&gt;val&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;merged&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mapList&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;reduce&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;((&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;m1&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;m2&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&amp;gt;&lt;/span&gt;
-
-  &lt;span style=&#34;color:#000&#34;&gt;m1&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;++&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;m2&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;map&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;k&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;k&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;m1&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;getOrElse&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;k&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Scala Future</title>
-      <link>https://zhimoe.github.io/post/scala-future/</link>
-      <pubDate>Sun, 21 Apr 2019 14:36:36 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/scala-future/</guid>
-      <description>&lt;p&gt;some notes on scala future, includes:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; future&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; executor context&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; await future result&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; callback&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; recover&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>Spring Boot Notes</title>
-      <link>https://zhimoe.github.io/post/spring-boot-notes/</link>
-      <pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/spring-boot-notes/</guid>
-      <description>&lt;p&gt;一些容易忘记的spring boot知识要点.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;注意,.yaml和.yml文件没任何区别.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
-&lt;h2 id=&#34;springbootapplication注解&#34;&gt;SpringBootApplication注解&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;@SpringBootApplication&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;// &amp;lt;=等价=&amp;gt;
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;@Configuration&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;@ComponentScan&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;@EnableAutoConfiguration&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Pattern Matching Anonymous Function</title>
-      <link>https://zhimoe.github.io/post/pattern-matching-anonymous-function/</link>
-      <pubDate>Sun, 31 Mar 2019 13:10:41 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/pattern-matching-anonymous-function/</guid>
-      <description>&lt;p&gt;Scala中很多使用if的地方都可以用match case来替换.常见的就是下面的这种写法:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;val&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;res&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;msg&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;match&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-	&lt;span style=&#34;color:#a90d91&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;it&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;it&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;contains&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;H&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;Hello&amp;#34;&lt;/span&gt;
-	&lt;span style=&#34;color:#a90d91&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;Other&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;//更常见的用法是去匹配参数的模式:
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Player&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;score&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Int&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color:#a90d91&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;player&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Player&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;player&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;match&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#a90d91&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Player&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;score&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;score&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;100000&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&amp;gt;&lt;/span&gt;
-    &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;Get a job, dude!&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#a90d91&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Player&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&amp;gt;&lt;/span&gt;
-    &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;Hey, $name, nice to see you again!&amp;#34;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#a90d91&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;printMessage&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;player&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Player&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;player&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Scala Type Class</title>
-      <link>https://zhimoe.github.io/post/scala-type-class/</link>
-      <pubDate>Sun, 31 Mar 2019 12:58:17 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/scala-type-class/</guid>
-      <description>&lt;p&gt;scala type class notes:
-&lt;a href=&#34;https://scalac.io/typeclasses-in-scala&#34;&gt;关于scala type class非常好的文章&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Scala 学习笔记</title>
-      <link>https://zhimoe.github.io/post/scala-notes/</link>
-      <pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/scala-notes/</guid>
-      <description>&lt;p&gt;some notes on scala, includes:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; setup with maven&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; import&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; == and eq&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; case class&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; for&amp;hellip;yield&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; companion object and class&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; method and function(def val)&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; _ in scala&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; =&amp;gt; in scala&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; () {} in scala&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; implicit&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; string&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>使用redis的hash优化内存使用[翻译]</title>
-      <link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</guid>
-      <description>&lt;p&gt;使用redis的hash优化内存使用&lt;/p&gt;
-&lt;h1 id=&#34;原文&#34;&gt;原文&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.peterbe.com/plog/understanding-redis-hash-max-ziplist-entries&#34;&gt;Understanding Redis hash-max-ziplist-entries&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Scala 2 Implicit</title>
-      <link>https://zhimoe.github.io/post/scala-implicit/</link>
-      <pubDate>Sat, 30 Mar 2019 12:58:17 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/scala-implicit/</guid>
-      <description>&lt;h2 id=&#34;隐式参数&#34;&gt;隐式参数&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-scala&#34; data-lang=&#34;scala&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;//隐式参数是在调用时可以自动填充的参数, 需要在调用范围内（scope)有一个隐式变量可供填充.
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;addInt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;Int&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;implicit&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;n&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;Int&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;n&lt;/span&gt;
-
-
-&lt;span style=&#34;color:#177500&#34;&gt;//需要提供一个隐式变量n
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;implicit&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;val&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;sn&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1c01ce&#34;&gt;1&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;addInt&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1c01ce&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#177500&#34;&gt;// 3
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;//如果有两个满足类型的隐式变量,则在编译addInt(2)时报错
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;//scala的方法中ExecutionContext一般作为implicit参数.
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>使用travis自动发布markdown到博客</title>
-      <link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/</link>
-      <pubDate>Sat, 30 Mar 2019 10:56:47 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/</guid>
-      <description>&lt;p&gt;如何使用github pages和github actions构建静态个人博客站点&lt;/p&gt;
-&lt;h3 id=&#34;update-at-2021&#34;&gt;update at 2021&lt;/h3&gt;
-&lt;p&gt;更新：github开放action功能后,travis-ci已经没有必要了,目前博客使用zhimoe仓库管理源码,使用action编译后将public目录同步到zhimoe.github.io仓库的gh-pages分支.
-注意,由于使用了jsdelivr的cdn功能,切换分支后theme的相关静态文件的path也要修改.&lt;/p&gt;
-&lt;p&gt;github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-pages分支的内容如果存在index.html, 那么其他人可以通过 &lt;a href=&#34;https://zhimoe.github.io&#34;&gt;https://zhimoe.github.io&lt;/a&gt; 访问这个站点.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>wsl-docker-environment</title>
-      <link>https://zhimoe.github.io/post/wsl-docker-environment/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/wsl-docker-environment/</guid>
-      <description>&lt;p&gt;使用wsl,MobaXterm,cmder,docker打造可视化的linux开发环境&lt;/p&gt;
-&lt;p&gt;离不开Windows的理由很多,作为后端开发需要使用linux的情况也很多,双系统总归是不方便,而且linux下的GUI体验也没用Win 10好. 如果使用虚拟机,那么文件交换和网络等各种问题也需要解决,对系统的内存要求也更高一些.微软为了让更多的开发人员留在Win10上面,开发了wsl功能.目前的实际体验已经很棒,今天介绍一下如何打造一个可视化的linux开发环境&amp;ndash;即在Win10启动linux的GUI软件,例如vs code等.在wsl启动vs code写代码可以有效避免一些Windows和linux的编码和换行问题.&lt;/p&gt;
-&lt;p&gt;本教程分为2部分:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 配置wsl可视化&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 在wsl使用docker&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;以下内容中 &lt;code&gt;wsl&lt;/code&gt;和&lt;code&gt;ubuntu&lt;/code&gt;含义相同,&lt;code&gt;console&lt;/code&gt;和&lt;code&gt;命令行&lt;/code&gt;含义相同.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>Neo4j入门</title>
-      <link>https://zhimoe.github.io/post/neo4j-intro/</link>
-      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/neo4j-intro/</guid>
-      <description>&lt;h3 id=&#34;neo4j图数据库介绍&#34;&gt;neo4j图数据库介绍&lt;/h3&gt;
-&lt;p&gt;neo4j是目前排名最高的图数据库,分为商业和社区版本,社区版只支持单机,而且查询的运行时(runtime)不同(cypher runtime:interpreted(社区版),slotted(企业版)). 数据库排名可以在 &lt;a href=&#34;https://db-engines.com/en/ranking/graph+dbms&#34;&gt;https://db-engines.com/en/ranking/graph+dbms&lt;/a&gt; 查看,下一代最有前景的开源图数据库是dgraph,目前还积极开发中,生产未就绪,等他的Java客户端再成熟一点可以试用.&lt;/p&gt;
-&lt;p&gt;neo4j数据库中只有3个概念: Node, Relationship, Properties. Node表示实体类别,使用Label区分,例如一个节点可以有Person/Father等多个标签,Relationship即关系,雇佣关系,父子关系,投资关系,交易关系等. Node和Relationship都可以有Proerties,属性自身不分是属于节点还是属于关系,例如Person可以有属性name,关系也可以用属性name.你可以在neo4j browser左侧看到当前数据库的所有Node Label,Relationship Type,Properties.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Jupyter Notebook Install New Package</title>
-      <link>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</link>
-      <pubDate>Thu, 01 Nov 2018 19:04:32 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</guid>
-      <description>&lt;p&gt;如何正确地在notebook中安装lib package&lt;/p&gt;
-&lt;h3 id=&#34;原文&#34;&gt;原文&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://jakevdp.github.io/blog/2017/12/05/installing-python-packages-from-jupyter/&#34;&gt;installing new python package from jupyter notebook&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;笔记&#34;&gt;笔记&lt;/h3&gt;
-&lt;p&gt;在pycharm写代码中如果使用到新的package,例如&lt;code&gt;numpy&lt;/code&gt;,只需要输入&lt;code&gt;import numpy&lt;/code&gt; 然后ALT+ENTER在提示中选择install new package即可.&lt;/p&gt;
-&lt;p&gt;在notebook中,网上的教程都说是&lt;code&gt;!pip install numpy&lt;/code&gt;. 但是这个可能有坑.究其原因是因为:&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java Thread Pool Hierachy</title>
-      <link>https://zhimoe.github.io/post/java-threadpool-hierachy/</link>
-      <pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-threadpool-hierachy/</guid>
-      <description>&lt;h3 id=&#34;thread-pool-classes-hierachy&#34;&gt;thread pool classes hierachy&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;java thread pool class hierarchy
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Rust Packages Crates Mod Notes</title><link>https://zhimoe.github.io/post/rust-packages-crates-mod/</link><pubDate>Sun, 12 Jan 2020 20:03:33 +0800</pubDate><guid>https://zhimoe.github.io/post/rust-packages-crates-mod/</guid><description>&lt;p>初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.&lt;/p>
+&lt;h2 id="packages-crates-and-modules">packages, crates and modules&lt;/h2>
+&lt;p>A Cargo.toml is a package. and must have a package name, like&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-toml" data-lang="toml">[&lt;span style="color:#000">package&lt;/span>]
+&lt;span style="color:#000">name&lt;/span> = &lt;span style="color:#c41a16">&amp;#34;actix-web&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>git 常用命令备忘录</title><link>https://zhimoe.github.io/post/git-useful-tips/</link><pubDate>Sun, 01 Sep 2019 21:01:06 +0800</pubDate><guid>https://zhimoe.github.io/post/git-useful-tips/</guid><description>&lt;p>记录日常开发中偶尔会遇到的但是总是记不住的git命令.
+以下技巧都来自于&lt;a href="https://ohshitgit.com/">oh shit git&lt;/a> 和 &lt;a href="https://stackoverflow.com">stackoverflow&lt;/a>. 版权归作者所有.&lt;/p></description></item><item><title>DevOps能力成熟度模型</title><link>https://zhimoe.github.io/post/devops-maturity-model-checklist/</link><pubDate>Wed, 24 Jul 2019 07:58:12 +0800</pubDate><guid>https://zhimoe.github.io/post/devops-maturity-model-checklist/</guid><description>&lt;p>之前听说过AWS的软件工程师是需要自己写需求说明书,前后端代码,测试和上线.还有instagram的工程师可以做到python的代码提交如果合并到主分支后可以在&lt;a href="https://instagram-engineering.com/static-analysis-at-scale-an-instagram-story-8f498ab71a0c">一个小时内&lt;/a>自动部署到生产被用户使用到,感觉这个非常神奇.如果需要做到这个,对组织级与个人都有极高的devops能力成熟度要求.
+上周代表CRM项目通过了信通院的DevOps三级认证.感觉提升的空间很大. 专门看了一下成熟度模型的标准.&lt;/p></description></item><item><title>Scala Collection Tips</title><link>https://zhimoe.github.io/post/scala-collection-tips/</link><pubDate>Sun, 19 May 2019 16:49:14 +0800</pubDate><guid>https://zhimoe.github.io/post/scala-collection-tips/</guid><description>&lt;p>scala collection 提供了一整套独立于Java的高性能集合,使用上非常灵活,所以需要清楚一些常用的方法:&lt;/p>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> reduce fold scan&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 集合的符号方法&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 数组,tuple&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 2.13的集合架构&lt;/li>
+&lt;/ul></description></item><item><title>前端静态资源图片优化</title><link>https://zhimoe.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96/</link><pubDate>Sun, 19 May 2019 11:07:26 +0800</pubDate><guid>https://zhimoe.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96/</guid><description>&lt;p>GTmetrix是一个前端页面测试的网站,可以发现你的站点哪些地方速度较慢,并针对性的优化.
+&lt;a href="https://gtmetrix.com/blog/how-to-optimize-images-a-practical-guide/">How to Optimize Images: A Practical Guide&lt;/a>&lt;/p></description></item><item><title>Spring FactoryBean and ContextAware</title><link>https://zhimoe.github.io/post/spring-factorybean-contextaware/</link><pubDate>Thu, 16 May 2019 22:44:38 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-factorybean-contextaware/</guid><description>&lt;p>理解Spring的FactoryBean 和 ContextAware接口.&lt;/p>
+&lt;h2 id="factorybean">FactoryBean&lt;/h2>
+&lt;p>一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例.&lt;/p></description></item><item><title>通过例子学习Clojure</title><link>https://zhimoe.github.io/post/learn-clojure-by-example/</link><pubDate>Mon, 13 May 2019 15:22:05 +0800</pubDate><guid>https://zhimoe.github.io/post/learn-clojure-by-example/</guid><description>&lt;p>这份笔记试图打造最强的clojure小抄,keep refactoring it&amp;hellip;&lt;/p></description></item><item><title>理解Elasticsearch Query DSL中的JSON结构</title><link>https://zhimoe.github.io/post/elasticsearch-query-dsl/</link><pubDate>Wed, 01 May 2019 10:17:46 +0800</pubDate><guid>https://zhimoe.github.io/post/elasticsearch-query-dsl/</guid><description>&lt;p>理解ES搜索中JSON DSL有助于自己写JSON查询,特别是手写复杂嵌套json.&lt;/p>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> diffs in es 2.x and es 5.x&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> query dsl&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> aggr query&lt;/li>
+&lt;/ul></description></item><item><title>Useful Scala Code Snippets</title><link>https://zhimoe.github.io/post/useful-scala-code-snippets/</link><pubDate>Fri, 26 Apr 2019 07:54:00 +0800</pubDate><guid>https://zhimoe.github.io/post/useful-scala-code-snippets/</guid><description>&lt;h2 id="merge-two-map-and-sum-its-values">merge two map and sum its values&lt;/h2>
+&lt;p>多个map合并,key相同时则value相加&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-scala" data-lang="scala">&lt;span style="color:#a90d91">val&lt;/span> &lt;span style="color:#000">map1&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#3f6e75">Map&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#1c01ce">1&lt;/span> &lt;span style="color:#000">-&amp;gt;&lt;/span> &lt;span style="color:#1c01ce">1&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#1c01ce">2&lt;/span> &lt;span style="color:#000">-&amp;gt;&lt;/span> &lt;span style="color:#1c01ce">2&lt;/span>&lt;span style="color:#000">)&lt;/span>
+&lt;span style="color:#a90d91">val&lt;/span> &lt;span style="color:#000">map2&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#3f6e75">Map&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#1c01ce">1&lt;/span> &lt;span style="color:#000">-&amp;gt;&lt;/span> &lt;span style="color:#1c01ce">11&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#1c01ce">3&lt;/span> &lt;span style="color:#000">-&amp;gt;&lt;/span> &lt;span style="color:#1c01ce">3&lt;/span>&lt;span style="color:#000">)&lt;/span>
+&lt;span style="color:#a90d91">val&lt;/span> &lt;span style="color:#000">map3&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#3f6e75">Map&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#1c01ce">1&lt;/span> &lt;span style="color:#000">-&amp;gt;&lt;/span> &lt;span style="color:#1c01ce">111&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#1c01ce">3&lt;/span> &lt;span style="color:#000">-&amp;gt;&lt;/span> &lt;span style="color:#1c01ce">3&lt;/span>&lt;span style="color:#000">)&lt;/span>
+&lt;span style="color:#a90d91">val&lt;/span> &lt;span style="color:#000">mapList&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#3f6e75">List&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">map1&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">map2&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">map3&lt;/span>&lt;span style="color:#000">)&lt;/span>
+&lt;span style="color:#a90d91">val&lt;/span> &lt;span style="color:#000">merged&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#000">mapList&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">reduce&lt;/span>&lt;span style="color:#000">((&lt;/span>&lt;span style="color:#000">m1&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">m2&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#a90d91">=&amp;gt;&lt;/span>
+&lt;span style="color:#000">m1&lt;/span> &lt;span style="color:#000">++&lt;/span> &lt;span style="color:#000">m2&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">map&lt;/span> &lt;span style="color:#000">{&lt;/span> &lt;span style="color:#a90d91">case&lt;/span> &lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">k&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">v&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#a90d91">=&amp;gt;&lt;/span> &lt;span style="color:#000">k&lt;/span> &lt;span style="color:#000">-&amp;gt;&lt;/span> &lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">v&lt;/span> &lt;span style="color:#000">+&lt;/span> &lt;span style="color:#000">m1&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">getOrElse&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">k&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#1c01ce">0&lt;/span>&lt;span style="color:#000">))&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Scala Future</title><link>https://zhimoe.github.io/post/scala-future/</link><pubDate>Sun, 21 Apr 2019 14:36:36 +0800</pubDate><guid>https://zhimoe.github.io/post/scala-future/</guid><description>&lt;p>some notes on scala future, includes:&lt;/p>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> future&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> executor context&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> await future result&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> callback&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> recover&lt;/li>
+&lt;/ul></description></item><item><title>Spring Boot Notes</title><link>https://zhimoe.github.io/post/spring-boot-notes/</link><pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-boot-notes/</guid><description>&lt;p>一些容易忘记的spring boot知识要点.&lt;/p>
+&lt;blockquote>
+&lt;p>注意,.yaml和.yml文件没任何区别.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="配置">配置&lt;/h2>
+&lt;h2 id="springbootapplication注解">SpringBootApplication注解&lt;/h2>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#000">@SpringBootApplication&lt;/span>
+&lt;span style="color:#177500">// &amp;lt;=等价=&amp;gt;
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#000">@Configuration&lt;/span>
+&lt;span style="color:#000">@ComponentScan&lt;/span>
+&lt;span style="color:#000">@EnableAutoConfiguration&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Pattern Matching Anonymous Function</title><link>https://zhimoe.github.io/post/pattern-matching-anonymous-function/</link><pubDate>Sun, 31 Mar 2019 13:10:41 +0800</pubDate><guid>https://zhimoe.github.io/post/pattern-matching-anonymous-function/</guid><description>&lt;p>Scala中很多使用if的地方都可以用match case来替换.常见的就是下面的这种写法:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-scala" data-lang="scala">&lt;span style="color:#a90d91">val&lt;/span> &lt;span style="color:#000">res&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#000">msg&lt;/span> &lt;span style="color:#a90d91">match&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">case&lt;/span> &lt;span style="color:#000">it&lt;/span> &lt;span style="color:#a90d91">if&lt;/span> &lt;span style="color:#000">it&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#000">contains&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;H&amp;#34;&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#a90d91">=&amp;gt;&lt;/span> &lt;span style="color:#c41a16">&amp;#34;Hello&amp;#34;&lt;/span>
+&lt;span style="color:#a90d91">case&lt;/span> &lt;span style="color:#a90d91">_&lt;/span> &lt;span style="color:#a90d91">=&amp;gt;&lt;/span> &lt;span style="color:#c41a16">&amp;#34;Other&amp;#34;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#177500">//更常见的用法是去匹配参数的模式:
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">case&lt;/span> &lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Player&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#a90d91">:&lt;/span> &lt;span style="color:#a90d91">String&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">score&lt;/span>&lt;span style="color:#a90d91">:&lt;/span> &lt;span style="color:#a90d91">Int&lt;/span>&lt;span style="color:#000">)&lt;/span>
+&lt;span style="color:#a90d91">def&lt;/span> &lt;span style="color:#000">message&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">player&lt;/span>&lt;span style="color:#a90d91">:&lt;/span> &lt;span style="color:#a90d91">Player&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#000">player&lt;/span> &lt;span style="color:#a90d91">match&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">case&lt;/span> &lt;span style="color:#3f6e75">Player&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#a90d91">_&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">score&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#a90d91">if&lt;/span> &lt;span style="color:#000">score&lt;/span> &lt;span style="color:#000">&amp;gt;&lt;/span> &lt;span style="color:#1c01ce">100000&lt;/span> &lt;span style="color:#a90d91">=&amp;gt;&lt;/span>
+&lt;span style="color:#c41a16">&amp;#34;Get a job, dude!&amp;#34;&lt;/span>
+&lt;span style="color:#a90d91">case&lt;/span> &lt;span style="color:#3f6e75">Player&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#a90d91">_&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#a90d91">=&amp;gt;&lt;/span>
+&lt;span style="color:#c41a16">&amp;#34;Hey, $name, nice to see you again!&amp;#34;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">def&lt;/span> &lt;span style="color:#000">printMessage&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">player&lt;/span>&lt;span style="color:#a90d91">:&lt;/span> &lt;span style="color:#a90d91">Player&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#000">println&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">message&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">player&lt;/span>&lt;span style="color:#000">))&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Scala Type Class</title><link>https://zhimoe.github.io/post/scala-type-class/</link><pubDate>Sun, 31 Mar 2019 12:58:17 +0800</pubDate><guid>https://zhimoe.github.io/post/scala-type-class/</guid><description>&lt;p>scala type class notes:
+&lt;a href="https://scalac.io/typeclasses-in-scala">关于scala type class非常好的文章&lt;/a>&lt;/p></description></item><item><title>Scala 学习笔记</title><link>https://zhimoe.github.io/post/scala-notes/</link><pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate><guid>https://zhimoe.github.io/post/scala-notes/</guid><description>&lt;p>some notes on scala, includes:&lt;/p>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> setup with maven&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> import&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> == and eq&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> case class&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> for&amp;hellip;yield&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> companion object and class&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> method and function(def val)&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> _ in scala&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> =&amp;gt; in scala&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> () {} in scala&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> implicit&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> string&lt;/li>
+&lt;/ul></description></item><item><title>使用redis的hash优化内存使用[翻译]</title><link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</link><pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate><guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>使用redis的hash优化内存使用&lt;/p>
+&lt;h1 id="原文">原文&lt;/h1>
+&lt;p>&lt;a href="https://www.peterbe.com/plog/understanding-redis-hash-max-ziplist-entries">Understanding Redis hash-max-ziplist-entries&lt;/a>&lt;/p></description></item><item><title>Scala 2 Implicit</title><link>https://zhimoe.github.io/post/scala-implicit/</link><pubDate>Sat, 30 Mar 2019 12:58:17 +0800</pubDate><guid>https://zhimoe.github.io/post/scala-implicit/</guid><description>&lt;h2 id="隐式参数">隐式参数&lt;/h2>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-scala" data-lang="scala">&lt;span style="color:#177500">//隐式参数是在调用时可以自动填充的参数, 需要在调用范围内（scope)有一个隐式变量可供填充.
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">def&lt;/span> &lt;span style="color:#000">addInt&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">i&lt;/span>&lt;span style="color:#a90d91">:&lt;/span>&lt;span style="color:#a90d91">Int&lt;/span>&lt;span style="color:#000">)(&lt;/span>&lt;span style="color:#a90d91">implicit&lt;/span> &lt;span style="color:#000">n&lt;/span>&lt;span style="color:#a90d91">:&lt;/span> &lt;span style="color:#a90d91">Int&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#000">i&lt;/span> &lt;span style="color:#000">+&lt;/span> &lt;span style="color:#000">n&lt;/span>
+&lt;span style="color:#177500">//需要提供一个隐式变量n
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">implicit&lt;/span> &lt;span style="color:#a90d91">val&lt;/span> &lt;span style="color:#000">sn&lt;/span> &lt;span style="color:#a90d91">=&lt;/span> &lt;span style="color:#1c01ce">1&lt;/span>
+&lt;span style="color:#000">addInt&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#1c01ce">2&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#177500">// 3
+&lt;/span>&lt;span style="color:#177500">&lt;/span>
+&lt;span style="color:#177500">//如果有两个满足类型的隐式变量,则在编译addInt(2)时报错
+&lt;/span>&lt;span style="color:#177500">&lt;/span>
+&lt;span style="color:#177500">//scala的方法中ExecutionContext一般作为implicit参数.
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>使用travis自动发布markdown到博客</title><link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/</link><pubDate>Sat, 30 Mar 2019 10:56:47 +0800</pubDate><guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/</guid><description>&lt;p>如何使用github pages和github actions构建静态个人博客站点&lt;/p>
+&lt;h3 id="update-at-2021">update at 2021&lt;/h3>
+&lt;p>更新：github开放action功能后,travis-ci已经没有必要了,目前博客使用zhimoe仓库管理源码,使用action编译后将public目录同步到zhimoe.github.io仓库的gh-pages分支.
+注意,由于使用了jsdelivr的cdn功能,切换分支后theme的相关静态文件的path也要修改.&lt;/p>
+&lt;p>github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-pages分支的内容如果存在index.html, 那么其他人可以通过 &lt;a href="https://zhimoe.github.io">https://zhimoe.github.io&lt;/a> 访问这个站点.&lt;/p></description></item><item><title>wsl-docker-environment</title><link>https://zhimoe.github.io/post/wsl-docker-environment/</link><pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/wsl-docker-environment/</guid><description>&lt;p>使用wsl,MobaXterm,cmder,docker打造可视化的linux开发环境&lt;/p>
+&lt;p>离不开Windows的理由很多,作为后端开发需要使用linux的情况也很多,双系统总归是不方便,而且linux下的GUI体验也没用Win 10好. 如果使用虚拟机,那么文件交换和网络等各种问题也需要解决,对系统的内存要求也更高一些.微软为了让更多的开发人员留在Win10上面,开发了wsl功能.目前的实际体验已经很棒,今天介绍一下如何打造一个可视化的linux开发环境&amp;ndash;即在Win10启动linux的GUI软件,例如vs code等.在wsl启动vs code写代码可以有效避免一些Windows和linux的编码和换行问题.&lt;/p>
+&lt;p>本教程分为2部分:&lt;/p>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 配置wsl可视化&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 在wsl使用docker&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>以下内容中 &lt;code>wsl&lt;/code>和&lt;code>ubuntu&lt;/code>含义相同,&lt;code>console&lt;/code>和&lt;code>命令行&lt;/code>含义相同.&lt;/p>
+&lt;/blockquote></description></item><item><title>Neo4j入门</title><link>https://zhimoe.github.io/post/neo4j-intro/</link><pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/neo4j-intro/</guid><description>&lt;h3 id="neo4j图数据库介绍">neo4j图数据库介绍&lt;/h3>
+&lt;p>neo4j是目前排名最高的图数据库,分为商业和社区版本,社区版只支持单机,而且查询的运行时(runtime)不同(cypher runtime:interpreted(社区版),slotted(企业版)). 数据库排名可以在 &lt;a href="https://db-engines.com/en/ranking/graph+dbms">https://db-engines.com/en/ranking/graph+dbms&lt;/a> 查看,下一代最有前景的开源图数据库是dgraph,目前还积极开发中,生产未就绪,等他的Java客户端再成熟一点可以试用.&lt;/p>
+&lt;p>neo4j数据库中只有3个概念: Node, Relationship, Properties. Node表示实体类别,使用Label区分,例如一个节点可以有Person/Father等多个标签,Relationship即关系,雇佣关系,父子关系,投资关系,交易关系等. Node和Relationship都可以有Proerties,属性自身不分是属于节点还是属于关系,例如Person可以有属性name,关系也可以用属性name.你可以在neo4j browser左侧看到当前数据库的所有Node Label,Relationship Type,Properties.&lt;/p></description></item><item><title>Jupyter Notebook Install New Package</title><link>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</link><pubDate>Thu, 01 Nov 2018 19:04:32 +0800</pubDate><guid>https://zhimoe.github.io/post/jupyter-notebook-install-new-package/</guid><description>&lt;p>如何正确地在notebook中安装lib package&lt;/p>
+&lt;h3 id="原文">原文&lt;/h3>
+&lt;p>&lt;a href="https://jakevdp.github.io/blog/2017/12/05/installing-python-packages-from-jupyter/">installing new python package from jupyter notebook&lt;/a>&lt;/p>
+&lt;h3 id="笔记">笔记&lt;/h3>
+&lt;p>在pycharm写代码中如果使用到新的package,例如&lt;code>numpy&lt;/code>,只需要输入&lt;code>import numpy&lt;/code> 然后ALT+ENTER在提示中选择install new package即可.&lt;/p>
+&lt;p>在notebook中,网上的教程都说是&lt;code>!pip install numpy&lt;/code>. 但是这个可能有坑.究其原因是因为:&lt;/p></description></item><item><title>Java Thread Pool Hierachy</title><link>https://zhimoe.github.io/post/java-threadpool-hierachy/</link><pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate><guid>https://zhimoe.github.io/post/java-threadpool-hierachy/</guid><description>&lt;h3 id="thread-pool-classes-hierachy">thread pool classes hierachy&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">java thread pool class hierarchy
 Executor (java.util.concurrent)
 |---ExecutorService (java.util.concurrent)
-    |---AbstractExecutorService (java.util.concurrent)
-    |   |---AbstractEventExecutor (io.netty.util.concurrent)
-    |   |---ForkJoinPool (java.util.concurrent)
-    |   |---ThreadPoolExecutor (java.util.concurrent)
-    |   |   |---ScheduledThreadPoolExecutor (java.util.concurrent)
-    |---DelegatedExecutorService in Executors (java.util.concurrent)
-    |---ScheduledExecutorService (java.util.concurrent)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Spark Basic</title>
-      <link>https://zhimoe.github.io/post/spark-basic/</link>
-      <pubDate>Sat, 31 Mar 2018 00:17:30 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/spark-basic/</guid>
-      <description>&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;
-&lt;p&gt;大数据计算和普通的程序并无本质区别：数据输入=&amp;gt;计算=&amp;gt;输出和结果的持久化.这里的挑战在于计算的效率和容错性.由于数据输入巨大,计算的效率是基本的要求.为了在通用硬件上高效完成大量计算,唯一的途径就是将计算任务拆分分布式计算.这就引出了新的问题：分布式计算资源的管理（Mesos,YARN）,分布式计算失败后的恢复（容错性）（Spark RDD）,以及分布式的数据输入和保存（分布式文件HDFS）.hadoop生态圈就是为了解决几个问题设计的(YARN,MapR,HDFS).只不过在计算这一环节Spark做的更加高效取代了MapR.所以先看下hadoop的核心两个组件.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>单元测试如何Mock有参数的void方法</title>
-      <link>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</link>
-      <pubDate>Sun, 23 Apr 2017 21:51:20 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</guid>
-      <description>&lt;p&gt;测试中如果遇到被测试方法调用void方法，在Mockito中改如何处理?&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>熊打虎</title>
-      <link>https://zhimoe.github.io/about/</link>
-      <pubDate>Sun, 09 Apr 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/about/</guid>
-      <description>A JVM lang programmer, use Java/Scala/Clojure, also know a little Python and Rust, yeah, I like learning new programming language. Most time I write user stories in the daily job. I make programming fonts, and I&amp;rsquo;m proud of the Aurulent font, try it! checkout my resume</description>
-    </item>
-    
-    <item>
-      <title>java generic</title>
-      <link>https://zhimoe.github.io/post/java-generic/</link>
-      <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-generic/</guid>
-      <description>&lt;h3 id=&#34;泛型&#34;&gt;泛型&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;// 类
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Tuple&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;S&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;first&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;S&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;second&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;// 泛型方法也可在非泛型类里面
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;ArrayAlg&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;getMiddle&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;];&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>IO-Java-Stream-Write-Reader</title>
-      <link>https://zhimoe.github.io/post/io-java-stream-write-reader/</link>
-      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/io-java-stream-write-reader/</guid>
-      <description>&lt;p&gt;上次总结了java中不同读写文件的方法,这次总结一下基本的IO流.网上的总结大部分是以Stream和Reader、Writer来介绍的.这次从封装层次来介绍.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java 6/7/8中文件读写</title>
-      <link>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</link>
-      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</guid>
-      <description>&lt;p&gt;如何在Java中读写文件,这里保留Java6/7版本,但是你永远不应该使用它们,优先使用Path,Files,Paths三个类.
-资料：&lt;a href=&#34;http://www.javapractices.com/topic/TopicAction.do?Id=42&#34;&gt;Reading and writing text files&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;java8最佳实践&#34;&gt;Java8最佳实践&lt;/h2&gt;
-&lt;p&gt;不要用File对象,改用Path对象,该对象既表示文件路径,也表示文件文本（应该认为文件也是路径的一部分）,对于以前的File,可以File.toPath()得到一个Path对象.
+|---AbstractExecutorService (java.util.concurrent)
+| |---AbstractEventExecutor (io.netty.util.concurrent)
+| |---ForkJoinPool (java.util.concurrent)
+| |---ThreadPoolExecutor (java.util.concurrent)
+| | |---ScheduledThreadPoolExecutor (java.util.concurrent)
+|---DelegatedExecutorService in Executors (java.util.concurrent)
+|---ScheduledExecutorService (java.util.concurrent)
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Spark Basic</title><link>https://zhimoe.github.io/post/spark-basic/</link><pubDate>Sat, 31 Mar 2018 00:17:30 +0800</pubDate><guid>https://zhimoe.github.io/post/spark-basic/</guid><description>&lt;h2 id="引言">引言&lt;/h2>
+&lt;p>大数据计算和普通的程序并无本质区别：数据输入=&amp;gt;计算=&amp;gt;输出和结果的持久化.这里的挑战在于计算的效率和容错性.由于数据输入巨大,计算的效率是基本的要求.为了在通用硬件上高效完成大量计算,唯一的途径就是将计算任务拆分分布式计算.这就引出了新的问题：分布式计算资源的管理（Mesos,YARN）,分布式计算失败后的恢复（容错性）（Spark RDD）,以及分布式的数据输入和保存（分布式文件HDFS）.hadoop生态圈就是为了解决几个问题设计的(YARN,MapR,HDFS).只不过在计算这一环节Spark做的更加高效取代了MapR.所以先看下hadoop的核心两个组件.&lt;/p></description></item><item><title>单元测试如何Mock有参数的void方法</title><link>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</link><pubDate>Sun, 23 Apr 2017 21:51:20 +0800</pubDate><guid>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</guid><description>&lt;p>测试中如果遇到被测试方法调用void方法，在Mockito中改如何处理?&lt;/p></description></item><item><title>熊打虎</title><link>https://zhimoe.github.io/about/</link><pubDate>Sun, 09 Apr 2017 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/about/</guid><description>A JVM lang programmer, use Java/Scala/Clojure, also know a little Python and Rust, yeah, I like learning new programming language. Most time I write user stories in the daily job. I make programming fonts, and I&amp;rsquo;m proud of the Aurulent font, try it! checkout my resume</description></item><item><title>java generic</title><link>https://zhimoe.github.io/post/java-generic/</link><pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-generic/</guid><description>&lt;h3 id="泛型">泛型&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#177500">// 类
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Tuple&lt;/span>&lt;span style="color:#000">&amp;lt;&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">S&lt;/span>&lt;span style="color:#000">&amp;gt;&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">T&lt;/span> &lt;span style="color:#000">first&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">S&lt;/span> &lt;span style="color:#000">second&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#177500">// 泛型方法也可在非泛型类里面
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">ArrayAlg&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#000">&amp;lt;&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#000">&amp;gt;&lt;/span> &lt;span style="color:#000">T&lt;/span> &lt;span style="color:#000">getMiddle&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#000">...&lt;/span> &lt;span style="color:#000">a&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">a&lt;/span>&lt;span style="color:#000">[&lt;/span>&lt;span style="color:#000">a&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">length&lt;/span> &lt;span style="color:#000">/&lt;/span> &lt;span style="color:#000">2&lt;/span>&lt;span style="color:#000">];&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>IO-Java-Stream-Write-Reader</title><link>https://zhimoe.github.io/post/io-java-stream-write-reader/</link><pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/io-java-stream-write-reader/</guid><description>&lt;p>上次总结了java中不同读写文件的方法,这次总结一下基本的IO流.网上的总结大部分是以Stream和Reader、Writer来介绍的.这次从封装层次来介绍.&lt;/p></description></item><item><title>Java 6/7/8中文件读写</title><link>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</link><pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</guid><description>&lt;p>如何在Java中读写文件,这里保留Java6/7版本,但是你永远不应该使用它们,优先使用Path,Files,Paths三个类.
+资料：&lt;a href="http://www.javapractices.com/topic/TopicAction.do?Id=42">Reading and writing text files&lt;/a>&lt;/p>
+&lt;h2 id="java8最佳实践">Java8最佳实践&lt;/h2>
+&lt;p>不要用File对象,改用Path对象,该对象既表示文件路径,也表示文件文本（应该认为文件也是路径的一部分）,对于以前的File,可以File.toPath()得到一个Path对象.
 Files是一个静态类,操作文件内容.Paths是静态工具类,操作文件路径,例如拼接文件路径,以前要使用平台无关的分隔符表示：File.pathSeparator, File.separator.
-例如,构建一个文件对象:&lt;code&gt;Path path = Paths.get(&amp;quot;~/test/&amp;quot;, &amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;, &amp;quot;a.txt&amp;quot;);&lt;/code&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java AOP example</title>
-      <link>https://zhimoe.github.io/post/java-aop-example/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-aop-example/</guid>
-      <description>&lt;p&gt;Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:
-&lt;a href=&#34;https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html&#34;&gt;A Simple Introduction to AOP&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;提醒个点,使用注解的方式写切面时,增加了一个空方法,即：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Test&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;@Pointcut&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;execution(* org.bk.inventory.service.*.*(..))&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;serviceMethods&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(){&lt;/span&gt;
-        &lt;span style=&#34;color:#177500&#34;&gt;//...
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 1 basic</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid>
-      <description>&lt;p&gt;知识点太多了.先列举一些知识点,然后在分别做一点笔记.&lt;/p&gt;
-&lt;h4 id=&#34;模式&#34;&gt;模式&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;共享可变性&lt;/li&gt;
-&lt;li&gt;隔离可变性&lt;/li&gt;
-&lt;li&gt;纯粹不可变性:STM,&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 2 Runnable Callable FutureExecutor</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</guid>
-      <description>&lt;h3 id=&#34;定义任务的内容&#34;&gt;定义任务的内容&lt;/h3&gt;
-&lt;p&gt;多线程编程的核心元素就是任务,任务是独立的活动.不依赖其他任务的状态,结果,以及边界效应.&lt;br&gt;
-定义任务的内容使用Runnable和Callable.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 3 synchronized or Lock</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</guid>
-      <description>&lt;h3 id=&#34;synchronized-method和synchronized-block的区别&#34;&gt;synchronized method和synchronized block的区别&lt;/h3&gt;
-&lt;p&gt;如果是synchronized(this),那么和synchronized 方法没有任何区别,锁定对象都是方法所在的对象.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mymethod&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mymethod&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#a90d91&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 4 CAS and atomic</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</guid>
-      <description>&lt;h4 id=&#34;atomiclong-code&#34;&gt;AtomicLong code:&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;incrementAndGet&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(;;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;current&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;get&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;();&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;next&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;current&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;compareAndSet&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;current&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;next&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;))&lt;/span&gt;
-          &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;next&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;//in java 8:
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;incrementAndGet&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;unsafe&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;getAndAddLong&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;valueOffset&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;1L&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;1L&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 5 Synchronizer and AQS</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</guid>
-      <description>&lt;p&gt;CountDownLatch和CyclicBarrier示例&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java-==-and-equals</title>
-      <link>https://zhimoe.github.io/post/java-and-equal/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-and-equal/</guid>
-      <description>&lt;p&gt;samples code and notes on java == and equals&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java动态代理</title>
-      <link>https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
-      <description>&lt;h3 id=&#34;好文&#34;&gt;好文&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;http://www.ibm.com/developerworks/cn/java/j-lo-proxy1/&#34;&gt;Java 动态代理机制分析及扩展&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;更深入的一篇:
-&lt;a href=&#34;http://nemotan.github.io/2015/11/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/&#34;&gt;java设计模式-动态代理模式&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java注解和注解处理器</title>
-      <link>https://zhimoe.github.io/post/java-annotation-processing/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-annotation-processing/</guid>
-      <description>&lt;h3 id=&#34;注解处理&#34;&gt;注解处理&lt;/h3&gt;
-&lt;p&gt;注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的.
+例如,构建一个文件对象:&lt;code>Path path = Paths.get(&amp;quot;~/test/&amp;quot;, &amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;, &amp;quot;a.txt&amp;quot;);&lt;/code>&lt;/p></description></item><item><title>Java AOP example</title><link>https://zhimoe.github.io/post/java-aop-example/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-aop-example/</guid><description>&lt;p>Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:
+&lt;a href="https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html">A Simple Introduction to AOP&lt;/a>&lt;/p>
+&lt;p>提醒个点,使用注解的方式写切面时,增加了一个空方法,即：&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Test&lt;/span>&lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">@Pointcut&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;execution(* org.bk.inventory.service.*.*(..))&amp;#34;&lt;/span>&lt;span style="color:#000">)&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">serviceMethods&lt;/span>&lt;span style="color:#000">(){&lt;/span>
+&lt;span style="color:#177500">//...
+&lt;/span>&lt;span style="color:#177500">&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java concurrency 1 basic</title><link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid><description>&lt;p>知识点太多了.先列举一些知识点,然后在分别做一点笔记.&lt;/p>
+&lt;h4 id="模式">模式&lt;/h4>
+&lt;ol>
+&lt;li>共享可变性&lt;/li>
+&lt;li>隔离可变性&lt;/li>
+&lt;li>纯粹不可变性:STM,&lt;/li>
+&lt;/ol></description></item><item><title>Java concurrency 2 Runnable Callable FutureExecutor</title><link>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</guid><description>&lt;h3 id="定义任务的内容">定义任务的内容&lt;/h3>
+&lt;p>多线程编程的核心元素就是任务,任务是独立的活动.不依赖其他任务的状态,结果,以及边界效应.&lt;br>
+定义任务的内容使用Runnable和Callable.&lt;/p></description></item><item><title>Java concurrency 3 synchronized or Lock</title><link>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</guid><description>&lt;h3 id="synchronized-method和synchronized-block的区别">synchronized method和synchronized block的区别&lt;/h3>
+&lt;p>如果是synchronized(this),那么和synchronized 方法没有任何区别,锁定对象都是方法所在的对象.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">synchronized&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">mymethod&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span> &lt;span style="color:#000">...&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">mymethod&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">synchronized&lt;/span> &lt;span style="color:#000">(&lt;/span>&lt;span style="color:#a90d91">this&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">{&lt;/span> &lt;span style="color:#000">...&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java concurrency 4 CAS and atomic</title><link>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</guid><description>&lt;h4 id="atomiclong-code">AtomicLong code:&lt;/h4>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">final&lt;/span> &lt;span style="color:#a90d91">long&lt;/span> &lt;span style="color:#000">incrementAndGet&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">for&lt;/span> &lt;span style="color:#000">(;;)&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">long&lt;/span> &lt;span style="color:#000">current&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#000">get&lt;/span>&lt;span style="color:#000">();&lt;/span>
+&lt;span style="color:#a90d91">long&lt;/span> &lt;span style="color:#000">next&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#000">current&lt;/span> &lt;span style="color:#000">+&lt;/span> &lt;span style="color:#000">1&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#a90d91">if&lt;/span> &lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">compareAndSet&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">current&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">next&lt;/span>&lt;span style="color:#000">))&lt;/span>
+&lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">next&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#177500">//in java 8:
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">final&lt;/span> &lt;span style="color:#a90d91">long&lt;/span> &lt;span style="color:#000">incrementAndGet&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">unsafe&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">getAndAddLong&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#a90d91">this&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">valueOffset&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">1L&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">+&lt;/span> &lt;span style="color:#000">1L&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java concurrency 5 Synchronizer and AQS</title><link>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</guid><description>&lt;p>CountDownLatch和CyclicBarrier示例&lt;/p></description></item><item><title>Java-==-and-equals</title><link>https://zhimoe.github.io/post/java-and-equal/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-and-equal/</guid><description>&lt;p>samples code and notes on java == and equals&lt;/p></description></item><item><title>Java动态代理</title><link>https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid><description>&lt;h3 id="好文">好文&lt;/h3>
+&lt;p>&lt;a href="http://www.ibm.com/developerworks/cn/java/j-lo-proxy1/">Java 动态代理机制分析及扩展&lt;/a>&lt;/p>
+&lt;p>更深入的一篇:
+&lt;a href="http://nemotan.github.io/2015/11/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">java设计模式-动态代理模式&lt;/a>&lt;/p></description></item><item><title>Java注解和注解处理器</title><link>https://zhimoe.github.io/post/java-annotation-processing/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-annotation-processing/</guid><description>&lt;h3 id="注解处理">注解处理&lt;/h3>
+&lt;p>注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的.
 关于注解的定义就不说了,主要说说注解处理
 本文根据以下资料并进行部分修改：
-&lt;a href=&#34;http://www.angelikalanger.com/Conferences/Slides/JavaAnnotationProcessing-JSpring-2008.pdf&#34;&gt;JavaAnnotationProcessing&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>单例模式和序列化</title>
-      <link>https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
-      <description>&lt;p&gt;Java单例模式的各种写法和序列化
-&lt;a href=&#34;http://www.hollischuang.com/archives/205&#34;&gt;参考资料&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;饱汉式&#34;&gt;饱汉式&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Singleton&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;  
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Singleton&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;null&lt;/span&gt;  
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Singleton&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(){}&lt;/span&gt;   
-	    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Singleton&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;getInstance&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;  
-	        &lt;span style=&#34;color:#a90d91&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;             &lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Singleton&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;();&lt;/span&gt;         &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;  
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;  
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;  &lt;span style=&#34;color:#177500&#34;&gt;//饱汉式,使用时创建
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>理解Gradle build脚本结构与语法</title>
-      <link>https://zhimoe.github.io/post/understanding-gradle-buildscript/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/understanding-gradle-buildscript/</guid>
-      <description>&lt;p&gt;在看这个之前,希望你有用ant或者maven的使用经验,还有,对groovy的语法有一个简单的了解,不懂也没关系,下面会介绍.
-理解gradle文件的前提是理解一个重要的groovy概念:closure&lt;/p&gt;
-&lt;h4 id=&#34;closure&#34;&gt;closure&lt;/h4&gt;
-&lt;p&gt;一个closure是一个定义在groovy文件中的{}代码块,这个代码块类似js中的匿名函数,它可以被赋值给变量,可以被调用,可以接收参数,还可以作为参数传递给别的函数.&lt;/p&gt;
-&lt;p&gt;closure中最重要的两个概念是委托对象和作为参数传递的语法格式（理解gradle文件很重要）.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>面试题-类加载过程和子类重写父类方法的调用</title>
-      <link>https://zhimoe.github.io/post/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</guid>
-      <description>&lt;p&gt;最近非常火的一道携程面试题Java&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Base&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;baseName&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;base&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Base&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;callName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;();&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;callName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;baseName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-    &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Base&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;baseName&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;sub&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-
-        &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;callName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-            &lt;span style=&#34;color:#000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;baseName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;Base&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Sub&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color:#177500&#34;&gt;// 输出？
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java新手如何学习SpringMVC框架</title>
-      <link>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</link>
-      <pubDate>Fri, 21 Aug 2015 22:02:50 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</guid>
-      <description>&lt;p&gt;知乎回答备份,&lt;a href=&#34;https://www.zhihu.com/question/21142149/answer/52383396&#34;&gt;原答案写于15年&lt;/a&gt;.
-6,404 人赞同了该回答&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;a href="http://www.angelikalanger.com/Conferences/Slides/JavaAnnotationProcessing-JSpring-2008.pdf">JavaAnnotationProcessing&lt;/a>&lt;/p></description></item><item><title>单例模式和序列化</title><link>https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</guid><description>&lt;p>Java单例模式的各种写法和序列化
+&lt;a href="http://www.hollischuang.com/archives/205">参考资料&lt;/a>&lt;/p>
+&lt;h3 id="饱汉式">饱汉式&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Singleton&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#000">Singleton&lt;/span> &lt;span style="color:#000">instance&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#a90d91">null&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">Singleton&lt;/span> &lt;span style="color:#000">(){}&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#000">Singleton&lt;/span> &lt;span style="color:#000">getInstance&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">if&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">instance&lt;/span> &lt;span style="color:#000">==&lt;/span> &lt;span style="color:#a90d91">null&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">instance&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#a90d91">new&lt;/span> &lt;span style="color:#000">Singleton&lt;/span>&lt;span style="color:#000">();&lt;/span> &lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">instance&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span> &lt;span style="color:#177500">//饱汉式,使用时创建
+&lt;/span>&lt;span style="color:#177500">&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>理解Gradle build脚本结构与语法</title><link>https://zhimoe.github.io/post/understanding-gradle-buildscript/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/understanding-gradle-buildscript/</guid><description>&lt;p>在看这个之前,希望你有用ant或者maven的使用经验,还有,对groovy的语法有一个简单的了解,不懂也没关系,下面会介绍.
+理解gradle文件的前提是理解一个重要的groovy概念:closure&lt;/p>
+&lt;h4 id="closure">closure&lt;/h4>
+&lt;p>一个closure是一个定义在groovy文件中的{}代码块,这个代码块类似js中的匿名函数,它可以被赋值给变量,可以被调用,可以接收参数,还可以作为参数传递给别的函数.&lt;/p>
+&lt;p>closure中最重要的两个概念是委托对象和作为参数传递的语法格式（理解gradle文件很重要）.&lt;/p></description></item><item><title>面试题-类加载过程和子类重写父类方法的调用</title><link>https://zhimoe.github.io/post/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</guid><description>&lt;p>最近非常火的一道携程面试题Java&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Base&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">String&lt;/span> &lt;span style="color:#000">baseName&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#c41a16">&amp;#34;base&amp;#34;&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#000">Base&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">callName&lt;/span>&lt;span style="color:#000">();&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">callName&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">System&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">out&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">println&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">baseName&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Sub&lt;/span> &lt;span style="color:#a90d91">extends&lt;/span> &lt;span style="color:#000">Base&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">String&lt;/span> &lt;span style="color:#000">baseName&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#c41a16">&amp;#34;sub&amp;#34;&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">callName&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">System&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">out&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">println&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">baseName&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">String&lt;/span>&lt;span style="color:#000">[]&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">Base&lt;/span> &lt;span style="color:#000">b&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#a90d91">new&lt;/span> &lt;span style="color:#000">Sub&lt;/span>&lt;span style="color:#000">();&lt;/span> &lt;span style="color:#177500">// 输出？
+&lt;/span>&lt;span style="color:#177500">&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java新手如何学习SpringMVC框架</title><link>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</link><pubDate>Fri, 21 Aug 2015 22:02:50 +0800</pubDate><guid>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</guid><description>&lt;p>知乎回答备份,&lt;a href="https://www.zhihu.com/question/21142149/answer/52383396">原答案写于15年&lt;/a>.
+6,404 人赞同了该回答&lt;/p></description></item></channel></rss>

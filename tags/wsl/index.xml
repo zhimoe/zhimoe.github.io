@@ -1,33 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>wsl on zhimoe</title>
-    <link>https://zhimoe.github.io/tags/wsl/</link>
-    <description>Recent content in wsl on zhimoe</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://zhimoe.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>wsl-docker-environment</title>
-      <link>https://zhimoe.github.io/post/wsl-docker-environment/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/wsl-docker-environment/</guid>
-      <description>&lt;p&gt;使用wsl,MobaXterm,cmder,docker打造可视化的linux开发环境&lt;/p&gt;
-&lt;p&gt;离不开Windows的理由很多,作为后端开发需要使用linux的情况也很多,双系统总归是不方便,而且linux下的GUI体验也没用Win 10好. 如果使用虚拟机,那么文件交换和网络等各种问题也需要解决,对系统的内存要求也更高一些.微软为了让更多的开发人员留在Win10上面,开发了wsl功能.目前的实际体验已经很棒,今天介绍一下如何打造一个可视化的linux开发环境&amp;ndash;即在Win10启动linux的GUI软件,例如vs code等.在wsl启动vs code写代码可以有效避免一些Windows和linux的编码和换行问题.&lt;/p&gt;
-&lt;p&gt;本教程分为2部分:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 配置wsl可视化&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 在wsl使用docker&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;以下内容中 &lt;code&gt;wsl&lt;/code&gt;和&lt;code&gt;ubuntu&lt;/code&gt;含义相同,&lt;code&gt;console&lt;/code&gt;和&lt;code&gt;命令行&lt;/code&gt;含义相同.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wsl on zhimoe</title><link>https://zhimoe.github.io/tags/wsl/</link><description>Recent content in wsl on zhimoe</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://zhimoe.github.io/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>wsl-docker-environment</title><link>https://zhimoe.github.io/post/wsl-docker-environment/</link><pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/wsl-docker-environment/</guid><description>&lt;p>使用wsl,MobaXterm,cmder,docker打造可视化的linux开发环境&lt;/p>
+&lt;p>离不开Windows的理由很多,作为后端开发需要使用linux的情况也很多,双系统总归是不方便,而且linux下的GUI体验也没用Win 10好. 如果使用虚拟机,那么文件交换和网络等各种问题也需要解决,对系统的内存要求也更高一些.微软为了让更多的开发人员留在Win10上面,开发了wsl功能.目前的实际体验已经很棒,今天介绍一下如何打造一个可视化的linux开发环境&amp;ndash;即在Win10启动linux的GUI软件,例如vs code等.在wsl启动vs code写代码可以有效避免一些Windows和linux的编码和换行问题.&lt;/p>
+&lt;p>本教程分为2部分:&lt;/p>
+&lt;ul>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 配置wsl可视化&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 在wsl使用docker&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>以下内容中 &lt;code>wsl&lt;/code>和&lt;code>ubuntu&lt;/code>含义相同,&lt;code>console&lt;/code>和&lt;code>命令行&lt;/code>含义相同.&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

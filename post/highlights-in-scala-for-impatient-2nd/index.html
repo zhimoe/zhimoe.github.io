@@ -1,176 +1,20 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Highlights in Scala for Impatient 2nd - zhimoe</title>
-    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
-    
-    <meta property="og:title" content="Highlights in Scala for Impatient 2nd">
-    <meta property="og:site_name" content="zhimoe">
-    <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Highlights in Scala for Impatient 2nd - zhimoe" />
-    <meta name="description" content="编程是一门手艺"> 
-    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/index.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />    
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/syntax.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-     fancybox: true, 
-    motion: true
-  };
-</script>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left page-home  ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-meta  custom-logo ">
-
-  <div class="custom-logo-site-title">
-    <a href="https://zhimoe.github.io"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhimoe</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">the craft of programming</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-      
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/post/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/about/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
-          </a>
-        </li>
-      
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
-      </li>
-    </ul>
-    <div class="site-search">
-      <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-    </div>
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-<section id="posts" class="posts-expand">
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/" itemprop="url">
-        Highlights in Scala for Impatient 2nd
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-01-15">
-    2020-01-15
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1831 字 ~4分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>key points in scala-for-impatient 2nd book, best book for java developer to use scala in a rush.
-scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala帮助很大.</p>
-<h3 id="functions">Functions</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• if expression has a value.
+<!doctype html><html lang=zh dir=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>Highlights in Scala for Impatient 2nd - zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="Highlights in Scala for Impatient 2nd"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="Highlights in Scala for Impatient 2nd - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.css rel=stylesheet><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span><span class=toggle-line></span><span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span><span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>the craft of programming</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class=menu-item><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>项目</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span><span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/ itemprop=url>Highlights in Scala for Impatient 2nd</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-01-15">2020-01-15</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>1831 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>4分钟</span></span>
+<span id=/post/highlights-in-scala-for-impatient-2nd/ class=leancloud_visitors data-flag-title="Highlights in Scala for Impatient 2nd">|
+<i class="fa fa-binoculars fa-fw"></i><span class=post-meta-item-text>阅读次数：</span>
+<span class=leancloud-visitors-count></span></span></div></header><div class=post-body itemprop=articleBody><p>key points in scala-for-impatient 2nd book, best book for java developer to use scala in a rush.
+scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala帮助很大.</p><h3 id=functions>Functions</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>• if expression has a value.
 • A block has a value — the value of its last expression.
 • The Scala for loop is like an “enhanced” Java for loop.
 • Semicolons are (mostly) optional.
@@ -180,94 +24,90 @@ scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala�
 • Exceptions work just like in Java or C++, but you use a “pattern matching” syntax for catch.
 • Scala has no checked exceptions.
 
-</code></pre></div><h3 id="arrays">Arrays</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• Use an Array if the length is fixed, and an ArrayBuffer if the length can vary.
+</code></pre></div><h3 id=arrays>Arrays</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>• Use an Array if the length is fixed, and an ArrayBuffer if the length can vary.
 • Don’t use new when supplying initial values.
 • Use () to access elements.
 • Use for (elem &lt;- arr) to traverse the elements.
 • Use for (elem &lt;- arr if . . . ) . . . yield . . . to transform into a new array.
 • Scala and Java arrays are interoperable; with ArrayBuffer, use scala.collection.JavaConverters._ 
 don&#39;t use scala.collection.JavaConversions.
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">import</span> <span style="color:#000">scala.collection.mutable.ArrayBuffer</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">b</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">ArrayBuffer</span><span style="color:#000">[</span><span style="color:#a90d91">Int</span><span style="color:#000">]()</span>
-<span style="color:#177500">// Or new ArrayBuffer[Int]
-</span><span style="color:#177500">// An empty array buffer, ready to hold integers
-</span><span style="color:#177500"></span>
-<span style="color:#000">b</span> <span style="color:#000">+=</span> <span style="color:#1c01ce">1</span>
-<span style="color:#177500">// ArrayBuffer(1)
-</span><span style="color:#177500">// Add an element at the end with +=
-</span><span style="color:#177500"></span>
-<span style="color:#000">b</span> <span style="color:#000">+=</span> <span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">5</span><span style="color:#000">)</span>
-<span style="color:#177500">// ArrayBuffer(1, 1, 2, 3, 5)
-</span><span style="color:#177500">// Add multiple elements at the end by enclosing them in parentheses
-</span><span style="color:#177500"></span>
-<span style="color:#000">b</span> <span style="color:#000">++=</span> <span style="color:#3f6e75">Array</span><span style="color:#000">(</span><span style="color:#1c01ce">8</span><span style="color:#000">,</span> <span style="color:#1c01ce">13</span><span style="color:#000">,</span> <span style="color:#1c01ce">21</span><span style="color:#000">)</span>
-<span style="color:#177500">// ArrayBuffer(1, 1, 2, 3, 5, 8, 13, 21)
-</span><span style="color:#177500">// You can append any collection with the ++= operator
-</span><span style="color:#177500"></span>
-<span style="color:#000">b</span><span style="color:#000">.</span><span style="color:#000">trimEnd</span><span style="color:#000">(</span><span style="color:#1c01ce">5</span><span style="color:#000">)</span>
-<span style="color:#177500">// ArrayBuffer(1, 1, 2)
-</span><span style="color:#177500">// Removes the last five elements
-</span><span style="color:#177500"></span>
-<span style="color:#000">b</span><span style="color:#000">.</span><span style="color:#000">insert</span><span style="color:#000">(</span><span style="color:#1c01ce">2</span><span style="color:#000">,</span> <span style="color:#1c01ce">6</span><span style="color:#000">)</span>
-<span style="color:#177500">// ArrayBuffer(1, 1, 6, 2)
-</span><span style="color:#177500">// Insert before index 2
-</span><span style="color:#177500"></span>
+</code></pre></div><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=color:#a90d91>import</span> <span style=color:#000>scala.collection.mutable.ArrayBuffer</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>b</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>ArrayBuffer</span><span style=color:#000>[</span><span style=color:#a90d91>Int</span><span style=color:#000>]()</span>
+<span style=color:#177500>// Or new ArrayBuffer[Int]
+</span><span style=color:#177500>// An empty array buffer, ready to hold integers
+</span><span style=color:#177500></span>
+<span style=color:#000>b</span> <span style=color:#000>+=</span> <span style=color:#1c01ce>1</span>
+<span style=color:#177500>// ArrayBuffer(1)
+</span><span style=color:#177500>// Add an element at the end with +=
+</span><span style=color:#177500></span>
+<span style=color:#000>b</span> <span style=color:#000>+=</span> <span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>5</span><span style=color:#000>)</span>
+<span style=color:#177500>// ArrayBuffer(1, 1, 2, 3, 5)
+</span><span style=color:#177500>// Add multiple elements at the end by enclosing them in parentheses
+</span><span style=color:#177500></span>
+<span style=color:#000>b</span> <span style=color:#000>++=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>(</span><span style=color:#1c01ce>8</span><span style=color:#000>,</span> <span style=color:#1c01ce>13</span><span style=color:#000>,</span> <span style=color:#1c01ce>21</span><span style=color:#000>)</span>
+<span style=color:#177500>// ArrayBuffer(1, 1, 2, 3, 5, 8, 13, 21)
+</span><span style=color:#177500>// You can append any collection with the ++= operator
+</span><span style=color:#177500></span>
+<span style=color:#000>b</span><span style=color:#000>.</span><span style=color:#000>trimEnd</span><span style=color:#000>(</span><span style=color:#1c01ce>5</span><span style=color:#000>)</span>
+<span style=color:#177500>// ArrayBuffer(1, 1, 2)
+</span><span style=color:#177500>// Removes the last five elements
+</span><span style=color:#177500></span>
+<span style=color:#000>b</span><span style=color:#000>.</span><span style=color:#000>insert</span><span style=color:#000>(</span><span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>6</span><span style=color:#000>)</span>
+<span style=color:#177500>// ArrayBuffer(1, 1, 6, 2)
+</span><span style=color:#177500>// Insert before index 2
+</span><span style=color:#177500></span>
 
-<span style="color:#177500">// iterate array with index 
-</span><span style="color:#177500">// use view or use index(it&#39;s faster)
-</span><span style="color:#177500"></span><span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#a90d91">&lt;-</span><span style="color:#000">b</span><span style="color:#000">.</span><span style="color:#000">indices</span><span style="color:#000">){</span><span style="color:#a90d91">val</span> <span style="color:#000">v</span> <span style="color:#a90d91">=</span> <span style="color:#000">b</span><span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">)}</span>
+<span style=color:#177500>// iterate array with index 
+</span><span style=color:#177500>// use view or use index(it&#39;s faster)
+</span><span style=color:#177500></span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#a90d91>&lt;-</span><span style=color:#000>b</span><span style=color:#000>.</span><span style=color:#000>indices</span><span style=color:#000>){</span><span style=color:#a90d91>val</span> <span style=color:#000>v</span> <span style=color:#a90d91>=</span> <span style=color:#000>b</span><span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>)}</span>
 
-</code></pre></div><h3 id="maps--tuples">Maps &amp; Tuples</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">var</span> <span style="color:#000">scores</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Map</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Alice&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">10</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Bob&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Cindy&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">8</span><span style="color:#000">)</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">scores2</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Map</span><span style="color:#000">((</span><span style="color:#c41a16">&#34;Alice&#34;</span><span style="color:#000">,</span> <span style="color:#1c01ce">10</span><span style="color:#000">),</span> <span style="color:#000">(</span><span style="color:#c41a16">&#34;Bob&#34;</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">),</span> <span style="color:#000">(</span><span style="color:#c41a16">&#34;Cindy&#34;</span><span style="color:#000">,</span> <span style="color:#1c01ce">8</span><span style="color:#000">))</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">bobsScore</span> <span style="color:#a90d91">=</span> <span style="color:#000">scores</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Bob&#34;</span><span style="color:#000">)</span> <span style="color:#177500">// Like scores.get(&#34;Bob&#34;) in Java
-</span><span style="color:#177500"></span>
-<span style="color:#a90d91">val</span> <span style="color:#000">scores1</span> <span style="color:#a90d91">=</span> <span style="color:#000">scala</span><span style="color:#000">.</span><span style="color:#000">collection</span><span style="color:#000">.</span><span style="color:#000">mutable</span><span style="color:#000">.</span><span style="color:#3f6e75">Map</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Alice&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">10</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Bob&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Cindy&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">8</span><span style="color:#000">)</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">scores3</span> <span style="color:#a90d91">=</span> <span style="color:#000">scala</span><span style="color:#000">.</span><span style="color:#000">collection</span><span style="color:#000">.</span><span style="color:#000">mutable</span><span style="color:#000">.</span><span style="color:#3f6e75">Map</span><span style="color:#000">[</span><span style="color:#a90d91">String</span>, <span style="color:#a90d91">Int</span><span style="color:#000">]()</span>
-<span style="color:#000">scores1</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Bob&#34;</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#1c01ce">10</span> 
-<span style="color:#a90d91">val</span> <span style="color:#000">v</span> <span style="color:#a90d91">=</span> <span style="color:#000">scores1</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Bob&#34;</span><span style="color:#000">)</span> <span style="color:#177500">// NPE if key is not exists
-</span><span style="color:#177500"></span><span style="color:#000">scores1</span><span style="color:#000">.</span><span style="color:#000">get</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Bob&#34;</span><span style="color:#000">)</span> <span style="color:#177500">// None if key is not exists
-</span><span style="color:#177500"></span><span style="color:#000">scores1</span><span style="color:#000">.</span><span style="color:#000">getOrElse</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Bob&#34;</span><span style="color:#000">,</span><span style="color:#1c01ce">10</span><span style="color:#000">)</span><span style="color:#177500">// 10 if key is not exists
-</span><span style="color:#177500"></span><span style="color:#000">scores1</span> <span style="color:#000">+=</span> <span style="color:#000">(</span><span style="color:#c41a16">&#34;Bob&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">10</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Fred&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">7</span><span style="color:#000">)</span>
-<span style="color:#000">scores1</span> <span style="color:#000">-=</span> <span style="color:#c41a16">&#34;Alice&#34;</span>
+</code></pre></div><h3 id=maps--tuples>Maps & Tuples</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=color:#a90d91>var</span> <span style=color:#000>scores</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Map</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Alice&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Cindy&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>8</span><span style=color:#000>)</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>scores2</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Map</span><span style=color:#000>((</span><span style=color:#c41a16>&#34;Alice&#34;</span><span style=color:#000>,</span> <span style=color:#1c01ce>10</span><span style=color:#000>),</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>),</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;Cindy&#34;</span><span style=color:#000>,</span> <span style=color:#1c01ce>8</span><span style=color:#000>))</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>bobsScore</span> <span style=color:#a90d91>=</span> <span style=color:#000>scores</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>)</span> <span style=color:#177500>// Like scores.get(&#34;Bob&#34;) in Java
+</span><span style=color:#177500></span>
+<span style=color:#a90d91>val</span> <span style=color:#000>scores1</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>Map</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Alice&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Cindy&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>8</span><span style=color:#000>)</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>scores3</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>Map</span><span style=color:#000>[</span><span style=color:#a90d91>String</span>, <span style=color:#a90d91>Int</span><span style=color:#000>]()</span>
+<span style=color:#000>scores1</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>)</span> <span style=color:#a90d91>=</span> <span style=color:#1c01ce>10</span> 
+<span style=color:#a90d91>val</span> <span style=color:#000>v</span> <span style=color:#a90d91>=</span> <span style=color:#000>scores1</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>)</span> <span style=color:#177500>// NPE if key is not exists
+</span><span style=color:#177500></span><span style=color:#000>scores1</span><span style=color:#000>.</span><span style=color:#000>get</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>)</span> <span style=color:#177500>// None if key is not exists
+</span><span style=color:#177500></span><span style=color:#000>scores1</span><span style=color:#000>.</span><span style=color:#000>getOrElse</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>,</span><span style=color:#1c01ce>10</span><span style=color:#000>)</span><span style=color:#177500>// 10 if key is not exists
+</span><span style=color:#177500></span><span style=color:#000>scores1</span> <span style=color:#000>+=</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Fred&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>7</span><span style=color:#000>)</span>
+<span style=color:#000>scores1</span> <span style=color:#000>-=</span> <span style=color:#c41a16>&#34;Alice&#34;</span>
 
-<span style="color:#177500">// for immutable
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">newScores</span> <span style="color:#a90d91">=</span> <span style="color:#000">scores</span> <span style="color:#000">+</span> <span style="color:#000">(</span><span style="color:#c41a16">&#34;Bob&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">10</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Fred&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">7</span><span style="color:#000">)</span> <span style="color:#177500">// New map with update
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">scores4</span> <span style="color:#a90d91">=</span> <span style="color:#000">scores</span> <span style="color:#000">-</span> <span style="color:#c41a16">&#34;Alice&#34;</span>
-<span style="color:#000">scores</span> <span style="color:#000">-=</span> <span style="color:#c41a16">&#34;Alice&#34;</span>
+<span style=color:#177500>// for immutable
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>newScores</span> <span style=color:#a90d91>=</span> <span style=color:#000>scores</span> <span style=color:#000>+</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Fred&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>7</span><span style=color:#000>)</span> <span style=color:#177500>// New map with update
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>scores4</span> <span style=color:#a90d91>=</span> <span style=color:#000>scores</span> <span style=color:#000>-</span> <span style=color:#c41a16>&#34;Alice&#34;</span>
+<span style=color:#000>scores</span> <span style=color:#000>-=</span> <span style=color:#c41a16>&#34;Alice&#34;</span>
 
 
-<span style="color:#a90d91">for</span> <span style="color:#000">((</span><span style="color:#000">k</span><span style="color:#000">,</span> <span style="color:#000">v</span><span style="color:#000">)</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#000">scores</span><span style="color:#000">){}</span>
+<span style=color:#a90d91>for</span> <span style=color:#000>((</span><span style=color:#000>k</span><span style=color:#000>,</span> <span style=color:#000>v</span><span style=color:#000>)</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>scores</span><span style=color:#000>){}</span>
 
-<span style="color:#a90d91">for</span> <span style="color:#000">((</span><span style="color:#000">k</span><span style="color:#000">,</span> <span style="color:#000">v</span><span style="color:#000">)</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#000">scores</span><span style="color:#000">)</span> <span style="color:#a90d91">yield</span> <span style="color:#000">(</span><span style="color:#000">v</span><span style="color:#000">,</span> <span style="color:#000">k</span><span style="color:#000">)</span>
+<span style=color:#a90d91>for</span> <span style=color:#000>((</span><span style=color:#000>k</span><span style=color:#000>,</span> <span style=color:#000>v</span><span style=color:#000>)</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>scores</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>(</span><span style=color:#000>v</span><span style=color:#000>,</span> <span style=color:#000>k</span><span style=color:#000>)</span>
 
-<span style="color:#177500">// sorted map
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">sortedScores</span> <span style="color:#a90d91">=</span> <span style="color:#000">scala</span><span style="color:#000">.</span><span style="color:#000">collection</span><span style="color:#000">.</span><span style="color:#000">mutable</span><span style="color:#000">.</span><span style="color:#3f6e75">SortedMap</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Alice&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">10</span><span style="color:#000">,</span><span style="color:#c41a16">&#34;Fred&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">7</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Bob&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Cindy&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">8</span><span style="color:#000">)</span>
-<span style="color:#177500">// insert order
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">months</span> <span style="color:#a90d91">=</span> <span style="color:#000">scala</span><span style="color:#000">.</span><span style="color:#000">collection</span><span style="color:#000">.</span><span style="color:#000">mutable</span><span style="color:#000">.</span><span style="color:#3f6e75">LinkedHashMap</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;January&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">1</span><span style="color:#000">,</span><span style="color:#c41a16">&#34;February&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">2</span><span style="color:#000">,</span> 
-<span style="color:#c41a16">&#34;March&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;April&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">4</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;May&#34;</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">5</span><span style="color:#000">)</span>
+<span style=color:#177500>// sorted map
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>sortedScores</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>SortedMap</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Alice&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span><span style=color:#c41a16>&#34;Fred&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>7</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Cindy&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>8</span><span style=color:#000>)</span>
+<span style=color:#177500>// insert order
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>months</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>LinkedHashMap</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;January&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>1</span><span style=color:#000>,</span><span style=color:#c41a16>&#34;February&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> 
+<span style=color:#c41a16>&#34;March&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;April&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>4</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;May&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>5</span><span style=color:#000>)</span>
 
-<span style="color:#a90d91">import</span> <span style="color:#000">scala.collection.JavaConverters._</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>scala.collection.JavaConverters._</span>
 
-<span style="color:#177500">// tuple 
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">t</span> <span style="color:#a90d91">=</span> <span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">3.14</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Fred&#34;</span><span style="color:#000">)</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">second</span> <span style="color:#a90d91">=</span> <span style="color:#000">t</span><span style="color:#000">.</span><span style="color:#000">_2</span> <span style="color:#177500">// Sets second to 3.14
-</span><span style="color:#177500"></span>
+<span style=color:#177500>// tuple 
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>t</span> <span style=color:#a90d91>=</span> <span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>3.14</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Fred&#34;</span><span style=color:#000>)</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>second</span> <span style=color:#a90d91>=</span> <span style=color:#000>t</span><span style=color:#000>.</span><span style=color:#000>_2</span> <span style=color:#177500>// Sets second to 3.14
+</span><span style=color:#177500></span>
 
-<span style="color:#a90d91">val</span> <span style="color:#000">keys</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Array</span><span style="color:#000">()</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">values</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Array</span><span style="color:#000">()</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">kv</span> <span style="color:#a90d91">=</span> <span style="color:#000">keys</span><span style="color:#000">.</span><span style="color:#000">zip</span><span style="color:#000">(</span><span style="color:#000">values</span><span style="color:#000">).</span><span style="color:#000">toMap</span><span style="color:#000">()</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>keys</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>()</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>values</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>()</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>kv</span> <span style=color:#a90d91>=</span> <span style=color:#000>keys</span><span style=color:#000>.</span><span style=color:#000>zip</span><span style=color:#000>(</span><span style=color:#000>values</span><span style=color:#000>).</span><span style=color:#000>toMap</span><span style=color:#000>()</span>
 
-</code></pre></div><h3 id="object">Object</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• Use objects for singletons and utility methods.
+</code></pre></div><h3 id=object>Object</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>• Use objects for singletons and utility methods.
 • A class can have a companion object with the same name.
 • Objects can extend classes or traits.
 • The apply method of an object is usually used for constructing new instances of the companion class.
 • To avoid the main method, use an object that extends the App trait.
 • You can implement enumerations by extending the Enumeration object.
-</code></pre></div><h3 id="package">Package</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">
+</code></pre></div><h3 id=package>Package</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>
 The key points of this chapter are:
 • Packages nest just like inner classes.
 • Package paths are not absolute.
@@ -278,13 +118,11 @@ The key points of this chapter are:
 • Import statements can be anywhere.
 • Import statements can rename and hide members.
 • java.lang, scala, and Predef are always imported
-</code></pre></div><h3 id="inheritance">Inheritance</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• The `extends` and `final` keywords are as in Java.
+</code></pre></div><h3 id=inheritance>Inheritance</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>• The `extends` and `final` keywords are as in Java.
 • You must use `override` when you override a method.
 • Only the primary constructor can call the primary superclass constructor.
 • You can `override` fields.
-</code></pre></div><h3 id="files">Files</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• Source.fromFile(...).getLines.toArray yields all lines of a file.
+</code></pre></div><h3 id=files>Files</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>• Source.fromFile(...).getLines.toArray yields all lines of a file.
 • Source.fromFile(...).mkString yields the file contents as a string.
 • To convert a string into a number, use the toInt or toDouble method.
 • Use the Java PrintWriter to write text files.
@@ -292,33 +130,29 @@ The key points of this chapter are:
 • Use &#34;&#34;&#34;...&#34;&#34;&#34; if your regular expression contains backslashes or quotes.
 • If a regex pattern has groups, you can extract their contents using the syntax for 
   (regex(var1, ...,varn) &lt;- string).
-</code></pre></div><h3 id="traits">Traits</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Key points of this chapter:
+</code></pre></div><h3 id=traits>Traits</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>Key points of this chapter:
 • A class can implement any number of traits.
 • Traits can require implementing classes to have certain fields, methods, or superclasses.
 • Unlike Java interfaces, a Scala trait can provide implementations of methods and fields.
 • When you layer multiple traits, the order matters—the trait whose methods execute first goes to the back.
-</code></pre></div><h3 id="operators">Operators</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#a90d91">val</span> <span style="color:#000">a</span> <span style="color:#a90d91">=</span> <span style="color:#1c01ce">10</span>
-<span style="color:#177500">//a: Int = 10
-</span><span style="color:#177500"></span>
-<span style="color:#000">-</span><span style="color:#000">a</span>
-<span style="color:#177500">// res0: Int = -10
-</span><span style="color:#177500">//means the same as a.unary_-.
-</span><span style="color:#177500"></span>
-<span style="color:#000">a</span><span style="color:#000">.</span><span style="color:#000">unary_-</span>
-<span style="color:#177500">//res1: Int = -10
-</span><span style="color:#177500"></span>
+</code></pre></div><h3 id=operators>Operators</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=color:#a90d91>val</span> <span style=color:#000>a</span> <span style=color:#a90d91>=</span> <span style=color:#1c01ce>10</span>
+<span style=color:#177500>//a: Int = 10
+</span><span style=color:#177500></span>
+<span style=color:#000>-</span><span style=color:#000>a</span>
+<span style=color:#177500>// res0: Int = -10
+</span><span style=color:#177500>//means the same as a.unary_-.
+</span><span style=color:#177500></span>
+<span style=color:#000>a</span><span style=color:#000>.</span><span style=color:#000>unary_-</span>
+<span style=color:#177500>//res1: Int = -10
+</span><span style=color:#177500></span>
 
-</code></pre></div><h3 id="high-order-functions">High Order Functions</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Array(3.14, 1.42, 2.0).map{ (x: Double) =&gt; 3 * x }
+</code></pre></div><h3 id=high-order-functions>High Order Functions</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>Array(3.14, 1.42, 2.0).map{ (x: Double) =&gt; 3 * x }
 //==
 Array(3.14, 1.42, 2.0) map { (x: Double) =&gt; 3 * x }
 
 // diff method and function
 
-</code></pre></div><h3 id="collections">Collections</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+</code></pre></div><h3 id=collections>Collections</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>The key points of this chapter are:
 • All collections extend the Iterable trait.
 • The three major categories of collections are sequences, sets, and maps.
 • Scala has mutable and immutable versions of most collections.
@@ -331,7 +165,7 @@ Array(3.14, 1.42, 2.0) map { (x: Double) =&gt; 3 * x }
   Check them out before writing tedious loops.
 • Mapping, folding, and zipping are useful techniques for applying a function or operation to 
   the elements of a collection
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"> Iterable trait methods:
+</code></pre></div><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text> Iterable trait methods:
 head, last, headOption, lastOption
 tail, init
 length, isEmpty
@@ -353,7 +187,7 @@ mkString(before, between, after), addString(sb, before, between, after)
 toIterable, toSeq, toIndexedSeq,
 toArray, toBuffer, toList, toStream,
 toSet, toVector, toMap, to[C]
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Important Methods of the Seq Trait:
+</code></pre></div><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>Important Methods of the Seq Trait:
 
 contains(elem), containsSlice(seq),
 startsWith(seq), endsWith(seq)
@@ -375,27 +209,26 @@ reverse
 sorted, sortWith(less), sortBy(f)
 
 permutations, combinations(n)
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">//The map and flatMap methods are important because they are used
-</span><span style="color:#177500">//for translating for expressions. For example, the expression:
-</span><span style="color:#177500"></span>
-<span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#1c01ce">1</span> <span style="color:#000">to</span> <span style="color:#1c01ce">10</span><span style="color:#000">)</span> <span style="color:#a90d91">yield</span> <span style="color:#000">i</span> <span style="color:#000">*</span> <span style="color:#000">i</span>
-<span style="color:#177500">//is translated to
-</span><span style="color:#177500"></span><span style="color:#000">(</span><span style="color:#1c01ce">1</span> <span style="color:#000">to</span> <span style="color:#1c01ce">10</span><span style="color:#000">).</span><span style="color:#000">map</span><span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">i</span> <span style="color:#000">*</span> <span style="color:#000">i</span><span style="color:#000">)</span>
-<span style="color:#177500">//and
-</span><span style="color:#177500"></span><span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#1c01ce">1</span> <span style="color:#000">to</span> <span style="color:#1c01ce">10</span><span style="color:#000">;</span> <span style="color:#000">j</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#1c01ce">1</span> <span style="color:#000">to</span> <span style="color:#000">i</span><span style="color:#000">)</span> <span style="color:#a90d91">yield</span> <span style="color:#000">i</span> <span style="color:#000">*</span> <span style="color:#000">j</span>
-<span style="color:#177500">//becomes
-</span><span style="color:#177500"></span><span style="color:#000">(</span><span style="color:#1c01ce">1</span> <span style="color:#000">to</span> <span style="color:#1c01ce">10</span><span style="color:#000">).</span><span style="color:#000">flatMap</span><span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">(</span><span style="color:#1c01ce">1</span> <span style="color:#000">to</span> <span style="color:#000">i</span><span style="color:#000">).</span><span style="color:#000">map</span><span style="color:#000">(</span><span style="color:#000">j</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">i</span> <span style="color:#000">*</span> <span style="color:#000">j</span><span style="color:#000">))</span>
+</code></pre></div><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=color:#177500>//The map and flatMap methods are important because they are used
+</span><span style=color:#177500>//for translating for expressions. For example, the expression:
+</span><span style=color:#177500></span>
+<span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>i</span> <span style=color:#000>*</span> <span style=color:#000>i</span>
+<span style=color:#177500>//is translated to
+</span><span style=color:#177500></span><span style=color:#000>(</span><span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>).</span><span style=color:#000>map</span><span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>i</span> <span style=color:#000>*</span> <span style=color:#000>i</span><span style=color:#000>)</span>
+<span style=color:#177500>//and
+</span><span style=color:#177500></span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>;</span> <span style=color:#000>j</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#000>i</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>i</span> <span style=color:#000>*</span> <span style=color:#000>j</span>
+<span style=color:#177500>//becomes
+</span><span style=color:#177500></span><span style=color:#000>(</span><span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>).</span><span style=color:#000>flatMap</span><span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>(</span><span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#000>i</span><span style=color:#000>).</span><span style=color:#000>map</span><span style=color:#000>(</span><span style=color:#000>j</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>i</span> <span style=color:#000>*</span> <span style=color:#000>j</span><span style=color:#000>))</span>
 
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala">
-<span style="color:#a90d91">val</span> <span style="color:#000">coll</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">List</span><span style="color:#000">()</span>
-<span style="color:#000">coll</span><span style="color:#000">.</span><span style="color:#000">par</span><span style="color:#000">.</span><span style="color:#000">sum</span>
-<span style="color:#000">coll</span><span style="color:#000">.</span><span style="color:#000">par</span><span style="color:#000">.</span><span style="color:#000">count</span><span style="color:#000">(</span><span style="color:#a90d91">_</span> <span style="color:#000">%</span> <span style="color:#1c01ce">2</span> <span style="color:#000">==</span> <span style="color:#1c01ce">0</span><span style="color:#000">)</span>
-<span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#000">(</span><span style="color:#1c01ce">0</span> <span style="color:#000">until</span> <span style="color:#1c01ce">100000</span><span style="color:#000">).</span><span style="color:#000">par</span><span style="color:#000">)</span> <span style="color:#000">print</span><span style="color:#000">(</span><span style="color:#c41a16">s&#34; </span><span style="color:#c41a16">$i</span><span style="color:#c41a16">&#34;</span><span style="color:#000">)</span>
+</code></pre></div><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala>
+<span style=color:#a90d91>val</span> <span style=color:#000>coll</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>List</span><span style=color:#000>()</span>
+<span style=color:#000>coll</span><span style=color:#000>.</span><span style=color:#000>par</span><span style=color:#000>.</span><span style=color:#000>sum</span>
+<span style=color:#000>coll</span><span style=color:#000>.</span><span style=color:#000>par</span><span style=color:#000>.</span><span style=color:#000>count</span><span style=color:#000>(</span><span style=color:#a90d91>_</span> <span style=color:#000>%</span> <span style=color:#1c01ce>2</span> <span style=color:#000>==</span> <span style=color:#1c01ce>0</span><span style=color:#000>)</span>
+<span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>(</span><span style=color:#1c01ce>0</span> <span style=color:#000>until</span> <span style=color:#1c01ce>100000</span><span style=color:#000>).</span><span style=color:#000>par</span><span style=color:#000>)</span> <span style=color:#000>print</span><span style=color:#000>(</span><span style=color:#c41a16>s&#34; </span><span style=color:#c41a16>$i</span><span style=color:#c41a16>&#34;</span><span style=color:#000>)</span>
 
-<span style="color:#000">(</span><span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#000">(</span><span style="color:#1c01ce">0</span> <span style="color:#000">until</span> <span style="color:#1c01ce">100000</span><span style="color:#000">).</span><span style="color:#000">par</span><span style="color:#000">)</span> <span style="color:#a90d91">yield</span> <span style="color:#000">i</span><span style="color:#000">)</span> <span style="color:#000">==</span> <span style="color:#000">(</span><span style="color:#1c01ce">0</span> <span style="color:#000">until</span> <span style="color:#1c01ce">100000</span><span style="color:#000">)</span>
+<span style=color:#000>(</span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>(</span><span style=color:#1c01ce>0</span> <span style=color:#000>until</span> <span style=color:#1c01ce>100000</span><span style=color:#000>).</span><span style=color:#000>par</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>i</span><span style=color:#000>)</span> <span style=color:#000>==</span> <span style=color:#000>(</span><span style=color:#1c01ce>0</span> <span style=color:#000>until</span> <span style=color:#1c01ce>100000</span><span style=color:#000>)</span>
 
-</code></pre></div><h3 id="pattern-matching">Pattern Matching</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+</code></pre></div><h3 id=pattern-matching>Pattern Matching</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>The key points of this chapter are:
 • The match expression is a better switch, without fall-through.
 • If no pattern matches, a MatchError is thrown. Use the case _ pattern to avoid that.
 • A pattern can include an arbitrary condition, called a guard.
@@ -406,8 +239,7 @@ permutations, combinations(n)
   for pattern matching.
 • The common superclass in a case class hierarchy should be sealed.
 • Use the Option type for values that may or may not be present—it is safer than using null.
-</code></pre></div><h3 id="annotations">Annotations</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+</code></pre></div><h3 id=annotations>Annotations</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>The key points of this chapter are:
 • You can annotate classes, methods, fields, local variables, parameters,expressions, 
   type parameters, and types.
 • With expressions and types, the annotation follows the annotated item.
@@ -418,8 +250,7 @@ permutations, combinations(n)
 • The assert function takes advantage of the @elidable annotation. You can optionally remove 
   assertions from your Scala programs.
 • Use the @deprecated annotation to mark deprecated features.
-</code></pre></div><h3 id="future">Future</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+</code></pre></div><h3 id=future>Future</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>The key points of this chapter are:
 • A block of code wrapped in a Future { ... } executes concurrently.
 • A future succeeds with a result or fails with an exception.
 • You can wait for a future to complete, but you don’t usually want to.
@@ -431,8 +262,7 @@ futures.
 flexibility for implementing tasks that produce results.
 • Pick an execution context that is suitable for the concurrent workload of your
 computation.
-</code></pre></div><h3 id="implicits">Implicits</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The key points of this chapter are:
+</code></pre></div><h3 id=implicits>Implicits</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>The key points of this chapter are:
 • Implicit conversions are used to convert between types.
 • You must import implicit conversions so that they are in scope.
 • An implicit parameter list requests objects of a given type. They can be obtained from 
@@ -440,257 +270,29 @@ computation.
 • If an implicit parameter is a single-argument function, it is also used as an implicit conversion.
 • A context bound of a type parameter requires the existence of an implicit object of the given type.
 • If it is possible to locate an implicit object, this can serve as evidence that a type conversion is valid.
-</code></pre></div><h3 id="type-class">Type Class</h3>
-<h3 id="canbuildfrom">CanBuildFrom</h3>
-    </div>
-    <footer class="post-footer">
-     
- 
-<div class="post-tags">     
-     
-    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
-    
-    <a href="https://zhimoe.github.io/tags/scala" rel="tag" title="scala">#scala#</a>
-    
-    <a href="https://zhimoe.github.io/tags/scala-for-impatient" rel="tag" title="scala-for-impatient">#scala-for-impatient#</a>
-    
-</div>
-
-
-
-     <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/scala-uniform-access-principle/" rel="next" title="scala uniform access principle">
-        <i class="fa fa-chevron-left"></i> scala uniform access principle
-        </a>
-    
-    </div>
-
-    <div class="post-nav-prev post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/rust-packages-crates-mod/" rel="prev" title="Rust Packages Crates Mod Notes">
-        Rust Packages Crates Mod Notes <i class="fa fa-chevron-right"></i>
-        </a>
-    
-    </div>
-</div>
-      
-     
-     
-     
-<div id="disqus_thread"></div>
-<script>
-
-
-var disqus_config = function () {
-  this.page.url = "https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/";  
-  this.page.identifier = "https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/"; 
-};
-
-(function() { 
-  var d = document, s = d.createElement('script');
-  s.src = 'https://zhimoe.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
-
-    </footer>
-  </article>
-</section>
-
-          </div>
-        </div>
-        <div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
-<aside id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
-
-  <ul class="sidebar-nav motion-element">
-    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-      文章目录
-    </li>
-    <li class="sidebar-nav-overview" data-target="site-overview">
-      站点概览
-    </li>
-  </ul>
-
-    <section class="site-overview sidebar-panel ">
-      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-        src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhimoe" />
-    <p class="site-author-name" itemprop="name">zhimoe</p>
-    <p class="site-description motion-element" itemprop="description"> 
-        the craft of programming</p>
-</div>
-      <nav class="site-state motion-element">
-    <div class="site-state-item site-state-posts">
-      <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">61</span>
-        <span class="site-state-item-name">日志</span>
-      </a>
-    </div>
-    <div class="site-state-item site-state-categories">    
-        <a href="https://zhimoe.github.io/categories/">      
-         
-        <span class="site-state-item-count">4</span>
-        
-        <span class="site-state-item-name">分类</span>
-        
-        </a>
-    </div>
-
-    <div class="site-state-item site-state-tags">
-        <a href="https://zhimoe.github.io/tags/">
-         
-        <span class="site-state-item-count">38</span>
-        
-        <span class="site-state-item-name">标签</span>
-        </a>
-    </div>
-</nav>
-      
-      
-<div class="links-of-author motion-element">
-    
-        <span class="links-of-author-item">
-        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
-            <i class="fa fa-fw fa-github"></i>
-            GitHub
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
-            <i class="fa fa-fw fa-globe"></i>
-            ZhiHu
-        </a>
-        </span>
-    
-</div>
-
-
-      
-
-      <div class="links-of-blogroll motion-element inline">
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
-</div>
-
-
-
-
-    </section>
-    
-<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-    <div class="post-toc">
-        <div class="post-toc-content"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#functions">Functions</a></li>
-        <li><a href="#arrays">Arrays</a></li>
-        <li><a href="#maps--tuples">Maps &amp; Tuples</a></li>
-        <li><a href="#object">Object</a></li>
-        <li><a href="#package">Package</a></li>
-        <li><a href="#inheritance">Inheritance</a></li>
-        <li><a href="#files">Files</a></li>
-        <li><a href="#traits">Traits</a></li>
-        <li><a href="#operators">Operators</a></li>
-        <li><a href="#high-order-functions">High Order Functions</a></li>
-        <li><a href="#collections">Collections</a></li>
-        <li><a href="#pattern-matching">Pattern Matching</a></li>
-        <li><a href="#annotations">Annotations</a></li>
-        <li><a href="#future">Future</a></li>
-        <li><a href="#implicits">Implicits</a></li>
-        <li><a href="#type-class">Type Class</a></li>
-        <li><a href="#canbuildfrom">CanBuildFrom</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-    </div>
-</section>
-
-  </div>
-</aside>
-
-      </div>
-    </main>
-   
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  <span itemprop="copyrightYear">  &copy; 
-  2017 - 2022</span>
-  <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhimoe</span>
-</div>
-<div class="powered-by">
-  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
-</div>
-<div class="theme-info">
-  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
-  </a>
-</div>
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-      <span id="scrollpercent"><span>0</span>%</span>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/utils.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/motion.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/affix.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/schemes/pisces.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/scrollspy.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/post-details.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/toc.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/bootstrap.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/search.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { fonts: ["TeX"] }
-  });
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
-</body>
-</html>
+</code></pre></div><h3 id=type-class>Type Class</h3><h3 id=canbuildfrom>CanBuildFrom</h3></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a>
+<a href=https://zhimoe.github.io/tags/scala rel=tag title=scala>#scala#</a>
+<a href=https://zhimoe.github.io/tags/scala-for-impatient rel=tag title=scala-for-impatient>#scala-for-impatient#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>声明：</span>Highlights in Scala for Impatient 2nd</p><p><span>链接：</span>https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/</p><p><span>作者：</span>zhimoe</p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick="var qr=document.getElementById('QR');if(qr.style.display==='none'){qr.style.display='block';}else{qr.style.display='none'}">
+<span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/scala-uniform-access-principle/ rel=next title="scala uniform access principle"><i class="fa fa-chevron-left"></i>scala uniform access principle</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/rust-packages-crates-mod/ rel=prev title="Rust Packages Crates Mod Notes">Rust Packages Crates Mod Notes
+<i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/";this.page.identifier="https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/";};(function(){var d=document,s=d.createElement('script');s.src='https://zhimoe.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></footer></article></section></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target=post-toc-wrap>文章目录</li><li class=sidebar-nav-overview data-target=site-overview>站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>the craft of programming</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>61</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>38</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-desktop"></i>ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link-square"></i>书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://tech.meituan.com/ title=美团技术团队 target=_blank>美团技术团队</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画 target=_blank>艺术绘画</a></li><li class=links-of-blogroll-item><a href=https://500px.com/ title=500px target=_blank>500px</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aop>Aop</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aurulent>Aurulent</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/cheatsheet>Cheatsheet</a></li></ul></div><div class="links-of-blogroll motion-element inline"><script type=text/javascript src="//rf.revolvermaps.com/0/0/6.js?i=55k6ne41ev6&m=7&c=e63100&cr1=ffffff&f=arial&l=0&bv=90&lx=-420&ly=420&hi=20&he=7&hc=a8ddff&rs=80" async></script></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class=post-toc><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#functions>Functions</a></li><li><a href=#arrays>Arrays</a></li><li><a href=#maps--tuples>Maps & Tuples</a></li><li><a href=#object>Object</a></li><li><a href=#package>Package</a></li><li><a href=#inheritance>Inheritance</a></li><li><a href=#files>Files</a></li><li><a href=#traits>Traits</a></li><li><a href=#operators>Operators</a></li><li><a href=#high-order-functions>High Order Functions</a></li><li><a href=#collections>Collections</a></li><li><a href=#pattern-matching>Pattern Matching</a></li><li><a href=#annotations>Annotations</a></li><li><a href=#future>Future</a></li><li><a href=#implicits>Implicits</a></li><li><a href=#type-class>Type Class</a></li><li><a href=#canbuildfrom>CanBuildFrom</a></li></ul></li></ul></nav></div></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2010 - 2022</span>
+<span class=with-love><i class="fa fa-heart"></i></span><span class=copyright-author>zhimoe</span></div><div class=powered-info><span class=powered-by>Powered by - <a class=powered-link href=//gohugo.io target=_blank title=hugo>Hugo v0.69.2</a></span>
+<span class=separator-line>/</span>
+<span class=theme-info>Theme by - <a class=powered-link href=//github.com/elkan1788/hugo-theme-next target=_blank>NexT</a></span></div><div class=vistor-info></div><div class=license-info><span class=storage-info>Storage by
+<a href style=font-weight:700 target=_blank></a></span><span class=separator-line>/</span>
+<span class=license-num><a href target=_blank></a></span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i><span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=//cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js></script><script type=text/javascript src=https://zhimoe.github.io/js/search.js></script><script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script><script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script><script type=text/javascript>function detectIE(){var ua=window.navigator.userAgent;var msie=ua.indexOf('MSIE ');var trident=ua.indexOf('Trident/');var edge=ua.indexOf('Edge/');if(msie>0||trident>0||edge>0){return-1;}
+return 1;}
+function getCntViewHeight(){var docHeight=$('#content').height(),winHeight=$(window).height(),cntViewHeight=(docHeight>winHeight)?(docHeight-winHeight):($(document).height()-winHeight);return cntViewHeight;}
+function getScrollbarWidth(){var $div=$('<div />').addClass('scrollbar-measure').prependTo('body');var div=$div[0];var scrollbarWidth=div.offsetWidth-div.clientWidth;$div.remove();return scrollbarWidth;}
+function registerBackTop(){var THRESHOLD=50;var $top=$('.back-to-top');$(window).on('scroll',function(){$top.toggleClass('back-to-top-on',window.pageYOffset>THRESHOLD);var scrollTop=$(window).scrollTop();var cntViewHeight=getCntViewHeight();var scrollPercent=(scrollTop)/(cntViewHeight);var scrollPercentRounded=Math.round(scrollPercent*100);var scrollPercentMaxed=(scrollPercentRounded>100)?100:scrollPercentRounded;$('#scrollpercent>span').html(scrollPercentMaxed);});$top.on('click',function(){$("html,body").animate({scrollTop:0,screenLeft:0,},800);});}
+function initScrollSpy(){var tocSelector='.post-toc';var $tocElement=$(tocSelector);var activeCurrentSelector='.active-current';$tocElement.on('activate.bs.scrollspy',function(){var $currentActiveElement=$(tocSelector+' .active').last();removeCurrentActiveClass();$currentActiveElement.addClass('active-current');}).on('clear.bs.scrollspy',removeCurrentActiveClass);$('body').scrollspy({target:tocSelector});function removeCurrentActiveClass(){$(tocSelector+' '+activeCurrentSelector).removeClass(activeCurrentSelector.substring(1));}}
+function initAffix(){var headerHeight=$('.header-inner').height();var footerOffset=parseInt($('.main').css('padding-bottom'),10);var sidebarTop=headerHeight+10;$('.sidebar-inner').affix({offset:{top:sidebarTop,bottom:footerOffset}});$(document).on('affixed.bs.affix',function(){updateTOCHeight(document.body.clientHeight-100);});}
+function initTOCDimension(){var updateTOCHeightTimer;$(window).on('resize',function(){updateTOCHeightTimer&&clearTimeout(updateTOCHeightTimer);updateTOCHeightTimer=setTimeout(function(){var tocWrapperHeight=document.body.clientHeight-100;updateTOCHeight(tocWrapperHeight);},0);});updateTOCHeight(document.body.clientHeight-100);var scrollbarWidth=getScrollbarWidth();$('.post-toc').css('width','calc(100% + '+scrollbarWidth+'px)');}
+function updateTOCHeight(height){height=height||'auto';$('.post-toc').css('max-height',height);}
+$(function(){var sidebarTop=$('.header-inner').height()+10;$('#sidebar').css({'margin-top':sidebarTop}).show();var sidebarMt=parseInt($('#sidebar').css('margin-top'));var sidebarInHeight=parseInt($('.sidebar-inner').css('height'));var sideHeight=sidebarMt+sidebarInHeight;var contentHeight=$('.content-wrap').height();if(contentHeight<sideHeight){$('.content-wrap').css('min-height',sideHeight);}
+$('.site-nav-toggle').on('click',function(){var $siteNav=$('.site-nav');var $toggleLine=$('.toggle');var ON_CLASS_NAME='site-nav-on';var CLOSE_CLASS_NAME='toggle-close';var isSiteNavOn=$siteNav.hasClass(ON_CLASS_NAME);var animateAction=isSiteNavOn?'slideUp':'slideDown';var animateCallback=isSiteNavOn?'removeClass':'addClass';$siteNav.stop()[animateAction]('normal',function(){$siteNav[animateCallback](ON_CLASS_NAME);$toggleLine[animateCallback](CLOSE_CLASS_NAME);});});registerBackTop();initScrollSpy();initAffix();initTOCDimension();$('.sidebar-nav-toc').click(function(){$(this).addClass('sidebar-nav-active');$(this).next().removeClass('sidebar-nav-active');$('.'+$(this).next().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});$('.sidebar-nav-overview').click(function(){$(this).addClass('sidebar-nav-active');$(this).prev().removeClass('sidebar-nav-active');$('.'+$(this).prev().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});});</script><script src=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.js></script><script type=text/javascript>$(function(){$('.post-body').viewer();});</script><script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js';}
+else{bp.src='http://push.zhanzhang.baidu.com/push.js';}
+var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s);})();</script></body></html>

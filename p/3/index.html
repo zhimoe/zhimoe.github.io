@@ -1,877 +1,107 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-	<meta name="generator" content="Hugo 0.69.2" />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>zhimoe - zhimoe</title>
-    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
-    
-    <meta property="og:title" content="zhimoe">
-    <meta property="og:site_name" content="zhimoe">
-    <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="zhimoe - zhimoe" />
-    <meta name="description" content="编程是一门手艺"> 
-    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/index.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />    
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/syntax.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: false, 
-    motion: true
-  };
-</script>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left page-home  ">
-    <div class="headband"></div>
+<!doctype html><html lang=zh dir=zh><head><meta name=generator content="Hugo 0.69.2"><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="zhimoe"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="zhimoe - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span><span class=toggle-line></span><span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span><span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>the craft of programming</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class="menu-item menu-item-active"><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>项目</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span><span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/programmingfonts/ itemprop=url>最佳编程字体</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-08-21">2020-08-21</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE itemprop=url rel=index style=text-decoration:underline><span itemprop=name>项目</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>692 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>个人对于编程字体有一点点洁癖.在尝试十几个字体后,终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code</p><h3 id=aurulent>Aurulent</h3><p><a href=https://github.com/zhimoe/programming-fonts>字体下载</a></p><ol><li>小写字母来自Aurulent Sans Mono,其他基于Fira Code.Aurulent Sans Mono风格和SourceCodePro非常像,胖宽型,大开大合,简单却有具有设计.特别是字符g,a,p,y,s.</li><li>字母r的思路来自<a href=https://www.programmingfonts.org/#gintronic>gintronic</a>. 优点是在低分辨率屏,r的末尾不会被hint只剩下尖尖.</li><li>问号？也来自gintronic字体,非常漂亮.</li></ol></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/programmingfonts/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/how-to-tie-shoelace/ itemprop=url>如何正确地系鞋带</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-08-21">2020-08-21</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%94%9F%E6%B4%BB itemprop=url rel=index style=text-decoration:underline><span itemprop=name>生活</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>534 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>Ian安全结是登山系鞋带的首选,它越穿越紧,不会松开.解鞋带轻轻一拉即开. 而且对称美观,上手简单.值得每个人花十分钟学习.
+本篇不仅给出Ian安全结示意图,还告诉大家如何让安全结和蝴蝶结水平对称,尽可能美观的秘诀.</p></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/how-to-tie-shoelace/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/java-lambda/ itemprop=url>Java 8 Lambda笔记</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-08-06">2020-08-06</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>2331 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>5分钟</span></span></div></header><div class=post-body itemprop=articleBody><h3 id=问题>问题</h3><p>Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#177500>// 监听器接口
+</span><span style=color:#177500></span><span style=color:#a90d91>public</span> <span style=color:#a90d91>interface</span> <span style=color:#3f6e75>ActionListener</span> <span style=color:#000>{</span>
+    <span style=color:#a90d91>void</span> <span style=color:#000>actionPerformed</span><span style=color:#000>(</span><span style=color:#000>ActionEvent</span> <span style=color:#000>e</span><span style=color:#000>);</span>
+<span style=color:#000>}</span>
+<span style=color:#177500>// 使用匿名类传递一个行为
+</span><span style=color:#177500></span><span style=color:#000>button</span><span style=color:#000>.</span><span style=color:#836c28>addActionListener</span><span style=color:#000>(</span><span style=color:#a90d91>new</span> <span style=color:#000>ActionListener</span><span style=color:#000>(){</span>
+    <span style=color:#a90d91>public</span> <span style=color:#a90d91>void</span> <span style=color:#000>actionPerformed</span><span style=color:#000>(</span><span style=color:#000>Event</span> <span style=color:#000>e</span><span style=color:#000>){</span>
+        <span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;button clicked&#34;</span><span style=color:#000>);</span>
+    <span style=color:#000>}</span>
+<span style=color:#000>});</span>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-meta  custom-logo ">
-
-  <div class="custom-logo-site-title">
-    <a href="https://zhimoe.github.io"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhimoe</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">the craft of programming</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-      
-      
-        <li class="menu-item menu-item-active">
-          <a href="https://zhimoe.github.io/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/post/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/about/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
-          </a>
-        </li>
-      
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
-      </li>
-    </ul>
-    <div class="site-search">
-      <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-    </div>
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-    
- <section id="posts" class="posts-expand">
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/" itemprop="url">
-        Matplotlib图例中文乱码解决方案
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-05-01">
-    2020-05-01
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">419 字 ~1分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.
-<a href="https://www.zhihu.com/question/25404709/answer/67672003">zhihu.com</a></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#177500"># https://www.zhihu.com/question/25404709/answer/67672003</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">matplotlib.font_manager</span> <span style="color:#a90d91">as</span> <span style="color:#000">fm</span>
-<span style="color:#177500"># 微软雅黑,如果需要宋体,可以用simsun.ttc</span>
-<span style="color:#000">myfont</span> <span style="color:#000">=</span> <span style="color:#000">fm</span><span style="color:#000">.</span><span style="color:#000">FontProperties</span>(<span style="color:#000">fname</span><span style="color:#000">=</span><span style="color:#c41a16">&#39;C:/Windows/Fonts/msyh.ttc&#39;</span>)
-<span style="color:#177500"># Linux字体在&#34;/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc&#34;, </span>
-<span style="color:#177500"># 需要先安装字体&#34;&gt;sudo apt install fonts-noto-cjk -y&#34;</span>
-<span style="color:#177500"># MacOS中文字体文件在&#34;/System/Library/Fonts/PingFang.ttc&#34;</span>
-<span style="color:#177500"># Win10,Linux已测试,MacOS未验证</span>
-
-<span style="color:#a90d91">import</span> <span style="color:#000">matplotlib.pyplot</span> <span style="color:#a90d91">as</span> <span style="color:#000">plt</span>
-
-<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">clf</span>()  <span style="color:#177500"># 清空画布</span>
-<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">plot</span>([<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">3</span>], [<span style="color:#1c01ce">4</span>, <span style="color:#1c01ce">5</span>, <span style="color:#1c01ce">6</span>])
-<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">xlabel</span>(<span style="color:#c41a16">&#34;横轴&#34;</span>,<span style="color:#000">fontproperties</span><span style="color:#000">=</span><span style="color:#000">myfont</span>)
-<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">ylabel</span>(<span style="color:#c41a16">&#34;纵轴&#34;</span>,<span style="color:#000">fontproperties</span><span style="color:#000">=</span><span style="color:#000">myfont</span>)
-<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">title</span>(<span style="color:#c41a16">&#34;pythoner.com&#34;</span>,<span style="color:#000">fontproperties</span><span style="color:#000">=</span><span style="color:#000">myfont</span>)
-<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">legend</span>([<span style="color:#c41a16">&#39;图例&#39;</span>],<span style="color:#000">prop</span><span style="color:#000">=</span><span style="color:#000">myfont</span>)
-<span style="color:#000">plt</span><span style="color:#000">.</span><span style="color:#000">show</span>()
-</code></pre></div>
-    </div>
-    
-    <footer class="post-footer"><div class="post-eof"></div></footer>
-  </article>
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/rust-ownership-lifetimes/" itemprop="url">
-        Rust Ownerships Lifetimes教程
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-02-22">
-    2020-02-22
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1135 字 ~3分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>some notes on rust ownership,reference,string and &amp;str, and lifetimes</p>
-    </div>
-    
-    <div class="post-more-link text-center">
-    <a class="btn" href="https://zhimoe.github.io/post/rust-ownership-lifetimes/" rel="contents">
-      阅读全文 &raquo;
-    </a>
-    </div>
-    
-    <footer class="post-footer"><div class="post-eof"></div></footer>
-  </article>
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/dockerfile-best-practices/" itemprop="url">
-        SpringBoot应用和Rust应用的Dockerfile最佳实践
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-02-03">
-    2020-02-03
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1515 字 ~4分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>记录spring boot和rust项目的Dockerfile的最佳实践.</p>
-<h2 id="spring-boot应用dockerfile">spring boot应用Dockerfile</h2>
-<p>spring.io提供了一个boot应用的<a href="https://spring.io/guides/topicals/spring-boot-docker">Dockerfile</a>指导.
-不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般企业项目中这么做显然不规范,直接使用maven基础镜像更合理.</p>
-    </div>
-    
-    <div class="post-more-link text-center">
-    <a class="btn" href="https://zhimoe.github.io/post/dockerfile-best-practices/" rel="contents">
-      阅读全文 &raquo;
-    </a>
-    </div>
-    
-    <footer class="post-footer"><div class="post-eof"></div></footer>
-  </article>
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/" itemprop="url">
-        Docker CMD ENTRYPOINT区别
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-02-02">
-    2020-02-02
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1098 字 ~3分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>记录docker中exec form和shell form的区别,CMD和ENTRYPOINT区别,以及最佳实践.</p>
-<h2 id="exec-form-vs-shell-form">exec form VS shell form</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># exec form
-&lt;instruction&gt; [&#34;executable&#34;, &#34;param1&#34;, &#34;param2&#34;, ...]
-
-# shell form
-&lt;instruction&gt; &lt;command&gt;
-</code></pre></div>
-    </div>
-    
-    <div class="post-more-link text-center">
-    <a class="btn" href="https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/" rel="contents">
-      阅读全文 &raquo;
-    </a>
-    </div>
-    
-    <footer class="post-footer"><div class="post-eof"></div></footer>
-  </article>
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/scala-uniform-access-principle/" itemprop="url">
-        scala uniform access principle
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-01-31">
-    2020-01-31
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">742 字 ~2分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>虽然代码写的很水,但是我对各种编程语言一直比较感兴趣. 除了工作中使用的Java之外,自己也了解Python,Groovy,Scala,Kotlin,Clojure,Go,Rust.其中Python和Scala在工作中也偶尔使用. 了解不同的编程语言语法对于编程思维的影响还是蛮有意思的.
-例如, 只会Java的开发者可能没有听过模式匹配(pattern match).在我学习了Scala之后,我对模式匹配的理解就是更强更优雅的switch+if. 而在我看过rust和elixir语言中关于模式匹配之后,我对模式匹配的理解就完全不一样了.</p>
-    </div>
-    
-    <div class="post-more-link text-center">
-    <a class="btn" href="https://zhimoe.github.io/post/scala-uniform-access-principle/" rel="contents">
-      阅读全文 &raquo;
-    </a>
-    </div>
-    
-    <footer class="post-footer"><div class="post-eof"></div></footer>
-  </article>
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/" itemprop="url">
-        Highlights in Scala for Impatient 2nd
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-01-15">
-    2020-01-15
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1831 字 ~4分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>key points in scala-for-impatient 2nd book, best book for java developer to use scala in a rush.
-scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala帮助很大.</p>
-<h3 id="functions">Functions</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">• if expression has a value.
-• A block has a value — the value of its last expression.
-• The Scala for loop is like an “enhanced” Java for loop.
-• Semicolons are (mostly) optional.
-• The void type is Unit.
-• Avoid using `return` in a function.
-• Beware of missing = in a function definition.
-• Exceptions work just like in Java or C++, but you use a “pattern matching” syntax for catch.
-• Scala has no checked exceptions.
-
-</code></pre></div>
-    </div>
-    
-    <div class="post-more-link text-center">
-    <a class="btn" href="https://zhimoe.github.io/post/highlights-in-scala-for-impatient-2nd/" rel="contents">
-      阅读全文 &raquo;
-    </a>
-    </div>
-    
-    <footer class="post-footer"><div class="post-eof"></div></footer>
-  </article>
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/rust-packages-crates-mod/" itemprop="url">
-        Rust Packages Crates Mod Notes
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-01-12">
-    2020-01-12
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">929 字 ~2分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.</p>
-<h2 id="packages-crates-and-modules">packages, crates and modules</h2>
-<p>A Cargo.toml is a package. and must have a package name, like</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#000">package</span>]
-<span style="color:#000">name</span> = <span style="color:#c41a16">&#34;actix-web&#34;</span>
-</code></pre></div>
-    </div>
-    
-    <div class="post-more-link text-center">
-    <a class="btn" href="https://zhimoe.github.io/post/rust-packages-crates-mod/" rel="contents">
-      阅读全文 &raquo;
-    </a>
-    </div>
-    
-    <footer class="post-footer"><div class="post-eof"></div></footer>
-  </article>
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/git-useful-tips/" itemprop="url">
-        git 常用命令备忘录
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2019-09-01">
-    2019-09-01
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">509 字 ~2分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>记录日常开发中偶尔会遇到的但是总是记不住的git命令.
-以下技巧都来自于<a href="https://ohshitgit.com/">oh shit git</a> 和 <a href="https://stackoverflow.com">stackoverflow</a>. 版权归作者所有.</p>
-    </div>
-    
-    <div class="post-more-link text-center">
-    <a class="btn" href="https://zhimoe.github.io/post/git-useful-tips/" rel="contents">
-      阅读全文 &raquo;
-    </a>
-    </div>
-    
-    <footer class="post-footer"><div class="post-eof"></div></footer>
-  </article>
-
-</section>
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-<nav class="pagination">
-    <a class="extend prev" rel="prev" href="https://zhimoe.github.io/p/2/"><i class="fa fa-angle-left"></i></a>
-    
+</code></pre></div></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/java-lambda/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/mdict-web/ itemprop=url>基于MDX的web词典</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-07-01">2020-07-01</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE itemprop=url rel=index style=text-decoration:underline><span itemprop=name>项目</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>370 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
+python版本增加了一个机器学习模型翻译.rust版本也有模型,但是还没来得及加.</p><h3 id=mdict-py>mdict-py</h3><p><a href=https://github.com/zhimoe/mdict-py>mdict-py源码</a></p><p>Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.</p><p>特点：</p><ol><li>自动识别中英文选择对应mdx词典,目前英文词典包含牛津8和朗文4,中文词典包含汉语词典3</li><li>英文尝试拼写纠错功能,动词时态纠错</li><li>如果配置了中文会尝试搜索朗文的例句,模糊搜索,对于有英语基础的同学很有用</li><li>如果配置了AI模型,会使用机器学习模型翻译,翻译结果比较粗糙,但是可以参考</li></ol></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/mdict-web/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/python-interview-questions/ itemprop=url>Python 4道笔试题</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-06-04">2020-06-04</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>599 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>4道常见的python面试题和解答,以及一些python陷阱的链接.</p><h2 id=问题>问题</h2><ol><li>题目1</li></ol><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>    <span style=color:#a90d91>def</span> <span style=color:#000>change</span>(<span style=color:#000>v</span>):
+        <span style=color:#000>v</span>[<span style=color:#1c01ce>1</span>] <span style=color:#000>=</span> <span style=color:#1c01ce>4</span>
+        <span style=color:#a90d91>return</span> <span style=color:#000>v</span>
         
         
-          <a class="page-number" href="https://zhimoe.github.io/">1</a>
-        
-        
-    
-        
-        
-          <a class="page-number" href="https://zhimoe.github.io/p/2/">2</a>
-        
-        
-    
-        
-        
-          <span class="page-number current">3</span>
-        
-        
-    
-        
-        
-          <a class="page-number" href="https://zhimoe.github.io/p/4/">4</a>
-        
-        
-    
-        
-        
-          <a class="page-number" href="https://zhimoe.github.io/p/5/">5</a>
-        
-        
-    
-        
-        
-          <a class="page-number" href="https://zhimoe.github.io/p/6/">6</a>
-        
-        
-    
-        
-        
-          <a class="page-number" href="https://zhimoe.github.io/p/7/">7</a>
-        
-        
-    
-        
-        
-          <a class="page-number" href="https://zhimoe.github.io/p/8/">8</a>
-        
-        
-    
-    <a class="extend next" rel="next" href="https://zhimoe.github.io/p/4/"><i class="fa fa-angle-right"></i></a>
-</nav>
-
-
-
-
-          </div>
-        </div>
-        <div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
-<aside id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
-
-    <section class="site-overview sidebar-panel  sidebar-panel-active ">
-      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-        src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhimoe" />
-    <p class="site-author-name" itemprop="name">zhimoe</p>
-    <p class="site-description motion-element" itemprop="description"> 
-        the craft of programming</p>
-</div>
-      <nav class="site-state motion-element">
-    <div class="site-state-item site-state-posts">
-      <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">61</span>
-        <span class="site-state-item-name">日志</span>
-      </a>
-    </div>
-    <div class="site-state-item site-state-categories">    
-        <a href="https://zhimoe.github.io/categories/">      
-         
-        <span class="site-state-item-count">4</span>
-        
-        <span class="site-state-item-name">分类</span>
-        
-        </a>
-    </div>
-
-    <div class="site-state-item site-state-tags">
-        <a href="https://zhimoe.github.io/tags/">
-         
-        <span class="site-state-item-count">38</span>
-        
-        <span class="site-state-item-name">标签</span>
-        </a>
-    </div>
-</nav>
-      
-<div class="feed-link motion-element">
-<a href="https://zhimoe.github.io/index.xml" rel="alternate" type="application/rss+xml" target="_blank">
-    <i class="fa fa-rss"></i>
-    RSS 订阅
-</a>
-</div>
-
-      
-<div class="links-of-author motion-element">
-    
-        <span class="links-of-author-item">
-        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
-            <i class="fa fa-fw fa-github"></i>
-            GitHub
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
-            <i class="fa fa-fw fa-globe"></i>
-            ZhiHu
-        </a>
-        </span>
-    
-</div>
-
-
-      
-
-      <div class="links-of-blogroll motion-element inline">
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
-</div>
-
-
-
-
-    </section>
-    
-  </div>
-</aside>
-
-      </div>
-    </main>
-   
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  <span itemprop="copyrightYear">  &copy; 
-  2017 - 2022</span>
-  <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhimoe</span>
-</div>
-<div class="powered-by">
-  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
-</div>
-<div class="theme-info">
-  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
-  </a>
-</div>
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-      <span id="scrollpercent"><span>0</span>%</span>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/utils.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/motion.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/affix.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/schemes/pisces.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/bootstrap.js"></script>
-
-<script type="text/javascript" id="motion.page.archive">
-  $('.archive-year').velocity('transition.slideLeftIn');
-</script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/search.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { fonts: ["TeX"] }
-  });
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
-</body>
-</html>
+    <span style=color:#000>a</span> <span style=color:#000>=</span> [<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>, <span style=color:#1c01ce>3</span>]
+    <span style=color:#a90d91>print</span>(<span style=color:#000>change</span>(<span style=color:#000>a</span>))
+    <span style=color:#a90d91>print</span>(<span style=color:#000>a</span>)    
+</code></pre></div></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/python-interview-questions/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article></section><nav class=pagination><a class="extend prev" rel=prev href=https://zhimoe.github.io/p/2/><i class="fa fa-angle-left"></i></a><a class=page-number href=https://zhimoe.github.io/>1</a>
+<a class=page-number href=https://zhimoe.github.io/p/2/>2</a>
+<span class="page-number current">3</span>
+<a class=page-number href=https://zhimoe.github.io/p/4/>4</a>
+<a class=page-number href=https://zhimoe.github.io/p/5/>5</a>
+<a class=page-number href=https://zhimoe.github.io/p/6/>6</a>
+<a class=page-number href=https://zhimoe.github.io/p/7/>7</a>
+<a class=page-number href=https://zhimoe.github.io/p/8/>8</a>
+<a class="extend next" rel=next href=https://zhimoe.github.io/p/4/><i class="fa fa-angle-right"></i></a></nav></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><section class="site-overview sidebar-panel sidebar-panel-active"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>the craft of programming</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>61</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>38</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="feed-link motion-element"><a href=https://zhimoe.github.io/index.xml rel=alternate type=application/rss+xml target=_blank><i class="fa fa-rss"></i>RSS 订阅</a></div><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-desktop"></i>ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link-square"></i>书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://tech.meituan.com/ title=美团技术团队 target=_blank>美团技术团队</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画 target=_blank>艺术绘画</a></li><li class=links-of-blogroll-item><a href=https://500px.com/ title=500px target=_blank>500px</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aop>Aop</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aurulent>Aurulent</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/cheatsheet>Cheatsheet</a></li></ul></div><div class="links-of-blogroll motion-element inline"><script type=text/javascript src="//rf.revolvermaps.com/0/0/6.js?i=55k6ne41ev6&m=7&c=e63100&cr1=ffffff&f=arial&l=0&bv=90&lx=-420&ly=420&hi=20&he=7&hc=a8ddff&rs=80" async></script></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2010 - 2022</span>
+<span class=with-love><i class="fa fa-heart"></i></span><span class=copyright-author>zhimoe</span></div><div class=powered-info><span class=powered-by>Powered by - <a class=powered-link href=//gohugo.io target=_blank title=hugo>Hugo v0.69.2</a></span>
+<span class=separator-line>/</span>
+<span class=theme-info>Theme by - <a class=powered-link href=//github.com/elkan1788/hugo-theme-next target=_blank>NexT</a></span></div><div class=vistor-info></div><div class=license-info><span class=storage-info>Storage by
+<a href style=font-weight:700 target=_blank></a></span><span class=separator-line>/</span>
+<span class=license-num><a href target=_blank></a></span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i><span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=//cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js></script><script type=text/javascript src=https://zhimoe.github.io/js/search.js></script><script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script><script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script><script type=text/javascript>function detectIE(){var ua=window.navigator.userAgent;var msie=ua.indexOf('MSIE ');var trident=ua.indexOf('Trident/');var edge=ua.indexOf('Edge/');if(msie>0||trident>0||edge>0){return-1;}
+return 1;}
+function getCntViewHeight(){var docHeight=$('#content').height(),winHeight=$(window).height(),cntViewHeight=(docHeight>winHeight)?(docHeight-winHeight):($(document).height()-winHeight);return cntViewHeight;}
+function getScrollbarWidth(){var $div=$('<div />').addClass('scrollbar-measure').prependTo('body');var div=$div[0];var scrollbarWidth=div.offsetWidth-div.clientWidth;$div.remove();return scrollbarWidth;}
+function registerBackTop(){var THRESHOLD=50;var $top=$('.back-to-top');$(window).on('scroll',function(){$top.toggleClass('back-to-top-on',window.pageYOffset>THRESHOLD);var scrollTop=$(window).scrollTop();var cntViewHeight=getCntViewHeight();var scrollPercent=(scrollTop)/(cntViewHeight);var scrollPercentRounded=Math.round(scrollPercent*100);var scrollPercentMaxed=(scrollPercentRounded>100)?100:scrollPercentRounded;$('#scrollpercent>span').html(scrollPercentMaxed);});$top.on('click',function(){$("html,body").animate({scrollTop:0,screenLeft:0,},800);});}
+function initScrollSpy(){var tocSelector='.post-toc';var $tocElement=$(tocSelector);var activeCurrentSelector='.active-current';$tocElement.on('activate.bs.scrollspy',function(){var $currentActiveElement=$(tocSelector+' .active').last();removeCurrentActiveClass();$currentActiveElement.addClass('active-current');}).on('clear.bs.scrollspy',removeCurrentActiveClass);$('body').scrollspy({target:tocSelector});function removeCurrentActiveClass(){$(tocSelector+' '+activeCurrentSelector).removeClass(activeCurrentSelector.substring(1));}}
+function initAffix(){var headerHeight=$('.header-inner').height();var footerOffset=parseInt($('.main').css('padding-bottom'),10);var sidebarTop=headerHeight+10;$('.sidebar-inner').affix({offset:{top:sidebarTop,bottom:footerOffset}});$(document).on('affixed.bs.affix',function(){updateTOCHeight(document.body.clientHeight-100);});}
+function initTOCDimension(){var updateTOCHeightTimer;$(window).on('resize',function(){updateTOCHeightTimer&&clearTimeout(updateTOCHeightTimer);updateTOCHeightTimer=setTimeout(function(){var tocWrapperHeight=document.body.clientHeight-100;updateTOCHeight(tocWrapperHeight);},0);});updateTOCHeight(document.body.clientHeight-100);var scrollbarWidth=getScrollbarWidth();$('.post-toc').css('width','calc(100% + '+scrollbarWidth+'px)');}
+function updateTOCHeight(height){height=height||'auto';$('.post-toc').css('max-height',height);}
+$(function(){var sidebarTop=$('.header-inner').height()+10;$('#sidebar').css({'margin-top':sidebarTop}).show();var sidebarMt=parseInt($('#sidebar').css('margin-top'));var sidebarInHeight=parseInt($('.sidebar-inner').css('height'));var sideHeight=sidebarMt+sidebarInHeight;var contentHeight=$('.content-wrap').height();if(contentHeight<sideHeight){$('.content-wrap').css('min-height',sideHeight);}
+$('.site-nav-toggle').on('click',function(){var $siteNav=$('.site-nav');var $toggleLine=$('.toggle');var ON_CLASS_NAME='site-nav-on';var CLOSE_CLASS_NAME='toggle-close';var isSiteNavOn=$siteNav.hasClass(ON_CLASS_NAME);var animateAction=isSiteNavOn?'slideUp':'slideDown';var animateCallback=isSiteNavOn?'removeClass':'addClass';$siteNav.stop()[animateAction]('normal',function(){$siteNav[animateCallback](ON_CLASS_NAME);$toggleLine[animateCallback](CLOSE_CLASS_NAME);});});registerBackTop();initScrollSpy();initAffix();initTOCDimension();$('.sidebar-nav-toc').click(function(){$(this).addClass('sidebar-nav-active');$(this).next().removeClass('sidebar-nav-active');$('.'+$(this).next().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});$('.sidebar-nav-overview').click(function(){$(this).addClass('sidebar-nav-active');$(this).prev().removeClass('sidebar-nav-active');$('.'+$(this).prev().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});});</script><script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js';}
+else{bp.src='http://push.zhanzhang.baidu.com/push.js';}
+var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s);})();</script></body></html>

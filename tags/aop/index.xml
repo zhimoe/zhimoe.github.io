@@ -1,34 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>aop on zhimoe</title>
-    <link>https://zhimoe.github.io/tags/aop/</link>
-    <description>Recent content in aop on zhimoe</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Fri, 01 Jan 2016 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://zhimoe.github.io/tags/aop/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Java AOP example</title>
-      <link>https://zhimoe.github.io/post/java-aop-example/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-aop-example/</guid>
-      <description>&lt;p&gt;Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:
-&lt;a href=&#34;https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html&#34;&gt;A Simple Introduction to AOP&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;提醒个点,使用注解的方式写切面时,增加了一个空方法,即：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Test&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;@Pointcut&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;execution(* org.bk.inventory.service.*.*(..))&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;serviceMethods&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(){&lt;/span&gt;
-        &lt;span style=&#34;color:#177500&#34;&gt;//...
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>aop on zhimoe</title><link>https://zhimoe.github.io/tags/aop/</link><description>Recent content in aop on zhimoe</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Fri, 01 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://zhimoe.github.io/tags/aop/index.xml" rel="self" type="application/rss+xml"/><item><title>Java AOP example</title><link>https://zhimoe.github.io/post/java-aop-example/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-aop-example/</guid><description>&lt;p>Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:
+&lt;a href="https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html">A Simple Introduction to AOP&lt;/a>&lt;/p>
+&lt;p>提醒个点,使用注解的方式写切面时,增加了一个空方法,即：&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Test&lt;/span>&lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">@Pointcut&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;execution(* org.bk.inventory.service.*.*(..))&amp;#34;&lt;/span>&lt;span style="color:#000">)&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">serviceMethods&lt;/span>&lt;span style="color:#000">(){&lt;/span>
+&lt;span style="color:#177500">//...
+&lt;/span>&lt;span style="color:#177500">&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

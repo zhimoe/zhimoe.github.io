@@ -1,1003 +1,636 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Typescript Comprehensive Cheatsheet - zhimoe</title>
-    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
-    
-    <meta property="og:title" content="Typescript Comprehensive Cheatsheet">
-    <meta property="og:site_name" content="zhimoe">
-    <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Typescript Comprehensive Cheatsheet - zhimoe" />
-    <meta name="description" content="编程是一门手艺"> 
-    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/index.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />    
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/syntax.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-     fancybox: true, 
-    motion: true
-  };
-</script>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left page-home  ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-meta  custom-logo ">
-
-  <div class="custom-logo-site-title">
-    <a href="https://zhimoe.github.io"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhimoe</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">the craft of programming</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-      
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/post/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/about/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
-          </a>
-        </li>
-      
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
-      </li>
-    </ul>
-    <div class="site-search">
-      <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-    </div>
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-<section id="posts" class="posts-expand">
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/ts-comprehensive-notes/" itemprop="url">
-        Typescript Comprehensive Cheatsheet
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2021-08-14">
-    2021-08-14
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">2874 字 ~6分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>一份详尽的ts语法笔记. 这周在看组里前端同事的代码,感觉完全还是在写JS,以我有限的JS/TS知识,也知道可以写得更加规范一点.但是一上手开始改,还真是手生.又重新过了一遍文档,做了一点笔记.</p>
-<h3 id="install">install</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#177500"># Install</span>
+<!doctype html><html lang=zh dir=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>Typescript Comprehensive Cheatsheet - zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="Typescript Comprehensive Cheatsheet"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="Typescript Comprehensive Cheatsheet - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.css rel=stylesheet><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span><span class=toggle-line></span><span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span><span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>the craft of programming</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class=menu-item><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>项目</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span><span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/ts-comprehensive-notes/ itemprop=url>Typescript Comprehensive Cheatsheet</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2021-08-14">2021-08-14</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>2874 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>6分钟</span></span>
+<span id=/post/ts-comprehensive-notes/ class=leancloud_visitors data-flag-title="Typescript Comprehensive Cheatsheet">|
+<i class="fa fa-binoculars fa-fw"></i><span class=post-meta-item-text>阅读次数：</span>
+<span class=leancloud-visitors-count></span></span></div></header><div class=post-body itemprop=articleBody><p>一份详尽的ts语法笔记. 这周在看组里前端同事的代码,感觉完全还是在写JS,以我有限的JS/TS知识,也知道可以写得更加规范一点.但是一上手开始改,还真是手生.又重新过了一遍文档,做了一点笔记.</p><h3 id=install>install</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#177500># Install</span>
 npm install typescript
-<span style="color:#177500"># Run</span>
+<span style=color:#177500># Run</span>
 npx tsc
-<span style="color:#177500"># Run with a specific config</span>  
+<span style=color:#177500># Run with a specific config</span>  
 npx tsc --project configs/my_tsconfig.json
-<span style="color:#177500"># Triple slash directives</span>
-<span style="color:#177500"># Reference built-in types</span>  
-/// &lt;reference <span style="color:#000">lib</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;es2016.array.include&#34;</span> /&gt;
-<span style="color:#177500"># Reference other types</span>
-/// &lt;reference <span style="color:#000">path</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;../my_types&#34;</span> /&gt;
-/// &lt;reference <span style="color:#000">types</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;jquery&#34;</span> /&gt;
-<span style="color:#177500"># AMD</span>
-/// &lt;amd-module <span style="color:#000">name</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;Name&#34;</span> /&gt;
-/// &lt;amd-dependency <span style="color:#000">path</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;app/foo&#34;</span> <span style="color:#000">name</span><span style="color:#000">=</span><span style="color:#c41a16">&#34;foo&#34;</span> /&gt;
+<span style=color:#177500># Triple slash directives</span>
+<span style=color:#177500># Reference built-in types</span>  
+/// &lt;reference <span style=color:#000>lib</span><span style=color:#000>=</span><span style=color:#c41a16>&#34;es2016.array.include&#34;</span> /&gt;
+<span style=color:#177500># Reference other types</span>
+/// &lt;reference <span style=color:#000>path</span><span style=color:#000>=</span><span style=color:#c41a16>&#34;../my_types&#34;</span> /&gt;
+/// &lt;reference <span style=color:#000>types</span><span style=color:#000>=</span><span style=color:#c41a16>&#34;jquery&#34;</span> /&gt;
+<span style=color:#177500># AMD</span>
+/// &lt;amd-module <span style=color:#000>name</span><span style=color:#000>=</span><span style=color:#c41a16>&#34;Name&#34;</span> /&gt;
+/// &lt;amd-dependency <span style=color:#000>path</span><span style=color:#000>=</span><span style=color:#c41a16>&#34;app/foo&#34;</span> <span style=color:#000>name</span><span style=color:#000>=</span><span style=color:#c41a16>&#34;foo&#34;</span> /&gt;
 
-<span style="color:#177500"># Compiler comments</span>
-<span style="color:#177500"># Don’t check this file</span>
+<span style=color:#177500># Compiler comments</span>
+<span style=color:#177500># Don’t check this file</span>
 // @ts-nocheck
-<span style="color:#177500"># Check this file (JS)</span>  
+<span style=color:#177500># Check this file (JS)</span>  
 // @ts-check
-<span style="color:#177500"># Ignore the next line</span>  
+<span style=color:#177500># Ignore the next line</span>  
 // @ts-ignore
-<span style="color:#177500"># Expect an error on the next line</span>  
+<span style=color:#177500># Expect an error on the next line</span>  
 // @ts-expect-error
 
-<span style="color:#177500"># ignore ts type error</span>
+<span style=color:#177500># ignore ts type error</span>
 tsc --noEmitOnError hello.ts
 
-<span style="color:#177500"># tsconfig.json</span>
-<span style="color:#c41a16">&#34;strict&#34;</span>: <span style="color:#a90d91">true</span>
-<span style="color:#c41a16">&#34;noImplicitAny&#34;</span>
-<span style="color:#c41a16">&#34;strictNullChecks&#34;</span>
+<span style=color:#177500># tsconfig.json</span>
+<span style=color:#c41a16>&#34;strict&#34;</span>: <span style=color:#a90d91>true</span>
+<span style=color:#c41a16>&#34;noImplicitAny&#34;</span>
+<span style=color:#c41a16>&#34;strictNullChecks&#34;</span>
 
-</code></pre></div><h3 id="ts-syntax-cheatsheet">ts syntax cheatsheet</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript">
-<span style="color:#177500">//-------------------------------- Basic type 
-</span><span style="color:#177500"></span><span style="color:#000">any</span> <span style="color:#177500">// untyped, use as js, disables all further type checking
-</span><span style="color:#177500"></span><span style="color:#000">unknown</span> <span style="color:#177500">// The unknown type represents any value. This is similar to the any type, but is safer because it’s not legal to do anything with an unknown value:
-</span><span style="color:#177500"></span><span style="color:#a90d91">void</span> <span style="color:#177500">// void is not the same as undefined.
-</span><span style="color:#177500">// a contextual function type with a void return type (type vf = () =&gt; void), when implemented, can return any other value, but it will be ignored.
-</span><span style="color:#177500"></span>
-<span style="color:#a90d91">null</span> <span style="color:#177500">// prefer use undefined
-</span><span style="color:#177500"></span><span style="color:#a90d91">undefined</span>
-<span style="color:#177500">// check optional param? if undefined before use it 
-</span><span style="color:#177500"></span>
-<span style="color:#000">never</span>  <span style="color:#177500">// unreachable see: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking
-</span><span style="color:#177500"></span>
-<span style="color:#000">object</span>
-<span style="color:#177500">// object is not Object. Always use object! object also diff from {}
-</span><span style="color:#177500">// In compile time {} doesn&#39;t have Object&#39;s members and Object has more strict behavior 
-</span><span style="color:#177500"></span>
-<span style="color:#a90d91">boolean</span>
-<span style="color:#a90d91">number</span>
-<span style="color:#a90d91">string</span>
-<span style="color:#177500">// The type names String , Number , and Boolean (starting with capital letters) are legal, but refer to
-</span><span style="color:#177500">// some special built-in types that will very rarely appear in your code. Always use string , number , or
-</span><span style="color:#177500">// boolean for types.
-</span><span style="color:#177500"></span>
-<span style="color:#000">bigint</span> <span style="color:#177500">//ES2020
-</span><span style="color:#177500">// Creating a bigint via the BigInt function
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">oneHundred</span>: <span style="color:#a90d91">bigint</span> <span style="color:#000">=</span> <span style="color:#000">BigInt</span>(<span style="color:#1c01ce">100</span>);
-<span style="color:#177500">// Creating a BigInt via the literal syntax
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">anotherHundred</span>: <span style="color:#a90d91">bigint</span> <span style="color:#000">=</span> <span style="color:#1c01ce">100</span><span style="color:#000">n</span>;
+</code></pre></div><h3 id=ts-syntax-cheatsheet>ts syntax cheatsheet</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript>
+<span style=color:#177500>//-------------------------------- Basic type 
+</span><span style=color:#177500></span><span style=color:#000>any</span> <span style=color:#177500>// untyped, use as js, disables all further type checking
+</span><span style=color:#177500></span><span style=color:#000>unknown</span> <span style=color:#177500>// The unknown type represents any value. This is similar to the any type, but is safer because it’s not legal to do anything with an unknown value:
+</span><span style=color:#177500></span><span style=color:#a90d91>void</span> <span style=color:#177500>// void is not the same as undefined.
+</span><span style=color:#177500>// a contextual function type with a void return type (type vf = () =&gt; void), when implemented, can return any other value, but it will be ignored.
+</span><span style=color:#177500></span>
+<span style=color:#a90d91>null</span> <span style=color:#177500>// prefer use undefined
+</span><span style=color:#177500></span><span style=color:#a90d91>undefined</span>
+<span style=color:#177500>// check optional param? if undefined before use it 
+</span><span style=color:#177500></span>
+<span style=color:#000>never</span>  <span style=color:#177500>// unreachable see: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking
+</span><span style=color:#177500></span>
+<span style=color:#000>object</span>
+<span style=color:#177500>// object is not Object. Always use object! object also diff from {}
+</span><span style=color:#177500>// In compile time {} doesn&#39;t have Object&#39;s members and Object has more strict behavior 
+</span><span style=color:#177500></span>
+<span style=color:#a90d91>boolean</span>
+<span style=color:#a90d91>number</span>
+<span style=color:#a90d91>string</span>
+<span style=color:#177500>// The type names String , Number , and Boolean (starting with capital letters) are legal, but refer to
+</span><span style=color:#177500>// some special built-in types that will very rarely appear in your code. Always use string , number , or
+</span><span style=color:#177500>// boolean for types.
+</span><span style=color:#177500></span>
+<span style=color:#000>bigint</span> <span style=color:#177500>//ES2020
+</span><span style=color:#177500>// Creating a bigint via the BigInt function
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>oneHundred</span>: <span style=color:#a90d91>bigint</span> <span style=color:#000>=</span> <span style=color:#000>BigInt</span>(<span style=color:#1c01ce>100</span>);
+<span style=color:#177500>// Creating a BigInt via the literal syntax
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>anotherHundred</span>: <span style=color:#a90d91>bigint</span> <span style=color:#000>=</span> <span style=color:#1c01ce>100</span><span style=color:#000>n</span>;
 
-<span style="color:#a90d91">string</span>[] <span style="color:#177500">// or  Array&lt;string&gt;
-</span><span style="color:#177500">// ReadonlyArray
-</span><span style="color:#177500">// error: new ReadonlyArray(&#34;red&#34;, &#34;green&#34;, &#34;blue&#34;);
-</span><span style="color:#177500">// use:
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">roArray</span>: <span style="color:#a90d91">ReadonlyArray</span><span style="color:#000">&lt;</span><span style="color:#a90d91">string</span><span style="color:#000">&gt;</span> <span style="color:#000">=</span> [<span style="color:#c41a16">&#34;red&#34;</span>, <span style="color:#c41a16">&#34;green&#34;</span>, <span style="color:#c41a16">&#34;blue&#34;</span>];
-<span style="color:#177500">// Just as TypeScript provides a shorthand syntax for Array&lt;Type&gt; with Type[], 
-</span><span style="color:#177500">// it also provides a shorthand syntax for ReadonlyArray&lt;Type&gt; with readonly Type[]
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">x</span>: <span style="color:#a90d91">readonly</span> <span style="color:#a90d91">string</span>[] <span style="color:#000">=</span> [];
-<span style="color:#a90d91">let</span> <span style="color:#000">y</span>: <span style="color:#a90d91">string</span>[] <span style="color:#000">=</span> [];
+<span style=color:#a90d91>string</span>[] <span style=color:#177500>// or  Array&lt;string&gt;
+</span><span style=color:#177500>// ReadonlyArray
+</span><span style=color:#177500>// error: new ReadonlyArray(&#34;red&#34;, &#34;green&#34;, &#34;blue&#34;);
+</span><span style=color:#177500>// use:
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>roArray</span>: <span style=color:#a90d91>ReadonlyArray</span><span style=color:#000>&lt;</span><span style=color:#a90d91>string</span><span style=color:#000>&gt;</span> <span style=color:#000>=</span> [<span style=color:#c41a16>&#34;red&#34;</span>, <span style=color:#c41a16>&#34;green&#34;</span>, <span style=color:#c41a16>&#34;blue&#34;</span>];
+<span style=color:#177500>// Just as TypeScript provides a shorthand syntax for Array&lt;Type&gt; with Type[], 
+</span><span style=color:#177500>// it also provides a shorthand syntax for ReadonlyArray&lt;Type&gt; with readonly Type[]
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>x</span>: <span style=color:#a90d91>readonly</span> <span style=color:#a90d91>string</span>[] <span style=color:#000>=</span> [];
+<span style=color:#a90d91>let</span> <span style=color:#000>y</span>: <span style=color:#a90d91>string</span>[] <span style=color:#000>=</span> [];
 
-[<span style="color:#a90d91">string</span>, <span style="color:#a90d91">number</span>]  <span style="color:#177500">// tuple
-</span><span style="color:#177500"></span>
-<span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">null</span> <span style="color:#000">|</span> <span style="color:#a90d91">undefined</span>   <span style="color:#177500">// union type
-</span><span style="color:#177500">// use isArray function narrowing the array type
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">welcomePeople</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">string</span>[] <span style="color:#000">|</span> <span style="color:#a90d91">string</span>) {
-  <span style="color:#a90d91">if</span> (<span style="color:#a90d91">Array</span>.<span style="color:#000">isArray</span>(<span style="color:#000">x</span>)) {
-    <span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#c41a16">&#34;Hello, &#34;</span> <span style="color:#000">+</span> <span style="color:#000">x</span>.<span style="color:#000">join</span>(<span style="color:#c41a16">&#34; and &#34;</span>));
-  } <span style="color:#a90d91">else</span> {
-    <span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#c41a16">&#34;Welcome lone traveler &#34;</span> <span style="color:#000">+</span> <span style="color:#000">x</span>);
+[<span style=color:#a90d91>string</span>, <span style=color:#a90d91>number</span>]  <span style=color:#177500>// tuple
+</span><span style=color:#177500></span>
+<span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>null</span> <span style=color:#000>|</span> <span style=color:#a90d91>undefined</span>   <span style=color:#177500>// union type
+</span><span style=color:#177500>// use isArray function narrowing the array type
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>welcomePeople</span>(<span style=color:#000>x</span>: <span style=color:#a90d91>string</span>[] <span style=color:#000>|</span> <span style=color:#a90d91>string</span>) {
+  <span style=color:#a90d91>if</span> (<span style=color:#a90d91>Array</span>.<span style=color:#000>isArray</span>(<span style=color:#000>x</span>)) {
+    <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>&#34;Hello, &#34;</span> <span style=color:#000>+</span> <span style=color:#000>x</span>.<span style=color:#000>join</span>(<span style=color:#c41a16>&#34; and &#34;</span>));
+  } <span style=color:#a90d91>else</span> {
+    <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>&#34;Welcome lone traveler &#34;</span> <span style=color:#000>+</span> <span style=color:#000>x</span>);
   }
 }
-<span style="color:#177500">// use in operator narrowing method structual type
-</span><span style="color:#177500">// instanceof narrowing
-</span><span style="color:#177500"></span>
-<span style="color:#000">type</span> <span style="color:#000">direction</span><span style="color:#000">=</span> <span style="color:#c41a16">&#39;left&#39;</span> <span style="color:#000">|</span> <span style="color:#c41a16">&#39;right&#39;</span>; <span style="color:#177500">// Literal types
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">roll</span><span style="color:#000">=</span> <span style="color:#1c01ce">1</span> <span style="color:#000">|</span> <span style="color:#1c01ce">2</span> <span style="color:#000">|</span> <span style="color:#1c01ce">3</span> <span style="color:#000">|</span> <span style="color:#1c01ce">4</span> <span style="color:#000">|</span> <span style="color:#1c01ce">5</span> <span style="color:#000">|</span> <span style="color:#1c01ce">6</span>;
+<span style=color:#177500>// use in operator narrowing method structual type
+</span><span style=color:#177500>// instanceof narrowing
+</span><span style=color:#177500></span>
+<span style=color:#000>type</span> <span style=color:#000>direction</span><span style=color:#000>=</span> <span style=color:#c41a16>&#39;left&#39;</span> <span style=color:#000>|</span> <span style=color:#c41a16>&#39;right&#39;</span>; <span style=color:#177500>// Literal types
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>roll</span><span style=color:#000>=</span> <span style=color:#1c01ce>1</span> <span style=color:#000>|</span> <span style=color:#1c01ce>2</span> <span style=color:#000>|</span> <span style=color:#1c01ce>3</span> <span style=color:#000>|</span> <span style=color:#1c01ce>4</span> <span style=color:#000>|</span> <span style=color:#1c01ce>5</span> <span style=color:#000>|</span> <span style=color:#1c01ce>6</span>;
 
 
-<span style="color:#177500">// ?? (nullish coalescing)  
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">getValue</span>(<span style="color:#000">val?</span>: <span style="color:#a90d91">number</span>)<span style="color:#000">:</span> <span style="color:#a90d91">number</span> <span style="color:#000">|</span> <span style="color:#c41a16">&#39;nil&#39;</span> {
-  <span style="color:#177500">// Will only return &#39;nil&#39; if `val` is null or undefined
-</span><span style="color:#177500"></span>  <span style="color:#a90d91">return</span> <span style="color:#000">val</span> <span style="color:#000">??</span> <span style="color:#c41a16">&#39;nil&#39;</span>;
+<span style=color:#177500>// ?? (nullish coalescing)  
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>getValue</span>(<span style=color:#000>val?</span>: <span style=color:#a90d91>number</span>)<span style=color:#000>:</span> <span style=color:#a90d91>number</span> <span style=color:#000>|</span> <span style=color:#c41a16>&#39;nil&#39;</span> {
+  <span style=color:#177500>// Will only return &#39;nil&#39; if `val` is null or undefined
+</span><span style=color:#177500></span>  <span style=color:#a90d91>return</span> <span style=color:#000>val</span> <span style=color:#000>??</span> <span style=color:#c41a16>&#39;nil&#39;</span>;
 }
 
-<span style="color:#177500">// ?. (optional chaining)
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">countCaps</span>(<span style="color:#000">value?</span>: <span style="color:#a90d91">string</span>) {
-  <span style="color:#177500">// The `value` expression be undefined if `value` is null or
-</span><span style="color:#177500"></span>  <span style="color:#177500">// undefined, or if the `match` call doesn&#39;t find anything.
-</span><span style="color:#177500"></span>  <span style="color:#a90d91">return</span> <span style="color:#000">value</span><span style="color:#000">?</span>.<span style="color:#000">match</span>(<span style="color:#c41a16">/[A-Z]/g</span>)<span style="color:#000">?</span>.<span style="color:#000">length</span> <span style="color:#000">??</span> <span style="color:#1c01ce">0</span>;
+<span style=color:#177500>// ?. (optional chaining)
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>countCaps</span>(<span style=color:#000>value?</span>: <span style=color:#a90d91>string</span>) {
+  <span style=color:#177500>// The `value` expression be undefined if `value` is null or
+</span><span style=color:#177500></span>  <span style=color:#177500>// undefined, or if the `match` call doesn&#39;t find anything.
+</span><span style=color:#177500></span>  <span style=color:#a90d91>return</span> <span style=color:#000>value</span><span style=color:#000>?</span>.<span style=color:#000>match</span>(<span style=color:#c41a16>/[A-Z]/g</span>)<span style=color:#000>?</span>.<span style=color:#000>length</span> <span style=color:#000>??</span> <span style=color:#1c01ce>0</span>;
 }
 
-<span style="color:#177500">// ! (null assertion) skip the null/undefined check
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">value</span>: <span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">undefined</span>;
-<span style="color:#177500">// ... Code that we&#39;re sure will initialize `value` ...
-</span><span style="color:#177500">// Assert that `value` is defined
-</span><span style="color:#177500"></span><span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#c41a16">`value is </span><span style="color:#c41a16">${</span><span style="color:#000">value</span><span style="color:#000">!</span>.<span style="color:#000">length</span><span style="color:#c41a16">}</span><span style="color:#c41a16"> characters long`</span>);
+<span style=color:#177500>// ! (null assertion) skip the null/undefined check
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>value</span>: <span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>undefined</span>;
+<span style=color:#177500>// ... Code that we&#39;re sure will initialize `value` ...
+</span><span style=color:#177500>// Assert that `value` is defined
+</span><span style=color:#177500></span><span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`value is </span><span style=color:#c41a16>${</span><span style=color:#000>value</span><span style=color:#000>!</span>.<span style=color:#000>length</span><span style=color:#c41a16>}</span><span style=color:#c41a16> characters long`</span>);
 
-<span style="color:#177500">// &amp;&amp;=  assign a value only if current value is truthy
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">a</span>;
-<span style="color:#a90d91">let</span> <span style="color:#000">b</span> <span style="color:#000">=</span> <span style="color:#1c01ce">1</span>;
-<span style="color:#000">a</span> <span style="color:#000">&amp;&amp;=</span> <span style="color:#c41a16">&#39;default&#39;</span>; <span style="color:#177500">// a is still undefined
-</span><span style="color:#177500"></span><span style="color:#000">b</span> <span style="color:#000">&amp;&amp;=</span>  <span style="color:#1c01ce">5</span>; <span style="color:#177500">// b is now 5
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// ||=   assign a value only if current value is falsy
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">a</span>;
-<span style="color:#a90d91">let</span> <span style="color:#000">b</span> <span style="color:#000">=</span> <span style="color:#1c01ce">1</span>;
-<span style="color:#000">a</span> <span style="color:#000">||=</span> <span style="color:#c41a16">&#39;default&#39;</span>; <span style="color:#177500">// a is &#39;default&#39; now
-</span><span style="color:#177500"></span><span style="color:#000">b</span> <span style="color:#000">||=</span>  <span style="color:#1c01ce">5</span>; <span style="color:#177500">// b is still 1
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// ??=  assign a value only if current value is null or undefined
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">a</span>;
-<span style="color:#a90d91">let</span> <span style="color:#000">b</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>;
-<span style="color:#000">a</span> <span style="color:#000">??=</span> <span style="color:#c41a16">&#39;default&#39;</span>; <span style="color:#177500">// a is now &#39;default&#39;
-</span><span style="color:#177500"></span><span style="color:#000">b</span> <span style="color:#000">??=</span>  <span style="color:#1c01ce">5</span>; <span style="color:#177500">// b is still 0
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// Object
-</span><span style="color:#177500"></span>{
-    <span style="color:#000">requiredStringVal</span>: <span style="color:#a90d91">string</span>;
-    <span style="color:#000">optionalNum?</span>: <span style="color:#a90d91">number</span>;
-    <span style="color:#000">readonly</span> <span style="color:#000">readOnlyBool</span>: <span style="color:#a90d91">bool</span>;
+<span style=color:#177500>// &amp;&amp;=  assign a value only if current value is truthy
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>a</span>;
+<span style=color:#a90d91>let</span> <span style=color:#000>b</span> <span style=color:#000>=</span> <span style=color:#1c01ce>1</span>;
+<span style=color:#000>a</span> <span style=color:#000>&amp;&amp;=</span> <span style=color:#c41a16>&#39;default&#39;</span>; <span style=color:#177500>// a is still undefined
+</span><span style=color:#177500></span><span style=color:#000>b</span> <span style=color:#000>&amp;&amp;=</span>  <span style=color:#1c01ce>5</span>; <span style=color:#177500>// b is now 5
+</span><span style=color:#177500></span>
+<span style=color:#177500>// ||=   assign a value only if current value is falsy
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>a</span>;
+<span style=color:#a90d91>let</span> <span style=color:#000>b</span> <span style=color:#000>=</span> <span style=color:#1c01ce>1</span>;
+<span style=color:#000>a</span> <span style=color:#000>||=</span> <span style=color:#c41a16>&#39;default&#39;</span>; <span style=color:#177500>// a is &#39;default&#39; now
+</span><span style=color:#177500></span><span style=color:#000>b</span> <span style=color:#000>||=</span>  <span style=color:#1c01ce>5</span>; <span style=color:#177500>// b is still 1
+</span><span style=color:#177500></span>
+<span style=color:#177500>// ??=  assign a value only if current value is null or undefined
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>a</span>;
+<span style=color:#a90d91>let</span> <span style=color:#000>b</span> <span style=color:#000>=</span> <span style=color:#1c01ce>0</span>;
+<span style=color:#000>a</span> <span style=color:#000>??=</span> <span style=color:#c41a16>&#39;default&#39;</span>; <span style=color:#177500>// a is now &#39;default&#39;
+</span><span style=color:#177500></span><span style=color:#000>b</span> <span style=color:#000>??=</span>  <span style=color:#1c01ce>5</span>; <span style=color:#177500>// b is still 0
+</span><span style=color:#177500></span>
+<span style=color:#177500>// Object
+</span><span style=color:#177500></span>{
+    <span style=color:#000>requiredStringVal</span>: <span style=color:#a90d91>string</span>;
+    <span style=color:#000>optionalNum?</span>: <span style=color:#a90d91>number</span>;
+    <span style=color:#000>readonly</span> <span style=color:#000>readOnlyBool</span>: <span style=color:#a90d91>bool</span>;
 
 }
-<span style="color:#177500">// Index signature: object with arbitrary string properties (like a hashmap or dictionary)
-</span><span style="color:#177500"></span>{ [<span style="color:#000">key</span>: <span style="color:#a90d91">string</span>]<span style="color:#000">:</span> <span style="color:#000">Type</span>; }
-{ [<span style="color:#000">key</span>: <span style="color:#a90d91">number</span>]<span style="color:#000">:</span> <span style="color:#000">Type</span>; }
-{ [<span style="color:#000">key</span>: <span style="color:#a90d91">symbol</span>]<span style="color:#000">:</span> <span style="color:#000">Type</span>; }
-{ [<span style="color:#000">key</span><span style="color:#000">:</span> <span style="color:#c41a16">`data-</span><span style="color:#c41a16">${</span><span style="color:#a90d91">string</span><span style="color:#c41a16">}</span><span style="color:#c41a16">`</span>]<span style="color:#000">:</span> <span style="color:#000">Type</span>; }
+<span style=color:#177500>// Index signature: object with arbitrary string properties (like a hashmap or dictionary)
+</span><span style=color:#177500></span>{ [<span style=color:#000>key</span>: <span style=color:#a90d91>string</span>]<span style=color:#000>:</span> <span style=color:#000>Type</span>; }
+{ [<span style=color:#000>key</span>: <span style=color:#a90d91>number</span>]<span style=color:#000>:</span> <span style=color:#000>Type</span>; }
+{ [<span style=color:#000>key</span>: <span style=color:#a90d91>symbol</span>]<span style=color:#000>:</span> <span style=color:#000>Type</span>; }
+{ [<span style=color:#000>key</span><span style=color:#000>:</span> <span style=color:#c41a16>`data-</span><span style=color:#c41a16>${</span><span style=color:#a90d91>string</span><span style=color:#c41a16>}</span><span style=color:#c41a16>`</span>]<span style=color:#000>:</span> <span style=color:#000>Type</span>; }
 
-<span style="color:#177500">// Array of functions that return strings
-</span><span style="color:#177500"></span>(() <span style="color:#000">=&gt;</span> <span style="color:#a90d91">string</span>)[]
-<span style="color:#177500">// or
-</span><span style="color:#177500"></span>{ ()<span style="color:#000">:</span> <span style="color:#a90d91">string</span>; }[]
-<span style="color:#177500">// or
-</span><span style="color:#177500"></span><span style="color:#a90d91">Array</span><span style="color:#000">&lt;</span>() <span style="color:#000">=&gt;</span> <span style="color:#a90d91">string</span><span style="color:#000">&gt;</span>
+<span style=color:#177500>// Array of functions that return strings
+</span><span style=color:#177500></span>(() <span style=color:#000>=&gt;</span> <span style=color:#a90d91>string</span>)[]
+<span style=color:#177500>// or
+</span><span style=color:#177500></span>{ ()<span style=color:#000>:</span> <span style=color:#a90d91>string</span>; }[]
+<span style=color:#177500>// or
+</span><span style=color:#177500></span><span style=color:#a90d91>Array</span><span style=color:#000>&lt;</span>() <span style=color:#000>=&gt;</span> <span style=color:#a90d91>string</span><span style=color:#000>&gt;</span>
 
-<span style="color:#177500">// Basic tuples
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">myTuple</span><span style="color:#000">:</span> [ <span style="color:#a90d91">string</span>, <span style="color:#a90d91">number</span>, <span style="color:#a90d91">boolean</span><span style="color:#000">?</span> ];
-<span style="color:#000">myTuple</span> <span style="color:#000">=</span> [ <span style="color:#c41a16">&#39;test&#39;</span>, <span style="color:#1c01ce">42</span> ];
-<span style="color:#177500">// Variadic tuples  
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Numbers</span> <span style="color:#000">=</span> [<span style="color:#a90d91">number</span>, <span style="color:#a90d91">number</span>];
-<span style="color:#000">type</span> <span style="color:#000">Strings</span> <span style="color:#000">=</span> [<span style="color:#a90d91">string</span>, <span style="color:#a90d91">string</span>];
+<span style=color:#177500>// Basic tuples
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>myTuple</span><span style=color:#000>:</span> [ <span style=color:#a90d91>string</span>, <span style=color:#a90d91>number</span>, <span style=color:#a90d91>boolean</span><span style=color:#000>?</span> ];
+<span style=color:#000>myTuple</span> <span style=color:#000>=</span> [ <span style=color:#c41a16>&#39;test&#39;</span>, <span style=color:#1c01ce>42</span> ];
+<span style=color:#177500>// Variadic tuples  
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Numbers</span> <span style=color:#000>=</span> [<span style=color:#a90d91>number</span>, <span style=color:#a90d91>number</span>];
+<span style=color:#000>type</span> <span style=color:#000>Strings</span> <span style=color:#000>=</span> [<span style=color:#a90d91>string</span>, <span style=color:#a90d91>string</span>];
  
-<span style="color:#000">type</span> <span style="color:#000">NumbersAndStrings</span> <span style="color:#000">=</span> [...<span style="color:#000">Numbers</span>, ...<span style="color:#000">Strings</span>];
-<span style="color:#177500">// [number, number, string, string]
-</span><span style="color:#177500"></span>
-<span style="color:#000">type</span> <span style="color:#000">NumberAndRest</span> <span style="color:#000">=</span> [<span style="color:#a90d91">number</span>, ...<span style="color:#a90d91">string</span>[]];
-<span style="color:#177500">// [number, varying number of string]
-</span><span style="color:#177500"></span>
-<span style="color:#000">type</span> <span style="color:#000">RestAndBoolean</span> <span style="color:#000">=</span> [...<span style="color:#000">any</span>[], <span style="color:#a90d91">boolean</span>];
-<span style="color:#177500">// [varying number of any, boolean]
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// Named tuples
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Vector2D</span> <span style="color:#000">=</span> [<span style="color:#000">x</span>: <span style="color:#a90d91">number</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">number</span>];
-<span style="color:#a90d91">function</span> <span style="color:#000">createVector2d</span>(...<span style="color:#000">args</span>: <span style="color:#a90d91">Vector2D</span>) {}
-<span style="color:#177500">// function createVector2d(x: number, y: number): void
-</span><span style="color:#177500">// !!!cation, you can not use v2d.x the name is just for hint, not for compiler
-</span><span style="color:#177500"></span>
+<span style=color:#000>type</span> <span style=color:#000>NumbersAndStrings</span> <span style=color:#000>=</span> [...<span style=color:#000>Numbers</span>, ...<span style=color:#000>Strings</span>];
+<span style=color:#177500>// [number, number, string, string]
+</span><span style=color:#177500></span>
+<span style=color:#000>type</span> <span style=color:#000>NumberAndRest</span> <span style=color:#000>=</span> [<span style=color:#a90d91>number</span>, ...<span style=color:#a90d91>string</span>[]];
+<span style=color:#177500>// [number, varying number of string]
+</span><span style=color:#177500></span>
+<span style=color:#000>type</span> <span style=color:#000>RestAndBoolean</span> <span style=color:#000>=</span> [...<span style=color:#000>any</span>[], <span style=color:#a90d91>boolean</span>];
+<span style=color:#177500>// [varying number of any, boolean]
+</span><span style=color:#177500></span>
+<span style=color:#177500>// Named tuples
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Vector2D</span> <span style=color:#000>=</span> [<span style=color:#000>x</span>: <span style=color:#a90d91>number</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>];
+<span style=color:#a90d91>function</span> <span style=color:#000>createVector2d</span>(...<span style=color:#000>args</span>: <span style=color:#a90d91>Vector2D</span>) {}
+<span style=color:#177500>// function createVector2d(x: number, y: number): void
+</span><span style=color:#177500>// !!!cation, you can not use v2d.x the name is just for hint, not for compiler
+</span><span style=color:#177500></span>
 
-<span style="color:#177500">// Interface  
-</span><span style="color:#177500"></span><span style="color:#a90d91">interface</span> <span style="color:#000">Child</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Parent</span>, <span style="color:#000">SomeClass</span> {
-    <span style="color:#000">property</span>: <span style="color:#a90d91">Type</span>;
-    <span style="color:#000">optionalProp?</span>: <span style="color:#a90d91">Type</span>;
-    <span style="color:#000">optionalMethod</span><span style="color:#000">?</span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>)<span style="color:#000">:</span> <span style="color:#000">ReturnType</span>;
+<span style=color:#177500>// Interface  
+</span><span style=color:#177500></span><span style=color:#a90d91>interface</span> <span style=color:#000>Child</span> <span style=color:#a90d91>extends</span> <span style=color:#000>Parent</span>, <span style=color:#000>SomeClass</span> {
+    <span style=color:#000>property</span>: <span style=color:#a90d91>Type</span>;
+    <span style=color:#000>optionalProp?</span>: <span style=color:#a90d91>Type</span>;
+    <span style=color:#000>optionalMethod</span><span style=color:#000>?</span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>)<span style=color:#000>:</span> <span style=color:#000>ReturnType</span>;
 }
-<span style="color:#177500">// Class  
-</span><span style="color:#177500"></span><span style="color:#a90d91">class</span> <span style="color:#000">Child</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Parent</span>
+<span style=color:#177500>// Class  
+</span><span style=color:#177500></span><span style=color:#a90d91>class</span> <span style=color:#000>Child</span> <span style=color:#a90d91>extends</span> <span style=color:#000>Parent</span>
 
-<span style="color:#a90d91">implements</span> <span style="color:#000">Child</span>, <span style="color:#000">OtherChild</span> {
-    <span style="color:#000">property</span>: <span style="color:#a90d91">Type</span>;
-    <span style="color:#000">defaultProperty</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;default value&#39;</span>;
-    <span style="color:#a90d91">private</span> <span style="color:#000">_privateProperty</span>: <span style="color:#a90d91">Type</span>;
-    <span style="color:#a90d91">private</span> <span style="color:#000">readonly</span> <span style="color:#000">_privateReadonlyProperty</span>: <span style="color:#a90d91">Type</span>;
-    <span style="color:#a90d91">static</span> <span style="color:#000">staticProperty</span>: <span style="color:#a90d91">Type</span>;
+<span style=color:#a90d91>implements</span> <span style=color:#000>Child</span>, <span style=color:#000>OtherChild</span> {
+    <span style=color:#000>property</span>: <span style=color:#a90d91>Type</span>;
+    <span style=color:#000>defaultProperty</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#39;default value&#39;</span>;
+    <span style=color:#a90d91>private</span> <span style=color:#000>_privateProperty</span>: <span style=color:#a90d91>Type</span>;
+    <span style=color:#a90d91>private</span> <span style=color:#000>readonly</span> <span style=color:#000>_privateReadonlyProperty</span>: <span style=color:#a90d91>Type</span>;
+    <span style=color:#a90d91>static</span> <span style=color:#000>staticProperty</span>: <span style=color:#a90d91>Type</span>;
 
-    <span style="color:#a90d91">static</span> {
-        <span style="color:#a90d91">try</span> {
-            <span style="color:#000">Child</span>.<span style="color:#000">staticProperty</span> <span style="color:#000">=</span> <span style="color:#000">calcStaticProp</span>();
-        } <span style="color:#a90d91">catch</span> {
-            <span style="color:#000">Child</span>.<span style="color:#000">staticProperty</span> <span style="color:#000">=</span> <span style="color:#000">defaultValue</span>;
+    <span style=color:#a90d91>static</span> {
+        <span style=color:#a90d91>try</span> {
+            <span style=color:#000>Child</span>.<span style=color:#000>staticProperty</span> <span style=color:#000>=</span> <span style=color:#000>calcStaticProp</span>();
+        } <span style=color:#a90d91>catch</span> {
+            <span style=color:#000>Child</span>.<span style=color:#000>staticProperty</span> <span style=color:#000>=</span> <span style=color:#000>defaultValue</span>;
         }
     }
 
-    <span style="color:#a90d91">constructor</span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>) {
-        <span style="color:#a90d91">super</span>(<span style="color:#000">arg1</span>);
+    <span style=color:#a90d91>constructor</span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>) {
+        <span style=color:#a90d91>super</span>(<span style=color:#000>arg1</span>);
     }
 
-    <span style="color:#a90d91">private</span> <span style="color:#000">_privateMethod</span>()<span style="color:#000">:</span> <span style="color:#000">Type</span> {}
+    <span style=color:#a90d91>private</span> <span style=color:#000>_privateMethod</span>()<span style=color:#000>:</span> <span style=color:#000>Type</span> {}
 
-    <span style="color:#000">methodProperty</span><span style="color:#000">:</span> (<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>) <span style="color:#000">=&gt;</span> <span style="color:#000">ReturnType</span>;
-    <span style="color:#000">overloadedMethod</span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>)<span style="color:#000">:</span> <span style="color:#000">ReturnType</span>;
-    <span style="color:#000">overloadedMethod</span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">OtherType</span>)<span style="color:#000">:</span> <span style="color:#000">ReturnType</span>;
-    <span style="color:#000">overloadedMethod</span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">CommonT</span>)<span style="color:#000">:</span> <span style="color:#000">CommonReturnT</span> {}
-    <span style="color:#a90d91">static</span> <span style="color:#000">staticMethod</span>()<span style="color:#000">:</span> <span style="color:#000">ReturnType</span> {}
-    <span style="color:#000">subclassedMethod</span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>)<span style="color:#000">:</span> <span style="color:#000">ReturnType</span> {
-        <span style="color:#a90d91">super</span>.<span style="color:#000">subclassedMethod</span>(<span style="color:#000">arg1</span>);
+    <span style=color:#000>methodProperty</span><span style=color:#000>:</span> (<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>) <span style=color:#000>=&gt;</span> <span style=color:#000>ReturnType</span>;
+    <span style=color:#000>overloadedMethod</span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>)<span style=color:#000>:</span> <span style=color:#000>ReturnType</span>;
+    <span style=color:#000>overloadedMethod</span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>OtherType</span>)<span style=color:#000>:</span> <span style=color:#000>ReturnType</span>;
+    <span style=color:#000>overloadedMethod</span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>CommonT</span>)<span style=color:#000>:</span> <span style=color:#000>CommonReturnT</span> {}
+    <span style=color:#a90d91>static</span> <span style=color:#000>staticMethod</span>()<span style=color:#000>:</span> <span style=color:#000>ReturnType</span> {}
+    <span style=color:#000>subclassedMethod</span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>)<span style=color:#000>:</span> <span style=color:#000>ReturnType</span> {
+        <span style=color:#a90d91>super</span>.<span style=color:#000>subclassedMethod</span>(<span style=color:#000>arg1</span>);
     }
 }
-<span style="color:#177500">//-------------------------------- Function
-</span><span style="color:#177500">// Function type  
-</span><span style="color:#177500"></span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>, <span style="color:#000">argN</span>: <span style="color:#a90d91">Type</span>) <span style="color:#000">=&gt;</span> <span style="color:#000">Type</span>;
-<span style="color:#177500">// or
-</span><span style="color:#177500"></span>{ (<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>, <span style="color:#000">argN</span>: <span style="color:#a90d91">Type</span>)<span style="color:#000">:</span> <span style="color:#000">Type</span>; }
-<span style="color:#177500">// Function type with optional param  
-</span><span style="color:#177500"></span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>, <span style="color:#000">optional?</span>: <span style="color:#a90d91">Type</span>) <span style="color:#000">=&gt;</span> <span style="color:#000">ReturnType</span>
-<span style="color:#177500">// Function type with rest param  
-</span><span style="color:#177500"></span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>, ...<span style="color:#000">allOtherArgs</span>: <span style="color:#a90d91">Type</span>[]) <span style="color:#000">=&gt;</span> <span style="color:#000">ReturnType</span>
-<span style="color:#177500">// Function type with static property
-</span><span style="color:#177500"></span>{ ()<span style="color:#000">:</span> <span style="color:#000">Type</span>; <span style="color:#000">staticProp</span>: <span style="color:#a90d91">Type</span>; }
-<span style="color:#177500">// Default argument
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">fn</span>(<span style="color:#000">arg1</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;default&#39;</span>)<span style="color:#000">:</span> <span style="color:#000">ReturnType</span> {}
-<span style="color:#177500">// Arrow function
-</span><span style="color:#177500"></span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>)<span style="color:#000">:</span> <span style="color:#000">ReturnType</span> <span style="color:#000">=&gt;</span> { ...; <span style="color:#a90d91">return</span> <span style="color:#000">value</span>; }
-<span style="color:#177500">// or
-</span><span style="color:#177500"></span>(<span style="color:#000">arg1</span>: <span style="color:#a90d91">Type</span>)<span style="color:#000">:</span> <span style="color:#000">ReturnType</span> <span style="color:#000">=&gt;</span> <span style="color:#000">value</span>;
-<span style="color:#177500">// this typing  
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">fn</span>(<span style="color:#a90d91">this</span><span style="color:#000">:</span> <span style="color:#000">Foo</span>, <span style="color:#000">arg1</span>: <span style="color:#a90d91">string</span>) {}
-<span style="color:#177500">// Overloads  
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">conv</span>(<span style="color:#000">a</span>: <span style="color:#a90d91">string</span>)<span style="color:#000">:</span> <span style="color:#a90d91">number</span>;
-<span style="color:#a90d91">function</span> <span style="color:#000">conv</span>(<span style="color:#000">a</span>: <span style="color:#a90d91">number</span>)<span style="color:#000">:</span> <span style="color:#a90d91">string</span>;
-<span style="color:#a90d91">function</span> <span style="color:#000">conv</span>(<span style="color:#000">a</span>: <span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">number</span>)<span style="color:#000">:</span> <span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">number</span> {
+<span style=color:#177500>//-------------------------------- Function
+</span><span style=color:#177500>// Function type  
+</span><span style=color:#177500></span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>, <span style=color:#000>argN</span>: <span style=color:#a90d91>Type</span>) <span style=color:#000>=&gt;</span> <span style=color:#000>Type</span>;
+<span style=color:#177500>// or
+</span><span style=color:#177500></span>{ (<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>, <span style=color:#000>argN</span>: <span style=color:#a90d91>Type</span>)<span style=color:#000>:</span> <span style=color:#000>Type</span>; }
+<span style=color:#177500>// Function type with optional param  
+</span><span style=color:#177500></span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>, <span style=color:#000>optional?</span>: <span style=color:#a90d91>Type</span>) <span style=color:#000>=&gt;</span> <span style=color:#000>ReturnType</span>
+<span style=color:#177500>// Function type with rest param  
+</span><span style=color:#177500></span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>, ...<span style=color:#000>allOtherArgs</span>: <span style=color:#a90d91>Type</span>[]) <span style=color:#000>=&gt;</span> <span style=color:#000>ReturnType</span>
+<span style=color:#177500>// Function type with static property
+</span><span style=color:#177500></span>{ ()<span style=color:#000>:</span> <span style=color:#000>Type</span>; <span style=color:#000>staticProp</span>: <span style=color:#a90d91>Type</span>; }
+<span style=color:#177500>// Default argument
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>fn</span>(<span style=color:#000>arg1</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#39;default&#39;</span>)<span style=color:#000>:</span> <span style=color:#000>ReturnType</span> {}
+<span style=color:#177500>// Arrow function
+</span><span style=color:#177500></span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>)<span style=color:#000>:</span> <span style=color:#000>ReturnType</span> <span style=color:#000>=&gt;</span> { ...; <span style=color:#a90d91>return</span> <span style=color:#000>value</span>; }
+<span style=color:#177500>// or
+</span><span style=color:#177500></span>(<span style=color:#000>arg1</span>: <span style=color:#a90d91>Type</span>)<span style=color:#000>:</span> <span style=color:#000>ReturnType</span> <span style=color:#000>=&gt;</span> <span style=color:#000>value</span>;
+<span style=color:#177500>// this typing  
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>fn</span>(<span style=color:#a90d91>this</span><span style=color:#000>:</span> <span style=color:#000>Foo</span>, <span style=color:#000>arg1</span>: <span style=color:#a90d91>string</span>) {}
+<span style=color:#177500>// Overloads  
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>conv</span>(<span style=color:#000>a</span>: <span style=color:#a90d91>string</span>)<span style=color:#000>:</span> <span style=color:#a90d91>number</span>;
+<span style=color:#a90d91>function</span> <span style=color:#000>conv</span>(<span style=color:#000>a</span>: <span style=color:#a90d91>number</span>)<span style=color:#000>:</span> <span style=color:#a90d91>string</span>;
+<span style=color:#a90d91>function</span> <span style=color:#000>conv</span>(<span style=color:#000>a</span>: <span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>number</span>)<span style=color:#000>:</span> <span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>number</span> {
     ...
 }
-<span style="color:#177500">// Call Signatures
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">DescribableFunction</span> <span style="color:#000">=</span> {
-  <span style="color:#000">description</span>: <span style="color:#a90d91">string</span>;
-  (<span style="color:#000">someArg</span>: <span style="color:#a90d91">number</span>)<span style="color:#000">:</span> <span style="color:#a90d91">boolean</span>;
+<span style=color:#177500>// Call Signatures
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>DescribableFunction</span> <span style=color:#000>=</span> {
+  <span style=color:#000>description</span>: <span style=color:#a90d91>string</span>;
+  (<span style=color:#000>someArg</span>: <span style=color:#a90d91>number</span>)<span style=color:#000>:</span> <span style=color:#a90d91>boolean</span>;
 };
-<span style="color:#a90d91">function</span> <span style="color:#000">doSomething</span>(<span style="color:#000">fn</span>: <span style="color:#a90d91">DescribableFunction</span>) {
-  <span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#000">fn</span>.<span style="color:#000">description</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; returned &#34;</span> <span style="color:#000">+</span> <span style="color:#000">fn</span>(<span style="color:#1c01ce">6</span>));
+<span style=color:#a90d91>function</span> <span style=color:#000>doSomething</span>(<span style=color:#000>fn</span>: <span style=color:#a90d91>DescribableFunction</span>) {
+  <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#000>fn</span>.<span style=color:#000>description</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34; returned &#34;</span> <span style=color:#000>+</span> <span style=color:#000>fn</span>(<span style=color:#1c01ce>6</span>));
 }
-<span style="color:#177500">// Construct Signatures
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">SomeConstructor</span> <span style="color:#000">=</span> {
-  <span style="color:#a90d91">new</span> (<span style="color:#000">s</span>: <span style="color:#a90d91">string</span>)<span style="color:#000">:</span> <span style="color:#000">SomeObject</span>;
+<span style=color:#177500>// Construct Signatures
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>SomeConstructor</span> <span style=color:#000>=</span> {
+  <span style=color:#a90d91>new</span> (<span style=color:#000>s</span>: <span style=color:#a90d91>string</span>)<span style=color:#000>:</span> <span style=color:#000>SomeObject</span>;
 };
-<span style="color:#a90d91">function</span> <span style="color:#000">fn</span>(<span style="color:#000">ctor</span>: <span style="color:#a90d91">SomeConstructor</span>) {
-  <span style="color:#a90d91">return</span> <span style="color:#a90d91">new</span> <span style="color:#000">ctor</span>(<span style="color:#c41a16">&#34;hello&#34;</span>);
+<span style=color:#a90d91>function</span> <span style=color:#000>fn</span>(<span style=color:#000>ctor</span>: <span style=color:#a90d91>SomeConstructor</span>) {
+  <span style=color:#a90d91>return</span> <span style=color:#a90d91>new</span> <span style=color:#000>ctor</span>(<span style=color:#c41a16>&#34;hello&#34;</span>);
 }
-<span style="color:#177500">// Generic Functions
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">firstElement</span><span style="color:#000">&lt;</span><span style="color:#000">Type</span><span style="color:#000">&gt;</span>(<span style="color:#000">arr</span>: <span style="color:#a90d91">Type</span>[])<span style="color:#000">:</span> <span style="color:#000">Type</span> <span style="color:#000">|</span> <span style="color:#a90d91">undefined</span> {
-  <span style="color:#a90d91">return</span> <span style="color:#000">arr</span>[<span style="color:#1c01ce">0</span>];
+<span style=color:#177500>// Generic Functions
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>firstElement</span><span style=color:#000>&lt;</span><span style=color:#000>Type</span><span style=color:#000>&gt;</span>(<span style=color:#000>arr</span>: <span style=color:#a90d91>Type</span>[])<span style=color:#000>:</span> <span style=color:#000>Type</span> <span style=color:#000>|</span> <span style=color:#a90d91>undefined</span> {
+  <span style=color:#a90d91>return</span> <span style=color:#000>arr</span>[<span style=color:#1c01ce>0</span>];
 }
-<span style="color:#177500">// Constraints
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">longest</span><span style="color:#000">&lt;</span><span style="color:#000">Type</span> <span style="color:#a90d91">extends</span> { <span style="color:#000">length</span>: <span style="color:#a90d91">number</span> }<span style="color:#000">&gt;</span>(<span style="color:#000">a</span>: <span style="color:#a90d91">Type</span>, <span style="color:#000">b</span>: <span style="color:#a90d91">Type</span>) {
-  <span style="color:#a90d91">if</span> (<span style="color:#000">a</span>.<span style="color:#000">length</span> <span style="color:#000">&gt;=</span> <span style="color:#000">b</span>.<span style="color:#000">length</span>) {
-    <span style="color:#a90d91">return</span> <span style="color:#000">a</span>;
-  } <span style="color:#a90d91">else</span> {
-    <span style="color:#a90d91">return</span> <span style="color:#000">b</span>;
+<span style=color:#177500>// Constraints
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>longest</span><span style=color:#000>&lt;</span><span style=color:#000>Type</span> <span style=color:#a90d91>extends</span> { <span style=color:#000>length</span>: <span style=color:#a90d91>number</span> }<span style=color:#000>&gt;</span>(<span style=color:#000>a</span>: <span style=color:#a90d91>Type</span>, <span style=color:#000>b</span>: <span style=color:#a90d91>Type</span>) {
+  <span style=color:#a90d91>if</span> (<span style=color:#000>a</span>.<span style=color:#000>length</span> <span style=color:#000>&gt;=</span> <span style=color:#000>b</span>.<span style=color:#000>length</span>) {
+    <span style=color:#a90d91>return</span> <span style=color:#000>a</span>;
+  } <span style=color:#a90d91>else</span> {
+    <span style=color:#a90d91>return</span> <span style=color:#000>b</span>;
   }
 }
  
-<span style="color:#177500">// longerArray is of type &#39;number[]&#39;
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">longerArray</span> <span style="color:#000">=</span> <span style="color:#000">longest</span>([<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>], [<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">3</span>]);
-<span style="color:#177500">// longerString is of type &#39;alice&#39; | &#39;bob&#39;
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">longerString</span> <span style="color:#000">=</span> <span style="color:#000">longest</span>(<span style="color:#c41a16">&#34;alice&#34;</span>, <span style="color:#c41a16">&#34;bob&#34;</span>);
-<span style="color:#177500">// Error! Numbers don&#39;t have a &#39;length&#39; property
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">notOK</span> <span style="color:#000">=</span> <span style="color:#000">longest</span>(<span style="color:#1c01ce">10</span>, <span style="color:#1c01ce">100</span>);
+<span style=color:#177500>// longerArray is of type &#39;number[]&#39;
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>longerArray</span> <span style=color:#000>=</span> <span style=color:#000>longest</span>([<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>], [<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>, <span style=color:#1c01ce>3</span>]);
+<span style=color:#177500>// longerString is of type &#39;alice&#39; | &#39;bob&#39;
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>longerString</span> <span style=color:#000>=</span> <span style=color:#000>longest</span>(<span style=color:#c41a16>&#34;alice&#34;</span>, <span style=color:#c41a16>&#34;bob&#34;</span>);
+<span style=color:#177500>// Error! Numbers don&#39;t have a &#39;length&#39; property
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>notOK</span> <span style=color:#000>=</span> <span style=color:#000>longest</span>(<span style=color:#1c01ce>10</span>, <span style=color:#1c01ce>100</span>);
 
-<span style="color:#177500">// Working with Constrained Values
-</span><span style="color:#177500">// 期望返回Type,而不是具有{ length: number }约束的类型.即期望子类,返回了父类,会导致属性变少
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">minimumLength</span><span style="color:#000">&lt;</span><span style="color:#000">Type</span> <span style="color:#a90d91">extends</span> { <span style="color:#000">length</span>: <span style="color:#a90d91">number</span> }<span style="color:#000">&gt;</span>(
-  <span style="color:#000">obj</span>: <span style="color:#a90d91">Type</span>,
-  <span style="color:#000">minimum</span>: <span style="color:#a90d91">number</span>
-)<span style="color:#000">:</span> <span style="color:#000">Type</span> {
-  <span style="color:#a90d91">if</span> (<span style="color:#000">obj</span>.<span style="color:#000">length</span> <span style="color:#000">&gt;=</span> <span style="color:#000">minimum</span>) {
-    <span style="color:#a90d91">return</span> <span style="color:#000">obj</span>;
-  } <span style="color:#a90d91">else</span> {
-    <span style="color:#a90d91">return</span> { <span style="color:#000">length</span>: <span style="color:#a90d91">minimum</span> }; <span style="color:#177500">// Type &#39;{ length: number; }&#39; is not assignable to type &#39;Type&#39;.
-</span><span style="color:#177500"></span>    <span style="color:#177500">// &#39;{ length: number; }&#39; is assignable to the constraint of type &#39;Type&#39;, but &#39;Type&#39; could be instantiated with a different subtype of constraint &#39;{ length: number; }&#39;
-</span><span style="color:#177500"></span>  }
+<span style=color:#177500>// Working with Constrained Values
+</span><span style=color:#177500>// 期望返回Type,而不是具有{ length: number }约束的类型.即期望子类,返回了父类,会导致属性变少
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>minimumLength</span><span style=color:#000>&lt;</span><span style=color:#000>Type</span> <span style=color:#a90d91>extends</span> { <span style=color:#000>length</span>: <span style=color:#a90d91>number</span> }<span style=color:#000>&gt;</span>(
+  <span style=color:#000>obj</span>: <span style=color:#a90d91>Type</span>,
+  <span style=color:#000>minimum</span>: <span style=color:#a90d91>number</span>
+)<span style=color:#000>:</span> <span style=color:#000>Type</span> {
+  <span style=color:#a90d91>if</span> (<span style=color:#000>obj</span>.<span style=color:#000>length</span> <span style=color:#000>&gt;=</span> <span style=color:#000>minimum</span>) {
+    <span style=color:#a90d91>return</span> <span style=color:#000>obj</span>;
+  } <span style=color:#a90d91>else</span> {
+    <span style=color:#a90d91>return</span> { <span style=color:#000>length</span>: <span style=color:#a90d91>minimum</span> }; <span style=color:#177500>// Type &#39;{ length: number; }&#39; is not assignable to type &#39;Type&#39;.
+</span><span style=color:#177500></span>    <span style=color:#177500>// &#39;{ length: number; }&#39; is assignable to the constraint of type &#39;Type&#39;, but &#39;Type&#39; could be instantiated with a different subtype of constraint &#39;{ length: number; }&#39;
+</span><span style=color:#177500></span>  }
 }
-<span style="color:#177500">// Rule: If a type parameter only appears in one location, strongly reconsider if you actually need it
-</span><span style="color:#177500">// Rule: Always use as few type parameters as possible
-</span><span style="color:#177500">// Rule: When possible, use the type parameter itself rather than constraining it
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// 函数重载
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">makeDate</span>(<span style="color:#000">timestamp</span>: <span style="color:#a90d91">number</span>)<span style="color:#000">:</span> <span style="color:#a90d91">Date</span>;
-<span style="color:#a90d91">function</span> <span style="color:#000">makeDate</span>(<span style="color:#000">m</span>: <span style="color:#a90d91">number</span>, <span style="color:#000">d</span>: <span style="color:#a90d91">number</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">number</span>)<span style="color:#000">:</span> <span style="color:#a90d91">Date</span>;
-<span style="color:#177500">// 上面两个为函数重载签名
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">makeDate</span>(<span style="color:#000">mOrTimestamp</span>: <span style="color:#a90d91">number</span>, <span style="color:#000">d?</span>: <span style="color:#a90d91">number</span>, <span style="color:#000">y?</span>: <span style="color:#a90d91">number</span>)<span style="color:#000">:</span> <span style="color:#a90d91">Date</span> {
-  <span style="color:#a90d91">if</span> (<span style="color:#000">d</span> <span style="color:#000">!==</span> <span style="color:#a90d91">undefined</span> <span style="color:#000">&amp;&amp;</span> <span style="color:#000">y</span> <span style="color:#000">!==</span> <span style="color:#a90d91">undefined</span>) {
-    <span style="color:#a90d91">return</span> <span style="color:#a90d91">new</span> <span style="color:#a90d91">Date</span>(<span style="color:#000">y</span>, <span style="color:#000">mOrTimestamp</span>, <span style="color:#000">d</span>);
-  } <span style="color:#a90d91">else</span> {
-    <span style="color:#a90d91">return</span> <span style="color:#a90d91">new</span> <span style="color:#a90d91">Date</span>(<span style="color:#000">mOrTimestamp</span>);
+<span style=color:#177500>// Rule: If a type parameter only appears in one location, strongly reconsider if you actually need it
+</span><span style=color:#177500>// Rule: Always use as few type parameters as possible
+</span><span style=color:#177500>// Rule: When possible, use the type parameter itself rather than constraining it
+</span><span style=color:#177500></span>
+<span style=color:#177500>// 函数重载
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>makeDate</span>(<span style=color:#000>timestamp</span>: <span style=color:#a90d91>number</span>)<span style=color:#000>:</span> <span style=color:#a90d91>Date</span>;
+<span style=color:#a90d91>function</span> <span style=color:#000>makeDate</span>(<span style=color:#000>m</span>: <span style=color:#a90d91>number</span>, <span style=color:#000>d</span>: <span style=color:#a90d91>number</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>)<span style=color:#000>:</span> <span style=color:#a90d91>Date</span>;
+<span style=color:#177500>// 上面两个为函数重载签名
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>makeDate</span>(<span style=color:#000>mOrTimestamp</span>: <span style=color:#a90d91>number</span>, <span style=color:#000>d?</span>: <span style=color:#a90d91>number</span>, <span style=color:#000>y?</span>: <span style=color:#a90d91>number</span>)<span style=color:#000>:</span> <span style=color:#a90d91>Date</span> {
+  <span style=color:#a90d91>if</span> (<span style=color:#000>d</span> <span style=color:#000>!==</span> <span style=color:#a90d91>undefined</span> <span style=color:#000>&amp;&amp;</span> <span style=color:#000>y</span> <span style=color:#000>!==</span> <span style=color:#a90d91>undefined</span>) {
+    <span style=color:#a90d91>return</span> <span style=color:#a90d91>new</span> <span style=color:#a90d91>Date</span>(<span style=color:#000>y</span>, <span style=color:#000>mOrTimestamp</span>, <span style=color:#000>d</span>);
+  } <span style=color:#a90d91>else</span> {
+    <span style=color:#a90d91>return</span> <span style=color:#a90d91>new</span> <span style=color:#a90d91>Date</span>(<span style=color:#000>mOrTimestamp</span>);
   }
 }
-<span style="color:#a90d91">const</span> <span style="color:#000">d1</span> <span style="color:#000">=</span> <span style="color:#000">makeDate</span>(<span style="color:#1c01ce">12345678</span>);
-<span style="color:#a90d91">const</span> <span style="color:#000">d2</span> <span style="color:#000">=</span> <span style="color:#000">makeDate</span>(<span style="color:#1c01ce">5</span>, <span style="color:#1c01ce">5</span>, <span style="color:#1c01ce">5</span>);
-<span style="color:#a90d91">const</span> <span style="color:#000">d3</span> <span style="color:#000">=</span> <span style="color:#000">makeDate</span>(<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">3</span>);
-<span style="color:#177500">// Always prefer parameters with union types instead of overloads when possible
-</span><span style="color:#177500"></span>
+<span style=color:#a90d91>const</span> <span style=color:#000>d1</span> <span style=color:#000>=</span> <span style=color:#000>makeDate</span>(<span style=color:#1c01ce>12345678</span>);
+<span style=color:#a90d91>const</span> <span style=color:#000>d2</span> <span style=color:#000>=</span> <span style=color:#000>makeDate</span>(<span style=color:#1c01ce>5</span>, <span style=color:#1c01ce>5</span>, <span style=color:#1c01ce>5</span>);
+<span style=color:#a90d91>const</span> <span style=color:#000>d3</span> <span style=color:#000>=</span> <span style=color:#000>makeDate</span>(<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>3</span>);
+<span style=color:#177500>// Always prefer parameters with union types instead of overloads when possible
+</span><span style=color:#177500></span>
 
-<span style="color:#177500">//-------------------------------- Enum
-</span><span style="color:#177500">// Unlike most TypeScript features, this is not a type-level addition to JavaScript but something added to the language and runtime.
-</span><span style="color:#177500">// Because of this, it’s a feature which you should know exists, but maybe hold off on using unless you are sure
-</span><span style="color:#177500"></span><span style="color:#a90d91">enum</span> <span style="color:#000">Color</span> {<span style="color:#000">Red</span>, <span style="color:#000">Green</span>, <span style="color:#000">Blue</span> <span style="color:#000">=</span> <span style="color:#1c01ce">4</span>} <span style="color:#177500">// default get Red=0, all of the following members are auto-incremented Green=1, except you give.
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">c</span>: <span style="color:#a90d91">Color</span> <span style="color:#000">=</span> <span style="color:#000">Color</span>.<span style="color:#000">Green</span>
-<span style="color:#177500">// enum有两种, value是number（默认）或string的.
-</span><span style="color:#177500">// !!!numeric enums members also get a reverse mapping from enum values to enum names, for example:
-</span><span style="color:#177500">// !!! careful with numeric enum iteration
-</span><span style="color:#177500"></span><span style="color:#a90d91">enum</span> <span style="color:#000">LogLevel</span> {
-  <span style="color:#000">ERROR</span>,
-  <span style="color:#000">WARN</span>,
-  <span style="color:#000">INFO</span>
+<span style=color:#177500>//-------------------------------- Enum
+</span><span style=color:#177500>// Unlike most TypeScript features, this is not a type-level addition to JavaScript but something added to the language and runtime.
+</span><span style=color:#177500>// Because of this, it’s a feature which you should know exists, but maybe hold off on using unless you are sure
+</span><span style=color:#177500></span><span style=color:#a90d91>enum</span> <span style=color:#000>Color</span> {<span style=color:#000>Red</span>, <span style=color:#000>Green</span>, <span style=color:#000>Blue</span> <span style=color:#000>=</span> <span style=color:#1c01ce>4</span>} <span style=color:#177500>// default get Red=0, all of the following members are auto-incremented Green=1, except you give.
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>c</span>: <span style=color:#a90d91>Color</span> <span style=color:#000>=</span> <span style=color:#000>Color</span>.<span style=color:#000>Green</span>
+<span style=color:#177500>// enum有两种, value是number（默认）或string的.
+</span><span style=color:#177500>// !!!numeric enums members also get a reverse mapping from enum values to enum names, for example:
+</span><span style=color:#177500>// !!! careful with numeric enum iteration
+</span><span style=color:#177500></span><span style=color:#a90d91>enum</span> <span style=color:#000>LogLevel</span> {
+  <span style=color:#000>ERROR</span>,
+  <span style=color:#000>WARN</span>,
+  <span style=color:#000>INFO</span>
 }
-<span style="color:#a90d91">for</span> (<span style="color:#a90d91">let</span> <span style="color:#000">element</span> <span style="color:#a90d91">in</span> <span style="color:#000">LogLevel</span>) {
-        <span style="color:#177500">// 先遍历index,再遍历value
-</span><span style="color:#177500"></span>        <span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#000">element</span> <span style="color:#000">+</span><span style="color:#c41a16">&#34; - &#34;</span><span style="color:#000">+</span> <span style="color:#000">LogLevel</span>[<span style="color:#000">element</span>]);<span style="color:#177500">// output
-</span><span style="color:#177500"></span>        <span style="color:#177500">// [LOG]: &#34;0 - ERROR&#34;
-</span><span style="color:#177500"></span>        <span style="color:#177500">// [LOG]: &#34;1 - WARN&#34;
-</span><span style="color:#177500"></span>        <span style="color:#177500">// [LOG]: &#34;2 - INFO&#34;
-</span><span style="color:#177500"></span>        <span style="color:#177500">// [LOG]: &#34;ERROR - 0&#34;
-</span><span style="color:#177500"></span>        <span style="color:#177500">// [LOG]: &#34;WARN - 1&#34;
-</span><span style="color:#177500"></span>        <span style="color:#177500">// [LOG]: &#34;INFO - 2&#34;
-</span><span style="color:#177500"></span>}
-<span style="color:#177500">// string value enum没有上面这个问题.
-</span><span style="color:#177500">// 在编译内部, ts编译得到一个name-&gt;value value-&gt;name的双向map
-</span><span style="color:#177500"></span><span style="color:#a90d91">enum</span> <span style="color:#000">Enum</span> {
-  <span style="color:#000">VAL</span>,
-}
-
-<span style="color:#177500">// tsc output
-</span><span style="color:#177500"></span><span style="color:#c41a16">&#34;use strict&#34;</span>;
-<span style="color:#a90d91">var</span> <span style="color:#000">Enum</span>;
-(<span style="color:#a90d91">function</span> (<span style="color:#000">Enum</span>) {
-    <span style="color:#000">Enum</span>[<span style="color:#000">Enum</span>[<span style="color:#c41a16">&#34;VAL&#34;</span>] <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>] <span style="color:#000">=</span> <span style="color:#c41a16">&#34;VAL&#34;</span>;
-})(<span style="color:#000">Enum</span> <span style="color:#000">||</span> (<span style="color:#000">Enum</span> <span style="color:#000">=</span> {}));
-
-
-<span style="color:#177500">// for in是ES5标准,遍历key.  in会遍历原型链prototype上面的属性.非底层代码,禁止使用for..in.
-</span><span style="color:#177500">// for of是ES6标准,遍历value.
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// 语法上enum允许 string value 和 numeric value并存,但是代码业务含义
-</span><span style="color:#177500"></span><span style="color:#a90d91">enum</span> <span style="color:#000">BooleanLikeHeterogeneousEnum</span> {
-  <span style="color:#000">No</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>,
-  <span style="color:#000">Yes</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;YES&#34;</span>,
+<span style=color:#a90d91>for</span> (<span style=color:#a90d91>let</span> <span style=color:#000>element</span> <span style=color:#a90d91>in</span> <span style=color:#000>LogLevel</span>) {
+        <span style=color:#177500>// 先遍历index,再遍历value
+</span><span style=color:#177500></span>        <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#000>element</span> <span style=color:#000>+</span><span style=color:#c41a16>&#34; - &#34;</span><span style=color:#000>+</span> <span style=color:#000>LogLevel</span>[<span style=color:#000>element</span>]);<span style=color:#177500>// output
+</span><span style=color:#177500></span>        <span style=color:#177500>// [LOG]: &#34;0 - ERROR&#34;
+</span><span style=color:#177500></span>        <span style=color:#177500>// [LOG]: &#34;1 - WARN&#34;
+</span><span style=color:#177500></span>        <span style=color:#177500>// [LOG]: &#34;2 - INFO&#34;
+</span><span style=color:#177500></span>        <span style=color:#177500>// [LOG]: &#34;ERROR - 0&#34;
+</span><span style=color:#177500></span>        <span style=color:#177500>// [LOG]: &#34;WARN - 1&#34;
+</span><span style=color:#177500></span>        <span style=color:#177500>// [LOG]: &#34;INFO - 2&#34;
+</span><span style=color:#177500></span>}
+<span style=color:#177500>// string value enum没有上面这个问题.
+</span><span style=color:#177500>// 在编译内部, ts编译得到一个name-&gt;value value-&gt;name的双向map
+</span><span style=color:#177500></span><span style=color:#a90d91>enum</span> <span style=color:#000>Enum</span> {
+  <span style=color:#000>VAL</span>,
 }
 
-<span style="color:#177500">// Try to use ts.forEach, ts.map, and ts.filter instead of loops when it is not strongly inconvenient.
-</span><span style="color:#177500"></span>
+<span style=color:#177500>// tsc output
+</span><span style=color:#177500></span><span style=color:#c41a16>&#34;use strict&#34;</span>;
+<span style=color:#a90d91>var</span> <span style=color:#000>Enum</span>;
+(<span style=color:#a90d91>function</span> (<span style=color:#000>Enum</span>) {
+    <span style=color:#000>Enum</span>[<span style=color:#000>Enum</span>[<span style=color:#c41a16>&#34;VAL&#34;</span>] <span style=color:#000>=</span> <span style=color:#1c01ce>0</span>] <span style=color:#000>=</span> <span style=color:#c41a16>&#34;VAL&#34;</span>;
+})(<span style=color:#000>Enum</span> <span style=color:#000>||</span> (<span style=color:#000>Enum</span> <span style=color:#000>=</span> {}));
 
-<span style="color:#177500">//-------------------------------- Type alias
-</span><span style="color:#177500"></span>
-<span style="color:#000">type</span> <span style="color:#000">Name</span> <span style="color:#000">=</span> <span style="color:#a90d91">string</span>;
-<span style="color:#000">type</span> <span style="color:#000">Direction</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;left&#39;</span> <span style="color:#000">|</span> <span style="color:#c41a16">&#39;right&#39;</span>;
-<span style="color:#000">type</span> <span style="color:#000">ElementCreator</span> <span style="color:#000">=</span> (<span style="color:#000">type</span>: <span style="color:#a90d91">string</span>) <span style="color:#000">=&gt;</span> <span style="color:#000">Element</span>;
-<span style="color:#000">type</span> <span style="color:#000">Point</span> <span style="color:#000">=</span> { <span style="color:#000">x</span>: <span style="color:#a90d91">number</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">number</span> };
-<span style="color:#000">type</span> <span style="color:#000">Point3D</span> <span style="color:#000">=</span> <span style="color:#000">Point</span> <span style="color:#000">&amp;</span> { <span style="color:#000">z</span>: <span style="color:#a90d91">number</span> };
-<span style="color:#000">type</span> <span style="color:#000">PointProp</span> <span style="color:#000">=</span> <span style="color:#000">keyof</span> <span style="color:#000">Point</span>; <span style="color:#177500">// &#39;x&#39; | &#39;y&#39;
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">point</span>: <span style="color:#a90d91">Point</span> <span style="color:#000">=</span> { <span style="color:#000">x</span>: <span style="color:#a90d91">1</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">2</span> };
-<span style="color:#000">type</span> <span style="color:#000">PtValProp</span> <span style="color:#000">=</span> <span style="color:#000">keyof</span> <span style="color:#a90d91">typeof</span> <span style="color:#000">point</span>; <span style="color:#177500">// &#39;x&#39; | &#39;y&#39;
-</span><span style="color:#177500">// Extending a type via intersections
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Animal</span> <span style="color:#000">=</span> {
-  <span style="color:#000">name</span>: <span style="color:#a90d91">string</span>
+
+<span style=color:#177500>// for in是ES5标准,遍历key.  in会遍历原型链prototype上面的属性.非底层代码,禁止使用for..in.
+</span><span style=color:#177500>// for of是ES6标准,遍历value.
+</span><span style=color:#177500></span>
+<span style=color:#177500>// 语法上enum允许 string value 和 numeric value并存,但是代码业务含义
+</span><span style=color:#177500></span><span style=color:#a90d91>enum</span> <span style=color:#000>BooleanLikeHeterogeneousEnum</span> {
+  <span style=color:#000>No</span> <span style=color:#000>=</span> <span style=color:#1c01ce>0</span>,
+  <span style=color:#000>Yes</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;YES&#34;</span>,
 }
 
-<span style="color:#000">type</span> <span style="color:#000">Bear</span> <span style="color:#000">=</span> <span style="color:#000">Animal</span> <span style="color:#000">&amp;</span> { 
-  <span style="color:#000">honey</span>: <span style="color:#a90d91">boolean</span> 
+<span style=color:#177500>// Try to use ts.forEach, ts.map, and ts.filter instead of loops when it is not strongly inconvenient.
+</span><span style=color:#177500></span>
+
+<span style=color:#177500>//-------------------------------- Type alias
+</span><span style=color:#177500></span>
+<span style=color:#000>type</span> <span style=color:#000>Name</span> <span style=color:#000>=</span> <span style=color:#a90d91>string</span>;
+<span style=color:#000>type</span> <span style=color:#000>Direction</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#39;left&#39;</span> <span style=color:#000>|</span> <span style=color:#c41a16>&#39;right&#39;</span>;
+<span style=color:#000>type</span> <span style=color:#000>ElementCreator</span> <span style=color:#000>=</span> (<span style=color:#000>type</span>: <span style=color:#a90d91>string</span>) <span style=color:#000>=&gt;</span> <span style=color:#000>Element</span>;
+<span style=color:#000>type</span> <span style=color:#000>Point</span> <span style=color:#000>=</span> { <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>number</span> };
+<span style=color:#000>type</span> <span style=color:#000>Point3D</span> <span style=color:#000>=</span> <span style=color:#000>Point</span> <span style=color:#000>&amp;</span> { <span style=color:#000>z</span>: <span style=color:#a90d91>number</span> };
+<span style=color:#000>type</span> <span style=color:#000>PointProp</span> <span style=color:#000>=</span> <span style=color:#000>keyof</span> <span style=color:#000>Point</span>; <span style=color:#177500>// &#39;x&#39; | &#39;y&#39;
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>point</span>: <span style=color:#a90d91>Point</span> <span style=color:#000>=</span> { <span style=color:#000>x</span>: <span style=color:#a90d91>1</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>2</span> };
+<span style=color:#000>type</span> <span style=color:#000>PtValProp</span> <span style=color:#000>=</span> <span style=color:#000>keyof</span> <span style=color:#a90d91>typeof</span> <span style=color:#000>point</span>; <span style=color:#177500>// &#39;x&#39; | &#39;y&#39;
+</span><span style=color:#177500>// Extending a type via intersections
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Animal</span> <span style=color:#000>=</span> {
+  <span style=color:#000>name</span>: <span style=color:#a90d91>string</span>
 }
 
-<span style="color:#177500">// type alias , interface 区别
-</span><span style="color:#177500"></span>
-
-
-<span style="color:#177500">//-------------------------------- Generics
-</span><span style="color:#177500">// Function using type parameters
-</span><span style="color:#177500"></span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span>(<span style="color:#000">items</span>: <span style="color:#a90d91">T</span>[], <span style="color:#000">callback</span><span style="color:#000">:</span> (<span style="color:#000">item</span>: <span style="color:#a90d91">T</span>) <span style="color:#000">=&gt;</span> <span style="color:#000">T</span>)<span style="color:#000">:</span> <span style="color:#000">T</span>[]
-<span style="color:#177500">// Interface with multiple types  
-</span><span style="color:#177500"></span><span style="color:#a90d91">interface</span> <span style="color:#000">Pair</span><span style="color:#000">&lt;</span><span style="color:#000">T1</span>, <span style="color:#000">T2</span><span style="color:#000">&gt;</span> {
-    <span style="color:#000">first</span>: <span style="color:#a90d91">T1</span>;
-    <span style="color:#000">second</span>: <span style="color:#a90d91">T2</span>;
+<span style=color:#000>type</span> <span style=color:#000>Bear</span> <span style=color:#000>=</span> <span style=color:#000>Animal</span> <span style=color:#000>&amp;</span> { 
+  <span style=color:#000>honey</span>: <span style=color:#a90d91>boolean</span> 
 }
-<span style="color:#177500">// Constrained type parameter
-</span><span style="color:#177500"></span><span style="color:#000">&lt;</span><span style="color:#000">T</span> <span style="color:#a90d91">extends</span> <span style="color:#000">ConstrainedType</span><span style="color:#000">&gt;</span>()<span style="color:#000">:</span> <span style="color:#000">T</span>
-<span style="color:#177500">// Default type parameter  
-</span><span style="color:#177500"></span><span style="color:#000">&lt;</span><span style="color:#000">T</span> <span style="color:#000">=</span> <span style="color:#000">DefaultType</span><span style="color:#000">&gt;</span>()<span style="color:#000">:</span> <span style="color:#000">T</span>
-<span style="color:#177500">// Constrained and default type parameter
-</span><span style="color:#177500"></span><span style="color:#000">&lt;</span><span style="color:#000">T</span> <span style="color:#a90d91">extends</span> <span style="color:#000">ConstrainedType</span> <span style="color:#000">=</span> <span style="color:#000">DefaultType</span><span style="color:#000">&gt;</span>()<span style="color:#000">:</span> <span style="color:#000">T</span>
-<span style="color:#177500">// Generic tuples
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Arr</span> <span style="color:#000">=</span> <span style="color:#000">readonly</span> <span style="color:#000">any</span>[];
+
+<span style=color:#177500>// type alias , interface 区别
+</span><span style=color:#177500></span>
+
+
+<span style=color:#177500>//-------------------------------- Generics
+</span><span style=color:#177500>// Function using type parameters
+</span><span style=color:#177500></span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span>(<span style=color:#000>items</span>: <span style=color:#a90d91>T</span>[], <span style=color:#000>callback</span><span style=color:#000>:</span> (<span style=color:#000>item</span>: <span style=color:#a90d91>T</span>) <span style=color:#000>=&gt;</span> <span style=color:#000>T</span>)<span style=color:#000>:</span> <span style=color:#000>T</span>[]
+<span style=color:#177500>// Interface with multiple types  
+</span><span style=color:#177500></span><span style=color:#a90d91>interface</span> <span style=color:#000>Pair</span><span style=color:#000>&lt;</span><span style=color:#000>T1</span>, <span style=color:#000>T2</span><span style=color:#000>&gt;</span> {
+    <span style=color:#000>first</span>: <span style=color:#a90d91>T1</span>;
+    <span style=color:#000>second</span>: <span style=color:#a90d91>T2</span>;
+}
+<span style=color:#177500>// Constrained type parameter
+</span><span style=color:#177500></span><span style=color:#000>&lt;</span><span style=color:#000>T</span> <span style=color:#a90d91>extends</span> <span style=color:#000>ConstrainedType</span><span style=color:#000>&gt;</span>()<span style=color:#000>:</span> <span style=color:#000>T</span>
+<span style=color:#177500>// Default type parameter  
+</span><span style=color:#177500></span><span style=color:#000>&lt;</span><span style=color:#000>T</span> <span style=color:#000>=</span> <span style=color:#000>DefaultType</span><span style=color:#000>&gt;</span>()<span style=color:#000>:</span> <span style=color:#000>T</span>
+<span style=color:#177500>// Constrained and default type parameter
+</span><span style=color:#177500></span><span style=color:#000>&lt;</span><span style=color:#000>T</span> <span style=color:#a90d91>extends</span> <span style=color:#000>ConstrainedType</span> <span style=color:#000>=</span> <span style=color:#000>DefaultType</span><span style=color:#000>&gt;</span>()<span style=color:#000>:</span> <span style=color:#000>T</span>
+<span style=color:#177500>// Generic tuples
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Arr</span> <span style=color:#000>=</span> <span style=color:#000>readonly</span> <span style=color:#000>any</span>[];
  
-<span style="color:#a90d91">function</span> <span style="color:#000">concat</span><span style="color:#000">&lt;</span><span style="color:#000">U</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Arr</span>, <span style="color:#000">V</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Arr</span><span style="color:#000">&gt;</span>(<span style="color:#000">a</span>: <span style="color:#a90d91">U</span>, <span style="color:#000">b</span>: <span style="color:#a90d91">V</span>)<span style="color:#000">:</span>
-[...<span style="color:#000">U</span>, ...<span style="color:#000">V</span>] { <span style="color:#a90d91">return</span> [...<span style="color:#000">a</span>, ...<span style="color:#000">b</span>] }
+<span style=color:#a90d91>function</span> <span style=color:#000>concat</span><span style=color:#000>&lt;</span><span style=color:#000>U</span> <span style=color:#a90d91>extends</span> <span style=color:#000>Arr</span>, <span style=color:#000>V</span> <span style=color:#a90d91>extends</span> <span style=color:#000>Arr</span><span style=color:#000>&gt;</span>(<span style=color:#000>a</span>: <span style=color:#a90d91>U</span>, <span style=color:#000>b</span>: <span style=color:#a90d91>V</span>)<span style=color:#000>:</span>
+[...<span style=color:#000>U</span>, ...<span style=color:#000>V</span>] { <span style=color:#a90d91>return</span> [...<span style=color:#000>a</span>, ...<span style=color:#000>b</span>] }
  
-<span style="color:#a90d91">const</span> <span style="color:#000">strictResult</span> <span style="color:#000">=</span> <span style="color:#000">concat</span>([<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>] <span style="color:#a90d91">as</span> <span style="color:#a90d91">const</span>, [<span style="color:#c41a16">&#39;3&#39;</span>, <span style="color:#c41a16">&#39;4&#39;</span>] <span style="color:#a90d91">as</span> <span style="color:#a90d91">const</span>);
-<span style="color:#a90d91">const</span> <span style="color:#000">relaxedResult</span> <span style="color:#000">=</span> <span style="color:#000">concat</span>([<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>], [<span style="color:#c41a16">&#39;3&#39;</span>, <span style="color:#c41a16">&#39;4&#39;</span>]);
+<span style=color:#a90d91>const</span> <span style=color:#000>strictResult</span> <span style=color:#000>=</span> <span style=color:#000>concat</span>([<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>] <span style=color:#a90d91>as</span> <span style=color:#a90d91>const</span>, [<span style=color:#c41a16>&#39;3&#39;</span>, <span style=color:#c41a16>&#39;4&#39;</span>] <span style=color:#a90d91>as</span> <span style=color:#a90d91>const</span>);
+<span style=color:#a90d91>const</span> <span style=color:#000>relaxedResult</span> <span style=color:#000>=</span> <span style=color:#000>concat</span>([<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>], [<span style=color:#c41a16>&#39;3&#39;</span>, <span style=color:#c41a16>&#39;4&#39;</span>]);
  
-<span style="color:#177500">// strictResult is of type [1, 2, &#39;3&#39;, &#39;4&#39;]
-</span><span style="color:#177500">// relaxedResult is of type (string | number)[]
-</span><span style="color:#177500"></span>
-<span style="color:#177500">//-------------------------------- Index, mapped, and conditional types
-</span><span style="color:#177500">// Index type query (keyof)
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Point</span> <span style="color:#000">=</span> { <span style="color:#000">x</span>: <span style="color:#a90d91">number</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">number</span> };
-<span style="color:#a90d91">let</span> <span style="color:#000">pointProp</span>: <span style="color:#a90d91">keyof</span> <span style="color:#000">Point</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;x&#39;</span>;
+<span style=color:#177500>// strictResult is of type [1, 2, &#39;3&#39;, &#39;4&#39;]
+</span><span style=color:#177500>// relaxedResult is of type (string | number)[]
+</span><span style=color:#177500></span>
+<span style=color:#177500>//-------------------------------- Index, mapped, and conditional types
+</span><span style=color:#177500>// Index type query (keyof)
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Point</span> <span style=color:#000>=</span> { <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>number</span> };
+<span style=color:#a90d91>let</span> <span style=color:#000>pointProp</span>: <span style=color:#a90d91>keyof</span> <span style=color:#000>Point</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#39;x&#39;</span>;
 
-<span style="color:#a90d91">function</span> <span style="color:#000">getProp</span><span style="color:#000">&lt;</span><span style="color:#000">T</span>, <span style="color:#000">K</span> <span style="color:#a90d91">extends</span> <span style="color:#000">keyof</span> <span style="color:#000">T</span><span style="color:#000">&gt;</span>(
-    <span style="color:#000">val</span>: <span style="color:#a90d91">T</span>,
-    <span style="color:#000">propName</span>: <span style="color:#a90d91">K</span>
+<span style=color:#a90d91>function</span> <span style=color:#000>getProp</span><span style=color:#000>&lt;</span><span style=color:#000>T</span>, <span style=color:#000>K</span> <span style=color:#a90d91>extends</span> <span style=color:#000>keyof</span> <span style=color:#000>T</span><span style=color:#000>&gt;</span>(
+    <span style=color:#000>val</span>: <span style=color:#a90d91>T</span>,
+    <span style=color:#000>propName</span>: <span style=color:#a90d91>K</span>
 
-)<span style="color:#000">:</span> <span style="color:#000">T</span>[<span style="color:#000">K</span>] { ... }
+)<span style=color:#000>:</span> <span style=color:#000>T</span>[<span style=color:#000>K</span>] { ... }
 
-<span style="color:#177500">// Mapped types
-</span><span style="color:#177500">// see more: https://www.typescriptlang.org/docs/handbook/utility-types.html
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Stringify</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">=</span> { [<span style="color:#000">P</span> <span style="color:#a90d91">in</span> <span style="color:#000">keyof</span> <span style="color:#000">T</span>]<span style="color:#000">:</span> <span style="color:#a90d91">string</span>; }
-<span style="color:#000">type</span> <span style="color:#000">Partial</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">=</span> { [<span style="color:#000">P</span> <span style="color:#a90d91">in</span> <span style="color:#000">keyof</span> <span style="color:#000">T</span>]<span style="color:#000">?:</span> <span style="color:#000">T</span>[<span style="color:#000">P</span>]; }
-<span style="color:#177500">// Conditional types  
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Swapper</span> <span style="color:#000">=</span> <span style="color:#000">&lt;</span><span style="color:#000">T</span> <span style="color:#a90d91">extends</span> <span style="color:#a90d91">number</span> <span style="color:#000">|</span> <span style="color:#a90d91">string</span><span style="color:#000">&gt;</span>
-    (<span style="color:#000">value</span>: <span style="color:#a90d91">T</span>) <span style="color:#000">=&gt;</span> <span style="color:#000">T</span> <span style="color:#a90d91">extends</span> <span style="color:#a90d91">number</span> <span style="color:#000">?</span> <span style="color:#a90d91">string</span> <span style="color:#000">:</span> <span style="color:#a90d91">number</span>;
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span>(<span style="color:#000">value</span>: <span style="color:#a90d91">number</span>) <span style="color:#000">=&gt;</span> <span style="color:#a90d91">string</span> <span style="color:#177500">// if T is number, or
-</span><span style="color:#177500"></span>(<span style="color:#000">value</span>: <span style="color:#a90d91">string</span>) <span style="color:#000">=&gt;</span> <span style="color:#a90d91">number</span> <span style="color:#177500">// if T is string
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// Conditional mapped types
-</span><span style="color:#177500"></span><span style="color:#a90d91">interface</span> <span style="color:#000">Person</span> {
-    <span style="color:#000">firstName</span>: <span style="color:#a90d91">string</span>;
-    <span style="color:#000">lastName</span>: <span style="color:#a90d91">string</span>;
-    <span style="color:#000">age</span>: <span style="color:#a90d91">number</span>;
+<span style=color:#177500>// Mapped types
+</span><span style=color:#177500>// see more: https://www.typescriptlang.org/docs/handbook/utility-types.html
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Stringify</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span> <span style=color:#000>=</span> { [<span style=color:#000>P</span> <span style=color:#a90d91>in</span> <span style=color:#000>keyof</span> <span style=color:#000>T</span>]<span style=color:#000>:</span> <span style=color:#a90d91>string</span>; }
+<span style=color:#000>type</span> <span style=color:#000>Partial</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span> <span style=color:#000>=</span> { [<span style=color:#000>P</span> <span style=color:#a90d91>in</span> <span style=color:#000>keyof</span> <span style=color:#000>T</span>]<span style=color:#000>?:</span> <span style=color:#000>T</span>[<span style=color:#000>P</span>]; }
+<span style=color:#177500>// Conditional types  
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Swapper</span> <span style=color:#000>=</span> <span style=color:#000>&lt;</span><span style=color:#000>T</span> <span style=color:#a90d91>extends</span> <span style=color:#a90d91>number</span> <span style=color:#000>|</span> <span style=color:#a90d91>string</span><span style=color:#000>&gt;</span>
+    (<span style=color:#000>value</span>: <span style=color:#a90d91>T</span>) <span style=color:#000>=&gt;</span> <span style=color:#000>T</span> <span style=color:#a90d91>extends</span> <span style=color:#a90d91>number</span> <span style=color:#000>?</span> <span style=color:#a90d91>string</span> <span style=color:#000>:</span> <span style=color:#a90d91>number</span>;
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span>(<span style=color:#000>value</span>: <span style=color:#a90d91>number</span>) <span style=color:#000>=&gt;</span> <span style=color:#a90d91>string</span> <span style=color:#177500>// if T is number, or
+</span><span style=color:#177500></span>(<span style=color:#000>value</span>: <span style=color:#a90d91>string</span>) <span style=color:#000>=&gt;</span> <span style=color:#a90d91>number</span> <span style=color:#177500>// if T is string
+</span><span style=color:#177500></span>
+<span style=color:#177500>// Conditional mapped types
+</span><span style=color:#177500></span><span style=color:#a90d91>interface</span> <span style=color:#000>Person</span> {
+    <span style=color:#000>firstName</span>: <span style=color:#a90d91>string</span>;
+    <span style=color:#000>lastName</span>: <span style=color:#a90d91>string</span>;
+    <span style=color:#000>age</span>: <span style=color:#a90d91>number</span>;
 }
 
-<span style="color:#000">type</span> <span style="color:#000">StringProps</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">=</span> {
-    [<span style="color:#000">K</span> <span style="color:#a90d91">in</span> <span style="color:#000">keyof</span> <span style="color:#000">T</span>]<span style="color:#000">:</span> <span style="color:#000">T</span>[<span style="color:#000">K</span>] <span style="color:#a90d91">extends</span> <span style="color:#a90d91">string</span> <span style="color:#000">?</span> <span style="color:#000">K</span> : <span style="color:#a90d91">never</span>;
+<span style=color:#000>type</span> <span style=color:#000>StringProps</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span> <span style=color:#000>=</span> {
+    [<span style=color:#000>K</span> <span style=color:#a90d91>in</span> <span style=color:#000>keyof</span> <span style=color:#000>T</span>]<span style=color:#000>:</span> <span style=color:#000>T</span>[<span style=color:#000>K</span>] <span style=color:#a90d91>extends</span> <span style=color:#a90d91>string</span> <span style=color:#000>?</span> <span style=color:#000>K</span> : <span style=color:#a90d91>never</span>;
 };
 
-<span style="color:#000">type</span> <span style="color:#000">PersonStrings</span> <span style="color:#000">=</span> <span style="color:#000">StringProps</span><span style="color:#000">&lt;</span><span style="color:#000">Person</span><span style="color:#000">&gt;</span>;
-<span style="color:#177500">// PersonStrings is &#34;firstName&#34; | &#34;lastName&#34;
-</span><span style="color:#177500"></span>
+<span style=color:#000>type</span> <span style=color:#000>PersonStrings</span> <span style=color:#000>=</span> <span style=color:#000>StringProps</span><span style=color:#000>&lt;</span><span style=color:#000>Person</span><span style=color:#000>&gt;</span>;
+<span style=color:#177500>// PersonStrings is &#34;firstName&#34; | &#34;lastName&#34;
+</span><span style=color:#177500></span>
 
-<span style="color:#177500">// Utility types
-</span><span style="color:#177500">// Partial  
-</span><span style="color:#177500"></span><span style="color:#000">Partial</span><span style="color:#000">&lt;</span>{ <span style="color:#000">x</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">y</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">z</span>: <span style="color:#a90d91">number</span>; }<span style="color:#000">&gt;</span>
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span>{ <span style="color:#000">x?</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">y?</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">z?</span>: <span style="color:#a90d91">number</span>; }
+<span style=color:#177500>// Utility types
+</span><span style=color:#177500>// Partial  
+</span><span style=color:#177500></span><span style=color:#000>Partial</span><span style=color:#000>&lt;</span>{ <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>z</span>: <span style=color:#a90d91>number</span>; }<span style=color:#000>&gt;</span>
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span>{ <span style=color:#000>x?</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>y?</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>z?</span>: <span style=color:#a90d91>number</span>; }
 
-<span style="color:#177500">// Readonly
-</span><span style="color:#177500"></span><span style="color:#000">Readonly</span><span style="color:#000">&lt;</span>{ <span style="color:#000">x</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">y</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">z</span>: <span style="color:#a90d91">number</span>; }<span style="color:#000">&gt;</span>
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span>{
-    <span style="color:#000">readonly</span> <span style="color:#000">x</span>: <span style="color:#a90d91">number</span>;
-    <span style="color:#000">readonly</span> <span style="color:#000">y</span>: <span style="color:#a90d91">number</span>;
-    <span style="color:#000">readonly</span> <span style="color:#000">z</span>: <span style="color:#a90d91">number</span>;
+<span style=color:#177500>// Readonly
+</span><span style=color:#177500></span><span style=color:#000>Readonly</span><span style=color:#000>&lt;</span>{ <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>z</span>: <span style=color:#a90d91>number</span>; }<span style=color:#000>&gt;</span>
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span>{
+    <span style=color:#000>readonly</span> <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>;
+    <span style=color:#000>readonly</span> <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>;
+    <span style=color:#000>readonly</span> <span style=color:#000>z</span>: <span style=color:#a90d91>number</span>;
 }
 
-<span style="color:#177500">//-------------------------------- Pick
-</span><span style="color:#177500"></span><span style="color:#000">Pick</span><span style="color:#000">&lt;</span>{ <span style="color:#000">x</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">y</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">z</span>: <span style="color:#a90d91">number</span>; }, <span style="color:#c41a16">&#39;x&#39;</span> <span style="color:#000">|</span> <span style="color:#c41a16">&#39;y&#39;</span><span style="color:#000">&gt;</span>
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span>{ <span style="color:#000">x</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">y</span>: <span style="color:#a90d91">number</span>; }
+<span style=color:#177500>//-------------------------------- Pick
+</span><span style=color:#177500></span><span style=color:#000>Pick</span><span style=color:#000>&lt;</span>{ <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>z</span>: <span style=color:#a90d91>number</span>; }, <span style=color:#c41a16>&#39;x&#39;</span> <span style=color:#000>|</span> <span style=color:#c41a16>&#39;y&#39;</span><span style=color:#000>&gt;</span>
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span>{ <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>; }
 
-<span style="color:#177500">// Record, 和 index signature区别是 后者key限制在 string number symbol
-</span><span style="color:#177500"></span><span style="color:#000">Record</span><span style="color:#000">&lt;</span><span style="color:#c41a16">&#39;x&#39;</span> <span style="color:#000">|</span> <span style="color:#c41a16">&#39;y&#39;</span> <span style="color:#000">|</span> <span style="color:#c41a16">&#39;z&#39;</span>, <span style="color:#a90d91">number</span><span style="color:#000">&gt;</span>
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span>{ <span style="color:#000">x</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">y</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">z</span>: <span style="color:#a90d91">number</span>; }
+<span style=color:#177500>// Record, 和 index signature区别是 后者key限制在 string number symbol
+</span><span style=color:#177500></span><span style=color:#000>Record</span><span style=color:#000>&lt;</span><span style=color:#c41a16>&#39;x&#39;</span> <span style=color:#000>|</span> <span style=color:#c41a16>&#39;y&#39;</span> <span style=color:#000>|</span> <span style=color:#c41a16>&#39;z&#39;</span>, <span style=color:#a90d91>number</span><span style=color:#000>&gt;</span>
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span>{ <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>z</span>: <span style=color:#a90d91>number</span>; }
 
-<span style="color:#177500">// Exclude  
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Excluded</span> <span style="color:#000">=</span> <span style="color:#000">Exclude</span><span style="color:#000">&lt;</span><span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">number</span>, <span style="color:#a90d91">string</span><span style="color:#000">&gt;</span>;
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span><span style="color:#a90d91">number</span>
+<span style=color:#177500>// Exclude  
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Excluded</span> <span style=color:#000>=</span> <span style=color:#000>Exclude</span><span style=color:#000>&lt;</span><span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>number</span>, <span style=color:#a90d91>string</span><span style=color:#000>&gt;</span>;
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span><span style=color:#a90d91>number</span>
 
-<span style="color:#177500">// Extract  
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Extracted</span> <span style="color:#000">=</span> <span style="color:#000">Extract</span><span style="color:#000">&lt;</span><span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">number</span>, <span style="color:#a90d91">string</span><span style="color:#000">&gt;</span>;
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span><span style="color:#a90d91">string</span>
+<span style=color:#177500>// Extract  
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Extracted</span> <span style=color:#000>=</span> <span style=color:#000>Extract</span><span style=color:#000>&lt;</span><span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>number</span>, <span style=color:#a90d91>string</span><span style=color:#000>&gt;</span>;
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span><span style=color:#a90d91>string</span>
 
-<span style="color:#177500">// NonNullable  
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">NonNull</span> <span style="color:#000">=</span> <span style="color:#000">NonNullable</span><span style="color:#000">&lt;</span><span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">number</span> <span style="color:#000">|</span> <span style="color:#a90d91">void</span><span style="color:#000">&gt;</span>;
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span><span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">number</span>
+<span style=color:#177500>// NonNullable  
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>NonNull</span> <span style=color:#000>=</span> <span style=color:#000>NonNullable</span><span style=color:#000>&lt;</span><span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>number</span> <span style=color:#000>|</span> <span style=color:#a90d91>void</span><span style=color:#000>&gt;</span>;
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span><span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>number</span>
 
-<span style="color:#177500">// ReturnType
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">ReturnValue</span> <span style="color:#000">=</span> <span style="color:#000">ReturnType</span><span style="color:#000">&lt;</span>() <span style="color:#000">=&gt;</span> <span style="color:#a90d91">string</span><span style="color:#000">&gt;</span>;
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span><span style="color:#a90d91">string</span>
+<span style=color:#177500>// ReturnType
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>ReturnValue</span> <span style=color:#000>=</span> <span style=color:#000>ReturnType</span><span style=color:#000>&lt;</span>() <span style=color:#000>=&gt;</span> <span style=color:#a90d91>string</span><span style=color:#000>&gt;</span>;
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span><span style=color:#a90d91>string</span>
 
-<span style="color:#177500">// InstanceType
-</span><span style="color:#177500"></span><span style="color:#a90d91">class</span> <span style="color:#000">Renderer() {</span>}
-<span style="color:#000">type</span> <span style="color:#000">Instance</span> <span style="color:#000">=</span> <span style="color:#000">InstanceType</span><span style="color:#000">&lt;</span><span style="color:#a90d91">typeof</span> <span style="color:#000">Renderer</span><span style="color:#000">&gt;</span>;
-<span style="color:#177500">// is equivalent to
-</span><span style="color:#177500"></span><span style="color:#000">Renderer</span>
+<span style=color:#177500>// InstanceType
+</span><span style=color:#177500></span><span style=color:#a90d91>class</span> <span style=color:#000>Renderer() {</span>}
+<span style=color:#000>type</span> <span style=color:#000>Instance</span> <span style=color:#000>=</span> <span style=color:#000>InstanceType</span><span style=color:#000>&lt;</span><span style=color:#a90d91>typeof</span> <span style=color:#000>Renderer</span><span style=color:#000>&gt;</span>;
+<span style=color:#177500>// is equivalent to
+</span><span style=color:#177500></span><span style=color:#000>Renderer</span>
 
 
-<span style="color:#177500">// Type guards
-</span><span style="color:#177500">// Type predicates  
-</span><span style="color:#177500"></span><span style="color:#a90d91">function</span> <span style="color:#000">isThing</span>(<span style="color:#000">val</span>: <span style="color:#a90d91">unknown</span>)<span style="color:#000">:</span> <span style="color:#000">val</span> <span style="color:#000">is</span> <span style="color:#000">Thing</span> {
-    <span style="color:#177500">// return true if val is a Thing
-</span><span style="color:#177500"></span>}
-<span style="color:#a90d91">if</span> (<span style="color:#000">isThing</span>(<span style="color:#000">value</span>)) {
-    <span style="color:#177500">// value is of type Thing
-</span><span style="color:#177500"></span>}
+<span style=color:#177500>// Type guards
+</span><span style=color:#177500>// Type predicates  
+</span><span style=color:#177500></span><span style=color:#a90d91>function</span> <span style=color:#000>isThing</span>(<span style=color:#000>val</span>: <span style=color:#a90d91>unknown</span>)<span style=color:#000>:</span> <span style=color:#000>val</span> <span style=color:#000>is</span> <span style=color:#000>Thing</span> {
+    <span style=color:#177500>// return true if val is a Thing
+</span><span style=color:#177500></span>}
+<span style=color:#a90d91>if</span> (<span style=color:#000>isThing</span>(<span style=color:#000>value</span>)) {
+    <span style=color:#177500>// value is of type Thing
+</span><span style=color:#177500></span>}
 
-<span style="color:#177500">//-------------------------------- typeof
-</span><span style="color:#177500">// &#34;string&#34;
-</span><span style="color:#177500">// &#34;number&#34;
-</span><span style="color:#177500">// &#34;bigint&#34;
-</span><span style="color:#177500">// &#34;boolean&#34;
-</span><span style="color:#177500">// &#34;symbol&#34;
-</span><span style="color:#177500">// &#34;undefined&#34;
-</span><span style="color:#177500">// &#34;object&#34;
-</span><span style="color:#177500">// &#34;function&#34;
-</span><span style="color:#177500"></span><span style="color:#a90d91">declare</span> <span style="color:#000">value</span>: <span style="color:#a90d91">string</span> <span style="color:#000">|</span> <span style="color:#a90d91">number</span> <span style="color:#000">|</span> <span style="color:#a90d91">boolean</span>;
-<span style="color:#a90d91">const</span> <span style="color:#000">isBoolean</span> <span style="color:#000">=</span> <span style="color:#a90d91">typeof</span> <span style="color:#000">value</span> <span style="color:#000">===</span> <span style="color:#c41a16">&#34;boolean&#34;</span>;
-<span style="color:#a90d91">if</span> (<span style="color:#a90d91">typeof</span> <span style="color:#000">value</span> <span style="color:#000">===</span> <span style="color:#c41a16">&#34;number&#34;</span>) {
-    <span style="color:#177500">// value is of type Number
-</span><span style="color:#177500"></span>} <span style="color:#a90d91">else</span> <span style="color:#a90d91">if</span> (<span style="color:#000">isBoolean</span>) {
-    <span style="color:#177500">// value is of type Boolean
-</span><span style="color:#177500"></span>} <span style="color:#a90d91">else</span> {
-    <span style="color:#177500">// value is a string
-</span><span style="color:#177500"></span>}
+<span style=color:#177500>//-------------------------------- typeof
+</span><span style=color:#177500>// &#34;string&#34;
+</span><span style=color:#177500>// &#34;number&#34;
+</span><span style=color:#177500>// &#34;bigint&#34;
+</span><span style=color:#177500>// &#34;boolean&#34;
+</span><span style=color:#177500>// &#34;symbol&#34;
+</span><span style=color:#177500>// &#34;undefined&#34;
+</span><span style=color:#177500>// &#34;object&#34;
+</span><span style=color:#177500>// &#34;function&#34;
+</span><span style=color:#177500></span><span style=color:#a90d91>declare</span> <span style=color:#000>value</span>: <span style=color:#a90d91>string</span> <span style=color:#000>|</span> <span style=color:#a90d91>number</span> <span style=color:#000>|</span> <span style=color:#a90d91>boolean</span>;
+<span style=color:#a90d91>const</span> <span style=color:#000>isBoolean</span> <span style=color:#000>=</span> <span style=color:#a90d91>typeof</span> <span style=color:#000>value</span> <span style=color:#000>===</span> <span style=color:#c41a16>&#34;boolean&#34;</span>;
+<span style=color:#a90d91>if</span> (<span style=color:#a90d91>typeof</span> <span style=color:#000>value</span> <span style=color:#000>===</span> <span style=color:#c41a16>&#34;number&#34;</span>) {
+    <span style=color:#177500>// value is of type Number
+</span><span style=color:#177500></span>} <span style=color:#a90d91>else</span> <span style=color:#a90d91>if</span> (<span style=color:#000>isBoolean</span>) {
+    <span style=color:#177500>// value is of type Boolean
+</span><span style=color:#177500></span>} <span style=color:#a90d91>else</span> {
+    <span style=color:#177500>// value is a string
+</span><span style=color:#177500></span>}
 
-<span style="color:#177500">// False
-</span><span style="color:#177500">// 0
-</span><span style="color:#177500">// NaN
-</span><span style="color:#177500">// &#34;&#34; (the empty string)
-</span><span style="color:#177500">// 0n (the bigint version of zero)
-</span><span style="color:#177500">// null
-</span><span style="color:#177500">// undefined
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// instanceof
-</span><span style="color:#177500"></span><span style="color:#a90d91">declare</span> <span style="color:#000">value</span>: <span style="color:#a90d91">Date</span> <span style="color:#000">|</span> <span style="color:#a90d91">Error</span> <span style="color:#000">|</span> <span style="color:#000">MyClass</span>;
-<span style="color:#a90d91">const</span> <span style="color:#000">isMyClass</span> <span style="color:#000">=</span> <span style="color:#000">value</span> <span style="color:#a90d91">instanceof</span> <span style="color:#000">MyClass</span>;
+<span style=color:#177500>// False
+</span><span style=color:#177500>// 0
+</span><span style=color:#177500>// NaN
+</span><span style=color:#177500>// &#34;&#34; (the empty string)
+</span><span style=color:#177500>// 0n (the bigint version of zero)
+</span><span style=color:#177500>// null
+</span><span style=color:#177500>// undefined
+</span><span style=color:#177500></span>
+<span style=color:#177500>// instanceof
+</span><span style=color:#177500></span><span style=color:#a90d91>declare</span> <span style=color:#000>value</span>: <span style=color:#a90d91>Date</span> <span style=color:#000>|</span> <span style=color:#a90d91>Error</span> <span style=color:#000>|</span> <span style=color:#000>MyClass</span>;
+<span style=color:#a90d91>const</span> <span style=color:#000>isMyClass</span> <span style=color:#000>=</span> <span style=color:#000>value</span> <span style=color:#a90d91>instanceof</span> <span style=color:#000>MyClass</span>;
 
-<span style="color:#a90d91">if</span> (<span style="color:#000">value</span> <span style="color:#a90d91">instanceof</span> <span style="color:#a90d91">Date</span>) {
-    <span style="color:#177500">// value is a Date
-</span><span style="color:#177500"></span>} <span style="color:#a90d91">else</span> <span style="color:#a90d91">if</span> (<span style="color:#000">isMyClass</span>) {
-    <span style="color:#177500">// value is an instance of MyClass
-</span><span style="color:#177500"></span>} <span style="color:#a90d91">else</span> {
-    <span style="color:#177500">// value is an Error
-</span><span style="color:#177500"></span>}
+<span style=color:#a90d91>if</span> (<span style=color:#000>value</span> <span style=color:#a90d91>instanceof</span> <span style=color:#a90d91>Date</span>) {
+    <span style=color:#177500>// value is a Date
+</span><span style=color:#177500></span>} <span style=color:#a90d91>else</span> <span style=color:#a90d91>if</span> (<span style=color:#000>isMyClass</span>) {
+    <span style=color:#177500>// value is an instance of MyClass
+</span><span style=color:#177500></span>} <span style=color:#a90d91>else</span> {
+    <span style=color:#177500>// value is an Error
+</span><span style=color:#177500></span>}
 
-<span style="color:#177500">// in 属性和方法
-</span><span style="color:#177500"></span><span style="color:#a90d91">interface</span> <span style="color:#000">Dog</span> { <span style="color:#000">woof</span>()<span style="color:#000">:</span> <span style="color:#a90d91">void</span>; }
-<span style="color:#a90d91">interface</span> <span style="color:#000">Cat</span> { <span style="color:#000">meow</span>()<span style="color:#000">:</span> <span style="color:#a90d91">void</span>; }
+<span style=color:#177500>// in 属性和方法
+</span><span style=color:#177500></span><span style=color:#a90d91>interface</span> <span style=color:#000>Dog</span> { <span style=color:#000>woof</span>()<span style=color:#000>:</span> <span style=color:#a90d91>void</span>; }
+<span style=color:#a90d91>interface</span> <span style=color:#000>Cat</span> { <span style=color:#000>meow</span>()<span style=color:#000>:</span> <span style=color:#a90d91>void</span>; }
 
-<span style="color:#a90d91">function</span> <span style="color:#000">speak</span>(<span style="color:#000">pet</span>: <span style="color:#a90d91">Dog</span> <span style="color:#000">|</span> <span style="color:#000">Cat</span>) {
-    <span style="color:#a90d91">if</span> (<span style="color:#c41a16">&#39;woof&#39;</span> <span style="color:#a90d91">in</span> <span style="color:#000">pet</span>) {
-        <span style="color:#000">pet</span>.<span style="color:#000">woof</span>()
-    } <span style="color:#a90d91">else</span> {
-        <span style="color:#000">pet</span>.<span style="color:#000">meow</span>()
+<span style=color:#a90d91>function</span> <span style=color:#000>speak</span>(<span style=color:#000>pet</span>: <span style=color:#a90d91>Dog</span> <span style=color:#000>|</span> <span style=color:#000>Cat</span>) {
+    <span style=color:#a90d91>if</span> (<span style=color:#c41a16>&#39;woof&#39;</span> <span style=color:#a90d91>in</span> <span style=color:#000>pet</span>) {
+        <span style=color:#000>pet</span>.<span style=color:#000>woof</span>()
+    } <span style=color:#a90d91>else</span> {
+        <span style=color:#000>pet</span>.<span style=color:#000>meow</span>()
     }
 }
 
 
-<span style="color:#177500">//-------------------------------- Assertions
-</span><span style="color:#177500">// Type
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">val</span> <span style="color:#000">=</span> <span style="color:#000">someValue</span> <span style="color:#a90d91">as</span> <span style="color:#a90d91">string</span>;
-<span style="color:#177500">// or
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">val</span> <span style="color:#000">=</span> <span style="color:#000">&lt;</span><span style="color:#a90d91">string</span><span style="color:#000">&gt;</span><span style="color:#000">someValue</span>;
-<span style="color:#000">Const</span> (<span style="color:#000">immutable</span> <span style="color:#000">value</span>)
-<span style="color:#a90d91">let</span> <span style="color:#000">point</span> <span style="color:#000">=</span> { <span style="color:#000">x</span>: <span style="color:#a90d91">20</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">30</span> } <span style="color:#a90d91">as</span> <span style="color:#a90d91">const</span>;
-<span style="color:#177500">// or
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">point</span> <span style="color:#000">=</span> <span style="color:#000">&lt;</span><span style="color:#a90d91">const</span><span style="color:#000">&gt;</span>{ <span style="color:#000">x</span>: <span style="color:#a90d91">20</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">30</span> };
+<span style=color:#177500>//-------------------------------- Assertions
+</span><span style=color:#177500>// Type
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>val</span> <span style=color:#000>=</span> <span style=color:#000>someValue</span> <span style=color:#a90d91>as</span> <span style=color:#a90d91>string</span>;
+<span style=color:#177500>// or
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>val</span> <span style=color:#000>=</span> <span style=color:#000>&lt;</span><span style=color:#a90d91>string</span><span style=color:#000>&gt;</span><span style=color:#000>someValue</span>;
+<span style=color:#000>Const</span> (<span style=color:#000>immutable</span> <span style=color:#000>value</span>)
+<span style=color:#a90d91>let</span> <span style=color:#000>point</span> <span style=color:#000>=</span> { <span style=color:#000>x</span>: <span style=color:#a90d91>20</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>30</span> } <span style=color:#a90d91>as</span> <span style=color:#a90d91>const</span>;
+<span style=color:#177500>// or
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>point</span> <span style=color:#000>=</span> <span style=color:#000>&lt;</span><span style=color:#a90d91>const</span><span style=color:#000>&gt;</span>{ <span style=color:#000>x</span>: <span style=color:#a90d91>20</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>30</span> };
 
-<span style="color:#a90d91">function</span> <span style="color:#000">handle</span>(<span style="color:#000">url</span>:<span style="color:#a90d91">string</span>,<span style="color:#000">method</span><span style="color:#000">:</span> <span style="color:#c41a16">&#34;GET&#34;</span><span style="color:#000">|</span><span style="color:#c41a16">&#34;POST&#34;</span>){
-    <span style="color:#000">console</span>.<span style="color:#000">log</span>(<span style="color:#c41a16">&#34;handle&#34;</span>)
+<span style=color:#a90d91>function</span> <span style=color:#000>handle</span>(<span style=color:#000>url</span>:<span style=color:#a90d91>string</span>,<span style=color:#000>method</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;GET&#34;</span><span style=color:#000>|</span><span style=color:#c41a16>&#34;POST&#34;</span>){
+    <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>&#34;handle&#34;</span>)
 }
 
-<span style="color:#a90d91">const</span> <span style="color:#000">req</span> <span style="color:#000">=</span> { <span style="color:#000">url</span><span style="color:#000">:</span> <span style="color:#c41a16">&#34;https://example.com&#34;</span>, <span style="color:#000">method</span><span style="color:#000">:</span> <span style="color:#c41a16">&#34;GET&#34;</span> };
-<span style="color:#000">handle</span>(<span style="color:#000">req</span>.<span style="color:#000">url</span>, <span style="color:#000">req</span>.<span style="color:#000">method</span> <span style="color:#a90d91">as</span> <span style="color:#c41a16">&#34;GET&#34;</span>); 
-<span style="color:#177500">// remove as &#34;GET&#34;, throw: Argument of type &#39;string&#39; is not assignable to parameter of type &#39;&#34;GET&#34; | &#34;POST&#34;&#39;.(2345)
-</span><span style="color:#177500">// or
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">req</span> <span style="color:#000">=</span> { <span style="color:#000">url</span><span style="color:#000">:</span> <span style="color:#c41a16">&#34;https://example.com&#34;</span>, <span style="color:#000">method</span><span style="color:#000">:</span> <span style="color:#c41a16">&#34;GET&#34;</span> <span style="color:#a90d91">as</span> <span style="color:#c41a16">&#34;GET&#34;</span> };
-<span style="color:#177500">// or convert to type literals
-</span><span style="color:#177500"></span><span style="color:#a90d91">const</span> <span style="color:#000">req</span> <span style="color:#000">=</span> { <span style="color:#000">url</span><span style="color:#000">:</span> <span style="color:#c41a16">&#34;https://example.com&#34;</span>, <span style="color:#000">method</span><span style="color:#000">:</span> <span style="color:#c41a16">&#34;GET&#34;</span> } <span style="color:#a90d91">as</span> <span style="color:#a90d91">const</span>;
+<span style=color:#a90d91>const</span> <span style=color:#000>req</span> <span style=color:#000>=</span> { <span style=color:#000>url</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;https://example.com&#34;</span>, <span style=color:#000>method</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;GET&#34;</span> };
+<span style=color:#000>handle</span>(<span style=color:#000>req</span>.<span style=color:#000>url</span>, <span style=color:#000>req</span>.<span style=color:#000>method</span> <span style=color:#a90d91>as</span> <span style=color:#c41a16>&#34;GET&#34;</span>); 
+<span style=color:#177500>// remove as &#34;GET&#34;, throw: Argument of type &#39;string&#39; is not assignable to parameter of type &#39;&#34;GET&#34; | &#34;POST&#34;&#39;.(2345)
+</span><span style=color:#177500>// or
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>req</span> <span style=color:#000>=</span> { <span style=color:#000>url</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;https://example.com&#34;</span>, <span style=color:#000>method</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;GET&#34;</span> <span style=color:#a90d91>as</span> <span style=color:#c41a16>&#34;GET&#34;</span> };
+<span style=color:#177500>// or convert to type literals
+</span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>req</span> <span style=color:#000>=</span> { <span style=color:#000>url</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;https://example.com&#34;</span>, <span style=color:#000>method</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;GET&#34;</span> } <span style=color:#a90d91>as</span> <span style=color:#a90d91>const</span>;
 
-<span style="color:#177500">//-------------------------------- Indexed Access Types
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">Person</span> <span style="color:#000">=</span> { <span style="color:#000">age</span>: <span style="color:#a90d91">number</span>; <span style="color:#000">name</span>: <span style="color:#a90d91">string</span>; <span style="color:#000">alive</span>: <span style="color:#a90d91">boolean</span> };
-<span style="color:#000">type</span> <span style="color:#000">Age</span> <span style="color:#000">=</span> <span style="color:#000">Person</span>[<span style="color:#c41a16">&#34;age&#34;</span>]; <span style="color:#177500">// number
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">I1</span> <span style="color:#000">=</span> <span style="color:#000">Person</span>[<span style="color:#c41a16">&#34;age&#34;</span> <span style="color:#000">|</span> <span style="color:#c41a16">&#34;name&#34;</span>]; <span style="color:#177500">// type I1 = string | number
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">I2</span> <span style="color:#000">=</span> <span style="color:#000">Person</span>[<span style="color:#000">keyof</span> <span style="color:#000">Person</span>]; <span style="color:#177500">// type I2 = string | number | boolean
-</span><span style="color:#177500"></span><span style="color:#000">type</span> <span style="color:#000">AliveOrName</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;alive&#34;</span> <span style="color:#000">|</span> <span style="color:#c41a16">&#34;name&#34;</span>;
-<span style="color:#000">type</span> <span style="color:#000">I3</span> <span style="color:#000">=</span> <span style="color:#000">Person</span>[<span style="color:#000">AliveOrName</span>]; <span style="color:#177500">// type I3 = string | boolean
-</span><span style="color:#177500"></span>     
+<span style=color:#177500>//-------------------------------- Indexed Access Types
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>Person</span> <span style=color:#000>=</span> { <span style=color:#000>age</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>name</span>: <span style=color:#a90d91>string</span>; <span style=color:#000>alive</span>: <span style=color:#a90d91>boolean</span> };
+<span style=color:#000>type</span> <span style=color:#000>Age</span> <span style=color:#000>=</span> <span style=color:#000>Person</span>[<span style=color:#c41a16>&#34;age&#34;</span>]; <span style=color:#177500>// number
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>I1</span> <span style=color:#000>=</span> <span style=color:#000>Person</span>[<span style=color:#c41a16>&#34;age&#34;</span> <span style=color:#000>|</span> <span style=color:#c41a16>&#34;name&#34;</span>]; <span style=color:#177500>// type I1 = string | number
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>I2</span> <span style=color:#000>=</span> <span style=color:#000>Person</span>[<span style=color:#000>keyof</span> <span style=color:#000>Person</span>]; <span style=color:#177500>// type I2 = string | number | boolean
+</span><span style=color:#177500></span><span style=color:#000>type</span> <span style=color:#000>AliveOrName</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;alive&#34;</span> <span style=color:#000>|</span> <span style=color:#c41a16>&#34;name&#34;</span>;
+<span style=color:#000>type</span> <span style=color:#000>I3</span> <span style=color:#000>=</span> <span style=color:#000>Person</span>[<span style=color:#000>AliveOrName</span>]; <span style=color:#177500>// type I3 = string | boolean
+</span><span style=color:#177500></span>     
 
-<span style="color:#177500">//-------------------------------- Ambient declarations
-</span><span style="color:#177500">// Global
-</span><span style="color:#177500"></span><span style="color:#a90d91">declare</span> <span style="color:#a90d91">const</span> <span style="color:#000">$</span>: <span style="color:#a90d91">JQueryStatic</span>;
-<span style="color:#177500">// Module
-</span><span style="color:#177500"></span><span style="color:#a90d91">declare</span> <span style="color:#000">module</span> <span style="color:#c41a16">&#34;foo&#34;</span> {
-    <span style="color:#a90d91">export</span> <span style="color:#a90d91">class</span> <span style="color:#000">Bar</span> { ... }
+<span style=color:#177500>//-------------------------------- Ambient declarations
+</span><span style=color:#177500>// Global
+</span><span style=color:#177500></span><span style=color:#a90d91>declare</span> <span style=color:#a90d91>const</span> <span style=color:#000>$</span>: <span style=color:#a90d91>JQueryStatic</span>;
+<span style=color:#177500>// Module
+</span><span style=color:#177500></span><span style=color:#a90d91>declare</span> <span style=color:#000>module</span> <span style=color:#c41a16>&#34;foo&#34;</span> {
+    <span style=color:#a90d91>export</span> <span style=color:#a90d91>class</span> <span style=color:#000>Bar</span> { ... }
 }
-<span style="color:#177500">// Wildcard module  
-</span><span style="color:#177500"></span><span style="color:#a90d91">declare</span> <span style="color:#000">module</span> <span style="color:#c41a16">&#34;text!*&#34;</span> {
-    <span style="color:#a90d91">const</span> <span style="color:#000">value</span>: <span style="color:#a90d91">string</span>;
-    <span style="color:#a90d91">export</span> <span style="color:#a90d91">default</span> <span style="color:#000">value</span>;
+<span style=color:#177500>// Wildcard module  
+</span><span style=color:#177500></span><span style=color:#a90d91>declare</span> <span style=color:#000>module</span> <span style=color:#c41a16>&#34;text!*&#34;</span> {
+    <span style=color:#a90d91>const</span> <span style=color:#000>value</span>: <span style=color:#a90d91>string</span>;
+    <span style=color:#a90d91>export</span> <span style=color:#a90d91>default</span> <span style=color:#000>value</span>;
 }
 
-</code></pre></div>
-    </div>
-    <footer class="post-footer">
-     
- 
-<div class="post-tags">     
-     
-    <a href="https://zhimoe.github.io/tags/typescript" rel="tag" title="typescript">#typescript#</a>
-    
-</div>
-
-
-
-     <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/nodejs-as-githook/" rel="next" title="在githook中调用nodejs脚本">
-        <i class="fa fa-chevron-left"></i> 在githook中调用nodejs脚本
-        </a>
-    
-    </div>
-
-    <div class="post-nav-prev post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/open-source-mental-health/" rel="prev" title="开源与心理健康[翻译]">
-        开源与心理健康[翻译] <i class="fa fa-chevron-right"></i>
-        </a>
-    
-    </div>
-</div>
-      
-     
-     
-     
-<div id="disqus_thread"></div>
-<script>
-
-
-var disqus_config = function () {
-  this.page.url = "https://zhimoe.github.io/post/ts-comprehensive-notes/";  
-  this.page.identifier = "https://zhimoe.github.io/post/ts-comprehensive-notes/"; 
-};
-
-(function() { 
-  var d = document, s = d.createElement('script');
-  s.src = 'https://zhimoe.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
-
-    </footer>
-  </article>
-</section>
-
-          </div>
-        </div>
-        <div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
-<aside id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
-
-  <ul class="sidebar-nav motion-element">
-    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-      文章目录
-    </li>
-    <li class="sidebar-nav-overview" data-target="site-overview">
-      站点概览
-    </li>
-  </ul>
-
-    <section class="site-overview sidebar-panel ">
-      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-        src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhimoe" />
-    <p class="site-author-name" itemprop="name">zhimoe</p>
-    <p class="site-description motion-element" itemprop="description"> 
-        the craft of programming</p>
-</div>
-      <nav class="site-state motion-element">
-    <div class="site-state-item site-state-posts">
-      <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">61</span>
-        <span class="site-state-item-name">日志</span>
-      </a>
-    </div>
-    <div class="site-state-item site-state-categories">    
-        <a href="https://zhimoe.github.io/categories/">      
-         
-        <span class="site-state-item-count">4</span>
-        
-        <span class="site-state-item-name">分类</span>
-        
-        </a>
-    </div>
-
-    <div class="site-state-item site-state-tags">
-        <a href="https://zhimoe.github.io/tags/">
-         
-        <span class="site-state-item-count">38</span>
-        
-        <span class="site-state-item-name">标签</span>
-        </a>
-    </div>
-</nav>
-      
-      
-<div class="links-of-author motion-element">
-    
-        <span class="links-of-author-item">
-        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
-            <i class="fa fa-fw fa-github"></i>
-            GitHub
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
-            <i class="fa fa-fw fa-globe"></i>
-            ZhiHu
-        </a>
-        </span>
-    
-</div>
-
-
-      
-
-      <div class="links-of-blogroll motion-element inline">
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
-</div>
-
-
-
-
-    </section>
-    
-<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-    <div class="post-toc">
-        <div class="post-toc-content"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#install">install</a></li>
-        <li><a href="#ts-syntax-cheatsheet">ts syntax cheatsheet</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-    </div>
-</section>
-
-  </div>
-</aside>
-
-      </div>
-    </main>
-   
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  <span itemprop="copyrightYear">  &copy; 
-  2017 - 2022</span>
-  <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhimoe</span>
-</div>
-<div class="powered-by">
-  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
-</div>
-<div class="theme-info">
-  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
-  </a>
-</div>
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-      <span id="scrollpercent"><span>0</span>%</span>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/utils.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/motion.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/affix.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/schemes/pisces.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/scrollspy.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/post-details.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/toc.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/bootstrap.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/search.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { fonts: ["TeX"] }
-  });
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
-</body>
-</html>
+</code></pre></div></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/typescript rel=tag title=typescript>#typescript#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>声明：</span>Typescript Comprehensive Cheatsheet</p><p><span>链接：</span>https://zhimoe.github.io/post/ts-comprehensive-notes/</p><p><span>作者：</span>zhimoe</p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick="var qr=document.getElementById('QR');if(qr.style.display==='none'){qr.style.display='block';}else{qr.style.display='none'}">
+<span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/nodejs-as-githook/ rel=next title=在githook中调用nodejs脚本><i class="fa fa-chevron-left"></i>在githook中调用nodejs脚本</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/open-source-mental-health/ rel=prev title=开源与心理健康[翻译]>开源与心理健康[翻译]
+<i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://zhimoe.github.io/post/ts-comprehensive-notes/";this.page.identifier="https://zhimoe.github.io/post/ts-comprehensive-notes/";};(function(){var d=document,s=d.createElement('script');s.src='https://zhimoe.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></footer></article></section></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target=post-toc-wrap>文章目录</li><li class=sidebar-nav-overview data-target=site-overview>站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>the craft of programming</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>61</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>38</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-desktop"></i>ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link-square"></i>书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://tech.meituan.com/ title=美团技术团队 target=_blank>美团技术团队</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画 target=_blank>艺术绘画</a></li><li class=links-of-blogroll-item><a href=https://500px.com/ title=500px target=_blank>500px</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aop>Aop</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aurulent>Aurulent</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/cheatsheet>Cheatsheet</a></li></ul></div><div class="links-of-blogroll motion-element inline"><script type=text/javascript src="//rf.revolvermaps.com/0/0/6.js?i=55k6ne41ev6&m=7&c=e63100&cr1=ffffff&f=arial&l=0&bv=90&lx=-420&ly=420&hi=20&he=7&hc=a8ddff&rs=80" async></script></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class=post-toc><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#install>install</a></li><li><a href=#ts-syntax-cheatsheet>ts syntax cheatsheet</a></li></ul></li></ul></nav></div></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2010 - 2022</span>
+<span class=with-love><i class="fa fa-heart"></i></span><span class=copyright-author>zhimoe</span></div><div class=powered-info><span class=powered-by>Powered by - <a class=powered-link href=//gohugo.io target=_blank title=hugo>Hugo v0.69.2</a></span>
+<span class=separator-line>/</span>
+<span class=theme-info>Theme by - <a class=powered-link href=//github.com/elkan1788/hugo-theme-next target=_blank>NexT</a></span></div><div class=vistor-info></div><div class=license-info><span class=storage-info>Storage by
+<a href style=font-weight:700 target=_blank></a></span><span class=separator-line>/</span>
+<span class=license-num><a href target=_blank></a></span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i><span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=//cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js></script><script type=text/javascript src=https://zhimoe.github.io/js/search.js></script><script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script><script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script><script type=text/javascript>function detectIE(){var ua=window.navigator.userAgent;var msie=ua.indexOf('MSIE ');var trident=ua.indexOf('Trident/');var edge=ua.indexOf('Edge/');if(msie>0||trident>0||edge>0){return-1;}
+return 1;}
+function getCntViewHeight(){var docHeight=$('#content').height(),winHeight=$(window).height(),cntViewHeight=(docHeight>winHeight)?(docHeight-winHeight):($(document).height()-winHeight);return cntViewHeight;}
+function getScrollbarWidth(){var $div=$('<div />').addClass('scrollbar-measure').prependTo('body');var div=$div[0];var scrollbarWidth=div.offsetWidth-div.clientWidth;$div.remove();return scrollbarWidth;}
+function registerBackTop(){var THRESHOLD=50;var $top=$('.back-to-top');$(window).on('scroll',function(){$top.toggleClass('back-to-top-on',window.pageYOffset>THRESHOLD);var scrollTop=$(window).scrollTop();var cntViewHeight=getCntViewHeight();var scrollPercent=(scrollTop)/(cntViewHeight);var scrollPercentRounded=Math.round(scrollPercent*100);var scrollPercentMaxed=(scrollPercentRounded>100)?100:scrollPercentRounded;$('#scrollpercent>span').html(scrollPercentMaxed);});$top.on('click',function(){$("html,body").animate({scrollTop:0,screenLeft:0,},800);});}
+function initScrollSpy(){var tocSelector='.post-toc';var $tocElement=$(tocSelector);var activeCurrentSelector='.active-current';$tocElement.on('activate.bs.scrollspy',function(){var $currentActiveElement=$(tocSelector+' .active').last();removeCurrentActiveClass();$currentActiveElement.addClass('active-current');}).on('clear.bs.scrollspy',removeCurrentActiveClass);$('body').scrollspy({target:tocSelector});function removeCurrentActiveClass(){$(tocSelector+' '+activeCurrentSelector).removeClass(activeCurrentSelector.substring(1));}}
+function initAffix(){var headerHeight=$('.header-inner').height();var footerOffset=parseInt($('.main').css('padding-bottom'),10);var sidebarTop=headerHeight+10;$('.sidebar-inner').affix({offset:{top:sidebarTop,bottom:footerOffset}});$(document).on('affixed.bs.affix',function(){updateTOCHeight(document.body.clientHeight-100);});}
+function initTOCDimension(){var updateTOCHeightTimer;$(window).on('resize',function(){updateTOCHeightTimer&&clearTimeout(updateTOCHeightTimer);updateTOCHeightTimer=setTimeout(function(){var tocWrapperHeight=document.body.clientHeight-100;updateTOCHeight(tocWrapperHeight);},0);});updateTOCHeight(document.body.clientHeight-100);var scrollbarWidth=getScrollbarWidth();$('.post-toc').css('width','calc(100% + '+scrollbarWidth+'px)');}
+function updateTOCHeight(height){height=height||'auto';$('.post-toc').css('max-height',height);}
+$(function(){var sidebarTop=$('.header-inner').height()+10;$('#sidebar').css({'margin-top':sidebarTop}).show();var sidebarMt=parseInt($('#sidebar').css('margin-top'));var sidebarInHeight=parseInt($('.sidebar-inner').css('height'));var sideHeight=sidebarMt+sidebarInHeight;var contentHeight=$('.content-wrap').height();if(contentHeight<sideHeight){$('.content-wrap').css('min-height',sideHeight);}
+$('.site-nav-toggle').on('click',function(){var $siteNav=$('.site-nav');var $toggleLine=$('.toggle');var ON_CLASS_NAME='site-nav-on';var CLOSE_CLASS_NAME='toggle-close';var isSiteNavOn=$siteNav.hasClass(ON_CLASS_NAME);var animateAction=isSiteNavOn?'slideUp':'slideDown';var animateCallback=isSiteNavOn?'removeClass':'addClass';$siteNav.stop()[animateAction]('normal',function(){$siteNav[animateCallback](ON_CLASS_NAME);$toggleLine[animateCallback](CLOSE_CLASS_NAME);});});registerBackTop();initScrollSpy();initAffix();initTOCDimension();$('.sidebar-nav-toc').click(function(){$(this).addClass('sidebar-nav-active');$(this).next().removeClass('sidebar-nav-active');$('.'+$(this).next().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});$('.sidebar-nav-overview').click(function(){$(this).addClass('sidebar-nav-active');$(this).prev().removeClass('sidebar-nav-active');$('.'+$(this).prev().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});});</script><script src=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.js></script><script type=text/javascript>$(function(){$('.post-body').viewer();});</script><script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js';}
+else{bp.src='http://push.zhanzhang.baidu.com/push.js';}
+var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s);})();</script></body></html>

@@ -1,37 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>lambda on zhimoe</title>
-    <link>https://zhimoe.github.io/tags/lambda/</link>
-    <description>Recent content in lambda on zhimoe</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Thu, 06 Aug 2020 22:49:34 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhimoe.github.io/tags/lambda/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Java 8 Lambda笔记</title>
-      <link>https://zhimoe.github.io/post/java-lambda/</link>
-      <pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-lambda/</guid>
-      <description>&lt;h3 id=&#34;问题&#34;&gt;问题&lt;/h3&gt;
-&lt;p&gt;Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;// 监听器接口
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;ActionListener&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;actionPerformed&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ActionEvent&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;// 使用匿名类传递一个行为
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;button&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;addActionListener&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ActionListener&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(){&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;actionPerformed&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Event&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;){&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;button clicked&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;});&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>lambda on zhimoe</title><link>https://zhimoe.github.io/tags/lambda/</link><description>Recent content in lambda on zhimoe</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Thu, 06 Aug 2020 22:49:34 +0800</lastBuildDate><atom:link href="https://zhimoe.github.io/tags/lambda/index.xml" rel="self" type="application/rss+xml"/><item><title>Java 8 Lambda笔记</title><link>https://zhimoe.github.io/post/java-lambda/</link><pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate><guid>https://zhimoe.github.io/post/java-lambda/</guid><description>&lt;h3 id="问题">问题&lt;/h3>
+&lt;p>Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#177500">// 监听器接口
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">interface&lt;/span> &lt;span style="color:#3f6e75">ActionListener&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">actionPerformed&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">ActionEvent&lt;/span> &lt;span style="color:#000">e&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#177500">// 使用匿名类传递一个行为
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#000">button&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">addActionListener&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#a90d91">new&lt;/span> &lt;span style="color:#000">ActionListener&lt;/span>&lt;span style="color:#000">(){&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">actionPerformed&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">Event&lt;/span> &lt;span style="color:#000">e&lt;/span>&lt;span style="color:#000">){&lt;/span>
+&lt;span style="color:#000">System&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">out&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">println&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;button clicked&amp;#34;&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

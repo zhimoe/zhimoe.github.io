@@ -1,26 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>redis on zhimoe</title>
-    <link>https://zhimoe.github.io/tags/redis/</link>
-    <description>Recent content in redis on zhimoe</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Sun, 31 Mar 2019 00:11:50 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhimoe.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>使用redis的hash优化内存使用[翻译]</title>
-      <link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</guid>
-      <description>&lt;p&gt;使用redis的hash优化内存使用&lt;/p&gt;
-&lt;h1 id=&#34;原文&#34;&gt;原文&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.peterbe.com/plog/understanding-redis-hash-max-ziplist-entries&#34;&gt;Understanding Redis hash-max-ziplist-entries&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>redis on zhimoe</title><link>https://zhimoe.github.io/tags/redis/</link><description>Recent content in redis on zhimoe</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Sun, 31 Mar 2019 00:11:50 +0800</lastBuildDate><atom:link href="https://zhimoe.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml"/><item><title>使用redis的hash优化内存使用[翻译]</title><link>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</link><pubDate>Sun, 31 Mar 2019 00:11:50 +0800</pubDate><guid>https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>使用redis的hash优化内存使用&lt;/p>
+&lt;h1 id="原文">原文&lt;/h1>
+&lt;p>&lt;a href="https://www.peterbe.com/plog/understanding-redis-hash-max-ziplist-entries">Understanding Redis hash-max-ziplist-entries&lt;/a>&lt;/p></description></item></channel></rss>

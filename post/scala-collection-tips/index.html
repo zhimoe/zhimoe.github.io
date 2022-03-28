@@ -1,579 +1,204 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Scala Collection Tips - zhimoe</title>
-    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
-    
-    <meta property="og:title" content="Scala Collection Tips">
-    <meta property="og:site_name" content="zhimoe">
-    <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Scala Collection Tips - zhimoe" />
-    <meta name="description" content="编程是一门手艺"> 
-    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/index.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />    
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/syntax.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-     fancybox: true, 
-    motion: true
-  };
-</script>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left page-home  ">
-    <div class="headband"></div>
+<!doctype html><html lang=zh dir=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>Scala Collection Tips - zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="Scala Collection Tips"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="Scala Collection Tips - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.css rel=stylesheet><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span><span class=toggle-line></span><span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span><span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>the craft of programming</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class=menu-item><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>项目</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span><span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/scala-collection-tips/ itemprop=url>Scala Collection Tips</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2019-05-19">2019-05-19</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>1003 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>3分钟</span></span>
+<span id=/post/scala-collection-tips/ class=leancloud_visitors data-flag-title="Scala Collection Tips">|
+<i class="fa fa-binoculars fa-fw"></i><span class=post-meta-item-text>阅读次数：</span>
+<span class=leancloud-visitors-count></span></span></div></header><div class=post-body itemprop=articleBody><p>scala collection 提供了一整套独立于Java的高性能集合,使用上非常灵活,所以需要清楚一些常用的方法:</p><ul><li><input checked disabled type=checkbox> reduce fold scan</li><li><input checked disabled type=checkbox> 集合的符号方法</li><li><input checked disabled type=checkbox> 数组,tuple</li><li><input checked disabled type=checkbox> 2.13的集合架构</li></ul><h2 id=reduce-fold-scan>reduce fold scan</h2><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=color:#177500>//reduce是一个二元函数,遍历整个集合
+</span><span style=color:#177500></span><span style=color:#3f6e75>List</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>5</span><span style=color:#000>).</span><span style=color:#000>reduceLeft</span><span style=color:#000>(</span><span style=color:#a90d91>_</span> <span style=color:#000>+</span> <span style=color:#a90d91>_</span><span style=color:#000>)</span>
+<span style=color:#177500>// == ((1+3)+5)
+</span><span style=color:#177500>//reduceRight start from end of the collection
+</span><span style=color:#177500>//also you can given initial argument
+</span><span style=color:#177500></span><span style=color:#3f6e75>List</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>5</span><span style=color:#000>).</span><span style=color:#000>foldLeft</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;&#34;</span><span style=color:#000>)(</span><span style=color:#a90d91>_</span> <span style=color:#000>+</span> <span style=color:#a90d91>_</span><span style=color:#000>)</span>
+<span style=color:#177500>// == 135
+</span><span style=color:#177500>//foldLeft 等价于 \: 操作符
+</span><span style=color:#177500></span><span style=color:#000>(</span><span style=color:#1c01ce>0</span> <span style=color:#000>/:</span> <span style=color:#3f6e75>List</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>5</span><span style=color:#000>))</span> <span style=color:#000>(</span><span style=color:#a90d91>_</span> <span style=color:#000>-</span> <span style=color:#a90d91>_</span><span style=color:#000>)</span>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-meta  custom-logo ">
+<span style=color:#177500>//folding 常用于替代for-loop
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>wf1</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>Map</span><span style=color:#000>[</span><span style=color:#a90d91>Char</span>, <span style=color:#a90d91>Int</span><span style=color:#000>]()</span>
+<span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>c</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#c41a16>&#34;Mississippi&#34;</span><span style=color:#000>)</span> <span style=color:#000>wf1</span><span style=color:#000>(</span><span style=color:#000>c</span><span style=color:#000>)</span> <span style=color:#a90d91>=</span> <span style=color:#000>wf1</span><span style=color:#000>.</span><span style=color:#000>getOrElse</span><span style=color:#000>(</span><span style=color:#000>c</span><span style=color:#000>,</span> <span style=color:#1c01ce>0</span><span style=color:#000>)</span> <span style=color:#000>+</span> <span style=color:#1c01ce>1</span>
+<span style=color:#177500>// Now freq is Map(&#39;i&#39; -&gt; 4, &#39;M&#39; -&gt; 1, &#39;s&#39; -&gt; 4, &#39;p&#39; -&gt; 2)
+</span><span style=color:#177500></span>
+<span style=color:#177500>//注意使用了不可变map
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>wf</span> <span style=color:#a90d91>=</span> <span style=color:#000>(</span><span style=color:#3f6e75>Map</span><span style=color:#000>[</span><span style=color:#a90d91>Char</span>, <span style=color:#a90d91>Int</span><span style=color:#000>]()</span> <span style=color:#000>/:</span> <span style=color:#c41a16>&#34;Mississippi&#34;</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+  <span style=color:#000>(</span><span style=color:#000>m</span><span style=color:#000>,</span> <span style=color:#000>c</span><span style=color:#000>)</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>m</span> <span style=color:#000>+</span> <span style=color:#000>(</span><span style=color:#000>c</span> <span style=color:#000>-&gt;</span> <span style=color:#000>(</span><span style=color:#000>m</span><span style=color:#000>.</span><span style=color:#000>getOrElse</span><span style=color:#000>(</span><span style=color:#000>c</span><span style=color:#000>,</span> <span style=color:#1c01ce>0</span><span style=color:#000>)</span> <span style=color:#000>+</span> <span style=color:#1c01ce>1</span><span style=color:#000>))</span>
+<span style=color:#000>}</span>
 
-  <div class="custom-logo-site-title">
-    <a href="https://zhimoe.github.io"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhimoe</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">the craft of programming</p>
-</div>
+<span style=color:#177500>//scan 方法可以获得每一步中间结果集
+</span><span style=color:#177500></span><span style=color:#000>(</span><span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>).</span><span style=color:#000>scanLeft</span><span style=color:#000>(</span><span style=color:#1c01ce>0</span><span style=color:#000>)(</span><span style=color:#a90d91>_</span> <span style=color:#000>+</span> <span style=color:#a90d91>_</span><span style=color:#000>)</span>
+<span style=color:#177500>//Vector(0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55)
+</span><span style=color:#177500></span>
+</code></pre></div><h2 id=集合的符号方法>集合的符号方法</h2><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=color:#177500>//+ 表示添加一个元素到无序集合
+</span><span style=color:#177500>// :+ +:表示添加到有序集合的首/尾
+</span><span style=color:#177500>//elem append or prepend to coll (Seq)
+</span><span style=color:#177500></span><span style=color:#000>coll</span> <span style=color:#a90d91>:</span><span style=color:#a90d91>+</span> <span style=color:#a90d91>elem</span>
+<span style=color:#000>elem</span> <span style=color:#000>+:</span> <span style=color:#000>coll</span>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-      
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/post/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/about/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
-          </a>
-        </li>
-      
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
-      </li>
-    </ul>
-    <div class="site-search">
-      <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-    </div>
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-<section id="posts" class="posts-expand">
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/scala-collection-tips/" itemprop="url">
-        Scala Collection Tips
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2019-05-19">
-    2019-05-19
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
+<span style=color:#177500>//add elem to set/map
+</span><span style=color:#177500></span><span style=color:#000>coll</span> <span style=color:#000>+</span> <span style=color:#000>elem</span>
+<span style=color:#000>coll</span> <span style=color:#000>+</span> <span style=color:#000>(</span><span style=color:#000>e1</span><span style=color:#000>,</span><span style=color:#000>e2</span><span style=color:#000>,...)</span>
 
 
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1003 字 ~3分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>scala collection 提供了一整套独立于Java的高性能集合,使用上非常灵活,所以需要清楚一些常用的方法:</p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> reduce fold scan</li>
-<li><input checked="" disabled="" type="checkbox"> 集合的符号方法</li>
-<li><input checked="" disabled="" type="checkbox"> 数组,tuple</li>
-<li><input checked="" disabled="" type="checkbox"> 2.13的集合架构</li>
-</ul>
-<h2 id="reduce-fold-scan">reduce fold scan</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">//reduce是一个二元函数,遍历整个集合
-</span><span style="color:#177500"></span><span style="color:#3f6e75">List</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">5</span><span style="color:#000">).</span><span style="color:#000">reduceLeft</span><span style="color:#000">(</span><span style="color:#a90d91">_</span> <span style="color:#000">+</span> <span style="color:#a90d91">_</span><span style="color:#000">)</span>
-<span style="color:#177500">// == ((1+3)+5)
-</span><span style="color:#177500">//reduceRight start from end of the collection
-</span><span style="color:#177500">//also you can given initial argument
-</span><span style="color:#177500"></span><span style="color:#3f6e75">List</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">5</span><span style="color:#000">).</span><span style="color:#000">foldLeft</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;&#34;</span><span style="color:#000">)(</span><span style="color:#a90d91">_</span> <span style="color:#000">+</span> <span style="color:#a90d91">_</span><span style="color:#000">)</span>
-<span style="color:#177500">// == 135
-</span><span style="color:#177500">//foldLeft 等价于 \: 操作符
-</span><span style="color:#177500"></span><span style="color:#000">(</span><span style="color:#1c01ce">0</span> <span style="color:#000">/:</span> <span style="color:#3f6e75">List</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">5</span><span style="color:#000">))</span> <span style="color:#000">(</span><span style="color:#a90d91">_</span> <span style="color:#000">-</span> <span style="color:#a90d91">_</span><span style="color:#000">)</span>
+<span style=color:#000>coll</span> <span style=color:#000>++</span> <span style=color:#000>coll2</span>
+<span style=color:#000>coll2</span> <span style=color:#000>++:</span> <span style=color:#000>coll</span>
 
-<span style="color:#177500">//folding 常用于替代for-loop
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">wf1</span> <span style="color:#a90d91">=</span> <span style="color:#000">scala</span><span style="color:#000">.</span><span style="color:#000">collection</span><span style="color:#000">.</span><span style="color:#000">mutable</span><span style="color:#000">.</span><span style="color:#3f6e75">Map</span><span style="color:#000">[</span><span style="color:#a90d91">Char</span>, <span style="color:#a90d91">Int</span><span style="color:#000">]()</span>
-<span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">c</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#c41a16">&#34;Mississippi&#34;</span><span style="color:#000">)</span> <span style="color:#000">wf1</span><span style="color:#000">(</span><span style="color:#000">c</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">wf1</span><span style="color:#000">.</span><span style="color:#000">getOrElse</span><span style="color:#000">(</span><span style="color:#000">c</span><span style="color:#000">,</span> <span style="color:#1c01ce">0</span><span style="color:#000">)</span> <span style="color:#000">+</span> <span style="color:#1c01ce">1</span>
-<span style="color:#177500">// Now freq is Map(&#39;i&#39; -&gt; 4, &#39;M&#39; -&gt; 1, &#39;s&#39; -&gt; 4, &#39;p&#39; -&gt; 2)
-</span><span style="color:#177500"></span>
-<span style="color:#177500">//注意使用了不可变map
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">wf</span> <span style="color:#a90d91">=</span> <span style="color:#000">(</span><span style="color:#3f6e75">Map</span><span style="color:#000">[</span><span style="color:#a90d91">Char</span>, <span style="color:#a90d91">Int</span><span style="color:#000">]()</span> <span style="color:#000">/:</span> <span style="color:#c41a16">&#34;Mississippi&#34;</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-  <span style="color:#000">(</span><span style="color:#000">m</span><span style="color:#000">,</span> <span style="color:#000">c</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">m</span> <span style="color:#000">+</span> <span style="color:#000">(</span><span style="color:#000">c</span> <span style="color:#000">-&gt;</span> <span style="color:#000">(</span><span style="color:#000">m</span><span style="color:#000">.</span><span style="color:#000">getOrElse</span><span style="color:#000">(</span><span style="color:#000">c</span><span style="color:#000">,</span> <span style="color:#1c01ce">0</span><span style="color:#000">)</span> <span style="color:#000">+</span> <span style="color:#1c01ce">1</span><span style="color:#000">))</span>
-<span style="color:#000">}</span>
+<span style=color:#177500>// prepend to lst
+</span><span style=color:#177500></span><span style=color:#000>elem</span> <span style=color:#a90d91>:</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>lst</span> 
+<span style=color:#000>lst2</span> <span style=color:#a90d91>:</span><span style=color:#a90d91>::</span> <span style=color:#a90d91>lst</span>
+<span style=color:#177500>// 等价list ++: list2
+</span><span style=color:#177500></span><span style=color:#000>list</span> <span style=color:#a90d91>:</span><span style=color:#a90d91>::</span> <span style=color:#a90d91>list2</span>
 
-<span style="color:#177500">//scan 方法可以获得每一步中间结果集
-</span><span style="color:#177500"></span><span style="color:#000">(</span><span style="color:#1c01ce">1</span> <span style="color:#000">to</span> <span style="color:#1c01ce">10</span><span style="color:#000">).</span><span style="color:#000">scanLeft</span><span style="color:#000">(</span><span style="color:#1c01ce">0</span><span style="color:#000">)(</span><span style="color:#a90d91">_</span> <span style="color:#000">+</span> <span style="color:#a90d91">_</span><span style="color:#000">)</span>
-<span style="color:#177500">//Vector(0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55)
-</span><span style="color:#177500"></span>
-</code></pre></div><h2 id="集合的符号方法">集合的符号方法</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">//+ 表示添加一个元素到无序集合
-</span><span style="color:#177500">// :+ +:表示添加到有序集合的首/尾
-</span><span style="color:#177500">//elem append or prepend to coll (Seq)
-</span><span style="color:#177500"></span><span style="color:#000">coll</span> <span style="color:#a90d91">:</span><span style="color:#a90d91">+</span> <span style="color:#a90d91">elem</span>
-<span style="color:#000">elem</span> <span style="color:#000">+:</span> <span style="color:#000">coll</span>
-
-<span style="color:#177500">//add elem to set/map
-</span><span style="color:#177500"></span><span style="color:#000">coll</span> <span style="color:#000">+</span> <span style="color:#000">elem</span>
-<span style="color:#000">coll</span> <span style="color:#000">+</span> <span style="color:#000">(</span><span style="color:#000">e1</span><span style="color:#000">,</span><span style="color:#000">e2</span><span style="color:#000">,...)</span>
-
-
-<span style="color:#000">coll</span> <span style="color:#000">++</span> <span style="color:#000">coll2</span>
-<span style="color:#000">coll2</span> <span style="color:#000">++:</span> <span style="color:#000">coll</span>
-
-<span style="color:#177500">// prepend to lst
-</span><span style="color:#177500"></span><span style="color:#000">elem</span> <span style="color:#a90d91">:</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">lst</span> 
-<span style="color:#000">lst2</span> <span style="color:#a90d91">:</span><span style="color:#a90d91">::</span> <span style="color:#a90d91">lst</span>
-<span style="color:#177500">// 等价list ++: list2
-</span><span style="color:#177500"></span><span style="color:#000">list</span> <span style="color:#a90d91">:</span><span style="color:#a90d91">::</span> <span style="color:#a90d91">list2</span>
-
-<span style="color:#177500">// 含有=的表示修改,必须是mutable的集合
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// TIP: As you can see, Scala provides many operators for adding and removing
-</span><span style="color:#177500">// elements. Here is a summary:
-</span><span style="color:#177500">// 1. Append (:+) or prepend (+:) to a sequence.
-</span><span style="color:#177500">// 2. Add (+) to an unordered collection.
-</span><span style="color:#177500">// 3. Remove with the - operator.
-</span><span style="color:#177500">// 4. Use ++ and -- for bulk add and remove.
-</span><span style="color:#177500">// 5. Mutations are += ++= -= --=.
-</span><span style="color:#177500">// 6. For lists, many Scala programmers prefer the :: and ::: operators.
-</span><span style="color:#177500">// 7. Stay away from ++: +=: ++=:.
+<span style=color:#177500>// 含有=的表示修改,必须是mutable的集合
+</span><span style=color:#177500></span>
+<span style=color:#177500>// TIP: As you can see, Scala provides many operators for adding and removing
+</span><span style=color:#177500>// elements. Here is a summary:
+</span><span style=color:#177500>// 1. Append (:+) or prepend (+:) to a sequence.
+</span><span style=color:#177500>// 2. Add (+) to an unordered collection.
+</span><span style=color:#177500>// 3. Remove with the - operator.
+</span><span style=color:#177500>// 4. Use ++ and -- for bulk add and remove.
+</span><span style=color:#177500>// 5. Mutations are += ++= -= --=.
+</span><span style=color:#177500>// 6. For lists, many Scala programmers prefer the :: and ::: operators.
+</span><span style=color:#177500>// 7. Stay away from ++: +=: ++=:.
 </span></code></pre></div><p>NOTE: For lists, you can use +: instead of :: for consistency, with one
-exception: Pattern matching (case h::t) does not work with the +: operator.</p>
-<h2 id="其他">其他</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scala" data-lang="scala"><span style="color:#177500">//数组的笔记
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">ints</span> <span style="color:#a90d91">=</span> <span style="color:#a90d91">new</span> <span style="color:#3f6e75">Array</span><span style="color:#000">[</span><span style="color:#a90d91">Int</span><span style="color:#000">](</span><span style="color:#1c01ce">30</span><span style="color:#000">)</span> <span style="color:#177500">// empty array
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">ints2</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Array</span><span style="color:#000">[</span><span style="color:#a90d91">Int</span><span style="color:#000">](</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">4</span><span style="color:#000">)</span> <span style="color:#177500">// array with init values
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">matrix4x9</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Array</span><span style="color:#000">.</span><span style="color:#000">ofDim</span><span style="color:#000">[</span><span style="color:#a90d91">Double</span><span style="color:#000">](</span><span style="color:#1c01ce">4</span><span style="color:#000">,</span> <span style="color:#1c01ce">9</span><span style="color:#000">)</span>
-<span style="color:#177500">//update
-</span><span style="color:#177500"></span><span style="color:#000">ints2</span><span style="color:#000">(</span><span style="color:#1c01ce">3</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#1c01ce">1000</span>
-<span style="color:#177500">// or
-</span><span style="color:#177500"></span><span style="color:#000">ints2</span><span style="color:#000">.</span><span style="color:#000">update</span><span style="color:#000">(</span><span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">1000</span><span style="color:#000">)</span>
-<span style="color:#177500">//求和
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">ints2Sum</span> <span style="color:#a90d91">=</span> <span style="color:#000">ints2</span><span style="color:#000">.</span><span style="color:#000">sum</span>
+exception: Pattern matching (case h::t) does not work with the +: operator.</p><h2 id=其他>其他</h2><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=color:#177500>//数组的笔记
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>ints</span> <span style=color:#a90d91>=</span> <span style=color:#a90d91>new</span> <span style=color:#3f6e75>Array</span><span style=color:#000>[</span><span style=color:#a90d91>Int</span><span style=color:#000>](</span><span style=color:#1c01ce>30</span><span style=color:#000>)</span> <span style=color:#177500>// empty array
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>ints2</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>[</span><span style=color:#a90d91>Int</span><span style=color:#000>](</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>4</span><span style=color:#000>)</span> <span style=color:#177500>// array with init values
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>matrix4x9</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>.</span><span style=color:#000>ofDim</span><span style=color:#000>[</span><span style=color:#a90d91>Double</span><span style=color:#000>](</span><span style=color:#1c01ce>4</span><span style=color:#000>,</span> <span style=color:#1c01ce>9</span><span style=color:#000>)</span>
+<span style=color:#177500>//update
+</span><span style=color:#177500></span><span style=color:#000>ints2</span><span style=color:#000>(</span><span style=color:#1c01ce>3</span><span style=color:#000>)</span> <span style=color:#a90d91>=</span> <span style=color:#1c01ce>1000</span>
+<span style=color:#177500>// or
+</span><span style=color:#177500></span><span style=color:#000>ints2</span><span style=color:#000>.</span><span style=color:#000>update</span><span style=color:#000>(</span><span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>1000</span><span style=color:#000>)</span>
+<span style=color:#177500>//求和
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>ints2Sum</span> <span style=color:#a90d91>=</span> <span style=color:#000>ints2</span><span style=color:#000>.</span><span style=color:#000>sum</span>
 
-<span style="color:#a90d91">val</span> <span style="color:#000">days</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Array</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Monday&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Tuesday&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Wednesday&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Thrusday&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Friday&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Saturday&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;Sunday&#34;</span><span style="color:#000">)</span>
-<span style="color:#177500">//遍历
-</span><span style="color:#177500"></span><span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#1c01ce">0</span> <span style="color:#000">until</span> <span style="color:#000">days</span><span style="color:#000">.</span><span style="color:#000">length</span><span style="color:#000">)</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#000">days</span><span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">))</span>
-<span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">day</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#000">days</span><span style="color:#000">)</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#000">day</span><span style="color:#000">)</span>
-<span style="color:#000">days</span> <span style="color:#000">foreach</span> <span style="color:#000">println</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>days</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Monday&#34;</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Tuesday&#34;</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Wednesday&#34;</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Thrusday&#34;</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Friday&#34;</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Saturday&#34;</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Sunday&#34;</span><span style=color:#000>)</span>
+<span style=color:#177500>//遍历
+</span><span style=color:#177500></span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#1c01ce>0</span> <span style=color:#000>until</span> <span style=color:#000>days</span><span style=color:#000>.</span><span style=color:#000>length</span><span style=color:#000>)</span> <span style=color:#000>println</span><span style=color:#000>(</span><span style=color:#000>days</span><span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>))</span>
+<span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>day</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>days</span><span style=color:#000>)</span> <span style=color:#000>println</span><span style=color:#000>(</span><span style=color:#000>day</span><span style=color:#000>)</span>
+<span style=color:#000>days</span> <span style=color:#000>foreach</span> <span style=color:#000>println</span>
 
-<span style="color:#177500">//遍历中使用index
-</span><span style="color:#177500"></span><span style="color:#000">days</span><span style="color:#000">.</span><span style="color:#000">zipWithIndex</span><span style="color:#000">.</span><span style="color:#000">map</span> <span style="color:#000">{</span> <span style="color:#a90d91">case</span> <span style="color:#000">(</span><span style="color:#000">e</span><span style="color:#000">,</span> <span style="color:#000">i</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">,</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">}</span>
-<span style="color:#177500">//faster
-</span><span style="color:#177500"></span><span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#a90d91">&lt;-</span> <span style="color:#000">days</span><span style="color:#000">.</span><span style="color:#000">indices</span><span style="color:#000">)</span> <span style="color:#a90d91">yield</span> <span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">,</span> <span style="color:#000">days</span><span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">))</span>
-<span style="color:#177500">//Possibly fastest
-</span><span style="color:#177500"></span><span style="color:#3f6e75">Array</span><span style="color:#000">.</span><span style="color:#000">tabulate</span><span style="color:#000">(</span><span style="color:#000">days</span><span style="color:#000">.</span><span style="color:#000">length</span><span style="color:#000">)</span> <span style="color:#000">{</span> <span style="color:#000">i</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">,</span> <span style="color:#000">days</span><span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">))</span> <span style="color:#000">}</span>
-<span style="color:#177500">//肯定最快
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">b</span> <span style="color:#a90d91">=</span> <span style="color:#a90d91">new</span> <span style="color:#3f6e75">Array</span><span style="color:#000">[(</span><span style="color:#a90d91">Int</span>, <span style="color:#a90d91">String</span><span style="color:#000">)](</span><span style="color:#000">days</span><span style="color:#000">.</span><span style="color:#000">length</span><span style="color:#000">)</span>
-<span style="color:#a90d91">var</span> <span style="color:#000">i</span> <span style="color:#a90d91">=</span> <span style="color:#1c01ce">0</span>
-<span style="color:#a90d91">while</span> <span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#000">&lt;</span> <span style="color:#000">days</span><span style="color:#000">.</span><span style="color:#000">length</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-  <span style="color:#000">b</span><span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">)</span> <span style="color:#a90d91">=</span> <span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">,</span> <span style="color:#000">days</span><span style="color:#000">(</span><span style="color:#000">i</span><span style="color:#000">))</span>
-  <span style="color:#000">i</span> <span style="color:#000">+=</span> <span style="color:#1c01ce">1</span>
-<span style="color:#000">}</span>
+<span style=color:#177500>//遍历中使用index
+</span><span style=color:#177500></span><span style=color:#000>days</span><span style=color:#000>.</span><span style=color:#000>zipWithIndex</span><span style=color:#000>.</span><span style=color:#000>map</span> <span style=color:#000>{</span> <span style=color:#a90d91>case</span> <span style=color:#000>(</span><span style=color:#000>e</span><span style=color:#000>,</span> <span style=color:#000>i</span><span style=color:#000>)</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>,</span> <span style=color:#000>e</span><span style=color:#000>)</span> <span style=color:#000>}</span>
+<span style=color:#177500>//faster
+</span><span style=color:#177500></span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>days</span><span style=color:#000>.</span><span style=color:#000>indices</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>,</span> <span style=color:#000>days</span><span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>))</span>
+<span style=color:#177500>//Possibly fastest
+</span><span style=color:#177500></span><span style=color:#3f6e75>Array</span><span style=color:#000>.</span><span style=color:#000>tabulate</span><span style=color:#000>(</span><span style=color:#000>days</span><span style=color:#000>.</span><span style=color:#000>length</span><span style=color:#000>)</span> <span style=color:#000>{</span> <span style=color:#000>i</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>,</span> <span style=color:#000>days</span><span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>))</span> <span style=color:#000>}</span>
+<span style=color:#177500>//肯定最快
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>b</span> <span style=color:#a90d91>=</span> <span style=color:#a90d91>new</span> <span style=color:#3f6e75>Array</span><span style=color:#000>[(</span><span style=color:#a90d91>Int</span>, <span style=color:#a90d91>String</span><span style=color:#000>)](</span><span style=color:#000>days</span><span style=color:#000>.</span><span style=color:#000>length</span><span style=color:#000>)</span>
+<span style=color:#a90d91>var</span> <span style=color:#000>i</span> <span style=color:#a90d91>=</span> <span style=color:#1c01ce>0</span>
+<span style=color:#a90d91>while</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#000>&lt;</span> <span style=color:#000>days</span><span style=color:#000>.</span><span style=color:#000>length</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+  <span style=color:#000>b</span><span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>)</span> <span style=color:#a90d91>=</span> <span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>,</span> <span style=color:#000>days</span><span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>))</span>
+  <span style=color:#000>i</span> <span style=color:#000>+=</span> <span style=color:#1c01ce>1</span>
+<span style=color:#000>}</span>
 
-<span style="color:#177500">//filter
-</span><span style="color:#177500"></span><span style="color:#000">days</span><span style="color:#000">.</span><span style="color:#000">filter</span><span style="color:#000">(</span><span style="color:#000">day</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">day</span><span style="color:#000">.</span><span style="color:#000">length</span> <span style="color:#000">&gt;</span> <span style="color:#1c01ce">4</span><span style="color:#000">)</span>
-<span style="color:#177500">//map
-</span><span style="color:#177500"></span><span style="color:#3f6e75">Array</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">4</span><span style="color:#000">,</span> <span style="color:#1c01ce">5</span><span style="color:#000">).</span><span style="color:#000">map</span><span style="color:#000">(</span><span style="color:#000">x</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">x</span> <span style="color:#000">*</span> <span style="color:#000">x</span><span style="color:#000">)</span>
-<span style="color:#177500">//sort
-</span><span style="color:#177500"></span><span style="color:#3f6e75">Array</span><span style="color:#000">(</span><span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">6</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">,</span> <span style="color:#1c01ce">0</span><span style="color:#000">,</span> <span style="color:#1c01ce">8</span><span style="color:#000">,</span> <span style="color:#1c01ce">5</span><span style="color:#000">).</span><span style="color:#000">sortWith</span><span style="color:#000">((</span><span style="color:#000">e1</span><span style="color:#000">,</span> <span style="color:#000">e2</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">e1</span> <span style="color:#000">&lt;</span> <span style="color:#000">e2</span><span style="color:#000">)</span> <span style="color:#177500">//小的在前
-</span><span style="color:#177500">//reduce,下面的会提示使用sum,
-</span><span style="color:#177500"></span><span style="color:#3f6e75">Array</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">4</span><span style="color:#000">,</span> <span style="color:#1c01ce">5</span><span style="color:#000">).</span><span style="color:#000">reduce</span><span style="color:#000">((</span><span style="color:#000">e1</span><span style="color:#000">,</span> <span style="color:#000">e2</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">e1</span> <span style="color:#000">+</span> <span style="color:#000">e2</span><span style="color:#000">)</span>
+<span style=color:#177500>//filter
+</span><span style=color:#177500></span><span style=color:#000>days</span><span style=color:#000>.</span><span style=color:#000>filter</span><span style=color:#000>(</span><span style=color:#000>day</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>day</span><span style=color:#000>.</span><span style=color:#000>length</span> <span style=color:#000>&gt;</span> <span style=color:#1c01ce>4</span><span style=color:#000>)</span>
+<span style=color:#177500>//map
+</span><span style=color:#177500></span><span style=color:#3f6e75>Array</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>4</span><span style=color:#000>,</span> <span style=color:#1c01ce>5</span><span style=color:#000>).</span><span style=color:#000>map</span><span style=color:#000>(</span><span style=color:#000>x</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>x</span> <span style=color:#000>*</span> <span style=color:#000>x</span><span style=color:#000>)</span>
+<span style=color:#177500>//sort
+</span><span style=color:#177500></span><span style=color:#3f6e75>Array</span><span style=color:#000>(</span><span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>6</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>0</span><span style=color:#000>,</span> <span style=color:#1c01ce>8</span><span style=color:#000>,</span> <span style=color:#1c01ce>5</span><span style=color:#000>).</span><span style=color:#000>sortWith</span><span style=color:#000>((</span><span style=color:#000>e1</span><span style=color:#000>,</span> <span style=color:#000>e2</span><span style=color:#000>)</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>e1</span> <span style=color:#000>&lt;</span> <span style=color:#000>e2</span><span style=color:#000>)</span> <span style=color:#177500>//小的在前
+</span><span style=color:#177500>//reduce,下面的会提示使用sum,
+</span><span style=color:#177500></span><span style=color:#3f6e75>Array</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>4</span><span style=color:#000>,</span> <span style=color:#1c01ce>5</span><span style=color:#000>).</span><span style=color:#000>reduce</span><span style=color:#000>((</span><span style=color:#000>e1</span><span style=color:#000>,</span> <span style=color:#000>e2</span><span style=color:#000>)</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>e1</span> <span style=color:#000>+</span> <span style=color:#000>e2</span><span style=color:#000>)</span>
 
-<span style="color:#177500">//不定长数组
-</span><span style="color:#177500"></span><span style="color:#a90d91">import</span> <span style="color:#000">scala.collection.mutable.ArrayBuffer</span>
+<span style=color:#177500>//不定长数组
+</span><span style=color:#177500></span><span style=color:#a90d91>import</span> <span style=color:#000>scala.collection.mutable.ArrayBuffer</span>
 
-<span style="color:#a90d91">val</span> <span style="color:#000">arr</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">ArrayBuffer</span><span style="color:#000">[</span><span style="color:#a90d91">Int</span><span style="color:#000">]()</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>arr</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>ArrayBuffer</span><span style=color:#000>[</span><span style=color:#a90d91>Int</span><span style=color:#000>]()</span>
 
 
-<span style="color:#177500">//tuple
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">oneAndTwo</span> <span style="color:#a90d91">=</span> <span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">)</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">oneAndTwo1</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Tuple2</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">)</span>
-<span style="color:#177500">//Pair is alias of Tuple2
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">oneAndTwo2</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Pair</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;two&#34;</span><span style="color:#000">)</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">oneAndTwo3</span> <span style="color:#a90d91">=</span> <span style="color:#1c01ce">1</span> <span style="color:#000">-&gt;</span> <span style="color:#1c01ce">2</span>
-<span style="color:#177500">//访问元素下标是从1开始,这是因为tuple里面每个元素类型不一样,为了能够和list等区分开
-</span><span style="color:#177500">//使用了类似Haskell/ML的习惯
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">two</span> <span style="color:#a90d91">=</span> <span style="color:#000">oneAndTwo</span><span style="color:#000">.</span><span style="color:#000">_2</span>
+<span style=color:#177500>//tuple
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>oneAndTwo</span> <span style=color:#a90d91>=</span> <span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>)</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>oneAndTwo1</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Tuple2</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>)</span>
+<span style=color:#177500>//Pair is alias of Tuple2
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>oneAndTwo2</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Pair</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;two&#34;</span><span style=color:#000>)</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>oneAndTwo3</span> <span style=color:#a90d91>=</span> <span style=color:#1c01ce>1</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>2</span>
+<span style=color:#177500>//访问元素下标是从1开始,这是因为tuple里面每个元素类型不一样,为了能够和list等区分开
+</span><span style=color:#177500>//使用了类似Haskell/ML的习惯
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>two</span> <span style=color:#a90d91>=</span> <span style=color:#000>oneAndTwo</span><span style=color:#000>.</span><span style=color:#000>_2</span>
 
-<span style="color:#177500">//option
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">emptyOpt</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Option</span><span style="color:#000">[</span><span style="color:#a90d91">Int</span><span style="color:#000">]</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">None</span>
-<span style="color:#a90d91">val</span> <span style="color:#000">fullOpt</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Option</span><span style="color:#000">[</span><span style="color:#a90d91">Int</span><span style="color:#000">]</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Some</span><span style="color:#000">(</span><span style="color:#1c01ce">42</span><span style="color:#000">)</span>
-<span style="color:#000">emptyOpt</span> <span style="color:#a90d91">match</span> <span style="color:#000">{</span>
-  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">Some</span><span style="color:#000">(</span><span style="color:#000">value</span><span style="color:#000">)</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#000">value</span><span style="color:#000">)</span>
-  <span style="color:#a90d91">case</span> <span style="color:#3f6e75">None</span> <span style="color:#a90d91">=&gt;</span> <span style="color:#000">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Empty&#34;</span><span style="color:#000">)</span>
-<span style="color:#000">}</span>
-<span style="color:#000">fullOpt</span><span style="color:#000">.</span><span style="color:#000">get</span> <span style="color:#177500">//42
-</span><span style="color:#177500"></span><span style="color:#000">emptyOpt</span><span style="color:#000">.</span><span style="color:#000">isEmpty</span> <span style="color:#177500">//true
-</span><span style="color:#177500"></span>
-<span style="color:#177500">//either
-</span><span style="color:#177500"></span><span style="color:#a90d91">def</span> <span style="color:#000">divide</span><span style="color:#000">(</span><span style="color:#000">a</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Double</span><span style="color:#000">,</span> <span style="color:#000">b</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Double</span><span style="color:#000">)</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Either</span><span style="color:#000">[</span><span style="color:#a90d91">String</span>, <span style="color:#a90d91">Double</span><span style="color:#000">]</span> <span style="color:#a90d91">=</span> <span style="color:#000">{</span>
-  <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">b</span> <span style="color:#000">==</span> <span style="color:#1c01ce">0.0</span><span style="color:#000">)</span> <span style="color:#3f6e75">Left</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Division by zero&#34;</span><span style="color:#000">)</span> <span style="color:#a90d91">else</span> <span style="color:#3f6e75">Right</span><span style="color:#000">(</span><span style="color:#000">a</span> <span style="color:#000">/</span> <span style="color:#000">b</span><span style="color:#000">)</span>
-<span style="color:#000">}</span>
-<span style="color:#000">divide</span><span style="color:#000">(</span><span style="color:#1c01ce">4</span><span style="color:#000">,</span> <span style="color:#1c01ce">0</span><span style="color:#000">)</span>
-
-
-<span style="color:#a90d91">def</span> <span style="color:#000">either</span><span style="color:#000">(</span><span style="color:#000">flag</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Boolean</span><span style="color:#000">)</span><span style="color:#a90d91">:</span> <span style="color:#a90d91">Either</span><span style="color:#000">[</span><span style="color:#a90d91">String</span>, <span style="color:#a90d91">List</span><span style="color:#000">[</span><span style="color:#a90d91">Int</span><span style="color:#000">]]</span> <span style="color:#a90d91">=</span> <span style="color:#000">{</span>
-  <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">flag</span><span style="color:#000">)</span> <span style="color:#3f6e75">Right</span><span style="color:#000">(</span><span style="color:#3f6e75">List</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">,</span> <span style="color:#1c01ce">3</span><span style="color:#000">))</span>
-  <span style="color:#a90d91">else</span> <span style="color:#3f6e75">Left</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;Wrong&#34;</span><span style="color:#000">)</span>
-<span style="color:#000">}</span>
-
-<span style="color:#a90d91">val</span> <span style="color:#000">content</span> <span style="color:#a90d91">=</span> <span style="color:#000">either</span><span style="color:#000">(</span><span style="color:#a90d91">true</span><span style="color:#000">).</span><span style="color:#000">right</span><span style="color:#000">.</span><span style="color:#000">map</span><span style="color:#000">(</span><span style="color:#a90d91">_</span><span style="color:#000">.</span><span style="color:#000">filter</span><span style="color:#000">(</span><span style="color:#a90d91">_</span> <span style="color:#000">&gt;</span> <span style="color:#1c01ce">0</span><span style="color:#000">))</span>
-
-<span style="color:#177500">//cast
-</span><span style="color:#177500"></span><span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toArray</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toBuffer</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toList</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">((</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">)).</span><span style="color:#000">toMap</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toStream</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toString</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toVector</span>
-
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toTraversable</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toIndexedSeq</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toIterable</span>
-<span style="color:#3f6e75">Set</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toSeq</span>
-<span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#1c01ce">1</span><span style="color:#000">).</span><span style="color:#000">toSet</span>
-
-<span style="color:#177500">//zip, zipAll, zipWithIndex, unzip
-</span><span style="color:#177500"></span><span style="color:#c41a16">&#34;abcde&#34;</span> <span style="color:#000">zip</span> <span style="color:#1c01ce">1.</span><span style="color:#000">to</span><span style="color:#000">(</span><span style="color:#1c01ce">5</span><span style="color:#000">)</span>
-<span style="color:#177500">//zipAll:第二个参数是调用者元素缺失使用的默认值,第三个参数是第一个实参不够长的默认值
-</span><span style="color:#177500"></span><span style="color:#c41a16">&#34;abcde&#34;</span><span style="color:#000">.</span><span style="color:#000">zipAll</span><span style="color:#000">(</span><span style="color:#1c01ce">1.</span><span style="color:#000">to</span><span style="color:#000">(</span><span style="color:#1c01ce">2</span><span style="color:#000">),</span> <span style="color:#c41a16">&#34;caller&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;arg&#34;</span><span style="color:#000">)</span>
-<span style="color:#177500">//尝试自己实现一个zipAll?
-</span><span style="color:#177500">//
-</span><span style="color:#177500"></span><span style="color:#c41a16">&#34;abcde&#34;</span> <span style="color:#000">zipWithIndex</span>
-
-<span style="color:#3f6e75">Seq</span><span style="color:#000">((</span><span style="color:#1c01ce">1</span><span style="color:#000">,</span> <span style="color:#1c01ce">2</span><span style="color:#000">),</span> <span style="color:#000">(</span><span style="color:#1c01ce">3</span><span style="color:#000">,</span> <span style="color:#1c01ce">4</span><span style="color:#000">),</span> <span style="color:#000">(</span><span style="color:#1c01ce">5</span><span style="color:#000">,</span> <span style="color:#1c01ce">6</span><span style="color:#000">))</span> <span style="color:#000">unzip</span>
-<span style="color:#177500">//
-</span><span style="color:#177500"></span><span style="color:#a90d91">val</span> <span style="color:#000">s</span> <span style="color:#a90d91">=</span> <span style="color:#3f6e75">Seq</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;a&#34;</span><span style="color:#000">,</span> <span style="color:#c41a16">&#34;b&#34;</span><span style="color:#000">)</span>
-</code></pre></div><h2 id="scala-213-collection">scala 2.13 collection</h2>
-<p>基本重写了.参考这两个文档:
-<a href="https://docs.scala-lang.org/overviews/core/collections-migration-213.html">collections migration 2.13</a>
-<a href="https://docs.scala-lang.org/overviews/core/architecture-of-scala-213-collections.html">the architecture of scala 2.13’s collections</a></p>
-    </div>
-    <footer class="post-footer">
-     
- 
-<div class="post-tags">     
-     
-    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
-    
-    <a href="https://zhimoe.github.io/tags/scala" rel="tag" title="scala">#scala#</a>
-    
-</div>
+<span style=color:#177500>//option
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>emptyOpt</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Option</span><span style=color:#000>[</span><span style=color:#a90d91>Int</span><span style=color:#000>]</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>None</span>
+<span style=color:#a90d91>val</span> <span style=color:#000>fullOpt</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Option</span><span style=color:#000>[</span><span style=color:#a90d91>Int</span><span style=color:#000>]</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Some</span><span style=color:#000>(</span><span style=color:#1c01ce>42</span><span style=color:#000>)</span>
+<span style=color:#000>emptyOpt</span> <span style=color:#a90d91>match</span> <span style=color:#000>{</span>
+  <span style=color:#a90d91>case</span> <span style=color:#3f6e75>Some</span><span style=color:#000>(</span><span style=color:#000>value</span><span style=color:#000>)</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>println</span><span style=color:#000>(</span><span style=color:#000>value</span><span style=color:#000>)</span>
+  <span style=color:#a90d91>case</span> <span style=color:#3f6e75>None</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Empty&#34;</span><span style=color:#000>)</span>
+<span style=color:#000>}</span>
+<span style=color:#000>fullOpt</span><span style=color:#000>.</span><span style=color:#000>get</span> <span style=color:#177500>//42
+</span><span style=color:#177500></span><span style=color:#000>emptyOpt</span><span style=color:#000>.</span><span style=color:#000>isEmpty</span> <span style=color:#177500>//true
+</span><span style=color:#177500></span>
+<span style=color:#177500>//either
+</span><span style=color:#177500></span><span style=color:#a90d91>def</span> <span style=color:#000>divide</span><span style=color:#000>(</span><span style=color:#000>a</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Double</span><span style=color:#000>,</span> <span style=color:#000>b</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Double</span><span style=color:#000>)</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Either</span><span style=color:#000>[</span><span style=color:#a90d91>String</span>, <span style=color:#a90d91>Double</span><span style=color:#000>]</span> <span style=color:#a90d91>=</span> <span style=color:#000>{</span>
+  <span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#000>b</span> <span style=color:#000>==</span> <span style=color:#1c01ce>0.0</span><span style=color:#000>)</span> <span style=color:#3f6e75>Left</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Division by zero&#34;</span><span style=color:#000>)</span> <span style=color:#a90d91>else</span> <span style=color:#3f6e75>Right</span><span style=color:#000>(</span><span style=color:#000>a</span> <span style=color:#000>/</span> <span style=color:#000>b</span><span style=color:#000>)</span>
+<span style=color:#000>}</span>
+<span style=color:#000>divide</span><span style=color:#000>(</span><span style=color:#1c01ce>4</span><span style=color:#000>,</span> <span style=color:#1c01ce>0</span><span style=color:#000>)</span>
 
 
+<span style=color:#a90d91>def</span> <span style=color:#000>either</span><span style=color:#000>(</span><span style=color:#000>flag</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Boolean</span><span style=color:#000>)</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Either</span><span style=color:#000>[</span><span style=color:#a90d91>String</span>, <span style=color:#a90d91>List</span><span style=color:#000>[</span><span style=color:#a90d91>Int</span><span style=color:#000>]]</span> <span style=color:#a90d91>=</span> <span style=color:#000>{</span>
+  <span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#000>flag</span><span style=color:#000>)</span> <span style=color:#3f6e75>Right</span><span style=color:#000>(</span><span style=color:#3f6e75>List</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>))</span>
+  <span style=color:#a90d91>else</span> <span style=color:#3f6e75>Left</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Wrong&#34;</span><span style=color:#000>)</span>
+<span style=color:#000>}</span>
 
-     <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/devops-maturity-model-checklist/" rel="next" title="DevOps能力成熟度模型">
-        <i class="fa fa-chevron-left"></i> DevOps能力成熟度模型
-        </a>
-    
-    </div>
+<span style=color:#a90d91>val</span> <span style=color:#000>content</span> <span style=color:#a90d91>=</span> <span style=color:#000>either</span><span style=color:#000>(</span><span style=color:#a90d91>true</span><span style=color:#000>).</span><span style=color:#000>right</span><span style=color:#000>.</span><span style=color:#000>map</span><span style=color:#000>(</span><span style=color:#a90d91>_</span><span style=color:#000>.</span><span style=color:#000>filter</span><span style=color:#000>(</span><span style=color:#a90d91>_</span> <span style=color:#000>&gt;</span> <span style=color:#1c01ce>0</span><span style=color:#000>))</span>
 
-    <div class="post-nav-prev post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96/" rel="prev" title="前端静态资源图片优化">
-        前端静态资源图片优化 <i class="fa fa-chevron-right"></i>
-        </a>
-    
-    </div>
-</div>
-      
-     
-     
-     
-<div id="disqus_thread"></div>
-<script>
+<span style=color:#177500>//cast
+</span><span style=color:#177500></span><span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toArray</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toBuffer</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toList</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>((</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>)).</span><span style=color:#000>toMap</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toStream</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toString</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toVector</span>
 
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toTraversable</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toIndexedSeq</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toIterable</span>
+<span style=color:#3f6e75>Set</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toSeq</span>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>).</span><span style=color:#000>toSet</span>
 
-var disqus_config = function () {
-  this.page.url = "https://zhimoe.github.io/post/scala-collection-tips/";  
-  this.page.identifier = "https://zhimoe.github.io/post/scala-collection-tips/"; 
-};
+<span style=color:#177500>//zip, zipAll, zipWithIndex, unzip
+</span><span style=color:#177500></span><span style=color:#c41a16>&#34;abcde&#34;</span> <span style=color:#000>zip</span> <span style=color:#1c01ce>1.</span><span style=color:#000>to</span><span style=color:#000>(</span><span style=color:#1c01ce>5</span><span style=color:#000>)</span>
+<span style=color:#177500>//zipAll:第二个参数是调用者元素缺失使用的默认值,第三个参数是第一个实参不够长的默认值
+</span><span style=color:#177500></span><span style=color:#c41a16>&#34;abcde&#34;</span><span style=color:#000>.</span><span style=color:#000>zipAll</span><span style=color:#000>(</span><span style=color:#1c01ce>1.</span><span style=color:#000>to</span><span style=color:#000>(</span><span style=color:#1c01ce>2</span><span style=color:#000>),</span> <span style=color:#c41a16>&#34;caller&#34;</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;arg&#34;</span><span style=color:#000>)</span>
+<span style=color:#177500>//尝试自己实现一个zipAll?
+</span><span style=color:#177500>//
+</span><span style=color:#177500></span><span style=color:#c41a16>&#34;abcde&#34;</span> <span style=color:#000>zipWithIndex</span>
 
-(function() { 
-  var d = document, s = d.createElement('script');
-  s.src = 'https://zhimoe.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
-
-    </footer>
-  </article>
-</section>
-
-          </div>
-        </div>
-        <div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
-<aside id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
-
-  <ul class="sidebar-nav motion-element">
-    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-      文章目录
-    </li>
-    <li class="sidebar-nav-overview" data-target="site-overview">
-      站点概览
-    </li>
-  </ul>
-
-    <section class="site-overview sidebar-panel ">
-      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-        src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhimoe" />
-    <p class="site-author-name" itemprop="name">zhimoe</p>
-    <p class="site-description motion-element" itemprop="description"> 
-        the craft of programming</p>
-</div>
-      <nav class="site-state motion-element">
-    <div class="site-state-item site-state-posts">
-      <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">61</span>
-        <span class="site-state-item-name">日志</span>
-      </a>
-    </div>
-    <div class="site-state-item site-state-categories">    
-        <a href="https://zhimoe.github.io/categories/">      
-         
-        <span class="site-state-item-count">4</span>
-        
-        <span class="site-state-item-name">分类</span>
-        
-        </a>
-    </div>
-
-    <div class="site-state-item site-state-tags">
-        <a href="https://zhimoe.github.io/tags/">
-         
-        <span class="site-state-item-count">38</span>
-        
-        <span class="site-state-item-name">标签</span>
-        </a>
-    </div>
-</nav>
-      
-      
-<div class="links-of-author motion-element">
-    
-        <span class="links-of-author-item">
-        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
-            <i class="fa fa-fw fa-github"></i>
-            GitHub
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
-            <i class="fa fa-fw fa-globe"></i>
-            ZhiHu
-        </a>
-        </span>
-    
-</div>
-
-
-      
-
-      <div class="links-of-blogroll motion-element inline">
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
-</div>
-
-
-
-
-    </section>
-    
-<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-    <div class="post-toc">
-        <div class="post-toc-content"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#reduce-fold-scan">reduce fold scan</a></li>
-    <li><a href="#集合的符号方法">集合的符号方法</a></li>
-    <li><a href="#其他">其他</a></li>
-    <li><a href="#scala-213-collection">scala 2.13 collection</a></li>
-  </ul>
-</nav></div>
-    </div>
-</section>
-
-  </div>
-</aside>
-
-      </div>
-    </main>
-   
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  <span itemprop="copyrightYear">  &copy; 
-  2017 - 2022</span>
-  <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhimoe</span>
-</div>
-<div class="powered-by">
-  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
-</div>
-<div class="theme-info">
-  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
-  </a>
-</div>
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-      <span id="scrollpercent"><span>0</span>%</span>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/utils.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/motion.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/affix.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/schemes/pisces.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/scrollspy.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/post-details.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/toc.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/bootstrap.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/search.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { fonts: ["TeX"] }
-  });
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
-</body>
-</html>
+<span style=color:#3f6e75>Seq</span><span style=color:#000>((</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>),</span> <span style=color:#000>(</span><span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>4</span><span style=color:#000>),</span> <span style=color:#000>(</span><span style=color:#1c01ce>5</span><span style=color:#000>,</span> <span style=color:#1c01ce>6</span><span style=color:#000>))</span> <span style=color:#000>unzip</span>
+<span style=color:#177500>//
+</span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>s</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Seq</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;a&#34;</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;b&#34;</span><span style=color:#000>)</span>
+</code></pre></div><h2 id=scala-213-collection>scala 2.13 collection</h2><p>基本重写了.参考这两个文档:
+<a href=https://docs.scala-lang.org/overviews/core/collections-migration-213.html>collections migration 2.13</a>
+<a href=https://docs.scala-lang.org/overviews/core/architecture-of-scala-213-collections.html>the architecture of scala 2.13’s collections</a></p></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a>
+<a href=https://zhimoe.github.io/tags/scala rel=tag title=scala>#scala#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>声明：</span>Scala Collection Tips</p><p><span>链接：</span>https://zhimoe.github.io/post/scala-collection-tips/</p><p><span>作者：</span>zhimoe</p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick="var qr=document.getElementById('QR');if(qr.style.display==='none'){qr.style.display='block';}else{qr.style.display='none'}">
+<span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/devops-maturity-model-checklist/ rel=next title=DevOps能力成熟度模型><i class="fa fa-chevron-left"></i>DevOps能力成熟度模型</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/%E5%89%8D%E7%AB%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%9B%BE%E7%89%87%E4%BC%98%E5%8C%96/ rel=prev title=前端静态资源图片优化>前端静态资源图片优化
+<i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://zhimoe.github.io/post/scala-collection-tips/";this.page.identifier="https://zhimoe.github.io/post/scala-collection-tips/";};(function(){var d=document,s=d.createElement('script');s.src='https://zhimoe.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></footer></article></section></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target=post-toc-wrap>文章目录</li><li class=sidebar-nav-overview data-target=site-overview>站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>the craft of programming</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>61</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>38</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-desktop"></i>ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link-square"></i>书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://tech.meituan.com/ title=美团技术团队 target=_blank>美团技术团队</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画 target=_blank>艺术绘画</a></li><li class=links-of-blogroll-item><a href=https://500px.com/ title=500px target=_blank>500px</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aop>Aop</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aurulent>Aurulent</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/cheatsheet>Cheatsheet</a></li></ul></div><div class="links-of-blogroll motion-element inline"><script type=text/javascript src="//rf.revolvermaps.com/0/0/6.js?i=55k6ne41ev6&m=7&c=e63100&cr1=ffffff&f=arial&l=0&bv=90&lx=-420&ly=420&hi=20&he=7&hc=a8ddff&rs=80" async></script></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class=post-toc><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#reduce-fold-scan>reduce fold scan</a></li><li><a href=#集合的符号方法>集合的符号方法</a></li><li><a href=#其他>其他</a></li><li><a href=#scala-213-collection>scala 2.13 collection</a></li></ul></nav></div></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2010 - 2022</span>
+<span class=with-love><i class="fa fa-heart"></i></span><span class=copyright-author>zhimoe</span></div><div class=powered-info><span class=powered-by>Powered by - <a class=powered-link href=//gohugo.io target=_blank title=hugo>Hugo v0.69.2</a></span>
+<span class=separator-line>/</span>
+<span class=theme-info>Theme by - <a class=powered-link href=//github.com/elkan1788/hugo-theme-next target=_blank>NexT</a></span></div><div class=vistor-info></div><div class=license-info><span class=storage-info>Storage by
+<a href style=font-weight:700 target=_blank></a></span><span class=separator-line>/</span>
+<span class=license-num><a href target=_blank></a></span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i><span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=//cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js></script><script type=text/javascript src=https://zhimoe.github.io/js/search.js></script><script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script><script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script><script type=text/javascript>function detectIE(){var ua=window.navigator.userAgent;var msie=ua.indexOf('MSIE ');var trident=ua.indexOf('Trident/');var edge=ua.indexOf('Edge/');if(msie>0||trident>0||edge>0){return-1;}
+return 1;}
+function getCntViewHeight(){var docHeight=$('#content').height(),winHeight=$(window).height(),cntViewHeight=(docHeight>winHeight)?(docHeight-winHeight):($(document).height()-winHeight);return cntViewHeight;}
+function getScrollbarWidth(){var $div=$('<div />').addClass('scrollbar-measure').prependTo('body');var div=$div[0];var scrollbarWidth=div.offsetWidth-div.clientWidth;$div.remove();return scrollbarWidth;}
+function registerBackTop(){var THRESHOLD=50;var $top=$('.back-to-top');$(window).on('scroll',function(){$top.toggleClass('back-to-top-on',window.pageYOffset>THRESHOLD);var scrollTop=$(window).scrollTop();var cntViewHeight=getCntViewHeight();var scrollPercent=(scrollTop)/(cntViewHeight);var scrollPercentRounded=Math.round(scrollPercent*100);var scrollPercentMaxed=(scrollPercentRounded>100)?100:scrollPercentRounded;$('#scrollpercent>span').html(scrollPercentMaxed);});$top.on('click',function(){$("html,body").animate({scrollTop:0,screenLeft:0,},800);});}
+function initScrollSpy(){var tocSelector='.post-toc';var $tocElement=$(tocSelector);var activeCurrentSelector='.active-current';$tocElement.on('activate.bs.scrollspy',function(){var $currentActiveElement=$(tocSelector+' .active').last();removeCurrentActiveClass();$currentActiveElement.addClass('active-current');}).on('clear.bs.scrollspy',removeCurrentActiveClass);$('body').scrollspy({target:tocSelector});function removeCurrentActiveClass(){$(tocSelector+' '+activeCurrentSelector).removeClass(activeCurrentSelector.substring(1));}}
+function initAffix(){var headerHeight=$('.header-inner').height();var footerOffset=parseInt($('.main').css('padding-bottom'),10);var sidebarTop=headerHeight+10;$('.sidebar-inner').affix({offset:{top:sidebarTop,bottom:footerOffset}});$(document).on('affixed.bs.affix',function(){updateTOCHeight(document.body.clientHeight-100);});}
+function initTOCDimension(){var updateTOCHeightTimer;$(window).on('resize',function(){updateTOCHeightTimer&&clearTimeout(updateTOCHeightTimer);updateTOCHeightTimer=setTimeout(function(){var tocWrapperHeight=document.body.clientHeight-100;updateTOCHeight(tocWrapperHeight);},0);});updateTOCHeight(document.body.clientHeight-100);var scrollbarWidth=getScrollbarWidth();$('.post-toc').css('width','calc(100% + '+scrollbarWidth+'px)');}
+function updateTOCHeight(height){height=height||'auto';$('.post-toc').css('max-height',height);}
+$(function(){var sidebarTop=$('.header-inner').height()+10;$('#sidebar').css({'margin-top':sidebarTop}).show();var sidebarMt=parseInt($('#sidebar').css('margin-top'));var sidebarInHeight=parseInt($('.sidebar-inner').css('height'));var sideHeight=sidebarMt+sidebarInHeight;var contentHeight=$('.content-wrap').height();if(contentHeight<sideHeight){$('.content-wrap').css('min-height',sideHeight);}
+$('.site-nav-toggle').on('click',function(){var $siteNav=$('.site-nav');var $toggleLine=$('.toggle');var ON_CLASS_NAME='site-nav-on';var CLOSE_CLASS_NAME='toggle-close';var isSiteNavOn=$siteNav.hasClass(ON_CLASS_NAME);var animateAction=isSiteNavOn?'slideUp':'slideDown';var animateCallback=isSiteNavOn?'removeClass':'addClass';$siteNav.stop()[animateAction]('normal',function(){$siteNav[animateCallback](ON_CLASS_NAME);$toggleLine[animateCallback](CLOSE_CLASS_NAME);});});registerBackTop();initScrollSpy();initAffix();initTOCDimension();$('.sidebar-nav-toc').click(function(){$(this).addClass('sidebar-nav-active');$(this).next().removeClass('sidebar-nav-active');$('.'+$(this).next().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});$('.sidebar-nav-overview').click(function(){$(this).addClass('sidebar-nav-active');$(this).prev().removeClass('sidebar-nav-active');$('.'+$(this).prev().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});});</script><script src=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.js></script><script type=text/javascript>$(function(){$('.post-body').viewer();});</script><script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js';}
+else{bp.src='http://push.zhanzhang.baidu.com/push.js';}
+var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s);})();</script></body></html>

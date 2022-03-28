@@ -1,554 +1,165 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Rust Ownerships Lifetimes教程 - zhimoe</title>
-    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
-    
-    <meta property="og:title" content="Rust Ownerships Lifetimes教程">
-    <meta property="og:site_name" content="zhimoe">
-    <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Rust Ownerships Lifetimes教程 - zhimoe" />
-    <meta name="description" content="编程是一门手艺"> 
-    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/index.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />    
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/syntax.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-     fancybox: true, 
-    motion: true
-  };
-</script>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left page-home  ">
-    <div class="headband"></div>
+<!doctype html><html lang=zh dir=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>Rust Ownerships Lifetimes教程 - zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="Rust Ownerships Lifetimes教程"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="Rust Ownerships Lifetimes教程 - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.css rel=stylesheet><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span><span class=toggle-line></span><span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span><span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>the craft of programming</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class=menu-item><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>项目</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span><span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/rust-ownership-lifetimes/ itemprop=url>Rust Ownerships Lifetimes教程</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-02-22">2020-02-22</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>1135 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>3分钟</span></span>
+<span id=/post/rust-ownership-lifetimes/ class=leancloud_visitors data-flag-title="Rust Ownerships Lifetimes教程">|
+<i class="fa fa-binoculars fa-fw"></i><span class=post-meta-item-text>阅读次数：</span>
+<span class=leancloud-visitors-count></span></span></div></header><div class=post-body itemprop=articleBody><p>some notes on rust ownership,reference,string and &str, and lifetimes</p><h3 id=rust-ownership>rust ownership</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=color:#177500>//heap and stack: stack is store data that known,fixed size.
+</span><span style=color:#177500>//Keeping track of what parts of code are using what data on the heap, minimizing
+</span><span style=color:#177500>//the amount of duplicate data on the heap, and cleaning up unused data on the heap
+</span><span style=color:#177500>//so you don’t run out of space are all problems that ownership addresses.
+</span><span style=color:#177500></span>
+<span style=color:#177500>//ownership rules:
+</span><span style=color:#177500>//Each value in Rust has a variable that’s called its owner.
+</span><span style=color:#177500>//There can only be one owner at a time.
+</span><span style=color:#177500>//When the owner goes out of scope, the value will be dropped.
+</span><span style=color:#177500></span>
+<span style=color:#177500>// stack only data assignment(栈上数据) will make a copy operation, since it is fixed size, the copy is fast
+</span><span style=color:#177500>// use h.clone() make a heap data deeply copy.
+</span><span style=color:#177500>// impl the Copy trait can make a type still usable after assignment
+</span><span style=color:#177500>// Copy trait can not use with Drop trait,Drop可以理解为destructor,当数据超过自己的scope时,drop()方法被调用;
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>copy</span>() {
+    <span style=color:#a90d91>let</span> <span style=color:#000>x</span> <span style=color:#000>=</span> <span style=color:#1c01ce>5</span>;
+    <span style=color:#a90d91>let</span> <span style=color:#000>y</span> <span style=color:#000>=</span> <span style=color:#000>x</span>; <span style=color:#177500>//copy the value(5) in the stack,since it is fixed-size, the copy operation is fast
+</span><span style=color:#177500></span>
+    <span style=color:#a90d91>let</span> <span style=color:#000>s1</span> <span style=color:#000>=</span> <span style=color:#a90d91>String</span>::<span style=color:#000>from</span>(<span style=color:#c41a16>&#34;hello&#34;</span>); <span style=color:#177500>//String 和 &amp;str区别见后文
+</span><span style=color:#177500></span>    <span style=color:#a90d91>let</span> <span style=color:#000>s2</span> <span style=color:#000>=</span> <span style=color:#000>s1</span>; <span style=color:#177500>//s1 is invalid
+</span><span style=color:#177500></span>    <span style=color:#177500>// println!(&#34;{}, world!&#34;, s1); //error, the &#34;hello&#34; ownership move to s2
+</span><span style=color:#177500></span>
+    <span style=color:#a90d91>let</span> <span style=color:#000>s3</span> <span style=color:#000>=</span> <span style=color:#000>s2</span>.<span style=color:#000>clone</span>(); <span style=color:#177500>//copy the heap value(&#34;hello&#34;), impl the Clone trait
+</span><span style=color:#177500></span>    <span style=color:#000>println</span><span style=color:#000>!</span>(<span style=color:#c41a16>&#34;{}, world!&#34;</span>, <span style=color:#000>s2</span>); <span style=color:#177500>// s2 still usable
+</span><span style=color:#177500></span>}
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-meta  custom-logo ">
+<span style=color:#177500>// passing function arguments or return value by function is same as 
+</span><span style=color:#177500>// assigning a value to a variable, you need take care the ownership of heap value,
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>ownership</span>() {
+    <span style=color:#a90d91>let</span> <span style=color:#000>x</span> <span style=color:#000>=</span> <span style=color:#1c01ce>5</span>;
+    <span style=color:#a90d91>let</span> <span style=color:#000>x10</span> <span style=color:#000>=</span> <span style=color:#000>plus10</span>(<span style=color:#000>x</span>);<span style=color:#177500>// x still usable since the x is stack data
+</span><span style=color:#177500></span>    <span style=color:#000>println</span><span style=color:#000>!</span>(<span style=color:#c41a16>&#34;{}&#34;</span>, <span style=color:#000>x</span>);
+    <span style=color:#000>println</span><span style=color:#000>!</span>(<span style=color:#c41a16>&#34;{}&#34;</span>, <span style=color:#000>x10</span>);
 
-  <div class="custom-logo-site-title">
-    <a href="https://zhimoe.github.io"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhimoe</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">the craft of programming</p>
-</div>
+    <span style=color:#a90d91>let</span> <span style=color:#000>s</span> <span style=color:#000>=</span> <span style=color:#a90d91>String</span>::<span style=color:#000>from</span>(<span style=color:#c41a16>&#34;hello&#34;</span>);
+    <span style=color:#000>takes_ownership</span>(<span style=color:#000>s</span>); <span style=color:#177500>//s&#39;s value moves into the function and so is no longer valid here
+</span><span style=color:#177500></span>    <span style=color:#177500>//println!(s) ;//error!
+</span><span style=color:#177500></span>}
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-      
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/post/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/about/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
-          </a>
-        </li>
-      
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
-      </li>
-    </ul>
-    <div class="site-search">
-      <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-    </div>
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-<section id="posts" class="posts-expand">
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/rust-ownership-lifetimes/" itemprop="url">
-        Rust Ownerships Lifetimes教程
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-02-22">
-    2020-02-22
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1135 字 ~3分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <p>some notes on rust ownership,reference,string and &amp;str, and lifetimes</p>
-<h3 id="rust-ownership">rust ownership</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">//heap and stack: stack is store data that known,fixed size.
-</span><span style="color:#177500">//Keeping track of what parts of code are using what data on the heap, minimizing
-</span><span style="color:#177500">//the amount of duplicate data on the heap, and cleaning up unused data on the heap
-</span><span style="color:#177500">//so you don’t run out of space are all problems that ownership addresses.
-</span><span style="color:#177500"></span>
-<span style="color:#177500">//ownership rules:
-</span><span style="color:#177500">//Each value in Rust has a variable that’s called its owner.
-</span><span style="color:#177500">//There can only be one owner at a time.
-</span><span style="color:#177500">//When the owner goes out of scope, the value will be dropped.
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// stack only data assignment(栈上数据) will make a copy operation, since it is fixed size, the copy is fast
-</span><span style="color:#177500">// use h.clone() make a heap data deeply copy.
-</span><span style="color:#177500">// impl the Copy trait can make a type still usable after assignment
-</span><span style="color:#177500">// Copy trait can not use with Drop trait,Drop可以理解为destructor,当数据超过自己的scope时,drop()方法被调用;
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">copy</span>() {
-    <span style="color:#a90d91">let</span> <span style="color:#000">x</span> <span style="color:#000">=</span> <span style="color:#1c01ce">5</span>;
-    <span style="color:#a90d91">let</span> <span style="color:#000">y</span> <span style="color:#000">=</span> <span style="color:#000">x</span>; <span style="color:#177500">//copy the value(5) in the stack,since it is fixed-size, the copy operation is fast
-</span><span style="color:#177500"></span>
-    <span style="color:#a90d91">let</span> <span style="color:#000">s1</span> <span style="color:#000">=</span> <span style="color:#a90d91">String</span>::<span style="color:#000">from</span>(<span style="color:#c41a16">&#34;hello&#34;</span>); <span style="color:#177500">//String 和 &amp;str区别见后文
-</span><span style="color:#177500"></span>    <span style="color:#a90d91">let</span> <span style="color:#000">s2</span> <span style="color:#000">=</span> <span style="color:#000">s1</span>; <span style="color:#177500">//s1 is invalid
-</span><span style="color:#177500"></span>    <span style="color:#177500">// println!(&#34;{}, world!&#34;, s1); //error, the &#34;hello&#34; ownership move to s2
-</span><span style="color:#177500"></span>
-    <span style="color:#a90d91">let</span> <span style="color:#000">s3</span> <span style="color:#000">=</span> <span style="color:#000">s2</span>.<span style="color:#000">clone</span>(); <span style="color:#177500">//copy the heap value(&#34;hello&#34;), impl the Clone trait
-</span><span style="color:#177500"></span>    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}, world!&#34;</span>, <span style="color:#000">s2</span>); <span style="color:#177500">// s2 still usable
-</span><span style="color:#177500"></span>}
-
-<span style="color:#177500">// passing function arguments or return value by function is same as 
-</span><span style="color:#177500">// assigning a value to a variable, you need take care the ownership of heap value,
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">ownership</span>() {
-    <span style="color:#a90d91">let</span> <span style="color:#000">x</span> <span style="color:#000">=</span> <span style="color:#1c01ce">5</span>;
-    <span style="color:#a90d91">let</span> <span style="color:#000">x10</span> <span style="color:#000">=</span> <span style="color:#000">plus10</span>(<span style="color:#000">x</span>);<span style="color:#177500">// x still usable since the x is stack data
-</span><span style="color:#177500"></span>    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}&#34;</span>, <span style="color:#000">x</span>);
-    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}&#34;</span>, <span style="color:#000">x10</span>);
-
-    <span style="color:#a90d91">let</span> <span style="color:#000">s</span> <span style="color:#000">=</span> <span style="color:#a90d91">String</span>::<span style="color:#000">from</span>(<span style="color:#c41a16">&#34;hello&#34;</span>);
-    <span style="color:#000">takes_ownership</span>(<span style="color:#000">s</span>); <span style="color:#177500">//s&#39;s value moves into the function and so is no longer valid here
-</span><span style="color:#177500"></span>    <span style="color:#177500">//println!(s) ;//error!
-</span><span style="color:#177500"></span>}
-
-<span style="color:#a90d91">fn</span> <span style="color:#000">plus10</span>(<span style="color:#000">i</span>: <span style="color:#a90d91">i32</span>) -&gt; <span style="color:#a90d91">i32</span> { <span style="color:#177500">// since the i is primitive in stack, so the function return a new value  
-</span><span style="color:#177500"></span>    <span style="color:#000">i</span> <span style="color:#000">+</span> <span style="color:#1c01ce">10</span> 
+<span style=color:#a90d91>fn</span> <span style=color:#000>plus10</span>(<span style=color:#000>i</span>: <span style=color:#a90d91>i32</span>) -&gt; <span style=color:#a90d91>i32</span> { <span style=color:#177500>// since the i is primitive in stack, so the function return a new value  
+</span><span style=color:#177500></span>    <span style=color:#000>i</span> <span style=color:#000>+</span> <span style=color:#1c01ce>10</span> 
 }
 
-<span style="color:#a90d91">fn</span> <span style="color:#000">takes_ownership</span>(<span style="color:#000">some_string</span>: <span style="color:#a90d91">String</span>) { <span style="color:#177500">// some_string comes into scope
-</span><span style="color:#177500"></span>    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}&#34;</span>, <span style="color:#000">some_string</span>);
-} <span style="color:#177500">// Here, some_string goes out of scope and `drop()` is called. The backing memory is freed.
-</span></code></pre></div><p>推荐阅读<a href="https://blog.thoughtram.io/ownership-in-rust/">A closer look at Ownership in Rust</a></p>
-<h3 id="references-and-borrowing">References and Borrowing:</h3>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">// since the ownership is too hard to track by coder&#39;s eye, rust introduce the ref and borrowing
-</span><span style="color:#177500">// a function that accept a ref will not takeover a value&#39;s ownership when the function is called
-</span><span style="color:#177500">// also will not drop the value&#39;s backend memory when function is return.
-</span><span style="color:#177500"></span>
+<span style=color:#a90d91>fn</span> <span style=color:#000>takes_ownership</span>(<span style=color:#000>some_string</span>: <span style=color:#a90d91>String</span>) { <span style=color:#177500>// some_string comes into scope
+</span><span style=color:#177500></span>    <span style=color:#000>println</span><span style=color:#000>!</span>(<span style=color:#c41a16>&#34;{}&#34;</span>, <span style=color:#000>some_string</span>);
+} <span style=color:#177500>// Here, some_string goes out of scope and `drop()` is called. The backing memory is freed.
+</span></code></pre></div><p>推荐阅读<a href=https://blog.thoughtram.io/ownership-in-rust/>A closer look at Ownership in Rust</a></p><h3 id=references-and-borrowing>References and Borrowing:</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=color:#177500>// since the ownership is too hard to track by coder&#39;s eye, rust introduce the ref and borrowing
+</span><span style=color:#177500>// a function that accept a ref will not takeover a value&#39;s ownership when the function is called
+</span><span style=color:#177500>// also will not drop the value&#39;s backend memory when function is return.
+</span><span style=color:#177500></span>
 
-<span style="color:#177500">// a variable can only have one mut ref or many immutable ref in a same scope;
-</span><span style="color:#177500"></span>
-<span style="color:#177500">//dangling reference
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">dangle</span>() -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#a90d91">String</span> {
-    <span style="color:#a90d91">let</span> <span style="color:#000">s</span> <span style="color:#000">=</span> <span style="color:#a90d91">String</span>::<span style="color:#000">from</span>(<span style="color:#c41a16">&#34;dangle ref&#34;</span>);
-    <span style="color:#000">&amp;</span><span style="color:#000">s</span> <span style="color:#177500">//error
-</span><span style="color:#177500"></span>}<span style="color:#177500">// the s is dropped, but the function try to return s reference
-</span><span style="color:#177500"></span>
+<span style=color:#177500>// a variable can only have one mut ref or many immutable ref in a same scope;
+</span><span style=color:#177500></span>
+<span style=color:#177500>//dangling reference
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>dangle</span>() -&gt; <span style=color:#a90d91>&amp;</span><span style=color:#a90d91>String</span> {
+    <span style=color:#a90d91>let</span> <span style=color:#000>s</span> <span style=color:#000>=</span> <span style=color:#a90d91>String</span>::<span style=color:#000>from</span>(<span style=color:#c41a16>&#34;dangle ref&#34;</span>);
+    <span style=color:#000>&amp;</span><span style=color:#000>s</span> <span style=color:#177500>//error
+</span><span style=color:#177500></span>}<span style=color:#177500>// the s is dropped, but the function try to return s reference
+</span><span style=color:#177500></span>
 
-<span style="color:#000">###</span> <span style="color:#a90d91">String</span> <span style="color:#000">vs</span> <span style="color:#a90d91">str</span> <span style="color:#000">vs</span> <span style="color:#000">&amp;</span><span style="color:#a90d91">String</span> <span style="color:#000">vs</span> <span style="color:#000">&amp;</span><span style="color:#a90d91">str</span>
-<span style="color:#177500">//1. String is heap string buffer
-</span><span style="color:#177500">//2. &amp;String is a ref of String
-</span><span style="color:#177500">//3. str is unknown immutable sequence of utf8 bytes stored somewhere in memory. the memory may be:
-</span><span style="color:#177500">//  3a. in binary: a string literal &#34;foo&#34; is a &amp;&#39;static str. The data is hardcoded into the executable and loaded into memory when the program runs.
-</span><span style="color:#177500">//  3b. in heap: Strings implement Deref&lt;Target=str&gt;, and so inherit all of str&#39;s methods.
-</span><span style="color:#177500">//  3c. in stack: when use str::from_utf8(x).unwrap(); x is stack-value ref
-</span><span style="color:#177500"></span>
-<span style="color:#177500">//&gt; the &amp;str param can accept a &amp;String since the String implement Deref&lt;Target=str&gt;.
-</span><span style="color:#177500">// 即接受&amp;str的地方都可以使用&amp;String
-</span><span style="color:#177500"></span>
-<span style="color:#c41a16">//!!! since the str is unknown size, one can only use it by &amp;str, called slice. slice is a view of some data. 
-</span><span style="color:#c41a16"></span>
+<span style=color:#000>###</span> <span style=color:#a90d91>String</span> <span style=color:#000>vs</span> <span style=color:#a90d91>str</span> <span style=color:#000>vs</span> <span style=color:#000>&amp;</span><span style=color:#a90d91>String</span> <span style=color:#000>vs</span> <span style=color:#000>&amp;</span><span style=color:#a90d91>str</span>
+<span style=color:#177500>//1. String is heap string buffer
+</span><span style=color:#177500>//2. &amp;String is a ref of String
+</span><span style=color:#177500>//3. str is unknown immutable sequence of utf8 bytes stored somewhere in memory. the memory may be:
+</span><span style=color:#177500>//  3a. in binary: a string literal &#34;foo&#34; is a &amp;&#39;static str. The data is hardcoded into the executable and loaded into memory when the program runs.
+</span><span style=color:#177500>//  3b. in heap: Strings implement Deref&lt;Target=str&gt;, and so inherit all of str&#39;s methods.
+</span><span style=color:#177500>//  3c. in stack: when use str::from_utf8(x).unwrap(); x is stack-value ref
+</span><span style=color:#177500></span>
+<span style=color:#177500>//&gt; the &amp;str param can accept a &amp;String since the String implement Deref&lt;Target=str&gt;.
+</span><span style=color:#177500>// 即接受&amp;str的地方都可以使用&amp;String
+</span><span style=color:#177500></span>
+<span style=color:#c41a16>//!!! since the str is unknown size, one can only use it by &amp;str, called slice. slice is a view of some data. 
+</span><span style=color:#c41a16></span>
 
-<span style="color:#a90d91">fn</span> <span style="color:#000">str</span>() {
-    <span style="color:#a90d91">let</span> <span style="color:#000">s</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;hello str&#34;</span>;<span style="color:#177500">//The type of s here is &amp;str: it’s a slice pointing to that specific point of the binary.
-</span><span style="color:#177500"></span>    <span style="color:#177500">// This is also why string literals are immutable; &amp;str is an immutable reference.
-</span><span style="color:#177500"></span>    <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">string</span> <span style="color:#000">=</span> <span style="color:#000">s</span>.<span style="color:#000">to_string</span>(); <span style="color:#177500">//&amp;str to String
-</span><span style="color:#177500"></span>    <span style="color:#000">string</span>.<span style="color:#000">push_str</span>(<span style="color:#c41a16">&#34; append&#34;</span>);
-    <span style="color:#000">println</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;{}&#34;</span>, <span style="color:#000">string</span>);
+<span style=color:#a90d91>fn</span> <span style=color:#000>str</span>() {
+    <span style=color:#a90d91>let</span> <span style=color:#000>s</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;hello str&#34;</span>;<span style=color:#177500>//The type of s here is &amp;str: it’s a slice pointing to that specific point of the binary.
+</span><span style=color:#177500></span>    <span style=color:#177500>// This is also why string literals are immutable; &amp;str is an immutable reference.
+</span><span style=color:#177500></span>    <span style=color:#a90d91>let</span> <span style=color:#a90d91>mut</span> <span style=color:#000>string</span> <span style=color:#000>=</span> <span style=color:#000>s</span>.<span style=color:#000>to_string</span>(); <span style=color:#177500>//&amp;str to String
+</span><span style=color:#177500></span>    <span style=color:#000>string</span>.<span style=color:#000>push_str</span>(<span style=color:#c41a16>&#34; append&#34;</span>);
+    <span style=color:#000>println</span><span style=color:#000>!</span>(<span style=color:#c41a16>&#34;{}&#34;</span>, <span style=color:#000>string</span>);
 }
 
-<span style="color:#177500">//a string slice has static lifetime
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">s</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;hello&#34;</span>;
-<span style="color:#177500">//means
-</span><span style="color:#177500"></span><span style="color:#a90d91">let</span> <span style="color:#000">s</span>: <span style="color:#a90d91">&amp;</span><span style="color:#000">’</span><span style="color:#a90d91">static</span> <span style="color:#a90d91">str</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#34;hello&#34;</span>;
-</code></pre></div><h2 id="lifetimes-are-only-about-reference">lifetimes are only about reference</h2>
-<p>a ref must die before its referent</p>
-<p>in rust:</p>
-<ul>
-<li>
-<p>A resource can only have one owner at a time. When it goes out of the scope, Rust removes it from the Memory.</p>
-</li>
-<li>
-<p>When we want to reuse the same resource, we are referencing it/ borrowing its content.</p>
-</li>
-<li>
-<p>When dealing with references, we have to specify lifetime annotations to provide instructions for the compiler to set how long those referenced resources should be alive.</p>
-</li>
-<li>
-<p>⭐ But because of lifetime annotations make the code more verbose, in order to make common patterns more ergonomic, Rust allows lifetimes to be elided/omitted in fn definitions. In this case, the compiler assigns lifetime annotations implicitly.</p>
-</li>
-</ul>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">// No inputs, return a reference
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function1</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>() -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {}
+<span style=color:#177500>//a string slice has static lifetime
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>s</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;hello&#34;</span>;
+<span style=color:#177500>//means
+</span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>s</span>: <span style=color:#a90d91>&amp;</span><span style=color:#000>’</span><span style=color:#a90d91>static</span> <span style=color:#a90d91>str</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;hello&#34;</span>;
+</code></pre></div><h2 id=lifetimes-are-only-about-reference>lifetimes are only about reference</h2><p>a ref must die before its referent</p><p>in rust:</p><ul><li><p>A resource can only have one owner at a time. When it goes out of the scope, Rust removes it from the Memory.</p></li><li><p>When we want to reuse the same resource, we are referencing it/ borrowing its content.</p></li><li><p>When dealing with references, we have to specify lifetime annotations to provide instructions for the compiler to set how long those referenced resources should be alive.</p></li><li><p>⭐ But because of lifetime annotations make the code more verbose, in order to make common patterns more ergonomic, Rust allows lifetimes to be elided/omitted in fn definitions. In this case, the compiler assigns lifetime annotations implicitly.</p></li></ul><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=color:#177500>// No inputs, return a reference
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>function1</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span><span style=color:#000>&gt;</span>() -&gt; <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span> {}
 
-<span style="color:#177500">// Single input
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function2</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>) {}
+<span style=color:#177500>// Single input
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>function2</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span><span style=color:#000>&gt;</span>(<span style=color:#000>x</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>) {}
 
-<span style="color:#177500">// Single input and output, both have the same lifetime
-</span><span style="color:#177500">// The output should live at least as long as input exists
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function3</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {} <span style="color:#177500">// no need the lifetime annotation,lifetime elision
-</span><span style="color:#177500"></span>
-<span style="color:#177500">// Multiple inputs, only one input and the output share same lifetime
-</span><span style="color:#177500">// The output should live at least as long as y exists
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function4</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">i32</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {}
+<span style=color:#177500>// Single input and output, both have the same lifetime
+</span><span style=color:#177500>// The output should live at least as long as input exists
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>function3</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span><span style=color:#000>&gt;</span>(<span style=color:#000>x</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>) -&gt; <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span> {} <span style=color:#177500>// no need the lifetime annotation,lifetime elision
+</span><span style=color:#177500></span>
+<span style=color:#177500>// Multiple inputs, only one input and the output share same lifetime
+</span><span style=color:#177500>// The output should live at least as long as y exists
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>function4</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span><span style=color:#000>&gt;</span>(<span style=color:#000>x</span>: <span style=color:#a90d91>i32</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>) -&gt; <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span> {}
 
-<span style="color:#177500">// Multiple inputs, both inputs and the output share same lifetime
-</span><span style="color:#177500">// The output should live at least as long as x and y exist
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function5</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {}
+<span style=color:#177500>// Multiple inputs, both inputs and the output share same lifetime
+</span><span style=color:#177500>// The output should live at least as long as x and y exist
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>function5</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span><span style=color:#000>&gt;</span>(<span style=color:#000>x</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>) -&gt; <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span> {}
 
-<span style="color:#177500">// Multiple inputs, inputs can have different lifetimes 🔎
-</span><span style="color:#177500">// The output should live at least as long as x exists
-</span><span style="color:#177500"></span><span style="color:#a90d91">fn</span> <span style="color:#000">function6</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span>, <span style="color:#836c28">&#39;b</span><span style="color:#000">&gt;</span>(<span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>, <span style="color:#000">y</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;b</span> <span style="color:#a90d91">str</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span> {}
-</code></pre></div><h2 id="lifetimes-in-structenum">lifetimes in struct/enum</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#177500">// Single element
-</span><span style="color:#177500">// Data of x should live at least as long as Struct exists
-</span><span style="color:#177500"></span><span style="color:#a90d91">struct</span> <span style="color:#3f6e75">Struct1</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
-    <span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>
+<span style=color:#177500>// Multiple inputs, inputs can have different lifetimes 🔎
+</span><span style=color:#177500>// The output should live at least as long as x exists
+</span><span style=color:#177500></span><span style=color:#a90d91>fn</span> <span style=color:#000>function6</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span>, <span style=color:#836c28>&#39;b</span><span style=color:#000>&gt;</span>(<span style=color:#000>x</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;b</span> <span style=color:#a90d91>str</span>) -&gt; <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span> {}
+</code></pre></div><h2 id=lifetimes-in-structenum>lifetimes in struct/enum</h2><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=color:#177500>// Single element
+</span><span style=color:#177500>// Data of x should live at least as long as Struct exists
+</span><span style=color:#177500></span><span style=color:#a90d91>struct</span> <span style=color:#3f6e75>Struct1</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span><span style=color:#000>&gt;</span> {
+    <span style=color:#000>x</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>
 }
 
-<span style="color:#177500">// Multiple elements
-</span><span style="color:#177500">// Data of x and y should live at least as long as Struct exists
-</span><span style="color:#177500"></span><span style="color:#a90d91">struct</span> <span style="color:#3f6e75">Struct2</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
-    <span style="color:#000">x</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>,
-    <span style="color:#000">y</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#a90d91">str</span>
+<span style=color:#177500>// Multiple elements
+</span><span style=color:#177500>// Data of x and y should live at least as long as Struct exists
+</span><span style=color:#177500></span><span style=color:#a90d91>struct</span> <span style=color:#3f6e75>Struct2</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span><span style=color:#000>&gt;</span> {
+    <span style=color:#000>x</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>,
+    <span style=color:#000>y</span>: <span style=color:#a90d91>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#a90d91>str</span>
 }
 
-<span style="color:#177500">// Variant with a single element
-</span><span style="color:#177500">// Data of the variant should live at least as long as Enum exists
-</span><span style="color:#177500"></span><span style="color:#a90d91">enum</span> <span style="color:#3f6e75">Enum</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
-    <span style="color:#000">Variant</span>(<span style="color:#000">&amp;</span><span style="color:#836c28">&#39;a</span> <span style="color:#000">Type</span>)
+<span style=color:#177500>// Variant with a single element
+</span><span style=color:#177500>// Data of the variant should live at least as long as Enum exists
+</span><span style=color:#177500></span><span style=color:#a90d91>enum</span> <span style=color:#3f6e75>Enum</span><span style=color:#000>&lt;</span><span style=color:#836c28>&#39;a</span><span style=color:#000>&gt;</span> {
+    <span style=color:#000>Variant</span>(<span style=color:#000>&amp;</span><span style=color:#836c28>&#39;a</span> <span style=color:#000>Type</span>)
 }
-</code></pre></div>
-    </div>
-    <footer class="post-footer">
-     
- 
-<div class="post-tags">     
-     
-    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
-    
-    <a href="https://zhimoe.github.io/tags/rust" rel="tag" title="rust">#rust#</a>
-    
-</div>
-
-
-
-     <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/" rel="next" title="Matplotlib图例中文乱码解决方案">
-        <i class="fa fa-chevron-left"></i> Matplotlib图例中文乱码解决方案
-        </a>
-    
-    </div>
-
-    <div class="post-nav-prev post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/dockerfile-best-practices/" rel="prev" title="SpringBoot应用和Rust应用的Dockerfile最佳实践">
-        SpringBoot应用和Rust应用的Dockerfile最佳实践 <i class="fa fa-chevron-right"></i>
-        </a>
-    
-    </div>
-</div>
-      
-     
-     
-     
-<div id="disqus_thread"></div>
-<script>
-
-
-var disqus_config = function () {
-  this.page.url = "https://zhimoe.github.io/post/rust-ownership-lifetimes/";  
-  this.page.identifier = "https://zhimoe.github.io/post/rust-ownership-lifetimes/"; 
-};
-
-(function() { 
-  var d = document, s = d.createElement('script');
-  s.src = 'https://zhimoe.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
-
-    </footer>
-  </article>
-</section>
-
-          </div>
-        </div>
-        <div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
-<aside id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
-
-  <ul class="sidebar-nav motion-element">
-    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-      文章目录
-    </li>
-    <li class="sidebar-nav-overview" data-target="site-overview">
-      站点概览
-    </li>
-  </ul>
-
-    <section class="site-overview sidebar-panel ">
-      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-        src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhimoe" />
-    <p class="site-author-name" itemprop="name">zhimoe</p>
-    <p class="site-description motion-element" itemprop="description"> 
-        the craft of programming</p>
-</div>
-      <nav class="site-state motion-element">
-    <div class="site-state-item site-state-posts">
-      <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">61</span>
-        <span class="site-state-item-name">日志</span>
-      </a>
-    </div>
-    <div class="site-state-item site-state-categories">    
-        <a href="https://zhimoe.github.io/categories/">      
-         
-        <span class="site-state-item-count">4</span>
-        
-        <span class="site-state-item-name">分类</span>
-        
-        </a>
-    </div>
-
-    <div class="site-state-item site-state-tags">
-        <a href="https://zhimoe.github.io/tags/">
-         
-        <span class="site-state-item-count">38</span>
-        
-        <span class="site-state-item-name">标签</span>
-        </a>
-    </div>
-</nav>
-      
-      
-<div class="links-of-author motion-element">
-    
-        <span class="links-of-author-item">
-        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
-            <i class="fa fa-fw fa-github"></i>
-            GitHub
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
-            <i class="fa fa-fw fa-globe"></i>
-            ZhiHu
-        </a>
-        </span>
-    
-</div>
-
-
-      
-
-      <div class="links-of-blogroll motion-element inline">
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
-</div>
-
-
-
-
-    </section>
-    
-<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-    <div class="post-toc">
-        <div class="post-toc-content"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#rust-ownership">rust ownership</a></li>
-        <li><a href="#references-and-borrowing">References and Borrowing:</a></li>
-      </ul>
-    </li>
-    <li><a href="#lifetimes-are-only-about-reference">lifetimes are only about reference</a></li>
-    <li><a href="#lifetimes-in-structenum">lifetimes in struct/enum</a></li>
-  </ul>
-</nav></div>
-    </div>
-</section>
-
-  </div>
-</aside>
-
-      </div>
-    </main>
-   
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  <span itemprop="copyrightYear">  &copy; 
-  2017 - 2022</span>
-  <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhimoe</span>
-</div>
-<div class="powered-by">
-  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
-</div>
-<div class="theme-info">
-  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
-  </a>
-</div>
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-      <span id="scrollpercent"><span>0</span>%</span>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/utils.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/motion.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/affix.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/schemes/pisces.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/scrollspy.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/post-details.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/toc.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/bootstrap.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/search.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { fonts: ["TeX"] }
-  });
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
-</body>
-</html>
+</code></pre></div></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a>
+<a href=https://zhimoe.github.io/tags/rust rel=tag title=rust>#rust#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>声明：</span>Rust Ownerships Lifetimes教程</p><p><span>链接：</span>https://zhimoe.github.io/post/rust-ownership-lifetimes/</p><p><span>作者：</span>zhimoe</p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick="var qr=document.getElementById('QR');if(qr.style.display==='none'){qr.style.display='block';}else{qr.style.display='none'}">
+<span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/ rel=next title=Matplotlib图例中文乱码解决方案><i class="fa fa-chevron-left"></i>Matplotlib图例中文乱码解决方案</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/dockerfile-best-practices/ rel=prev title=SpringBoot应用和Rust应用的Dockerfile最佳实践>SpringBoot应用和Rust应用的Dockerfile最佳实践
+<i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://zhimoe.github.io/post/rust-ownership-lifetimes/";this.page.identifier="https://zhimoe.github.io/post/rust-ownership-lifetimes/";};(function(){var d=document,s=d.createElement('script');s.src='https://zhimoe.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></footer></article></section></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target=post-toc-wrap>文章目录</li><li class=sidebar-nav-overview data-target=site-overview>站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>the craft of programming</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>61</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>38</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-desktop"></i>ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link-square"></i>书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://tech.meituan.com/ title=美团技术团队 target=_blank>美团技术团队</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画 target=_blank>艺术绘画</a></li><li class=links-of-blogroll-item><a href=https://500px.com/ title=500px target=_blank>500px</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aop>Aop</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aurulent>Aurulent</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/cheatsheet>Cheatsheet</a></li></ul></div><div class="links-of-blogroll motion-element inline"><script type=text/javascript src="//rf.revolvermaps.com/0/0/6.js?i=55k6ne41ev6&m=7&c=e63100&cr1=ffffff&f=arial&l=0&bv=90&lx=-420&ly=420&hi=20&he=7&hc=a8ddff&rs=80" async></script></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class=post-toc><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#rust-ownership>rust ownership</a></li><li><a href=#references-and-borrowing>References and Borrowing:</a></li></ul></li><li><a href=#lifetimes-are-only-about-reference>lifetimes are only about reference</a></li><li><a href=#lifetimes-in-structenum>lifetimes in struct/enum</a></li></ul></nav></div></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2010 - 2022</span>
+<span class=with-love><i class="fa fa-heart"></i></span><span class=copyright-author>zhimoe</span></div><div class=powered-info><span class=powered-by>Powered by - <a class=powered-link href=//gohugo.io target=_blank title=hugo>Hugo v0.69.2</a></span>
+<span class=separator-line>/</span>
+<span class=theme-info>Theme by - <a class=powered-link href=//github.com/elkan1788/hugo-theme-next target=_blank>NexT</a></span></div><div class=vistor-info></div><div class=license-info><span class=storage-info>Storage by
+<a href style=font-weight:700 target=_blank></a></span><span class=separator-line>/</span>
+<span class=license-num><a href target=_blank></a></span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i><span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=//cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js></script><script type=text/javascript src=https://zhimoe.github.io/js/search.js></script><script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script><script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script><script type=text/javascript>function detectIE(){var ua=window.navigator.userAgent;var msie=ua.indexOf('MSIE ');var trident=ua.indexOf('Trident/');var edge=ua.indexOf('Edge/');if(msie>0||trident>0||edge>0){return-1;}
+return 1;}
+function getCntViewHeight(){var docHeight=$('#content').height(),winHeight=$(window).height(),cntViewHeight=(docHeight>winHeight)?(docHeight-winHeight):($(document).height()-winHeight);return cntViewHeight;}
+function getScrollbarWidth(){var $div=$('<div />').addClass('scrollbar-measure').prependTo('body');var div=$div[0];var scrollbarWidth=div.offsetWidth-div.clientWidth;$div.remove();return scrollbarWidth;}
+function registerBackTop(){var THRESHOLD=50;var $top=$('.back-to-top');$(window).on('scroll',function(){$top.toggleClass('back-to-top-on',window.pageYOffset>THRESHOLD);var scrollTop=$(window).scrollTop();var cntViewHeight=getCntViewHeight();var scrollPercent=(scrollTop)/(cntViewHeight);var scrollPercentRounded=Math.round(scrollPercent*100);var scrollPercentMaxed=(scrollPercentRounded>100)?100:scrollPercentRounded;$('#scrollpercent>span').html(scrollPercentMaxed);});$top.on('click',function(){$("html,body").animate({scrollTop:0,screenLeft:0,},800);});}
+function initScrollSpy(){var tocSelector='.post-toc';var $tocElement=$(tocSelector);var activeCurrentSelector='.active-current';$tocElement.on('activate.bs.scrollspy',function(){var $currentActiveElement=$(tocSelector+' .active').last();removeCurrentActiveClass();$currentActiveElement.addClass('active-current');}).on('clear.bs.scrollspy',removeCurrentActiveClass);$('body').scrollspy({target:tocSelector});function removeCurrentActiveClass(){$(tocSelector+' '+activeCurrentSelector).removeClass(activeCurrentSelector.substring(1));}}
+function initAffix(){var headerHeight=$('.header-inner').height();var footerOffset=parseInt($('.main').css('padding-bottom'),10);var sidebarTop=headerHeight+10;$('.sidebar-inner').affix({offset:{top:sidebarTop,bottom:footerOffset}});$(document).on('affixed.bs.affix',function(){updateTOCHeight(document.body.clientHeight-100);});}
+function initTOCDimension(){var updateTOCHeightTimer;$(window).on('resize',function(){updateTOCHeightTimer&&clearTimeout(updateTOCHeightTimer);updateTOCHeightTimer=setTimeout(function(){var tocWrapperHeight=document.body.clientHeight-100;updateTOCHeight(tocWrapperHeight);},0);});updateTOCHeight(document.body.clientHeight-100);var scrollbarWidth=getScrollbarWidth();$('.post-toc').css('width','calc(100% + '+scrollbarWidth+'px)');}
+function updateTOCHeight(height){height=height||'auto';$('.post-toc').css('max-height',height);}
+$(function(){var sidebarTop=$('.header-inner').height()+10;$('#sidebar').css({'margin-top':sidebarTop}).show();var sidebarMt=parseInt($('#sidebar').css('margin-top'));var sidebarInHeight=parseInt($('.sidebar-inner').css('height'));var sideHeight=sidebarMt+sidebarInHeight;var contentHeight=$('.content-wrap').height();if(contentHeight<sideHeight){$('.content-wrap').css('min-height',sideHeight);}
+$('.site-nav-toggle').on('click',function(){var $siteNav=$('.site-nav');var $toggleLine=$('.toggle');var ON_CLASS_NAME='site-nav-on';var CLOSE_CLASS_NAME='toggle-close';var isSiteNavOn=$siteNav.hasClass(ON_CLASS_NAME);var animateAction=isSiteNavOn?'slideUp':'slideDown';var animateCallback=isSiteNavOn?'removeClass':'addClass';$siteNav.stop()[animateAction]('normal',function(){$siteNav[animateCallback](ON_CLASS_NAME);$toggleLine[animateCallback](CLOSE_CLASS_NAME);});});registerBackTop();initScrollSpy();initAffix();initTOCDimension();$('.sidebar-nav-toc').click(function(){$(this).addClass('sidebar-nav-active');$(this).next().removeClass('sidebar-nav-active');$('.'+$(this).next().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});$('.sidebar-nav-overview').click(function(){$(this).addClass('sidebar-nav-active');$(this).prev().removeClass('sidebar-nav-active');$('.'+$(this).prev().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});});</script><script src=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.js></script><script type=text/javascript>$(function(){$('.post-body').viewer();});</script><script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js';}
+else{bp.src='http://push.zhanzhang.baidu.com/push.js';}
+var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s);})();</script></body></html>

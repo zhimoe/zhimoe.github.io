@@ -1,301 +1,115 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>java on zhimoe</title>
-    <link>https://zhimoe.github.io/tags/java/</link>
-    <description>Recent content in java on zhimoe</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Thu, 06 Aug 2020 22:49:34 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhimoe.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Java 8 Lambda笔记</title>
-      <link>https://zhimoe.github.io/post/java-lambda/</link>
-      <pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-lambda/</guid>
-      <description>&lt;h3 id=&#34;问题&#34;&gt;问题&lt;/h3&gt;
-&lt;p&gt;Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;// 监听器接口
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;ActionListener&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;actionPerformed&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ActionEvent&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;// 使用匿名类传递一个行为
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;button&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;addActionListener&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;ActionListener&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(){&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;actionPerformed&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Event&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;){&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;button clicked&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;});&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java Thread Pool Hierachy</title>
-      <link>https://zhimoe.github.io/post/java-threadpool-hierachy/</link>
-      <pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-threadpool-hierachy/</guid>
-      <description>&lt;h3 id=&#34;thread-pool-classes-hierachy&#34;&gt;thread pool classes hierachy&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;java thread pool class hierarchy
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>java on zhimoe</title><link>https://zhimoe.github.io/tags/java/</link><description>Recent content in java on zhimoe</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Thu, 06 Aug 2020 22:49:34 +0800</lastBuildDate><atom:link href="https://zhimoe.github.io/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Java 8 Lambda笔记</title><link>https://zhimoe.github.io/post/java-lambda/</link><pubDate>Thu, 06 Aug 2020 22:49:34 +0800</pubDate><guid>https://zhimoe.github.io/post/java-lambda/</guid><description>&lt;h3 id="问题">问题&lt;/h3>
+&lt;p>Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#177500">// 监听器接口
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">interface&lt;/span> &lt;span style="color:#3f6e75">ActionListener&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">actionPerformed&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">ActionEvent&lt;/span> &lt;span style="color:#000">e&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#177500">// 使用匿名类传递一个行为
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#000">button&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">addActionListener&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#a90d91">new&lt;/span> &lt;span style="color:#000">ActionListener&lt;/span>&lt;span style="color:#000">(){&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">actionPerformed&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">Event&lt;/span> &lt;span style="color:#000">e&lt;/span>&lt;span style="color:#000">){&lt;/span>
+&lt;span style="color:#000">System&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">out&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">println&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;button clicked&amp;#34;&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java Thread Pool Hierachy</title><link>https://zhimoe.github.io/post/java-threadpool-hierachy/</link><pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate><guid>https://zhimoe.github.io/post/java-threadpool-hierachy/</guid><description>&lt;h3 id="thread-pool-classes-hierachy">thread pool classes hierachy&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">java thread pool class hierarchy
 Executor (java.util.concurrent)
 |---ExecutorService (java.util.concurrent)
-    |---AbstractExecutorService (java.util.concurrent)
-    |   |---AbstractEventExecutor (io.netty.util.concurrent)
-    |   |---ForkJoinPool (java.util.concurrent)
-    |   |---ThreadPoolExecutor (java.util.concurrent)
-    |   |   |---ScheduledThreadPoolExecutor (java.util.concurrent)
-    |---DelegatedExecutorService in Executors (java.util.concurrent)
-    |---ScheduledExecutorService (java.util.concurrent)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>单元测试如何Mock有参数的void方法</title>
-      <link>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</link>
-      <pubDate>Sun, 23 Apr 2017 21:51:20 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</guid>
-      <description>&lt;p&gt;测试中如果遇到被测试方法调用void方法，在Mockito中改如何处理?&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>java generic</title>
-      <link>https://zhimoe.github.io/post/java-generic/</link>
-      <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-generic/</guid>
-      <description>&lt;h3 id=&#34;泛型&#34;&gt;泛型&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#177500&#34;&gt;// 类
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Tuple&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;S&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;first&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;S&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;second&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;// 泛型方法也可在非泛型类里面
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;ArrayAlg&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;getMiddle&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;T&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;];&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>IO-Java-Stream-Write-Reader</title>
-      <link>https://zhimoe.github.io/post/io-java-stream-write-reader/</link>
-      <pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/io-java-stream-write-reader/</guid>
-      <description>&lt;p&gt;上次总结了java中不同读写文件的方法,这次总结一下基本的IO流.网上的总结大部分是以Stream和Reader、Writer来介绍的.这次从封装层次来介绍.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java 6/7/8中文件读写</title>
-      <link>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</link>
-      <pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</guid>
-      <description>&lt;p&gt;如何在Java中读写文件,这里保留Java6/7版本,但是你永远不应该使用它们,优先使用Path,Files,Paths三个类.
-资料：&lt;a href=&#34;http://www.javapractices.com/topic/TopicAction.do?Id=42&#34;&gt;Reading and writing text files&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;java8最佳实践&#34;&gt;Java8最佳实践&lt;/h2&gt;
-&lt;p&gt;不要用File对象,改用Path对象,该对象既表示文件路径,也表示文件文本（应该认为文件也是路径的一部分）,对于以前的File,可以File.toPath()得到一个Path对象.
+|---AbstractExecutorService (java.util.concurrent)
+| |---AbstractEventExecutor (io.netty.util.concurrent)
+| |---ForkJoinPool (java.util.concurrent)
+| |---ThreadPoolExecutor (java.util.concurrent)
+| | |---ScheduledThreadPoolExecutor (java.util.concurrent)
+|---DelegatedExecutorService in Executors (java.util.concurrent)
+|---ScheduledExecutorService (java.util.concurrent)
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>单元测试如何Mock有参数的void方法</title><link>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</link><pubDate>Sun, 23 Apr 2017 21:51:20 +0800</pubDate><guid>https://zhimoe.github.io/post/how-test-void-method-with-parameter/</guid><description>&lt;p>测试中如果遇到被测试方法调用void方法，在Mockito中改如何处理?&lt;/p></description></item><item><title>java generic</title><link>https://zhimoe.github.io/post/java-generic/</link><pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-generic/</guid><description>&lt;h3 id="泛型">泛型&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#177500">// 类
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Tuple&lt;/span>&lt;span style="color:#000">&amp;lt;&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">S&lt;/span>&lt;span style="color:#000">&amp;gt;&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">T&lt;/span> &lt;span style="color:#000">first&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">S&lt;/span> &lt;span style="color:#000">second&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#177500">// 泛型方法也可在非泛型类里面
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">ArrayAlg&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#000">&amp;lt;&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#000">&amp;gt;&lt;/span> &lt;span style="color:#000">T&lt;/span> &lt;span style="color:#000">getMiddle&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#000">...&lt;/span> &lt;span style="color:#000">a&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">a&lt;/span>&lt;span style="color:#000">[&lt;/span>&lt;span style="color:#000">a&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">length&lt;/span> &lt;span style="color:#000">/&lt;/span> &lt;span style="color:#000">2&lt;/span>&lt;span style="color:#000">];&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>IO-Java-Stream-Write-Reader</title><link>https://zhimoe.github.io/post/io-java-stream-write-reader/</link><pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/io-java-stream-write-reader/</guid><description>&lt;p>上次总结了java中不同读写文件的方法,这次总结一下基本的IO流.网上的总结大部分是以Stream和Reader、Writer来介绍的.这次从封装层次来介绍.&lt;/p></description></item><item><title>Java 6/7/8中文件读写</title><link>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</link><pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</guid><description>&lt;p>如何在Java中读写文件,这里保留Java6/7版本,但是你永远不应该使用它们,优先使用Path,Files,Paths三个类.
+资料：&lt;a href="http://www.javapractices.com/topic/TopicAction.do?Id=42">Reading and writing text files&lt;/a>&lt;/p>
+&lt;h2 id="java8最佳实践">Java8最佳实践&lt;/h2>
+&lt;p>不要用File对象,改用Path对象,该对象既表示文件路径,也表示文件文本（应该认为文件也是路径的一部分）,对于以前的File,可以File.toPath()得到一个Path对象.
 Files是一个静态类,操作文件内容.Paths是静态工具类,操作文件路径,例如拼接文件路径,以前要使用平台无关的分隔符表示：File.pathSeparator, File.separator.
-例如,构建一个文件对象:&lt;code&gt;Path path = Paths.get(&amp;quot;~/test/&amp;quot;, &amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;, &amp;quot;a.txt&amp;quot;);&lt;/code&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java AOP example</title>
-      <link>https://zhimoe.github.io/post/java-aop-example/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-aop-example/</guid>
-      <description>&lt;p&gt;Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:
-&lt;a href=&#34;https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html&#34;&gt;A Simple Introduction to AOP&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;提醒个点,使用注解的方式写切面时,增加了一个空方法,即：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Test&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;@Pointcut&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;execution(* org.bk.inventory.service.*.*(..))&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;serviceMethods&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(){&lt;/span&gt;
-        &lt;span style=&#34;color:#177500&#34;&gt;//...
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 1 basic</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid>
-      <description>&lt;p&gt;知识点太多了.先列举一些知识点,然后在分别做一点笔记.&lt;/p&gt;
-&lt;h4 id=&#34;模式&#34;&gt;模式&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;共享可变性&lt;/li&gt;
-&lt;li&gt;隔离可变性&lt;/li&gt;
-&lt;li&gt;纯粹不可变性:STM,&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 2 Runnable Callable FutureExecutor</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</guid>
-      <description>&lt;h3 id=&#34;定义任务的内容&#34;&gt;定义任务的内容&lt;/h3&gt;
-&lt;p&gt;多线程编程的核心元素就是任务,任务是独立的活动.不依赖其他任务的状态,结果,以及边界效应.&lt;br&gt;
-定义任务的内容使用Runnable和Callable.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 3 synchronized or Lock</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</guid>
-      <description>&lt;h3 id=&#34;synchronized-method和synchronized-block的区别&#34;&gt;synchronized method和synchronized block的区别&lt;/h3&gt;
-&lt;p&gt;如果是synchronized(this),那么和synchronized 方法没有任何区别,锁定对象都是方法所在的对象.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mymethod&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;mymethod&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-  &lt;span style=&#34;color:#a90d91&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 4 CAS and atomic</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</guid>
-      <description>&lt;h4 id=&#34;atomiclong-code&#34;&gt;AtomicLong code:&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;incrementAndGet&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(;;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;current&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;get&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;();&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;next&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;current&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;compareAndSet&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;current&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;next&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;))&lt;/span&gt;
-          &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;next&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#177500&#34;&gt;//in java 8:
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;incrementAndGet&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;unsafe&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;getAndAddLong&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;valueOffset&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;1L&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;1L&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java concurrency 5 Synchronizer and AQS</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</guid>
-      <description>&lt;p&gt;CountDownLatch和CyclicBarrier示例&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java-==-and-equals</title>
-      <link>https://zhimoe.github.io/post/java-and-equal/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-and-equal/</guid>
-      <description>&lt;p&gt;samples code and notes on java == and equals&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java动态代理</title>
-      <link>https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid>
-      <description>&lt;h3 id=&#34;好文&#34;&gt;好文&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;http://www.ibm.com/developerworks/cn/java/j-lo-proxy1/&#34;&gt;Java 动态代理机制分析及扩展&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;更深入的一篇:
-&lt;a href=&#34;http://nemotan.github.io/2015/11/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/&#34;&gt;java设计模式-动态代理模式&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java注解和注解处理器</title>
-      <link>https://zhimoe.github.io/post/java-annotation-processing/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-annotation-processing/</guid>
-      <description>&lt;h3 id=&#34;注解处理&#34;&gt;注解处理&lt;/h3&gt;
-&lt;p&gt;注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的.
+例如,构建一个文件对象:&lt;code>Path path = Paths.get(&amp;quot;~/test/&amp;quot;, &amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;, &amp;quot;a.txt&amp;quot;);&lt;/code>&lt;/p></description></item><item><title>Java AOP example</title><link>https://zhimoe.github.io/post/java-aop-example/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-aop-example/</guid><description>&lt;p>Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:
+&lt;a href="https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html">A Simple Introduction to AOP&lt;/a>&lt;/p>
+&lt;p>提醒个点,使用注解的方式写切面时,增加了一个空方法,即：&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Test&lt;/span>&lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">@Pointcut&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#c41a16">&amp;#34;execution(* org.bk.inventory.service.*.*(..))&amp;#34;&lt;/span>&lt;span style="color:#000">)&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">serviceMethods&lt;/span>&lt;span style="color:#000">(){&lt;/span>
+&lt;span style="color:#177500">//...
+&lt;/span>&lt;span style="color:#177500">&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java concurrency 1 basic</title><link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid><description>&lt;p>知识点太多了.先列举一些知识点,然后在分别做一点笔记.&lt;/p>
+&lt;h4 id="模式">模式&lt;/h4>
+&lt;ol>
+&lt;li>共享可变性&lt;/li>
+&lt;li>隔离可变性&lt;/li>
+&lt;li>纯粹不可变性:STM,&lt;/li>
+&lt;/ol></description></item><item><title>Java concurrency 2 Runnable Callable FutureExecutor</title><link>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</guid><description>&lt;h3 id="定义任务的内容">定义任务的内容&lt;/h3>
+&lt;p>多线程编程的核心元素就是任务,任务是独立的活动.不依赖其他任务的状态,结果,以及边界效应.&lt;br>
+定义任务的内容使用Runnable和Callable.&lt;/p></description></item><item><title>Java concurrency 3 synchronized or Lock</title><link>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/</guid><description>&lt;h3 id="synchronized-method和synchronized-block的区别">synchronized method和synchronized block的区别&lt;/h3>
+&lt;p>如果是synchronized(this),那么和synchronized 方法没有任何区别,锁定对象都是方法所在的对象.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">synchronized&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">mymethod&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span> &lt;span style="color:#000">...&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">mymethod&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">synchronized&lt;/span> &lt;span style="color:#000">(&lt;/span>&lt;span style="color:#a90d91">this&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">{&lt;/span> &lt;span style="color:#000">...&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java concurrency 4 CAS and atomic</title><link>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-4-cas-and-atomic/</guid><description>&lt;h4 id="atomiclong-code">AtomicLong code:&lt;/h4>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">final&lt;/span> &lt;span style="color:#a90d91">long&lt;/span> &lt;span style="color:#000">incrementAndGet&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">for&lt;/span> &lt;span style="color:#000">(;;)&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">long&lt;/span> &lt;span style="color:#000">current&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#000">get&lt;/span>&lt;span style="color:#000">();&lt;/span>
+&lt;span style="color:#a90d91">long&lt;/span> &lt;span style="color:#000">next&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#000">current&lt;/span> &lt;span style="color:#000">+&lt;/span> &lt;span style="color:#000">1&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#a90d91">if&lt;/span> &lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">compareAndSet&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">current&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">next&lt;/span>&lt;span style="color:#000">))&lt;/span>
+&lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">next&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#177500">//in java 8:
+&lt;/span>&lt;span style="color:#177500">&lt;/span>&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">final&lt;/span> &lt;span style="color:#a90d91">long&lt;/span> &lt;span style="color:#000">incrementAndGet&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">unsafe&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">getAndAddLong&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#a90d91">this&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">valueOffset&lt;/span>&lt;span style="color:#000">,&lt;/span> &lt;span style="color:#000">1L&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">+&lt;/span> &lt;span style="color:#000">1L&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java concurrency 5 Synchronizer and AQS</title><link>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-5-synchronizer-and-aqs/</guid><description>&lt;p>CountDownLatch和CyclicBarrier示例&lt;/p></description></item><item><title>Java-==-and-equals</title><link>https://zhimoe.github.io/post/java-and-equal/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-and-equal/</guid><description>&lt;p>samples code and notes on java == and equals&lt;/p></description></item><item><title>Java动态代理</title><link>https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</guid><description>&lt;h3 id="好文">好文&lt;/h3>
+&lt;p>&lt;a href="http://www.ibm.com/developerworks/cn/java/j-lo-proxy1/">Java 动态代理机制分析及扩展&lt;/a>&lt;/p>
+&lt;p>更深入的一篇:
+&lt;a href="http://nemotan.github.io/2015/11/java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">java设计模式-动态代理模式&lt;/a>&lt;/p></description></item><item><title>Java注解和注解处理器</title><link>https://zhimoe.github.io/post/java-annotation-processing/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-annotation-processing/</guid><description>&lt;h3 id="注解处理">注解处理&lt;/h3>
+&lt;p>注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的.
 关于注解的定义就不说了,主要说说注解处理
 本文根据以下资料并进行部分修改：
-&lt;a href=&#34;http://www.angelikalanger.com/Conferences/Slides/JavaAnnotationProcessing-JSpring-2008.pdf&#34;&gt;JavaAnnotationProcessing&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>单例模式和序列化</title>
-      <link>https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</guid>
-      <description>&lt;p&gt;Java单例模式的各种写法和序列化
-&lt;a href=&#34;http://www.hollischuang.com/archives/205&#34;&gt;参考资料&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;饱汉式&#34;&gt;饱汉式&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Singleton&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;  
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Singleton&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;null&lt;/span&gt;  
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Singleton&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;(){}&lt;/span&gt;   
-	    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Singleton&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;getInstance&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;  
-	        &lt;span style=&#34;color:#a90d91&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt;             &lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Singleton&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;();&lt;/span&gt;         &lt;span style=&#34;color:#a90d91&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;instance&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;  
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;  
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;  &lt;span style=&#34;color:#177500&#34;&gt;//饱汉式,使用时创建
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>面试题-类加载过程和子类重写父类方法的调用</title>
-      <link>https://zhimoe.github.io/post/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</guid>
-      <description>&lt;p&gt;最近非常火的一道携程面试题Java&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Base&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;baseName&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;base&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Base&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;callName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;();&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;callName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;baseName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-    &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#3f6e75&#34;&gt;Sub&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Base&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#a90d91&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;baseName&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c41a16&#34;&gt;&amp;#34;sub&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;;&lt;/span&gt;
-
-        &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;callName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-            &lt;span style=&#34;color:#000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;out&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#836c28&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;baseName&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;);&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-
-    &lt;span style=&#34;color:#a90d91&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;String&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;args&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#000&#34;&gt;Base&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a90d91&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;Sub&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;();&lt;/span&gt; &lt;span style=&#34;color:#177500&#34;&gt;// 输出？
-&lt;/span&gt;&lt;span style=&#34;color:#177500&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#000&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Java新手如何学习SpringMVC框架</title>
-      <link>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</link>
-      <pubDate>Fri, 21 Aug 2015 22:02:50 +0800</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</guid>
-      <description>&lt;p&gt;知乎回答备份,&lt;a href=&#34;https://www.zhihu.com/question/21142149/answer/52383396&#34;&gt;原答案写于15年&lt;/a&gt;.
-6,404 人赞同了该回答&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;a href="http://www.angelikalanger.com/Conferences/Slides/JavaAnnotationProcessing-JSpring-2008.pdf">JavaAnnotationProcessing&lt;/a>&lt;/p></description></item><item><title>单例模式和序列化</title><link>https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/</guid><description>&lt;p>Java单例模式的各种写法和序列化
+&lt;a href="http://www.hollischuang.com/archives/205">参考资料&lt;/a>&lt;/p>
+&lt;h3 id="饱汉式">饱汉式&lt;/h3>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Singleton&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#000">Singleton&lt;/span> &lt;span style="color:#000">instance&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#a90d91">null&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">Singleton&lt;/span> &lt;span style="color:#000">(){}&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#000">Singleton&lt;/span> &lt;span style="color:#000">getInstance&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">if&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">instance&lt;/span> &lt;span style="color:#000">==&lt;/span> &lt;span style="color:#a90d91">null&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">instance&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#a90d91">new&lt;/span> &lt;span style="color:#000">Singleton&lt;/span>&lt;span style="color:#000">();&lt;/span> &lt;span style="color:#a90d91">return&lt;/span> &lt;span style="color:#000">instance&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span> &lt;span style="color:#177500">//饱汉式,使用时创建
+&lt;/span>&lt;span style="color:#177500">&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>面试题-类加载过程和子类重写父类方法的调用</title><link>https://zhimoe.github.io/post/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%90%E7%B1%BB%E9%87%8D%E5%86%99%E7%88%B6%E7%B1%BB%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8/</guid><description>&lt;p>最近非常火的一道携程面试题Java&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Base&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">String&lt;/span> &lt;span style="color:#000">baseName&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#c41a16">&amp;#34;base&amp;#34;&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#000">Base&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">callName&lt;/span>&lt;span style="color:#000">();&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">callName&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">System&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">out&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">println&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">baseName&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#a90d91">class&lt;/span> &lt;span style="color:#3f6e75">Sub&lt;/span> &lt;span style="color:#a90d91">extends&lt;/span> &lt;span style="color:#000">Base&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#a90d91">private&lt;/span> &lt;span style="color:#000">String&lt;/span> &lt;span style="color:#000">baseName&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#c41a16">&amp;#34;sub&amp;#34;&lt;/span>&lt;span style="color:#000">;&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">callName&lt;/span>&lt;span style="color:#000">()&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">System&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">out&lt;/span>&lt;span style="color:#000">.&lt;/span>&lt;span style="color:#836c28">println&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">baseName&lt;/span>&lt;span style="color:#000">);&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#a90d91">public&lt;/span> &lt;span style="color:#a90d91">static&lt;/span> &lt;span style="color:#a90d91">void&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#000">(&lt;/span>&lt;span style="color:#000">String&lt;/span>&lt;span style="color:#000">[]&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#000">)&lt;/span> &lt;span style="color:#000">{&lt;/span>
+&lt;span style="color:#000">Base&lt;/span> &lt;span style="color:#000">b&lt;/span> &lt;span style="color:#000">=&lt;/span> &lt;span style="color:#a90d91">new&lt;/span> &lt;span style="color:#000">Sub&lt;/span>&lt;span style="color:#000">();&lt;/span> &lt;span style="color:#177500">// 输出？
+&lt;/span>&lt;span style="color:#177500">&lt;/span> &lt;span style="color:#000">}&lt;/span>
+&lt;span style="color:#000">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Java新手如何学习SpringMVC框架</title><link>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</link><pubDate>Fri, 21 Aug 2015 22:02:50 +0800</pubDate><guid>https://zhimoe.github.io/post/how-do-newbie-learn-spring/</guid><description>&lt;p>知乎回答备份,&lt;a href="https://www.zhihu.com/question/21142149/answer/52383396">原答案写于15年&lt;/a>.
+6,404 人赞同了该回答&lt;/p></description></item></channel></rss>

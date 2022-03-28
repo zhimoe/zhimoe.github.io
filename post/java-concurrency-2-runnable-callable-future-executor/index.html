@@ -1,456 +1,66 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Java concurrency 2 Runnable Callable FutureExecutor - zhimoe</title>
-    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
-    
-    <meta property="og:title" content="Java concurrency 2 Runnable Callable FutureExecutor">
-    <meta property="og:site_name" content="zhimoe">
-    <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Java concurrency 2 Runnable Callable FutureExecutor - zhimoe" />
-    <meta name="description" content="编程是一门手艺"> 
-    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/index.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />    
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/syntax.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-     fancybox: true, 
-    motion: true
-  };
-</script>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left page-home  ">
-    <div class="headband"></div>
+<!doctype html><html lang=zh dir=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>Java concurrency 2 Runnable Callable FutureExecutor - zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="Java concurrency 2 Runnable Callable FutureExecutor"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="Java concurrency 2 Runnable Callable FutureExecutor - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.css rel=stylesheet><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span><span class=toggle-line></span><span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span><span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>the craft of programming</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class=menu-item><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>项目</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span><span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/ itemprop=url>Java concurrency 2 Runnable Callable FutureExecutor</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2016-01-01">2016-01-01</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>1314 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>3分钟</span></span>
+<span id=/post/java-concurrency-2-runnable-callable-future-executor/ class=leancloud_visitors data-flag-title="Java concurrency 2 Runnable Callable FutureExecutor">|
+<i class="fa fa-binoculars fa-fw"></i><span class=post-meta-item-text>阅读次数：</span>
+<span class=leancloud-visitors-count></span></span></div></header><div class=post-body itemprop=articleBody><h3 id=定义任务的内容>定义任务的内容</h3><p>多线程编程的核心元素就是任务,任务是独立的活动.不依赖其他任务的状态,结果,以及边界效应.<br>定义任务的内容使用Runnable和Callable.</p><p>Runnable 接口表示没有返回的一个过程（procedure）,没有受检异常.<br>Callabe 接口的call方法会返回一个结果,并有可能抛出受检异常.如果要表示没有返回值,可以使用<code>Callable&lt;Void> </code>,但是不鼓励使用这个代替Runable,但一个任务内容没有返回值,只是利用副作用时,应该优先使用Runable,使得含义清晰,并且JDK中ScheduledExecutorService也有只能接收Runable的方法.</p><p>可以将Runnable定义的任务提交给Thread直接运行,但是这个线程是不可重用的.更好的方法是提交给执行器ExecutorService.</p><p>Future接口描述了任务的生命周期,并提供方法获得任务执行的结果.该接口有一个实现类：FutureTask.该类的实例一定和一个具体任务相关.ExecutorService所有的submit方法都会返回一个Future实例.你也可以直接通过FutureTask构造函数将Runnable/Callable构建一个FutureTask实例.该实例将管理该任务的生命周期</p><p>注意,FutureTask 实现了Runnable和Future（通过实现RunnableFuture<v> 接口,如下）,所以既可以使用ExecutorService,也可以使用Thread执行任务内容.</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>FutureTask</span><span style=color:#000>&lt;</span><span style=color:#000>V</span><span style=color:#000>&gt;</span> <span style=color:#a90d91>implements</span> <span style=color:#000>RunnableFuture</span><span style=color:#000>&lt;</span><span style=color:#000>V</span><span style=color:#000>&gt;</span>   
+<span style=color:#a90d91>public</span> <span style=color:#a90d91>interface</span> <span style=color:#3f6e75>RunnableFuture</span><span style=color:#000>&lt;</span><span style=color:#000>V</span><span style=color:#000>&gt;</span> <span style=color:#a90d91>extends</span> <span style=color:#000>Runnable</span><span style=color:#000>,</span> <span style=color:#000>Future</span><span style=color:#000>&lt;</span><span style=color:#000>V</span><span style=color:#000>&gt;</span>
+</code></pre></div><p>Future.get是一个阻塞方法,如果任务没有结束或者没有抛出异常,那么会一直等待下去,如果需要异步的使用ComletionService.</p><h3 id=executorservice>ExecutorService</h3><p>执行器框架,root 接口是Executor,只有一个execute方法执行runnable实例.更常用是子接口ExecutorService,除了可以执行runnable,callable,还可以invoke一callable集合：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span> <span style=color:#000>List</span><span style=color:#000>&lt;</span><span style=color:#000>Future</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;&gt;</span>	<span style=color:#000>invokeAll</span><span style=color:#000>(</span><span style=color:#000>Collection</span><span style=color:#000>&lt;?</span> <span style=color:#a90d91>extends</span> <span style=color:#000>Callable</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;&gt;</span> <span style=color:#000>tasks</span><span style=color:#000>)</span>
+<span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span> <span style=color:#000>T</span>	<span style=color:#000>invokeAny</span><span style=color:#000>(</span><span style=color:#000>Collection</span><span style=color:#000>&lt;?</span> <span style=color:#a90d91>extends</span> <span style=color:#000>Callable</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;&gt;</span> <span style=color:#000>tasks</span><span style=color:#000>)</span>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-meta  custom-logo ">
-
-  <div class="custom-logo-site-title">
-    <a href="https://zhimoe.github.io"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhimoe</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">the craft of programming</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-      
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/post/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/about/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
-          </a>
-        </li>
-      
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
-      </li>
-    </ul>
-    <div class="site-search">
-      <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-    </div>
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-<section id="posts" class="posts-expand">
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/" itemprop="url">
-        Java concurrency 2 Runnable Callable FutureExecutor
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2016-01-01">
-    2016-01-01
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">1314 字 ~3分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <h3 id="定义任务的内容">定义任务的内容</h3>
-<p>多线程编程的核心元素就是任务,任务是独立的活动.不依赖其他任务的状态,结果,以及边界效应.<br>
-定义任务的内容使用Runnable和Callable.</p>
-<p>Runnable 接口表示没有返回的一个过程（procedure）,没有受检异常.<br>
-Callabe 接口的call方法会返回一个结果,并有可能抛出受检异常.如果要表示没有返回值,可以使用<code>Callable&lt;Void&gt; </code>,但是不鼓励使用这个代替Runable,但一个任务内容没有返回值,只是利用副作用时,应该优先使用Runable,使得含义清晰,并且JDK中ScheduledExecutorService也有只能接收Runable的方法.</p>
-<p>可以将Runnable定义的任务提交给Thread直接运行,但是这个线程是不可重用的.更好的方法是提交给执行器ExecutorService.</p>
-<p>Future接口描述了任务的生命周期,并提供方法获得任务执行的结果.该接口有一个实现类：FutureTask.该类的实例一定和一个具体任务相关.ExecutorService所有的submit方法都会返回一个Future实例.你也可以直接通过FutureTask构造函数将Runnable/Callable构建一个FutureTask实例.该实例将管理该任务的生命周期</p>
-<p>注意,FutureTask   实现了Runnable和Future（通过实现RunnableFuture<!-- raw HTML omitted --> 接口,如下）,所以既可以使用ExecutorService,也可以使用Thread执行任务内容.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">FutureTask</span><span style="color:#000">&lt;</span><span style="color:#000">V</span><span style="color:#000">&gt;</span> <span style="color:#a90d91">implements</span> <span style="color:#000">RunnableFuture</span><span style="color:#000">&lt;</span><span style="color:#000">V</span><span style="color:#000">&gt;</span>   
-<span style="color:#a90d91">public</span> <span style="color:#a90d91">interface</span> <span style="color:#3f6e75">RunnableFuture</span><span style="color:#000">&lt;</span><span style="color:#000">V</span><span style="color:#000">&gt;</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Runnable</span><span style="color:#000">,</span> <span style="color:#000">Future</span><span style="color:#000">&lt;</span><span style="color:#000">V</span><span style="color:#000">&gt;</span>
-</code></pre></div><p>Future.get是一个阻塞方法,如果任务没有结束或者没有抛出异常,那么会一直等待下去,如果需要异步的使用ComletionService.</p>
-<h3 id="executorservice">ExecutorService</h3>
-<p>执行器框架,root 接口是Executor,只有一个execute方法执行runnable实例.更常用是子接口ExecutorService,除了可以执行runnable,callable,还可以invoke一callable集合：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">List</span><span style="color:#000">&lt;</span><span style="color:#000">Future</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;&gt;</span>	<span style="color:#000">invokeAll</span><span style="color:#000">(</span><span style="color:#000">Collection</span><span style="color:#000">&lt;?</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Callable</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;&gt;</span> <span style="color:#000">tasks</span><span style="color:#000">)</span>
-<span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">T</span>	<span style="color:#000">invokeAny</span><span style="color:#000">(</span><span style="color:#000">Collection</span><span style="color:#000">&lt;?</span> <span style="color:#a90d91">extends</span> <span style="color:#000">Callable</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;&gt;</span> <span style="color:#000">tasks</span><span style="color:#000">)</span>
-
-<span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">Future</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span>	<span style="color:#000">submit</span><span style="color:#000">(</span><span style="color:#000">Callable</span><span style="color:#000">&lt;</span><span style="color:#000">T</span><span style="color:#000">&gt;</span> <span style="color:#000">task</span><span style="color:#000">)</span>
-<span style="color:#000">Future</span><span style="color:#000">&lt;?&gt;</span>	<span style="color:#000">submit</span><span style="color:#000">(</span><span style="color:#000">Runnable</span> <span style="color:#000">task</span><span style="color:#000">)</span>
-</code></pre></div><h3 id="scheduledexecutorservice">ScheduledExecutorService</h3>
-<p>The <code>ScheduledExecutorService</code> interface supplements the methods of its parent <code>ExecutorService</code> with schedule, which executes a <code>Runnable</code> or <code>Callable</code> task after a specified delay. In addition, the interface defines <code>scheduleAtFixedRate</code> and <code>scheduleWithFixedDelay</code>, which executes specified tasks repeatedly, at defined intervals.</p>
-<p><code>scheduleAtFixedRate</code>: 第一次是initialDelay 后执行,第二次是initialDelay + 1 * period 后执行,类推.</p>
-<p><code>scheduleWithFixedDelay</code>: 是前面任务执行结束后开始计算间隔计时.</p>
-<p>两个方法都不会并发执行任务,特别是第一个方法,如果任务时间比参数中等待时间period长,那么只会延期执行.对于第二个方法,本来就是要等前面结束才执行,所以没有这个问题.两个方法遇到异常,那么后面任务也不会执行,因为任务是重复的,后面也会遇到异常.周期任务可以取消,或者遇到执行器终结才结束.</p>
-<h3 id="completionservice">CompletionService</h3>
-<p>如果有多个任务,那么ExecutorService只能不停的轮询Future看是否有任务结束,并取得结果.CompletionService则是另外是自动的告诉你那些任务结果已经准备好.注意构造方法需要一个ExecutorService</p>
-<blockquote>
-<p>ExecutorService = incoming queue + worker threads <br>
-CompletionService = incoming queue + worker threads + output queue</p>
-</blockquote>
-<p><a href="http://stackoverflow.com/questions/4912228/when-should-i-use-a-completionservice-over-an-executorservice">参考</a></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">ExecutorService</span> <span style="color:#000">executor</span> <span style="color:#000">=</span> <span style="color:#000">Executors</span><span style="color:#000">.</span><span style="color:#836c28">newFixedThreadPool</span><span style="color:#000">(</span><span style="color:#000">numberOfThreadsInThePool</span><span style="color:#000">);</span>
-<span style="color:#000">CompletionService</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;</span> <span style="color:#000">completionService</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">ExecutorCompletionService</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;(</span><span style="color:#000">executor</span><span style="color:#000">);</span>
-                <span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#a90d91">final</span> <span style="color:#000">String</span> <span style="color:#000">num</span><span style="color:#000">:</span> <span style="color:#000">nums</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-                        <span style="color:#000">completionService</span><span style="color:#000">.</span><span style="color:#836c28">submit</span><span style="color:#000">(</span><span style="color:#a90d91">new</span> <span style="color:#000">Task</span><span style="color:#000">(</span><span style="color:#000">num</span><span style="color:#000">));</span> <span style="color:#177500">//Task is Callable
-</span><span style="color:#177500"></span>                <span style="color:#000">}</span>
-                <span style="color:#a90d91">try</span> <span style="color:#000">{</span>
-                        <span style="color:#a90d91">for</span> <span style="color:#000">(</span><span style="color:#a90d91">int</span> <span style="color:#000">t</span> <span style="color:#000">=</span> <span style="color:#000">0</span><span style="color:#000">,</span> <span style="color:#000">n</span> <span style="color:#000">=</span> <span style="color:#000">nums</span><span style="color:#000">.</span><span style="color:#836c28">size</span><span style="color:#000">();</span> <span style="color:#000">t</span> <span style="color:#000">&lt;</span> <span style="color:#000">n</span><span style="color:#000">;</span> <span style="color:#000">t</span><span style="color:#000">++)</span> <span style="color:#000">{</span>
-                                <span style="color:#000">Future</span><span style="color:#000">&lt;</span><span style="color:#000">String</span><span style="color:#000">&gt;</span> <span style="color:#000">f</span> <span style="color:#000">=</span> <span style="color:#000">completionService</span><span style="color:#000">.</span><span style="color:#836c28">take</span><span style="color:#000">();</span>
-                                <span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">print</span><span style="color:#000">(</span><span style="color:#000">f</span><span style="color:#000">.</span><span style="color:#836c28">get</span><span style="color:#000">());</span>
-                        <span style="color:#000">}</span>
-                <span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">InterruptedException</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-                        <span style="color:#000">Thread</span><span style="color:#000">.</span><span style="color:#836c28">currentThread</span><span style="color:#000">().</span><span style="color:#836c28">interrupt</span><span style="color:#000">();</span>
-                <span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">ExecutionException</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-                        <span style="color:#000">Thread</span><span style="color:#000">.</span><span style="color:#836c28">currentThread</span><span style="color:#000">().</span><span style="color:#836c28">interrupt</span><span style="color:#000">();</span>
-                <span style="color:#000">}</span> <span style="color:#a90d91">finally</span> <span style="color:#000">{</span>
-                        <span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">executor</span> <span style="color:#000">!=</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-                            <span style="color:#000">executor</span><span style="color:#000">.</span><span style="color:#836c28">shutdownNow</span><span style="color:#000">();</span>
-                        <span style="color:#000">}</span>
-                <span style="color:#000">}</span>
-</code></pre></div>
-    </div>
-    <footer class="post-footer">
-     
- 
-<div class="post-tags">     
-     
-    <a href="https://zhimoe.github.io/tags/java" rel="tag" title="java">#java#</a>
-    
-    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
-    
-</div>
-
-
-
-     <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/java-concurrency-1-basic/" rel="next" title="Java concurrency 1 basic">
-        <i class="fa fa-chevron-left"></i> Java concurrency 1 basic
-        </a>
-    
-    </div>
-
-    <div class="post-nav-prev post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/" rel="prev" title="Java concurrency 3 synchronized or Lock">
-        Java concurrency 3 synchronized or Lock <i class="fa fa-chevron-right"></i>
-        </a>
-    
-    </div>
-</div>
-      
-     
-     
-     
-<div id="disqus_thread"></div>
-<script>
-
-
-var disqus_config = function () {
-  this.page.url = "https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/";  
-  this.page.identifier = "https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/"; 
-};
-
-(function() { 
-  var d = document, s = d.createElement('script');
-  s.src = 'https://zhimoe.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
-
-    </footer>
-  </article>
-</section>
-
-          </div>
-        </div>
-        <div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
-<aside id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
-
-  <ul class="sidebar-nav motion-element">
-    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-      文章目录
-    </li>
-    <li class="sidebar-nav-overview" data-target="site-overview">
-      站点概览
-    </li>
-  </ul>
-
-    <section class="site-overview sidebar-panel ">
-      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-        src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhimoe" />
-    <p class="site-author-name" itemprop="name">zhimoe</p>
-    <p class="site-description motion-element" itemprop="description"> 
-        the craft of programming</p>
-</div>
-      <nav class="site-state motion-element">
-    <div class="site-state-item site-state-posts">
-      <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">61</span>
-        <span class="site-state-item-name">日志</span>
-      </a>
-    </div>
-    <div class="site-state-item site-state-categories">    
-        <a href="https://zhimoe.github.io/categories/">      
-         
-        <span class="site-state-item-count">4</span>
-        
-        <span class="site-state-item-name">分类</span>
-        
-        </a>
-    </div>
-
-    <div class="site-state-item site-state-tags">
-        <a href="https://zhimoe.github.io/tags/">
-         
-        <span class="site-state-item-count">38</span>
-        
-        <span class="site-state-item-name">标签</span>
-        </a>
-    </div>
-</nav>
-      
-      
-<div class="links-of-author motion-element">
-    
-        <span class="links-of-author-item">
-        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
-            <i class="fa fa-fw fa-github"></i>
-            GitHub
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
-            <i class="fa fa-fw fa-globe"></i>
-            ZhiHu
-        </a>
-        </span>
-    
-</div>
-
-
-      
-
-      <div class="links-of-blogroll motion-element inline">
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
-</div>
-
-
-
-
-    </section>
-    
-<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-    <div class="post-toc">
-        <div class="post-toc-content"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#定义任务的内容">定义任务的内容</a></li>
-        <li><a href="#executorservice">ExecutorService</a></li>
-        <li><a href="#scheduledexecutorservice">ScheduledExecutorService</a></li>
-        <li><a href="#completionservice">CompletionService</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-    </div>
-</section>
-
-  </div>
-</aside>
-
-      </div>
-    </main>
-   
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  <span itemprop="copyrightYear">  &copy; 
-  2017 - 2022</span>
-  <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhimoe</span>
-</div>
-<div class="powered-by">
-  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
-</div>
-<div class="theme-info">
-  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
-  </a>
-</div>
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-      <span id="scrollpercent"><span>0</span>%</span>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/utils.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/motion.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/affix.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/schemes/pisces.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/scrollspy.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/post-details.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/toc.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/bootstrap.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/search.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { fonts: ["TeX"] }
-  });
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
-</body>
-</html>
+<span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span> <span style=color:#000>Future</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span>	<span style=color:#000>submit</span><span style=color:#000>(</span><span style=color:#000>Callable</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span> <span style=color:#000>task</span><span style=color:#000>)</span>
+<span style=color:#000>Future</span><span style=color:#000>&lt;?&gt;</span>	<span style=color:#000>submit</span><span style=color:#000>(</span><span style=color:#000>Runnable</span> <span style=color:#000>task</span><span style=color:#000>)</span>
+</code></pre></div><h3 id=scheduledexecutorservice>ScheduledExecutorService</h3><p>The <code>ScheduledExecutorService</code> interface supplements the methods of its parent <code>ExecutorService</code> with schedule, which executes a <code>Runnable</code> or <code>Callable</code> task after a specified delay. In addition, the interface defines <code>scheduleAtFixedRate</code> and <code>scheduleWithFixedDelay</code>, which executes specified tasks repeatedly, at defined intervals.</p><p><code>scheduleAtFixedRate</code>: 第一次是initialDelay 后执行,第二次是initialDelay + 1 * period 后执行,类推.</p><p><code>scheduleWithFixedDelay</code>: 是前面任务执行结束后开始计算间隔计时.</p><p>两个方法都不会并发执行任务,特别是第一个方法,如果任务时间比参数中等待时间period长,那么只会延期执行.对于第二个方法,本来就是要等前面结束才执行,所以没有这个问题.两个方法遇到异常,那么后面任务也不会执行,因为任务是重复的,后面也会遇到异常.周期任务可以取消,或者遇到执行器终结才结束.</p><h3 id=completionservice>CompletionService</h3><p>如果有多个任务,那么ExecutorService只能不停的轮询Future看是否有任务结束,并取得结果.CompletionService则是另外是自动的告诉你那些任务结果已经准备好.注意构造方法需要一个ExecutorService</p><blockquote><p>ExecutorService = incoming queue + worker threads<br>CompletionService = incoming queue + worker threads + output queue</p></blockquote><p><a href=http://stackoverflow.com/questions/4912228/when-should-i-use-a-completionservice-over-an-executorservice>参考</a></p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#000>ExecutorService</span> <span style=color:#000>executor</span> <span style=color:#000>=</span> <span style=color:#000>Executors</span><span style=color:#000>.</span><span style=color:#836c28>newFixedThreadPool</span><span style=color:#000>(</span><span style=color:#000>numberOfThreadsInThePool</span><span style=color:#000>);</span>
+<span style=color:#000>CompletionService</span><span style=color:#000>&lt;</span><span style=color:#000>String</span><span style=color:#000>&gt;</span> <span style=color:#000>completionService</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>ExecutorCompletionService</span><span style=color:#000>&lt;</span><span style=color:#000>String</span><span style=color:#000>&gt;(</span><span style=color:#000>executor</span><span style=color:#000>);</span>
+                <span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#a90d91>final</span> <span style=color:#000>String</span> <span style=color:#000>num</span><span style=color:#000>:</span> <span style=color:#000>nums</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+                        <span style=color:#000>completionService</span><span style=color:#000>.</span><span style=color:#836c28>submit</span><span style=color:#000>(</span><span style=color:#a90d91>new</span> <span style=color:#000>Task</span><span style=color:#000>(</span><span style=color:#000>num</span><span style=color:#000>));</span> <span style=color:#177500>//Task is Callable
+</span><span style=color:#177500></span>                <span style=color:#000>}</span>
+                <span style=color:#a90d91>try</span> <span style=color:#000>{</span>
+                        <span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#a90d91>int</span> <span style=color:#000>t</span> <span style=color:#000>=</span> <span style=color:#000>0</span><span style=color:#000>,</span> <span style=color:#000>n</span> <span style=color:#000>=</span> <span style=color:#000>nums</span><span style=color:#000>.</span><span style=color:#836c28>size</span><span style=color:#000>();</span> <span style=color:#000>t</span> <span style=color:#000>&lt;</span> <span style=color:#000>n</span><span style=color:#000>;</span> <span style=color:#000>t</span><span style=color:#000>++)</span> <span style=color:#000>{</span>
+                                <span style=color:#000>Future</span><span style=color:#000>&lt;</span><span style=color:#000>String</span><span style=color:#000>&gt;</span> <span style=color:#000>f</span> <span style=color:#000>=</span> <span style=color:#000>completionService</span><span style=color:#000>.</span><span style=color:#836c28>take</span><span style=color:#000>();</span>
+                                <span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>print</span><span style=color:#000>(</span><span style=color:#000>f</span><span style=color:#000>.</span><span style=color:#836c28>get</span><span style=color:#000>());</span>
+                        <span style=color:#000>}</span>
+                <span style=color:#000>}</span> <span style=color:#a90d91>catch</span> <span style=color:#000>(</span><span style=color:#000>InterruptedException</span> <span style=color:#000>e</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+                        <span style=color:#000>Thread</span><span style=color:#000>.</span><span style=color:#836c28>currentThread</span><span style=color:#000>().</span><span style=color:#836c28>interrupt</span><span style=color:#000>();</span>
+                <span style=color:#000>}</span> <span style=color:#a90d91>catch</span> <span style=color:#000>(</span><span style=color:#000>ExecutionException</span> <span style=color:#000>e</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+                        <span style=color:#000>Thread</span><span style=color:#000>.</span><span style=color:#836c28>currentThread</span><span style=color:#000>().</span><span style=color:#836c28>interrupt</span><span style=color:#000>();</span>
+                <span style=color:#000>}</span> <span style=color:#a90d91>finally</span> <span style=color:#000>{</span>
+                        <span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#000>executor</span> <span style=color:#000>!=</span> <span style=color:#a90d91>null</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+                            <span style=color:#000>executor</span><span style=color:#000>.</span><span style=color:#836c28>shutdownNow</span><span style=color:#000>();</span>
+                        <span style=color:#000>}</span>
+                <span style=color:#000>}</span>
+</code></pre></div></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/java rel=tag title=java>#java#</a>
+<a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>声明：</span>Java concurrency 2 Runnable Callable FutureExecutor</p><p><span>链接：</span>https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/</p><p><span>作者：</span>zhimoe</p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick="var qr=document.getElementById('QR');if(qr.style.display==='none'){qr.style.display='block';}else{qr.style.display='none'}">
+<span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/java-concurrency-1-basic/ rel=next title="Java concurrency 1 basic"><i class="fa fa-chevron-left"></i>Java concurrency 1 basic</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/java-concurrency-3-synchronized-or-lock/ rel=prev title="Java concurrency 3 synchronized or Lock">Java concurrency 3 synchronized or Lock
+<i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/";this.page.identifier="https://zhimoe.github.io/post/java-concurrency-2-runnable-callable-future-executor/";};(function(){var d=document,s=d.createElement('script');s.src='https://zhimoe.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></footer></article></section></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target=post-toc-wrap>文章目录</li><li class=sidebar-nav-overview data-target=site-overview>站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>the craft of programming</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>61</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>38</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-desktop"></i>ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link-square"></i>书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://tech.meituan.com/ title=美团技术团队 target=_blank>美团技术团队</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画 target=_blank>艺术绘画</a></li><li class=links-of-blogroll-item><a href=https://500px.com/ title=500px target=_blank>500px</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aop>Aop</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aurulent>Aurulent</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/cheatsheet>Cheatsheet</a></li></ul></div><div class="links-of-blogroll motion-element inline"><script type=text/javascript src="//rf.revolvermaps.com/0/0/6.js?i=55k6ne41ev6&m=7&c=e63100&cr1=ffffff&f=arial&l=0&bv=90&lx=-420&ly=420&hi=20&he=7&hc=a8ddff&rs=80" async></script></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class=post-toc><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#定义任务的内容>定义任务的内容</a></li><li><a href=#executorservice>ExecutorService</a></li><li><a href=#scheduledexecutorservice>ScheduledExecutorService</a></li><li><a href=#completionservice>CompletionService</a></li></ul></li></ul></nav></div></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2010 - 2022</span>
+<span class=with-love><i class="fa fa-heart"></i></span><span class=copyright-author>zhimoe</span></div><div class=powered-info><span class=powered-by>Powered by - <a class=powered-link href=//gohugo.io target=_blank title=hugo>Hugo v0.69.2</a></span>
+<span class=separator-line>/</span>
+<span class=theme-info>Theme by - <a class=powered-link href=//github.com/elkan1788/hugo-theme-next target=_blank>NexT</a></span></div><div class=vistor-info></div><div class=license-info><span class=storage-info>Storage by
+<a href style=font-weight:700 target=_blank></a></span><span class=separator-line>/</span>
+<span class=license-num><a href target=_blank></a></span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i><span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=//cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js></script><script type=text/javascript src=https://zhimoe.github.io/js/search.js></script><script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script><script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script><script type=text/javascript>function detectIE(){var ua=window.navigator.userAgent;var msie=ua.indexOf('MSIE ');var trident=ua.indexOf('Trident/');var edge=ua.indexOf('Edge/');if(msie>0||trident>0||edge>0){return-1;}
+return 1;}
+function getCntViewHeight(){var docHeight=$('#content').height(),winHeight=$(window).height(),cntViewHeight=(docHeight>winHeight)?(docHeight-winHeight):($(document).height()-winHeight);return cntViewHeight;}
+function getScrollbarWidth(){var $div=$('<div />').addClass('scrollbar-measure').prependTo('body');var div=$div[0];var scrollbarWidth=div.offsetWidth-div.clientWidth;$div.remove();return scrollbarWidth;}
+function registerBackTop(){var THRESHOLD=50;var $top=$('.back-to-top');$(window).on('scroll',function(){$top.toggleClass('back-to-top-on',window.pageYOffset>THRESHOLD);var scrollTop=$(window).scrollTop();var cntViewHeight=getCntViewHeight();var scrollPercent=(scrollTop)/(cntViewHeight);var scrollPercentRounded=Math.round(scrollPercent*100);var scrollPercentMaxed=(scrollPercentRounded>100)?100:scrollPercentRounded;$('#scrollpercent>span').html(scrollPercentMaxed);});$top.on('click',function(){$("html,body").animate({scrollTop:0,screenLeft:0,},800);});}
+function initScrollSpy(){var tocSelector='.post-toc';var $tocElement=$(tocSelector);var activeCurrentSelector='.active-current';$tocElement.on('activate.bs.scrollspy',function(){var $currentActiveElement=$(tocSelector+' .active').last();removeCurrentActiveClass();$currentActiveElement.addClass('active-current');}).on('clear.bs.scrollspy',removeCurrentActiveClass);$('body').scrollspy({target:tocSelector});function removeCurrentActiveClass(){$(tocSelector+' '+activeCurrentSelector).removeClass(activeCurrentSelector.substring(1));}}
+function initAffix(){var headerHeight=$('.header-inner').height();var footerOffset=parseInt($('.main').css('padding-bottom'),10);var sidebarTop=headerHeight+10;$('.sidebar-inner').affix({offset:{top:sidebarTop,bottom:footerOffset}});$(document).on('affixed.bs.affix',function(){updateTOCHeight(document.body.clientHeight-100);});}
+function initTOCDimension(){var updateTOCHeightTimer;$(window).on('resize',function(){updateTOCHeightTimer&&clearTimeout(updateTOCHeightTimer);updateTOCHeightTimer=setTimeout(function(){var tocWrapperHeight=document.body.clientHeight-100;updateTOCHeight(tocWrapperHeight);},0);});updateTOCHeight(document.body.clientHeight-100);var scrollbarWidth=getScrollbarWidth();$('.post-toc').css('width','calc(100% + '+scrollbarWidth+'px)');}
+function updateTOCHeight(height){height=height||'auto';$('.post-toc').css('max-height',height);}
+$(function(){var sidebarTop=$('.header-inner').height()+10;$('#sidebar').css({'margin-top':sidebarTop}).show();var sidebarMt=parseInt($('#sidebar').css('margin-top'));var sidebarInHeight=parseInt($('.sidebar-inner').css('height'));var sideHeight=sidebarMt+sidebarInHeight;var contentHeight=$('.content-wrap').height();if(contentHeight<sideHeight){$('.content-wrap').css('min-height',sideHeight);}
+$('.site-nav-toggle').on('click',function(){var $siteNav=$('.site-nav');var $toggleLine=$('.toggle');var ON_CLASS_NAME='site-nav-on';var CLOSE_CLASS_NAME='toggle-close';var isSiteNavOn=$siteNav.hasClass(ON_CLASS_NAME);var animateAction=isSiteNavOn?'slideUp':'slideDown';var animateCallback=isSiteNavOn?'removeClass':'addClass';$siteNav.stop()[animateAction]('normal',function(){$siteNav[animateCallback](ON_CLASS_NAME);$toggleLine[animateCallback](CLOSE_CLASS_NAME);});});registerBackTop();initScrollSpy();initAffix();initTOCDimension();$('.sidebar-nav-toc').click(function(){$(this).addClass('sidebar-nav-active');$(this).next().removeClass('sidebar-nav-active');$('.'+$(this).next().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});$('.sidebar-nav-overview').click(function(){$(this).addClass('sidebar-nav-active');$(this).prev().removeClass('sidebar-nav-active');$('.'+$(this).prev().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});});</script><script src=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.js></script><script type=text/javascript>$(function(){$('.post-body').viewer();});</script><script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js';}
+else{bp.src='http://push.zhanzhang.baidu.com/push.js';}
+var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s);})();</script></body></html>

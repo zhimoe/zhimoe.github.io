@@ -1,30 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>concurrency on zhimoe</title>
-    <link>https://zhimoe.github.io/tags/concurrency/</link>
-    <description>Recent content in concurrency on zhimoe</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Fri, 01 Jan 2016 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://zhimoe.github.io/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Java concurrency 1 basic</title>
-      <link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link>
-      <pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid>
-      <description>&lt;p&gt;知识点太多了.先列举一些知识点,然后在分别做一点笔记.&lt;/p&gt;
-&lt;h4 id=&#34;模式&#34;&gt;模式&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;共享可变性&lt;/li&gt;
-&lt;li&gt;隔离可变性&lt;/li&gt;
-&lt;li&gt;纯粹不可变性:STM,&lt;/li&gt;
-&lt;/ol&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>concurrency on zhimoe</title><link>https://zhimoe.github.io/tags/concurrency/</link><description>Recent content in concurrency on zhimoe</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Fri, 01 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://zhimoe.github.io/tags/concurrency/index.xml" rel="self" type="application/rss+xml"/><item><title>Java concurrency 1 basic</title><link>https://zhimoe.github.io/post/java-concurrency-1-basic/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-1-basic/</guid><description>&lt;p>知识点太多了.先列举一些知识点,然后在分别做一点笔记.&lt;/p>
+&lt;h4 id="模式">模式&lt;/h4>
+&lt;ol>
+&lt;li>共享可变性&lt;/li>
+&lt;li>隔离可变性&lt;/li>
+&lt;li>纯粹不可变性:STM,&lt;/li>
+&lt;/ol></description></item></channel></rss>

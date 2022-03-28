@@ -1,203 +1,25 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Java注解和注解处理器 - zhimoe</title>
-    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
-    
-    <meta property="og:title" content="Java注解和注解处理器">
-    <meta property="og:site_name" content="zhimoe">
-    <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Java注解和注解处理器 - zhimoe" />
-    <meta name="description" content="编程是一门手艺"> 
-    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/index.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />    
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/syntax.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-     fancybox: true, 
-    motion: true
-  };
-</script>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left page-home  ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-meta  custom-logo ">
-
-  <div class="custom-logo-site-title">
-    <a href="https://zhimoe.github.io"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhimoe</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">the craft of programming</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-      
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/post/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/about/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
-          </a>
-        </li>
-      
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
-      </li>
-    </ul>
-    <div class="site-search">
-      <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-    </div>
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-<section id="posts" class="posts-expand">
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/java-annotation-processing/" itemprop="url">
-        Java注解和注解处理器
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2016-01-01">
-    2016-01-01
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">2235 字 ~5分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <h3 id="注解处理">注解处理</h3>
-<p>注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的.
+<!doctype html><html lang=zh dir=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>Java注解和注解处理器 - zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="Java注解和注解处理器"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="Java注解和注解处理器 - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.css rel=stylesheet><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span><span class=toggle-line></span><span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span><span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>the craft of programming</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class=menu-item><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>项目</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span><span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/java-annotation-processing/ itemprop=url>Java注解和注解处理器</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2016-01-01">2016-01-01</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>2235 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>5分钟</span></span>
+<span id=/post/java-annotation-processing/ class=leancloud_visitors data-flag-title=Java注解和注解处理器>|
+<i class="fa fa-binoculars fa-fw"></i><span class=post-meta-item-text>阅读次数：</span>
+<span class=leancloud-visitors-count></span></span></div></header><div class=post-body itemprop=articleBody><h3 id=注解处理>注解处理</h3><p>注解是jdk1.5出现的,但是自定义处理注解的功能是1.6才有的.Element等关于注解源码抽象的支持类都是1.6出现的.
 关于注解的定义就不说了,主要说说注解处理
 本文根据以下资料并进行部分修改：
-<a href="http://www.angelikalanger.com/Conferences/Slides/JavaAnnotationProcessing-JSpring-2008.pdf">JavaAnnotationProcessing</a></p>
-<h3 id="基本知识">基本知识</h3>
-<p>annotation processing integrated into javac compiler</p>
-<p>– since Java 6.0; known as <code>pluggable annotation processing</code><br>
-– compiler automatically searches for annotation processors<br>
-– unless disabled with <code>-proc:none </code>option for javac<br>
-– processors can be specified explicitly with <code>-processor </code> option for javac or <code>-cp processor.jar</code>,processor.jar include /META-INF/service/javax.annotation.processing.Processor file and your processor decalared in file;</p>
-<p>implement a processor class<br>
-– must implement <code>Processor</code> interface<br>
-– typically derived from <code>AbstractProcessor</code><br>
-– new package javax.annotation.processing</p>
-<p>同时自定义注解处理器需要指定注解选项：  specify supported annotation + options</p>
-<p>– by means of annotations:
+<a href=http://www.angelikalanger.com/Conferences/Slides/JavaAnnotationProcessing-JSpring-2008.pdf>JavaAnnotationProcessing</a></p><h3 id=基本知识>基本知识</h3><p>annotation processing integrated into javac compiler</p><p>– since Java 6.0; known as <code>pluggable annotation processing</code><br>– compiler automatically searches for annotation processors<br>– unless disabled with <code>-proc:none </code>option for javac<br>– processors can be specified explicitly with <code>-processor</code> option for javac or <code>-cp processor.jar</code>,processor.jar include /META-INF/service/javax.annotation.processing.Processor file and your processor decalared in file;</p><p>implement a processor class<br>– must implement <code>Processor</code> interface<br>– typically derived from <code>AbstractProcessor</code><br>– new package javax.annotation.processing</p><p>同时自定义注解处理器需要指定注解选项： specify supported annotation + options</p><p>– by means of annotations:
 @SupportedAnnotationTypes
 @SupportedOptions
-@SupportedSourceVersion</p>
-<p>编译器编译源码是会有很多轮(round)：</p>
-<p>1st round：编译器得到所有的注解-获取所有的注解处理器-进行match并process,如果匹配的处理器中process方法的返回值是<code>true</code>,表示该注解被 claim,不再查询其他处理器.如果是<code>false</code>,接着查询匹配处理器处理,所以注解处理器在META-INF/services/javax.annotation.processing.Processor声明顺序是有关系的&ndash; 所有的注解都被claim后,注解处理完成.</p>
-<p>如果注解处理器产生新的java文件,那么新的一轮处理开始,前面被调用的那些处理器又被调用,直到没有java文件产生.</p>
-<p>最后一轮又要调用一遍所有处理器,完成他们的各自工作.</p>
-<p>最最后,编译器编译源码和注解处理器生成的源码.</p>
-<p>还有一个很重要的类AbstractProcessor： 有一个引用processingEnv <br>
-提供了两个重要工具类：<br>
-– <code>Filer</code> for creation of new source, class, or auxiliary files<br>
-– <code>Messager </code> to report errors, warnings, and other notices</p>
-<p>此外,一个产生java文件的重要方法：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">FileObject sourceFile = processingEnv.getFiler().createSourceFile(beanClassName);
+@SupportedSourceVersion</p><p>编译器编译源码是会有很多轮(round)：</p><p>1st round：编译器得到所有的注解-获取所有的注解处理器-进行match并process,如果匹配的处理器中process方法的返回值是<code>true</code>,表示该注解被 claim,不再查询其他处理器.如果是<code>false</code>,接着查询匹配处理器处理,所以注解处理器在META-INF/services/javax.annotation.processing.Processor声明顺序是有关系的&ndash; 所有的注解都被claim后,注解处理完成.</p><p>如果注解处理器产生新的java文件,那么新的一轮处理开始,前面被调用的那些处理器又被调用,直到没有java文件产生.</p><p>最后一轮又要调用一遍所有处理器,完成他们的各自工作.</p><p>最最后,编译器编译源码和注解处理器生成的源码.</p><p>还有一个很重要的类AbstractProcessor： 有一个引用processingEnv<br>提供了两个重要工具类：<br>– <code>Filer</code> for creation of new source, class, or auxiliary files<br>– <code>Messager</code> to report errors, warnings, and other notices</p><p>此外,一个产生java文件的重要方法：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>FileObject sourceFile = processingEnv.getFiler().createSourceFile(beanClassName);
 
 process() method takes 2 arguments:
 
@@ -208,440 +30,207 @@ Set&lt;? extends TypeElement&gt; annotations
 RoundEnvironment roundenv  
 – environment for information about the current and prior round  
 – supplies elements annotated with a given annotation or all root elements in the source  
-</code></pre></div><p>一个自定义的注解处理器格式如下：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#000">@SupportedAnnotationTypes</span><span style="color:#000">({</span><span style="color:#c41a16">&#34;Property&#34;</span><span style="color:#000">})</span>
-<span style="color:#000">@SupportedSourceVersion</span><span style="color:#000">(</span><span style="color:#000">SourceVersion</span><span style="color:#000">.</span><span style="color:#836c28">RELEASE_6</span><span style="color:#000">)</span>
-<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">PropertyAnnotationProcessor</span> <span style="color:#a90d91">extends</span> <span style="color:#000">AbstractProcessor</span> <span style="color:#000">{</span>
-    <span style="color:#a90d91">public</span> <span style="color:#a90d91">boolean</span> <span style="color:#000">process</span><span style="color:#000">(</span><span style="color:#000">Set</span><span style="color:#000">&lt;?</span> <span style="color:#a90d91">extends</span> <span style="color:#000">TypeElement</span><span style="color:#000">&gt;</span> <span style="color:#000">annotations</span><span style="color:#000">,</span> <span style="color:#000">RoundEnvironment</span> <span style="color:#000">env</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-        <span style="color:#177500">// process the source file elements using the mirror API
-</span><span style="color:#177500"></span>    <span style="color:#000">}</span>
-<span style="color:#000">}</span>
+</code></pre></div><p>一个自定义的注解处理器格式如下：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#000>@SupportedAnnotationTypes</span><span style=color:#000>({</span><span style=color:#c41a16>&#34;Property&#34;</span><span style=color:#000>})</span>
+<span style=color:#000>@SupportedSourceVersion</span><span style=color:#000>(</span><span style=color:#000>SourceVersion</span><span style=color:#000>.</span><span style=color:#836c28>RELEASE_6</span><span style=color:#000>)</span>
+<span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>PropertyAnnotationProcessor</span> <span style=color:#a90d91>extends</span> <span style=color:#000>AbstractProcessor</span> <span style=color:#000>{</span>
+    <span style=color:#a90d91>public</span> <span style=color:#a90d91>boolean</span> <span style=color:#000>process</span><span style=color:#000>(</span><span style=color:#000>Set</span><span style=color:#000>&lt;?</span> <span style=color:#a90d91>extends</span> <span style=color:#000>TypeElement</span><span style=color:#000>&gt;</span> <span style=color:#000>annotations</span><span style=color:#000>,</span> <span style=color:#000>RoundEnvironment</span> <span style=color:#000>env</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+        <span style=color:#177500>// process the source file elements using the mirror API
+</span><span style=color:#177500></span>    <span style=color:#000>}</span>
+<span style=color:#000>}</span>
 
-</code></pre></div><p>jdk1.6 对注解的处理支持建立在对源码的抽象,Element是<code>javax.lang.model.*</code>中定义的,各种Element是对源码抽象数据结构,如：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">package</span> <span style="color:#000">com.example</span><span style="color:#000">;</span>	    <span style="color:#177500">// PackageElement
-</span><span style="color:#177500"></span><span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Foo</span> <span style="color:#000">{</span>		    <span style="color:#177500">// TypeElement
-</span><span style="color:#177500"></span>    <span style="color:#a90d91">private</span> <span style="color:#a90d91">int</span> <span style="color:#000">a</span><span style="color:#000">;</span>          <span style="color:#177500">// VariableElement
-</span><span style="color:#177500"></span>    <span style="color:#a90d91">private</span> <span style="color:#000">Foo</span> <span style="color:#000">other</span><span style="color:#000">;</span>      <span style="color:#177500">// VariableElement
-</span><span style="color:#177500"></span>    <span style="color:#a90d91">public</span> <span style="color:#000">Foo</span> <span style="color:#000">()</span> <span style="color:#000">{}</span>        <span style="color:#177500">// ExecuteableElement
-</span><span style="color:#177500"></span>
-<span style="color:#000">}</span>
+</code></pre></div><p>jdk1.6 对注解的处理支持建立在对源码的抽象,Element是<code>javax.lang.model.*</code>中定义的,各种Element是对源码抽象数据结构,如：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#a90d91>package</span> <span style=color:#000>com.example</span><span style=color:#000>;</span>	    <span style=color:#177500>// PackageElement
+</span><span style=color:#177500></span><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>Foo</span> <span style=color:#000>{</span>		    <span style=color:#177500>// TypeElement
+</span><span style=color:#177500></span>    <span style=color:#a90d91>private</span> <span style=color:#a90d91>int</span> <span style=color:#000>a</span><span style=color:#000>;</span>          <span style=color:#177500>// VariableElement
+</span><span style=color:#177500></span>    <span style=color:#a90d91>private</span> <span style=color:#000>Foo</span> <span style=color:#000>other</span><span style=color:#000>;</span>      <span style=color:#177500>// VariableElement
+</span><span style=color:#177500></span>    <span style=color:#a90d91>public</span> <span style=color:#000>Foo</span> <span style=color:#000>()</span> <span style=color:#000>{}</span>        <span style=color:#177500>// ExecuteableElement
+</span><span style=color:#177500></span>
+<span style=color:#000>}</span>
 
-</code></pre></div><p>TypeElement不能提供父类的信息,如果需要这些信息,需要从Element中得到TypeMirror.TypeMirror::element.asType()</p>
-<h3 id="实例">实例：</h3>
-<p>动手写注解处理器：3个类,一个定义注解Comparator.java,一个使用注解的类Name.java,一个处理注解MyProcessor.java.<br>
-我将定义一个注解@Comparator,使用在方法上,被注释的方法能够返回一个Comparator.<br>
-一个注解处理器,解析所有被注释的方法,为每一个方法产生一个Comparator类.</p>
-<p>！！！注意,这里的内容和连接中资料的已经不一样了,资料里给的process方法并不能产生比较器类.</p>
-<p>给出注解定义前看看注解怎么使用：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">// ./Name.java  
-</span><span style="color:#177500">// ./  表示当前命令行文件夹,后面所有的javc命令都以这个文件夹为准
-</span><span style="color:#177500"></span><span style="color:#a90d91">package</span> <span style="color:#000">java.interview.annotation</span><span style="color:#000">;</span>
+</code></pre></div><p>TypeElement不能提供父类的信息,如果需要这些信息,需要从Element中得到TypeMirror.TypeMirror::element.asType()</p><h3 id=实例>实例：</h3><p>动手写注解处理器：3个类,一个定义注解Comparator.java,一个使用注解的类Name.java,一个处理注解MyProcessor.java.<br>我将定义一个注解@Comparator,使用在方法上,被注释的方法能够返回一个Comparator.<br>一个注解处理器,解析所有被注释的方法,为每一个方法产生一个Comparator类.</p><p>！！！注意,这里的内容和连接中资料的已经不一样了,资料里给的process方法并不能产生比较器类.</p><p>给出注解定义前看看注解怎么使用：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#177500>// ./Name.java  
+</span><span style=color:#177500>// ./  表示当前命令行文件夹,后面所有的javc命令都以这个文件夹为准
+</span><span style=color:#177500></span><span style=color:#a90d91>package</span> <span style=color:#000>java.interview.annotation</span><span style=color:#000>;</span>
 
-<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">Name</span> <span style="color:#000">{</span>
+<span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>Name</span> <span style=color:#000>{</span>
 
-	<span style="color:#a90d91">private</span> <span style="color:#a90d91">final</span> <span style="color:#000">String</span> <span style="color:#000">first</span><span style="color:#000">;</span>
-	<span style="color:#a90d91">private</span> <span style="color:#a90d91">final</span> <span style="color:#000">String</span> <span style="color:#000">last</span><span style="color:#000">;</span>
+	<span style=color:#a90d91>private</span> <span style=color:#a90d91>final</span> <span style=color:#000>String</span> <span style=color:#000>first</span><span style=color:#000>;</span>
+	<span style=color:#a90d91>private</span> <span style=color:#a90d91>final</span> <span style=color:#000>String</span> <span style=color:#000>last</span><span style=color:#000>;</span>
 
-	<span style="color:#a90d91">public</span> <span style="color:#000">Name</span><span style="color:#000">(</span><span style="color:#000">String</span> <span style="color:#000">f</span><span style="color:#000">,</span> <span style="color:#000">String</span> <span style="color:#000">l</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-		<span style="color:#000">first</span> <span style="color:#000">=</span> <span style="color:#000">f</span><span style="color:#000">;</span>
-		<span style="color:#000">last</span> <span style="color:#000">=</span> <span style="color:#000">l</span><span style="color:#000">;</span>
-	<span style="color:#000">}</span>
+	<span style=color:#a90d91>public</span> <span style=color:#000>Name</span><span style=color:#000>(</span><span style=color:#000>String</span> <span style=color:#000>f</span><span style=color:#000>,</span> <span style=color:#000>String</span> <span style=color:#000>l</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+		<span style=color:#000>first</span> <span style=color:#000>=</span> <span style=color:#000>f</span><span style=color:#000>;</span>
+		<span style=color:#000>last</span> <span style=color:#000>=</span> <span style=color:#000>l</span><span style=color:#000>;</span>
+	<span style=color:#000>}</span>
 
-	<span style="color:#000">@Comparator</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;NameByFirstNameComparator&#34;</span><span style="color:#000">)</span>
-	<span style="color:#a90d91">public</span> <span style="color:#a90d91">int</span> <span style="color:#000">compareToByFirstName</span><span style="color:#000">(</span><span style="color:#000">Name</span> <span style="color:#000">other</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-		<span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#a90d91">this</span> <span style="color:#000">==</span> <span style="color:#000">other</span><span style="color:#000">)</span>
-			<span style="color:#a90d91">return</span> <span style="color:#000">0</span><span style="color:#000">;</span>
-		<span style="color:#a90d91">int</span> <span style="color:#000">result</span><span style="color:#000">;</span>
-		<span style="color:#a90d91">if</span> <span style="color:#000">((</span><span style="color:#000">result</span> <span style="color:#000">=</span> <span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">first</span><span style="color:#000">.</span><span style="color:#836c28">compareTo</span><span style="color:#000">(</span><span style="color:#000">other</span><span style="color:#000">.</span><span style="color:#836c28">first</span><span style="color:#000">))</span> <span style="color:#000">!=</span> <span style="color:#000">0</span><span style="color:#000">)</span>
-			<span style="color:#a90d91">return</span> <span style="color:#000">result</span><span style="color:#000">;</span>
-		<span style="color:#a90d91">return</span> <span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">last</span><span style="color:#000">.</span><span style="color:#836c28">compareTo</span><span style="color:#000">(</span><span style="color:#000">other</span><span style="color:#000">.</span><span style="color:#836c28">last</span><span style="color:#000">);</span>
-	<span style="color:#000">}</span>
-<span style="color:#000">}</span>
+	<span style=color:#000>@Comparator</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;NameByFirstNameComparator&#34;</span><span style=color:#000>)</span>
+	<span style=color:#a90d91>public</span> <span style=color:#a90d91>int</span> <span style=color:#000>compareToByFirstName</span><span style=color:#000>(</span><span style=color:#000>Name</span> <span style=color:#000>other</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+		<span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#a90d91>this</span> <span style=color:#000>==</span> <span style=color:#000>other</span><span style=color:#000>)</span>
+			<span style=color:#a90d91>return</span> <span style=color:#000>0</span><span style=color:#000>;</span>
+		<span style=color:#a90d91>int</span> <span style=color:#000>result</span><span style=color:#000>;</span>
+		<span style=color:#a90d91>if</span> <span style=color:#000>((</span><span style=color:#000>result</span> <span style=color:#000>=</span> <span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>first</span><span style=color:#000>.</span><span style=color:#836c28>compareTo</span><span style=color:#000>(</span><span style=color:#000>other</span><span style=color:#000>.</span><span style=color:#836c28>first</span><span style=color:#000>))</span> <span style=color:#000>!=</span> <span style=color:#000>0</span><span style=color:#000>)</span>
+			<span style=color:#a90d91>return</span> <span style=color:#000>result</span><span style=color:#000>;</span>
+		<span style=color:#a90d91>return</span> <span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>last</span><span style=color:#000>.</span><span style=color:#836c28>compareTo</span><span style=color:#000>(</span><span style=color:#000>other</span><span style=color:#000>.</span><span style=color:#836c28>last</span><span style=color:#000>);</span>
+	<span style=color:#000>}</span>
+<span style=color:#000>}</span>
 
-</code></pre></div><p>其中被注解注释的方法将产生一个NameByFirstNameComparator.java文件：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">// ./angus/initerview/annotation/NameByFirstNameComparator.java
-</span><span style="color:#177500"></span>
-<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">NameByFirstNameComparator</span> <span style="color:#a90d91">implements</span> <span style="color:#000">java</span><span style="color:#000">.</span><span style="color:#836c28">util</span><span style="color:#000">.</span><span style="color:#836c28">Comparator</span><span style="color:#000">&lt;</span><span style="color:#000">Name</span><span style="color:#000">&gt;</span> <span style="color:#000">{</span>
-	<span style="color:#a90d91">public</span> <span style="color:#a90d91">int</span> <span style="color:#000">compare</span><span style="color:#000">(</span><span style="color:#000">Name</span> <span style="color:#000">o1</span><span style="color:#000">,</span> <span style="color:#000">Name</span> <span style="color:#000">o2</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-		<span style="color:#a90d91">return</span> <span style="color:#000">o1</span><span style="color:#000">.</span><span style="color:#836c28">compareToByFirstName</span><span style="color:#000">(</span><span style="color:#000">o2</span><span style="color:#000">);</span>
-	<span style="color:#000">}</span>
+</code></pre></div><p>其中被注解注释的方法将产生一个NameByFirstNameComparator.java文件：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#177500>// ./angus/initerview/annotation/NameByFirstNameComparator.java
+</span><span style=color:#177500></span>
+<span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>NameByFirstNameComparator</span> <span style=color:#a90d91>implements</span> <span style=color:#000>java</span><span style=color:#000>.</span><span style=color:#836c28>util</span><span style=color:#000>.</span><span style=color:#836c28>Comparator</span><span style=color:#000>&lt;</span><span style=color:#000>Name</span><span style=color:#000>&gt;</span> <span style=color:#000>{</span>
+	<span style=color:#a90d91>public</span> <span style=color:#a90d91>int</span> <span style=color:#000>compare</span><span style=color:#000>(</span><span style=color:#000>Name</span> <span style=color:#000>o1</span><span style=color:#000>,</span> <span style=color:#000>Name</span> <span style=color:#000>o2</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+		<span style=color:#a90d91>return</span> <span style=color:#000>o1</span><span style=color:#000>.</span><span style=color:#836c28>compareToByFirstName</span><span style=color:#000>(</span><span style=color:#000>o2</span><span style=color:#000>);</span>
+	<span style=color:#000>}</span>
 
-	<span style="color:#a90d91">public</span> <span style="color:#a90d91">boolean</span> <span style="color:#000">equals</span><span style="color:#000">(</span><span style="color:#000">Object</span> <span style="color:#000">other</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-		<span style="color:#a90d91">return</span> <span style="color:#a90d91">this</span><span style="color:#000">.</span><span style="color:#836c28">getClass</span><span style="color:#000">()</span> <span style="color:#000">==</span> <span style="color:#000">other</span><span style="color:#000">.</span><span style="color:#836c28">getClass</span><span style="color:#000">();</span>
-	<span style="color:#000">}</span>
-<span style="color:#000">}</span>
+	<span style=color:#a90d91>public</span> <span style=color:#a90d91>boolean</span> <span style=color:#000>equals</span><span style=color:#000>(</span><span style=color:#000>Object</span> <span style=color:#000>other</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+		<span style=color:#a90d91>return</span> <span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>getClass</span><span style=color:#000>()</span> <span style=color:#000>==</span> <span style=color:#000>other</span><span style=color:#000>.</span><span style=color:#836c28>getClass</span><span style=color:#000>();</span>
+	<span style=color:#000>}</span>
+<span style=color:#000>}</span>
 
-</code></pre></div><p>我们定义注解：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#177500">// ./Comparator.java 
-</span><span style="color:#177500"></span><span style="color:#a90d91">package</span> <span style="color:#000">angus.interview.annotation</span><span style="color:#000">;</span>
+</code></pre></div><p>我们定义注解：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#177500>// ./Comparator.java 
+</span><span style=color:#177500></span><span style=color:#a90d91>package</span> <span style=color:#000>angus.interview.annotation</span><span style=color:#000>;</span>
 
-<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.annotation.Documented</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.annotation.ElementType</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.annotation.Retention</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.annotation.RetentionPolicy</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">java.lang.annotation.Target</span><span style="color:#000">;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>java.lang.annotation.Documented</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>java.lang.annotation.ElementType</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>java.lang.annotation.Retention</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>java.lang.annotation.RetentionPolicy</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>java.lang.annotation.Target</span><span style=color:#000>;</span>
 
-<span style="color:#000">@Documented</span>
-<span style="color:#000">@Target</span><span style="color:#000">(</span><span style="color:#000">ElementType</span><span style="color:#000">.</span><span style="color:#836c28">METHOD</span><span style="color:#000">)</span>
-<span style="color:#000">@Retention</span><span style="color:#000">(</span><span style="color:#000">RetentionPolicy</span><span style="color:#000">.</span><span style="color:#836c28">SOURCE</span><span style="color:#000">)</span>
-<span style="color:#a90d91">public</span> <span style="color:#000">@interface</span> <span style="color:#000">Comparator</span> <span style="color:#000">{</span>
-	<span style="color:#000">String</span> <span style="color:#000">value</span><span style="color:#000">();</span>
+<span style=color:#000>@Documented</span>
+<span style=color:#000>@Target</span><span style=color:#000>(</span><span style=color:#000>ElementType</span><span style=color:#000>.</span><span style=color:#836c28>METHOD</span><span style=color:#000>)</span>
+<span style=color:#000>@Retention</span><span style=color:#000>(</span><span style=color:#000>RetentionPolicy</span><span style=color:#000>.</span><span style=color:#836c28>SOURCE</span><span style=color:#000>)</span>
+<span style=color:#a90d91>public</span> <span style=color:#000>@interface</span> <span style=color:#000>Comparator</span> <span style=color:#000>{</span>
+	<span style=color:#000>String</span> <span style=color:#000>value</span><span style=color:#000>();</span>
 
-<span style="color:#000">}</span>
+<span style=color:#000>}</span>
 
-</code></pre></div><p>接下来定义我们的注解处理器,有详细注解,特别注意generate源码中的空格和分号不要弄丢了：</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a90d91">package</span> <span style="color:#000">angus.interview.annotation</span><span style="color:#000">;</span>
+</code></pre></div><p>接下来定义我们的注解处理器,有详细注解,特别注意generate源码中的空格和分号不要弄丢了：</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#a90d91>package</span> <span style=color:#000>angus.interview.annotation</span><span style=color:#000>;</span>
 
-<span style="color:#a90d91">import</span> <span style="color:#000">java.io.IOException</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">java.io.PrintWriter</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">java.util.Set</span><span style="color:#000">;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>java.io.IOException</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>java.io.PrintWriter</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>java.util.Set</span><span style=color:#000>;</span>
 
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.annotation.processing.AbstractProcessor</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.annotation.processing.RoundEnvironment</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.annotation.processing.SupportedAnnotationTypes</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.annotation.processing.SupportedSourceVersion</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.lang.model.SourceVersion</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.lang.model.element.Element</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.lang.model.element.ExecutableElement</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.lang.model.element.TypeElement</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.lang.model.type.PrimitiveType</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.lang.model.type.TypeKind</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.lang.model.type.TypeMirror</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.tools.Diagnostic</span><span style="color:#000">;</span>
-<span style="color:#a90d91">import</span> <span style="color:#000">javax.tools.FileObject</span><span style="color:#000">;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.annotation.processing.AbstractProcessor</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.annotation.processing.RoundEnvironment</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.annotation.processing.SupportedAnnotationTypes</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.annotation.processing.SupportedSourceVersion</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.lang.model.SourceVersion</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.lang.model.element.Element</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.lang.model.element.ExecutableElement</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.lang.model.element.TypeElement</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.lang.model.type.PrimitiveType</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.lang.model.type.TypeKind</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.lang.model.type.TypeMirror</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.tools.Diagnostic</span><span style=color:#000>;</span>
+<span style=color:#a90d91>import</span> <span style=color:#000>javax.tools.FileObject</span><span style=color:#000>;</span>
 
-<span style="color:#000">@SupportedAnnotationTypes</span><span style="color:#000">({</span> <span style="color:#c41a16">&#34;angus.interview.annotation.Comparator&#34;</span> <span style="color:#000">})</span>
-<span style="color:#000">@SupportedSourceVersion</span><span style="color:#000">(</span><span style="color:#000">SourceVersion</span><span style="color:#000">.</span><span style="color:#836c28">RELEASE_8</span><span style="color:#000">)</span>
-<span style="color:#a90d91">public</span> <span style="color:#a90d91">class</span> <span style="color:#3f6e75">MyProcessor</span> <span style="color:#a90d91">extends</span> <span style="color:#000">AbstractProcessor</span> <span style="color:#000">{</span>
+<span style=color:#000>@SupportedAnnotationTypes</span><span style=color:#000>({</span> <span style=color:#c41a16>&#34;angus.interview.annotation.Comparator&#34;</span> <span style=color:#000>})</span>
+<span style=color:#000>@SupportedSourceVersion</span><span style=color:#000>(</span><span style=color:#000>SourceVersion</span><span style=color:#000>.</span><span style=color:#836c28>RELEASE_8</span><span style=color:#000>)</span>
+<span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>MyProcessor</span> <span style=color:#a90d91>extends</span> <span style=color:#000>AbstractProcessor</span> <span style=color:#000>{</span>
 
-	<span style="color:#000">@Override</span>
-	<span style="color:#a90d91">public</span> <span style="color:#a90d91">boolean</span> <span style="color:#000">process</span><span style="color:#000">(</span><span style="color:#000">Set</span><span style="color:#000">&lt;?</span> <span style="color:#a90d91">extends</span> <span style="color:#000">TypeElement</span><span style="color:#000">&gt;</span> <span style="color:#000">annotations</span><span style="color:#000">,</span> <span style="color:#000">RoundEnvironment</span> <span style="color:#000">roundEnv</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+	<span style=color:#000>@Override</span>
+	<span style=color:#a90d91>public</span> <span style=color:#a90d91>boolean</span> <span style=color:#000>process</span><span style=color:#000>(</span><span style=color:#000>Set</span><span style=color:#000>&lt;?</span> <span style=color:#a90d91>extends</span> <span style=color:#000>TypeElement</span><span style=color:#000>&gt;</span> <span style=color:#000>annotations</span><span style=color:#000>,</span> <span style=color:#000>RoundEnvironment</span> <span style=color:#000>roundEnv</span><span style=color:#000>)</span> <span style=color:#000>{</span>
 		
 		
-		<span style="color:#a90d91">for</span><span style="color:#000">(</span> <span style="color:#a90d91">final</span> <span style="color:#000">Element</span> <span style="color:#000">element</span><span style="color:#000">:</span> <span style="color:#000">roundEnv</span><span style="color:#000">.</span><span style="color:#836c28">getElementsAnnotatedWith</span><span style="color:#000">(</span> <span style="color:#000">Comparator</span><span style="color:#000">.</span><span style="color:#836c28">class</span> <span style="color:#000">)</span> <span style="color:#000">)</span> <span style="color:#000">{</span>
-			<span style="color:#a90d91">if</span><span style="color:#000">(</span><span style="color:#000">element</span> <span style="color:#a90d91">instanceof</span> <span style="color:#000">ExecutableElement</span><span style="color:#000">){</span>
-				<span style="color:#000">ExecutableElement</span> <span style="color:#000">m</span> <span style="color:#000">=</span> <span style="color:#000">(</span><span style="color:#000">ExecutableElement</span><span style="color:#000">)</span> <span style="color:#000">element</span><span style="color:#000">;</span>
-				<span style="color:#000">TypeElement</span> <span style="color:#000">className</span> <span style="color:#000">=</span> <span style="color:#000">(</span><span style="color:#000">TypeElement</span><span style="color:#000">)</span><span style="color:#000">m</span><span style="color:#000">.</span><span style="color:#836c28">getEnclosingElement</span><span style="color:#000">();</span>
-				<span style="color:#000">Comparator</span> <span style="color:#000">a</span> <span style="color:#000">=</span> <span style="color:#000">m</span><span style="color:#000">.</span><span style="color:#836c28">getAnnotation</span><span style="color:#000">(</span><span style="color:#000">Comparator</span><span style="color:#000">.</span><span style="color:#836c28">class</span><span style="color:#000">);</span>
-				<span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">a</span> <span style="color:#000">!=</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span>
+		<span style=color:#a90d91>for</span><span style=color:#000>(</span> <span style=color:#a90d91>final</span> <span style=color:#000>Element</span> <span style=color:#000>element</span><span style=color:#000>:</span> <span style=color:#000>roundEnv</span><span style=color:#000>.</span><span style=color:#836c28>getElementsAnnotatedWith</span><span style=color:#000>(</span> <span style=color:#000>Comparator</span><span style=color:#000>.</span><span style=color:#836c28>class</span> <span style=color:#000>)</span> <span style=color:#000>)</span> <span style=color:#000>{</span>
+			<span style=color:#a90d91>if</span><span style=color:#000>(</span><span style=color:#000>element</span> <span style=color:#a90d91>instanceof</span> <span style=color:#000>ExecutableElement</span><span style=color:#000>){</span>
+				<span style=color:#000>ExecutableElement</span> <span style=color:#000>m</span> <span style=color:#000>=</span> <span style=color:#000>(</span><span style=color:#000>ExecutableElement</span><span style=color:#000>)</span> <span style=color:#000>element</span><span style=color:#000>;</span>
+				<span style=color:#000>TypeElement</span> <span style=color:#000>className</span> <span style=color:#000>=</span> <span style=color:#000>(</span><span style=color:#000>TypeElement</span><span style=color:#000>)</span><span style=color:#000>m</span><span style=color:#000>.</span><span style=color:#836c28>getEnclosingElement</span><span style=color:#000>();</span>
+				<span style=color:#000>Comparator</span> <span style=color:#000>a</span> <span style=color:#000>=</span> <span style=color:#000>m</span><span style=color:#000>.</span><span style=color:#836c28>getAnnotation</span><span style=color:#000>(</span><span style=color:#000>Comparator</span><span style=color:#000>.</span><span style=color:#836c28>class</span><span style=color:#000>);</span>
+				<span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#000>a</span> <span style=color:#000>!=</span> <span style=color:#a90d91>null</span><span style=color:#000>)</span> <span style=color:#000>{</span>
 
-					<span style="color:#000">TypeMirror</span> <span style="color:#000">returnType</span> <span style="color:#000">=</span> <span style="color:#000">m</span><span style="color:#000">.</span><span style="color:#836c28">getReturnType</span><span style="color:#000">();</span>
+					<span style=color:#000>TypeMirror</span> <span style=color:#000>returnType</span> <span style=color:#000>=</span> <span style=color:#000>m</span><span style=color:#000>.</span><span style=color:#836c28>getReturnType</span><span style=color:#000>();</span>
 
-					<span style="color:#a90d91">if</span> <span style="color:#000">(!(</span><span style="color:#000">returnType</span> <span style="color:#a90d91">instanceof</span> <span style="color:#000">PrimitiveType</span><span style="color:#000">)</span>
-							<span style="color:#000">||</span> <span style="color:#000">((</span><span style="color:#000">PrimitiveType</span><span style="color:#000">)</span> <span style="color:#000">returnType</span><span style="color:#000">).</span><span style="color:#836c28">getKind</span><span style="color:#000">()</span> <span style="color:#000">!=</span> <span style="color:#000">TypeKind</span><span style="color:#000">.</span><span style="color:#836c28">INT</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-						<span style="color:#000">processingEnv</span><span style="color:#000">.</span><span style="color:#836c28">getMessager</span><span style="color:#000">().</span><span style="color:#836c28">printMessage</span><span style="color:#000">(</span><span style="color:#000">Diagnostic</span><span style="color:#000">.</span><span style="color:#836c28">Kind</span><span style="color:#000">.</span><span style="color:#836c28">ERROR</span><span style="color:#000">,</span>
-								<span style="color:#c41a16">&#34;@Comparator can only be applied to methods that return int&#34;</span><span style="color:#000">);</span>
-						<span style="color:#a90d91">continue</span><span style="color:#000">;</span>
-					<span style="color:#000">}</span>
-					<span style="color:#177500">// prepare for java file generation
-</span><span style="color:#177500"></span>					<span style="color:#177500">// t m a mean ?
-</span><span style="color:#177500"></span>					<span style="color:#000">String</span> <span style="color:#000">comparatorClassName</span> <span style="color:#000">=</span> <span style="color:#000">a</span><span style="color:#000">.</span><span style="color:#836c28">value</span><span style="color:#000">();</span>
-					<span style="color:#000">String</span> <span style="color:#000">comparetoMethodName</span> <span style="color:#000">=</span> <span style="color:#000">m</span><span style="color:#000">.</span><span style="color:#836c28">getSimpleName</span><span style="color:#000">().</span><span style="color:#836c28">toString</span><span style="color:#000">();</span>
-					<span style="color:#000">String</span> <span style="color:#000">theProcessedClassesName</span> <span style="color:#000">=</span> <span style="color:#000">className</span><span style="color:#000">.</span><span style="color:#836c28">getQualifiedName</span><span style="color:#000">().</span><span style="color:#836c28">toString</span><span style="color:#000">();</span>
-					<span style="color:#a90d91">try</span> <span style="color:#000">{</span>
-						<span style="color:#000">writeComparatorFile</span><span style="color:#000">(</span><span style="color:#000">theProcessedClassesName</span><span style="color:#000">,</span> <span style="color:#000">comparatorClassName</span><span style="color:#000">,</span> <span style="color:#000">comparetoMethodName</span><span style="color:#000">);</span>
-					<span style="color:#000">}</span> <span style="color:#a90d91">catch</span> <span style="color:#000">(</span><span style="color:#000">IOException</span> <span style="color:#000">e</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-						<span style="color:#000">e</span><span style="color:#000">.</span><span style="color:#836c28">printStackTrace</span><span style="color:#000">();</span>
+					<span style=color:#a90d91>if</span> <span style=color:#000>(!(</span><span style=color:#000>returnType</span> <span style=color:#a90d91>instanceof</span> <span style=color:#000>PrimitiveType</span><span style=color:#000>)</span>
+							<span style=color:#000>||</span> <span style=color:#000>((</span><span style=color:#000>PrimitiveType</span><span style=color:#000>)</span> <span style=color:#000>returnType</span><span style=color:#000>).</span><span style=color:#836c28>getKind</span><span style=color:#000>()</span> <span style=color:#000>!=</span> <span style=color:#000>TypeKind</span><span style=color:#000>.</span><span style=color:#836c28>INT</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+						<span style=color:#000>processingEnv</span><span style=color:#000>.</span><span style=color:#836c28>getMessager</span><span style=color:#000>().</span><span style=color:#836c28>printMessage</span><span style=color:#000>(</span><span style=color:#000>Diagnostic</span><span style=color:#000>.</span><span style=color:#836c28>Kind</span><span style=color:#000>.</span><span style=color:#836c28>ERROR</span><span style=color:#000>,</span>
+								<span style=color:#c41a16>&#34;@Comparator can only be applied to methods that return int&#34;</span><span style=color:#000>);</span>
+						<span style=color:#a90d91>continue</span><span style=color:#000>;</span>
+					<span style=color:#000>}</span>
+					<span style=color:#177500>// prepare for java file generation
+</span><span style=color:#177500></span>					<span style=color:#177500>// t m a mean ?
+</span><span style=color:#177500></span>					<span style=color:#000>String</span> <span style=color:#000>comparatorClassName</span> <span style=color:#000>=</span> <span style=color:#000>a</span><span style=color:#000>.</span><span style=color:#836c28>value</span><span style=color:#000>();</span>
+					<span style=color:#000>String</span> <span style=color:#000>comparetoMethodName</span> <span style=color:#000>=</span> <span style=color:#000>m</span><span style=color:#000>.</span><span style=color:#836c28>getSimpleName</span><span style=color:#000>().</span><span style=color:#836c28>toString</span><span style=color:#000>();</span>
+					<span style=color:#000>String</span> <span style=color:#000>theProcessedClassesName</span> <span style=color:#000>=</span> <span style=color:#000>className</span><span style=color:#000>.</span><span style=color:#836c28>getQualifiedName</span><span style=color:#000>().</span><span style=color:#836c28>toString</span><span style=color:#000>();</span>
+					<span style=color:#a90d91>try</span> <span style=color:#000>{</span>
+						<span style=color:#000>writeComparatorFile</span><span style=color:#000>(</span><span style=color:#000>theProcessedClassesName</span><span style=color:#000>,</span> <span style=color:#000>comparatorClassName</span><span style=color:#000>,</span> <span style=color:#000>comparetoMethodName</span><span style=color:#000>);</span>
+					<span style=color:#000>}</span> <span style=color:#a90d91>catch</span> <span style=color:#000>(</span><span style=color:#000>IOException</span> <span style=color:#000>e</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+						<span style=color:#000>e</span><span style=color:#000>.</span><span style=color:#836c28>printStackTrace</span><span style=color:#000>();</span>
 						
-					<span style="color:#000">}</span>
+					<span style=color:#000>}</span>
 
-				<span style="color:#000">}</span>
-			<span style="color:#000">}</span>
+				<span style=color:#000>}</span>
+			<span style=color:#000>}</span>
 			
-		<span style="color:#000">}</span>
+		<span style=color:#000>}</span>
 
-		<span style="color:#a90d91">return</span> <span style="color:#a90d91">true</span><span style="color:#000">;</span><span style="color:#177500">// claimed now,no need next processor
-</span><span style="color:#177500"></span>	<span style="color:#000">}</span>
+		<span style=color:#a90d91>return</span> <span style=color:#a90d91>true</span><span style=color:#000>;</span><span style=color:#177500>// claimed now,no need next processor
+</span><span style=color:#177500></span>	<span style=color:#000>}</span>
 
-	<span style="color:#177500">/*
-</span><span style="color:#177500">	 * 
-</span><span style="color:#177500">	 * public class NameByFirstNameComparator implements java.util.Comparator&lt;Name&gt; { 
-</span><span style="color:#177500">     *   public int compare(Name o1, Nameo2) { return o1.compareToByFirstName(o2); }
-</span><span style="color:#177500">	 * 
-</span><span style="color:#177500">	 *   public boolean equals(Object other) { return this.getClass() == other.getClass(); } }
-</span><span style="color:#177500">	 */</span>
+	<span style=color:#177500>/*
+</span><span style=color:#177500>	 * 
+</span><span style=color:#177500>	 * public class NameByFirstNameComparator implements java.util.Comparator&lt;Name&gt; { 
+</span><span style=color:#177500>     *   public int compare(Name o1, Nameo2) { return o1.compareToByFirstName(o2); }
+</span><span style=color:#177500>	 * 
+</span><span style=color:#177500>	 *   public boolean equals(Object other) { return this.getClass() == other.getClass(); } }
+</span><span style=color:#177500>	 */</span>
 
-	<span style="color:#177500">//!!!careful with spaces and &#34;;&#34;!!!
-</span><span style="color:#177500"></span>	<span style="color:#a90d91">private</span> <span style="color:#a90d91">void</span> <span style="color:#000">writeComparatorFile</span><span style="color:#000">(</span><span style="color:#000">String</span> <span style="color:#000">fullClassName</span><span style="color:#000">,</span> <span style="color:#000">String</span> <span style="color:#000">comparatorClassName</span><span style="color:#000">,</span> <span style="color:#000">String</span> <span style="color:#000">compareToMethodName</span><span style="color:#000">)</span>
-			<span style="color:#a90d91">throws</span> <span style="color:#000">IOException</span> <span style="color:#000">{</span>
-		<span style="color:#a90d91">int</span> <span style="color:#000">i</span> <span style="color:#000">=</span> <span style="color:#000">fullClassName</span><span style="color:#000">.</span><span style="color:#836c28">lastIndexOf</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;.&#34;</span><span style="color:#000">);</span>
-		<span style="color:#000">String</span> <span style="color:#000">packageName</span> <span style="color:#000">=</span> <span style="color:#000">fullClassName</span><span style="color:#000">.</span><span style="color:#836c28">substring</span><span style="color:#000">(</span><span style="color:#000">0</span><span style="color:#000">,</span> <span style="color:#000">i</span><span style="color:#000">);</span>
-		<span style="color:#000">FileObject</span> <span style="color:#000">sourceFile</span> <span style="color:#000">=</span> <span style="color:#000">processingEnv</span><span style="color:#000">.</span><span style="color:#836c28">getFiler</span><span style="color:#000">().</span><span style="color:#836c28">createSourceFile</span><span style="color:#000">(</span><span style="color:#000">packageName</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34;.&#34;</span> <span style="color:#000">+</span> <span style="color:#000">comparatorClassName</span><span style="color:#000">);</span>
-		<span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">sourceFile</span> <span style="color:#000">==</span> <span style="color:#a90d91">null</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-			<span style="color:#000">System</span><span style="color:#000">.</span><span style="color:#836c28">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;create source file failed&#34;</span><span style="color:#000">);</span>
-		<span style="color:#000">}</span>
-		<span style="color:#000">PrintWriter</span> <span style="color:#000">out</span> <span style="color:#000">=</span> <span style="color:#a90d91">new</span> <span style="color:#000">PrintWriter</span><span style="color:#000">(</span><span style="color:#000">sourceFile</span><span style="color:#000">.</span><span style="color:#836c28">openWriter</span><span style="color:#000">());</span>
+	<span style=color:#177500>//!!!careful with spaces and &#34;;&#34;!!!
+</span><span style=color:#177500></span>	<span style=color:#a90d91>private</span> <span style=color:#a90d91>void</span> <span style=color:#000>writeComparatorFile</span><span style=color:#000>(</span><span style=color:#000>String</span> <span style=color:#000>fullClassName</span><span style=color:#000>,</span> <span style=color:#000>String</span> <span style=color:#000>comparatorClassName</span><span style=color:#000>,</span> <span style=color:#000>String</span> <span style=color:#000>compareToMethodName</span><span style=color:#000>)</span>
+			<span style=color:#a90d91>throws</span> <span style=color:#000>IOException</span> <span style=color:#000>{</span>
+		<span style=color:#a90d91>int</span> <span style=color:#000>i</span> <span style=color:#000>=</span> <span style=color:#000>fullClassName</span><span style=color:#000>.</span><span style=color:#836c28>lastIndexOf</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;.&#34;</span><span style=color:#000>);</span>
+		<span style=color:#000>String</span> <span style=color:#000>packageName</span> <span style=color:#000>=</span> <span style=color:#000>fullClassName</span><span style=color:#000>.</span><span style=color:#836c28>substring</span><span style=color:#000>(</span><span style=color:#000>0</span><span style=color:#000>,</span> <span style=color:#000>i</span><span style=color:#000>);</span>
+		<span style=color:#000>FileObject</span> <span style=color:#000>sourceFile</span> <span style=color:#000>=</span> <span style=color:#000>processingEnv</span><span style=color:#000>.</span><span style=color:#836c28>getFiler</span><span style=color:#000>().</span><span style=color:#836c28>createSourceFile</span><span style=color:#000>(</span><span style=color:#000>packageName</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34;.&#34;</span> <span style=color:#000>+</span> <span style=color:#000>comparatorClassName</span><span style=color:#000>);</span>
+		<span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#000>sourceFile</span> <span style=color:#000>==</span> <span style=color:#a90d91>null</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+			<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;create source file failed&#34;</span><span style=color:#000>);</span>
+		<span style=color:#000>}</span>
+		<span style=color:#000>PrintWriter</span> <span style=color:#000>out</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>PrintWriter</span><span style=color:#000>(</span><span style=color:#000>sourceFile</span><span style=color:#000>.</span><span style=color:#836c28>openWriter</span><span style=color:#000>());</span>
 
-		<span style="color:#a90d91">if</span> <span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#000">&gt;</span> <span style="color:#000">0</span><span style="color:#000">)</span> <span style="color:#000">{</span>
-			<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;package &#34;</span> <span style="color:#000">+</span> <span style="color:#000">packageName</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34;;&#34;</span><span style="color:#000">);</span>
-		<span style="color:#000">}</span>
-		<span style="color:#000">String</span> <span style="color:#000">parametrizedType</span> <span style="color:#000">=</span> <span style="color:#000">fullClassName</span><span style="color:#000">.</span><span style="color:#836c28">substring</span><span style="color:#000">(</span><span style="color:#000">i</span> <span style="color:#000">+</span> <span style="color:#000">1</span><span style="color:#000">);</span><span style="color:#177500">//!!
-</span><span style="color:#177500"></span>		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span>
-				<span style="color:#c41a16">&#34;public class &#34;</span> <span style="color:#000">+</span> <span style="color:#000">comparatorClassName</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; implements java.util.Comparator&lt;&#34;</span> <span style="color:#000">+</span> <span style="color:#000">parametrizedType</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34;&gt; {&#34;</span><span style="color:#000">);</span>
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">();</span>
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;public int compare( &#34;</span> <span style="color:#000">+</span> <span style="color:#000">parametrizedType</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; o1 , &#34;</span> <span style="color:#000">+</span> <span style="color:#000">parametrizedType</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34; o2 ){&#34;</span><span style="color:#000">);</span>
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;return o1.&#34;</span> <span style="color:#000">+</span> <span style="color:#000">compareToMethodName</span> <span style="color:#000">+</span> <span style="color:#c41a16">&#34;(o2);&#34;</span><span style="color:#000">);</span>
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;}&#34;</span><span style="color:#000">);</span>
+		<span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#000>&gt;</span> <span style=color:#000>0</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+			<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;package &#34;</span> <span style=color:#000>+</span> <span style=color:#000>packageName</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34;;&#34;</span><span style=color:#000>);</span>
+		<span style=color:#000>}</span>
+		<span style=color:#000>String</span> <span style=color:#000>parametrizedType</span> <span style=color:#000>=</span> <span style=color:#000>fullClassName</span><span style=color:#000>.</span><span style=color:#836c28>substring</span><span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#000>+</span> <span style=color:#000>1</span><span style=color:#000>);</span><span style=color:#177500>//!!
+</span><span style=color:#177500></span>		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span>
+				<span style=color:#c41a16>&#34;public class &#34;</span> <span style=color:#000>+</span> <span style=color:#000>comparatorClassName</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34; implements java.util.Comparator&lt;&#34;</span> <span style=color:#000>+</span> <span style=color:#000>parametrizedType</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34;&gt; {&#34;</span><span style=color:#000>);</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>();</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;public int compare( &#34;</span> <span style=color:#000>+</span> <span style=color:#000>parametrizedType</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34; o1 , &#34;</span> <span style=color:#000>+</span> <span style=color:#000>parametrizedType</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34; o2 ){&#34;</span><span style=color:#000>);</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;return o1.&#34;</span> <span style=color:#000>+</span> <span style=color:#000>compareToMethodName</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34;(o2);&#34;</span><span style=color:#000>);</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;}&#34;</span><span style=color:#000>);</span>
 		
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">();</span>
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">();</span>
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;public boolean equals(Object other) {&#34;</span><span style="color:#000">);</span>
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;return this.getClass() == other.getClass();&#34;</span><span style="color:#000">);</span>
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;}&#34;</span><span style="color:#000">);</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>();</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>();</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;public boolean equals(Object other) {&#34;</span><span style=color:#000>);</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;return this.getClass() == other.getClass();&#34;</span><span style=color:#000>);</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;}&#34;</span><span style=color:#000>);</span>
 
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">println</span><span style="color:#000">(</span><span style="color:#c41a16">&#34;}&#34;</span><span style="color:#000">);</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;}&#34;</span><span style=color:#000>);</span>
 
-		<span style="color:#000">out</span><span style="color:#000">.</span><span style="color:#836c28">close</span><span style="color:#000">();</span>
-	<span style="color:#000">}</span>
+		<span style=color:#000>out</span><span style=color:#000>.</span><span style=color:#836c28>close</span><span style=color:#000>();</span>
+	<span style=color:#000>}</span>
 
-<span style="color:#000">}</span>
-
-
-</code></pre></div><h3 id="测试处理器">测试处理器</h3>
-<p>两种方法,</p>
-<p>一种是使用 -cp：</p>
-<p>在项目的根目录中（pom.xml同级目录）新建META-INF文件夹,并在里面新建services文件夹,再在里面新建一个文件 javax.annotation.processing.Processor,并在该文件中注册我们的处理器,第一行写入：angus.interview.annotation.MyProcessor.
-然后用eclipse将项目export得到一个jar包,jar必须包含target文件夹（处理器class文件）和META-INF文件夹（注册处理器）.这里将jar包命名为process.jar. 复制jar包到Name.java目录中,并在该目录打开终端,输入：</p>
-<blockquote>
-<p>javac -cp process.jar Name.java</p>
-</blockquote>
-<p>将会得到Name.class文件和一个angus文件夹,最里面是NameByFirstNameComparator.java和NameByFirstNameComparator.class.
-打开NameByFirstNameComparator.java,发现内容和上面给出的一模一样.</p>
-<p>第二种方法是使用-processor参数,但是还没搞懂MyProcessor.class应该放在哪里.暂时先到这.</p>
-    </div>
-    <footer class="post-footer">
-     
- 
-<div class="post-tags">     
-     
-    <a href="https://zhimoe.github.io/tags/java" rel="tag" title="java">#java#</a>
-    
-    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
-    
-</div>
+<span style=color:#000>}</span>
 
 
-
-     <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" rel="next" title="Java动态代理">
-        <i class="fa fa-chevron-left"></i> Java动态代理
-        </a>
-    
-    </div>
-
-    <div class="post-nav-prev post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/" rel="prev" title="单例模式和序列化">
-        单例模式和序列化 <i class="fa fa-chevron-right"></i>
-        </a>
-    
-    </div>
-</div>
-      
-     
-     
-     
-<div id="disqus_thread"></div>
-<script>
-
-
-var disqus_config = function () {
-  this.page.url = "https://zhimoe.github.io/post/java-annotation-processing/";  
-  this.page.identifier = "https://zhimoe.github.io/post/java-annotation-processing/"; 
-};
-
-(function() { 
-  var d = document, s = d.createElement('script');
-  s.src = 'https://zhimoe.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
-
-    </footer>
-  </article>
-</section>
-
-          </div>
-        </div>
-        <div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
-<aside id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
-
-  <ul class="sidebar-nav motion-element">
-    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-      文章目录
-    </li>
-    <li class="sidebar-nav-overview" data-target="site-overview">
-      站点概览
-    </li>
-  </ul>
-
-    <section class="site-overview sidebar-panel ">
-      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-        src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhimoe" />
-    <p class="site-author-name" itemprop="name">zhimoe</p>
-    <p class="site-description motion-element" itemprop="description"> 
-        the craft of programming</p>
-</div>
-      <nav class="site-state motion-element">
-    <div class="site-state-item site-state-posts">
-      <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">61</span>
-        <span class="site-state-item-name">日志</span>
-      </a>
-    </div>
-    <div class="site-state-item site-state-categories">    
-        <a href="https://zhimoe.github.io/categories/">      
-         
-        <span class="site-state-item-count">4</span>
-        
-        <span class="site-state-item-name">分类</span>
-        
-        </a>
-    </div>
-
-    <div class="site-state-item site-state-tags">
-        <a href="https://zhimoe.github.io/tags/">
-         
-        <span class="site-state-item-count">38</span>
-        
-        <span class="site-state-item-name">标签</span>
-        </a>
-    </div>
-</nav>
-      
-      
-<div class="links-of-author motion-element">
-    
-        <span class="links-of-author-item">
-        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
-            <i class="fa fa-fw fa-github"></i>
-            GitHub
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
-            <i class="fa fa-fw fa-globe"></i>
-            ZhiHu
-        </a>
-        </span>
-    
-</div>
-
-
-      
-
-      <div class="links-of-blogroll motion-element inline">
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
-</div>
-
-
-
-
-    </section>
-    
-<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-    <div class="post-toc">
-        <div class="post-toc-content"><nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#注解处理">注解处理</a></li>
-        <li><a href="#基本知识">基本知识</a></li>
-        <li><a href="#实例">实例：</a></li>
-        <li><a href="#测试处理器">测试处理器</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav></div>
-    </div>
-</section>
-
-  </div>
-</aside>
-
-      </div>
-    </main>
-   
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  <span itemprop="copyrightYear">  &copy; 
-  2017 - 2022</span>
-  <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhimoe</span>
-</div>
-<div class="powered-by">
-  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
-</div>
-<div class="theme-info">
-  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
-  </a>
-</div>
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-      <span id="scrollpercent"><span>0</span>%</span>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/utils.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/motion.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/affix.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/schemes/pisces.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/scrollspy.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/post-details.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/toc.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/bootstrap.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/search.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { fonts: ["TeX"] }
-  });
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
-</body>
-</html>
+</code></pre></div><h3 id=测试处理器>测试处理器</h3><p>两种方法,</p><p>一种是使用 -cp：</p><p>在项目的根目录中（pom.xml同级目录）新建META-INF文件夹,并在里面新建services文件夹,再在里面新建一个文件 javax.annotation.processing.Processor,并在该文件中注册我们的处理器,第一行写入：angus.interview.annotation.MyProcessor.
+然后用eclipse将项目export得到一个jar包,jar必须包含target文件夹（处理器class文件）和META-INF文件夹（注册处理器）.这里将jar包命名为process.jar. 复制jar包到Name.java目录中,并在该目录打开终端,输入：</p><blockquote><p>javac -cp process.jar Name.java</p></blockquote><p>将会得到Name.class文件和一个angus文件夹,最里面是NameByFirstNameComparator.java和NameByFirstNameComparator.class.
+打开NameByFirstNameComparator.java,发现内容和上面给出的一模一样.</p><p>第二种方法是使用-processor参数,但是还没搞懂MyProcessor.class应该放在哪里.暂时先到这.</p></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/java rel=tag title=java>#java#</a>
+<a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>声明：</span>Java注解和注解处理器</p><p><span>链接：</span>https://zhimoe.github.io/post/java-annotation-processing/</p><p><span>作者：</span>zhimoe</p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick="var qr=document.getElementById('QR');if(qr.style.display==='none'){qr.style.display='block';}else{qr.style.display='none'}">
+<span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/ rel=next title=Java动态代理><i class="fa fa-chevron-left"></i>Java动态代理</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%BA%8F%E5%88%97%E5%8C%96/ rel=prev title=单例模式和序列化>单例模式和序列化
+<i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://zhimoe.github.io/post/java-annotation-processing/";this.page.identifier="https://zhimoe.github.io/post/java-annotation-processing/";};(function(){var d=document,s=d.createElement('script');s.src='https://zhimoe.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></footer></article></section></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target=post-toc-wrap>文章目录</li><li class=sidebar-nav-overview data-target=site-overview>站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>the craft of programming</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>61</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>38</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-desktop"></i>ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link-square"></i>书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://tech.meituan.com/ title=美团技术团队 target=_blank>美团技术团队</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画 target=_blank>艺术绘画</a></li><li class=links-of-blogroll-item><a href=https://500px.com/ title=500px target=_blank>500px</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aop>Aop</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aurulent>Aurulent</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/cheatsheet>Cheatsheet</a></li></ul></div><div class="links-of-blogroll motion-element inline"><script type=text/javascript src="//rf.revolvermaps.com/0/0/6.js?i=55k6ne41ev6&m=7&c=e63100&cr1=ffffff&f=arial&l=0&bv=90&lx=-420&ly=420&hi=20&he=7&hc=a8ddff&rs=80" async></script></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class=post-toc><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#注解处理>注解处理</a></li><li><a href=#基本知识>基本知识</a></li><li><a href=#实例>实例：</a></li><li><a href=#测试处理器>测试处理器</a></li></ul></li></ul></nav></div></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2010 - 2022</span>
+<span class=with-love><i class="fa fa-heart"></i></span><span class=copyright-author>zhimoe</span></div><div class=powered-info><span class=powered-by>Powered by - <a class=powered-link href=//gohugo.io target=_blank title=hugo>Hugo v0.69.2</a></span>
+<span class=separator-line>/</span>
+<span class=theme-info>Theme by - <a class=powered-link href=//github.com/elkan1788/hugo-theme-next target=_blank>NexT</a></span></div><div class=vistor-info></div><div class=license-info><span class=storage-info>Storage by
+<a href style=font-weight:700 target=_blank></a></span><span class=separator-line>/</span>
+<span class=license-num><a href target=_blank></a></span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i><span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=//cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js></script><script type=text/javascript src=https://zhimoe.github.io/js/search.js></script><script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script><script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script><script type=text/javascript>function detectIE(){var ua=window.navigator.userAgent;var msie=ua.indexOf('MSIE ');var trident=ua.indexOf('Trident/');var edge=ua.indexOf('Edge/');if(msie>0||trident>0||edge>0){return-1;}
+return 1;}
+function getCntViewHeight(){var docHeight=$('#content').height(),winHeight=$(window).height(),cntViewHeight=(docHeight>winHeight)?(docHeight-winHeight):($(document).height()-winHeight);return cntViewHeight;}
+function getScrollbarWidth(){var $div=$('<div />').addClass('scrollbar-measure').prependTo('body');var div=$div[0];var scrollbarWidth=div.offsetWidth-div.clientWidth;$div.remove();return scrollbarWidth;}
+function registerBackTop(){var THRESHOLD=50;var $top=$('.back-to-top');$(window).on('scroll',function(){$top.toggleClass('back-to-top-on',window.pageYOffset>THRESHOLD);var scrollTop=$(window).scrollTop();var cntViewHeight=getCntViewHeight();var scrollPercent=(scrollTop)/(cntViewHeight);var scrollPercentRounded=Math.round(scrollPercent*100);var scrollPercentMaxed=(scrollPercentRounded>100)?100:scrollPercentRounded;$('#scrollpercent>span').html(scrollPercentMaxed);});$top.on('click',function(){$("html,body").animate({scrollTop:0,screenLeft:0,},800);});}
+function initScrollSpy(){var tocSelector='.post-toc';var $tocElement=$(tocSelector);var activeCurrentSelector='.active-current';$tocElement.on('activate.bs.scrollspy',function(){var $currentActiveElement=$(tocSelector+' .active').last();removeCurrentActiveClass();$currentActiveElement.addClass('active-current');}).on('clear.bs.scrollspy',removeCurrentActiveClass);$('body').scrollspy({target:tocSelector});function removeCurrentActiveClass(){$(tocSelector+' '+activeCurrentSelector).removeClass(activeCurrentSelector.substring(1));}}
+function initAffix(){var headerHeight=$('.header-inner').height();var footerOffset=parseInt($('.main').css('padding-bottom'),10);var sidebarTop=headerHeight+10;$('.sidebar-inner').affix({offset:{top:sidebarTop,bottom:footerOffset}});$(document).on('affixed.bs.affix',function(){updateTOCHeight(document.body.clientHeight-100);});}
+function initTOCDimension(){var updateTOCHeightTimer;$(window).on('resize',function(){updateTOCHeightTimer&&clearTimeout(updateTOCHeightTimer);updateTOCHeightTimer=setTimeout(function(){var tocWrapperHeight=document.body.clientHeight-100;updateTOCHeight(tocWrapperHeight);},0);});updateTOCHeight(document.body.clientHeight-100);var scrollbarWidth=getScrollbarWidth();$('.post-toc').css('width','calc(100% + '+scrollbarWidth+'px)');}
+function updateTOCHeight(height){height=height||'auto';$('.post-toc').css('max-height',height);}
+$(function(){var sidebarTop=$('.header-inner').height()+10;$('#sidebar').css({'margin-top':sidebarTop}).show();var sidebarMt=parseInt($('#sidebar').css('margin-top'));var sidebarInHeight=parseInt($('.sidebar-inner').css('height'));var sideHeight=sidebarMt+sidebarInHeight;var contentHeight=$('.content-wrap').height();if(contentHeight<sideHeight){$('.content-wrap').css('min-height',sideHeight);}
+$('.site-nav-toggle').on('click',function(){var $siteNav=$('.site-nav');var $toggleLine=$('.toggle');var ON_CLASS_NAME='site-nav-on';var CLOSE_CLASS_NAME='toggle-close';var isSiteNavOn=$siteNav.hasClass(ON_CLASS_NAME);var animateAction=isSiteNavOn?'slideUp':'slideDown';var animateCallback=isSiteNavOn?'removeClass':'addClass';$siteNav.stop()[animateAction]('normal',function(){$siteNav[animateCallback](ON_CLASS_NAME);$toggleLine[animateCallback](CLOSE_CLASS_NAME);});});registerBackTop();initScrollSpy();initAffix();initTOCDimension();$('.sidebar-nav-toc').click(function(){$(this).addClass('sidebar-nav-active');$(this).next().removeClass('sidebar-nav-active');$('.'+$(this).next().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});$('.sidebar-nav-overview').click(function(){$(this).addClass('sidebar-nav-active');$(this).prev().removeClass('sidebar-nav-active');$('.'+$(this).prev().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});});</script><script src=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.js></script><script type=text/javascript>$(function(){$('.post-body').viewer();});</script><script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js';}
+else{bp.src='http://push.zhanzhang.baidu.com/push.js';}
+var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s);})();</script></body></html>

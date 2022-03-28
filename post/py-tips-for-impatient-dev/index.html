@@ -1,599 +1,134 @@
-<!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Py Tips for Impatient Dev - zhimoe</title>
-    <meta name="keywords" content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust">
-    
-    <meta property="og:title" content="Py Tips for Impatient Dev">
-    <meta property="og:site_name" content="zhimoe">
-    <meta property="og:image" content="/img/avatar.png"> 
-    <meta name="title" content="Py Tips for Impatient Dev - zhimoe" />
-    <meta name="description" content="编程是一门手艺"> 
-    <link rel="shortcut icon" href="https://zhimoe.github.io/img/favicon.ico" />
-    <link rel="apple-touch-icon" href="https://zhimoe.github.io/img/avatar.png" />
-    <link rel="apple-touch-icon-precomposed" href="https://zhimoe.github.io/img/avatar.png" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/index.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/typeface-merriweather@0.0.72/index.min.css" rel="stylesheet" type="text/css" />    
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/css/syntax.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-     fancybox: true, 
-    motion: true
-  };
-</script>
-</head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left page-home  ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-meta  custom-logo ">
-
-  <div class="custom-logo-site-title">
-    <a href="https://zhimoe.github.io"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">zhimoe</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">the craft of programming</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-    <ul id="menu" class="menu">
-      
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/post/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-code"></i> <br />编程
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-pencil"></i> <br />翻译
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-bathtub"></i> <br />项目
-          </a>
-        </li>
-      
-        <li class="menu-item ">
-          <a href="https://zhimoe.github.io/about/" rel="section">
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于
-          </a>
-        </li>
-      
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger"> <i class="menu-item-icon fa fa-search fa-fw"></i> <br /> 搜索</a>
-      </li>
-    </ul>
-    <div class="site-search">
-      <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-    </div>
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-<section id="posts" class="posts-expand">
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://zhimoe.github.io/post/py-tips-for-impatient-dev/" itemprop="url">
-        Py Tips for Impatient Dev
-        </a>
-      </h1>
-      <div class="post-meta">
-      <span class="post-time">
-<span class="post-meta-item-icon">
-    <i class="fa fa-calendar-o"></i>
-</span>
-<span class="post-meta-item-text">时间：</span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2021-01-31">
-    2021-01-31
-</time>
-</span> 
-      
-
-  <span class="post-category" >
-  &nbsp; | &nbsp;
-  <span class="post-meta-item-icon">
-    <i class="fa fa-folder-o"></i>
-  </span>
-  <span class="post-meta-item-text">分类：</span>
-  
-    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B" itemprop="url" rel="index">
-        <span itemprop="name">编程</span>
-      </a>
-      &nbsp; 
-    </span>
-  
-</span>
-
-
-       <span>
-&nbsp; | &nbsp;
-<span class="post-meta-item-icon">
-    <i class="fa fa-eye"></i>
-</span>
-<span class="post-meta-item-text">阅读：</span>
-<span class="leancloud-visitors-count">2217 字 ~5分钟</span>
-</span>
-      </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-    <h2 id="tricks">tricks</h2>
-<ol>
-<li>
-<p>python的dict中关于equal和hash计算方式会有意外的效果</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">[<span style="color:#c41a16">&#39;no&#39;</span>, <span style="color:#c41a16">&#39;yes&#39;</span>][<span style="color:#5b269a">True</span>] <span style="color:#177500"># output?</span>
-{<span style="color:#5b269a">True</span>: <span style="color:#c41a16">&#39;yes&#39;</span>, <span style="color:#1c01ce">1</span>: <span style="color:#c41a16">&#39;no&#39;</span>, <span style="color:#1c01ce">1.0</span>: <span style="color:#c41a16">&#39;maybe&#39;</span>} <span style="color:#177500"># output?</span>
-</code></pre></div><blockquote>
-<p>“布尔类型是整数类型的子类型,布尔值在几乎所有环境中的行为都类似于值 0 和 1,但在转换为字符串时,分别得到的是字符串 False 或 True.”<br>
-&ndash; The Standard Type Hierarchy</p>
-</blockquote>
-</li>
-</ol>
-<p>由于True,1, 1.0的__eq__和__hash__都一样,所以出现了神奇的结果.</p>
-<ol start="2">
-<li>
-<p><code>(1) != (1,) #第一个就是int,第二个是tuple</code></p>
-</li>
-<li>
-<p><code>...</code>和<code>pass</code>几乎等效的,这是一个ellipsis type的单例.</p>
-</li>
-</ol>
-<h2 id="staticmethod-classmethod">staticmethod classmethod</h2>
-<blockquote>
-<p>staticmethod和classmethod都可以通过Cls.m()或instance.m()方式访问,都可以被继承,都可以访问全局变量.区别是
+<!doctype html><html lang=zh dir=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>Py Tips for Impatient Dev - zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Scala,Python,Clojure,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="Py Tips for Impatient Dev"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="Py Tips for Impatient Dev - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-lato@1.1.13/index.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.css rel=stylesheet><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span><span class=toggle-line></span><span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span><span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>the craft of programming</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class=menu-item><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%A1%B9%E7%9B%AE/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>项目</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span><span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/py-tips-for-impatient-dev/ itemprop=url>Py Tips for Impatient Dev</a></h1><div class=post-meta><span class=post-time><i class="fa fa-calendar-o fa-fw"></i><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2021-01-31">2021-01-31</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<i class="fa fa-folder-o fa-fw"></i><span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<i class="fa fa-file-word-o fa-fw"></i><span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>2819 字</span></span>
+<span>|
+<i class="fa fa-eye fa-fw"></i><span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>6分钟</span></span>
+<span id=/post/py-tips-for-impatient-dev/ class=leancloud_visitors data-flag-title="Py Tips for Impatient Dev">|
+<i class="fa fa-binoculars fa-fw"></i><span class=post-meta-item-text>阅读次数：</span>
+<span class=leancloud-visitors-count></span></span></div></header><div class=post-body itemprop=articleBody><h2 id=tricks>tricks</h2><h3 id=python的dict中关于equal和hash计算方式会有意外的效果>python的dict中关于equal和hash计算方式会有意外的效果</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>[<span style=color:#c41a16>&#39;no&#39;</span>, <span style=color:#c41a16>&#39;yes&#39;</span>][<span style=color:#5b269a>True</span>] <span style=color:#177500># output?</span>
+{<span style=color:#5b269a>True</span>: <span style=color:#c41a16>&#39;yes&#39;</span>, <span style=color:#1c01ce>1</span>: <span style=color:#c41a16>&#39;no&#39;</span>, <span style=color:#1c01ce>1.0</span>: <span style=color:#c41a16>&#39;maybe&#39;</span>} <span style=color:#177500># output?</span>
+</code></pre></div><blockquote><p>“布尔类型是整数类型的子类型,布尔值在几乎所有环境中的行为都类似于值 0 和 1,但在转换为字符串时,分别得到的是字符串 False 或 True.”<br>&ndash; The Standard Type Hierarchy</p></blockquote><p>由于True,1, 1.0的__eq__和__hash__都一样,所以出现了神奇的结果.</p><h3 id=1--1-第一个是int第二个是tuple><code>(1) != (1,)</code> 第一个是int,第二个是tuple</h3><h3 id=避免可变的默认参数-例如>避免可变的默认参数, 例如:</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#a90d91>def</span> <span style=color:#000>fun</span>(<span style=color:#000>count</span><span style=color:#000>=</span>[]):
+  <span style=color:#000>count</span><span style=color:#000>.</span><span style=color:#000>append</span>(<span style=color:#1c01ce>2</span>) <span style=color:#177500>#这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险!</span>
+  <span style=color:#a90d91>return</span> <span style=color:#000>count</span>
+<span style=color:#000>fun</span>()   <span style=color:#177500>#[2]</span>
+<span style=color:#000>fun</span>()   <span style=color:#177500>#[2,2]</span>
+</code></pre></div><h2 id=staticmethod-classmethod>staticmethod classmethod</h2><blockquote><p>staticmethod和classmethod都可以通过Cls.m()或instance.m()方式访问,都可以被继承,都可以访问全局变量.区别是
 classmethod访问的class变量信息会自动在Derive子类中改变,而staticmethod因为缺少第一个cls参数,所以访问的全局变量始终是父类的变量.
 staticmethod可以理解为Java的StringUtils类,只是和Cls放在一起方便代码阅读和组织.
-classmethod则是可以通过cls参数访问到当前类信息的.</p>
-</blockquote>
-<h2 id="str和bytes">str和bytes</h2>
-<ol>
-<li>py3.6开始,推荐使用f-string,不要使用<code> %s</code>或者 <code>&quot;&quot;.format()</code>.如果接收用户输入,使用Template做安全校验</li>
-<li>多行string
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000">my_very_big_string</span> <span style="color:#000">=</span> (
-    <span style="color:#c41a16">&#34;For a long time I used to go to bed early. Sometimes, &#34;</span>
-    <span style="color:#c41a16">&#34;when I had put out my candle, my eyes would close so quickly &#34;</span>
-    <span style="color:#c41a16">&#34;that I had not even time to say “I’m going to sleep.”&#34;</span>
+classmethod则是可以通过cls参数访问到当前类信息的.</p></blockquote><h2 id=容器方法>容器方法</h2><h3 id=合并字典>合并字典：</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#000>d1</span><span style=color:#000>.</span><span style=color:#000>update</span>(<span style=color:#000>d2</span>) <span style=color:#177500># 遍历d2,更新到d1</span>
+<span style=color:#000>d</span> <span style=color:#000>=</span> <span style=color:#a90d91>dict</span>(<span style=color:#000>**</span><span style=color:#000>profile</span>, <span style=color:#000>**</span><span style=color:#000>ext_info</span>) <span style=color:#177500>#解构重新创建dict,右边的优先级高</span>
+<span style=color:#000>d</span> <span style=color:#000>=</span> <span style=color:#a90d91>dict</span>(<span style=color:#000>profile</span><span style=color:#000>.</span><span style=color:#000>items</span>() <span style=color:#000>|</span> <span style=color:#000>ext_info</span><span style=color:#000>.</span><span style=color:#000>items</span>()) <span style=color:#177500>#同理</span>
+<span style=color:#000>d</span> <span style=color:#000>=</span> <span style=color:#000>d1</span> <span style=color:#000>|</span> <span style=color:#000>d2</span> <span style=color:#177500># 新语法</span>
+{<span style=color:#000>k</span>: <span style=color:#000>v</span> <span style=color:#a90d91>for</span> <span style=color:#000>d</span> <span style=color:#000>in</span> [<span style=color:#000>profile</span>, <span style=color:#000>ext_info</span>] <span style=color:#a90d91>for</span> <span style=color:#000>k</span>, <span style=color:#000>v</span> <span style=color:#000>in</span> <span style=color:#000>d</span><span style=color:#000>.</span><span style=color:#000>items</span>()} <span style=color:#177500># 推导式</span>
+</code></pre></div><h3 id=py36开始-dict默认插入有序无需使用orderdict>py3.6开始 dict默认插入有序,无需使用OrderDict</h3><h3 id=dict-get-and-pop>dict get and pop</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#000>d</span><span style=color:#000>.</span><span style=color:#000>get</span>(<span style=color:#000>k</span>,<span style=color:#000>default</span>) 
+<span style=color:#000>d</span><span style=color:#000>.</span><span style=color:#000>setdefault</span>(<span style=color:#000>k</span>,<span style=color:#000>default</span>) 
+<span style=color:#000>d</span><span style=color:#000>.</span><span style=color:#000>pop</span>(<span style=color:#000>k</span>) <span style=color:#177500>#删除不存在的键时,使用del d[k]有异常抛出,pop则不会</span>
+</code></pre></div><h3 id=自定义dict>自定义dict</h3><blockquote><p>自定义自己的dict不能继承dict,而是collections.abc.MutableMapping, 因为自带的list和dict有一些特殊行为无法覆盖</p></blockquote><h3 id=sort-dict-by-key>sort dict by key:</h3><p><code>print(sorted(dic, key=dic.get)) #output: key in asc order</code></p><h3 id=判断key是否存在-if-k-in-d>判断key是否存在: <code>if k in d:</code></h3><h3 id=带索引遍历-for-idx-item-in-enumeratex>带索引遍历: <code>for idx, item in enumerate(x):</code></h3><h3 id=浅复制>浅复制</h3><p>list(l)等方式构建的list dict set属于浅复制,如果容器的元素还是容器,那么元素属于引用.
+深度复制需要使用copy module</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#a90d91>import</span> <span style=color:#000>copy</span>
+<span style=color:#000>xs</span> <span style=color:#000>=</span> [[<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>, <span style=color:#1c01ce>3</span>], [<span style=color:#1c01ce>4</span>, <span style=color:#1c01ce>5</span>, <span style=color:#1c01ce>6</span>], [<span style=color:#1c01ce>7</span>, <span style=color:#1c01ce>8</span>, <span style=color:#1c01ce>9</span>]]
+<span style=color:#000>zs</span> <span style=color:#000>=</span> <span style=color:#000>copy</span><span style=color:#000>.</span><span style=color:#000>deepcopy</span>(<span style=color:#000>xs</span>)
+<span style=color:#177500># 对象同样可以使用copy,还有__copy__等魔法方法可以探索</span>
+</code></pre></div><h3 id=使用namedtuple可以让代码更容易阅读当然现在可以是所有dataclass特性更丰富>使用namedtuple可以让代码更容易阅读,当然现在可以是所有dataclass,特性更丰富</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#a90d91>from</span> <span style=color:#000>collections</span> <span style=color:#a90d91>import</span> <span style=color:#000>namedtuple</span>
+<span style=color:#a90d91>class</span> <span style=color:#3f6e75>Car</span>:
+  <span style=color:#c41a16>&#34;&#34;&#34;you do not modify the name and date attributes &#34;&#34;&#34;</span>
+
+  <span style=color:#a90d91>def</span> <span style=color:#000>__init__</span>(<span style=color:#5b269a>self</span>, <span style=color:#000>name</span>, <span style=color:#000>date</span>):
+      <span style=color:#5b269a>self</span><span style=color:#000>.</span><span style=color:#000>_name</span> <span style=color:#000>=</span> <span style=color:#000>name</span>
+      <span style=color:#5b269a>self</span><span style=color:#000>.</span><span style=color:#000>_date</span> <span style=color:#000>=</span> <span style=color:#000>date</span>
+
+
+<span style=color:#177500># use namedtuple</span>
+<span style=color:#000>Car</span> <span style=color:#000>=</span> <span style=color:#000>namedtuple</span>(<span style=color:#c41a16>&#39;Car&#39;</span>, <span style=color:#c41a16>&#39;name date&#39;</span>)  <span style=color:#177500># 注意,这里多个属性可以一次性传入,使用空格分割</span>
+<span style=color:#177500># 然后你可以将Car作为data class使用</span>
+
+<span style=color:#177500>#还有一个type hint的版本</span>
+<span style=color:#a90d91>from</span> <span style=color:#000>typing</span> <span style=color:#a90d91>import</span> <span style=color:#000>NamedTuple</span>
+</code></pre></div><h3 id=list的元素可以不同更为紧凑的单一类型是array类型>list的元素可以不同,更为紧凑的单一类型是array类型</h3><h3 id=counterstringmost_common3><code>Counter(string).most_common(3)</code></h3><h3 id=deque>deque</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#a90d91>from</span> <span style=color:#000>collections</span> <span style=color:#a90d91>import</span> <span style=color:#000>deque</span>
+<span style=color:#000>names</span> <span style=color:#000>=</span> <span style=color:#000>deque</span>([<span style=color:#c41a16>&#39;raymond&#39;</span>, <span style=color:#c41a16>&#39;rachel&#39;</span>, <span style=color:#c41a16>&#39;matthew&#39;</span>, <span style=color:#c41a16>&#39;roger&#39;</span>,
+             <span style=color:#c41a16>&#39;betty&#39;</span>, <span style=color:#c41a16>&#39;melissa&#39;</span>, <span style=color:#c41a16>&#39;judith&#39;</span>, <span style=color:#c41a16>&#39;charlie&#39;</span>])
+<span style=color:#000>names</span><span style=color:#000>.</span><span style=color:#000>popleft</span>()
+<span style=color:#000>names</span><span style=color:#000>.</span><span style=color:#000>appendleft</span>(<span style=color:#c41a16>&#39;mark&#39;</span>)
+</code></pre></div><h3 id=一些不常用的容器countedobjectchainmapmappingproxytypefrozensetdefaultdict>一些不常用的容器：CountedObject,ChainMap,MappingProxyType,frozenset,defaultdict</h3><h3 id=在遍历中修改list>在遍历中修改list</h3><p>使用for i in range(len(a))或者for i, v in enumerate(a)都是危险的.</p><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#177500># 方法1 将list拷贝一下,遍历新数组的过程中,修改原list:</span>
+<span style=color:#000>num_list</span> <span style=color:#000>=</span> [<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>, <span style=color:#1c01ce>3</span>, <span style=color:#1c01ce>4</span>, <span style=color:#1c01ce>5</span>]
+<span style=color:#a90d91>print</span>(<span style=color:#000>num_list</span>)
+<span style=color:#a90d91>for</span> <span style=color:#000>item</span> <span style=color:#000>in</span> <span style=color:#000>num_list</span>[:]:  <span style=color:#177500># 这里list[:]是对原数组的拷贝,trick!!!</span>
+<span style=color:#a90d91>if</span> <span style=color:#000>item</span> <span style=color:#000>==</span> <span style=color:#1c01ce>2</span>: <span style=color:#000>num_list</span><span style=color:#000>.</span><span style=color:#000>remove</span>(<span style=color:#000>item</span>)
+<span style=color:#a90d91>else</span>:
+<span style=color:#a90d91>print</span>(<span style=color:#000>item</span>)
+<span style=color:#a90d91>print</span>(<span style=color:#000>num_list</span>)
+
+<span style=color:#177500># 方法2 如果数组很大,那应该使用倒序遍历:</span>
+<span style=color:#a90d91>for</span> <span style=color:#000>i</span> <span style=color:#000>in</span> <span style=color:#a90d91>range</span>(<span style=color:#a90d91>len</span>(<span style=color:#000>num_list</span>)<span style=color:#000>-</span><span style=color:#1c01ce>1</span>, <span style=color:#000>-</span><span style=color:#1c01ce>1</span>, <span style=color:#000>-</span><span style=color:#1c01ce>1</span>):
+  <span style=color:#a90d91>if</span> <span style=color:#000>num_list</span>[<span style=color:#000>i</span>] <span style=color:#000>==</span> <span style=color:#1c01ce>2</span>:
+      <span style=color:#000>num_list</span><span style=color:#000>.</span><span style=color:#000>pop</span>(<span style=color:#000>i</span>)
+  <span style=color:#a90d91>else</span>:
+      <span style=color:#a90d91>print</span>(<span style=color:#000>num_list</span>[<span style=color:#000>i</span>])
+      
+<span style=color:#177500># 方法3 还是使用for推导式</span>
+[<span style=color:#1c01ce>4</span> <span style=color:#a90d91>if</span> <span style=color:#000>x</span><span style=color:#000>==</span><span style=color:#1c01ce>3</span> <span style=color:#a90d91>else</span> <span style=color:#000>x</span> <span style=color:#a90d91>for</span> <span style=color:#000>x</span> <span style=color:#000>in</span> <span style=color:#000>num_list</span>]
+</code></pre></div><h3 id=打印容器可以使用pprintpprint>打印容器可以使用pprint.pprint</h3><h2 id=str和bytes>str和bytes</h2><h3 id=py36开始推荐使用f-string不要使用-s或者-format如果接收用户输入使用template做安全校验>py3.6开始,推荐使用f-string,不要使用<code> %s</code>或者 <code>"".format()</code>.如果接收用户输入,使用Template做安全校验</h3><h3 id=多行string>多行string</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#000>my_very_big_string</span> <span style=color:#000>=</span> (
+  <span style=color:#c41a16>&#34;For a long time I used to go to bed early. Sometimes, &#34;</span>
+  <span style=color:#c41a16>&#34;when I had put out my candle, my eyes would close so quickly &#34;</span>
+  <span style=color:#c41a16>&#34;that I had not even time to say “I’m going to sleep.”&#34;</span>
 )
-</code></pre></div></li>
-<li>bytes 是不可变的数组,每个元素必须在0～255之间.
+</code></pre></div><h3 id=bytes-和bytesarray>bytes 和bytesarray</h3><p>bytes是不可变的数组,每个元素必须在0～255之间.
 bytearray是可变的,可以修改,增加,删除元素.
-转换 <code>bytes(ba)</code></li>
-<li>小整数池是[-5,256], string也有 string intern.</li>
-</ol>
-<h2 id="pythonic的代码">pythonic的代码</h2>
-<ol>
-<li>使用for推导式,不要for..in遍历, 也少用map,filter</li>
-<li>多使用destructing,这点在Java/Go都不支持,可以在方法内部省很多代码
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000">long_list</span> <span style="color:#000">=</span> [<span style="color:#000">x</span> <span style="color:#a90d91">for</span> <span style="color:#000">x</span> <span style="color:#000">in</span> <span style="color:#a90d91">range</span>(<span style="color:#1c01ce">100</span>)]
-<span style="color:#000">a</span>, <span style="color:#000">b</span>, <span style="color:#000">*</span><span style="color:#000">c</span>, <span style="color:#000">d</span>, <span style="color:#000">e</span>, <span style="color:#000">f</span> <span style="color:#000">=</span> <span style="color:#000">long_list</span> <span style="color:#177500">#e==98 f=99</span>
-</code></pre></div></li>
-<li>with语句可以同时打开多个文件,不要嵌套with,更多功能查看<code>contextlib</code></li>
-<li>使用<code>if x is None</code>,而不是 <code>if x == None </code></li>
-<li>避免可变的默认参数, 例如:
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">def</span> <span style="color:#000">fun</span>(<span style="color:#000">count</span><span style="color:#000">=</span>[]):
-    <span style="color:#000">count</span><span style="color:#000">.</span><span style="color:#000">append</span>(<span style="color:#1c01ce">2</span>) <span style="color:#177500">#这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险!</span>
-    <span style="color:#a90d91">return</span> <span style="color:#000">count</span>
-<span style="color:#000">fun</span>()   <span style="color:#177500">#[2]</span>
-<span style="color:#000">fun</span>()   <span style="color:#177500">#[2,2]</span>
-</code></pre></div></li>
-<li>新手多使用格式化,多看pycharm的提示,多在逻辑复杂处使用空行</li>
-<li>异常处理: 清楚except和assert场合,logging.error(&lsquo;xxxxxxx&rsquo;, exc_info=True).
-自定义异常必须重写__init__() 和 __str__()</li>
-<li>使用for i in range(len(a)):或者for i, v in enumerate(a):都是危险的.
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#177500"># 方法1</span>
-<span style="color:#177500"># 将list拷贝一下,遍历新数组的过程中,修改原list:</span>
-<span style="color:#000">num_list</span> <span style="color:#000">=</span> [<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">3</span>, <span style="color:#1c01ce">4</span>, <span style="color:#1c01ce">5</span>] 
-<span style="color:#a90d91">print</span>(<span style="color:#000">num_list</span>) 
-<span style="color:#a90d91">for</span> <span style="color:#000">item</span> <span style="color:#000">in</span> <span style="color:#000">num_list</span>[:]:  <span style="color:#177500"># 这里list[:]是对原数组的拷贝,trick!!!</span>
-    <span style="color:#a90d91">if</span> <span style="color:#000">item</span> <span style="color:#000">==</span> <span style="color:#1c01ce">2</span>: <span style="color:#000">num_list</span><span style="color:#000">.</span><span style="color:#000">remove</span>(<span style="color:#000">item</span>) 
-    <span style="color:#a90d91">else</span>: 
-        <span style="color:#a90d91">print</span>(<span style="color:#000">item</span>) 
-<span style="color:#a90d91">print</span>(<span style="color:#000">num_list</span>)
-   
-<span style="color:#177500"># 方法2</span>
-<span style="color:#177500"># 如果数组很大,那应该使用倒序遍历:</span>
-<span style="color:#a90d91">for</span> <span style="color:#000">i</span> <span style="color:#000">in</span> <span style="color:#a90d91">range</span>(<span style="color:#a90d91">len</span>(<span style="color:#000">num_list</span>)<span style="color:#000">-</span><span style="color:#1c01ce">1</span>, <span style="color:#000">-</span><span style="color:#1c01ce">1</span>, <span style="color:#000">-</span><span style="color:#1c01ce">1</span>):
-    <span style="color:#a90d91">if</span> <span style="color:#000">num_list</span>[<span style="color:#000">i</span>] <span style="color:#000">==</span> <span style="color:#1c01ce">2</span>:
-        <span style="color:#000">num_list</span><span style="color:#000">.</span><span style="color:#000">pop</span>(<span style="color:#000">i</span>)
-    <span style="color:#a90d91">else</span>:
-        <span style="color:#a90d91">print</span>(<span style="color:#000">num_list</span>[<span style="color:#000">i</span>])
-           
-<span style="color:#177500"># 方法3 还是使用for推导式</span>
-[<span style="color:#1c01ce">4</span> <span style="color:#a90d91">if</span> <span style="color:#000">x</span><span style="color:#000">==</span><span style="color:#1c01ce">3</span> <span style="color:#a90d91">else</span> <span style="color:#000">x</span> <span style="color:#a90d91">for</span> <span style="color:#000">x</span> <span style="color:#000">in</span> <span style="color:#000">num_list</span>]
-</code></pre></div></li>
-<li>打印容器可以使用pprint.pprint</li>
-<li><code>x if x &lt; 10 else y</code></li>
-<li>use <code>reversed(lis)</code> over <code>lis[::-1]</code></li>
-<li>use pathlib over os.pathlib. pathlib的方法不全.</li>
-<li>os module is for system, sys this module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter.</li>
-<li>@property make a method to class&rsquo;s property. can not use () when access the method cuz it is prop.</li>
-<li>use assert protect your code. 不要使用assert检查数据, 断言可能被全局禁用,导致数据检查（或者更恐怖的权限检查）被跳过</li>
-</ol>
-<h2 id="容器">容器</h2>
-<ol>
-<li>dict.get()可以指定missing-key-value</li>
-<li>判断key是否存在: <code>if k in d:</code></li>
-<li>带索引遍历: <code>for idx, item in enumerate(x):</code></li>
-<li>list(l)等方式构建的list dict set属于浅复制,如果容器的元素还是容器,那么元素属于引用.
-深度复制需要使用copy module
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">import</span> <span style="color:#000">copy</span>
-<span style="color:#000">xs</span> <span style="color:#000">=</span> [[<span style="color:#1c01ce">1</span>, <span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">3</span>], [<span style="color:#1c01ce">4</span>, <span style="color:#1c01ce">5</span>, <span style="color:#1c01ce">6</span>], [<span style="color:#1c01ce">7</span>, <span style="color:#1c01ce">8</span>, <span style="color:#1c01ce">9</span>]]
-<span style="color:#000">zs</span> <span style="color:#000">=</span> <span style="color:#000">copy</span><span style="color:#000">.</span><span style="color:#000">deepcopy</span>(<span style="color:#000">xs</span>)
-<span style="color:#177500"># 对象同样可以使用copy,还有__copy__等魔法方法可以探索</span>
-</code></pre></div></li>
-<li>使用namedtuple可以让代码更容易阅读
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">from</span> <span style="color:#000">collections</span> <span style="color:#a90d91">import</span> <span style="color:#000">namedtuple</span>
-<span style="color:#a90d91">class</span> <span style="color:#3f6e75">Car</span>:
-    <span style="color:#c41a16">&#34;&#34;&#34;you do not modify the name and date attributes &#34;&#34;&#34;</span>
-   
-    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>, <span style="color:#000">name</span>, <span style="color:#000">date</span>):
-        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_name</span> <span style="color:#000">=</span> <span style="color:#000">name</span>
-        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_date</span> <span style="color:#000">=</span> <span style="color:#000">date</span>
-   
-   
-<span style="color:#177500"># use namedtuple</span>
-<span style="color:#000">Car</span> <span style="color:#000">=</span> <span style="color:#000">namedtuple</span>(<span style="color:#c41a16">&#39;Car&#39;</span>, <span style="color:#c41a16">&#39;name date&#39;</span>)  <span style="color:#177500"># 注意,这里多个属性可以一次性传入,使用空格分割</span>
-<span style="color:#177500"># 然后你可以将Car作为data class使用</span>
-   
-<span style="color:#177500">#还有一个type hint的版本</span>
-<span style="color:#a90d91">from</span> <span style="color:#000">typing</span> <span style="color:#a90d91">import</span> <span style="color:#000">NamedTuple</span>
-</code></pre></div></li>
-<li>不常用的一些容器
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">class</span> <span style="color:#3f6e75">CountedObject</span>:
-    <span style="color:#000">num_instances</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>
-   
-    <span style="color:#a90d91">def</span> <span style="color:#000">init</span>(<span style="color:#5b269a">self</span>):
-        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">__class__</span><span style="color:#000">.</span><span style="color:#000">num_instances</span> <span style="color:#000">+=</span> <span style="color:#1c01ce">1</span>
-   
-<span style="color:#a90d91">from</span> <span style="color:#000">types</span> <span style="color:#a90d91">import</span> <span style="color:#000">MappingProxyType</span> <span style="color:#177500">#对外提供视图</span>
-<span style="color:#a90d91">from</span> <span style="color:#000">collections</span> <span style="color:#a90d91">import</span> <span style="color:#000">defaultdict</span>
-<span style="color:#a90d91">from</span> <span style="color:#000">collections</span> <span style="color:#a90d91">import</span> <span style="color:#000">ChainMap</span>
-   
-<span style="color:#a90d91">frozenset</span>
-</code></pre></div></li>
-<li>list的元素可以不同,更为紧凑的单一类型是array 类型</li>
-<li><code>Counter(string).most_common(3)</code></li>
-<li>sort map by key: print(sorted(dic, key=dic.get)), output: key in asc order</li>
-<li>deque
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">from</span> <span style="color:#000">collections</span> <span style="color:#a90d91">import</span> <span style="color:#000">deque</span>
-<span style="color:#000">names</span> <span style="color:#000">=</span> <span style="color:#000">deque</span>([<span style="color:#c41a16">&#39;raymond&#39;</span>, <span style="color:#c41a16">&#39;rachel&#39;</span>, <span style="color:#c41a16">&#39;matthew&#39;</span>, <span style="color:#c41a16">&#39;roger&#39;</span>,
-               <span style="color:#c41a16">&#39;betty&#39;</span>, <span style="color:#c41a16">&#39;melissa&#39;</span>, <span style="color:#c41a16">&#39;judith&#39;</span>, <span style="color:#c41a16">&#39;charlie&#39;</span>])
-<span style="color:#000">names</span><span style="color:#000">.</span><span style="color:#000">popleft</span>()
-<span style="color:#000">names</span><span style="color:#000">.</span><span style="color:#000">appendleft</span>(<span style="color:#c41a16">&#39;mark&#39;</span>)
-</code></pre></div></li>
-<li>合并dict
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000">system</span> <span style="color:#000">=</span> <span style="color:#a90d91">dict</span>(<span style="color:#c41a16">&#34;path&#34;</span>, <span style="color:#c41a16">&#34;c:/&#34;</span>, <span style="color:#c41a16">&#34;env&#34;</span>, <span style="color:#c41a16">&#34;prd&#34;</span>)
-<span style="color:#000">user</span> <span style="color:#000">=</span> <span style="color:#a90d91">dict</span>(<span style="color:#c41a16">&#34;path&#34;</span>, <span style="color:#c41a16">&#34;d:/&#34;</span>, <span style="color:#c41a16">&#34;env&#34;</span>, <span style="color:#c41a16">&#34;dev&#34;</span>)
-<span style="color:#000">system</span><span style="color:#000">.</span><span style="color:#000">update</span>(<span style="color:#000">user</span>) <span style="color:#177500"># 遍历user,更新到system</span>
-<span style="color:#000">final</span> <span style="color:#000">=</span> {<span style="color:#000">**</span><span style="color:#000">system</span>, <span style="color:#000">**</span><span style="color:#000">user</span>}  <span style="color:#177500"># 右边的优先级高</span>
-    
-</code></pre></div></li>
-</ol>
-<h2 id="dunder方法函数oop">dunder方法,函数,oop</h2>
-<ol>
-<li>@functools.wraps(func)</li>
-<li><code>__var</code> 在class环境中会被改写</li>
-<li>使用abc模块可以避免抽象类只有在未实现方法被调用时才抛出NotImplementedError</li>
-<li>理解python的dunder方法,可以写出超级简洁的方法：</li>
-</ol>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a90d91">import</span> <span style="color:#000">collections</span>
+转换 <code>bytes(ba)</code></p><h3 id=小整数池是-5256-string也有-string-intern>小整数池是[-5,256], string也有 string intern</h3><h3 id=有时使用strpartition方法拆分str或者strtranslate批量replace子串更方便>有时使用str.partition方法拆分str或者str.translate批量replace子串更方便</h3><h3 id=多行文本去除缩进可以使用-textwrapdedenyour-text>多行文本去除缩进可以使用 <code>textwrap.deden("""\your text""")</code></h3><h3 id=str重复n次prints--n>str重复n次<code>print(s * n);</code></h3><h2 id=重要标准库>重要标准库</h2><h3 id=bisect二分法搜索>bisect二分法搜索</h3><h3 id=use-pathlib-over-ospathlib-后者方法不全>use <code>pathlib</code> over <code>os.pathlib</code>. 后者方法不全.</h3><h3 id=os-vs-sys>os vs sys</h3><blockquote><p>os module is for system, sys this module provides access to some variables used or maintained by
+the interpreter and to functions that interact strongly with the interpreter.</p></blockquote><h3 id=迭代器>迭代器</h3><ul><li>迭代器：<code>__iter__</code> 和 <code>__next__</code> 两个方法</li><li>可迭代对象：<code>__iter__</code> 方法</li><li>如果希望可迭代对象可以重复使用,应该在 <code>__iter__</code> 每次返回新的迭代器对象。</li><li>yield生成器也是迭代器。itertools简化循环,例如product</li></ul><h2 id=pythonic的代码>pythonic的代码</h2><h3 id=使用for推导式不要forin遍历也少用mapfilter>使用for推导式,不要for..in遍历,也少用map,filter</h3><h3 id=多使用destructing这点在javago都不支持可以在方法内部省很多代码>多使用destructing,这点在Java/Go都不支持,可以在方法内部省很多代码</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#000>long_list</span> <span style=color:#000>=</span> [<span style=color:#000>x</span> <span style=color:#a90d91>for</span> <span style=color:#000>x</span> <span style=color:#000>in</span> <span style=color:#a90d91>range</span>(<span style=color:#1c01ce>100</span>)]
+<span style=color:#000>a</span>, <span style=color:#000>b</span>, <span style=color:#000>*</span><span style=color:#000>c</span>, <span style=color:#000>d</span>, <span style=color:#000>e</span>, <span style=color:#000>f</span> <span style=color:#000>=</span> <span style=color:#000>long_list</span> <span style=color:#177500>#e==98 f=99</span>
+</code></pre></div><h3 id=使用if-x-is-none而不是-if-x--none->使用<code>if x is None</code>,而不是 <code>if x == None</code></h3><h3 id=异常处理>异常处理</h3><p>清楚except和assert场合,logging.error(&lsquo;xxxxxxx&rsquo;, exc_info=True).
+自定义异常必须重写__init__() 和 __str__()</p><h3 id=x-if-x--10-else-y><code>x if x &lt; 10 else y</code></h3><h3 id=use-reversedlis-over-lis-1>use <code>reversed(lis)</code> over <code>lis[::-1]</code></h3><h3 id=property-make-a-method-to-classs-property-can-not-use--when-access-the-method-cuz-it-is-prop>@property make a method to class&rsquo;s property. can not use () when access the method cuz it is prop.</h3><h3 id=use-assert-protect-your-code-不要使用assert检查数据-断言可能被全局禁用导致数据检查或者更恐怖的权限检查被跳过>use assert protect your code. 不要使用assert检查数据, 断言可能被全局禁用,导致数据检查（或者更恐怖的权限检查）被跳过</h3><h3 id=functoolswrapsfunc>@functools.wraps(func)</h3><h3 id=__var-在class环境中会被改写><code>__var</code> 在class环境中会被改写</h3><h3 id=使用abc模块可以避免抽象类只有在未实现方法被调用时才抛出notimplementederror>使用abc模块可以避免抽象类只有在未实现方法被调用时才抛出NotImplementedError</h3><h3 id=理解python的dunder方法可以写出超级简洁的方法>理解python的dunder方法,可以写出超级简洁的方法：</h3><div class=highlight><pre style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#a90d91>import</span> <span style=color:#000>collections</span>
 
-<span style="color:#000">Card</span> <span style="color:#000">=</span> <span style="color:#000">collections</span><span style="color:#000">.</span><span style="color:#000">namedtuple</span>(<span style="color:#c41a16">&#39;Card&#39;</span>, [<span style="color:#c41a16">&#39;rank&#39;</span>, <span style="color:#c41a16">&#39;suit&#39;</span>])
+<span style=color:#000>Card</span> <span style=color:#000>=</span> <span style=color:#000>collections</span><span style=color:#000>.</span><span style=color:#000>namedtuple</span>(<span style=color:#c41a16>&#39;Card&#39;</span>, [<span style=color:#c41a16>&#39;rank&#39;</span>, <span style=color:#c41a16>&#39;suit&#39;</span>])
+<span style=color:#a90d91>class</span> <span style=color:#3f6e75>FrenchDeck</span>:
+    <span style=color:#000>ranks</span> <span style=color:#000>=</span> [<span style=color:#a90d91>str</span>(<span style=color:#000>n</span>) <span style=color:#a90d91>for</span> <span style=color:#000>n</span> <span style=color:#000>in</span> <span style=color:#a90d91>range</span>(<span style=color:#1c01ce>2</span>, <span style=color:#1c01ce>11</span>)] <span style=color:#000>+</span> <span style=color:#a90d91>list</span>(<span style=color:#c41a16>&#39;JQKA&#39;</span>)
+    <span style=color:#000>suits</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#39;spades diamonds clubs hearts&#39;</span><span style=color:#000>.</span><span style=color:#000>split</span>()
 
-<span style="color:#a90d91">class</span> <span style="color:#3f6e75">FrenchDeck</span>:
-    <span style="color:#000">ranks</span> <span style="color:#000">=</span> [<span style="color:#a90d91">str</span>(<span style="color:#000">n</span>) <span style="color:#a90d91">for</span> <span style="color:#000">n</span> <span style="color:#000">in</span> <span style="color:#a90d91">range</span>(<span style="color:#1c01ce">2</span>, <span style="color:#1c01ce">11</span>)] <span style="color:#000">+</span> <span style="color:#a90d91">list</span>(<span style="color:#c41a16">&#39;JQKA&#39;</span>)
-    <span style="color:#000">suits</span> <span style="color:#000">=</span> <span style="color:#c41a16">&#39;spades diamonds clubs hearts&#39;</span><span style="color:#000">.</span><span style="color:#000">split</span>()
+    <span style=color:#a90d91>def</span> <span style=color:#000>__init__</span>(<span style=color:#5b269a>self</span>):
+        <span style=color:#5b269a>self</span><span style=color:#000>.</span><span style=color:#000>_cards</span> <span style=color:#000>=</span> [<span style=color:#000>Card</span>(<span style=color:#000>rank</span>, <span style=color:#000>suit</span>) <span style=color:#a90d91>for</span> <span style=color:#000>suit</span> <span style=color:#000>in</span> <span style=color:#5b269a>self</span><span style=color:#000>.</span><span style=color:#000>suits</span>
+                                        <span style=color:#a90d91>for</span> <span style=color:#000>rank</span> <span style=color:#000>in</span> <span style=color:#5b269a>self</span><span style=color:#000>.</span><span style=color:#000>ranks</span>]
 
-    <span style="color:#a90d91">def</span> <span style="color:#000">__init__</span>(<span style="color:#5b269a">self</span>):
-        <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_cards</span> <span style="color:#000">=</span> [<span style="color:#000">Card</span>(<span style="color:#000">rank</span>, <span style="color:#000">suit</span>) <span style="color:#a90d91">for</span> <span style="color:#000">suit</span> <span style="color:#000">in</span> <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">suits</span>
-                                        <span style="color:#a90d91">for</span> <span style="color:#000">rank</span> <span style="color:#000">in</span> <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">ranks</span>]
+    <span style=color:#a90d91>def</span> <span style=color:#000>__len__</span>(<span style=color:#5b269a>self</span>):
+        <span style=color:#a90d91>return</span> <span style=color:#a90d91>len</span>(<span style=color:#5b269a>self</span><span style=color:#000>.</span><span style=color:#000>_cards</span>)
 
-    <span style="color:#a90d91">def</span> <span style="color:#000">__len__</span>(<span style="color:#5b269a">self</span>):
-        <span style="color:#a90d91">return</span> <span style="color:#a90d91">len</span>(<span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_cards</span>)
+    <span style=color:#a90d91>def</span> <span style=color:#000>__getitem__</span>(<span style=color:#5b269a>self</span>, <span style=color:#000>position</span>):
+        <span style=color:#a90d91>return</span> <span style=color:#5b269a>self</span><span style=color:#000>.</span><span style=color:#000>_cards</span>[<span style=color:#000>position</span>]
 
-    <span style="color:#a90d91">def</span> <span style="color:#000">__getitem__</span>(<span style="color:#5b269a">self</span>, <span style="color:#000">position</span>):
-        <span style="color:#a90d91">return</span> <span style="color:#5b269a">self</span><span style="color:#000">.</span><span style="color:#000">_cards</span>[<span style="color:#000">position</span>]
-
-<span style="color:#000">deck</span> <span style="color:#000">=</span> <span style="color:#000">new</span> <span style="color:#000">FrenchDeck</span>()
-<span style="color:#a90d91">from</span> <span style="color:#000">random</span> <span style="color:#a90d91">import</span> <span style="color:#000">choice</span>
-<span style="color:#000">choice</span>(<span style="color:#000">deck</span>)
-<span style="color:#177500"># Card(rank=&#39;3&#39;, suit=&#39;hearts&#39;)</span>
-</code></pre></div><p>上面的例子我们使用了__len__方法和__getitem__方法,好处就是你可以使用python的len(deck),deck[1]这种语法,也就是说<code>FrenchDeck</code>几乎就是一个容器类型,还可以使用for遍历.</p>
-<h2 id="调试与编译">调试与编译</h2>
-<ol>
-<li>使用help(),dir()获取信息</li>
-<li>python中的每个函数都有__code__属性,包含字节码信息</li>
-<li>使用dis模块的dis函数可以查看更容易阅读的汇编(dis == disassembler)</li>
-<li>sys.getsizeof(x)获取对象大小</li>
-</ol>
-<h2 id="优秀资料">优秀资料</h2>
-<p><a href="https://github.com/piglei/one-python-craftsman">python 工匠系列</a>
-<a href="https://realpython.com/learning-paths/">realpython学习路径</a>
-<a href="https://github.com/gto76/python-cheatsheet">一份非常详尽的python小抄</a></p>
-    </div>
-    <footer class="post-footer">
-     
- 
-<div class="post-tags">     
-     
-    <a href="https://zhimoe.github.io/tags/code" rel="tag" title="code">#code#</a>
-    
-    <a href="https://zhimoe.github.io/tags/python" rel="tag" title="python">#python#</a>
-    
-</div>
-
-
-
-     <div class="post-nav">
-    <div class="post-nav-next post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/" rel="next" title="Tour of Rusts Standard Library Traits">
-        <i class="fa fa-chevron-left"></i> Tour of Rusts Standard Library Traits
-        </a>
-    
-    </div>
-
-    <div class="post-nav-prev post-nav-item">
-    
-        <a href="https://zhimoe.github.io/post/spell-correct/" rel="prev" title="如何实现一个拼写检查器[翻译]">
-        如何实现一个拼写检查器[翻译] <i class="fa fa-chevron-right"></i>
-        </a>
-    
-    </div>
-</div>
-      
-     
-     
-     
-<div id="disqus_thread"></div>
-<script>
-
-
-var disqus_config = function () {
-  this.page.url = "https://zhimoe.github.io/post/py-tips-for-impatient-dev/";  
-  this.page.identifier = "https://zhimoe.github.io/post/py-tips-for-impatient-dev/"; 
-};
-
-(function() { 
-  var d = document, s = d.createElement('script');
-  s.src = 'https://zhimoe.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                            
-
-    </footer>
-  </article>
-</section>
-
-          </div>
-        </div>
-        <div class="sidebar-toggle">
-  <div class="sidebar-toggle-line-wrap">
-    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-  </div>
-</div>
-<aside id="sidebar" class="sidebar">
-  <div class="sidebar-inner">
-
-  <ul class="sidebar-nav motion-element">
-    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-      文章目录
-    </li>
-    <li class="sidebar-nav-overview" data-target="site-overview">
-      站点概览
-    </li>
-  </ul>
-
-    <section class="site-overview sidebar-panel ">
-      <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-        src="https://zhimoe.github.io/img/avatar.png"
-        alt="zhimoe" />
-    <p class="site-author-name" itemprop="name">zhimoe</p>
-    <p class="site-description motion-element" itemprop="description"> 
-        the craft of programming</p>
-</div>
-      <nav class="site-state motion-element">
-    <div class="site-state-item site-state-posts">
-      <a href="https://zhimoe.github.io/post/">
-        <span class="site-state-item-count">61</span>
-        <span class="site-state-item-name">日志</span>
-      </a>
-    </div>
-    <div class="site-state-item site-state-categories">    
-        <a href="https://zhimoe.github.io/categories/">      
-         
-        <span class="site-state-item-count">4</span>
-        
-        <span class="site-state-item-name">分类</span>
-        
-        </a>
-    </div>
-
-    <div class="site-state-item site-state-tags">
-        <a href="https://zhimoe.github.io/tags/">
-         
-        <span class="site-state-item-count">38</span>
-        
-        <span class="site-state-item-name">标签</span>
-        </a>
-    </div>
-</nav>
-      
-      
-<div class="links-of-author motion-element">
-    
-        <span class="links-of-author-item">
-        <a href="https://github.com/zhimoe/" target="_blank" title="GitHub">
-            <i class="fa fa-fw fa-github"></i>
-            GitHub
-        </a>
-        </span>
-    
-        <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/question/21142149/answer/52383396" target="_blank" title="ZhiHu">
-            <i class="fa fa-fw fa-globe"></i>
-            ZhiHu
-        </a>
-        </span>
-    
-</div>
-
-
-      
-
-      <div class="links-of-blogroll motion-element inline">
-<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=55k6ne41ev6&amp;m=0&amp;c=03a89e&amp;cr1=b22222&amp;f=calibri&amp;l=33" async="async"></script>
-</div>
-
-
-
-
-    </section>
-    
-<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-    <div class="post-toc">
-        <div class="post-toc-content"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#tricks">tricks</a></li>
-    <li><a href="#staticmethod-classmethod">staticmethod classmethod</a></li>
-    <li><a href="#str和bytes">str和bytes</a></li>
-    <li><a href="#pythonic的代码">pythonic的代码</a></li>
-    <li><a href="#容器">容器</a></li>
-    <li><a href="#dunder方法函数oop">dunder方法,函数,oop</a></li>
-    <li><a href="#调试与编译">调试与编译</a></li>
-    <li><a href="#优秀资料">优秀资料</a></li>
-  </ul>
-</nav></div>
-    </div>
-</section>
-
-  </div>
-</aside>
-
-      </div>
-    </main>
-   
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  <span itemprop="copyrightYear">  &copy; 
-  2017 - 2022</span>
-  <span class="with-love"><i class="fa fa-heart"></i></span>
-  <span class="author" itemprop="copyrightHolder">zhimoe</span>
-</div>
-<div class="powered-by">
-  Powered by - <a class="theme-link" href="http://gohugo.io" target="_blank" title="hugo" >Hugo v0.69.2</a>
-</div>
-<div class="theme-info">
-  Theme by - <a class="theme-link" href="https://github.com/zhimoe/hugo-theme-next" target="_blank"> NexT
-  </a>
-</div>
-
-
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-      <span id="scrollpercent"><span>0</span>%</span>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery_lazyload@1.9.3/jquery.lazyload.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.min.js"></script>
-<script type="text/javascript" src="https://libs.jshub.com/velocity/1.2.3/velocity.ui.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.21/dist/ua-parser.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/fancybox@2.1.5/dist/css/jquery.fancybox.css"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/utils.js"></script> 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/motion.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/affix.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/schemes/pisces.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/scrollspy.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/post-details.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/toc.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/bootstrap.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/zhimoe/zhimoe.github.io@gh-pages/js/search.js"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      displayMath: [ ['$$','$$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { fonts: ["TeX"] }
-  });
-</script>
-<script src='https://cdn.jsdelivr.net/npm/mathjax@2.7.5/config/TeX-AMS-MML_HTMLorMML.js' async></script>
-</body>
-</html>
+<span style=color:#000>deck</span> <span style=color:#000>=</span> <span style=color:#000>new</span> <span style=color:#000>FrenchDeck</span>()
+<span style=color:#a90d91>from</span> <span style=color:#000>random</span> <span style=color:#a90d91>import</span> <span style=color:#000>choice</span>
+<span style=color:#000>choice</span>(<span style=color:#000>deck</span>)
+<span style=color:#177500># Card(rank=&#39;3&#39;, suit=&#39;hearts&#39;)</span>
+</code></pre></div><p>上面的例子我们使用了__len__方法和__getitem__方法,好处就是你可以使用python的len(deck),deck[1]这种语法,也就是说<code>FrenchDeck</code>几乎就是一个容器类型,还可以使用for遍历.
+更多查看&lt;fluent python 2nd>.</p><h2 id=其他>其他</h2><h3 id=使用helpdir获取信息>使用help(),dir()获取信息</h3><h3 id=python中的每个函数都有__code__属性包含字节码信息>python中的每个函数都有__code__属性,包含字节码信息</h3><h3 id=使用dis模块的dis函数可以查看更容易阅读的汇编dis--disassembler>使用dis模块的dis函数可以查看更容易阅读的汇编(dis == disassembler)</h3><h3 id=sysgetsizeofx获取对象大小>sys.getsizeof(x)获取对象大小</h3><h3 id=和pass几乎等效的这是一个ellipsis-type的单例><code>...</code>和<code>pass</code>几乎等效的,这是一个ellipsis type的单例.</h3><h3 id=无限大-floatinf-float-inf>无限大 float(&lsquo;inf&rsquo;) float('-inf&rsquo;)</h3><h3 id=dis查看字节码>dis查看字节码</h3><h3 id=会被__eq__方法改变判断是否none时应该使用is判断id是否一致>==会被__eq__方法改变,判断是否None时应该使用is判断id是否一致</h3><h3 id=python的try可以配合else当没有任何异常或者try里面没有return-break才执行else部分这个和finally有很重要的不同>python的try可以配合else：当没有任何异常或者try里面没有return break,才执行else部分。这个和finally有很重要的不同</h3><h3 id=with需要实现__enter__-__exit__两个方法>with需要实现__enter__ __exit__两个方法</h3><h3 id=with语句可以同时打开多个文件不要嵌套with更多功能查看contextlib>with语句可以同时打开多个文件,不要嵌套with,更多功能查看<code>contextlib</code></h3><h3 id=不要手动做数据校验使用pydantic>不要手动做数据校验,使用pydantic</h3><h3 id=不要使用assert校验参数合法性因为可以通过-o参数跳过>不要使用assert校验参数合法性,因为可以通过-O参数跳过</h3><h2 id=参考资料>参考资料</h2><p><a href=https://github.com/piglei/one-python-craftsman>Python 工匠系列</a></p><p><a href=https://realpython.com/learning-paths/>RealPython学习路径</a></p><p><a href=https://github.com/gto76/python-cheatsheet>一份非常详尽的Python小抄</a></p><p><a href=https://book.douban.com/subject/34990079/>Fluent Python 2nd</a></p></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a>
+<a href=https://zhimoe.github.io/tags/python rel=tag title=python>#python#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>声明：</span>Py Tips for Impatient Dev</p><p><span>链接：</span>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</p><p><span>作者：</span>zhimoe</p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick="var qr=document.getElementById('QR');if(qr.style.display==='none'){qr.style.display='block';}else{qr.style.display='none'}">
+<span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/tour-of-rusts-standard-library-traits/ rel=next title="Tour of Rusts Standard Library Traits"><i class="fa fa-chevron-left"></i>Tour of Rusts Standard Library Traits</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/spell-correct/ rel=prev title=如何实现一个拼写检查器[翻译]>如何实现一个拼写检查器[翻译]
+<i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://zhimoe.github.io/post/py-tips-for-impatient-dev/";this.page.identifier="https://zhimoe.github.io/post/py-tips-for-impatient-dev/";};(function(){var d=document,s=d.createElement('script');s.src='https://zhimoe.disqus.com/embed.js';s.setAttribute('data-timestamp',+new Date());(d.head||d.body).appendChild(s);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></footer></article></section></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target=post-toc-wrap>文章目录</li><li class=sidebar-nav-overview data-target=site-overview>站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>the craft of programming</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>61</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>38</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-desktop"></i>ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link-square"></i>书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://tech.meituan.com/ title=美团技术团队 target=_blank>美团技术团队</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画 target=_blank>艺术绘画</a></li><li class=links-of-blogroll-item><a href=https://500px.com/ title=500px target=_blank>500px</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aop>Aop</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/aurulent>Aurulent</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/cheatsheet>Cheatsheet</a></li></ul></div><div class="links-of-blogroll motion-element inline"><script type=text/javascript src="//rf.revolvermaps.com/0/0/6.js?i=55k6ne41ev6&m=7&c=e63100&cr1=ffffff&f=arial&l=0&bv=90&lx=-420&ly=420&hi=20&he=7&hc=a8ddff&rs=80" async></script></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class=post-toc><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#tricks>tricks</a><ul><li><a href=#python的dict中关于equal和hash计算方式会有意外的效果>python的dict中关于equal和hash计算方式会有意外的效果</a></li><li><a href=#1--1-第一个是int第二个是tuple><code>(1) != (1,)</code> 第一个是int,第二个是tuple</a></li><li><a href=#避免可变的默认参数-例如>避免可变的默认参数, 例如:</a></li></ul></li><li><a href=#staticmethod-classmethod>staticmethod classmethod</a></li><li><a href=#容器方法>容器方法</a><ul><li><a href=#合并字典>合并字典：</a></li><li><a href=#py36开始-dict默认插入有序无需使用orderdict>py3.6开始 dict默认插入有序,无需使用OrderDict</a></li><li><a href=#dict-get-and-pop>dict get and pop</a></li><li><a href=#自定义dict>自定义dict</a></li><li><a href=#sort-dict-by-key>sort dict by key:</a></li><li><a href=#判断key是否存在-if-k-in-d>判断key是否存在: <code>if k in d:</code></a></li><li><a href=#带索引遍历-for-idx-item-in-enumeratex>带索引遍历: <code>for idx, item in enumerate(x):</code></a></li><li><a href=#浅复制>浅复制</a></li><li><a href=#使用namedtuple可以让代码更容易阅读当然现在可以是所有dataclass特性更丰富>使用namedtuple可以让代码更容易阅读,当然现在可以是所有dataclass,特性更丰富</a></li><li><a href=#list的元素可以不同更为紧凑的单一类型是array类型>list的元素可以不同,更为紧凑的单一类型是array类型</a></li><li><a href=#counterstringmost_common3><code>Counter(string).most_common(3)</code></a></li><li><a href=#deque>deque</a></li><li><a href=#一些不常用的容器countedobjectchainmapmappingproxytypefrozensetdefaultdict>一些不常用的容器：CountedObject,ChainMap,MappingProxyType,frozenset,defaultdict</a></li><li><a href=#在遍历中修改list>在遍历中修改list</a></li><li><a href=#打印容器可以使用pprintpprint>打印容器可以使用pprint.pprint</a></li></ul></li><li><a href=#str和bytes>str和bytes</a><ul><li><a href=#py36开始推荐使用f-string不要使用-s或者-format如果接收用户输入使用template做安全校验>py3.6开始,推荐使用f-string,不要使用<code> %s</code>或者 <code>"".format()</code>.如果接收用户输入,使用Template做安全校验</a></li><li><a href=#多行string>多行string</a></li><li><a href=#bytes-和bytesarray>bytes 和bytesarray</a></li><li><a href=#小整数池是-5256-string也有-string-intern>小整数池是[-5,256], string也有 string intern</a></li><li><a href=#有时使用strpartition方法拆分str或者strtranslate批量replace子串更方便>有时使用str.partition方法拆分str或者str.translate批量replace子串更方便</a></li><li><a href=#多行文本去除缩进可以使用-textwrapdedenyour-text>多行文本去除缩进可以使用 <code>textwrap.deden("""\your text""")</code></a></li><li><a href=#str重复n次prints--n>str重复n次<code>print(s * n);</code></a></li></ul></li><li><a href=#重要标准库>重要标准库</a><ul><li><a href=#bisect二分法搜索>bisect二分法搜索</a></li><li><a href=#use-pathlib-over-ospathlib-后者方法不全>use <code>pathlib</code> over <code>os.pathlib</code>. 后者方法不全.</a></li><li><a href=#os-vs-sys>os vs sys</a></li><li><a href=#迭代器>迭代器</a></li></ul></li><li><a href=#pythonic的代码>pythonic的代码</a><ul><li><a href=#使用for推导式不要forin遍历也少用mapfilter>使用for推导式,不要for..in遍历,也少用map,filter</a></li><li><a href=#多使用destructing这点在javago都不支持可以在方法内部省很多代码>多使用destructing,这点在Java/Go都不支持,可以在方法内部省很多代码</a></li><li><a href=#使用if-x-is-none而不是-if-x--none->使用<code>if x is None</code>,而不是 <code>if x == None</code></a></li><li><a href=#异常处理>异常处理</a></li><li><a href=#x-if-x--10-else-y><code>x if x &lt; 10 else y</code></a></li><li><a href=#use-reversedlis-over-lis-1>use <code>reversed(lis)</code> over <code>lis[::-1]</code></a></li><li><a href=#property-make-a-method-to-classs-property-can-not-use--when-access-the-method-cuz-it-is-prop>@property make a method to class&rsquo;s property. can not use () when access the method cuz it is prop.</a></li><li><a href=#use-assert-protect-your-code-不要使用assert检查数据-断言可能被全局禁用导致数据检查或者更恐怖的权限检查被跳过>use assert protect your code. 不要使用assert检查数据, 断言可能被全局禁用,导致数据检查（或者更恐怖的权限检查）被跳过</a></li><li><a href=#functoolswrapsfunc>@functools.wraps(func)</a></li><li><a href=#__var-在class环境中会被改写><code>__var</code> 在class环境中会被改写</a></li><li><a href=#使用abc模块可以避免抽象类只有在未实现方法被调用时才抛出notimplementederror>使用abc模块可以避免抽象类只有在未实现方法被调用时才抛出NotImplementedError</a></li><li><a href=#理解python的dunder方法可以写出超级简洁的方法>理解python的dunder方法,可以写出超级简洁的方法：</a></li></ul></li><li><a href=#其他>其他</a><ul><li><a href=#使用helpdir获取信息>使用help(),dir()获取信息</a></li><li><a href=#python中的每个函数都有__code__属性包含字节码信息>python中的每个函数都有__code__属性,包含字节码信息</a></li><li><a href=#使用dis模块的dis函数可以查看更容易阅读的汇编dis--disassembler>使用dis模块的dis函数可以查看更容易阅读的汇编(dis == disassembler)</a></li><li><a href=#sysgetsizeofx获取对象大小>sys.getsizeof(x)获取对象大小</a></li><li><a href=#和pass几乎等效的这是一个ellipsis-type的单例><code>...</code>和<code>pass</code>几乎等效的,这是一个ellipsis type的单例.</a></li><li><a href=#无限大-floatinf-float-inf>无限大 float(&lsquo;inf&rsquo;) float('-inf&rsquo;)</a></li><li><a href=#dis查看字节码>dis查看字节码</a></li><li><a href=#会被__eq__方法改变判断是否none时应该使用is判断id是否一致>==会被__eq__方法改变,判断是否None时应该使用is判断id是否一致</a></li><li><a href=#python的try可以配合else当没有任何异常或者try里面没有return-break才执行else部分这个和finally有很重要的不同>python的try可以配合else：当没有任何异常或者try里面没有return break,才执行else部分。这个和finally有很重要的不同</a></li><li><a href=#with需要实现__enter__-__exit__两个方法>with需要实现__enter__ __exit__两个方法</a></li><li><a href=#with语句可以同时打开多个文件不要嵌套with更多功能查看contextlib>with语句可以同时打开多个文件,不要嵌套with,更多功能查看<code>contextlib</code></a></li><li><a href=#不要手动做数据校验使用pydantic>不要手动做数据校验,使用pydantic</a></li><li><a href=#不要使用assert校验参数合法性因为可以通过-o参数跳过>不要使用assert校验参数合法性,因为可以通过-O参数跳过</a></li></ul></li><li><a href=#参考资料>参考资料</a></li></ul></nav></div></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2010 - 2022</span>
+<span class=with-love><i class="fa fa-heart"></i></span><span class=copyright-author>zhimoe</span></div><div class=powered-info><span class=powered-by>Powered by - <a class=powered-link href=//gohugo.io target=_blank title=hugo>Hugo v0.69.2</a></span>
+<span class=separator-line>/</span>
+<span class=theme-info>Theme by - <a class=powered-link href=//github.com/elkan1788/hugo-theme-next target=_blank>NexT</a></span></div><div class=vistor-info></div><div class=license-info><span class=storage-info>Storage by
+<a href style=font-weight:700 target=_blank></a></span><span class=separator-line>/</span>
+<span class=license-num><a href target=_blank></a></span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i><span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=//cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.min.js></script><script type=text/javascript src=https://zhimoe.github.io/js/search.js></script><script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script><script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script><script type=text/javascript>function detectIE(){var ua=window.navigator.userAgent;var msie=ua.indexOf('MSIE ');var trident=ua.indexOf('Trident/');var edge=ua.indexOf('Edge/');if(msie>0||trident>0||edge>0){return-1;}
+return 1;}
+function getCntViewHeight(){var docHeight=$('#content').height(),winHeight=$(window).height(),cntViewHeight=(docHeight>winHeight)?(docHeight-winHeight):($(document).height()-winHeight);return cntViewHeight;}
+function getScrollbarWidth(){var $div=$('<div />').addClass('scrollbar-measure').prependTo('body');var div=$div[0];var scrollbarWidth=div.offsetWidth-div.clientWidth;$div.remove();return scrollbarWidth;}
+function registerBackTop(){var THRESHOLD=50;var $top=$('.back-to-top');$(window).on('scroll',function(){$top.toggleClass('back-to-top-on',window.pageYOffset>THRESHOLD);var scrollTop=$(window).scrollTop();var cntViewHeight=getCntViewHeight();var scrollPercent=(scrollTop)/(cntViewHeight);var scrollPercentRounded=Math.round(scrollPercent*100);var scrollPercentMaxed=(scrollPercentRounded>100)?100:scrollPercentRounded;$('#scrollpercent>span').html(scrollPercentMaxed);});$top.on('click',function(){$("html,body").animate({scrollTop:0,screenLeft:0,},800);});}
+function initScrollSpy(){var tocSelector='.post-toc';var $tocElement=$(tocSelector);var activeCurrentSelector='.active-current';$tocElement.on('activate.bs.scrollspy',function(){var $currentActiveElement=$(tocSelector+' .active').last();removeCurrentActiveClass();$currentActiveElement.addClass('active-current');}).on('clear.bs.scrollspy',removeCurrentActiveClass);$('body').scrollspy({target:tocSelector});function removeCurrentActiveClass(){$(tocSelector+' '+activeCurrentSelector).removeClass(activeCurrentSelector.substring(1));}}
+function initAffix(){var headerHeight=$('.header-inner').height();var footerOffset=parseInt($('.main').css('padding-bottom'),10);var sidebarTop=headerHeight+10;$('.sidebar-inner').affix({offset:{top:sidebarTop,bottom:footerOffset}});$(document).on('affixed.bs.affix',function(){updateTOCHeight(document.body.clientHeight-100);});}
+function initTOCDimension(){var updateTOCHeightTimer;$(window).on('resize',function(){updateTOCHeightTimer&&clearTimeout(updateTOCHeightTimer);updateTOCHeightTimer=setTimeout(function(){var tocWrapperHeight=document.body.clientHeight-100;updateTOCHeight(tocWrapperHeight);},0);});updateTOCHeight(document.body.clientHeight-100);var scrollbarWidth=getScrollbarWidth();$('.post-toc').css('width','calc(100% + '+scrollbarWidth+'px)');}
+function updateTOCHeight(height){height=height||'auto';$('.post-toc').css('max-height',height);}
+$(function(){var sidebarTop=$('.header-inner').height()+10;$('#sidebar').css({'margin-top':sidebarTop}).show();var sidebarMt=parseInt($('#sidebar').css('margin-top'));var sidebarInHeight=parseInt($('.sidebar-inner').css('height'));var sideHeight=sidebarMt+sidebarInHeight;var contentHeight=$('.content-wrap').height();if(contentHeight<sideHeight){$('.content-wrap').css('min-height',sideHeight);}
+$('.site-nav-toggle').on('click',function(){var $siteNav=$('.site-nav');var $toggleLine=$('.toggle');var ON_CLASS_NAME='site-nav-on';var CLOSE_CLASS_NAME='toggle-close';var isSiteNavOn=$siteNav.hasClass(ON_CLASS_NAME);var animateAction=isSiteNavOn?'slideUp':'slideDown';var animateCallback=isSiteNavOn?'removeClass':'addClass';$siteNav.stop()[animateAction]('normal',function(){$siteNav[animateCallback](ON_CLASS_NAME);$toggleLine[animateCallback](CLOSE_CLASS_NAME);});});registerBackTop();initScrollSpy();initAffix();initTOCDimension();$('.sidebar-nav-toc').click(function(){$(this).addClass('sidebar-nav-active');$(this).next().removeClass('sidebar-nav-active');$('.'+$(this).next().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});$('.sidebar-nav-overview').click(function(){$(this).addClass('sidebar-nav-active');$(this).prev().removeClass('sidebar-nav-active');$('.'+$(this).prev().attr('data-target')).toggle(500);$('.'+$(this).attr('data-target')).toggle(500);});});</script><script src=//cdn.bootcdn.net/ajax/libs/imageviewer/0.1.0/viewer.min.js></script><script type=text/javascript>$(function(){$('.post-body').viewer();});</script><script>(function(){var bp=document.createElement('script');var curProtocol=window.location.protocol.split(':')[0];if(curProtocol==='https'){bp.src='https://zz.bdstatic.com/linksubmit/push.js';}
+else{bp.src='http://push.zhanzhang.baidu.com/push.js';}
+var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(bp,s);})();</script></body></html>
