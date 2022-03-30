@@ -1041,10 +1041,7 @@ pre .javascript .function {
   .posts-expand {
     margin: 0 20px;
   }
-  .post-body pre,
-  .post-body .highlight {
-    padding: 10px;
-  }
+
   .post-body pre .gutter pre,
   .post-body .highlight .gutter pre {
     padding-right: 10px;
@@ -2466,7 +2463,7 @@ body {
 @media (max-width: 767px) {
   .content-wrap {
     width: 100%;
-    padding: 20px;
+    padding: 0;
     min-height: auto;
   }
 }
