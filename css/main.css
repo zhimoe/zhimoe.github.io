@@ -201,7 +201,7 @@ body {
   position: relative;
   font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
-  line-height: 2;
+  line-height: 1.5rem;
   color: #555;
   background: #fff;
 }
@@ -284,7 +284,7 @@ h6 {
   }
 }
 p {
-  margin: 0 0 25px 0;
+  margin: 0 0 0.5rem 0;
 }
 a {
   color: #555;
@@ -2968,8 +2968,8 @@ body {
 }
 
 .article-copyright {
-  border: 1px dashed #e0e0e0; 
-  padding: 10px; 
+  border: 1px dashed #e0e0e0;
+  padding: 10px;
   font-size: 13px;
   background-color: #fffeee; 
   background-repeat: no-repeat; 
@@ -2979,14 +2979,6 @@ body {
   -moz-background-clip: -moz-initial; 
   -moz-background-origin: -moz-initial; 
   -moz-background-inline-policy: -moz-initial;
-}
-
-.article-copyright-info {
-  margin-top: 40px;
-}
-
-.article-copyright-info p {
-  margin-top: -25px;
 }
 
 
