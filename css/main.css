@@ -1378,7 +1378,7 @@ pre .javascript .function {
 }
 .posts-expand .post-eof {
   display: block;
-  margin: 80px auto 60px;
+  margin: 40px auto 60px;
   width: 8%;
   height: 1px;
   background: #ccc;
@@ -2450,7 +2450,7 @@ body {
   float: right;
   box-sizing: border-box;
   padding: 0px 50px;
-  width: 800px;
+  width: 840px;
   background: #fff;
   height: auto;
 }
