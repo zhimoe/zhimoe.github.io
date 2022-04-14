@@ -199,7 +199,7 @@ th {
 }
 body {
   position: relative;
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
   line-height: 1.5rem;
   color: #555;
@@ -226,7 +226,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 h2,
 h3,
@@ -908,13 +908,13 @@ pre .javascript .function {
   font-size: 24px;
   font-weight: bold;
   font-weight: normal;
-  font-family: "Alegreya Sans", Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Alegreya Sans", 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .site-subtitle {
   margin-top: 15px;
   font-size: 16px;
   color: #ddd;
-  font-family: "Alegreya Sans", Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Alegreya Sans", 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .use-motion .brand {
   opacity: 0;
@@ -996,7 +996,7 @@ pre .javascript .function {
 }
 
 .post-body {
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .post-body h1 {
   border-left: solid 5px #428bca;
@@ -1263,7 +1263,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 15px 0;
   color: #999;
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1493,14 +1493,14 @@ pre .javascript .function {
   text-align: center;
   color: #222;
   font-weight: bold;
-  font-family: "Alegreya Sans", Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Alegreya Sans", 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .site-description {
   margin-top: 0;
   text-align: center;
   font-size: 13px;
   color: #999;
-  font-family: "Alegreya Sans", Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "Alegreya Sans", 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .site-state {
   overflow: hidden;
@@ -3017,7 +3017,7 @@ body {
     font-variant: normal;
     font-stretch: normal;
     font-size: 18px;
-    font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: 'Fira Sans', "PingFang SC", "Microsoft YaHei", sans-serif;
     background: #F44336;
 }
 
