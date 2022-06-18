@@ -109,13 +109,7 @@ hr {
 pre {
   overflow: auto;
 }
-code,
-kbd,
-pre,
-samp {
-  font-family: TheSansTypewriter, MonoLisa, "Source Code Pro", monospace, ui-monospace;
-  font-size: 1em;
-}
+
 button,
 input,
 optgroup,
@@ -481,9 +475,11 @@ pre,
   background: #f7f7f7;
   line-height: 1.6;
 }
+kbd,
+samp,
 pre,
 code {
-  font-family: TheSansTypewriter, MonoLisa, "Source Code Pro", ui-monospace, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: PragmataPro, MonoLisa, 'Source Code Pro', 'Fira Code', Consolas, "PingFang SC", "Microsoft YaHei", ui-monospace, monospace;
 }
 code {
   padding: 2px 4px;
