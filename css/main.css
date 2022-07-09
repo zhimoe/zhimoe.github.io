@@ -479,7 +479,7 @@ kbd,
 samp,
 pre,
 code {
-  font-family: Prestige, MonoLisa, 'Source Code Pro', Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: Prestige, MonoLisa, 'Source Code Pro', Consolas, monospace, ui-monospace;
 }
 code {
   padding: 2px 4px;
