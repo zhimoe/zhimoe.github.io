@@ -479,7 +479,7 @@ kbd,
 samp,
 pre,
 code {
-  font-family: Prestige, MonoLisa, 'Source Code Pro', Consolas, ui-monospace, monospace;
+  font-family: 'Fira Code', 'Source Code Pro', Consolas, ui-monospace, monospace;
 }
 code {
   padding: 2px 4px;
