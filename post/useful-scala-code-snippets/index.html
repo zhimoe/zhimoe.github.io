@@ -21,13 +21,12 @@
 </span></span><span style=display:flex><span><span style=color:#00f>val</span> mapList <span style=color:#00f>=</span> <span style=color:#2b91af>List</span>(map1, map2, map3)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#00f>val</span> merged <span style=color:#00f>=</span> mapList.reduce((m1, m2) <span style=color:#00f>=&gt;</span>
-</span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  m1 ++ m2.map { <span style=color:#00f>case</span> (k, v) <span style=color:#00f>=&gt;</span> k -&gt; (v + m1.getOrElse(k, 0)) }
 </span></span><span style=display:flex><span>)
 </span></span></code></pre></div><h2 id=文件读>文件读</h2><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:green>// &#34;&#34;&#34;&#34;&#34;&#34;可以避免\\符号
 </span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>val</span> file <span style=color:#00f>=</span> <span style=color:#a31515>&#34;&#34;&#34;d:\data\file.txt&#34;&#34;&#34;</span>
 </span></span><span style=display:flex><span><span style=color:#00f>for</span> (line <span style=color:#00f>&lt;-</span> <span style=color:#2b91af>Source</span>.fromFile(file, encoding).getLines()) {
-</span></span><span style=display:flex><span>          print(line)
+</span></span><span style=display:flex><span>    print(line)
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><h2 id=文件写>文件写</h2><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span>  <span style=color:green>//资源管理
 </span></span></span><span style=display:flex><span><span style=color:green></span>  <span style=color:#00f>def</span> using[<span style=color:#2b91af>A</span> <span style=color:#00f>&lt;:</span> {<span style=color:#2b91af>def</span> <span style=color:#2b91af>close</span>() <span style=color:#2b91af>:</span> <span style=color:#2b91af>Unit</span>}, <span style=color:#2b91af>R</span>](resource<span style=color:#00f>:</span> <span style=color:#2b91af>A</span>)(fun<span style=color:#00f>:</span> <span style=color:#2b91af>A</span> =&gt; R)<span style=color:#00f>:</span> <span style=color:#2b91af>R</span> = {

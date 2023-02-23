@@ -54,7 +54,6 @@
 </span></span><span style=display:flex><span><span style=color:#00f>val</span> mapList <span style=color:#00f>=</span> <span style=color:#2b91af>List</span>(map1, map2, map3)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#00f>val</span> merged <span style=color:#00f>=</span> mapList.reduce((m1, m2) <span style=color:#00f>=&gt;</span>
-</span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  m1 ++ m2.map { <span style=color:#00f>case</span> (k, v) <span style=color:#00f>=&gt;</span> k -&gt; (v + m1.getOrElse(k, 0)) }
 </span></span><span style=display:flex><span>)
 </span></span></code></pre></div></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/useful-scala-code-snippets/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/scala-future/ itemprop=url>Scala Future</a></h1><div class=post-meta><span class=post-time><span class=post-meta-item-text>时间：</span>

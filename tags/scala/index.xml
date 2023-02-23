@@ -37,7 +37,6 @@ scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00f">val&lt;/span> mapList &lt;span style="color:#00f">=&lt;/span> &lt;span style="color:#2b91af">List&lt;/span>(map1, map2, map3)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00f">val&lt;/span> merged &lt;span style="color:#00f">=&lt;/span> mapList.reduce((m1, m2) &lt;span style="color:#00f">=&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m1 ++ m2.map { &lt;span style="color:#00f">case&lt;/span> (k, v) &lt;span style="color:#00f">=&amp;gt;&lt;/span> k -&amp;gt; (v + m1.getOrElse(k, 0)) }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Scala Future</title><link>https://zhimoe.github.io/post/scala-future/</link><pubDate>Sun, 21 Apr 2019 14:36:36 +0800</pubDate><guid>https://zhimoe.github.io/post/scala-future/</guid><description>&lt;p>some notes on scala future, includes:&lt;/p>

@@ -11,40 +11,40 @@
 &nbsp;</span></span>
 <span>|
 <span class=post-meta-item-text>字数：</span>
-<span class=leancloud-world-count>1135 字</span></span>
+<span class=leancloud-world-count>1130 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
 <span class=leancloud-view-count>3分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>some notes on rust ownership,reference,string and &str, and lifetimes</p><h3 id=rust-ownership>rust ownership</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:green>//heap and stack: stack is store data that known,fixed size.
-</span></span></span><span style=display:flex><span><span style=color:green>//Keeping track of what parts of code are using what data on the heap, minimizing
-</span></span></span><span style=display:flex><span><span style=color:green>//the amount of duplicate data on the heap, and cleaning up unused data on the heap
+</span></span></span><span style=display:flex><span><span style=color:green>//memory manager keeping track of what parts of code are using what data on the heap, 
+</span></span></span><span style=display:flex><span><span style=color:green>//minimizing the amount of duplicate data on the heap, and cleaning up unused data on the heap
 </span></span></span><span style=display:flex><span><span style=color:green>//so you don’t run out of space are all problems that ownership addresses.
 </span></span></span><span style=display:flex><span><span style=color:green></span>
 </span></span><span style=display:flex><span><span style=color:green>//ownership rules:
-</span></span></span><span style=display:flex><span><span style=color:green>//Each value in Rust has a variable that’s called its owner.
-</span></span></span><span style=display:flex><span><span style=color:green>//There can only be one owner at a time.
-</span></span></span><span style=display:flex><span><span style=color:green>//When the owner goes out of scope, the value will be dropped.
+</span></span></span><span style=display:flex><span><span style=color:green>// Each value in Rust has a variable that’s called its owner.
+</span></span></span><span style=display:flex><span><span style=color:green>// There can only be one owner at a time.
+</span></span></span><span style=display:flex><span><span style=color:green>// When the owner goes out of scope, the value will be dropped.
 </span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span><span style=color:green>// stack only data assignment(栈上数据) will make a copy operation, since it is fixed size, the copy is fast
-</span></span></span><span style=display:flex><span><span style=color:green>// use h.clone() make a heap data deeply copy.
-</span></span></span><span style=display:flex><span><span style=color:green>// impl the Copy trait can make a type still usable after assignment
-</span></span></span><span style=display:flex><span><span style=color:green>// Copy trait can not use with Drop trait,Drop可以理解为destructor,当数据超过自己的scope时,drop()方法被调用;
+</span></span><span style=display:flex><span><span style=color:green>// stack only data(栈内数据) assignment will make a copy operation, since it is fixed size, the copy is fast
+</span></span></span><span style=display:flex><span><span style=color:green>// rust use h.clone() make a heap data deeply copy.
+</span></span></span><span style=display:flex><span><span style=color:green>// impl the Copy trait can make the original variable still usable after assignment.
+</span></span></span><span style=display:flex><span><span style=color:green>// Copy trait can not use with Drop trait, Drop可以理解为destructor,当数据超过自己的scope时, drop()方法被调用;
 </span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>fn</span> copy() {
 </span></span><span style=display:flex><span>    <span style=color:#00f>let</span> x = 5;
 </span></span><span style=display:flex><span>    <span style=color:#00f>let</span> y = x; <span style=color:green>//copy the value(5) in the stack,since it is fixed-size, the copy operation is fast
 </span></span></span><span style=display:flex><span><span style=color:green></span>
 </span></span><span style=display:flex><span>    <span style=color:#00f>let</span> s1 = String::from(<span style=color:#a31515>&#34;hello&#34;</span>); <span style=color:green>//String 和 &amp;str区别见后文
-</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>let</span> s2 = s1; <span style=color:green>//s1 is invalid
+</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>let</span> s2 = s1; <span style=color:green>//now s1 is invalid
 </span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:green>// println!(&#34;{}, world!&#34;, s1); //error, the &#34;hello&#34; ownership move to s2
 </span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>    <span style=color:#00f>let</span> s3 = s2.clone(); <span style=color:green>//copy the heap value(&#34;hello&#34;), impl the Clone trait
-</span></span></span><span style=display:flex><span><span style=color:green></span>    println!(<span style=color:#a31515>&#34;{}, world!&#34;</span>, s2); <span style=color:green>// s2 still usable
+</span></span><span style=display:flex><span>    <span style=color:#00f>let</span> s3 = s2.clone(); <span style=color:green>//copy the heap value(&#34;hello&#34;), String impl the Clone trait
+</span></span></span><span style=display:flex><span><span style=color:green></span>    println!(<span style=color:#a31515>&#34;{}, world!&#34;</span>, s2); <span style=color:green>//s2 still usable
 </span></span></span><span style=display:flex><span><span style=color:green></span>}
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:green>// passing function arguments or return value by function is same as 
 </span></span></span><span style=display:flex><span><span style=color:green>// assigning a value to a variable, you need take care the ownership of heap value,
 </span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>fn</span> ownership() {
 </span></span><span style=display:flex><span>    <span style=color:#00f>let</span> x = 5;
-</span></span><span style=display:flex><span>    <span style=color:#00f>let</span> x10 = plus10(x);<span style=color:green>// x still usable since the x is stack data
+</span></span><span style=display:flex><span>    <span style=color:#00f>let</span> x10 = plus10(x);<span style=color:green>//x still usable since the x is stack data
 </span></span></span><span style=display:flex><span><span style=color:green></span>    println!(<span style=color:#a31515>&#34;{}&#34;</span>, x);
 </span></span><span style=display:flex><span>    println!(<span style=color:#a31515>&#34;{}&#34;</span>, x10);
 </span></span><span style=display:flex><span>
@@ -79,7 +79,7 @@
 </span></span></span><span style=display:flex><span><span style=color:green>//2. &amp;String is a ref of String
 </span></span></span><span style=display:flex><span><span style=color:green>//3. str is unknown immutable sequence of utf8 bytes stored somewhere in memory. the memory may be:
 </span></span></span><span style=display:flex><span><span style=color:green>//  3a. in binary: a string literal &#34;foo&#34; is a &amp;&#39;static str. The data is hardcoded into the executable and loaded into memory when the program runs.
-</span></span></span><span style=display:flex><span><span style=color:green>//  3b. in heap: Strings implement Deref&lt;Target=str&gt;, and so inherit all of str&#39;s methods.
+</span></span></span><span style=display:flex><span><span style=color:green>//  3b. in heap: String implement Deref&lt;Target=str&gt;, and so inherit all of str&#39;s methods.
 </span></span></span><span style=display:flex><span><span style=color:green>//  3c. in stack: when use str::from_utf8(x).unwrap(); x is stack-value ref
 </span></span></span><span style=display:flex><span><span style=color:green></span>
 </span></span><span style=display:flex><span><span style=color:green>//&gt; the &amp;str param can accept a &amp;String since the String implement Deref&lt;Target=str&gt;.
@@ -88,7 +88,7 @@
 </span></span><span style=display:flex><span><span style=color:#a31515>//!!! since the str is unknown size, one can only use it by &amp;str, called slice. slice is a view of some data. 
 </span></span></span><span style=display:flex><span><span style=color:#a31515></span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>fn</span> str() {
+</span></span><span style=display:flex><span><span style=color:#00f>fn</span> str_demo() {
 </span></span><span style=display:flex><span>    <span style=color:#00f>let</span> s = <span style=color:#a31515>&#34;hello str&#34;</span>;<span style=color:green>//The type of s here is &amp;str: it’s a slice pointing to that specific point of the binary.
 </span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:green>// This is also why string literals are immutable; &amp;str is an immutable reference.
 </span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>let</span> <span style=color:#00f>mut</span> string = s.to_string(); <span style=color:green>//&amp;str to String
@@ -96,11 +96,11 @@
 </span></span><span style=display:flex><span>    println!(<span style=color:#a31515>&#34;{}&#34;</span>, string);
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>//a string slice has static lifetime
+</span></span><span style=display:flex><span><span style=color:green>//a slice has static lifetime
 </span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>let</span> s = <span style=color:#a31515>&#34;hello&#34;</span>;
 </span></span><span style=display:flex><span><span style=color:green>//means
 </span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>let</span> s: <span style=color:#00f>&amp;</span><span>’</span><span style=color:#00f>static</span> <span style=color:#2b91af>str</span> = <span style=color:#a31515>&#34;hello&#34;</span>;
-</span></span></code></pre></div><h2 id=lifetimes-are-only-about-reference>lifetimes are only about reference</h2><p>a ref must die before its referent</p><p>in rust:</p><ul><li><p>A resource can only have one owner at a time. When it goes out of the scope, Rust removes it from the Memory.</p></li><li><p>When we want to reuse the same resource, we are referencing it/ borrowing its content.</p></li><li><p>When dealing with references, we have to specify lifetime annotations to provide instructions for the compiler to set how long those referenced resources should be alive.</p></li><li><p>⭐ But because of lifetime annotations make the code more verbose, in order to make common patterns more ergonomic, Rust allows lifetimes to be elided/omitted in fn definitions. In this case, the compiler assigns lifetime annotations implicitly.</p></li></ul><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:green>// No inputs, return a reference
+</span></span></code></pre></div><h2 id=lifetimes-are-only-about-reference>lifetimes are only about reference</h2><p>a ref must die before its referent</p><p>in rust:</p><ul><li><p>A resource can only have one owner at a time. When it goes out of the scope, Rust removes it from the Memory.</p></li><li><p>When we want to reuse the same resource, we are referencing it/ borrowing its content.</p></li><li><p>When dealing with references, we have to specify lifetime annotations to provide instructions for the compiler to set<br>how long those referenced resources should be alive.</p></li><li><p>⭐ But because of lifetime annotations make the code more verbose, in order to make common patterns more ergonomic,<br>Rust allows lifetimes to be elided/omitted in fn definitions. In this case, the compiler assigns lifetime annotations<br>implicitly.</p></li></ul><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:green>// No inputs, return a reference
 </span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>fn</span> function1&lt;&#39;a&gt;() -&gt; <span style=color:#00f>&amp;</span>&#39;a <span style=color:#2b91af>str</span> {}
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:green>// Single input

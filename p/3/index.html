@@ -35,7 +35,7 @@
 &nbsp;</span></span>
 <span>|
 <span class=post-meta-item-text>字数：</span>
-<span class=leancloud-world-count>462 字</span></span>
+<span class=leancloud-world-count>472 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
 <span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>Associated Type and generic diff in rust</p><h2 id=type-outside-impl>type outside impl</h2><p>a <code>type Foo = Bar</code> outside is just type alias. most used in generic type.</p><p>like:<code> type Thunk = Box&lt;dyn Fn() + Send + 'static>;</code></p><h2 id=type-inside-impl>type inside impl</h2><p><code>type</code> in an <code>impl</code> defines an associated type. associated type可以理解为一个类型占位符,在trait的方法声明中使用.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#00f>pub</span> <span style=color:#00f>trait</span> Iterator {

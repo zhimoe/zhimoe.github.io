@@ -11,7 +11,7 @@
 &nbsp;</span></span>
 <span>|
 <span class=post-meta-item-text>字数：</span>
-<span class=leancloud-world-count>462 字</span></span>
+<span class=leancloud-world-count>472 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
 <span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>Associated Type and generic diff in rust</p><h2 id=type-outside-impl>type outside impl</h2><p>a <code>type Foo = Bar</code> outside is just type alias. most used in generic type.</p><p>like:<code> type Thunk = Box&lt;dyn Fn() + Send + 'static>;</code></p><h2 id=type-inside-impl>type inside impl</h2><p><code>type</code> in an <code>impl</code> defines an associated type. associated type可以理解为一个类型占位符,在trait的方法声明中使用.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#00f>pub</span> <span style=color:#00f>trait</span> Iterator {
@@ -30,9 +30,9 @@
 </span></span><span style=display:flex><span>    <span style=color:#00f>fn</span> next(&amp;<span style=color:#00f>mut</span> self) -&gt; Option&lt;T&gt;;
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span><span style=color:green>//  with generice, you can set default type:
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#a31515>/// trait Generic&lt;T = String&gt;
+</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#a31515>/// trait Iterator&lt;T = String&gt;
 </span></span></span><span style=display:flex><span><span style=color:#a31515>///    where T: Display,
-</span></span></span></code></pre></div><p>主要的区别就是generic可是有任意多个实现,因为<code>Add&lt;Foo></code>和<code>Add&lt;Bar></code>是两个不同的类型.<br>而associated type只能有一个实现,因为<code>Iterator</code>只有一个类型,所以associated type可以用于限制类型.</p><h2 id=when-use>when use</h2><p>The quick and dirty answer to when to use generics and when to use associated types is:<br>Use generics if it makes sense to have multiple implementations of a trait for a specific type (such as the <code>From&lt;T></code> trait).<br>Otherwise, use associated types (like <code>Iterator</code> and <code>Deref</code>).</p><p>假设我们实现一个redis 客户端,那么比较适合使用associated types:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#00f>trait</span> RedisCommand{
+</span></span></span></code></pre></div><p>主要的区别就是generic可是有任意多个实现,因为<code>Iterator&lt;Foo></code>和<code>Iterator&lt;Bar></code>是两个不同的类型.<br>而associated type只能有一个实现,因为<code>Iterator</code>只有一个类型,所以associated type可以用于限制类型.</p><h2 id=when-use>when use</h2><p>The quick and dirty answer to when to use generics and when to use associated types is:<br>Use generics if it makes sense to have multiple implementations of a trait for a specific type (such as the <code>From&lt;T></code> trait).<br>Otherwise, use associated types (like <code>Iterator</code> and <code>Deref</code>).</p><p>假设我们实现一个redis 客户端,那么比较适合使用associated types:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#00f>trait</span> RedisCommand{
 </span></span><span style=display:flex><span>    <span style=color:#00f>type</span> <span style=color:#2b91af>Response</span>;
 </span></span><span style=display:flex><span>    <span style=color:#00f>fn</span> receive(&amp;self, message: String) -&gt; Result&lt;Self::Response&gt;;
 </span></span><span style=display:flex><span>}

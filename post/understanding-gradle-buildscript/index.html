@@ -11,7 +11,7 @@
 &nbsp;</span></span>
 <span>|
 <span class=post-meta-item-text>字数：</span>
-<span class=leancloud-world-count>4111 字</span></span>
+<span class=leancloud-world-count>4110 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
 <span class=leancloud-view-count>9分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>在看这个之前,希望你有用ant或者maven的使用经验,还有,对groovy的语法有一个简单的了解,不懂也没关系,下面会介绍.<br>理解gradle文件的前提是理解一个重要的groovy概念:closure</p><h4 id=closure>closure</h4><p>一个closure是一个定义在groovy文件中的{}代码块,这个代码块类似js中的匿名函数,它可以被赋值给变量,可以被调用,可以接收参数,还可以作为参数传递给别的函数.</p><p>closure中最重要的两个概念是委托对象和作为参数传递的语法格式（理解gradle文件很重要）.</p><h4 id=groovy方法调用括号的省略>groovy方法调用括号的省略</h4><p>groovy提供非常优雅的方法调用格式,总结起来是:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=display:flex><span><span style=color:green>//可以省略参数括号,并且链式调用
@@ -72,17 +72,19 @@
 </span></span><span style=display:flex><span>Init script	-&gt;Gradle
 </span></span><span style=display:flex><span>Settings script(setting.gradle)	-&gt;Settings
 </span></span></code></pre></div><p>构建中的每一个project,Gradle都会创建一个Project对象,并将这个对象与构建脚本相关联.</p><p>Project对象与build.gradle是一对一的关系.</p><p>Gradle的脚本是配置脚本,当脚本执行时,它是在配置某一个特殊类型的对象.比如一个构建脚本的执行,它就是在配置一个Project类型的对象.这个对象叫做脚本的代理对象.</p><p>委托有个重要的概念就是scope,指closure的变量引用范围:有时变量不在当前scope中,但是可以通过委托,改变closure的委托对象,这样就拥有了委托者的scope,从而可以在closure中使用委托者的变量.</p><p>关于groovy closure 的委托有三个重要属性</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>• this: refers to the instance of the class that the closure was defined in.
-</span></span><span style=display:flex><span>• owner: is the same as this, unless the closure was defined inside another closure in which case the owner refers to the outer closure.
+</span></span><span style=display:flex><span>• owner: is the same as this, unless the closure was defined inside another closure in which case the owner refers to the outer closure.
 </span></span><span style=display:flex><span>• delegate: is the same as owner. But, it is the only one that can be programmatically changed, and it is the one that makes Groovy closures really powerful.
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>the closure itself will be checked first, followed by the closure&#39;s this scope, than the closure&#39;s owner, then its delegate. However, Groovy is so flexible this strategy can be changed. Every closure has a property called resolvedStrategy. This can be set to:
+</span></span><span style=display:flex><span>the closure itself will be checked first, followed by the closure&#39;s this scope, then the closure&#39;s owner, then its delegate. 
+</span></span><span style=display:flex><span>However, Groovy is so flexible this strategy can be changed. 
+</span></span><span style=display:flex><span>Every closure has a property called resolvedStrategy. This can be set to:
 </span></span><span style=display:flex><span>	• Closure.OWNER_FIRST
 </span></span><span style=display:flex><span>	• Closure.DELEGATE_FIRST
 </span></span><span style=display:flex><span>	• Closure.OWNER_ONLY
 </span></span><span style=display:flex><span>	• Closure.DELEGATE_ONLY
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>来自 &lt;https://dzone.com/articles/groovy-closures-owner-delegate&gt; 
-</span></span></code></pre></div><p>gradle是dsl解析工具,是对groovy语法的扩展,build.gradle可以理解为就是一个.groovy文件,gradle会解析这个文件,发现里面的closure,并将这些closure委托给一个对象去执行.<br>gradle将groovy的委托机制发挥到极致,要理解gradle内部,就要理解closure的委托！！</p><h3 id=closure作为参数传递>closure作为参数传递</h3><p>将closure作为参数传递的方法有多种:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=display:flex><span><span style=color:green>//method accepts 1 parameter - closure 
+</span></span></code></pre></div><p>gradle是dsl解析工具,是对groovy语法的扩展,build.gradle可以理解为就是一个.groovy文件,gradle会解析这个文件,发现里面的closure,并将这些closure委托给一个对象去执行.<br>gradle将groovy的委托机制发挥到极致,要理解gradle内部,就要理解closure的委托！</p><h3 id=closure作为参数传递>closure作为参数传递</h3><p>将closure作为参数传递的方法有多种:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=display:flex><span><span style=color:green>//method accepts 1 parameter - closure 
 </span></span></span><span style=display:flex><span><span style=color:green></span>myMethod(myClosure)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:green>//if method accepts only 1 parameter - parentheses can be omitted 
@@ -116,7 +118,7 @@
 </span></span><span style=display:flex><span>sourceSets { }	Configures the source sets of <span style=color:#00f>this</span> project.
 </span></span><span style=display:flex><span>subprojects { }	Configures the sub-projects of <span style=color:#00f>this</span> project.
 </span></span><span style=display:flex><span>publishing { }	Configures the PublishingExtension added by the publishing plugin.
-</span></span></code></pre></div><p>这些closure参数基本都是委托给其他对象执行的.</p><p>可以看到,Project对象的方法是有限而且通用的.真正有用的是插件,gradle的很多功能也是通过官方写的插件提供的.<br>如果你看到一个顶级层的<code>something { ... }</code>block,但是在Project源码中没有找到something block的任何信息.那么这个方法就是通过插件提供的.gradle自带很多插件,像java,eclipse,groovy,android等.<br>看一个实际的例子:<br>在andoird开发中的构建脚本:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=display:flex><span>apply plugin: <span style=color:#a31515>&#39;com.android.application&#39;</span>
+</span></span></code></pre></div><p>这些closure参数基本都是委托给其他对象执行的.</p><p>可以看到,Project对象的方法是有限而且通用的.真正有用的是插件,gradle的很多功能也是通过官方写的插件提供的.<br>如果你看到一个顶级层的<code>something { ... }</code>block,但是在Project源码中没有找到something block的任何信息.那么这个方法就是通过插件提供的.gradle自带很多插件,像java,eclipse,groovy,android等.<br>看一个实际的例子:<br>在android开发中的构建脚本:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=display:flex><span>apply plugin: <span style=color:#a31515>&#39;com.android.application&#39;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>android {
 </span></span><span style=display:flex><span>    compileSdkVersion 22
