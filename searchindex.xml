@@ -444,7 +444,7 @@ when use The quick and dirty answer to when to use generics and when to use asso
 Use generics if it makes sense to have multiple implementations of a trait for a specific type (such as the From&lt;T> trait).
 Otherwise, use associated types (like Iterator and Deref).
 假设我们实现一个redis 客户端,那么比较适合使用associated types:
-trait RedisCommand{ type Response; fn receive(&amp;self, message: String) -> Result&lt;Self::Response>; } impl RedisCommand for PingCommand { type Response = String fn receive(&amp;self, message: String) -> Result&lt;Self::Response>{ // -- snip -- } }</content></entry><entry><title>最佳编程字体</title><url>https://zhimoe.github.io/post/programmingfonts/</url><categories><category>项目</category></categories><tags><tag>font</tag><tag>aurulent</tag><tag>firacode</tag></tags><content type="html"> 个人对于编程字体有一点点洁癖.在尝试十几个字体后,终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code
+trait RedisCommand{ type Response; fn receive(&amp;self, message: String) -> Result&lt;Self::Response>; } impl RedisCommand for PingCommand { type Response = String fn receive(&amp;self, message: String) -> Result&lt;Self::Response>{ // -- snip -- } }</content></entry><entry><title>最佳编程字体</title><url>https://zhimoe.github.io/post/programming-fonts/</url><categories><category>随想</category></categories><tags><tag>font</tag><tag>aurulent</tag><tag>firacode</tag></tags><content type="html"> 个人对于编程字体有一点点洁癖.在尝试十几个字体后,终于使用FontForge和fontline.py动手修改制作自己的编程字体:Aurulent和 Fira Code
 Aurulent 字体下载
 小写字母来自Aurulent Sans Mono,其他基于Fira Code.Aurulent Sans Mono风格和SourceCodePro非常像,胖宽型,大开大合,简单却有具有设计.特别是字符g,a,p,y,s. 字母r的思路来自gintronic. 优点是在低分辨率屏,r的末尾不会被hint只剩下尖尖. 问号？也来自gintronic字体,非常漂亮. FiraCode Fira Code是全网最受欢迎的字体.但是这个r实在过于fancy,所以重新绘制了一个.只提供regular和bold两个字重.
 其他字体 个人比较喜欢的字体有
@@ -470,7 +470,7 @@ Consumer, Function, Predicate各自有一个2个入参的版本,共3个:BiConsum
 在构建自己的函数式接口时,务必使用注解@FunctionalInterface标注你的接口,这样可以给IDE lint和使用者提供更加充分信息.
 方法引用 如果lambda表达式的方法体过长,那么需要抽取方法,Java8提供了更近一步的语法——方法引用. 方法引用表示一个lambda表达式.只需要引用的方法签名和lambda目标类型的抽象方法签名一致即可.
 方法引用一共有5种类型,其中,静态方法是最常用的类型.
-方法引用类型 方法引用 对应lambda表达式 静态方法 Integer::parseInt str-> Integer.parseInt(str) 有限制(Bound receiver)实例引用 Instant.now()::isAfter Instant then = Instant.now(); then.isAfter(t) 无限制(Unbound receiver)实例引用 String::toLowerCase str -> str.toLowerCase 类构造器 TreeMap&lt;K,V>::new ()-> new TreeMap&lt;K,V>() 数组构造器 int[]::new len->new int[len] Bound receiver其实很好理解,方法的receiver(上面的then = Instant.now())是固定的. Unbound receiver的含义是方法的接收者(上面的str)是不确定的, 通过入参的形式传入. 而在方法引用的形式上面反而像静态方法引用(String::toLowerCase, toLowerCase不是静态方法,所以不是静态方法引用). 更粗暴的理解就是入参是方法的引用对象,所以方法引用对象取决于入参（不确定）. 数组构造器的比较难以理解,可以看成如下代码： IntFunction&lt;int[]> arrayMaker = int[]::new; int[] array = arrayMaker.apply(len) // 创建数组 int[len]</content></entry><entry><title>基于MDX的web词典</title><url>https://zhimoe.github.io/post/mdict-web/</url><categories><category>项目</category></categories><tags><tag>python</tag><tag>rust</tag></tags><content type="html"> Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
+方法引用类型 方法引用 对应lambda表达式 静态方法 Integer::parseInt str-> Integer.parseInt(str) 有限制(Bound receiver)实例引用 Instant.now()::isAfter Instant then = Instant.now(); then.isAfter(t) 无限制(Unbound receiver)实例引用 String::toLowerCase str -> str.toLowerCase 类构造器 TreeMap&lt;K,V>::new ()-> new TreeMap&lt;K,V>() 数组构造器 int[]::new len->new int[len] Bound receiver其实很好理解,方法的receiver(上面的then = Instant.now())是固定的. Unbound receiver的含义是方法的接收者(上面的str)是不确定的, 通过入参的形式传入. 而在方法引用的形式上面反而像静态方法引用(String::toLowerCase, toLowerCase不是静态方法,所以不是静态方法引用). 更粗暴的理解就是入参是方法的引用对象,所以方法引用对象取决于入参（不确定）. 数组构造器的比较难以理解,可以看成如下代码： IntFunction&lt;int[]> arrayMaker = int[]::new; int[] array = arrayMaker.apply(len) // 创建数组 int[len]</content></entry><entry><title>基于MDX的web词典</title><url>https://zhimoe.github.io/post/mdict-web/</url><categories><category>随想</category></categories><tags><tag>python</tag><tag>rust</tag></tags><content type="html"> Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
 python版本增加了一个机器学习模型翻译.rust版本也有模型,但是还没来得及加.
 mdict-py mdict-py源码
 Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.
@@ -1090,4 +1090,42 @@ CSDN-类加载机制-深入java虚拟机 读书笔记
 在Controller中彻底杜绝引入HttpServletRequest或者HttpServletResponse这样的原生Servlet对象.
 同时将请求参数和响应数据都从响应方法中剥离到了Controller中的属性变量.
 这是一个很大的技术改造,也造成了Struts2的盛行.Spring MVC走的是中间路线,Spring的2.0.8之前的版本甚至直接使用Servlet的doGet的.Spring MVC现在开始流行主要还是因为Schema xml的精简和基于注解的配置.所以这里出现了新的知识点：Schema Based XML的相关知识和Java5引入的注解原理.
-书籍：推荐许令波的书《深入分析Java Web技术内幕(修订版)》和计文柯的《深入理解spring技术内幕》,特别是第二本,对spring的分析很是彻底.</content></entry></search>
+书籍：推荐许令波的书《深入分析Java Web技术内幕(修订版)》和计文柯的《深入理解spring技术内幕》,特别是第二本,对spring的分析很是彻底.</content></entry><entry><title>你的半步，我的天涯</title><url>https://zhimoe.github.io/post/hanamitsuki-movie-review/</url><categories><category>随想</category></categories><tags><tag>qq空间</tag></tags><content type="html"> 好久没看过爱情电影了，当《山楂树》赚尽眼泪时我没有看，当《那些年》红遍两岸时，我没有看。因为没有选择，看了这部电影。
+《HANAMITSUKI》是这个名字，中文名是叫《花水木》。
+我努力想记起当中那段让我眼眶湿润的片段，却暂时空白。那些记住的片段永远都是女主角那温情的脸庞和男主人公的眉头紧锁，还有那些飘逸的花瓣，孤独守望的灯塔，蔚蓝的天空和海洋，痛苦的泪水和幸福的泪滴。
+片中所涉及到的亲情友情爱情，我是想解释都解释不清的，浓浓的化不开，暖暖的让人突然觉得该反省自己去珍惜自己身边的了吗。或者反思我身边有那么类似的感动吗，应该做个让别人也感到温馨的人吧。感动了，就是部好电影，觉得有趣也是部好电影，收获了理解了，她就值得去被人们知道。
+现在看到如此的情节，自己的心就会抽痛，以前极少这样的，也许是比以前又驶过了一些年岁，其实心里很不愿意承认的词就是“小资”“多愁善感”，就是或许有的时候就是一种共鸣，然后是所谓的宣泄。心痛，眼眶湿了，这就是方式与途径。
+电影，是二十四格的真实。 故事里的情节不停地让人想到自己。爱情，需要面对的太多。悬殊的生活环境，不同的生活话题，长长的距离，渺茫不清的未来，诺言，在这些面前是多么苍白无力！现实如此现实，如果纯一没有牺牲，故事会是怎样的呢？电影里美好的结局被自己心里的一个假设击的粉碎。 一段真爱，用尽十年才走在一起，终究给所有人以希望和鼓励。创作者最大的幸福是可以让电影不像现实那样到处遗憾，观赏者最大的快乐就是用眼睛摸一摸自己的理想－－或是有关爱情的，或是有关事业的。
+电影，风景，想所想，思绪无边无际。多想也能远离喧嚣凡俗杂事，暂时沉浸在美好当中。
+第二遍快进看了一遍，当平泽回到日本,对着放下手中的活来欢迎她的母亲一笑的那个画面我给截了下来。那是怎样的一种繁华落，始得人生之义。最后的最后，一切还是回到了起点，而我们已经不是那个曾经的人了，历经千辛万苦，我们更加珍惜。
+新的一年，我想对屏幕前的你说，在寻找幸福的路上，勇敢地去争取渴望的，更要珍惜拥有的，在这个曲折的人生路上，错过，就和相遇一样的偶然。相信爱，因为，美好的，也是易碎的。
+很喜欢孙燕资的“遇见”，不仅因为声音，还为歌词。
+听见 冬天的离开 我在某年某月 醒过来 我想 我等 我期待 未来却不能理智安排 阴天 傍晚 车窗外 未来有一个人在等待 向左 向右 向前看 爱要拐几个弯才来 我遇见谁 会有怎样的对白 我等的人 他在多远的未来 我听见风来自地铁和人海 我排着队 拿着爱的号码牌 阴天 傍晚 车窗外 未来有一个人在等待 向左 向右 向前看 爱要拐几个弯才来 我遇见谁 会有怎样的对白 我等的人 他在多远的未来 我听见风来自地铁和人海 我排着队 拿着爱的号码牌 我往前飞 飞过一片时间海 我们也常在爱情里受伤害 我看着路 梦的入口有点窄 我遇见你是最美的意外 终有一天 我的谜底会揭开</content></entry><entry><title>写在2012岁末</title><url>https://zhimoe.github.io/post/goodbye-2012/</url><categories><category>随想</category></categories><tags><tag>qq空间</tag></tags><content type="html"> 时光如水，哗啦啦又是一年； 岁月如歌，唏哩哩唱不成调。 去年光棍节写了点感慨，最后是“这仍然还是最好的年代，却也是最坏的年代。2011年的冬天，虽然阳光很好，但风还是有些冷，愿与君共勉，但冷暖自知。”
+事实是2012，冬天更冷。
+这会儿坐着回想今年一年，发现对上半年的记忆是一片空白。所有的记忆是从暑假回家开始的。事先没有说，出车站时发了一条短信，五分钟后朱来接我，每次放假都是如此。第二天还没起床，徐已经冒雨到车站接我，最后冒雨去他家住了一晚。我这个朋友，一个学期里电话都很少打一个，和他们也没有共同的兴趣爱好，却在一起即使不说话也不觉得尴尬。
+在家里的二十几天，妈妈变着花样地做饭菜，我没长胖，她自己却长了几斤。
+假期只出去玩了一次，和徐去杨家玩了一天，晚上三个人看奥运会，然后三个横着躺在床上听他们说和女友认识的故事，聊大学生活，快两点才睡着。第二天还是下雨，三个人躺在床上看电视，没有多说一句；下午冒雨去水库玩。
+然后就是青岛实习。每天都是白天坐车看军舰看潜艇，晚上吃烧烤和扎啤。
+还记得穿着裤衩，趿着拖鞋去看海底世界的心情； 为阿光饯行那个晚上喝得放纵； 印象最深刻的还是黄岛的风光——沿着海岸公路，看到的是风格各异的别墅，数不清的高尔夫球场，漫山遍野的桃树，蓊郁的树林，怪石嶙峋的大珠山，纯朴的小渔村；还有那腥味的海风…一切都是那么新，那么美。
+开学后，平静了。视力急剧下降，以致无法正常看书。写周记的习惯也断了，每每想好了，却又觉得没有必要了。或许做的最有意义的一件事就是锻炼吧，身体结实了很多。
+2012 ，末日没有到来，明天还在蔓延，温暖感动很多，不顺的事情更多。2013，但愿运气好一些。
+2013，在衰老中成熟，用伪装的坚强去感染生活。
+辞旧迎新的时刻，摘抄西班牙诗人加西亚·洛尔卡的诗句，作为我们年复一年的新年许愿的理由：“因为我们想要每天吃的面包，想要桤木的花朵和永久的温存。因为我们要求大地的意志能够实现，将它的果实分给所有人。”</content></entry><entry><title>小城</title><url>https://zhimoe.github.io/post/small-town/</url><categories><category>随想</category></categories><tags><tag>qq空间</tag></tags><content type="html"> 我不喜欢西安，喜欢一个地方需要时间，而我还找不到理由。我不喜欢因为我仅仅是在这里生活。
+我喜欢玉山，因为那里有曾经的我。一个人走在街上，忽然就觉得这一幕好熟悉，分明有一天自己也是这么走着，那天我要去干什么？我已经记不得，甚至有可能是一种幻觉。
+一个能让自己产生幻觉的地方，必然是你留下了太多的记忆在那里，留下了太多的不舍和牵挂。
+西安没有给我什么，或者说还没有发生什么，她无需给我什么，是我的鲁莽闯入。多情地想起了玉山那个小城。多少年后当我回想起西安会不会也像想起玉山一样&ndash;些许甜蜜些许忧伤些许满足些许遗憾？
+玉山最高的地方是塔山，而我竟没有登过顶。如果那天我接过了你递过来剥好的瓜子仁，事情会不会是另一番模样？
+“家在故林吴楚间，冰为溪水玉为山”题目问作者是谁。我没有记住老师给的答案。两年后我站在作者的塑像前，一直想起当时没有答上问题时你在朝我偷笑的画面。
+“太阳斜了，城里头起了炊烟，水上的烟波也带上了红影。西北的高山一带，有一个尖峰，活像倒插的笔尖，大约是怀玉山了罢？"”这是1933年的玉山。 当年郁达夫说的“实在是威尼斯里的一条通衢”的沿河，如今被改建的像画一般。
+很喜欢沿河路，密密的柳条，撒在斑驳的阳光，走在其间，能触摸到心中的悲悲戚戚。就那么静静地看着那些垂钓者，或者站在石桌旁看那群老者下棋，都是那么让人享受。趴在栏杆上，望着那西流而去的冰溪水，微凉的情绪也会随着河面过来的风摆荡。学校南门外的一段，留住了太多一中学子的记忆。多少年轻的誓言梦呀，都和那里的麻辣烫有关。那些热闹的夜晚，现在还会不会有？
+“热闹是他们的、、、”
+站在阳台上，看着秦岭，想到那句“西北望长安，可怜无数山”，秦岭由东向西走，无论从西北往长安看，还是从长安往西北看，都没有比秦岭更高的山了。不知道怎么解释，这里太阳自然也下得晚，六点多了还是热情不减，让人觉得秦岭是站错了位置，室友说要是真站在西边，冬天你又该抱怨了。我苦笑，或许是吧！反正我对自己不了解。
+望着秦岭，想着玉山的塔山与冰溪河，想到了那句“日暮乡关何处是，烟波江上使人愁”。</content></entry><entry><title>一点回忆</title><url>https://zhimoe.github.io/post/some-memories-about-mother/</url><categories><category>随想</category></categories><tags><tag>qq空间</tag></tags><content type="html"> 我想这不是一篇回忆，而是心情。默存说我们年轻时很容易把自己的写作冲动当成一种写作才能。我自知没有如此高雅的才能。但也不想在某一天突然发现自己被时间推着往前走。阿七说长时间的寂寞是所有写作的滥觞。或许我的确是寂寞的吧！一个人走在无人的路上，往事就在街角处看见了……
+中考后的第二天，我就说服母亲让我去打工。她在担心之余试图阻止，却用错了方法－－总是挖苦我：一定是没考好吧？想躲出去吧？被激将的我更加坚定要去打工了。说实话考了以后真的没底，感觉很一般，说不出好也说不出坏。而这种情况是最折磨人的，痛苦的像难产。中考后的第三天，我独自一人登上了去丽水的火车。
+这是我第一次坐火车。母亲帮我买了车票后就回去了，而我独自等了一个多小时的车。我想母亲的伟大就在于这样放心而又用心地去培养自己的孩子的自立能力吧！虽然有时我也怀疑是否因为哥哥继承了她的所有优秀品质，从小到大让她是如此地放心与骄傲以致于她认为她的孩子都应该是那样的独立自主。
+我背着个大书包站在那望着母亲的背影，虽然正午十二点的烈日下那晃动的空气让背影有点模糊，加上在那新建的火车站广场上，看上去背影更加显得小了，但那一刻，望着母亲的背影，我感到很欣慰，是的，是欣慰，或者说是满足。那个曾经病得只剩不到七十斤的人，现在已经能健步如飞了；那个曾经病得没有一根头发的人，现在又有了一头黑发，虽然近看有些许银丝；那张曾经因为进口药和病毒而彻底变形的脸现在又恢复健康了，虽然有一点浮肿…但终究还是健康的。这个伟大的母亲，或许是放不下自己的家人，在被医生宣布无救后又活过来了，那一天，和母亲同病房的有两个手术失败永远地走了…
+我永远都忘不了那一天，我在上第三节课时大娘来找我，没有上过一天学的她一直等到放学才敢进班叫我。我跟着她回家，走到小路上，她以那种旁人莫不关心的语气说：“你妈不行了，今天就要回来了。”不知是年少对死亡的无知无惧还是快两年没有见到母亲已经对这个概念没有多少感觉了，听到这句话后我很安静，只是突然觉得天快黑了，应该快点回去。我一路小跑，把大娘甩在后面。该怎样去原谅自己，曾经的无知与幼稚。近两年里我只见过母亲一面，暑假里我理了个光头去外婆家，在那里我看到了母亲，她心疼地问为什么理光头，是不是自己不会洗头？我执拗地没有回答，心里怎么也不愿意承认躺在床上的那个人就是母亲。也是在那一刻，我发现自己以前从没有仔细看过母亲那张漂亮的脸，现在留下的只是模糊的回忆。而当我在写这些字时，我只能回想起一个画面－那时应该还六七岁时，我和母亲去山上打柴，母亲打柴时我就在边上找鹅卵石，有特色的石头。又让她给我做一柄木剑，把所有的树当成敌人去砍。回去时，她挑着一担柴，我跟在她后面，口袋里装满了石头，拿着长木剑，突然脚一滑摔倒了，她马上扔下担跑过来扶我起来，帮我擦汗并蹲下来笑着把我口袋里的石头都装进她的袋子里，也就是在那一刻我看了看母亲的脸，白皙的，铺满了碎碎的汗珠，微笑着责怪我装这么多石头。我把玩了泥巴的手往她脸上一抹撒腿就跑，她也不追，拿下毛巾仔细地把脸擦干净了才起身。最终我还是没记住母亲当年的模样，只是想起那微笑的感觉依旧是那样的温暖。有时访亲时能从亲友们的口中知道母亲年轻时的确是很好看的………
+我就就那样站在烈日下望着母亲转过街角，一颗汗珠沿着我的睫毛滑进了眼眶，又立刻溢了出来，顺着脸颊滴在地上，还没来得及溅开就被那厚厚的灰给吸干了，卷成了一个泥珠。
+在候车室里我看到许多学生，有些是我的同学，他们也在等车，他们中有的是去家长那里玩，更多的是已经决定了不读书了，出去打工，做生意。看着他们有说有笑，我忽然觉得他们是幸福的，因为他们已经清楚了方向，虽然前途艰辛而漫长，但他们是那样的年轻而乐观，将用自己的双手去开创自己的未来。而我呢，就像一只被捏在空中的鸭子，不知道被扔下去时下面是水还是油。
+火车启动的那一刻，我透过玻璃看着陌生的站台，心里第一次有了一点孤独感，那诺大的站台亦是一样吧：目送着一批又一批的人生拓荒者，见证着一场又一场分别时的泪飞，迎来了一群又一群骄傲或落魄的归客…他是知道的那么多，他有那么多的故事可讲，可是没有人肯停下来听一听他的诉说，车站里的人永远是那样的匆忙………
+2010年7月</content></entry></search>
