@@ -1,0 +1,261 @@
+<!doctype html><html lang=zh dir=zh><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=content-security-policy content="upgrade-insecure-requests"><title>Kotlin Coroutine - zhimoe</title><meta name=keywords content="读书,代码,架构,JVM,Java,Kotlin,Python,Rust"><meta name=author content="zhimoe"><meta property="og:title" content="Kotlin Coroutine"><meta property="og:site_name" content="zhimoe"><meta property="og:image" content="/img/author.jpg"><meta name=title content="Kotlin Coroutine - zhimoe"><meta name=description content="编程是一门手艺"><link rel="shortcut icon" href=https://zhimoe.github.io/img/favicon.ico><link rel=apple-touch-icon href=https://zhimoe.github.io/img/apple-touch-icon.png><link rel=apple-touch-icon-precomposed href=https://zhimoe.github.io/img/apple-touch-icon.png><link href=https://cdn.jsdelivr.net/npm/typeface-fira-sans@1.1.13/index.min.css rel=stylesheet type=text/css><link href=https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css rel=stylesheet type=text/css><link href=https://cdn.jsdelivr.net/npm/imageviewer@1.1.0/dist/viewer.min.css rel=stylesheet><link href=https://zhimoe.github.io/css/main.css rel=stylesheet type=text/css><link href=https://zhimoe.github.io/css/syntax.css rel=stylesheet type=text/css><script async src="https://www.googletagmanager.com/gtag/js?id=G-CJJZFN2DZR"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CJJZFN2DZR")</script><script>const apiEndpoint="https://pageview.zhimoe.workers.dev/write",payload={url:document.location.href,title:document.title,referrer:window.frames.top.document.referrer};fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`,{mode:"no-cors"}).catch(console.log)</script></head><body itemscope itemtype=http://schema.org/WebPage lang=zh-hans><div class="container one-collumn sidebar-position-left page-home"><div class=headband></div><header id=header class=header itemscope itemtype=http://schema.org/WPHeader><div class=header-inner><div class=site-brand-container><div class=site-nav-toggle><div class=toggle role=button style=opacity:1;top:0><span class=toggle-line></span>
+<span class=toggle-line></span>
+<span class=toggle-line></span></div></div><div class="site-meta custom-logo"><div class=custom-logo-site-title><a href=https://zhimoe.github.io/ class=brand rel=start><span class=logo-line-before><i></i></span>
+<span class=site-title>zhimoe</span>
+<span class=logo-line-after><i></i></span></a></div><p class=site-subtitle>Captain your own Ship.</p></div><div class=site-nav-right><div class="toggle popup-trigger" style=opacity:1;top:0><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class=site-nav><ul id=menu class=menu><li class=menu-item><a href=https://zhimoe.github.io/ rel=section><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class=menu-item><a href=https://zhimoe.github.io/post/ rel=section><i class="menu-item-icon fa fa-fw fa-list-alt"></i><br>归档</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B/ rel=section><i class="menu-item-icon fa fa-fw fa-wpexplorer"></i><br>编程</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E7%BF%BB%E8%AF%91/ rel=section><i class="menu-item-icon fa fa-fw fa-language"></i><br>翻译</a></li><li class=menu-item><a href=https://zhimoe.github.io/categories/%E9%9A%8F%E6%83%B3/ rel=section><i class="menu-item-icon fa fa-fw fa-bathtub"></i><br>随想</a></li><li class=menu-item><a href=https://zhimoe.github.io/about/ rel=section><i class="menu-item-icon fa fa-fw fa-grav"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href=javascript:; class=popup-trigger><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class=site-search><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class=search-icon><i class="fa fa-search"></i></span>
+<span class=popup-btn-close><i class="fa fa-times-circle"></i></span><div class=local-search-input-wrapper><input autocomplete=off placeholder=搜索关键字... spellcheck=false type=text id=local-search-input autocapitalize=none autocorrect=off></div></div><div id=local-search-result></div></div></div></nav></div></header><main id=main class=main><div class=main-inner><div class=content-wrap><div id=content class=content><section id=posts class=posts-expand><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/kotlin-coroutine/ itemprop=url>Kotlin Coroutine</a></h1><div class=post-meta><span class=post-time><span class=post-meta-item-text>时间：</span>
+<time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2023-04-30">2023-04-30</time></span>
+<span class=post-category>&nbsp; | &nbsp;
+<span class=post-meta-item-text>分类：</span>
+<span itemprop=about itemscope itemtype=https://schema.org/Thing><a href=https://zhimoe.github.io/categories/%E7%BC%96%E7%A8%8B itemprop=url rel=index style=text-decoration:underline><span itemprop=name>编程</span></a>
+&nbsp;</span></span>
+<span>|
+<span class=post-meta-item-text>字数：</span>
+<span class=leancloud-world-count>3549 字</span></span>
+<span>|
+<span class=post-meta-item-text>阅读：</span>
+<span class=leancloud-view-count>8分钟</span></span></div></header><div class=post-body itemprop=articleBody><pre><code>A coroutine is an instance of suspendable computation. 
+</code></pre><p>协程是可被挂起的计算的实例。换句话说协程是一个对象，这个对象保存着一段可以切换线程的任务 + 当前执行的状态两部分信息。<br>日常涉及协程的编码，主要是描述协程的任务和管理多个协程的生命周期、异常处理等。</p><p>Kotlin 使用堆栈帧管理要运行哪个函数以及所有局部变量。挂起协程时，系统会复制并保存当前的堆栈帧以供稍后使用。恢复时，会将堆栈帧从其保存位置复制回来，然后函数再次开始运行。即使代码可能看起来像普通的顺序阻塞请求，协程也能确保网络请求避免阻塞主线程。</p><h3 id=问题场景>问题场景</h3><p>假设现在有个场景，根据用户id调用两个外部接口获取用户的姓名和公司名称，拼接后返回。<br>由于两个外部接口耗时较高，直接的思路就是使用两个线程来发送请求然后等待请求全部响应后拼接响应值。</p><h4 id=方式1-java的callable>方式1 Java的Callable</h4><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:green>// 定义两个Callable来异步执行方法
+</span></span></span><span style=display:flex><span><span style=color:green></span>Callable&lt;String&gt; getUserName = () -&gt; {
+</span></span><span style=display:flex><span>    <span style=color:green>// 模拟调用耗时方法获取用户名
+</span></span></span><span style=display:flex><span><span style=color:green></span>    Thread.sleep(1000); 
+</span></span><span style=display:flex><span>    <span style=color:#00f>return</span> <span style=color:#a31515>&#34;John&#34;</span>;
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Callable&lt;String&gt; getCompany = () -&gt; {
+</span></span><span style=display:flex><span>    <span style=color:green>// 模拟调用耗时方法获取公司名
+</span></span></span><span style=display:flex><span><span style=color:green></span>    Thread.sleep(1000);
+</span></span><span style=display:flex><span>    <span style=color:#00f>return</span> <span style=color:#a31515>&#34;Doe Corp.&#34;</span>; 
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:green>// 使用ExecutorService执行两个Callable并获取Future
+</span></span></span><span style=display:flex><span><span style=color:green></span>ExecutorService executor = Executors.newFixedThreadPool(2);
+</span></span><span style=display:flex><span>Future&lt;String&gt; nameFuture = executor.submit(getUserName);
+</span></span><span style=display:flex><span>Future&lt;String&gt; companyFuture = executor.submit(getCompany);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:green>// 在主线程中获取结果并合并
+</span></span></span><span style=display:flex><span><span style=color:green></span>String name = nameFuture.get();    
+</span></span><span style=display:flex><span>String company = companyFuture.get();
+</span></span><span style=display:flex><span>String info = name + <span style=color:#a31515>&#34;, &#34;</span> + company;
+</span></span><span style=display:flex><span>System.out.println(info); <span style=color:green>// John, Doe Corp.
+</span></span></span><span style=display:flex><span><span style=color:green></span>
+</span></span><span style=display:flex><span>executor.shutdown();
+</span></span></code></pre></div><h4 id=方式2-java的completablefuture>方式2 Java的CompletableFuture</h4><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:green>// 定义两个异步操作
+</span></span></span><span style=display:flex><span><span style=color:green></span>CompletableFuture&lt;String&gt; getUserName = CompletableFuture.supplyAsync(() -&gt; {
+</span></span><span style=display:flex><span>    Thread.sleep(1000);
+</span></span><span style=display:flex><span>    <span style=color:#00f>return</span> <span style=color:#a31515>&#34;John&#34;</span>;
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>CompletableFuture&lt;String&gt; getCompany = CompletableFuture.supplyAsync(() -&gt; {
+</span></span><span style=display:flex><span>    Thread.sleep(1000);
+</span></span><span style=display:flex><span>    <span style=color:#00f>return</span> <span style=color:#a31515>&#34;Doe Corp.&#34;</span>;
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:green>// 使用thenCombine合并两个异步操作的结果
+</span></span></span><span style=display:flex><span><span style=color:green></span>CompletableFuture&lt;String&gt; combined = getUserName.thenCombine(getCompany, (name, company) -&gt; name + <span style=color:#a31515>&#34;, &#34;</span> + company);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:green>// 获取最终结果
+</span></span></span><span style=display:flex><span><span style=color:green></span>String result = combined.get(); 
+</span></span><span style=display:flex><span>System.out.println(result); <span style=color:green>// John, Doe Corp.
+</span></span></span></code></pre></div><h4 id=方式3-kotlin的coroutine>方式3 Kotlin的Coroutine</h4><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>suspend</span> <span style=color:#00f>fun</span> getUserName(): String {
+</span></span><span style=display:flex><span>    delay(1000)  <span style=color:green>// 模拟调用耗时方法
+</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>return</span> <span style=color:#a31515>&#34;John&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00f>suspend</span> <span style=color:#00f>fun</span> getCompany(): String {
+</span></span><span style=display:flex><span>    delay(1000)  <span style=color:green>// 模拟调用耗时方法
+</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>return</span> <span style=color:#a31515>&#34;Doe Corp.&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00f>fun</span> main() {
+</span></span><span style=display:flex><span>    <span style=color:green>// 使用async并发调用两个suspend函数
+</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>val</span> name = async { getUserName() }
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> company = async { getCompany() }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:green>// 使用await等待两个任务完成并获取结果
+</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>val</span> nameResult = name.await()  
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> companyResult = company.await()
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;</span><span style=color:#a31515>$nameResult</span><span style=color:#a31515>, </span><span style=color:#a31515>$companyResult</span><span style=color:#a31515>&#34;</span>) <span style=color:green>// John, Doe Corp. 
+</span></span></span><span style=display:flex><span><span style=color:green></span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:green>// 或者使用awaitAll
+</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>suspend</span> <span style=color:#00f>fun</span> fetchTwoDocs() =        <span style=color:green>// called on any Dispatcher (any thread, possibly Main)
+</span></span></span><span style=display:flex><span><span style=color:green></span>    coroutineScope {
+</span></span><span style=display:flex><span>        <span style=color:#00f>val</span> deferreds = listOf(     <span style=color:green>// fetch two docs at the same time
+</span></span></span><span style=display:flex><span><span style=color:green></span>            async { fetchDoc(1) },  <span style=color:green>// async returns a result for the first doc
+</span></span></span><span style=display:flex><span><span style=color:green></span>            async { fetchDoc(2) }   <span style=color:green>// async returns a result for the second doc
+</span></span></span><span style=display:flex><span><span style=color:green></span>        )
+</span></span><span style=display:flex><span>        deferreds.awaitAll()        <span style=color:green>// use awaitAll to wait for both network requests
+</span></span></span><span style=display:flex><span><span style=color:green></span>        <span style=color:green>// The awaitAll function should be preferred over map { it.await() }
+</span></span></span><span style=display:flex><span><span style=color:green></span>    }
+</span></span></code></pre></div><h3 id=suspend关键字>suspend关键字</h3><p>suspend函数是协程中的任务描述部分，suspend关键字只是一个语法提示，告诉函数调用者该函数可能被切换线程，同理，也只能在suspend函数内部调用其他suspend函数，例如上面的delay。</p><p>编译器和IDE根据suspend关键字来做一个语法提示与校验。</p><h3 id=coroutine-builder>coroutine builder</h3><p>利用suspend fun只能描述任务/函数，还需要使用coroutine builder来创建协程。<br><code>launch</code>函数会创建一个协程返回一个<code>Job</code>不包含协程结果信息。<code>async</code>函数也创建一个协程返回<code>Deferred</code>-类似Future包含协程的未来计算结果。可以通过<code>Deferred</code>对象的await方法获取结果值。<br>所有的coroutine builder都是<code>CoroutineScope</code>的扩展函数。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>val</span> time = measureTimeMillis {
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> one = async { doSomethingUsefulOne() }
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> two = async { doSomethingUsefulTwo() }
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;The answer is </span><span style=color:#a31515>${one.await() + two.await()}</span><span style=color:#a31515>&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>println(<span style=color:#a31515>&#34;Completed in </span><span style=color:#a31515>$time</span><span style=color:#a31515> ms&#34;</span>)
+</span></span></code></pre></div><p><code>start = CoroutineStart.LAZY</code>的async协程只有在被调用<code>start</code>或者<code>await</code>时才会启动。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>val</span> time = measureTimeMillis {
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> one = async(start = <span style=color:#2b91af>CoroutineStart</span>.LAZY) { doSomethingUsefulOne() }
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> two = async(start = <span style=color:#2b91af>CoroutineStart</span>.LAZY) { doSomethingUsefulTwo() }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    one.start() 
+</span></span><span style=display:flex><span>    two.start() 
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;The answer is </span><span style=color:#a31515>${one.await() + two.await()}</span><span style=color:#a31515>&#34;</span>) <span style=color:green>//注意，如果没有上面两个start的话，那么两个await会让两个协程顺序执行而不是异步
+</span></span></span><span style=display:flex><span><span style=color:green></span>}
+</span></span><span style=display:flex><span>println(<span style=color:#a31515>&#34;Completed in </span><span style=color:#a31515>$time</span><span style=color:#a31515> ms&#34;</span>)
+</span></span></code></pre></div><h3 id=结构化并发>结构化并发</h3><p>还是上面方式3的两个suspend函数，如果其中一个方法异常，另一个方法也就没有必要继续执行了，在Java多线程目前难以做到（JEP 428已经实现，参考jdk19的StructuredTaskScope类），<br>而在kotlin协程中，只需要将两个线程放在同一个<code>CoroutineScope</code>即可实现:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>fun</span> main() = runBlocking&lt;Unit&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#00f>try</span> {
+</span></span><span style=display:flex><span>        failedConcurrentSum()
+</span></span><span style=display:flex><span>    } <span style=color:#00f>catch</span>(e: ArithmeticException) {
+</span></span><span style=display:flex><span>        println(<span style=color:#a31515>&#34;Computation failed with ArithmeticException&#34;</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00f>suspend</span> <span style=color:#00f>fun</span> failedConcurrentSum(): Int = coroutineScope { <span style=color:green>//coroutineScope 创建一个新的scope 
+</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>val</span> one = async&lt;Int&gt; { 
+</span></span><span style=display:flex><span>        <span style=color:#00f>try</span> {
+</span></span><span style=display:flex><span>            delay(<span style=color:#2b91af>Long</span>.MAX_VALUE) <span style=color:green>// Emulates very long computation
+</span></span></span><span style=display:flex><span><span style=color:green></span>            42
+</span></span><span style=display:flex><span>        } <span style=color:#00f>finally</span> {
+</span></span><span style=display:flex><span>            println(<span style=color:#a31515>&#34;First child was cancelled&#34;</span>)
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> two = async&lt;Int&gt; { 
+</span></span><span style=display:flex><span>        println(<span style=color:#a31515>&#34;Second child throws an exception&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#00f>throw</span> ArithmeticException()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    one.await() + two.await()
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>结构化并发是kotlin协程的核心优势之一，只有在你遇到复杂的场景时才能感受到结构化并发的威力与优雅。</p><h3 id=dispatcher>Dispatcher</h3><p>CoroutineDispatcher用来决定哪个（或几个）线程来运行该协程，可以将协程的执行限制在一个线程或者某个线程池，或者不限制。<br>自带的几个dispatcher<br><code>Dispatchers.Main</code>: A coroutine dispatcher that is confined to the Main thread operating with UI objects. Usually such dispatcher is single-threaded.<br><code>Dispatchers.Default</code>: The default CoroutineDispatcher that is used by all standard builders like launch, async, etc. if no dispatcher nor any other ContinuationInterceptor is specified in their context.<br><code>Dispatchers.IO</code>: The CoroutineDispatcher that is designed for offloading blocking IO tasks to a shared pool of threads.<br><code>Dispatchers.Unconfined</code>: A coroutine dispatcher that is not confined to any specific thread. It executes initial continuation of the coroutine in the current call-frame and lets the coroutine resume in whatever thread that is used by the corresponding suspending function, without mandating any specific threading policy.</p><p>注意，即使是同一个函数内的不同行代码也不一定在同一个线程上面执行。</p><h3 id=coroutinecontext>CoroutineContext</h3><p>协程执行时总有带有一个CoroutineContext，可以理解为就是一个元信息Map，保存了Job、coroutine dispatcher 等信息:<br>Job：控制协程的生命周期。<br>CoroutineDispatcher：将工作分派到适当的线程。<br>CoroutineName：协程的名称，可用于调试。<br>CoroutineExceptionHandler：处理未捕获的异常。</p><p>coroutine builder（async、launch）接收可选的CoroutineContext对象参数。CoroutineContext最常见的用途就是指定协程的dispatcher。</p><h3 id=coroutinescope>CoroutineScope</h3><p>CoroutineScope是协程最重要也是最难理解的点。CoroutineScope 给每个协程都定义了一个scope,用来组织和管理一组协程的生命周期。<br>async和launch也是CoroutineScope的扩展函数。很多教程里面直接调用async函数其实是使用了GlobalScope对象。<br>获取独立的scope对象最佳实践是通过 <code>CoroutineScope()</code> 和 <code>MainScope()</code> 工厂函数。一般不建议自己实现<code>CoroutineScope</code>接口。</p><p><code>suspend withContext</code>和<code>suspend coroutineScope</code>函数也叫scoping function。<br><code>withContext</code>: Calls the specified suspending block with a given coroutine context, suspends until it completes, and returns the result.<br><code>coroutineScope</code>: Creates a CoroutineScope and calls the specified suspend block with this scope. The provided scope inherits its coroutineContext from the outer scope, but overrides the context&rsquo;s Job.<br><code>withContext</code>比<code>coroutineScope</code>多了一个context:CoroutineContext参数。</p><p><code>withContext</code>几个使用示例</p><ol><li>切换到IO上下文执行IO操作</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>suspend</span> <span style=color:#00f>fun</span> doSomething() {
+</span></span><span style=display:flex><span>    withContext(<span style=color:#2b91af>Dispatchers</span>.IO) {
+</span></span><span style=display:flex><span>        <span style=color:green>// 在IO上下文中执行IO密集型代码
+</span></span></span><span style=display:flex><span><span style=color:green></span>        doNetworkRequest() 
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=2><li>切换到主线程更新UI</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>suspend</span> <span style=color:#00f>fun</span> doSomething() {
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> result = withContext(<span style=color:#2b91af>Dispatchers</span>.Default) {
+</span></span><span style=display:flex><span>        <span style=color:green>// 在默认上下文中进行计算
+</span></span></span><span style=display:flex><span><span style=color:green></span>        calculateResult() 
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    withContext(<span style=color:#2b91af>Dispatchers</span>.Main) {
+</span></span><span style=display:flex><span>        <span style=color:green>// 在主线程中更新UI
+</span></span></span><span style=display:flex><span><span style=color:green></span>        updateUI(result)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=3><li>同时在两个不同上下文中执行任务</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>suspend</span> <span style=color:#00f>fun</span> doSomething() {
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> job1 = <span style=color:#2b91af>GlobalScope</span>.launch(<span style=color:#2b91af>Dispatchers</span>.IO) {
+</span></span><span style=display:flex><span>        <span style=color:green>// ...
+</span></span></span><span style=display:flex><span><span style=color:green></span>    } 
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> job2 = <span style=color:#2b91af>GlobalScope</span>.launch(<span style=color:#2b91af>Dispatchers</span>.Main) {
+</span></span><span style=display:flex><span>        <span style=color:green>// ...
+</span></span></span><span style=display:flex><span><span style=color:green></span>    }
+</span></span><span style=display:flex><span>    withContext(<span style=color:#2b91af>Dispatchers</span>.IO) {
+</span></span><span style=display:flex><span>        job1.join()   <span style=color:green>// 等待IO上下文的任务结束
+</span></span></span><span style=display:flex><span><span style=color:green></span>    }
+</span></span><span style=display:flex><span>    withContext(<span style=color:#2b91af>Dispatchers</span>.Main) {
+</span></span><span style=display:flex><span>        job2.join()   <span style=color:green>// 等待主线程的任务结束 
+</span></span></span><span style=display:flex><span><span style=color:green></span>    } 
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=4><li>取消上下文切换</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>suspend</span> <span style=color:#00f>fun</span> doSomething() {
+</span></span><span style=display:flex><span>    withContext(NonCancellable) { <span style=color:green>// 使用NonCancellable上下文
+</span></span></span><span style=display:flex><span><span style=color:green></span>        <span style=color:green>// 这里的代码块不会被取消
+</span></span></span><span style=display:flex><span><span style=color:green></span>        doSomething()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:green>// ...
+</span></span></span><span style=display:flex><span><span style=color:green></span>}
+</span></span></code></pre></div><h4 id=withcontext-vs-async>withContext vs async</h4><p>看上去除了返回值不一样，两者的功能非常相似,都是接收context和block参数。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:green>// async
+</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>fun</span> asyncDemo() = runBlocking {
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;I am working&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> opOne = async(IO) { operationOne() }.await() <span style=color:green>//注意 这里会阻塞等到operationOne返回才能继续下一行执行
+</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>val</span> opTwo = async(IO) { operationTwo() }.await()
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;Done working.&#34;</span>)
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;The multiplied result is </span><span style=color:#a31515>${opOne * opTwo}</span><span style=color:#a31515>&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:green>// withContext
+</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>fun</span> withContextDemo() = runBlocking {
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;I am working&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> opOne = withContext(IO) { operationOne() }
+</span></span><span style=display:flex><span>    <span style=color:#00f>val</span> opTwo = withContext(IO) { operationTwo() }
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;Done working.&#34;</span>)
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;The multiplied result is </span><span style=color:#a31515>${opOne * opTwo}</span><span style=color:#a31515>&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>其实async是用于并发异步编程的，上面的async使用方式是不推荐的，因为在创建一个协程后立即调用await会阻塞当前线程，所以上面opOne和opTwo是顺序执行。<br>withContext只是用于Context切换。上面的代码其实也可以写成</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>val</span> result = withContext(IO) { operationOne() + operationTwo() }
+</span></span></code></pre></div><h3 id=flow>Flow</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>fun</span> simple(): Flow&lt;Int&gt; = flow { <span style=color:green>// flow builder, no suspend keyword before fun
+</span></span></span><span style=display:flex><span><span style=color:green></span>    <span style=color:#00f>for</span> (i <span style=color:#00f>in</span> 1..3) {
+</span></span><span style=display:flex><span>        delay(1000) <span style=color:green>// pretend we are doing something useful here
+</span></span></span><span style=display:flex><span><span style=color:green></span>        emit(i) <span style=color:green>// emit next value
+</span></span></span><span style=display:flex><span><span style=color:green></span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:green>// Collect the flow
+</span></span></span><span style=display:flex><span><span style=color:green></span>simple().collect { <span style=color:#00f>value</span> -&gt; println(<span style=color:#00f>value</span>) }
+</span></span><span style=display:flex><span><span style=color:green>// We can replace delay with Thread.sleep in the body of simple&#39;s flow { ... } and see that the main thread is blocked in this case.
+</span></span></span></code></pre></div><p>Flow只有在collect调用时才计算，也可以中途取消:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>fun</span> simple(): Flow&lt;Int&gt; = flow { 
+</span></span><span style=display:flex><span>    <span style=color:#00f>for</span> (i <span style=color:#00f>in</span> 1..3) {
+</span></span><span style=display:flex><span>        delay(100)          
+</span></span><span style=display:flex><span>        println(<span style=color:#a31515>&#34;Emitting </span><span style=color:#a31515>$i</span><span style=color:#a31515>&#34;</span>)
+</span></span><span style=display:flex><span>        emit(i)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#00f>fun</span> main() = runBlocking&lt;Unit&gt; {
+</span></span><span style=display:flex><span>    withTimeoutOrNull(250) { <span style=color:green>// Timeout after 250ms 
+</span></span></span><span style=display:flex><span><span style=color:green></span>        simple().collect { <span style=color:#00f>value</span> -&gt; println(<span style=color:#00f>value</span>) } 
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    println(<span style=color:#a31515>&#34;Done&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:green>// only collected 1 2 
+</span></span></span></code></pre></div><p>除了 <code>flow</code> 还有 <code>flowOf(1,2,3)</code> 、 <code>coll.asFlow()</code> 等flow builder函数。<br>operator: <code>transform</code> <code>take</code> <code>collect</code> <code>toList/toSet</code> <code>first</code> <code>reduce</code> <code>fold - reduce with initial value</code></p><p><code>flowOn</code> change the context of a flow:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>fun simple(): Flow&lt;Int&gt; = flow {
+</span></span><span style=display:flex><span>    for (i in 1..3) {
+</span></span><span style=display:flex><span>        Thread.sleep(100) // pretend we are computing it in CPU-consuming way
+</span></span><span style=display:flex><span>        log(&#34;Emitting $i&#34;)
+</span></span><span style=display:flex><span>        emit(i) // emit next value
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}.flowOn(Dispatchers.Default) // RIGHT way to change context for CPU-consuming code in flow builder
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>fun main() = runBlocking&lt;Unit&gt; {
+</span></span><span style=display:flex><span>    simple().collect { value -&gt;
+</span></span><span style=display:flex><span>        log(&#34;Collected $value&#34;) 
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>}            
+</span></span></code></pre></div><p>如果collect函数比flow的emit还慢的话，可以使用<code>buffer</code>将flow提前生成</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>val</span> time = measureTimeMillis {
+</span></span><span style=display:flex><span>    simple() <span style=color:green>// 100ms for each element
+</span></span></span><span style=display:flex><span><span style=color:green></span>        .buffer() <span style=color:green>// buffer emissions, don&#39;t wait
+</span></span></span><span style=display:flex><span><span style=color:green></span>        .collect { <span style=color:#00f>value</span> -&gt; 
+</span></span><span style=display:flex><span>            delay(300) <span style=color:green>// pretend we are processing it for 300 ms
+</span></span></span><span style=display:flex><span><span style=color:green></span>            println(<span style=color:#00f>value</span>) 
+</span></span><span style=display:flex><span>        } 
+</span></span><span style=display:flex><span>}   
+</span></span><span style=display:flex><span>println(<span style=color:#a31515>&#34;Collected in </span><span style=color:#a31515>$time</span><span style=color:#a31515> ms&#34;</span>)
+</span></span></code></pre></div><h3 id=channel>Channel</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#00f>val</span> channel = Channel&lt;Int&gt;()
+</span></span><span style=display:flex><span>launch {
+</span></span><span style=display:flex><span>    <span style=color:#00f>for</span> (x <span style=color:#00f>in</span> 1..5) channel.send(x * x)
+</span></span><span style=display:flex><span>    channel.close() <span style=color:green>// we&#39;re done sending
+</span></span></span><span style=display:flex><span><span style=color:green></span>}
+</span></span><span style=display:flex><span><span style=color:green>// here we print received values using `for` loop (until the channel is closed)
+</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>for</span> (y <span style=color:#00f>in</span> channel) println(y)
+</span></span><span style=display:flex><span>println(<span style=color:#a31515>&#34;Done!&#34;</span>)
+</span></span></code></pre></div><h3 id=其他常用函数>其他常用函数</h3><p><code>runBlocking</code>的签名<code>actual fun &lt;T> runBlocking(context: CoroutineContext = EmptyCoroutineContext, block: suspend CoroutineScope.() -> T): T</code><br>看着和withContext非常相似，但是withContext是suspend函数，runBlocking不是。<br>runBlocking 运行一个新的协程，并可中断地阻塞当前线程，直到协程完成。此函数不应在协程中使用。它旨在将常规的阻塞代码与挂起风格编写的库连接起来，以便在main函数和测试中使用。</p><p><code>kotlin.system.measureTimeMillis</code> Executes the given block and returns elapsed time in milliseconds.</p><p><code>delay</code> Delays coroutine for a given time without blocking a thread and resumes it after a specified time.</p><p><code>suspend fun yield()</code> Yields the thread (or thread pool) of the current coroutine dispatcher to other coroutines on the same dispatcher to run if possible.</p></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>文章：</span><a href=https://zhimoe.github.io/post/kotlin-coroutine/> Kotlin Coroutine by zhimoe</a></p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick='var qr=document.getElementById("QR");qr.style.display==="none"?qr.style.display="block":qr.style.display="none"'>
+<span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/access-into-wsl2-ubuntu-from-macos/ rel=prev title="在macOS通过SSH访问Windows的WSL2 Ubuntu">在macOS通过SSH访问Windows的WSL2 Ubuntu
+<i class="fa fa-chevron-right"></i></a></div></div><div id=disqus_thread></div><script>var disqus_config=function(){this.page.url="https://zhimoe.github.io/post/kotlin-coroutine/",this.page.identifier="https://zhimoe.github.io/post/kotlin-coroutine/"};(function(){var e=document,t=e.createElement("script");t.src="https://zhimoe.disqus.com/embed.js",t.setAttribute("data-timestamp",+new Date),(e.head||e.body).appendChild(t)})()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></footer></article></section></div></div><div class=sidebar-toggle><div class=sidebar-toggle-line-wrap><span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+<span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+<span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id=sidebar class=sidebar><div class=sidebar-inner><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target=post-toc-wrap>文章目录</li><li class=sidebar-nav-overview data-target=site-overview>站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop=author itemscope itemtype=http://schema.org/Person><img class=site-author-image itemprop=image src=https://zhimoe.github.io/img/avatar.png alt=zhimoe><p class=site-author-name itemprop=name>zhimoe</p><p class="site-description motion-element" itemprop=description>Captain your own Ship.</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href=https://zhimoe.github.io/post/><span class=site-state-item-count>67</span>
+<span class=site-state-item-name>日志</span></a></div><div class="site-state-item site-state-categories"><a href=https://zhimoe.github.io/categories/><span class=site-state-item-count>4</span>
+<span class=site-state-item-name>分类</span></a></div><div class="site-state-item site-state-tags"><a href=https://zhimoe.github.io/tags/><span class=site-state-item-count>42</span>
+<span class=site-state-item-name>标签</span></a></div></nav><div class="links-of-author motion-element"><span class=links-of-author-item><a href=https://github.com/zhimoe/ target=_blank title=GitHub><i class="fa fa-fw fa-github"></i>
+GitHub</a></span>
+<span class=links-of-author-item><a href=https://www.zhihu.com/question/21142149/answer/52383396 target=_blank title=ZhiHu><i class="fa fa-fw fa-globe"></i>
+ZhiHu</a></span></div><div class="links-of-blogroll motion-element links-of-blogroll-inline"><div class=links-of-blogroll-title><i class="fa fa-fw fa-external-link"></i>
+书签</div><ul class=links-of-blogroll-list><li class=links-of-blogroll-item><a href=https://learngitbranching.js.org/ title=可视化学习Git target=_blank>可视化学习Git</a></li><li class=links-of-blogroll-item><a href=https://gallerix.asia/ title=艺术绘画博物馆 target=_blank>艺术绘画博物馆</a></li><li class=links-of-blogroll-item><a href=https://cheats.rs/ title=RustCheatsheet target=_blank>RustCheatsheet</a></li><li class=links-of-blogroll-item><a href=https://developers.google.com/machine-learning/crash-course/ title=谷歌机器学习课程 target=_blank>谷歌机器学习课程</a></li></ul></div><div class="tagcloud-of-blogroll motion-element tagcloud-of-blogroll-inline"><div class=tagcloud-of-blogroll-title><i class="fa fa-fw fa-tags"></i>
+标签云</div><ul class=tagcloud-of-blogroll-list><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/code>Code</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/java>Java</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/scala>Scala</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/python>Python</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/rust>Rust</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/qq%E7%A9%BA%E9%97%B4>Qq空间</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/spring>Spring</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/%E5%B9%B6%E5%8F%91>并发</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/docker>Docker</a></li><li class=tagcloud-of-blogroll-item><a href=https://zhimoe.github.io/tags/git>Git</a></li></ul></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class=post-toc><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#问题场景>问题场景</a></li><li><a href=#suspend关键字>suspend关键字</a></li><li><a href=#coroutine-builder>coroutine builder</a></li><li><a href=#结构化并发>结构化并发</a></li><li><a href=#dispatcher>Dispatcher</a></li><li><a href=#coroutinecontext>CoroutineContext</a></li><li><a href=#coroutinescope>CoroutineScope</a></li><li><a href=#flow>Flow</a></li><li><a href=#channel>Channel</a></li><li><a href=#其他常用函数>其他常用函数</a></li></ul></li></ul></nav></div></div></section></div></aside></div></main><footer id=footer class=footer><div class=footer-inner><div class=copyright><span class=copyright-year>&copy; 2016 - 2023</span>
+<span class=with-love><i class="fa fa-heart"></i></span>
+<span class=copyright-author>zhimoe</span></div></div></footer><div class=back-to-top><i class="fa fa-arrow-up"></i>
+<span id=scrollpercent><span>0</span>%</span></div></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js></script>
+<script type=text/javascript src=https://zhimoe.github.io/js/search.js></script>
+<script type=text/javascript src=https://zhimoe.github.io/js/affix.js></script>
+<script type=text/javascript src=https://zhimoe.github.io/js/scrollspy.js></script>
+<script type=text/javascript>function detectIE(){let e=window.navigator.userAgent,t=e.indexOf("MSIE "),n=e.indexOf("Trident/"),s=e.indexOf("Edge/");return t>0||n>0||s>0?-1:1}function getCntViewHeight(){let t=$("#content").height(),e=$(window).height();return t>e?t-e:$(document).height()-e}function getScrollbarWidth(){let e=$("<div />").addClass("scrollbar-measure").prependTo("body"),t=e[0],n=t.offsetWidth-t.clientWidth;return e.remove(),n}function registerBackTop(){let t=50,e=$(".back-to-top");$(window).on("scroll",function(){e.toggleClass("back-to-top-on",window.pageYOffset>t);let s=$(window).scrollTop(),o=getCntViewHeight(),i=s/o,n=Math.round(i*100),a=n>100?100:n;$("#scrollpercent>span").html(a)}),e.on("click",function(){$("html,body").animate({scrollTop:0,screenLeft:0},800)})}function initScrollSpy(){let e=".post-toc",s=$(e),t=".active-current";s.on("activate.bs.scrollspy",function(){let t=$(e+" .active").last();n(),t.addClass("active-current")}).on("clear.bs.scrollspy",n),$("body").scrollspy({target:e});function n(){$(e+" "+t).removeClass(t.substring(1))}}function initAffix(){let e=$(".header-inner").height(),t=parseInt($(".main").css("padding-bottom"),10),n=e+10;$(".sidebar-inner").affix({offset:{top:n,bottom:t}}),$(document).on("affixed.bs.affix",function(){updateTOCHeight(document.body.clientHeight-100)})}function initTOCDimension(){let e;$(window).on("resize",function(){e&&clearTimeout(e),e=setTimeout(function(){let e=document.body.clientHeight-100;updateTOCHeight(e)},0)}),updateTOCHeight(document.body.clientHeight-100);let t=getScrollbarWidth();$(".post-toc").css("width","calc(100% + "+t+"px)")}function updateTOCHeight(e){e=e||"auto",$(".post-toc").css("max-height",e)}$(function(){let t=$(".header-inner").height()+10;$("#sidebar").css({"margin-top":t}).show();let n=parseInt($("#sidebar").css("margin-top")),s=parseInt($(".sidebar-inner").css("height")),e=n+s,o=$(".content-wrap").height();o<e&&$(".content-wrap").css("min-height",e),$(".site-nav-toggle").on("click",function(){let e=$(".site-nav"),o=$(".toggle"),t="site-nav-on",i="toggle-close",n=e.hasClass(t),a=n?"slideUp":"slideDown",s=n?"removeClass":"addClass";e.stop()[a]("normal",function(){e[s](t),o[s](i)})}),registerBackTop(),initScrollSpy(),initAffix(),initTOCDimension(),$(".sidebar-nav-toc").click(function(){$(this).addClass("sidebar-nav-active"),$(this).next().removeClass("sidebar-nav-active"),$("."+$(this).next().attr("data-target")).toggle(500),$("."+$(this).attr("data-target")).toggle(500)}),$(".sidebar-nav-overview").click(function(){$(this).addClass("sidebar-nav-active"),$(this).prev().removeClass("sidebar-nav-active"),$("."+$(this).prev().attr("data-target")).toggle(500),$("."+$(this).attr("data-target")).toggle(500)})})</script><script src=https://cdn.jsdelivr.net/npm/imageviewer@1.1.0/dist/viewer.min.js></script>
+<script type=text/javascript>$(function(){$(".post-body").viewer()})</script></body></html>
