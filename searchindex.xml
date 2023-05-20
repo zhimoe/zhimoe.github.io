@@ -149,7 +149,65 @@ Prj on  oops ❯ git rebase master Current branch oops is up to date. Prj on 
 参考一个完美的GitFlow模型</content></entry><entry><title>Scala3 缩进语法总结表</title><url>https://zhimoe.github.io/post/scala3-indent-syntax/</url><categories><category>编程</category></categories><tags><tag>scala3</tag><tag>cheatsheet</tag></tags><content type="html"> Scala 3 在语法上面新增了一种Python的缩进格式,两种格式都可以使用. 但是目前部分情况还是需要使用括号.
 个人对新语法是支持的. 缩进可以极大地提供代码的可读性和整洁, 最大的体会就是SparkStreaming的rdd处理代码,新手容易写出十几个}括号嵌套代码.
 当然缺点是缩进不利于代码复制和格式化.
-下面是书本上关于Scala3的语法对比. 注意,两个语法格式都是支持的. for和if去掉小括号真的是太棒了.</content></entry><entry><title>使用speed-measure-webpack-plugin和Happypack优化webpack打包速度</title><url>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</url><categories><category>编程</category></categories><tags><tag>code</tag><tag>JS</tag><tag>webpack</tag></tags><content type="html"> 问题 一个ionic app本地编译需要8分钟,提交到流水线编译耗时需要近40分钟,从日志看到webpack打包步骤耗时最严重.
+下面是书本上关于Scala3的语法对比. 注意,两个语法格式都是支持的. for和if去掉小括号真的是太棒了.</content></entry><entry><title>Python Tips for Impatient Dev</title><url>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</url><categories><category>编程</category></categories><tags><tag>code</tag><tag>python</tag></tags><content type="html"> Python tricks f-string的妙用 py3.6开始,推荐使用f-string,不要使用 %s或者 "".format().如果接收用户输入,使用Template做安全校验。
+在python f-string中可以通过变量或者表达式后面加=实现打印变量名或者表达式:
+print(f'{v=}') # 等价print(f'v={v}') print(f'{(len(arr),v)=}') 枚举类Enum略去value方法 假设你想要获得下面Color的#000, 需要使用Color.WHITE.value。但是可以通过StrEnum省去这个.value
+class Color(Enum): WHITE = "#000" # tips from enum import StrEnum class Directions(StrEnum): NORTH = 'north', # notice the trailing comma SOUTH = 'south', print(Directions.NORTH) # no need .value 使用with管理需要关闭的资源 with open(file_path, 'w') as file, get_connection(config) as conn: file.write('Hello, World!') 简化if的一些技巧 if variable == a or variable == b: res = do_something(variable) # better if variable in {a, b}: res = do_something(variable) if b > 10: a = 0 else: a = 5 # better a = 0 if b > 10 else 5 if data: lst = data else: lst = [0, 0, 0] # better, only use this when data type is collection, # cuz if data is int, then data=0 will make lst = [0,0,0] lst = data or [0, 0, 0] Instead of asking for permission, ask for forgiveness Python的异常比较轻量，所以一般推荐的写法是与其提前判断条件是否满足，不如在try catch中处理异常
+try: with open(filename, 'w') as file: file.write('Hello, World!') except FileNotFoundError: print('File does not exist.') except PermissionError: print('You dont have write permission.') except OSError as exc: print(f'An OSError has occurred:\n{exc}') 重要的std lib functools contextlib atexit pathlib collections itertools isinstance isinstance可以一次判断多个Class类型:
+# no need or conditions isinstance(foo, (Class1, Class2, ...)) 海象运算符(walrus operator) python3.8引入海象运算符，解决一个场景:获取一个值，检查它是否为非零，然后使用它。在python3.8之前需要三行:
+count = fresh_fruit.get('lemon', 0) if count: make_lemonade(count) else: out_of_stock() 上面的代码会引入一个看上去非常重要的变量，但实际情况并非如此。使用海象运算符可以解决这个问题。
+if count := fresh_fruit.get('lemon', 0): make_lemonade(count) else: out_of_stock() 虽然只是减少了一行代码，但是可读性提升了巨大，可以清楚地知道count只有在if成立时才使用到。甚至还可以在if中判断
+if (count := fresh_fruit.get('apple', 0)) >= 4: make_cider(count) else: out_of_stock() 另一个常见的场景是do-while,例如处理一个分页请求，直到请求返回为None，由于python不支持do-while语法，一般有两种写法:
+page_data = get_page() while page_data: process_page(page_data) page_data = get_page() # 方法2 loop-and-a-half while True: page_data = get_page() if not page_data: break process_page(page_data) 海象运算符完美解决了这个问题:
+while page_data := get_page(): process_page(page_data) 读写文件时也经常遇到这个场景:
+fp = open("test.txt", "r") while line := fp.readline(): print(line.strip()) 多进程的使用 from multiprocessing import Pool requests = [req1, req2] with Pool as p: results = p.map(process_request, requests) python的dict中关于equal和hash计算方式会有意外的效果 ['no', 'yes'][True] # output? {True: 'yes', 1: 'no', 1.0: 'maybe'} # output? “布尔类型是整数类型的子类型,布尔值在几乎所有环境中的行为都类似于值 0 和 1,但在转换为字符串时,分别得到的是字符串 False 或 True.”
+&ndash; The Standard Type Hierarchy
+由于True,1, 1.0的__eq__和__hash__都一样,所以出现了神奇的结果.
+(1) != (1,) 第一个是int,第二个是tuple 避免可变的默认参数, 例如: def fun(count=[]): count.append(2) #这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险! return count fun() #[2] fun() #[2,2] staticmethod classmethod staticmethod和classmethod都可以通过Cls.m()或instance.m()方式访问,都可以被继承,都可以访问全局变量.区别是
+classmethod访问的class变量信息会自动在Derive子类中改变,而staticmethod因为缺少第一个cls参数,所以访问的全局变量始终是父类的变量.
+staticmethod可以理解为Java的StringUtils类,只是和Cls放在一起方便代码阅读和组织.
+classmethod则是可以通过cls参数访问到当前类信息的.
+容器方法 合并字典 d1.update(d2) # 遍历d2,更新到d1 d = dict(**profile, **ext_info) #解构重新创建dict,右边的优先级高 d = dict(profile.items() | ext_info.items()) #同理 d = d1 | d2 # 新语法 {k: v for d in [profile, ext_info] for k, v in d.items()} # 推导式 py3.6开始 dict默认插入有序,无需使用OrderDict
+dict get and pop d.get(k,default) d.setdefault(k,default) d.pop(k) #删除不存在的键时,使用del d[k]有异常抛出,pop则不会 自定义dict 自定义自己的dict不能继承dict,而是collections.abc.MutableMapping, 因为自带的list和dict有一些特殊行为无法覆盖
+sort dict by key: print(sorted(dic, key=dic.get)) #output: key in asc order
+带索引遍历 for idx, item in enumerate(x):
+浅复制 list(l)等方式构建的list dict set属于浅复制,如果容器的元素还是容器,那么元素属于引用.
+深度复制需要使用copy module
+import copy xs = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] zs = copy.deepcopy(xs) # 对象同样可以使用copy,还有__copy__等魔法方法可以探索 使用namedtuple namedtuple可以让代码更容易阅读,当然现在可以是所有dataclass,特性更丰富
+from collections import namedtuple class Car: """you do not modify the name and date attributes """ def __init__(self, name, date): self._name = name self._date = date # use namedtuple Car = namedtuple('Car', 'name date') # 注意,这里多个属性可以一次性传入,使用空格分割 # 然后你可以将Car作为data class使用 #还有一个type hint的版本 from typing import NamedTuple list vs array list的元素可以不同,更为紧凑的单一类型是array类型
+Counter Counter(string).most_common(3)
+deque from collections import deque names = deque(['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']) names.popleft() names.appendleft('mark') 一些不常用的容器 CountedObject,ChainMap,MappingProxyType,frozenset,defaultdict
+在遍历中修改list 使用for i in range(len(a))或者for i, v in enumerate(a)都是危险的.
+# 方法1 将list拷贝一下,遍历新数组的过程中,修改原list: num_list = [1, 2, 3, 4, 5] print(num_list) for item in num_list[:]: # 这里list[:]是对原数组的拷贝,trick!!! if item == 2: num_list.remove(item) else: print(item) print(num_list) # 方法2 如果数组很大,那应该使用倒序遍历: for i in range(len(num_list)-1, -1, -1): if num_list[i] == 2: num_list.pop(i) else: print(num_list[i]) # 方法3 还是使用for推导式 [4 if x==3 else x for x in num_list] 打印容器可以使用pprint.pprint
+str和bytes bytes 和 bytesarray bytes是不可变的数组,每个元素必须在0～255之间.
+bytearray是可变的,可以修改,增加,删除元素.
+转换 bytes(ba)
+多行string my_very_big_string = ( "For a long time I used to go to bed early. Sometimes, " "when I had put out my candle, my eyes would close so quickly " "that I had not even time to say “I’m going to sleep.”" ) 多行文本去除缩进可以使用 textwrap.deden("""\your text""")
+str重复n次 print(s * n);
+int/string intern 小整数池是[-5,256], string也有 string intern
+str.partition/str.translate 有时使用str.partition方法拆分str或者str.translate批量replace子串更方便
+重要标准库 bisect 二分法搜索
+pathlib vs os.pathlib use pathlib over os.pathlib. 后者方法不全.
+os vs sys os module is for system, sys this module provides access to some variables used or maintained by
+the interpreter and to functions that interact strongly with the interpreter.
+迭代器 迭代器:__iter__ 和 __next__ 两个方法 可迭代对象:__iter__ 方法 如果希望可迭代对象可以重复使用,应该在 __iter__ 每次返回新的迭代器对象。 yield生成器也是迭代器。itertools简化循环,例如product pythonic的代码 使用for推导式,不要for..in遍历,也少用map,filter
+多使用destructing,这点在Java/Go都不支持,可以在方法内部省很多代码
+long_list = [x for x in range(100)] a, b, *c, d, e, f = long_list #e==98 f=99 使用if x is None,而不是 if x == None 异常处理
+清楚except和assert场合,logging.error(&lsquo;xxxxxxx&rsquo;, exc_info=True).
+自定义异常必须重写__init__() 和 str()
+use reversed(lis) over lis[::-1]
+@property make a method to class&rsquo;s property. can not use () when access the method cuz it is prop.
+use assert protect your code. 不要使用assert检查数据, 断言可能被全局禁用,导致数据检查（或者更恐怖的权限检查）被跳过
+@functools.wraps(func)
+__var 在class环境中会被改写
+使用abc模块可以避免抽象类只有在未实现方法被调用时才抛出NotImplementedError
+理解python的dunder方法,可以写出超级简洁的方法:
+import collections Card = collections.namedtuple('Card', ['rank', 'suit']) class FrenchDeck: ranks = [str(n) for n in range(2, 11)] + list('JQKA') suits = 'spades diamonds clubs hearts'.split() def __init__(self): self._cards = [Card(rank, suit) for suit in self.suits for rank in self.ranks] def __len__(self): return len(self._cards) def __getitem__(self, position): return self._cards[position] deck = new FrenchDeck() from random import choice choice(deck) # Card(rank='3', suit='hearts') 上面的例子我们使用了__len__方法和__getitem__方法,好处就是你可以使用python的len(deck),deck[1]这种语法,也就是说FrenchDeck几乎就是一个容器类型,还可以使用for遍历.
+更多查看&lt;fluent python 2nd>.
+其他 使用help(),dir()获取信息 python中的每个函数都有__code__属性,包含字节码信息 使用dis模块的dis函数可以查看更容易阅读的汇编(dis == disassembler) sys.getsizeof(x)获取对象大小 ...和pass几乎等效的,这是一个ellipsis type的单例. 无限大 float(&lsquo;inf&rsquo;) float(&rsquo;-inf&rsquo;) dis查看字节码 ==会被__eq__方法改变,判断是否None时应该使用is判断id是否一致 python的try可以配合else:当没有任何异常或者try里面没有return break,才执行else部分。这个和finally有很重要的不同 with需要实现__enter__ __exit__两个方法 with语句可以同时打开多个文件,不要嵌套with,更多功能查看contextlib 不要手动做数据校验,使用pydantic这个库 不要使用assert校验参数合法性,因为可以通过-O参数跳过 参考资料 Python 工匠系列
+RealPython学习路径
+一份非常详尽的Python小抄
+Fluent Python 2nd</content></entry><entry><title>使用speed-measure-webpack-plugin和Happypack优化webpack打包速度</title><url>https://zhimoe.github.io/post/speed-up-angular-build-use-happypack/</url><categories><category>编程</category></categories><tags><tag>code</tag><tag>JS</tag><tag>webpack</tag></tags><content type="html"> 问题 一个ionic app本地编译需要8分钟,提交到流水线编译耗时需要近40分钟,从日志看到webpack打包步骤耗时最严重.
 排查与解决 初步判断是流水线使用的容器CPU性能较弱或者存储mount性能导致的.找流水线同事支持配置了一个纯内存编译流水线,发现还是很慢. 接下来使用webpack的插件speed-measure-webpack-plugin监控性能.
 在webpack.config.js配置：
 // webpack.config.js // npm i --save-dev speed-measure-webpack-plugin const SpeedMeasurePlugin = require("speed-measure-webpack-plugin"); const smp = new SpeedMeasurePlugin(); // ...the webpack configuration const prodConfig = {/*...*/} module.exports = { prod: smp.wrap(prodConfig) }; 得到下图左侧的结果,可以看到主要耗时都在angular的PurifyPlugin上.搜索了一番后找到HappPack这个多核执行的插件.
@@ -466,31 +524,7 @@ use std::path::Path; use std::fs::File; use std::io::Read; use std::io::Write; u
 Artist credit: The Jenkins Comic
 Discuss Discuss this article on
 Github learnrust subreddit official Rust users forum Twitter lobste.rs rust subreddit Notifications Get notified when the next blog post get published by
-Following pretzelhammer on Twitter or Watching this repo&rsquo;s releases (click Watch -> click Custom -> select Releases -> click Apply) Further Reading Sizedness in Rust Common Rust Lifetime Misconceptions Learning Rust in 2020 Learn Assembly with Entirely Too Many Brainfuck Compilers source:Tour of Rust&rsquo;s Standard Library Traits</content></entry><entry><title>Py Tips for Impatient Dev</title><url>https://zhimoe.github.io/post/py-tips-for-impatient-dev/</url><categories><category>编程</category></categories><tags><tag>code</tag><tag>python</tag></tags><content type="html"> tricks python的dict中关于equal和hash计算方式会有意外的效果 ['no', 'yes'][True] # output? {True: 'yes', 1: 'no', 1.0: 'maybe'} # output? “布尔类型是整数类型的子类型,布尔值在几乎所有环境中的行为都类似于值 0 和 1,但在转换为字符串时,分别得到的是字符串 False 或 True.”
-&ndash; The Standard Type Hierarchy
-由于True,1, 1.0的__eq__和__hash__都一样,所以出现了神奇的结果.
-(1) != (1,) 第一个是int,第二个是tuple 避免可变的默认参数, 例如: def fun(count=[]): count.append(2) #这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险! return count fun() #[2] fun() #[2,2] staticmethod classmethod staticmethod和classmethod都可以通过Cls.m()或instance.m()方式访问,都可以被继承,都可以访问全局变量.区别是
-classmethod访问的class变量信息会自动在Derive子类中改变,而staticmethod因为缺少第一个cls参数,所以访问的全局变量始终是父类的变量.
-staticmethod可以理解为Java的StringUtils类,只是和Cls放在一起方便代码阅读和组织.
-classmethod则是可以通过cls参数访问到当前类信息的.
-容器方法 合并字典： d1.update(d2) # 遍历d2,更新到d1 d = dict(**profile, **ext_info) #解构重新创建dict,右边的优先级高 d = dict(profile.items() | ext_info.items()) #同理 d = d1 | d2 # 新语法 {k: v for d in [profile, ext_info] for k, v in d.items()} # 推导式 py3.6开始 dict默认插入有序,无需使用OrderDict dict get and pop d.get(k,default) d.setdefault(k,default) d.pop(k) #删除不存在的键时,使用del d[k]有异常抛出,pop则不会 自定义dict 自定义自己的dict不能继承dict,而是collections.abc.MutableMapping, 因为自带的list和dict有一些特殊行为无法覆盖
-sort dict by key: print(sorted(dic, key=dic.get)) #output: key in asc order
-判断key是否存在: if k in d: 带索引遍历: for idx, item in enumerate(x): 浅复制 list(l)等方式构建的list dict set属于浅复制,如果容器的元素还是容器,那么元素属于引用.
-深度复制需要使用copy module
-import copy xs = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] zs = copy.deepcopy(xs) # 对象同样可以使用copy,还有__copy__等魔法方法可以探索 使用namedtuple可以让代码更容易阅读,当然现在可以是所有dataclass,特性更丰富 from collections import namedtuple class Car: """you do not modify the name and date attributes """ def __init__(self, name, date): self._name = name self._date = date # use namedtuple Car = namedtuple('Car', 'name date') # 注意,这里多个属性可以一次性传入,使用空格分割 # 然后你可以将Car作为data class使用 #还有一个type hint的版本 from typing import NamedTuple list的元素可以不同,更为紧凑的单一类型是array类型 Counter(string).most_common(3) deque from collections import deque names = deque(['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']) names.popleft() names.appendleft('mark') 一些不常用的容器：CountedObject,ChainMap,MappingProxyType,frozenset,defaultdict 在遍历中修改list 使用for i in range(len(a))或者for i, v in enumerate(a)都是危险的.
-# 方法1 将list拷贝一下,遍历新数组的过程中,修改原list: num_list = [1, 2, 3, 4, 5] print(num_list) for item in num_list[:]: # 这里list[:]是对原数组的拷贝,trick!!! if item == 2: num_list.remove(item) else: print(item) print(num_list) # 方法2 如果数组很大,那应该使用倒序遍历: for i in range(len(num_list)-1, -1, -1): if num_list[i] == 2: num_list.pop(i) else: print(num_list[i]) # 方法3 还是使用for推导式 [4 if x==3 else x for x in num_list] 打印容器可以使用pprint.pprint str和bytes py3.6开始,推荐使用f-string,不要使用 %s或者 "".format().如果接收用户输入,使用Template做安全校验 多行string my_very_big_string = ( "For a long time I used to go to bed early. Sometimes, " "when I had put out my candle, my eyes would close so quickly " "that I had not even time to say “I’m going to sleep.”" ) bytes 和bytesarray bytes是不可变的数组,每个元素必须在0～255之间.
-bytearray是可变的,可以修改,增加,删除元素.
-转换 bytes(ba)
-小整数池是[-5,256], string也有 string intern 有时使用str.partition方法拆分str或者str.translate批量replace子串更方便 多行文本去除缩进可以使用 textwrap.deden("""\your text""") str重复n次print(s * n); 重要标准库 bisect二分法搜索 use pathlib over os.pathlib. 后者方法不全. os vs sys os module is for system, sys this module provides access to some variables used or maintained by
-the interpreter and to functions that interact strongly with the interpreter.
-迭代器 迭代器：__iter__ 和 __next__ 两个方法 可迭代对象：__iter__ 方法 如果希望可迭代对象可以重复使用,应该在 __iter__ 每次返回新的迭代器对象。 yield生成器也是迭代器。itertools简化循环,例如product pythonic的代码 使用for推导式,不要for..in遍历,也少用map,filter 多使用destructing,这点在Java/Go都不支持,可以在方法内部省很多代码 long_list = [x for x in range(100)] a, b, *c, d, e, f = long_list #e==98 f=99 使用if x is None,而不是 if x == None 异常处理 清楚except和assert场合,logging.error(&lsquo;xxxxxxx&rsquo;, exc_info=True).
-自定义异常必须重写__init__() 和 str()
-x if x &lt; 10 else y use reversed(lis) over lis[::-1] @property make a method to class&rsquo;s property. can not use () when access the method cuz it is prop. use assert protect your code. 不要使用assert检查数据, 断言可能被全局禁用,导致数据检查（或者更恐怖的权限检查）被跳过 @functools.wraps(func) __var 在class环境中会被改写 使用abc模块可以避免抽象类只有在未实现方法被调用时才抛出NotImplementedError 理解python的dunder方法,可以写出超级简洁的方法： import collections Card = collections.namedtuple('Card', ['rank', 'suit']) class FrenchDeck: ranks = [str(n) for n in range(2, 11)] + list('JQKA') suits = 'spades diamonds clubs hearts'.split() def __init__(self): self._cards = [Card(rank, suit) for suit in self.suits for rank in self.ranks] def __len__(self): return len(self._cards) def __getitem__(self, position): return self._cards[position] deck = new FrenchDeck() from random import choice choice(deck) # Card(rank='3', suit='hearts') 上面的例子我们使用了__len__方法和__getitem__方法,好处就是你可以使用python的len(deck),deck[1]这种语法,也就是说FrenchDeck几乎就是一个容器类型,还可以使用for遍历.
-更多查看&lt;fluent python 2nd>.
-其他 使用help(),dir()获取信息 python中的每个函数都有__code__属性,包含字节码信息 使用dis模块的dis函数可以查看更容易阅读的汇编(dis == disassembler) sys.getsizeof(x)获取对象大小 ...和pass几乎等效的,这是一个ellipsis type的单例. 无限大 float(&lsquo;inf&rsquo;) float(&rsquo;-inf&rsquo;) dis查看字节码 ==会被__eq__方法改变,判断是否None时应该使用is判断id是否一致 python的try可以配合else：当没有任何异常或者try里面没有return break,才执行else部分。这个和finally有很重要的不同 with需要实现__enter__ __exit__两个方法 with语句可以同时打开多个文件,不要嵌套with,更多功能查看contextlib 不要手动做数据校验,使用pydantic 不要使用assert校验参数合法性,因为可以通过-O参数跳过 参考资料 Python 工匠系列
-RealPython学习路径
-一份非常详尽的Python小抄
-Fluent Python 2nd</content></entry><entry><title>如何实现一个拼写检查器[翻译]</title><url>https://zhimoe.github.io/post/spell-correct/</url><categories><category>翻译</category></categories><tags><tag>code</tag><tag>python</tag></tags><content type="html"> 谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文How to Write a Spelling Corrector.
+Following pretzelhammer on Twitter or Watching this repo&rsquo;s releases (click Watch -> click Custom -> select Releases -> click Apply) Further Reading Sizedness in Rust Common Rust Lifetime Misconceptions Learning Rust in 2020 Learn Assembly with Entirely Too Many Brainfuck Compilers source:Tour of Rust&rsquo;s Standard Library Traits</content></entry><entry><title>如何实现一个拼写检查器[翻译]</title><url>https://zhimoe.github.io/post/spell-correct/</url><categories><category>翻译</category></categories><tags><tag>code</tag><tag>python</tag></tags><content type="html"> 谷歌AI负责人norvig在07年写的如何实现一个拼写纠正器的经典博文How to Write a Spelling Corrector.
 上面的链接已经是16年更新过了,程序也更新到了python3.
 中文版的翻译 如何实现一个拼写纠正器 还是基于07年版本的.
 博文最有意思的地方是大牛记录了如何在飞机上面没有网络的条件下徒手写一个准确率超过70%的拼写纠正器.</content></entry><entry><title>Associated Type in Rust</title><url>https://zhimoe.github.io/post/type-in-rust/</url><categories><category>编程</category></categories><tags><tag>rust</tag></tags><content type="html"> Associated Type and generic diff in rust
