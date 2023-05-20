@@ -3619,7 +3619,7 @@ body {
     margin: 10px;
 }
 
-#wcomments {
-    margin: 20px 0 40px 0;
-    text-align: center;
+/* fix excessive list indentation */
+ul, ol {
+    padding-left: 10px !important;
 }

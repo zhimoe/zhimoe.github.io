@@ -15,74 +15,74 @@
 <span class=leancloud-world-count>347 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>samples code and notes on java == and equals</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:green>/**
-</span></span></span><span style=display:flex><span><span style=color:green> * samples for == and equal() 
-</span></span></span><span style=display:flex><span><span style=color:green> * @author zhimoe
-</span></span></span><span style=display:flex><span><span style=color:green> *
-</span></span></span><span style=display:flex><span><span style=color:green> */</span>
-</span></span><span style=display:flex><span><span style=color:#00f>class</span> <span style=color:#2b91af>TestObj</span> {
-</span></span><span style=display:flex><span>	<span style=color:green>// the class for test == and equal()
-</span></span></span><span style=display:flex><span><span style=color:green></span>}
+<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>samples code and notes on java == and equals</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#177500>/**
+</span></span></span><span style=display:flex><span><span style=color:#177500> * samples for == and equal() 
+</span></span></span><span style=display:flex><span><span style=color:#177500> * @author zhimoe
+</span></span></span><span style=display:flex><span><span style=color:#177500> *
+</span></span></span><span style=display:flex><span><span style=color:#177500> */</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>class</span> <span style=color:#3f6e75>TestObj</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#177500>// the class for test == and equal()
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>public</span> <span style=color:#00f>class</span> <span style=color:#2b91af>EqualAndCompare</span> {
+</span></span><span style=display:flex><span><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>EqualAndCompare</span> <span style=color:#000>{</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	<span style=color:#00f>public</span> <span style=color:#00f>static</span> <span style=color:#2b91af>void</span> main(String[] args) {
+</span></span><span style=display:flex><span>	<span style=color:#a90d91>public</span> <span style=color:#a90d91>static</span> <span style=color:#a90d91>void</span> <span style=color:#000>main</span><span style=color:#000>(</span><span style=color:#000>String</span><span style=color:#000>[]</span> <span style=color:#000>args</span><span style=color:#000>)</span> <span style=color:#000>{</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		TestObj obj1 = <span style=color:#00f>new</span> TestObj();
-</span></span><span style=display:flex><span>		TestObj obj2 = <span style=color:#00f>new</span> TestObj();
-</span></span><span style=display:flex><span>		TestObj obj3 = obj1;
-</span></span><span style=display:flex><span>		System.out.println(obj1 == obj2);<span style=color:green>// false ,
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// == Compares references, not values
-</span></span></span><span style=display:flex><span><span style=color:green></span>		System.out.println(obj1 == obj3);<span style=color:green>// true
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>		System.out.println(obj1.equals(obj2));<span style=color:green>// false,
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// equal() method is derived from java.lang.Object, if not override,nor
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// in superclass,then equal behave as same as ==
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// Always remember to override hashCode if you override equals so as not
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// to &#34;break the contract&#34;.
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// As per the API, the result returned from the hashCode() method for
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// two objects must be the same if their equals methods shows that they
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// are equivalent. The converse is not necessarily true.
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>		String s1 = <span style=color:#a31515>&#34;haha&#34;</span>;<span style=color:green>// constant pool
-</span></span></span><span style=display:flex><span><span style=color:green></span>		String s2 = <span style=color:#00f>new</span> String(<span style=color:#a31515>&#34;haha&#34;</span>);<span style=color:green>// defined in ?heap
-</span></span></span><span style=display:flex><span><span style=color:green></span>		System.out.println(s1 == s2);<span style=color:green>// false ,== Compares references, not
-</span></span></span><span style=display:flex><span><span style=color:green></span>										<span style=color:green>// values, there is a exception for
-</span></span></span><span style=display:flex><span><span style=color:green></span>										<span style=color:green>// static field in class, static String
-</span></span></span><span style=display:flex><span><span style=color:green></span>										<span style=color:green>// in class == and equal both always
-</span></span></span><span style=display:flex><span><span style=color:green></span>										<span style=color:green>// return *true*
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// for more infomation,see :
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:green>// http://stackoverflow.com/questions/7520432/what-is-the-difference-between-vs-equals-in-java
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>		System.out.println(s1.equals(s2)); <span style=color:green>// true compare the
-</span></span></span><span style=display:flex><span><span style=color:green></span>											<span style=color:green>// value
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>		String s3 = s2.intern();<span style=color:green>// find the same value String in constant pool
-</span></span></span><span style=display:flex><span><span style=color:green></span>		System.out.println(s1 == s3);<span style=color:green>// true
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>		<span style=color:#2b91af>int</span> i1 = 2;<span style=color:green>// primitive type has no equal() method
-</span></span></span><span style=display:flex><span><span style=color:green></span>		Integer i3 = Integer.valueOf(2);
-</span></span><span style=display:flex><span>		System.out.println(i1 == i3);<span style=color:green>// true, i3 automatic unboxing into int;
-</span></span></span><span style=display:flex><span><span style=color:green></span>		System.out.println(i3.equals(i1));<span style=color:green>// auto boxing into Integer
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>		Integer i2 = 2;
-</span></span><span style=display:flex><span>		System.out.println(i3.compareTo(i2));
+</span></span><span style=display:flex><span>		<span style=color:#000>TestObj</span> <span style=color:#000>obj1</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>TestObj</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>TestObj</span> <span style=color:#000>obj2</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>TestObj</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>TestObj</span> <span style=color:#000>obj3</span> <span style=color:#000>=</span> <span style=color:#000>obj1</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>obj1</span> <span style=color:#000>==</span> <span style=color:#000>obj2</span><span style=color:#000>);</span><span style=color:#177500>// false ,
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// == Compares references, not values
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>obj1</span> <span style=color:#000>==</span> <span style=color:#000>obj3</span><span style=color:#000>);</span><span style=color:#177500>// true
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>obj1</span><span style=color:#000>.</span><span style=color:#836c28>equals</span><span style=color:#000>(</span><span style=color:#000>obj2</span><span style=color:#000>));</span><span style=color:#177500>// false,
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// equal() method is derived from java.lang.Object, if not override,nor
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// in superclass,then equal behave as same as ==
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// Always remember to override hashCode if you override equals so as not
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// to &#34;break the contract&#34;.
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// As per the API, the result returned from the hashCode() method for
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// two objects must be the same if their equals methods shows that they
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// are equivalent. The converse is not necessarily true.
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span>		<span style=color:#000>String</span> <span style=color:#000>s1</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;haha&#34;</span><span style=color:#000>;</span><span style=color:#177500>// constant pool
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>String</span> <span style=color:#000>s2</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>String</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;haha&#34;</span><span style=color:#000>);</span><span style=color:#177500>// defined in ?heap
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>s1</span> <span style=color:#000>==</span> <span style=color:#000>s2</span><span style=color:#000>);</span><span style=color:#177500>// false ,== Compares references, not
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>										<span style=color:#177500>// values, there is a exception for
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>										<span style=color:#177500>// static field in class, static String
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>										<span style=color:#177500>// in class == and equal both always
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>										<span style=color:#177500>// return *true*
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// for more infomation,see :
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#177500>// http://stackoverflow.com/questions/7520432/what-is-the-difference-between-vs-equals-in-java
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>s1</span><span style=color:#000>.</span><span style=color:#836c28>equals</span><span style=color:#000>(</span><span style=color:#000>s2</span><span style=color:#000>));</span> <span style=color:#177500>// true compare the
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>											<span style=color:#177500>// value
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span>		<span style=color:#000>String</span> <span style=color:#000>s3</span> <span style=color:#000>=</span> <span style=color:#000>s2</span><span style=color:#000>.</span><span style=color:#836c28>intern</span><span style=color:#000>();</span><span style=color:#177500>// find the same value String in constant pool
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>s1</span> <span style=color:#000>==</span> <span style=color:#000>s3</span><span style=color:#000>);</span><span style=color:#177500>// true
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>int</span> <span style=color:#000>i1</span> <span style=color:#000>=</span> <span style=color:#1c01ce>2</span><span style=color:#000>;</span><span style=color:#177500>// primitive type has no equal() method
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>Integer</span> <span style=color:#000>i3</span> <span style=color:#000>=</span> <span style=color:#000>Integer</span><span style=color:#000>.</span><span style=color:#836c28>valueOf</span><span style=color:#000>(</span><span style=color:#1c01ce>2</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>i1</span> <span style=color:#000>==</span> <span style=color:#000>i3</span><span style=color:#000>);</span><span style=color:#177500>// true, i3 automatic unboxing into int;
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>i3</span><span style=color:#000>.</span><span style=color:#836c28>equals</span><span style=color:#000>(</span><span style=color:#000>i1</span><span style=color:#000>));</span><span style=color:#177500>// auto boxing into Integer
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span>		<span style=color:#000>Integer</span> <span style=color:#000>i2</span> <span style=color:#000>=</span> <span style=color:#1c01ce>2</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>i3</span><span style=color:#000>.</span><span style=color:#836c28>compareTo</span><span style=color:#000>(</span><span style=color:#000>i2</span><span style=color:#000>));</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	<span style=color:green>/*
-</span></span></span><span style=display:flex><span><span style=color:green>	 * Comparable interface, a.compareTo(b) return -1：less,0:equal,1:greater. 0
-</span></span></span><span style=display:flex><span><span style=color:green>	 * should always be returned for objects when the .equals() comparisons
-</span></span></span><span style=display:flex><span><span style=color:green>	 * return true. All Java classes that have a natural ordering implement this
-</span></span></span><span style=display:flex><span><span style=color:green>	 * (String, Double, BigInteger, ...).
-</span></span></span><span style=display:flex><span><span style=color:green>	 * 
-</span></span></span><span style=display:flex><span><span style=color:green>	 *
-</span></span></span><span style=display:flex><span><span style=color:green>	 * Comparator interface: is a util for compare two instance,then you can use
-</span></span></span><span style=display:flex><span><span style=color:green>	 * the comparator to sort array and other things
-</span></span></span><span style=display:flex><span><span style=color:green>	 * 
-</span></span></span><span style=display:flex><span><span style=color:green>	 */</span>
+</span></span><span style=display:flex><span>	<span style=color:#177500>/*
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 * Comparable interface, a.compareTo(b) return -1：less,0:equal,1:greater. 0
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 * should always be returned for objects when the .equals() comparisons
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 * return true. All Java classes that have a natural ordering implement this
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 * (String, Double, BigInteger, ...).
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 * 
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 *
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 * Comparator interface: is a util for compare two instance,then you can use
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 * the comparator to sort array and other things
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 * 
+</span></span></span><span style=display:flex><span><span style=color:#177500>	 */</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#000>}</span>
 </span></span></code></pre></div></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/java rel=tag title=java>#java#</a>
 <a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>文章：</span><a href=https://zhimoe.github.io/post/java--and-equal/> Java-==-and-equals by zhimoe</a></p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick='var qr=document.getElementById("QR");qr.style.display==="none"?qr.style.display="block":qr.style.display="none"'>
 <span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/java-aop-example/ rel=next title="Java AOP example"><i class="fa fa-chevron-left"></i> Java AOP example</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/java-concurrency-1-thread/ rel=prev title=Javac-线程与任务>Javac-线程与任务

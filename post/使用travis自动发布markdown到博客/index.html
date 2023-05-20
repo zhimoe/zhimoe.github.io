@@ -15,53 +15,53 @@
 <span class=leancloud-world-count>1743 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>4分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>如何使用github pages和github actions构建静态个人博客站点</p><h3 id=update-at-2021>update at 2021</h3><p>更新：github开放action功能后,travis-ci已经没有必要了,目前博客使用zhimoe仓库管理源码,使用action编译后将public目录同步到zhimoe.github.io仓库的gh-pages分支.<br>注意,由于使用了jsdelivr的cdn功能,切换分支后theme的相关静态文件的path也要修改.</p><p>github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-pages分支的内容如果存在index.html, 那么其他人可以通过 <a href=https://zhimoe.github.io>https://zhimoe.github.io</a> 访问这个站点.</p><p>借助于一些static gen工具,你可以将你的markdown转换为一个静态网站(html,js,css). 然后把静态网站的内容上传到刚说的repo中, 就有一个自己的博客站点了. static gen工具非常多, github推荐的是<a href=https://www.staticgen.com/>Jekyll(ruby)</a>, 主流的还有hexo(js)和hugo(go), hexo因为是基于js的,所以高质量的主题多(因为做主题是需要js,css技能), hugo的编译快些, 但是好看的主题不多. 高质量的主题除了美观可能还需要考虑移动端(responsive),评论, 访问统计等各种功能. 每个gen工具都有自己的主题站点. hugo的主题在这里找: <a href=https://themes.gohugo.io/>hugo themes</a>.</p><p>制作github pages站点的一般做法是把代码(放图片和markdown)放在master分支,static gen编译后的(html,js,css,image)内容放在gh-pages分支.然后在settings里面设置. 这样就可以得到一个站点了. 这么做有个缺点,就是markdown文件会被别人整个下载过去,之前就遇到过一次. 正好github现在有3个免费私有仓库. 所以我把源码放在私有仓库zhimoe.github.io.src里面,而编译后的内容发布的 <a href=https://zhimoe.github.io>https://zhimoe.github.io</a>上面去.</p><p>自动编译发布这个过程就是持续集成(continue integration,CI)了, 即我提交一个markdown文件,我的主页会自动看到这篇文章, 不需要我在本地编译再提交编译结果文件.<a href=travis-ci.com>travis-ci</a> 提供了免费的github CI服务. 使用github账号登录就会有提示操作. 这里勾选私有仓库zhimoe.github.io.src, 然后在项目里面添加.travis.yml文件告诉travis如何编译和发布内容到个人站点.</p><h3 id=markdown渲染设置>markdown渲染设置</h3><p>hugo使用BlackFriday渲染markdown文件,默认的设置有几个过于严格:</p><ul><li>没有硬换行,需要使用<code>\</code>来表示换行</li><li>标题和<code>#</code>之间必须有空格</li><li>代码块前面必须有空行</li></ul><p>在config.toml可以修改这些配置:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span><span style=color:green># markdown解析引擎blackfriday配置, </span>
-</span></span><span style=display:flex><span><span style=color:green># extensions :  noEmptyLineBeforeBlock-代码块前面无需空行,hardLineBreak-换行无需使用backslash</span>
-</span></span><span style=display:flex><span><span style=color:green># extensionsmask spaceHeaders-标题之间无需空格</span>
-</span></span><span style=display:flex><span>[blackfriday]
-</span></span><span style=display:flex><span>  angledQuotes = <span style=color:#00f>true</span>
-</span></span><span style=display:flex><span>  extensions = [<span style=color:#a31515>&#34;hardLineBreak&#34;</span>,<span style=color:#a31515>&#34;noEmptyLineBeforeBlock&#34;</span>]
-</span></span><span style=display:flex><span>  extensionsmask = [<span style=color:#a31515>&#34;spaceHeaders&#34;</span>]
-</span></span><span style=display:flex><span>  fractions = <span style=color:#00f>false</span>
-</span></span><span style=display:flex><span>  plainIDAnchors = <span style=color:#00f>true</span>
-</span></span></code></pre></div><h3 id=travis-ci配置>travis-ci配置</h3><p>就是从一个私有的源码仓库编译,然后将编译后的文件强制覆盖到个人主页(即username.github.io这个仓库)的仓库中.具体的配置就不说了,注意是需要一个github的personal-access-key. 下面是.travis.yml内容:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>dist: xenial
-</span></span><span style=display:flex><span>language: python
-</span></span><span style=display:flex><span>python: 3.7
+<span class=leancloud-view-count>4分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>如何使用github pages和github actions构建静态个人博客站点</p><h3 id=update-at-2021>update at 2021</h3><p>更新：github开放action功能后,travis-ci已经没有必要了,目前博客使用zhimoe仓库管理源码,使用action编译后将public目录同步到zhimoe.github.io仓库的gh-pages分支.<br>注意,由于使用了jsdelivr的cdn功能,切换分支后theme的相关静态文件的path也要修改.</p><p>github给个人和组织免费提供github pages功能. 就是说如果有个repo的名字为 zhimoe.github.io (zhimoe 为你的github username), 那么这个repo里面的master或者gh-pages分支的内容如果存在index.html, 那么其他人可以通过 <a href=https://zhimoe.github.io>https://zhimoe.github.io</a> 访问这个站点.</p><p>借助于一些static gen工具,你可以将你的markdown转换为一个静态网站(html,js,css). 然后把静态网站的内容上传到刚说的repo中, 就有一个自己的博客站点了. static gen工具非常多, github推荐的是<a href=https://www.staticgen.com/>Jekyll(ruby)</a>, 主流的还有hexo(js)和hugo(go), hexo因为是基于js的,所以高质量的主题多(因为做主题是需要js,css技能), hugo的编译快些, 但是好看的主题不多. 高质量的主题除了美观可能还需要考虑移动端(responsive),评论, 访问统计等各种功能. 每个gen工具都有自己的主题站点. hugo的主题在这里找: <a href=https://themes.gohugo.io/>hugo themes</a>.</p><p>制作github pages站点的一般做法是把代码(放图片和markdown)放在master分支,static gen编译后的(html,js,css,image)内容放在gh-pages分支.然后在settings里面设置. 这样就可以得到一个站点了. 这么做有个缺点,就是markdown文件会被别人整个下载过去,之前就遇到过一次. 正好github现在有3个免费私有仓库. 所以我把源码放在私有仓库zhimoe.github.io.src里面,而编译后的内容发布的 <a href=https://zhimoe.github.io>https://zhimoe.github.io</a>上面去.</p><p>自动编译发布这个过程就是持续集成(continue integration,CI)了, 即我提交一个markdown文件,我的主页会自动看到这篇文章, 不需要我在本地编译再提交编译结果文件.<a href=travis-ci.com>travis-ci</a> 提供了免费的github CI服务. 使用github账号登录就会有提示操作. 这里勾选私有仓库zhimoe.github.io.src, 然后在项目里面添加.travis.yml文件告诉travis如何编译和发布内容到个人站点.</p><h3 id=markdown渲染设置>markdown渲染设置</h3><p>hugo使用BlackFriday渲染markdown文件,默认的设置有几个过于严格:</p><ul><li>没有硬换行,需要使用<code>\</code>来表示换行</li><li>标题和<code>#</code>之间必须有空格</li><li>代码块前面必须有空行</li></ul><p>在config.toml可以修改这些配置:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span><span style=color:#177500># markdown解析引擎blackfriday配置, </span>
+</span></span><span style=display:flex><span><span style=color:#177500># extensions :  noEmptyLineBeforeBlock-代码块前面无需空行,hardLineBreak-换行无需使用backslash</span>
+</span></span><span style=display:flex><span><span style=color:#177500># extensionsmask spaceHeaders-标题之间无需空格</span>
+</span></span><span style=display:flex><span>[<span style=color:#000>blackfriday</span>]
+</span></span><span style=display:flex><span>  <span style=color:#000>angledQuotes</span> = <span style=color:#a90d91>true</span>
+</span></span><span style=display:flex><span>  <span style=color:#000>extensions</span> = [<span style=color:#c41a16>&#34;hardLineBreak&#34;</span>,<span style=color:#c41a16>&#34;noEmptyLineBeforeBlock&#34;</span>]
+</span></span><span style=display:flex><span>  <span style=color:#000>extensionsmask</span> = [<span style=color:#c41a16>&#34;spaceHeaders&#34;</span>]
+</span></span><span style=display:flex><span>  <span style=color:#000>fractions</span> = <span style=color:#a90d91>false</span>
+</span></span><span style=display:flex><span>  <span style=color:#000>plainIDAnchors</span> = <span style=color:#a90d91>true</span>
+</span></span></code></pre></div><h3 id=travis-ci配置>travis-ci配置</h3><p>就是从一个私有的源码仓库编译,然后将编译后的文件强制覆盖到个人主页(即username.github.io这个仓库)的仓库中.具体的配置就不说了,注意是需要一个github的personal-access-key. 下面是.travis.yml内容:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#000>dist</span>: <span style=color:#1c01ce>xenial</span>
+</span></span><span style=display:flex><span><span style=color:#000>language</span>: <span style=color:#1c01ce>python</span>
+</span></span><span style=display:flex><span><span style=color:#000>python</span>: <span style=color:#1c01ce>3.7</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green># Handle git submodules yourself</span>
-</span></span><span style=display:flex><span>git:
-</span></span><span style=display:flex><span>    submodules: <span style=color:#00f>false</span>
-</span></span><span style=display:flex><span><span style=color:green># Use sed to replace the SSH URL with the public URL, then initialize submodules</span>
-</span></span><span style=display:flex><span>before_install:
-</span></span><span style=display:flex><span>  - sudo apt update -qq
-</span></span><span style=display:flex><span>  - sudo apt -yq install apt-transport-https
-</span></span><span style=display:flex><span>  - echo -e &#34;Host github.com\n\tStrictHostKeyChecking no\n&#34; &gt;&gt; ~/.ssh/config
-</span></span><span style=display:flex><span>  - git config --global user.email ${GITHUB_EMAIL}
-</span></span><span style=display:flex><span>  - git config --global user.name ${GITHUB_USERNAME}
-</span></span><span style=display:flex><span>  - sed -i &#39;s/git@github.com:/https:\/\/github.com\//&#39; .gitmodules
-</span></span><span style=display:flex><span>  - git submodule update --init --recursive
+</span></span><span style=display:flex><span><span style=color:#177500># Handle git submodules yourself</span>
+</span></span><span style=display:flex><span><span style=color:#000>git</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>submodules</span>: <span style=color:#a90d91>false</span>
+</span></span><span style=display:flex><span><span style=color:#177500># Use sed to replace the SSH URL with the public URL, then initialize submodules</span>
+</span></span><span style=display:flex><span><span style=color:#000>before_install</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>sudo apt update -qq</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>sudo apt -yq install apt-transport-https</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>echo -e &#34;Host github.com\n\tStrictHostKeyChecking no\n&#34; &gt;&gt; ~/.ssh/config</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git config --global user.email ${GITHUB_EMAIL}</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git config --global user.name ${GITHUB_USERNAME}</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>sed -i &#39;s/git@github.com:/https:\/\/github.com\//&#39; .gitmodules</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git submodule update --init --recursive</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>install:
-</span></span><span style=display:flex><span>  <span style=color:green># install latest hugo release version</span>
-</span></span><span style=display:flex><span>  <span style=color:green># - wget -qO- https://api.github.com/repos/gohugoio/hugo/releases/latest | sed -r -n &#39;/browser_download_url/{/Linux-64bit.deb/{s@[^:]*:[[:space:]]*&#34;([^&#34;]*)&#34;.*@\1@g;p;q}}&#39; | xargs wget</span>
-</span></span><span style=display:flex><span>  <span style=color:green># use local hugo pkg for speed</span>
-</span></span><span style=display:flex><span>  - sudo dpkg -i hugo*.deb
-</span></span><span style=display:flex><span>  - rm -rf public 2&gt; /dev/null
+</span></span><span style=display:flex><span><span style=color:#000>install</span>:
+</span></span><span style=display:flex><span>  <span style=color:#177500># install latest hugo release version</span>
+</span></span><span style=display:flex><span>  <span style=color:#177500># - wget -qO- https://api.github.com/repos/gohugoio/hugo/releases/latest | sed -r -n &#39;/browser_download_url/{/Linux-64bit.deb/{s@[^:]*:[[:space:]]*&#34;([^&#34;]*)&#34;.*@\1@g;p;q}}&#39; | xargs wget</span>
+</span></span><span style=display:flex><span>  <span style=color:#177500># use local hugo pkg for speed</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>sudo dpkg -i hugo*.deb</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>rm -rf public 2&gt; /dev/null</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:green># compile src to dist</span>
-</span></span><span style=display:flex><span>script:
-</span></span><span style=display:flex><span>  - hugo -d ./dist/
+</span></span><span style=display:flex><span>  <span style=color:#177500># compile src to dist</span>
+</span></span><span style=display:flex><span><span style=color:#000>script</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>hugo -d ./dist/</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>after_success:
-</span></span><span style=display:flex><span>  - git clone https://zhimoe:${GITHUB_TOKEN}@github.com/zhimoe/zhimoe.github.io.git
-</span></span><span style=display:flex><span>  - cd zhimoe.github.io 
-</span></span><span style=display:flex><span>  - git rm -rf . &amp;&amp; git clean -fxd 
-</span></span><span style=display:flex><span>  - mv -v ../dist/* .
-</span></span><span style=display:flex><span>  - git add .
-</span></span><span style=display:flex><span>  - git commit -m &#34;update site&#34;
-</span></span><span style=display:flex><span>  - git remote set-url origin https://zhimoe:${GITHUB_TOKEN}@github.com/zhimoe/zhimoe.github.io.git
-</span></span><span style=display:flex><span>  - git remote -v
-</span></span><span style=display:flex><span>  - git push -q -f
+</span></span><span style=display:flex><span><span style=color:#000>after_success</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git clone https://zhimoe:${GITHUB_TOKEN}@github.com/zhimoe/zhimoe.github.io.git</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>cd zhimoe.github.io </span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git rm -rf . &amp;&amp; git clean -fxd </span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>mv -v ../dist/* .</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git add .</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git commit -m &#34;update site&#34;</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git remote set-url origin https://zhimoe:${GITHUB_TOKEN}@github.com/zhimoe/zhimoe.github.io.git</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git remote -v</span>
+</span></span><span style=display:flex><span>  - <span style=color:#1c01ce>git push -q -f</span>
 </span></span></code></pre></div><p>要点:</p><ul><li>在项目的源码中放了hugo的deb安装包,省去下载的过程</li><li>主题以submodules放在themes目录中,所以编译前一定要<code>git submodule update --init --recursive</code>更新主题到本地.</li><li>目标repo的远程仓库一定要在push前重新设置:<code>git remote set-url origin xxx</code></li></ul></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a>
 <a href=https://zhimoe.github.io/tags/github rel=tag title=github>#github#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>文章：</span><a href=https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/> 使用travis自动发布markdown到博客 by zhimoe</a></p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick='var qr=document.getElementById("QR");qr.style.display==="none"?qr.style.display="block":qr.style.display="none"'>
 <span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/scala-implicit/ rel=next title="Scala 2 Implicit"><i class="fa fa-chevron-left"></i> Scala 2 Implicit</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/wsl-docker-environment/ rel=prev title=wsl-docker-environment>wsl-docker-environment

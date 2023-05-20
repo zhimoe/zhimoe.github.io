@@ -15,58 +15,58 @@
 <span class=leancloud-world-count>655 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><h3 id=问题>问题</h3><p>一个ionic app本地编译需要8分钟,提交到流水线编译耗时需要近40分钟,从日志看到webpack打包步骤耗时最严重.</p><h3 id=排查与解决>排查与解决</h3><p>初步判断是流水线使用的容器CPU性能较弱或者存储mount性能导致的.找流水线同事支持配置了一个纯内存编译流水线,发现还是很慢. 接下来使用webpack的插件<a href=https://www.npmjs.com/package/speed-measure-webpack-plugin>speed-measure-webpack-plugin</a>监控性能.</p><p>在webpack.config.js配置：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:green>// webpack.config.js
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span><span style=color:green>// npm i --save-dev speed-measure-webpack-plugin
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>const</span> SpeedMeasurePlugin = require(<span style=color:#a31515>&#34;speed-measure-webpack-plugin&#34;</span>);
-</span></span><span style=display:flex><span><span style=color:#00f>const</span> smp = <span style=color:#00f>new</span> SpeedMeasurePlugin();
-</span></span><span style=display:flex><span><span style=color:green>// ...the webpack configuration
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>const</span> prodConfig = {<span style=color:green>/*...*/</span>}
-</span></span><span style=display:flex><span>module.exports = {
-</span></span><span style=display:flex><span>    prod: smp.wrap(prodConfig)
+<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><h3 id=问题>问题</h3><p>一个ionic app本地编译需要8分钟,提交到流水线编译耗时需要近40分钟,从日志看到webpack打包步骤耗时最严重.</p><h3 id=排查与解决>排查与解决</h3><p>初步判断是流水线使用的容器CPU性能较弱或者存储mount性能导致的.找流水线同事支持配置了一个纯内存编译流水线,发现还是很慢. 接下来使用webpack的插件<a href=https://www.npmjs.com/package/speed-measure-webpack-plugin>speed-measure-webpack-plugin</a>监控性能.</p><p>在webpack.config.js配置：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#177500>// webpack.config.js
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#177500>// npm i --save-dev speed-measure-webpack-plugin
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>SpeedMeasurePlugin</span> <span style=color:#000>=</span> <span style=color:#000>require</span>(<span style=color:#c41a16>&#34;speed-measure-webpack-plugin&#34;</span>);
+</span></span><span style=display:flex><span><span style=color:#a90d91>const</span> <span style=color:#000>smp</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>SpeedMeasurePlugin</span>();
+</span></span><span style=display:flex><span><span style=color:#177500>// ...the webpack configuration
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>prodConfig</span> <span style=color:#000>=</span> {<span style=color:#177500>/*...*/</span>}
+</span></span><span style=display:flex><span><span style=color:#000>module</span>.<span style=color:#000>exports</span> <span style=color:#000>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#000>prod</span><span style=color:#000>:</span> <span style=color:#000>smp</span>.<span style=color:#000>wrap</span>(<span style=color:#000>prodConfig</span>)
 </span></span><span style=display:flex><span>};
-</span></span></code></pre></div><p>得到下图左侧的结果,可以看到主要耗时都在angular的PurifyPlugin上.搜索了一番后找到HappPack这个多核执行的插件.<br><img src=https://zhimoe.github.io/py/happypack.jpg alt=smp-result-before-and-after-happypack><br>配置happypack,由于主要耗时都在<code>const PurifyPlugin = require('@angular-devkit/build-optimizer').PurifyPlugin;</code>插件上,这里只需要针对这一个插件配置happypack即可.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:green>// webpack.config.js
-</span></span></span><span style=display:flex><span><span style=color:green>// 
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>const</span> HappyPack = require(<span style=color:#a31515>&#39;happypack&#39;</span>);
-</span></span><span style=display:flex><span><span style=color:#00f>const</span> os = require(<span style=color:#a31515>&#39;os&#39;</span>);<span style=color:green>//获取cpu core数量
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span><span style=color:green>//loaders配置
-</span></span></span><span style=display:flex><span><span style=color:green></span>{
-</span></span><span style=display:flex><span>    test: <span style=color:#a31515>/\.ts$/</span>, 
-</span></span><span style=display:flex><span>    use: [
+</span></span></code></pre></div><p>得到下图左侧的结果,可以看到主要耗时都在angular的PurifyPlugin上.搜索了一番后找到HappPack这个多核执行的插件.<br><img src=https://zhimoe.github.io/py/happypack.jpg alt=smp-result-before-and-after-happypack><br>配置happypack,由于主要耗时都在<code>const PurifyPlugin = require('@angular-devkit/build-optimizer').PurifyPlugin;</code>插件上,这里只需要针对这一个插件配置happypack即可.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#177500>// webpack.config.js
+</span></span></span><span style=display:flex><span><span style=color:#177500>// 
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>const</span> <span style=color:#000>HappyPack</span> <span style=color:#000>=</span> <span style=color:#000>require</span>(<span style=color:#c41a16>&#39;happypack&#39;</span>);
+</span></span><span style=display:flex><span><span style=color:#a90d91>const</span> <span style=color:#000>os</span> <span style=color:#000>=</span> <span style=color:#000>require</span>(<span style=color:#c41a16>&#39;os&#39;</span>);<span style=color:#177500>//获取cpu core数量
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#177500>//loaders配置
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>{
+</span></span><span style=display:flex><span>    <span style=color:#000>test</span><span style=color:#000>:</span> <span style=color:#c41a16>/\.ts$/</span>, 
+</span></span><span style=display:flex><span>    <span style=color:#000>use</span><span style=color:#000>:</span> [
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        loader: <span style=color:#a31515>&#39;happypack/loader?id=ts&#39;</span>, <span style=color:green>// 在所有loader之前加上happypack/loader,id是plugins中定义的
-</span></span></span><span style=display:flex><span><span style=color:green></span>    },
+</span></span><span style=display:flex><span>        <span style=color:#000>loader</span><span style=color:#000>:</span> <span style=color:#c41a16>&#39;happypack/loader?id=ts&#39;</span>, <span style=color:#177500>// 在所有loader之前加上happypack/loader,id是plugins中定义的
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>    },
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        loader: process.env.IONIC_CACHE_LOADER
+</span></span><span style=display:flex><span>        <span style=color:#000>loader</span><span style=color:#000>:</span> <span style=color:#000>process</span>.<span style=color:#000>env</span>.<span style=color:#000>IONIC_CACHE_LOADER</span>
 </span></span><span style=display:flex><span>    },
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        loader: <span style=color:#a31515>&#39;@angular-devkit/build-optimizer/webpack-loader&#39;</span>,
-</span></span><span style=display:flex><span>        options: {
-</span></span><span style=display:flex><span>            sourceMap: <span style=color:#00f>true</span>
+</span></span><span style=display:flex><span>        <span style=color:#000>loader</span><span style=color:#000>:</span> <span style=color:#c41a16>&#39;@angular-devkit/build-optimizer/webpack-loader&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#000>options</span><span style=color:#000>:</span> {
+</span></span><span style=display:flex><span>            <span style=color:#000>sourceMap</span><span style=color:#000>:</span> <span style=color:#a90d91>true</span>
 </span></span><span style=display:flex><span>        }
 </span></span><span style=display:flex><span>    },
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>        loader: process.env.IONIC_WEBPACK_LOADER
+</span></span><span style=display:flex><span>        <span style=color:#000>loader</span><span style=color:#000>:</span> <span style=color:#000>process</span>.<span style=color:#000>env</span>.<span style=color:#000>IONIC_WEBPACK_LOADER</span>
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>    ]
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>// 在plugins中配置happypack插件
-</span></span></span><span style=display:flex><span><span style=color:green></span>plugins: [
-</span></span><span style=display:flex><span>    ionicWebpackFactory.getIonicEnvironmentPlugin(),
-</span></span><span style=display:flex><span>    ionicWebpackFactory.getCommonChunksPlugin(),
-</span></span><span style=display:flex><span>    <span style=color:#00f>new</span> ModuleConcatPlugin(),
-</span></span><span style=display:flex><span>    <span style=color:#00f>new</span> PurifyPlugin(),
-</span></span><span style=display:flex><span>    <span style=color:#00f>new</span> HappyPack({
-</span></span><span style=display:flex><span>        id: <span style=color:#a31515>&#39;js&#39;</span>,
-</span></span><span style=display:flex><span>        threads: os.cpus().length,
-</span></span><span style=display:flex><span>        loaders: [<span style=color:#a31515>&#39;@angular-devkit/build-optimizer/webpack-loader&#39;</span>]
+</span></span><span style=display:flex><span><span style=color:#177500>// 在plugins中配置happypack插件
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>plugins</span><span style=color:#000>:</span> [
+</span></span><span style=display:flex><span>    <span style=color:#000>ionicWebpackFactory</span>.<span style=color:#000>getIonicEnvironmentPlugin</span>(),
+</span></span><span style=display:flex><span>    <span style=color:#000>ionicWebpackFactory</span>.<span style=color:#000>getCommonChunksPlugin</span>(),
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>new</span> <span style=color:#000>ModuleConcatPlugin</span>(),
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>new</span> <span style=color:#000>PurifyPlugin</span>(),
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>new</span> <span style=color:#000>HappyPack</span>({
+</span></span><span style=display:flex><span>        <span style=color:#000>id</span><span style=color:#000>:</span> <span style=color:#c41a16>&#39;js&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#000>threads</span><span style=color:#000>:</span> <span style=color:#000>os</span>.<span style=color:#000>cpus</span>().<span style=color:#000>length</span>,
+</span></span><span style=display:flex><span>        <span style=color:#000>loaders</span><span style=color:#000>:</span> [<span style=color:#c41a16>&#39;@angular-devkit/build-optimizer/webpack-loader&#39;</span>]
 </span></span><span style=display:flex><span>    }),
-</span></span><span style=display:flex><span>    <span style=color:#00f>new</span> HappyPack({
-</span></span><span style=display:flex><span>        id: <span style=color:#a31515>&#39;ts&#39;</span>, <span style=color:green>// 在loader中使用
-</span></span></span><span style=display:flex><span><span style=color:green></span>        threads: os.cpus().length, <span style=color:green>// 开启操作系统cpu的最大核心数
-</span></span></span><span style=display:flex><span><span style=color:green></span>        loaders: [<span style=color:#a31515>&#39;@angular-devkit/build-optimizer/webpack-loader&#39;</span>]
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>new</span> <span style=color:#000>HappyPack</span>({
+</span></span><span style=display:flex><span>        <span style=color:#000>id</span><span style=color:#000>:</span> <span style=color:#c41a16>&#39;ts&#39;</span>, <span style=color:#177500>// 在loader中使用
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>        <span style=color:#000>threads</span><span style=color:#000>:</span> <span style=color:#000>os</span>.<span style=color:#000>cpus</span>().<span style=color:#000>length</span>, <span style=color:#177500>// 开启操作系统cpu的最大核心数
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>        <span style=color:#000>loaders</span><span style=color:#000>:</span> [<span style=color:#c41a16>&#39;@angular-devkit/build-optimizer/webpack-loader&#39;</span>]
 </span></span><span style=display:flex><span>    })
 </span></span><span style=display:flex><span>    
 </span></span><span style=display:flex><span>]

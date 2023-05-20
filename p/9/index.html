@@ -26,8 +26,8 @@
 <span class=leancloud-world-count>717 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>使用redis的hash优化内存使用</p><h3 id=问题和方案>问题和方案</h3><p>场景: 有3亿张图片放在对象存储(DELL ECS/AMAZON EC2)上面,现在需要保存图片的id->用户id的映射.最直接的思路是:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>set <span style=color:#a31515>&#34;media:1155220&#34;</span> <span style=color:#a31515>&#34;user1&#34;</span>
-</span></span><span style=display:flex><span>set <span style=color:#a31515>&#34;media:1155221&#34;</span> <span style=color:#a31515>&#34;user2&#34;</span>
+<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>使用redis的hash优化内存使用</p><h3 id=问题和方案>问题和方案</h3><p>场景: 有3亿张图片放在对象存储(DELL ECS/AMAZON EC2)上面,现在需要保存图片的id->用户id的映射.最直接的思路是:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#a90d91>set</span> <span style=color:#c41a16>&#34;media:1155220&#34;</span> <span style=color:#c41a16>&#34;user1&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>set</span> <span style=color:#c41a16>&#34;media:1155221&#34;</span> <span style=color:#c41a16>&#34;user2&#34;</span>
 </span></span></code></pre></div><p>这样设计key之后3亿张图片需要21GB的内存,因为redis的string是线性增长的.</p></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8redis%E7%9A%84hash%E4%BC%98%E5%8C%96%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/scala-implicit/ itemprop=url>Scala 2 Implicit</a></h1><div class=post-meta><span class=post-time><span class=post-meta-item-text>时间：</span>
 <time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2019-03-30">2019-03-30</time></span>
 <span class=post-category>&nbsp; | &nbsp;
@@ -39,17 +39,17 @@
 <span class=leancloud-world-count>1580 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>4分钟</span></span></div></header><div class=post-body itemprop=articleBody><h2 id=隐式参数>隐式参数</h2><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:green>//隐式参数是在调用时可以自动填充的参数, 需要在调用范围内（scope)有一个隐式变量可供填充.
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>def</span> addInt(i<span style=color:#00f>:</span><span style=color:#2b91af>Int</span>)(<span style=color:#00f>implicit</span> n<span style=color:#00f>:</span> <span style=color:#2b91af>Int</span>) <span style=color:#00f>=</span> i + n
+<span class=leancloud-view-count>4分钟</span></span></div></header><div class=post-body itemprop=articleBody><h2 id=隐式参数>隐式参数</h2><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#177500>//隐式参数是在调用时可以自动填充的参数, 需要在调用范围内（scope)有一个隐式变量可供填充.
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>def</span> <span style=color:#000>addInt</span><span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#a90d91>:</span><span style=color:#a90d91>Int</span><span style=color:#000>)(</span><span style=color:#a90d91>implicit</span> <span style=color:#000>n</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Int</span><span style=color:#000>)</span> <span style=color:#a90d91>=</span> <span style=color:#000>i</span> <span style=color:#000>+</span> <span style=color:#000>n</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>//需要提供一个隐式变量n
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>implicit</span> <span style=color:#00f>val</span> sn <span style=color:#00f>=</span> 1
-</span></span><span style=display:flex><span>addInt(2) <span style=color:green>// 3
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span><span style=color:green>//如果有两个满足类型的隐式变量,则在编译addInt(2)时报错
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span><span style=color:green>//scala的方法中ExecutionContext一般作为implicit参数.
+</span></span><span style=display:flex><span><span style=color:#177500>//需要提供一个隐式变量n
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>implicit</span> <span style=color:#a90d91>val</span> <span style=color:#000>sn</span> <span style=color:#a90d91>=</span> <span style=color:#1c01ce>1</span>
+</span></span><span style=display:flex><span><span style=color:#000>addInt</span><span style=color:#000>(</span><span style=color:#1c01ce>2</span><span style=color:#000>)</span> <span style=color:#177500>// 3
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#177500>//如果有两个满足类型的隐式变量,则在编译addInt(2)时报错
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#177500>//scala的方法中ExecutionContext一般作为implicit参数.
 </span></span></span></code></pre></div></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/scala-implicit/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/%E4%BD%BF%E7%94%A8travis%E8%87%AA%E5%8A%A8%E5%8F%91%E5%B8%83markdown%E5%88%B0%E5%8D%9A%E5%AE%A2/ itemprop=url>使用travis自动发布markdown到博客</a></h1><div class=post-meta><span class=post-time><span class=post-meta-item-text>时间：</span>
 <time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2019-03-30">2019-03-30</time></span>
 <span class=post-category>&nbsp; | &nbsp;

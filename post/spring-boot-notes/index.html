@@ -15,124 +15,124 @@
 <span class=leancloud-world-count>2102 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>5分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>一些容易忘记的spring boot知识要点.</p><blockquote><p>注意,.yaml和.yml文件没任何区别.</p></blockquote><h2 id=配置>配置</h2><h2 id=springbootapplication注解>SpringBootApplication注解</h2><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>@SpringBootApplication
-</span></span><span style=display:flex><span><span style=color:green>// &lt;=等价=&gt;
-</span></span></span><span style=display:flex><span><span style=color:green></span>@Configuration
-</span></span><span style=display:flex><span>@ComponentScan
-</span></span><span style=display:flex><span>@EnableAutoConfiguration
-</span></span></code></pre></div><h2 id=自动配置>自动配置</h2><p>spring的自动配置依赖以下注解:</p><p><img src=https://zhimoe.github.io/spring/spring-boot-autoconfig-conditional.png alt=spring-boot-autoconfig-conditional></p><h2 id=配置文件>配置文件</h2><p>任何时候硬编码的配置总是不好的,spring支持从很多环境中读取配置: 配置文件,yaml文件,环境变量,命令参数.<br>配置可以在<code>@Value</code>注解中使用,也可<code>Environment</code>访问,或者通过<code>@ConfigurationProperties</code>将配置属性绑定到特定的bean(<a href=https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config-typesafe-configuration-properties>例子</a>).</p><p>spring boot的配置属性读取顺序为:</p><ul><li>Devtools global settings properties on your home directory (~/.spring-boot-devtools.properties when devtools is active).</li><li>@TestPropertySource annotations on your tests.</li><li>@SpringBootTest#properties annotation attribute on your tests.</li><li>Command line arguments.</li><li>Properties from SPRING_APPLICATION_JSON (inline JSON embedded in an environment variable or system property)</li><li>ServletConfig init parameters.</li><li>ServletContext init parameters.</li><li>JNDI attributes from java:comp/env.</li><li>Java System properties (System.getProperties()).</li><li>OS environment variables.</li><li>A RandomValuePropertySource that only has properties in random.*.</li><li>Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)</li><li>Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants)</li><li>Application properties outside of your packaged jar (application.properties and YAML variants).</li><li>Application properties packaged inside your jar (application.properties and YAML variants).</li><li>@PropertySource annotations on your @Configuration classes.</li><li>Default properties (specified using SpringApplication.setDefaultProperties).</li></ul><p>因为spring-boot主要使用的<code>application.properties/yaml</code>文件,所以后面主要关注这个文件.</p><p>此外,spring代码中使用了大约近千个(300多类)默认值,这些默认值都是可以覆盖的.只需你在你的propeties/yaml文件中用相同的key即可.<br>所有的参考值见: <a href=https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/html/common-application-properties.html>example application.properties</a></p><h2 id=applicationproperties>application.properties</h2><p>SpringApplication loads properties from application.properties files in the following locations and adds them to the Spring Environment:</p><ul><li>A /config subdirectory of the current directory</li><li>The current directory</li><li>A classpath /config package</li><li>The classpath root</li></ul><h2 id=applicationyml>application.yml</h2><p>yaml是json的超集,相比properties文件,有着简洁灵活的优势 例如可以设置数组,设置group概念等.<br>yaml文件可以配置数组:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:green># 数组功能,等价</span>
-</span></span><span style=display:flex><span><span style=color:green># my.servers[0]=dev.bar.com</span>
-</span></span><span style=display:flex><span><span style=color:green># my.servers[1]=foo.bar.com</span>
-</span></span><span style=display:flex><span>my:
-</span></span><span style=display:flex><span>   servers:
-</span></span><span style=display:flex><span>       - dev.bar.com
-</span></span><span style=display:flex><span>	   - foo.bar.com
+<span class=leancloud-view-count>5分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>一些容易忘记的spring boot知识要点.</p><blockquote><p>注意,.yaml和.yml文件没任何区别.</p></blockquote><h2 id=配置>配置</h2><h2 id=springbootapplication注解>SpringBootApplication注解</h2><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#000>@SpringBootApplication</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// &lt;=等价=&gt;
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#000>@ComponentScan</span>
+</span></span><span style=display:flex><span><span style=color:#000>@EnableAutoConfiguration</span>
+</span></span></code></pre></div><h2 id=自动配置>自动配置</h2><p>spring的自动配置依赖以下注解:</p><p><img src=https://zhimoe.github.io/spring/spring-boot-autoconfig-conditional.png alt=spring-boot-autoconfig-conditional></p><h2 id=配置文件>配置文件</h2><p>任何时候硬编码的配置总是不好的,spring支持从很多环境中读取配置: 配置文件,yaml文件,环境变量,命令参数.<br>配置可以在<code>@Value</code>注解中使用,也可<code>Environment</code>访问,或者通过<code>@ConfigurationProperties</code>将配置属性绑定到特定的bean(<a href=https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/html/boot-features-external-config.html#boot-features-external-config-typesafe-configuration-properties>例子</a>).</p><p>spring boot的配置属性读取顺序为:</p><ul><li>Devtools global settings properties on your home directory (~/.spring-boot-devtools.properties when devtools is active).</li><li>@TestPropertySource annotations on your tests.</li><li>@SpringBootTest#properties annotation attribute on your tests.</li><li>Command line arguments.</li><li>Properties from SPRING_APPLICATION_JSON (inline JSON embedded in an environment variable or system property)</li><li>ServletConfig init parameters.</li><li>ServletContext init parameters.</li><li>JNDI attributes from java:comp/env.</li><li>Java System properties (System.getProperties()).</li><li>OS environment variables.</li><li>A RandomValuePropertySource that only has properties in random.*.</li><li>Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)</li><li>Profile-specific application properties packaged inside your jar (application-{profile}.properties and YAML variants)</li><li>Application properties outside of your packaged jar (application.properties and YAML variants).</li><li>Application properties packaged inside your jar (application.properties and YAML variants).</li><li>@PropertySource annotations on your @Configuration classes.</li><li>Default properties (specified using SpringApplication.setDefaultProperties).</li></ul><p>因为spring-boot主要使用的<code>application.properties/yaml</code>文件,所以后面主要关注这个文件.</p><p>此外,spring代码中使用了大约近千个(300多类)默认值,这些默认值都是可以覆盖的.只需你在你的propeties/yaml文件中用相同的key即可.<br>所有的参考值见: <a href=https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/html/common-application-properties.html>example application.properties</a></p><h2 id=applicationproperties>application.properties</h2><p>SpringApplication loads properties from application.properties files in the following locations and adds them to the Spring Environment:</p><ul><li>A /config subdirectory of the current directory</li><li>The current directory</li><li>A classpath /config package</li><li>The classpath root</li></ul><h2 id=applicationyml>application.yml</h2><p>yaml是json的超集,相比properties文件,有着简洁灵活的优势 例如可以设置数组,设置group概念等.<br>yaml文件可以配置数组:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#177500># 数组功能,等价</span>
+</span></span><span style=display:flex><span><span style=color:#177500># my.servers[0]=dev.bar.com</span>
+</span></span><span style=display:flex><span><span style=color:#177500># my.servers[1]=foo.bar.com</span>
+</span></span><span style=display:flex><span><span style=color:#000>my</span>:
+</span></span><span style=display:flex><span>   <span style=color:#000>servers</span>:
+</span></span><span style=display:flex><span>       - <span style=color:#1c01ce>dev.bar.com</span>
+</span></span><span style=display:flex><span>	   - <span style=color:#1c01ce>foo.bar.com</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>#上面的配置可以通过注解绑定到以下bean中,非常强大.</span>
-</span></span><span style=display:flex><span>@ConfigurationProperties(prefix=&#34;my&#34;)
-</span></span><span style=display:flex><span>public class Config {
-</span></span><span style=display:flex><span>	private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();
+</span></span><span style=display:flex><span><span style=color:#177500>#上面的配置可以通过注解绑定到以下bean中,非常强大.</span>
+</span></span><span style=display:flex><span>@<span style=color:#1c01ce>ConfigurationProperties(prefix=&#34;my&#34;)</span>
+</span></span><span style=display:flex><span><span style=color:#1c01ce>public class Config {</span>
+</span></span><span style=display:flex><span>	<span style=color:#1c01ce>private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();</span>
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green># 在一个yaml文件设置不同的profile配置,properties文件只能通过拆分文件`application-profiles.properties`实现.</span>
-</span></span><span style=display:flex><span>server:
-</span></span><span style=display:flex><span>    address: 192.168.1.100
-</span></span><span style=display:flex><span>---
-</span></span><span style=display:flex><span>spring:
-</span></span><span style=display:flex><span>    profiles: DEV
-</span></span><span style=display:flex><span>server:
-</span></span><span style=display:flex><span>    address: 127.0.0.1
-</span></span><span style=display:flex><span>---
-</span></span><span style=display:flex><span>spring:
-</span></span><span style=display:flex><span>    profiles: PRD
-</span></span><span style=display:flex><span>server:
-</span></span><span style=display:flex><span>    address: 192.168.1.120
-</span></span></code></pre></div><h3 id=yaml缺点>yaml缺点:</h3><blockquote><p>YAML files cannot be loaded by using the <code>@PropertySource</code> annotation. So, in the case that you need to load values that way, you need to use a properties file.</p></blockquote><p>当然使用properties文件缺点也明显,不能分组(yaml的&mdash;功能);同时中文显示容易unicode码.</p><h2 id=读取配置文件>读取配置文件</h2><p>除了application.properties文件,其他的配置属性文件需要我们自己加载读取.注意,下面的<code>PropertySource</code>无法加载yaml文件.</p><h3 id=使用propertysource>使用PropertySource</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-properties data-lang=properties><span style=display:flex><span>cron=<span style=color:#a31515>0/3 * * * * ?</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>@Configuration
-</span></span><span style=display:flex><span>@PropertySource(<span style=color:#a31515>&#34;classpath:foo.properties&#34;</span>)
-</span></span><span style=display:flex><span><span style=color:#00f>public</span> <span style=color:#00f>class</span> <span style=color:#2b91af>PropertiesWithJavaConfig</span> {
-</span></span><span style=display:flex><span>    @Value(${cron})
-</span></span><span style=display:flex><span>    <span style=color:#00f>private</span> String cron;
+</span></span><span style=display:flex><span><span style=color:#177500># 在一个yaml文件设置不同的profile配置,properties文件只能通过拆分文件`application-profiles.properties`实现.</span>
+</span></span><span style=display:flex><span><span style=color:#000>server</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>address</span>: <span style=color:#1c01ce>192.168.1.100</span>
+</span></span><span style=display:flex><span><span style=color:#000>---</span>
+</span></span><span style=display:flex><span><span style=color:#000>spring</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>profiles</span>: <span style=color:#1c01ce>DEV</span>
+</span></span><span style=display:flex><span><span style=color:#000>server</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>address</span>: <span style=color:#1c01ce>127.0.0.1</span>
+</span></span><span style=display:flex><span><span style=color:#000>---</span>
+</span></span><span style=display:flex><span><span style=color:#000>spring</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>profiles</span>: <span style=color:#1c01ce>PRD</span>
+</span></span><span style=display:flex><span><span style=color:#000>server</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>address</span>: <span style=color:#1c01ce>192.168.1.120</span>
+</span></span></code></pre></div><h3 id=yaml缺点>yaml缺点:</h3><blockquote><p>YAML files cannot be loaded by using the <code>@PropertySource</code> annotation. So, in the case that you need to load values that way, you need to use a properties file.</p></blockquote><p>当然使用properties文件缺点也明显,不能分组(yaml的&mdash;功能);同时中文显示容易unicode码.</p><h2 id=读取配置文件>读取配置文件</h2><p>除了application.properties文件,其他的配置属性文件需要我们自己加载读取.注意,下面的<code>PropertySource</code>无法加载yaml文件.</p><h3 id=使用propertysource>使用PropertySource</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-properties data-lang=properties><span style=display:flex><span><span style=color:#836c28>cron</span><span style=color:#000>=</span><span style=color:#c41a16>0/3 * * * * ?</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#000>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#000>@PropertySource</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;classpath:foo.properties&#34;</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>PropertiesWithJavaConfig</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>@Value</span><span style=color:#000>(</span><span style=color:#000>$</span><span style=color:#000>{</span><span style=color:#000>cron</span><span style=color:#000>})</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>private</span> <span style=color:#000>String</span> <span style=color:#000>cron</span><span style=color:#000>;</span>
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>//or
-</span></span></span><span style=display:flex><span><span style=color:green></span>@PropertySource({ 
-</span></span><span style=display:flex><span>  <span style=color:#a31515>&#34;classpath:persistence-${envTarget:mysql}.properties&#34;</span>
-</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span><span style=color:#177500>//or
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>@PropertySource</span><span style=color:#000>({</span> 
+</span></span><span style=display:flex><span>  <span style=color:#c41a16>&#34;classpath:persistence-${envTarget:mysql}.properties&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#000>})</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>//multi files
-</span></span></span><span style=display:flex><span><span style=color:green>//java 8+
-</span></span></span><span style=display:flex><span><span style=color:green></span>@PropertySource(<span style=color:#a31515>&#34;classpath:foo.properties&#34;</span>)
-</span></span><span style=display:flex><span>@PropertySource(<span style=color:#a31515>&#34;classpath:bar.properties&#34;</span>)
-</span></span><span style=display:flex><span><span style=color:#00f>public</span> <span style=color:#00f>class</span> <span style=color:#2b91af>PropertiesWithJavaConfig</span> {
-</span></span><span style=display:flex><span>    <span style=color:green>//...
-</span></span></span><span style=display:flex><span><span style=color:green></span>}
-</span></span><span style=display:flex><span><span style=color:green>//java 6+
-</span></span></span><span style=display:flex><span><span style=color:green></span>@PropertySources({
-</span></span><span style=display:flex><span>    @PropertySource(<span style=color:#a31515>&#34;classpath:foo.properties&#34;</span>),
-</span></span><span style=display:flex><span>    @PropertySource(<span style=color:#a31515>&#34;classpath:bar.properties&#34;</span>)
-</span></span><span style=display:flex><span>})
-</span></span><span style=display:flex><span><span style=color:#00f>public</span> <span style=color:#00f>class</span> <span style=color:#2b91af>PropertiesWithJavaConfig</span> {
-</span></span><span style=display:flex><span>    <span style=color:green>//...
-</span></span></span><span style=display:flex><span><span style=color:green></span>}
+</span></span><span style=display:flex><span><span style=color:#177500>//multi files
+</span></span></span><span style=display:flex><span><span style=color:#177500>//java 8+
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>@PropertySource</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;classpath:foo.properties&#34;</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#000>@PropertySource</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;classpath:bar.properties&#34;</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>PropertiesWithJavaConfig</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500>//...
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>}</span>
+</span></span><span style=display:flex><span><span style=color:#177500>//java 6+
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>@PropertySources</span><span style=color:#000>({</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>@PropertySource</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;classpath:foo.properties&#34;</span><span style=color:#000>),</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>@PropertySource</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;classpath:bar.properties&#34;</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#000>})</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>PropertiesWithJavaConfig</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500>//...
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>//通过xml加载
-</span></span></span><span style=display:flex><span><span style=color:green>//register file in xml
-</span></span></span><span style=display:flex><span><span style=color:green></span>&lt;context:property-placeholder location=<span style=color:#a31515>&#34;classpath:foo.properties&#34;</span> /&gt;
-</span></span><span style=display:flex><span><span style=color:green>//foo.properties in src/main/resources
-</span></span></span><span style=display:flex><span><span style=color:green></span>&lt;context:property-placeholder location=<span style=color:#a31515>&#34;classpath:foo.properties, classpath:bar.properties&#34;</span>/&gt;
-</span></span></code></pre></div><h3 id=如何加载自定义的yaml文件>如何加载自定义的yaml文件</h3><p>上面提到spring会默认加载<code>application.yml</code>文件的配置.但是其他文件名的yml文件无法通过<code>@PropertySource</code>加载.可以有以下方法.</p><ul><li>使用xml,然后在Java Config类加载xml. 个人不推荐使用xml文件,脱离spring boot的初衷了.</li><li>使用yml加载器: The <code>YamlPropertiesFactoryBean</code> will load YAML as <code>Properties</code> and the <code>YamlMapFactoryBean</code> will load YAML as a <code>Map</code>.</li><li>避免使用,尽量将你的所以配置放在application.yml里面,因为yml可以有分组功能.</li><li>将你文件命名为<code>application-redis.yml</code>,然后在application.yml使用<code>spring.profiles.include: 'redis'</code> 加载.</li></ul><p>使用yaml文件的加载可以通过<code>ConfigurationProperties</code>绑定到配置bean中.还要添加2个注解注册到spring:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>@Configuration
-</span></span><span style=display:flex><span>@EnableConfigurationProperties
-</span></span><span style=display:flex><span>@ConfigurationProperties
-</span></span><span style=display:flex><span><span style=color:#00f>public</span> <span style=color:#00f>class</span> <span style=color:#2b91af>YAMLConfig</span> {
+</span></span><span style=display:flex><span><span style=color:#177500>//通过xml加载
+</span></span></span><span style=display:flex><span><span style=color:#177500>//register file in xml
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>&lt;</span><span style=color:#000>context</span><span style=color:#000>:</span><span style=color:#000>property</span><span style=color:#000>-</span><span style=color:#000>placeholder</span> <span style=color:#000>location</span><span style=color:#000>=</span><span style=color:#c41a16>&#34;classpath:foo.properties&#34;</span> <span style=color:#000>/&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#177500>//foo.properties in src/main/resources
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>&lt;</span><span style=color:#000>context</span><span style=color:#000>:</span><span style=color:#000>property</span><span style=color:#000>-</span><span style=color:#000>placeholder</span> <span style=color:#000>location</span><span style=color:#000>=</span><span style=color:#c41a16>&#34;classpath:foo.properties, classpath:bar.properties&#34;</span><span style=color:#000>/&gt;</span>
+</span></span></code></pre></div><h3 id=如何加载自定义的yaml文件>如何加载自定义的yaml文件</h3><p>上面提到spring会默认加载<code>application.yml</code>文件的配置.但是其他文件名的yml文件无法通过<code>@PropertySource</code>加载.可以有以下方法.</p><ul><li>使用xml,然后在Java Config类加载xml. 个人不推荐使用xml文件,脱离spring boot的初衷了.</li><li>使用yml加载器: The <code>YamlPropertiesFactoryBean</code> will load YAML as <code>Properties</code> and the <code>YamlMapFactoryBean</code> will load YAML as a <code>Map</code>.</li><li>避免使用,尽量将你的所以配置放在application.yml里面,因为yml可以有分组功能.</li><li>将你文件命名为<code>application-redis.yml</code>,然后在application.yml使用<code>spring.profiles.include: 'redis'</code> 加载.</li></ul><p>使用yaml文件的加载可以通过<code>ConfigurationProperties</code>绑定到配置bean中.还要添加2个注解注册到spring:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#000>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#000>@EnableConfigurationProperties</span>
+</span></span><span style=display:flex><span><span style=color:#000>@ConfigurationProperties</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>YAMLConfig</span> <span style=color:#000>{</span>
 </span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>    <span style=color:#00f>private</span> String name;
-</span></span><span style=display:flex><span>    <span style=color:#00f>private</span> String environment;
-</span></span><span style=display:flex><span>    <span style=color:#00f>private</span> List&lt;String&gt; servers = <span style=color:#00f>new</span> ArrayList&lt;&gt;();
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>private</span> <span style=color:#000>String</span> <span style=color:#000>name</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>private</span> <span style=color:#000>String</span> <span style=color:#000>environment</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>private</span> <span style=color:#000>List</span><span style=color:#000>&lt;</span><span style=color:#000>String</span><span style=color:#000>&gt;</span> <span style=color:#000>servers</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>ArrayList</span><span style=color:#000>&lt;&gt;();</span>
 </span></span><span style=display:flex><span> 
-</span></span><span style=display:flex><span>    <span style=color:green>// standard getters and setters
-</span></span></span><span style=display:flex><span><span style=color:green></span>}
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml><span style=display:flex><span>spring:
-</span></span><span style=display:flex><span>    profiles: prod
-</span></span><span style=display:flex><span>name: prod-YAML
-</span></span><span style=display:flex><span>environment: production
-</span></span><span style=display:flex><span>servers: 
-</span></span><span style=display:flex><span>    - www.abc.com
-</span></span><span style=display:flex><span>    - www.xyz.com
-</span></span></code></pre></div><h3 id=profiles>profiles</h3><p>很多配置希望基于环境,spring boot支持<code>application-profile.properties</code>格式的配置,profile可以是DEV,ST,UAT,PRD,TEST等.<br>例如某个class希望只有在<code>PRD</code>环境才有:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>@Profile(<span style=color:#a31515>&#34;PRD&#34;</span>)
-</span></span><span style=display:flex><span>@Configuration
-</span></span><span style=display:flex><span>@EnableWebSecurity
-</span></span><span style=display:flex><span><span style=color:#00f>public</span> <span style=color:#00f>class</span> <span style=color:#2b91af>SecurityConfig</span> <span style=color:#00f>extends</span> WebSecurityConfigurerAdapter {}
-</span></span></code></pre></div><p>然后在<code>application.yml/properties</code>设置profile:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>spring:
-</span></span><span style=display:flex><span>  profiles:
-</span></span><span style=display:flex><span>    active: PRD
-</span></span></code></pre></div><h3 id=properties文件设置profile>properties文件设置profile</h3><p><code>application.properties</code>文件只能使用<code>application-DEV.properties,application-ST.properties</code>设置profile.</p><h3 id=yml文件设置profile>yml文件设置profile</h3><p><code>application.yml</code>既可以像properties文件使用<code>application-DEV.yml</code>来设置profile,也可以使用<code>---</code>分组.如下示例,<code>logging.level=INFO</code>在所有profile中生效,而在生产环境中增加日志文件设置,DEV环境则使用<code>DEBUG</code>级别日志.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:green># application.yml</span>
-</span></span><span style=display:flex><span>logging:
-</span></span><span style=display:flex><span>  level:
-</span></span><span style=display:flex><span>   root: INFO
-</span></span><span style=display:flex><span>---
-</span></span><span style=display:flex><span>spring:
-</span></span><span style=display:flex><span>  profiles: DEV
-</span></span><span style=display:flex><span>logging:
-</span></span><span style=display:flex><span>  level:
-</span></span><span style=display:flex><span>    root: DEBUG
-</span></span><span style=display:flex><span>---
-</span></span><span style=display:flex><span>spring:
-</span></span><span style=display:flex><span>  profiles: PRD
-</span></span><span style=display:flex><span>logging:
-</span></span><span style=display:flex><span>  path: /tmp/
-</span></span><span style=display:flex><span>  file: BookWorm.log
-</span></span><span style=display:flex><span>  level:
-</span></span><span style=display:flex><span>    root: WARN
-</span></span></code></pre></div><h3 id=激活profiles>激活profiles</h3><p>在<code>application.yml/properties</code>文件中激活某个profile:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>spring:
-</span></span><span style=display:flex><span>    profiles:
-</span></span><span style=display:flex><span>        active: DEV
-</span></span></code></pre></div><p>如果你设置了<code>SPRING_PROFILES_ACTIVE</code>环境变量,那么会覆盖上面的profile设置.当然你也可以使用自定义环境变量和默认值:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span>spring:
-</span></span><span style=display:flex><span>    profiles:
-</span></span><span style=display:flex><span>        active: ${ENV_TYP:PRD}
-</span></span><span style=display:flex><span><span style=color:green># 读取ENV_TYP环境变量的值作为激活profile,如果没用这个环境变量,那么设置为PRD.</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500>// standard getters and setters
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>}</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:#000>spring</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>profiles</span>: <span style=color:#1c01ce>prod</span>
+</span></span><span style=display:flex><span><span style=color:#000>name</span>: <span style=color:#1c01ce>prod-YAML</span>
+</span></span><span style=display:flex><span><span style=color:#000>environment</span>: <span style=color:#1c01ce>production</span>
+</span></span><span style=display:flex><span><span style=color:#000>servers</span>: 
+</span></span><span style=display:flex><span>    - <span style=color:#1c01ce>www.abc.com</span>
+</span></span><span style=display:flex><span>    - <span style=color:#1c01ce>www.xyz.com</span>
+</span></span></code></pre></div><h3 id=profiles>profiles</h3><p>很多配置希望基于环境,spring boot支持<code>application-profile.properties</code>格式的配置,profile可以是DEV,ST,UAT,PRD,TEST等.<br>例如某个class希望只有在<code>PRD</code>环境才有:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#000>@Profile</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;PRD&#34;</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#000>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#000>@EnableWebSecurity</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>SecurityConfig</span> <span style=color:#a90d91>extends</span> <span style=color:#000>WebSecurityConfigurerAdapter</span> <span style=color:#000>{}</span>
+</span></span></code></pre></div><p>然后在<code>application.yml/properties</code>设置profile:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#000>spring</span>:
+</span></span><span style=display:flex><span>  <span style=color:#000>profiles</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>active</span>: <span style=color:#1c01ce>PRD</span>
+</span></span></code></pre></div><h3 id=properties文件设置profile>properties文件设置profile</h3><p><code>application.properties</code>文件只能使用<code>application-DEV.properties,application-ST.properties</code>设置profile.</p><h3 id=yml文件设置profile>yml文件设置profile</h3><p><code>application.yml</code>既可以像properties文件使用<code>application-DEV.yml</code>来设置profile,也可以使用<code>---</code>分组.如下示例,<code>logging.level=INFO</code>在所有profile中生效,而在生产环境中增加日志文件设置,DEV环境则使用<code>DEBUG</code>级别日志.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#177500># application.yml</span>
+</span></span><span style=display:flex><span><span style=color:#000>logging</span>:
+</span></span><span style=display:flex><span>  <span style=color:#000>level</span>:
+</span></span><span style=display:flex><span>   <span style=color:#000>root</span>: <span style=color:#1c01ce>INFO</span>
+</span></span><span style=display:flex><span><span style=color:#000>---</span>
+</span></span><span style=display:flex><span><span style=color:#000>spring</span>:
+</span></span><span style=display:flex><span>  <span style=color:#000>profiles</span>: <span style=color:#1c01ce>DEV</span>
+</span></span><span style=display:flex><span><span style=color:#000>logging</span>:
+</span></span><span style=display:flex><span>  <span style=color:#000>level</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>root</span>: <span style=color:#1c01ce>DEBUG</span>
+</span></span><span style=display:flex><span><span style=color:#000>---</span>
+</span></span><span style=display:flex><span><span style=color:#000>spring</span>:
+</span></span><span style=display:flex><span>  <span style=color:#000>profiles</span>: <span style=color:#1c01ce>PRD</span>
+</span></span><span style=display:flex><span><span style=color:#000>logging</span>:
+</span></span><span style=display:flex><span>  <span style=color:#000>path</span>: <span style=color:#1c01ce>/tmp/</span>
+</span></span><span style=display:flex><span>  <span style=color:#000>file</span>: <span style=color:#1c01ce>BookWorm.log</span>
+</span></span><span style=display:flex><span>  <span style=color:#000>level</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>root</span>: <span style=color:#1c01ce>WARN</span>
+</span></span></code></pre></div><h3 id=激活profiles>激活profiles</h3><p>在<code>application.yml/properties</code>文件中激活某个profile:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#000>spring</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>profiles</span>:
+</span></span><span style=display:flex><span>        <span style=color:#000>active</span>: <span style=color:#1c01ce>DEV</span>
+</span></span></code></pre></div><p>如果你设置了<code>SPRING_PROFILES_ACTIVE</code>环境变量,那么会覆盖上面的profile设置.当然你也可以使用自定义环境变量和默认值:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#000>spring</span>:
+</span></span><span style=display:flex><span>    <span style=color:#000>profiles</span>:
+</span></span><span style=display:flex><span>        <span style=color:#000>active</span>: <span style=color:#1c01ce>${ENV_TYP:PRD}</span>
+</span></span><span style=display:flex><span><span style=color:#177500># 读取ENV_TYP环境变量的值作为激活profile,如果没用这个环境变量,那么设置为PRD.</span>
 </span></span></code></pre></div><h2 id=测试>测试</h2></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a>
 <a href=https://zhimoe.github.io/tags/spring rel=tag title=spring>#spring#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>文章：</span><a href=https://zhimoe.github.io/post/spring-boot-notes/> Spring Boot Notes by zhimoe</a></p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick='var qr=document.getElementById("QR");qr.style.display==="none"?qr.style.display="block":qr.style.display="none"'>
 <span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/scala-future/ rel=next title="Scala Future"><i class="fa fa-chevron-left"></i> Scala Future</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/pattern-matching-anonymous-function/ rel=prev title="Pattern Matching Anonymous Function">Pattern Matching Anonymous Function

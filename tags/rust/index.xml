@@ -4,10 +4,10 @@
 &lt;p>like:&lt;code> type Thunk = Box&amp;lt;dyn Fn() + Send + 'static&amp;gt;;&lt;/code>&lt;/p>
 &lt;h2 id="type-inside-impl">type inside impl&lt;/h2>
 &lt;p>&lt;code>type&lt;/code> in an &lt;code>impl&lt;/code> defines an associated type. associated type可以理解为一个类型占位符,在trait的方法声明中使用.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00f">pub&lt;/span> &lt;span style="color:#00f">trait&lt;/span> Iterator {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00f">type&lt;/span> &lt;span style="color:#2b91af">Item&lt;/span>; &lt;span style="color:#008000">// or type T: Display;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#008000">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#00f">fn&lt;/span> next(&amp;amp;&lt;span style="color:#00f">mut&lt;/span> self) -&amp;gt; Option&amp;lt;Self::Item&amp;gt;;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a90d91">pub&lt;/span> &lt;span style="color:#a90d91">trait&lt;/span> &lt;span style="color:#a90d91">Iterator&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a90d91">type&lt;/span> &lt;span style="color:#3f6e75">Item&lt;/span>; &lt;span style="color:#177500">// or type T: Display;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#177500">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a90d91">fn&lt;/span> &lt;span style="color:#000">next&lt;/span>(&lt;span style="color:#000">&amp;amp;&lt;/span>&lt;span style="color:#a90d91">mut&lt;/span> &lt;span style="color:#5b269a">self&lt;/span>) -&amp;gt; &lt;span style="color:#a90d91">Option&lt;/span>&lt;span style="color:#000">&amp;lt;&lt;/span>&lt;span style="color:#5b269a">Self&lt;/span>::&lt;span style="color:#000">Item&lt;/span>&lt;span style="color:#000">&amp;gt;&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>基于MDX的web词典</title><link>https://zhimoe.github.io/post/mdict-web/</link><pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/mdict-web/</guid><description>&lt;p>Mdict项目是一个糅合了MDX词典、ES例句搜索和AI模型翻译的多源搜索功能Web词典.特别适合部署在内网中学习使用或者给孩子学习使用.&lt;br>
 python版本增加了一个机器学习模型翻译.rust版本也有模型,但是还没来得及加.&lt;/p>
@@ -26,6 +26,6 @@ python版本增加了一个机器学习模型翻译.rust版本也有模型,但�
 不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般企业项目中这么做显然不规范,直接使用maven基础镜像更合理.&lt;/p></description></item><item><title>Rust Packages Crates Mod Notes</title><link>https://zhimoe.github.io/post/rust-packages-crates-mod/</link><pubDate>Sun, 12 Jan 2020 20:03:33 +0800</pubDate><guid>https://zhimoe.github.io/post/rust-packages-crates-mod/</guid><description>&lt;p>初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.&lt;/p>
 &lt;h2 id="packages-crates-and-modules">packages, crates and modules&lt;/h2>
 &lt;p>A Cargo.toml is a package. and must have a package name, like&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[package]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name = &lt;span style="color:#a31515">&amp;#34;actix-web&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#000">package&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">name&lt;/span> = &lt;span style="color:#c41a16">&amp;#34;actix-web&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

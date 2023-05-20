@@ -15,13 +15,13 @@
 <span class=leancloud-world-count>358 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>在文件读取的时候,会遇到非法转义字符,导致文件按行读取失败.此时可以通过忽略转义字符来解决.本文记录了scala和python的方法.</p><h2 id=背景>背景</h2><p>有50G的服务器日志,拆分为几千个txt文件,编码是utf8,使用scala和python按行处理：</p><h3 id=scala>scala</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#00f>def</span> main(args<span style=color:#00f>:</span> <span style=color:#2b91af>Array</span>[<span style=color:#2b91af>String</span>])<span style=color:#00f>:</span> <span style=color:#2b91af>Unit</span> = {
-</span></span><span style=display:flex><span>  <span style=color:#00f>for</span> (line <span style=color:#00f>&lt;-</span> <span style=color:#2b91af>Source</span>.fromFile(<span style=color:#a31515>&#34;./txt1.log&#34;</span>,<span style=color:#a31515>&#34;UTF8&#34;</span>).getLines()) {
-</span></span><span style=display:flex><span>    <span style=color:#00f>if</span> (line.contains(<span style=color:#a31515>&#34;ABC&#34;</span>)) {
-</span></span><span style=display:flex><span>      <span style=color:green>//do something      
-</span></span></span><span style=display:flex><span><span style=color:green></span>    }
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>}
+<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>在文件读取的时候,会遇到非法转义字符,导致文件按行读取失败.此时可以通过忽略转义字符来解决.本文记录了scala和python的方法.</p><h2 id=背景>背景</h2><p>有50G的服务器日志,拆分为几千个txt文件,编码是utf8,使用scala和python按行处理：</p><h3 id=scala>scala</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#a90d91>def</span> <span style=color:#000>main</span><span style=color:#000>(</span><span style=color:#000>args</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Array</span><span style=color:#000>[</span><span style=color:#a90d91>String</span><span style=color:#000>])</span><span style=color:#a90d91>:</span> <span style=color:#a90d91>Unit</span> <span style=color:#000>=</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>line</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#3f6e75>Source</span><span style=color:#000>.</span><span style=color:#000>fromFile</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;./txt1.log&#34;</span><span style=color:#000>,</span><span style=color:#c41a16>&#34;UTF8&#34;</span><span style=color:#000>).</span><span style=color:#000>getLines</span><span style=color:#000>())</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#000>line</span><span style=color:#000>.</span><span style=color:#000>contains</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;ABC&#34;</span><span style=color:#000>))</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>      <span style=color:#177500>//do something      
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>    <span style=color:#000>}</span>
+</span></span><span style=display:flex><span>  <span style=color:#000>}</span>
+</span></span><span style=display:flex><span><span style=color:#000>}</span>
 </span></span></code></pre></div></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/scala-python-file-encoding-escape/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/matplotlib-chinese-garbled-solution/ itemprop=url>Matplotlib图例中文乱码解决方案</a></h1><div class=post-meta><span class=post-time><span class=post-meta-item-text>时间：</span>
 <time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-05-01">2020-05-01</time></span>
 <span class=post-category>&nbsp; | &nbsp;
@@ -33,24 +33,24 @@
 <span class=leancloud-world-count>419 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.<br><a href=https://www.zhihu.com/question/25404709/answer/67672003>zhihu.com</a></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:green># https://www.zhihu.com/question/25404709/answer/67672003</span>
-</span></span><span style=display:flex><span><span style=color:#00f>import</span> matplotlib.font_manager <span style=color:#00f>as</span> fm
-</span></span><span style=display:flex><span><span style=color:green># 微软雅黑,如果需要宋体,可以用simsun.ttc</span>
-</span></span><span style=display:flex><span>myfont = fm.FontProperties(fname=<span style=color:#a31515>&#39;C:/Windows/Fonts/msyh.ttc&#39;</span>)
-</span></span><span style=display:flex><span><span style=color:green># Linux字体在&#34;/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc&#34;, </span>
-</span></span><span style=display:flex><span><span style=color:green># 需要先安装字体&#34;&gt;sudo apt install fonts-noto-cjk -y&#34;</span>
-</span></span><span style=display:flex><span><span style=color:green># MacOS中文字体文件在&#34;/System/Library/Fonts/PingFang.ttc&#34;</span>
-</span></span><span style=display:flex><span><span style=color:green># Win10,Linux已测试,MacOS未验证</span>
+<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>很久以前写的一个答案,四年来一直有人评论感谢,说只有我的方法是有效的.非常意外也很高兴. 也放到博客中里备份吧.<br><a href=https://www.zhihu.com/question/25404709/answer/67672003>zhihu.com</a></p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#177500># https://www.zhihu.com/question/25404709/answer/67672003</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>import</span> <span style=color:#000>matplotlib.font_manager</span> <span style=color:#a90d91>as</span> <span style=color:#000>fm</span>
+</span></span><span style=display:flex><span><span style=color:#177500># 微软雅黑,如果需要宋体,可以用simsun.ttc</span>
+</span></span><span style=display:flex><span><span style=color:#000>myfont</span> <span style=color:#000>=</span> <span style=color:#000>fm</span><span style=color:#000>.</span><span style=color:#000>FontProperties</span>(<span style=color:#000>fname</span><span style=color:#000>=</span><span style=color:#c41a16>&#39;C:/Windows/Fonts/msyh.ttc&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#177500># Linux字体在&#34;/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc&#34;, </span>
+</span></span><span style=display:flex><span><span style=color:#177500># 需要先安装字体&#34;&gt;sudo apt install fonts-noto-cjk -y&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#177500># MacOS中文字体文件在&#34;/System/Library/Fonts/PingFang.ttc&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#177500># Win10,Linux已测试,MacOS未验证</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>import</span> matplotlib.pyplot <span style=color:#00f>as</span> plt
+</span></span><span style=display:flex><span><span style=color:#a90d91>import</span> <span style=color:#000>matplotlib.pyplot</span> <span style=color:#a90d91>as</span> <span style=color:#000>plt</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt.clf()  <span style=color:green># 清空画布</span>
-</span></span><span style=display:flex><span>plt.plot([1, 2, 3], [4, 5, 6])
-</span></span><span style=display:flex><span>plt.xlabel(<span style=color:#a31515>&#34;横轴&#34;</span>,fontproperties=myfont)
-</span></span><span style=display:flex><span>plt.ylabel(<span style=color:#a31515>&#34;纵轴&#34;</span>,fontproperties=myfont)
-</span></span><span style=display:flex><span>plt.title(<span style=color:#a31515>&#34;pythoner.com&#34;</span>,fontproperties=myfont)
-</span></span><span style=display:flex><span>plt.legend([<span style=color:#a31515>&#39;图例&#39;</span>],prop=myfont)
-</span></span><span style=display:flex><span>plt.show()
+</span></span><span style=display:flex><span><span style=color:#000>plt</span><span style=color:#000>.</span><span style=color:#000>clf</span>()  <span style=color:#177500># 清空画布</span>
+</span></span><span style=display:flex><span><span style=color:#000>plt</span><span style=color:#000>.</span><span style=color:#000>plot</span>([<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>, <span style=color:#1c01ce>3</span>], [<span style=color:#1c01ce>4</span>, <span style=color:#1c01ce>5</span>, <span style=color:#1c01ce>6</span>])
+</span></span><span style=display:flex><span><span style=color:#000>plt</span><span style=color:#000>.</span><span style=color:#000>xlabel</span>(<span style=color:#c41a16>&#34;横轴&#34;</span>,<span style=color:#000>fontproperties</span><span style=color:#000>=</span><span style=color:#000>myfont</span>)
+</span></span><span style=display:flex><span><span style=color:#000>plt</span><span style=color:#000>.</span><span style=color:#000>ylabel</span>(<span style=color:#c41a16>&#34;纵轴&#34;</span>,<span style=color:#000>fontproperties</span><span style=color:#000>=</span><span style=color:#000>myfont</span>)
+</span></span><span style=display:flex><span><span style=color:#000>plt</span><span style=color:#000>.</span><span style=color:#000>title</span>(<span style=color:#c41a16>&#34;pythoner.com&#34;</span>,<span style=color:#000>fontproperties</span><span style=color:#000>=</span><span style=color:#000>myfont</span>)
+</span></span><span style=display:flex><span><span style=color:#000>plt</span><span style=color:#000>.</span><span style=color:#000>legend</span>([<span style=color:#c41a16>&#39;图例&#39;</span>],<span style=color:#000>prop</span><span style=color:#000>=</span><span style=color:#000>myfont</span>)
+</span></span><span style=display:flex><span><span style=color:#000>plt</span><span style=color:#000>.</span><span style=color:#000>show</span>()
 </span></span></code></pre></div></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/rust-ownership-lifetimes/ itemprop=url>Rust Ownerships Lifetimes教程</a></h1><div class=post-meta><span class=post-time><span class=post-meta-item-text>时间：</span>
 <time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2020-02-22">2020-02-22</time></span>
 <span class=post-category>&nbsp; | &nbsp;

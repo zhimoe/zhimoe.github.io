@@ -15,90 +15,90 @@
 <span class=leancloud-world-count>599 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>4道常见的python面试题和解答,以及一些python陷阱的链接.</p><h2 id=问题>问题</h2><ol><li>题目1</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#00f>def</span> change(v):
-</span></span><span style=display:flex><span>        v[1] = 4
-</span></span><span style=display:flex><span>        <span style=color:#00f>return</span> v
+<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>4道常见的python面试题和解答,以及一些python陷阱的链接.</p><h2 id=问题>问题</h2><ol><li>题目1</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#a90d91>def</span> <span style=color:#000>change</span>(<span style=color:#000>v</span>):
+</span></span><span style=display:flex><span>        <span style=color:#000>v</span>[<span style=color:#1c01ce>1</span>] <span style=color:#000>=</span> <span style=color:#1c01ce>4</span>
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>return</span> <span style=color:#000>v</span>
 </span></span><span style=display:flex><span>        
 </span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>    a = [1, 2, 3]
-</span></span><span style=display:flex><span>    print(change(a))
-</span></span><span style=display:flex><span>    print(a)    
-</span></span></code></pre></div><ol start=2><li>题目2</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#00f>def</span> append1(x=[]):
-</span></span><span style=display:flex><span>        x.append(1)
-</span></span><span style=display:flex><span>        <span style=color:#00f>return</span> x
+</span></span><span style=display:flex><span>    <span style=color:#000>a</span> <span style=color:#000>=</span> [<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>, <span style=color:#1c01ce>3</span>]
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>print</span>(<span style=color:#000>change</span>(<span style=color:#000>a</span>))
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>print</span>(<span style=color:#000>a</span>)    
+</span></span></code></pre></div><ol start=2><li>题目2</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#a90d91>def</span> <span style=color:#000>append1</span>(<span style=color:#000>x</span><span style=color:#000>=</span>[]):
+</span></span><span style=display:flex><span>        <span style=color:#000>x</span><span style=color:#000>.</span><span style=color:#000>append</span>(<span style=color:#1c01ce>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>return</span> <span style=color:#000>x</span>
 </span></span><span style=display:flex><span>        
 </span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>    <span style=color:#00f>def</span> now(n=time.time()):
-</span></span><span style=display:flex><span>        time.sleep(1)
-</span></span><span style=display:flex><span>        <span style=color:#00f>return</span> n
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>def</span> <span style=color:#000>now</span>(<span style=color:#000>n</span><span style=color:#000>=</span><span style=color:#000>time</span><span style=color:#000>.</span><span style=color:#000>time</span>()):
+</span></span><span style=display:flex><span>        <span style=color:#000>time</span><span style=color:#000>.</span><span style=color:#000>sleep</span>(<span style=color:#1c01ce>1</span>)
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>return</span> <span style=color:#000>n</span>
 </span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>    print(append1(), append1()) <span style=color:green>#?</span>
-</span></span><span style=display:flex><span>    print(now(), now()) <span style=color:green>#?</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>print</span>(<span style=color:#000>append1</span>(), <span style=color:#000>append1</span>()) <span style=color:#177500>#?</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>print</span>(<span style=color:#000>now</span>(), <span style=color:#000>now</span>()) <span style=color:#177500>#?</span>
 </span></span><span style=display:flex><span>    
-</span></span></code></pre></div><ol start=3><li>题目3</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#00f>def</span> arr_multi():
-</span></span><span style=display:flex><span>        x = [[0] * 3] * 3
-</span></span><span style=display:flex><span>        x[0][0] = 42
-</span></span><span style=display:flex><span>        <span style=color:#00f>return</span> x
+</span></span></code></pre></div><ol start=3><li>题目3</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#a90d91>def</span> <span style=color:#000>arr_multi</span>():
+</span></span><span style=display:flex><span>        <span style=color:#000>x</span> <span style=color:#000>=</span> [[<span style=color:#1c01ce>0</span>] <span style=color:#000>*</span> <span style=color:#1c01ce>3</span>] <span style=color:#000>*</span> <span style=color:#1c01ce>3</span>
+</span></span><span style=display:flex><span>        <span style=color:#000>x</span>[<span style=color:#1c01ce>0</span>][<span style=color:#1c01ce>0</span>] <span style=color:#000>=</span> <span style=color:#1c01ce>42</span>
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>return</span> <span style=color:#000>x</span>
 </span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>    print(arr_multi())
-</span></span></code></pre></div><ol start=4><li>题目4</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#00f>def</span> fn_for():
-</span></span><span style=display:flex><span>        f = [<span style=color:#00f>lambda</span> x: x * i <span style=color:#00f>for</span> i <span style=color:#00f>in</span> range(3)]
-</span></span><span style=display:flex><span>        print(f[0](1), f[1](1), f[2](1))
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>print</span>(<span style=color:#000>arr_multi</span>())
+</span></span></code></pre></div><ol start=4><li>题目4</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#a90d91>def</span> <span style=color:#000>fn_for</span>():
+</span></span><span style=display:flex><span>        <span style=color:#000>f</span> <span style=color:#000>=</span> [<span style=color:#a90d91>lambda</span> <span style=color:#000>x</span>: <span style=color:#000>x</span> <span style=color:#000>*</span> <span style=color:#000>i</span> <span style=color:#a90d91>for</span> <span style=color:#000>i</span> <span style=color:#000>in</span> <span style=color:#a90d91>range</span>(<span style=color:#1c01ce>3</span>)]
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>print</span>(<span style=color:#000>f</span>[<span style=color:#1c01ce>0</span>](<span style=color:#1c01ce>1</span>), <span style=color:#000>f</span>[<span style=color:#1c01ce>1</span>](<span style=color:#1c01ce>1</span>), <span style=color:#000>f</span>[<span style=color:#1c01ce>2</span>](<span style=color:#1c01ce>1</span>))
 </span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>    print(fn_for())
-</span></span></code></pre></div><h2 id=解答>解答</h2><ol><li></li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    [1, 4, 3]
-</span></span><span style=display:flex><span>    [1, 4, 3]
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>print</span>(<span style=color:#000>fn_for</span>())
+</span></span></code></pre></div><h2 id=解答>解答</h2><ol><li></li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    [<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>4</span>, <span style=color:#1c01ce>3</span>]
+</span></span><span style=display:flex><span>    [<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>4</span>, <span style=color:#1c01ce>3</span>]
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:green># 就是简单的引用传递,但是很多人不自信,在选择题里面频频出错.</span>
-</span></span><span style=display:flex><span>    <span style=color:green># python中所有的都是对象, id(obj)会返回地址. </span>
-</span></span><span style=display:flex><span>    <span style=color:green># 但是如果新建对象是short string,int [-5,256],不可变的空集合(empty tuples) 等情况不会真的创建新对象.</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500># 就是简单的引用传递,但是很多人不自信,在选择题里面频频出错.</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500># python中所有的都是对象, id(obj)会返回地址. </span>
+</span></span><span style=display:flex><span>    <span style=color:#177500># 但是如果新建对象是short string,int [-5,256],不可变的空集合(empty tuples) 等情况不会真的创建新对象.</span>
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:#00f>from</span> copy <span style=color:#00f>import</span> copy, deepcopy
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>from</span> <span style=color:#000>copy</span> <span style=color:#a90d91>import</span> <span style=color:#000>copy</span>, <span style=color:#000>deepcopy</span>
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    arr1 = [1,2,3,[4,5,6]]
-</span></span><span style=display:flex><span>    arr2 = copy(arr1) <span style=color:green># shallow copy, new id, but elements in array is same id</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>arr1</span> <span style=color:#000>=</span> [<span style=color:#1c01ce>1</span>,<span style=color:#1c01ce>2</span>,<span style=color:#1c01ce>3</span>,[<span style=color:#1c01ce>4</span>,<span style=color:#1c01ce>5</span>,<span style=color:#1c01ce>6</span>]]
+</span></span><span style=display:flex><span>    <span style=color:#000>arr2</span> <span style=color:#000>=</span> <span style=color:#000>copy</span>(<span style=color:#000>arr1</span>) <span style=color:#177500># shallow copy, new id, but elements in array is same id</span>
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    id(arr1[0]) == id(arr2[0]) 
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>id</span>(<span style=color:#000>arr1</span>[<span style=color:#1c01ce>0</span>]) <span style=color:#000>==</span> <span style=color:#a90d91>id</span>(<span style=color:#000>arr2</span>[<span style=color:#1c01ce>0</span>]) 
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:green>#deepcopy</span>
-</span></span><span style=display:flex><span>    arr3 = deepcopy(arr1) <span style=color:green># elements id is new </span>
-</span></span></code></pre></div><ol start=2><li></li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:green># 结果:</span>
-</span></span><span style=display:flex><span>    [1, 1] [1, 1]
-</span></span><span style=display:flex><span>    1590544209.9695618 1590544209.9695618
+</span></span><span style=display:flex><span>    <span style=color:#177500>#deepcopy</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>arr3</span> <span style=color:#000>=</span> <span style=color:#000>deepcopy</span>(<span style=color:#000>arr1</span>) <span style=color:#177500># elements id is new </span>
+</span></span></code></pre></div><ol start=2><li></li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>    <span style=color:#177500># 结果:</span>
+</span></span><span style=display:flex><span>    [<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>1</span>] [<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>1</span>]
+</span></span><span style=display:flex><span>    <span style=color:#1c01ce>1590544209.9695618</span> <span style=color:#1c01ce>1590544209.9695618</span>
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:green># 不少人认为是: [1] [1, 1].其实还是没有深入理解引用的原理,</span>
-</span></span><span style=display:flex><span>    <span style=color:green># 翻译一下就很好理解了:</span>
-</span></span><span style=display:flex><span>    y = append1()  <span style=color:green># id(y) == id(x), y=[1]</span>
-</span></span><span style=display:flex><span>    y = append1()  <span style=color:green># id(y) == id(x), y=[1,1]</span>
-</span></span><span style=display:flex><span>    print(y,y)
+</span></span><span style=display:flex><span>    <span style=color:#177500># 不少人认为是: [1] [1, 1].其实还是没有深入理解引用的原理,</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500># 翻译一下就很好理解了:</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>y</span> <span style=color:#000>=</span> <span style=color:#000>append1</span>()  <span style=color:#177500># id(y) == id(x), y=[1]</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>y</span> <span style=color:#000>=</span> <span style=color:#000>append1</span>()  <span style=color:#177500># id(y) == id(x), y=[1,1]</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>print</span>(<span style=color:#000>y</span>,<span style=color:#000>y</span>)
 </span></span><span style=display:flex><span>    
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:green># 最好不要使用[]作为默认参数,使用下面的形式:</span>
-</span></span><span style=display:flex><span>    <span style=color:#00f>def</span> my_func(working_list=<span style=color:#00f>None</span>):
-</span></span><span style=display:flex><span>        <span style=color:#00f>if</span> working_list <span style=color:#00f>is</span> <span style=color:#00f>None</span>: 
-</span></span><span style=display:flex><span>            working_list = []
+</span></span><span style=display:flex><span>    <span style=color:#177500># 最好不要使用[]作为默认参数,使用下面的形式:</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>def</span> <span style=color:#000>my_func</span>(<span style=color:#000>working_list</span><span style=color:#000>=</span><span style=color:#a90d91>None</span>):
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>if</span> <span style=color:#000>working_list</span> <span style=color:#000>is</span> <span style=color:#a90d91>None</span>: 
+</span></span><span style=display:flex><span>            <span style=color:#000>working_list</span> <span style=color:#000>=</span> []
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>        working_list.append(<span style=color:#a31515>&#34;a&#34;</span>)
-</span></span><span style=display:flex><span>        print(working_list)
+</span></span><span style=display:flex><span>        <span style=color:#000>working_list</span><span style=color:#000>.</span><span style=color:#000>append</span>(<span style=color:#c41a16>&#34;a&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>print</span>(<span style=color:#000>working_list</span>)
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:green># 或者</span>
-</span></span><span style=display:flex><span>    <span style=color:#00f>def</span> fun(count=[]):
-</span></span><span style=display:flex><span>        count.append(2) <span style=color:green>#这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险!</span>
-</span></span><span style=display:flex><span>        <span style=color:#00f>return</span> count
-</span></span><span style=display:flex><span>    fun()   <span style=color:green>#[2]</span>
-</span></span><span style=display:flex><span>    fun()   <span style=color:green>#[2,2]</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500># 或者</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>def</span> <span style=color:#000>fun</span>(<span style=color:#000>count</span><span style=color:#000>=</span>[]):
+</span></span><span style=display:flex><span>        <span style=color:#000>count</span><span style=color:#000>.</span><span style=color:#000>append</span>(<span style=color:#1c01ce>2</span>) <span style=color:#177500>#这里count两次调用如果都使用默认参数的话,则是同一个数组,非常危险!</span>
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>return</span> <span style=color:#000>count</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>fun</span>()   <span style=color:#177500>#[2]</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>fun</span>()   <span style=color:#177500>#[2,2]</span>
 </span></span><span style=display:flex><span>   
-</span></span></code></pre></div><ol start=3><li></li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span>    [[42, 0, 0], [42, 0, 0], [42, 0, 0]]
-</span></span><span style=display:flex><span>    <span style=color:green># list 是mutable, []*3表示是引用复制三次.</span>
+</span></span></code></pre></div><ol start=3><li></li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-py data-lang=py><span style=display:flex><span>    [[<span style=color:#1c01ce>42</span>, <span style=color:#1c01ce>0</span>, <span style=color:#1c01ce>0</span>], [<span style=color:#1c01ce>42</span>, <span style=color:#1c01ce>0</span>, <span style=color:#1c01ce>0</span>], [<span style=color:#1c01ce>42</span>, <span style=color:#1c01ce>0</span>, <span style=color:#1c01ce>0</span>]]
+</span></span><span style=display:flex><span>    <span style=color:#177500># list 是mutable, []*3表示是引用复制三次.</span>
 </span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:green># 赋值后为什么只改变列的值？</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500># 赋值后为什么只改变列的值？</span>
 </span></span></code></pre></div><ol start=4><li></li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>    2 2 2
 </span></span><span style=display:flex><span>    None
-</span></span></code></pre></div><p>本意其实是想得到一个函数列表[0<em>x,1</em>x,2*x],<br>但是 <strong>Python’s closures are <em>late binding</em>. This means that the values of variables used in closures are looked up at the time the inner function is called.</strong><br>解决方案是偏函数partial</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#00f>from</span> functools <span style=color:#00f>import</span> partial
-</span></span><span style=display:flex><span><span style=color:#00f>def</span> fix_fn_for():
-</span></span><span style=display:flex><span>    f = [partial(<span style=color:#00f>lambda</span> y, x: y * x, x=i) <span style=color:#00f>for</span> i <span style=color:#00f>in</span> range(3)]
-</span></span><span style=display:flex><span>    print(f[0](1), f[1](1), f[2](1))
-</span></span></code></pre></div><p>或：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span>fl=[<span style=color:#00f>lambda</span> x, i=i: x*i <span style=color:#00f>for</span> i <span style=color:#00f>in</span> range(3)]
+</span></span></code></pre></div><p>本意其实是想得到一个函数列表[0<em>x,1</em>x,2*x],<br>但是 <strong>Python’s closures are <em>late binding</em>. This means that the values of variables used in closures are looked up at the time the inner function is called.</strong><br>解决方案是偏函数partial</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#a90d91>from</span> <span style=color:#000>functools</span> <span style=color:#a90d91>import</span> <span style=color:#000>partial</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>def</span> <span style=color:#000>fix_fn_for</span>():
+</span></span><span style=display:flex><span>    <span style=color:#000>f</span> <span style=color:#000>=</span> [<span style=color:#000>partial</span>(<span style=color:#a90d91>lambda</span> <span style=color:#000>y</span>, <span style=color:#000>x</span>: <span style=color:#000>y</span> <span style=color:#000>*</span> <span style=color:#000>x</span>, <span style=color:#000>x</span><span style=color:#000>=</span><span style=color:#000>i</span>) <span style=color:#a90d91>for</span> <span style=color:#000>i</span> <span style=color:#000>in</span> <span style=color:#a90d91>range</span>(<span style=color:#1c01ce>3</span>)]
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>print</span>(<span style=color:#000>f</span>[<span style=color:#1c01ce>0</span>](<span style=color:#1c01ce>1</span>), <span style=color:#000>f</span>[<span style=color:#1c01ce>1</span>](<span style=color:#1c01ce>1</span>), <span style=color:#000>f</span>[<span style=color:#1c01ce>2</span>](<span style=color:#1c01ce>1</span>))
+</span></span></code></pre></div><p>或：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#000>fl</span><span style=color:#000>=</span>[<span style=color:#a90d91>lambda</span> <span style=color:#000>x</span>, <span style=color:#000>i</span><span style=color:#000>=</span><span style=color:#000>i</span>: <span style=color:#000>x</span><span style=color:#000>*</span><span style=color:#000>i</span> <span style=color:#a90d91>for</span> <span style=color:#000>i</span> <span style=color:#000>in</span> <span style=color:#a90d91>range</span>(<span style=color:#1c01ce>3</span>)]
 </span></span></code></pre></div><p><a href=https://docs.python-guide.org/writing/gotchas/>常见python陷阱</a><br><a href=https://www.toptal.com/python/top-10-mistakes-that-python-programmers-make>The 10 Most Common Mistakes in Python</a><br><a href=https://8thlight.com/blog/shibani-mookerjee/2019/05/07/some-common-gotchas-in-python.html>Some Common Gotchas in Python</a></p></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code#</a>
 <a href=https://zhimoe.github.io/tags/python rel=tag title=python>#python#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>文章：</span><a href=https://zhimoe.github.io/post/python-interview-questions/> Python 4道笔试题 by zhimoe</a></p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick='var qr=document.getElementById("QR");qr.style.display==="none"?qr.style.display="block":qr.style.display="none"'>
 <span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/mdict-web/ rel=next title=基于MDX的web词典><i class="fa fa-chevron-left"></i> 基于MDX的web词典</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/scala-python-file-encoding-escape/ rel=prev title="Scala Python 文件读取跳过转义字符">Scala Python 文件读取跳过转义字符

@@ -16,105 +16,105 @@
 <span>|
 <span class=post-meta-item-text>阅读：</span>
 <span class=leancloud-view-count>3分钟</span></span></div></header><div class=post-body itemprop=articleBody><h3 id=objectwaitnotifynotifyall>Object.wait/notify/notifyAll</h3><p>这三个方法是在class Object 上面的，也就是所有对象都有这个方法。这里对象就是上面类比的资源,可以当成一个信号量。<br>Object.wait() to suspend a thread（等价于sem.wait()）。将当前线程暂停并释放当前对象锁，直到其他线程调用了当前对象的notify/notifyAll方法。<br>Object.notify() to wake a thread up（等价sem.signal()）。唤醒一个在等待当前对象锁的线程。<br>以前用wait/notify的地方,现在可以用CyclicBarrier和CountDownLatch同步工具代替</p><p>wait方法使用模板:</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>synchronized</span> (obj) {
-</span></span><span style=display:flex><span>    <span style=color:#00f>while</span> (condition does not hold){ <span style=color:green>// 这里即使线程被虚假唤醒，条件还是不满足，则继续wait
-</span></span></span><span style=display:flex><span><span style=color:green></span>        obj.wait();
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:green>//... Perform action appropriate to condition
-</span></span></span><span style=display:flex><span><span style=color:green></span>}
-</span></span></code></pre></div><p>为什么 wait 方法必须在 synchronized 保护的同步代码中使用？ 因为需要保证while判断和wait两个操作是一个原子操作。</p><p>两个线程交替打印A/B</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#00f>public</span> <span style=color:#00f>static</span> <span style=color:#2b91af>void</span> main(String[] args) {
-</span></span><span style=display:flex><span>            PrintTask pt = <span style=color:#00f>new</span> PrintTask(<span style=color:#a31515>&#34;A&#34;</span>);
-</span></span><span style=display:flex><span>            <span style=color:#00f>new</span> Thread(pt::print).start();
-</span></span><span style=display:flex><span>            <span style=color:#00f>new</span> Thread(pt::print).start();
-</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span><span style=color:#a90d91>synchronized</span> <span style=color:#000>(</span><span style=color:#000>obj</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>while</span> <span style=color:#000>(</span><span style=color:#000>condition</span> <span style=color:#000>does</span> <span style=color:#000>not</span> <span style=color:#000>hold</span><span style=color:#000>){</span> <span style=color:#177500>// 这里即使线程被虚假唤醒，条件还是不满足，则继续wait
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>        <span style=color:#000>obj</span><span style=color:#000>.</span><span style=color:#836c28>wait</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#177500>//... Perform action appropriate to condition
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>}</span>
+</span></span></code></pre></div><p>为什么 wait 方法必须在 synchronized 保护的同步代码中使用？ 因为需要保证while判断和wait两个操作是一个原子操作。</p><p>两个线程交替打印A/B</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#a90d91>public</span> <span style=color:#a90d91>static</span> <span style=color:#a90d91>void</span> <span style=color:#000>main</span><span style=color:#000>(</span><span style=color:#000>String</span><span style=color:#000>[]</span> <span style=color:#000>args</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#000>PrintTask</span> <span style=color:#000>pt</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>PrintTask</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;A&#34;</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#a90d91>new</span> <span style=color:#000>Thread</span><span style=color:#000>(</span><span style=color:#000>pt</span><span style=color:#000>::</span><span style=color:#000>print</span><span style=color:#000>).</span><span style=color:#836c28>start</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#a90d91>new</span> <span style=color:#000>Thread</span><span style=color:#000>(</span><span style=color:#000>pt</span><span style=color:#000>::</span><span style=color:#000>print</span><span style=color:#000>).</span><span style=color:#836c28>start</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#00f>static</span> <span style=color:#00f>class</span> <span style=color:#2b91af>PrintTask</span> {
-</span></span><span style=display:flex><span>        <span style=color:#00f>private</span> String currentChar;
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>static</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>PrintTask</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>private</span> <span style=color:#000>String</span> <span style=color:#000>currentChar</span><span style=color:#000>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        PrintTask(String initialChar) {
-</span></span><span style=display:flex><span>            <span style=color:#00f>this</span>.currentChar = initialChar;
-</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#000>PrintTask</span><span style=color:#000>(</span><span style=color:#000>String</span> <span style=color:#000>initialChar</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>currentChar</span> <span style=color:#000>=</span> <span style=color:#000>initialChar</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#00f>public</span> <span style=color:#2b91af>void</span> print() {
-</span></span><span style=display:flex><span>            <span style=color:#00f>synchronized</span> (<span style=color:#00f>this</span>) {
-</span></span><span style=display:flex><span>                <span style=color:#00f>while</span> (<span style=color:#00f>true</span>) {
-</span></span><span style=display:flex><span>                    System.out.println(Thread.currentThread().getId() +<span style=color:#a31515>&#34; &#34;</span>+currentChar);
-</span></span><span style=display:flex><span>                    <span style=color:#00f>if</span> (<span style=color:#a31515>&#34;A&#34;</span>.equals(currentChar)) {
-</span></span><span style=display:flex><span>                        currentChar = <span style=color:#a31515>&#34;B&#34;</span>;
-</span></span><span style=display:flex><span>                    } <span style=color:#00f>else</span> {
-</span></span><span style=display:flex><span>                        currentChar = <span style=color:#a31515>&#34;A&#34;</span>;
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                    <span style=color:#00f>try</span> {
-</span></span><span style=display:flex><span>                        <span style=color:#00f>this</span>.notifyAll();
-</span></span><span style=display:flex><span>                        <span style=color:#00f>this</span>.wait();
-</span></span><span style=display:flex><span>                    } <span style=color:#00f>catch</span> (InterruptedException e) {
-</span></span><span style=display:flex><span>                        <span style=color:#00f>throw</span> <span style=color:#00f>new</span> RuntimeException(e);
-</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>public</span> <span style=color:#a90d91>void</span> <span style=color:#000>print</span><span style=color:#000>()</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#a90d91>synchronized</span> <span style=color:#000>(</span><span style=color:#a90d91>this</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#a90d91>while</span> <span style=color:#000>(</span><span style=color:#a90d91>true</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>                    <span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>Thread</span><span style=color:#000>.</span><span style=color:#836c28>currentThread</span><span style=color:#000>().</span><span style=color:#836c28>getId</span><span style=color:#000>()</span> <span style=color:#000>+</span><span style=color:#c41a16>&#34; &#34;</span><span style=color:#000>+</span><span style=color:#000>currentChar</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#a90d91>if</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;A&#34;</span><span style=color:#000>.</span><span style=color:#836c28>equals</span><span style=color:#000>(</span><span style=color:#000>currentChar</span><span style=color:#000>))</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>                        <span style=color:#000>currentChar</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;B&#34;</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#000>}</span> <span style=color:#a90d91>else</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>                        <span style=color:#000>currentChar</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;A&#34;</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#000>}</span>
+</span></span><span style=display:flex><span>                    <span style=color:#a90d91>try</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>                        <span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>notifyAll</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>                        <span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>wait</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>                    <span style=color:#000>}</span> <span style=color:#a90d91>catch</span> <span style=color:#000>(</span><span style=color:#000>InterruptedException</span> <span style=color:#000>e</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>                        <span style=color:#a90d91>throw</span> <span style=color:#a90d91>new</span> <span style=color:#000>RuntimeException</span><span style=color:#000>(</span><span style=color:#000>e</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span></code></pre></div><h3 id=synchronized-和-volatile>synchronized 和 volatile</h3><p>volatile 比较简单，可以理解为将一个变量强制同步给所有线程可见，但是不能解决并发写的问题。</p><p>java的每个对象都有内在锁（或者叫监视器锁，intrinsic lock or monitor lock），涉及两个JVM指令：monitorenter、monitorexit。</p><p>synchronized method和synchronized block的区别：<br>如果是synchronized(this),那么和synchronized 方法没有任何区别,锁定对象都是方法所在的对象.<br>但是synchronized block可以锁定其他对象,而且synchronized block的范围是可以控制更灵活,synchronized 方法的边界只能是整个方法</p><p>使用ReentrantLock场景：<br>需要以下高级特性时 ： 可定时的,可轮询的,可中断的锁,公平队列,非块结构.<br><a href=https://stackoverflow.com/questions/4201713/synchronization-vs-lock>Synchronization vs Lock-stackoverflow</a></p><h3 id=semaphore>Semaphore</h3><p>可以理解为资源的许可证数量。<br>sem.acquire(2): 获取两个许可证。<br>sem.release() 释放资源的一个许可证。<br>信号量非常有用，也是基础，基于信号量，可以构建出很多其他的同步工具: turnstile和rendezvous，barrier，mutex，Multiplex</p><h3 id=countdownlatch>CountDownLatch</h3><p>CountDownLatch是管理一组线程和一个主线程的先后.主线程wait后就阻塞,直到所有的CountDownLatch调用countDown后主线程接着开始.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#00f>package</span> angus.intrview.concurrent;
+</span></span><span style=display:flex><span>                <span style=color:#000>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#000>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#000>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>}</span>
+</span></span></code></pre></div><h3 id=synchronized-和-volatile>synchronized 和 volatile</h3><p>volatile 比较简单，可以理解为将一个变量强制同步给所有线程可见，但是不能解决并发写的问题。</p><p>java的每个对象都有内在锁（或者叫监视器锁，intrinsic lock or monitor lock），涉及两个JVM指令：monitorenter、monitorexit。</p><p>synchronized method和synchronized block的区别：<br>如果是synchronized(this),那么和synchronized 方法没有任何区别,锁定对象都是方法所在的对象.<br>但是synchronized block可以锁定其他对象,而且synchronized block的范围是可以控制更灵活,synchronized 方法的边界只能是整个方法</p><p>使用ReentrantLock场景：<br>需要以下高级特性时 ： 可定时的,可轮询的,可中断的锁,公平队列,非块结构.<br><a href=https://stackoverflow.com/questions/4201713/synchronization-vs-lock>Synchronization vs Lock-stackoverflow</a></p><h3 id=semaphore>Semaphore</h3><p>可以理解为资源的许可证数量。<br>sem.acquire(2): 获取两个许可证。<br>sem.release() 释放资源的一个许可证。<br>信号量非常有用，也是基础，基于信号量，可以构建出很多其他的同步工具: turnstile和rendezvous，barrier，mutex，Multiplex</p><h3 id=countdownlatch>CountDownLatch</h3><p>CountDownLatch是管理一组线程和一个主线程的先后.主线程wait后就阻塞,直到所有的CountDownLatch调用countDown后主线程接着开始.</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a90d91>package</span> <span style=color:#000>angus.intrview.concurrent</span><span style=color:#000>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>import</span> java.util.concurrent.CountDownLatch;
-</span></span><span style=display:flex><span><span style=color:#00f>import</span> java.util.concurrent.TimeUnit;
+</span></span><span style=display:flex><span><span style=color:#a90d91>import</span> <span style=color:#000>java.util.concurrent.CountDownLatch</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>import</span> <span style=color:#000>java.util.concurrent.TimeUnit</span><span style=color:#000>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>public</span> <span style=color:#00f>class</span> <span style=color:#2b91af>CountDownLatchTest</span> {
-</span></span><span style=display:flex><span>	<span style=color:green>// 这个方法将启动多个任务,并让它们同时执行,计算完成的时间
-</span></span></span><span style=display:flex><span><span style=color:green></span>	<span style=color:#00f>public</span> <span style=color:#2b91af>long</span> timer(<span style=color:#2b91af>int</span> taskNums) <span style=color:#00f>throws</span> InterruptedException {
-</span></span><span style=display:flex><span>		CountDownLatch startLatch = <span style=color:#00f>new</span> CountDownLatch(1);
-</span></span><span style=display:flex><span>		CountDownLatch finishLatch = <span style=color:#00f>new</span> CountDownLatch(taskNums);
-</span></span><span style=display:flex><span>		<span style=color:#00f>for</span> (<span style=color:#2b91af>int</span> i = 0; i &lt; taskNums; i++) {
-</span></span><span style=display:flex><span>			Task task = <span style=color:#00f>new</span> Task(startLatch, finishLatch, i);
-</span></span><span style=display:flex><span>			<span style=color:#00f>new</span> Thread(task).start();
-</span></span><span style=display:flex><span>		}
+</span></span><span style=display:flex><span><span style=color:#a90d91>public</span> <span style=color:#a90d91>class</span> <span style=color:#3f6e75>CountDownLatchTest</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#177500>// 这个方法将启动多个任务,并让它们同时执行,计算完成的时间
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>	<span style=color:#a90d91>public</span> <span style=color:#a90d91>long</span> <span style=color:#000>timer</span><span style=color:#000>(</span><span style=color:#a90d91>int</span> <span style=color:#000>taskNums</span><span style=color:#000>)</span> <span style=color:#a90d91>throws</span> <span style=color:#000>InterruptedException</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>CountDownLatch</span> <span style=color:#000>startLatch</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>CountDownLatch</span><span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>CountDownLatch</span> <span style=color:#000>finishLatch</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>CountDownLatch</span><span style=color:#000>(</span><span style=color:#000>taskNums</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#a90d91>int</span> <span style=color:#000>i</span> <span style=color:#000>=</span> <span style=color:#1c01ce>0</span><span style=color:#000>;</span> <span style=color:#000>i</span> <span style=color:#000>&lt;</span> <span style=color:#000>taskNums</span><span style=color:#000>;</span> <span style=color:#000>i</span><span style=color:#000>++)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#000>Task</span> <span style=color:#000>task</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>Task</span><span style=color:#000>(</span><span style=color:#000>startLatch</span><span style=color:#000>,</span> <span style=color:#000>finishLatch</span><span style=color:#000>,</span> <span style=color:#000>i</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#a90d91>new</span> <span style=color:#000>Thread</span><span style=color:#000>(</span><span style=color:#000>task</span><span style=color:#000>).</span><span style=color:#836c28>start</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#2b91af>long</span> start = System.nanoTime();
-</span></span><span style=display:flex><span>		startLatch.countDown();<span style=color:green>// 准备好线程后开始同时启动所有任务
-</span></span></span><span style=display:flex><span><span style=color:green></span>		finishLatch.await();<span style=color:green>// 等待任务完成
-</span></span></span><span style=display:flex><span><span style=color:green></span>		<span style=color:#2b91af>long</span> end = System.nanoTime();
-</span></span><span style=display:flex><span>		<span style=color:#00f>return</span> end - start;
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>long</span> <span style=color:#000>start</span> <span style=color:#000>=</span> <span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>nanoTime</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>startLatch</span><span style=color:#000>.</span><span style=color:#836c28>countDown</span><span style=color:#000>();</span><span style=color:#177500>// 准备好线程后开始同时启动所有任务
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>finishLatch</span><span style=color:#000>.</span><span style=color:#836c28>await</span><span style=color:#000>();</span><span style=color:#177500>// 等待任务完成
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#a90d91>long</span> <span style=color:#000>end</span> <span style=color:#000>=</span> <span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>nanoTime</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>return</span> <span style=color:#000>end</span> <span style=color:#000>-</span> <span style=color:#000>start</span><span style=color:#000>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	<span style=color:#00f>public</span> <span style=color:#00f>static</span> <span style=color:#2b91af>void</span> main(String[] args) <span style=color:#00f>throws</span> InterruptedException {
-</span></span><span style=display:flex><span>		CountDownLatchTest ct = <span style=color:#00f>new</span> CountDownLatchTest();
-</span></span><span style=display:flex><span>		<span style=color:#2b91af>long</span> time = ct.timer(100);
-</span></span><span style=display:flex><span>		System.out.println(TimeUnit.NANOSECONDS.toSeconds(time) + <span style=color:#a31515>&#34;   SENCODS&#34;</span>);
-</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#a90d91>public</span> <span style=color:#a90d91>static</span> <span style=color:#a90d91>void</span> <span style=color:#000>main</span><span style=color:#000>(</span><span style=color:#000>String</span><span style=color:#000>[]</span> <span style=color:#000>args</span><span style=color:#000>)</span> <span style=color:#a90d91>throws</span> <span style=color:#000>InterruptedException</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>CountDownLatchTest</span> <span style=color:#000>ct</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>CountDownLatchTest</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>long</span> <span style=color:#000>time</span> <span style=color:#000>=</span> <span style=color:#000>ct</span><span style=color:#000>.</span><span style=color:#836c28>timer</span><span style=color:#000>(</span><span style=color:#1c01ce>100</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#000>TimeUnit</span><span style=color:#000>.</span><span style=color:#836c28>NANOSECONDS</span><span style=color:#000>.</span><span style=color:#836c28>toSeconds</span><span style=color:#000>(</span><span style=color:#000>time</span><span style=color:#000>)</span> <span style=color:#000>+</span> <span style=color:#c41a16>&#34;   SENCODS&#34;</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>	<span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>class</span> <span style=color:#2b91af>Task</span> <span style=color:#00f>implements</span> Runnable {
-</span></span><span style=display:flex><span>	CountDownLatch startLatch;
-</span></span><span style=display:flex><span>	CountDownLatch finishLatch;
-</span></span><span style=display:flex><span>	<span style=color:#2b91af>int</span> time;
+</span></span><span style=display:flex><span><span style=color:#a90d91>class</span> <span style=color:#3f6e75>Task</span> <span style=color:#a90d91>implements</span> <span style=color:#000>Runnable</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#000>CountDownLatch</span> <span style=color:#000>startLatch</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>	<span style=color:#000>CountDownLatch</span> <span style=color:#000>finishLatch</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>	<span style=color:#a90d91>int</span> <span style=color:#000>time</span><span style=color:#000>;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	Task(CountDownLatch startLatch, CountDownLatch finishLatch, <span style=color:#2b91af>int</span> time) {
-</span></span><span style=display:flex><span>		<span style=color:#00f>this</span>.startLatch = startLatch;
-</span></span><span style=display:flex><span>		<span style=color:#00f>this</span>.finishLatch = finishLatch;
-</span></span><span style=display:flex><span>		<span style=color:#00f>this</span>.time = time;
-</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#000>Task</span><span style=color:#000>(</span><span style=color:#000>CountDownLatch</span> <span style=color:#000>startLatch</span><span style=color:#000>,</span> <span style=color:#000>CountDownLatch</span> <span style=color:#000>finishLatch</span><span style=color:#000>,</span> <span style=color:#a90d91>int</span> <span style=color:#000>time</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>startLatch</span> <span style=color:#000>=</span> <span style=color:#000>startLatch</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>finishLatch</span> <span style=color:#000>=</span> <span style=color:#000>finishLatch</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>this</span><span style=color:#000>.</span><span style=color:#836c28>time</span> <span style=color:#000>=</span> <span style=color:#000>time</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>	<span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	@Override
-</span></span><span style=display:flex><span>	<span style=color:#00f>public</span> <span style=color:#2b91af>void</span> run() {
-</span></span><span style=display:flex><span>		<span style=color:#00f>try</span> {
-</span></span><span style=display:flex><span>			startLatch.await();<span style=color:green>// 等待主线程通知任务开始
-</span></span></span><span style=display:flex><span><span style=color:green></span>			System.out.println(<span style=color:#a31515>&#34;doing the task!&#34;</span>);
-</span></span><span style=display:flex><span>			Thread.sleep(time * 100); <span style=color:green>// 模拟任务过程
-</span></span></span><span style=display:flex><span><span style=color:green></span>		} <span style=color:#00f>catch</span> (InterruptedException e1) {
-</span></span><span style=display:flex><span>			<span style=color:green>// TODO Auto-generated catch block
-</span></span></span><span style=display:flex><span><span style=color:green></span>			e1.printStackTrace();
-</span></span><span style=display:flex><span>		} <span style=color:#00f>finally</span> {
-</span></span><span style=display:flex><span>			System.out.println(<span style=color:#a31515>&#34;task done&#34;</span>);
-</span></span><span style=display:flex><span>			finishLatch.countDown();<span style=color:green>// 告诉主线程任务完成
-</span></span></span><span style=display:flex><span><span style=color:green></span>		}
+</span></span><span style=display:flex><span>	<span style=color:#000>@Override</span>
+</span></span><span style=display:flex><span>	<span style=color:#a90d91>public</span> <span style=color:#a90d91>void</span> <span style=color:#000>run</span><span style=color:#000>()</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#a90d91>try</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#000>startLatch</span><span style=color:#000>.</span><span style=color:#836c28>await</span><span style=color:#000>();</span><span style=color:#177500>// 等待主线程通知任务开始
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>			<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;doing the task!&#34;</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#000>Thread</span><span style=color:#000>.</span><span style=color:#836c28>sleep</span><span style=color:#000>(</span><span style=color:#000>time</span> <span style=color:#000>*</span> <span style=color:#1c01ce>100</span><span style=color:#000>);</span> <span style=color:#177500>// 模拟任务过程
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>}</span> <span style=color:#a90d91>catch</span> <span style=color:#000>(</span><span style=color:#000>InterruptedException</span> <span style=color:#000>e1</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#177500>// TODO Auto-generated catch block
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>			<span style=color:#000>e1</span><span style=color:#000>.</span><span style=color:#836c28>printStackTrace</span><span style=color:#000>();</span>
+</span></span><span style=display:flex><span>		<span style=color:#000>}</span> <span style=color:#a90d91>finally</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#000>System</span><span style=color:#000>.</span><span style=color:#836c28>out</span><span style=color:#000>.</span><span style=color:#836c28>println</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;task done&#34;</span><span style=color:#000>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#000>finishLatch</span><span style=color:#000>.</span><span style=color:#836c28>countDown</span><span style=color:#000>();</span><span style=color:#177500>// 告诉主线程任务完成
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>		<span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	<span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#000>}</span>
 </span></span></code></pre></div><h3 id=cyclicbarrier-exchanger>CyclicBarrier Exchanger</h3><h3 id=lock>Lock</h3></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/java rel=tag title=java>#java#</a>
 <a href=https://zhimoe.github.io/tags/%e5%b9%b6%e5%8f%91 rel=tag title=并发>#并发#</a></div><div class=post-nav><div class=article-copyright><div class=article-copyright-info><p><span>文章：</span><a href=https://zhimoe.github.io/post/java-concurrency-2-control/> Java并发2-同步与锁 by zhimoe</a></p><p><span>声明： </span>本博客文章除特别声明外，均采用 <a href=https://creativecommons.org/licenses/by-nc-sa/3.0/ target=_blank style=text-decoration:underline>CC BY-NC-SA 3.0</a>许可协议，转载请注明出处！</p></div></div><div class=clear></div></div><div class=reward-qr-info><div>创作不易，打赏作者 ^_^</div><button id=rewardButton disable=enable onclick='var qr=document.getElementById("QR");qr.style.display==="none"?qr.style.display="block":qr.style.display="none"'>
 <span>赏</span></button><div id=QR style=display:none><div id=wechat style=display:inline-block><img id=wechat_qr src=https://zhimoe.github.io/img/wechat-pay.jpg alt="WeChat Pay"><p>微信打赏</p></div><div id=alipay style=display:inline-block><img id=alipay_qr src=https://zhimoe.github.io/img/ali-pay.jpg alt=Alipay><p>支付宝打赏</p></div></div></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/java-concurrency-1-thread/ rel=next title=Javac-线程与任务><i class="fa fa-chevron-left"></i> Javac-线程与任务</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/java-concurrency-3-threadlocal/ rel=prev title=Java并发3-ThreadLocal>Java并发3-ThreadLocal

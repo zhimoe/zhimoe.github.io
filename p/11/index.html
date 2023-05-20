@@ -15,18 +15,18 @@
 <span class=leancloud-world-count>653 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><h3 id=泛型>泛型</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:green>// 类
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>class</span> <span style=color:#2b91af>Tuple</span>&lt;T, S&gt; {
-</span></span><span style=display:flex><span>    <span style=color:#00f>private</span> T first;
-</span></span><span style=display:flex><span>    <span style=color:#00f>private</span> S second;
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span><span style=color:green>// 泛型方法也可在非泛型类里面
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>class</span> <span style=color:#2b91af>ArrayAlg</span> {
-</span></span><span style=display:flex><span>    <span style=color:#00f>public</span> <span style=color:#00f>static</span> &lt;T&gt; T getMiddle(T... a) {
-</span></span><span style=display:flex><span>        <span style=color:#00f>return</span> a[a.length / 2];
-</span></span><span style=display:flex><span>    }
+<span class=leancloud-view-count>2分钟</span></span></div></header><div class=post-body itemprop=articleBody><h3 id=泛型>泛型</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#177500>// 类
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>class</span> <span style=color:#3f6e75>Tuple</span><span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>,</span> <span style=color:#000>S</span><span style=color:#000>&gt;</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>private</span> <span style=color:#000>T</span> <span style=color:#000>first</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>private</span> <span style=color:#000>S</span> <span style=color:#000>second</span><span style=color:#000>;</span>
+</span></span><span style=display:flex><span><span style=color:#000>}</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// 泛型方法也可在非泛型类里面
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>class</span> <span style=color:#3f6e75>ArrayAlg</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>public</span> <span style=color:#a90d91>static</span> <span style=color:#000>&lt;</span><span style=color:#000>T</span><span style=color:#000>&gt;</span> <span style=color:#000>T</span> <span style=color:#000>getMiddle</span><span style=color:#000>(</span><span style=color:#000>T</span><span style=color:#000>...</span> <span style=color:#000>a</span><span style=color:#000>)</span> <span style=color:#000>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>return</span> <span style=color:#000>a</span><span style=color:#000>[</span><span style=color:#000>a</span><span style=color:#000>.</span><span style=color:#836c28>length</span> <span style=color:#000>/</span> <span style=color:#1c01ce>2</span><span style=color:#000>];</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#000>}</span>
 </span></span></code></pre></div></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/java-generic/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/io-java-stream-write-reader/ itemprop=url>IO-Java-Stream-Write-Reader</a></h1><div class=post-meta><span class=post-time><span class=post-meta-item-text>时间：</span>
 <time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2016-03-01">2016-03-01</time></span>
 <span class=post-category>&nbsp; | &nbsp;
@@ -60,12 +60,12 @@
 <span class=leancloud-world-count>155 字</span></span>
 <span>|
 <span class=post-meta-item-text>阅读：</span>
-<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:<br><a href=https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html>A Simple Introduction to AOP</a></p><p>提醒个点,使用注解的方式写切面时,增加了一个空方法,即：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#00f>class</span> <span style=color:#2b91af>Test</span>{
-</span></span><span style=display:flex><span>    @Pointcut(<span style=color:#a31515>&#34;execution(* org.bk.inventory.service.*.*(..))&#34;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#00f>public</span> <span style=color:#2b91af>void</span> serviceMethods(){
-</span></span><span style=display:flex><span>        <span style=color:green>//...
-</span></span></span><span style=display:flex><span><span style=color:green></span>    }
-</span></span><span style=display:flex><span>}
+<span class=leancloud-view-count>1分钟</span></span></div></header><div class=post-body itemprop=articleBody><p>Java AOP: 找到一个最简单的介绍,不怎么想翻译,直接看原文吧:<br><a href=https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html>A Simple Introduction to AOP</a></p><p>提醒个点,使用注解的方式写切面时,增加了一个空方法,即：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a90d91>class</span> <span style=color:#3f6e75>Test</span><span style=color:#000>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#000>@Pointcut</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;execution(* org.bk.inventory.service.*.*(..))&#34;</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>public</span> <span style=color:#a90d91>void</span> <span style=color:#000>serviceMethods</span><span style=color:#000>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#177500>//...
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>    <span style=color:#000>}</span>
+</span></span><span style=display:flex><span><span style=color:#000>}</span>
 </span></span></code></pre></div></div><div class="post-more-link text-center"><a class=btn href=https://zhimoe.github.io/post/java-aop-example/ rel=contents>阅读全文 &#187;</a></div><footer class=post-footer><div class=post-eof></div></footer></article><article class="post post-type-normal" itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline"><a class=post-title-link href=https://zhimoe.github.io/post/java--and-equal/ itemprop=url>Java-==-and-equals</a></h1><div class=post-meta><span class=post-time><span class=post-meta-item-text>时间：</span>
 <time itemprop=dateCreated datetime=2016-03-22T13:04:35+08:00 content="2016-01-01">2016-01-01</time></span>
 <span class=post-category>&nbsp; | &nbsp;

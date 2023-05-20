@@ -31,74 +31,74 @@
 </span></span><span style=display:flex><span>• Use for (elem &lt;- arr if . . . ) . . . yield . . . to transform into a new array.
 </span></span><span style=display:flex><span>• Scala and Java arrays are interoperable; with ArrayBuffer, use scala.collection.JavaConverters._ 
 </span></span><span style=display:flex><span>don&#39;t use scala.collection.JavaConversions.
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#00f>import</span> scala.collection.mutable.ArrayBuffer
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> b <span style=color:#00f>=</span> <span style=color:#2b91af>ArrayBuffer</span>[<span style=color:#2b91af>Int</span>]()
-</span></span><span style=display:flex><span><span style=color:green>// Or new ArrayBuffer[Int]
-</span></span></span><span style=display:flex><span><span style=color:green>// An empty array buffer, ready to hold integers
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>b += 1
-</span></span><span style=display:flex><span><span style=color:green>// ArrayBuffer(1)
-</span></span></span><span style=display:flex><span><span style=color:green>// Add an element at the end with +=
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>b += (1, 2, 3, 5)
-</span></span><span style=display:flex><span><span style=color:green>// ArrayBuffer(1, 1, 2, 3, 5)
-</span></span></span><span style=display:flex><span><span style=color:green>// Add multiple elements at the end by enclosing them in parentheses
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>b ++= <span style=color:#2b91af>Array</span>(8, 13, 21)
-</span></span><span style=display:flex><span><span style=color:green>// ArrayBuffer(1, 1, 2, 3, 5, 8, 13, 21)
-</span></span></span><span style=display:flex><span><span style=color:green>// You can append any collection with the ++= operator
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>b.trimEnd(5)
-</span></span><span style=display:flex><span><span style=color:green>// ArrayBuffer(1, 1, 2)
-</span></span></span><span style=display:flex><span><span style=color:green>// Removes the last five elements
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>b.insert(2, 6)
-</span></span><span style=display:flex><span><span style=color:green>// ArrayBuffer(1, 1, 6, 2)
-</span></span></span><span style=display:flex><span><span style=color:green>// Insert before index 2
-</span></span></span><span style=display:flex><span><span style=color:green></span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#a90d91>import</span> <span style=color:#000>scala.collection.mutable.ArrayBuffer</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>b</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>ArrayBuffer</span><span style=color:#000>[</span><span style=color:#a90d91>Int</span><span style=color:#000>]()</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// Or new ArrayBuffer[Int]
+</span></span></span><span style=display:flex><span><span style=color:#177500>// An empty array buffer, ready to hold integers
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#000>b</span> <span style=color:#000>+=</span> <span style=color:#1c01ce>1</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// ArrayBuffer(1)
+</span></span></span><span style=display:flex><span><span style=color:#177500>// Add an element at the end with +=
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#000>b</span> <span style=color:#000>+=</span> <span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#1c01ce>5</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// ArrayBuffer(1, 1, 2, 3, 5)
+</span></span></span><span style=display:flex><span><span style=color:#177500>// Add multiple elements at the end by enclosing them in parentheses
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#000>b</span> <span style=color:#000>++=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>(</span><span style=color:#1c01ce>8</span><span style=color:#000>,</span> <span style=color:#1c01ce>13</span><span style=color:#000>,</span> <span style=color:#1c01ce>21</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// ArrayBuffer(1, 1, 2, 3, 5, 8, 13, 21)
+</span></span></span><span style=display:flex><span><span style=color:#177500>// You can append any collection with the ++= operator
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#000>b</span><span style=color:#000>.</span><span style=color:#000>trimEnd</span><span style=color:#000>(</span><span style=color:#1c01ce>5</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// ArrayBuffer(1, 1, 2)
+</span></span></span><span style=display:flex><span><span style=color:#177500>// Removes the last five elements
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#000>b</span><span style=color:#000>.</span><span style=color:#000>insert</span><span style=color:#000>(</span><span style=color:#1c01ce>2</span><span style=color:#000>,</span> <span style=color:#1c01ce>6</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// ArrayBuffer(1, 1, 6, 2)
+</span></span></span><span style=display:flex><span><span style=color:#177500>// Insert before index 2
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>// iterate array with index 
-</span></span></span><span style=display:flex><span><span style=color:green>// use view or use index(it&#39;s faster)
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>for</span> (i<span style=color:#00f>&lt;-</span>b.indices){<span style=color:#00f>val</span> v <span style=color:#00f>=</span> b(i)}
-</span></span></code></pre></div><h3 id=maps--tuples>Maps & Tuples</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#00f>var</span> scores <span style=color:#00f>=</span> <span style=color:#2b91af>Map</span>(<span style=color:#a31515>&#34;Alice&#34;</span> -&gt; 10, <span style=color:#a31515>&#34;Bob&#34;</span> -&gt; 3, <span style=color:#a31515>&#34;Cindy&#34;</span> -&gt; 8)
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> scores2 <span style=color:#00f>=</span> <span style=color:#2b91af>Map</span>((<span style=color:#a31515>&#34;Alice&#34;</span>, 10), (<span style=color:#a31515>&#34;Bob&#34;</span>, 3), (<span style=color:#a31515>&#34;Cindy&#34;</span>, 8))
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> bobsScore <span style=color:#00f>=</span> scores(<span style=color:#a31515>&#34;Bob&#34;</span>) <span style=color:green>// Like scores.get(&#34;Bob&#34;) in Java
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> scores1 <span style=color:#00f>=</span> scala.collection.mutable.<span style=color:#2b91af>Map</span>(<span style=color:#a31515>&#34;Alice&#34;</span> -&gt; 10, <span style=color:#a31515>&#34;Bob&#34;</span> -&gt; 3, <span style=color:#a31515>&#34;Cindy&#34;</span> -&gt; 8)
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> scores3 <span style=color:#00f>=</span> scala.collection.mutable.<span style=color:#2b91af>Map</span>[<span style=color:#2b91af>String</span>, <span style=color:#2b91af>Int</span>]()
-</span></span><span style=display:flex><span>scores1(<span style=color:#a31515>&#34;Bob&#34;</span>) <span style=color:#00f>=</span> 10 
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> v <span style=color:#00f>=</span> scores1(<span style=color:#a31515>&#34;Bob&#34;</span>) <span style=color:green>// NPE if key is not exists
-</span></span></span><span style=display:flex><span><span style=color:green></span>scores1.get(<span style=color:#a31515>&#34;Bob&#34;</span>) <span style=color:green>// None if key is not exists
-</span></span></span><span style=display:flex><span><span style=color:green></span>scores1.getOrElse(<span style=color:#a31515>&#34;Bob&#34;</span>,10)<span style=color:green>// 10 if key is not exists
-</span></span></span><span style=display:flex><span><span style=color:green></span>scores1 += (<span style=color:#a31515>&#34;Bob&#34;</span> -&gt; 10, <span style=color:#a31515>&#34;Fred&#34;</span> -&gt; 7)
-</span></span><span style=display:flex><span>scores1 -= <span style=color:#a31515>&#34;Alice&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// iterate array with index 
+</span></span></span><span style=display:flex><span><span style=color:#177500>// use view or use index(it&#39;s faster)
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#a90d91>&lt;-</span><span style=color:#000>b</span><span style=color:#000>.</span><span style=color:#000>indices</span><span style=color:#000>){</span><span style=color:#a90d91>val</span> <span style=color:#000>v</span> <span style=color:#a90d91>=</span> <span style=color:#000>b</span><span style=color:#000>(</span><span style=color:#000>i</span><span style=color:#000>)}</span>
+</span></span></code></pre></div><h3 id=maps--tuples>Maps & Tuples</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#a90d91>var</span> <span style=color:#000>scores</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Map</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Alice&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Cindy&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>8</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>scores2</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Map</span><span style=color:#000>((</span><span style=color:#c41a16>&#34;Alice&#34;</span><span style=color:#000>,</span> <span style=color:#1c01ce>10</span><span style=color:#000>),</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>,</span> <span style=color:#1c01ce>3</span><span style=color:#000>),</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;Cindy&#34;</span><span style=color:#000>,</span> <span style=color:#1c01ce>8</span><span style=color:#000>))</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>bobsScore</span> <span style=color:#a90d91>=</span> <span style=color:#000>scores</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>)</span> <span style=color:#177500>// Like scores.get(&#34;Bob&#34;) in Java
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>scores1</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>Map</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Alice&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Cindy&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>8</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>scores3</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>Map</span><span style=color:#000>[</span><span style=color:#a90d91>String</span>, <span style=color:#a90d91>Int</span><span style=color:#000>]()</span>
+</span></span><span style=display:flex><span><span style=color:#000>scores1</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>)</span> <span style=color:#a90d91>=</span> <span style=color:#1c01ce>10</span> 
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>v</span> <span style=color:#a90d91>=</span> <span style=color:#000>scores1</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>)</span> <span style=color:#177500>// NPE if key is not exists
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>scores1</span><span style=color:#000>.</span><span style=color:#000>get</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>)</span> <span style=color:#177500>// None if key is not exists
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>scores1</span><span style=color:#000>.</span><span style=color:#000>getOrElse</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span><span style=color:#000>,</span><span style=color:#1c01ce>10</span><span style=color:#000>)</span><span style=color:#177500>// 10 if key is not exists
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>scores1</span> <span style=color:#000>+=</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Fred&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>7</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#000>scores1</span> <span style=color:#000>-=</span> <span style=color:#c41a16>&#34;Alice&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>// for immutable
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>val</span> newScores <span style=color:#00f>=</span> scores + (<span style=color:#a31515>&#34;Bob&#34;</span> -&gt; 10, <span style=color:#a31515>&#34;Fred&#34;</span> -&gt; 7) <span style=color:green>// New map with update
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>val</span> scores4 <span style=color:#00f>=</span> scores - <span style=color:#a31515>&#34;Alice&#34;</span>
-</span></span><span style=display:flex><span>scores -= <span style=color:#a31515>&#34;Alice&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// for immutable
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>newScores</span> <span style=color:#a90d91>=</span> <span style=color:#000>scores</span> <span style=color:#000>+</span> <span style=color:#000>(</span><span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Fred&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>7</span><span style=color:#000>)</span> <span style=color:#177500>// New map with update
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>scores4</span> <span style=color:#a90d91>=</span> <span style=color:#000>scores</span> <span style=color:#000>-</span> <span style=color:#c41a16>&#34;Alice&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#000>scores</span> <span style=color:#000>-=</span> <span style=color:#c41a16>&#34;Alice&#34;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>for</span> ((k, v) <span style=color:#00f>&lt;-</span> scores){}
+</span></span><span style=display:flex><span><span style=color:#a90d91>for</span> <span style=color:#000>((</span><span style=color:#000>k</span><span style=color:#000>,</span> <span style=color:#000>v</span><span style=color:#000>)</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>scores</span><span style=color:#000>){}</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>for</span> ((k, v) <span style=color:#00f>&lt;-</span> scores) <span style=color:#00f>yield</span> (v, k)
+</span></span><span style=display:flex><span><span style=color:#a90d91>for</span> <span style=color:#000>((</span><span style=color:#000>k</span><span style=color:#000>,</span> <span style=color:#000>v</span><span style=color:#000>)</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>scores</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>(</span><span style=color:#000>v</span><span style=color:#000>,</span> <span style=color:#000>k</span><span style=color:#000>)</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>// sorted map
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>val</span> sortedScores <span style=color:#00f>=</span> scala.collection.mutable.<span style=color:#2b91af>SortedMap</span>(<span style=color:#a31515>&#34;Alice&#34;</span> -&gt; 10,<span style=color:#a31515>&#34;Fred&#34;</span> -&gt; 7, <span style=color:#a31515>&#34;Bob&#34;</span> -&gt; 3, <span style=color:#a31515>&#34;Cindy&#34;</span> -&gt; 8)
-</span></span><span style=display:flex><span><span style=color:green>// insert order
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>val</span> months <span style=color:#00f>=</span> scala.collection.mutable.<span style=color:#2b91af>LinkedHashMap</span>(<span style=color:#a31515>&#34;January&#34;</span> -&gt; 1,<span style=color:#a31515>&#34;February&#34;</span> -&gt; 2, 
-</span></span><span style=display:flex><span><span style=color:#a31515>&#34;March&#34;</span> -&gt; 3, <span style=color:#a31515>&#34;April&#34;</span> -&gt; 4, <span style=color:#a31515>&#34;May&#34;</span> -&gt; 5)
+</span></span><span style=display:flex><span><span style=color:#177500>// sorted map
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>sortedScores</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>SortedMap</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;Alice&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>10</span><span style=color:#000>,</span><span style=color:#c41a16>&#34;Fred&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>7</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Bob&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Cindy&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>8</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// insert order
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>months</span> <span style=color:#a90d91>=</span> <span style=color:#000>scala</span><span style=color:#000>.</span><span style=color:#000>collection</span><span style=color:#000>.</span><span style=color:#000>mutable</span><span style=color:#000>.</span><span style=color:#3f6e75>LinkedHashMap</span><span style=color:#000>(</span><span style=color:#c41a16>&#34;January&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>1</span><span style=color:#000>,</span><span style=color:#c41a16>&#34;February&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>2</span><span style=color:#000>,</span> 
+</span></span><span style=display:flex><span><span style=color:#c41a16>&#34;March&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>3</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;April&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>4</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;May&#34;</span> <span style=color:#000>-&gt;</span> <span style=color:#1c01ce>5</span><span style=color:#000>)</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>import</span> scala.collection.JavaConverters._
+</span></span><span style=display:flex><span><span style=color:#a90d91>import</span> <span style=color:#000>scala.collection.JavaConverters._</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:green>// tuple 
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>val</span> t <span style=color:#00f>=</span> (1, 3.14, <span style=color:#a31515>&#34;Fred&#34;</span>)
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> second <span style=color:#00f>=</span> t._2 <span style=color:green>// Sets second to 3.14
-</span></span></span><span style=display:flex><span><span style=color:green></span>
+</span></span><span style=display:flex><span><span style=color:#177500>// tuple 
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>val</span> <span style=color:#000>t</span> <span style=color:#a90d91>=</span> <span style=color:#000>(</span><span style=color:#1c01ce>1</span><span style=color:#000>,</span> <span style=color:#1c01ce>3.14</span><span style=color:#000>,</span> <span style=color:#c41a16>&#34;Fred&#34;</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>second</span> <span style=color:#a90d91>=</span> <span style=color:#000>t</span><span style=color:#000>.</span><span style=color:#000>_2</span> <span style=color:#177500>// Sets second to 3.14
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> keys <span style=color:#00f>=</span> <span style=color:#2b91af>Array</span>()
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> values <span style=color:#00f>=</span> <span style=color:#2b91af>Array</span>()
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> kv <span style=color:#00f>=</span> keys.zip(values).toMap()
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>keys</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>()</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>values</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>Array</span><span style=color:#000>()</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>kv</span> <span style=color:#a90d91>=</span> <span style=color:#000>keys</span><span style=color:#000>.</span><span style=color:#000>zip</span><span style=color:#000>(</span><span style=color:#000>values</span><span style=color:#000>).</span><span style=color:#000>toMap</span><span style=color:#000>()</span>
 </span></span></code></pre></div><h3 id=object>Object</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>• Use objects for singletons and utility methods.
 </span></span><span style=display:flex><span>• A class can have a companion object with the same name.
 </span></span><span style=display:flex><span>• Objects can extend classes or traits.
@@ -133,15 +133,15 @@
 </span></span><span style=display:flex><span>• Traits can require implementing classes to have certain fields, methods, or superclasses.
 </span></span><span style=display:flex><span>• Unlike Java interfaces, a Scala trait can provide implementations of methods and fields.
 </span></span><span style=display:flex><span>• When you layer multiple traits, the order matters—the trait whose methods execute first goes to the back.
-</span></span></code></pre></div><h3 id=operators>Operators</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#00f>val</span> a <span style=color:#00f>=</span> 10
-</span></span><span style=display:flex><span><span style=color:green>//a: Int = 10
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>-a
-</span></span><span style=display:flex><span><span style=color:green>// res0: Int = -10
-</span></span></span><span style=display:flex><span><span style=color:green>//means the same as a.unary_-.
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span>a.unary_-
-</span></span><span style=display:flex><span><span style=color:green>//res1: Int = -10
+</span></span></code></pre></div><h3 id=operators>Operators</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>a</span> <span style=color:#a90d91>=</span> <span style=color:#1c01ce>10</span>
+</span></span><span style=display:flex><span><span style=color:#177500>//a: Int = 10
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#000>-</span><span style=color:#000>a</span>
+</span></span><span style=display:flex><span><span style=color:#177500>// res0: Int = -10
+</span></span></span><span style=display:flex><span><span style=color:#177500>//means the same as a.unary_-.
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#000>a</span><span style=color:#000>.</span><span style=color:#000>unary_-</span>
+</span></span><span style=display:flex><span><span style=color:#177500>//res1: Int = -10
 </span></span></span></code></pre></div><h3 id=high-order-functions>High Order Functions</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Array(3.14, 1.42, 2.0).map{ (x: Double) =&gt; 3 * x }
 </span></span><span style=display:flex><span>//==
 </span></span><span style=display:flex><span>Array(3.14, 1.42, 2.0) map { (x: Double) =&gt; 3 * x }
@@ -204,23 +204,23 @@
 </span></span><span style=display:flex><span>sorted, sortWith(less), sortBy(f)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>permutations, combinations(n)
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:green>//The map and flatMap methods are important because they are used
-</span></span></span><span style=display:flex><span><span style=color:green>//for translating for expressions. For example, the expression:
-</span></span></span><span style=display:flex><span><span style=color:green></span>
-</span></span><span style=display:flex><span><span style=color:#00f>for</span> (i <span style=color:#00f>&lt;-</span> 1 to 10) <span style=color:#00f>yield</span> i * i
-</span></span><span style=display:flex><span><span style=color:green>//is translated to
-</span></span></span><span style=display:flex><span><span style=color:green></span>(1 to 10).map(i <span style=color:#00f>=&gt;</span> i * i)
-</span></span><span style=display:flex><span><span style=color:green>//and
-</span></span></span><span style=display:flex><span><span style=color:green></span><span style=color:#00f>for</span> (i <span style=color:#00f>&lt;-</span> 1 to 10; j <span style=color:#00f>&lt;-</span> 1 to i) <span style=color:#00f>yield</span> i * j
-</span></span><span style=display:flex><span><span style=color:green>//becomes
-</span></span></span><span style=display:flex><span><span style=color:green></span>(1 to 10).flatMap(i <span style=color:#00f>=&gt;</span> (1 to i).map(j <span style=color:#00f>=&gt;</span> i * j))
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span><span style=color:#177500>//The map and flatMap methods are important because they are used
+</span></span></span><span style=display:flex><span><span style=color:#177500>//for translating for expressions. For example, the expression:
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>i</span> <span style=color:#000>*</span> <span style=color:#000>i</span>
+</span></span><span style=display:flex><span><span style=color:#177500>//is translated to
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>(</span><span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>).</span><span style=color:#000>map</span><span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>i</span> <span style=color:#000>*</span> <span style=color:#000>i</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#177500>//and
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>;</span> <span style=color:#000>j</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#000>i</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>i</span> <span style=color:#000>*</span> <span style=color:#000>j</span>
+</span></span><span style=display:flex><span><span style=color:#177500>//becomes
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#000>(</span><span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#1c01ce>10</span><span style=color:#000>).</span><span style=color:#000>flatMap</span><span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>(</span><span style=color:#1c01ce>1</span> <span style=color:#000>to</span> <span style=color:#000>i</span><span style=color:#000>).</span><span style=color:#000>map</span><span style=color:#000>(</span><span style=color:#000>j</span> <span style=color:#a90d91>=&gt;</span> <span style=color:#000>i</span> <span style=color:#000>*</span> <span style=color:#000>j</span><span style=color:#000>))</span>
 </span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-scala data-lang=scala><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#00f>val</span> coll <span style=color:#00f>=</span> <span style=color:#2b91af>List</span>()
-</span></span><span style=display:flex><span>coll.par.sum
-</span></span><span style=display:flex><span>coll.par.count(<span style=color:#00f>_</span> % 2 == 0)
-</span></span><span style=display:flex><span><span style=color:#00f>for</span> (i <span style=color:#00f>&lt;-</span> (0 until 100000).par) print(<span style=color:#a31515>s&#34; </span><span style=color:#a31515>$i</span><span style=color:#a31515>&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#a90d91>val</span> <span style=color:#000>coll</span> <span style=color:#a90d91>=</span> <span style=color:#3f6e75>List</span><span style=color:#000>()</span>
+</span></span><span style=display:flex><span><span style=color:#000>coll</span><span style=color:#000>.</span><span style=color:#000>par</span><span style=color:#000>.</span><span style=color:#000>sum</span>
+</span></span><span style=display:flex><span><span style=color:#000>coll</span><span style=color:#000>.</span><span style=color:#000>par</span><span style=color:#000>.</span><span style=color:#000>count</span><span style=color:#000>(</span><span style=color:#a90d91>_</span> <span style=color:#000>%</span> <span style=color:#1c01ce>2</span> <span style=color:#000>==</span> <span style=color:#1c01ce>0</span><span style=color:#000>)</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>(</span><span style=color:#1c01ce>0</span> <span style=color:#000>until</span> <span style=color:#1c01ce>100000</span><span style=color:#000>).</span><span style=color:#000>par</span><span style=color:#000>)</span> <span style=color:#000>print</span><span style=color:#000>(</span><span style=color:#c41a16>s&#34; </span><span style=color:#c41a16>$i</span><span style=color:#c41a16>&#34;</span><span style=color:#000>)</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>(<span style=color:#00f>for</span> (i <span style=color:#00f>&lt;-</span> (0 until 100000).par) <span style=color:#00f>yield</span> i) == (0 until 100000)
+</span></span><span style=display:flex><span><span style=color:#000>(</span><span style=color:#a90d91>for</span> <span style=color:#000>(</span><span style=color:#000>i</span> <span style=color:#a90d91>&lt;-</span> <span style=color:#000>(</span><span style=color:#1c01ce>0</span> <span style=color:#000>until</span> <span style=color:#1c01ce>100000</span><span style=color:#000>).</span><span style=color:#000>par</span><span style=color:#000>)</span> <span style=color:#a90d91>yield</span> <span style=color:#000>i</span><span style=color:#000>)</span> <span style=color:#000>==</span> <span style=color:#000>(</span><span style=color:#1c01ce>0</span> <span style=color:#000>until</span> <span style=color:#1c01ce>100000</span><span style=color:#000>)</span>
 </span></span></code></pre></div><h3 id=pattern-matching>Pattern Matching</h3><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>The key points of this chapter are:
 </span></span><span style=display:flex><span>• The match expression is a better switch, without fall-through.
 </span></span><span style=display:flex><span>• If no pattern matches, a MatchError is thrown. Use the case _ pattern to avoid that.
