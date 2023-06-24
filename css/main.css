@@ -1550,7 +1550,7 @@ pre .javascript .function {
 
 .posts-expand .post-tags {
     margin-top: 2px;
-    text-align: center;
+    text-align: left;
 }
 
 .posts-expand .post-tags a {
@@ -3529,9 +3529,9 @@ body {
     font-style: normal;
     font-variant: normal;
     font-stretch: normal;
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: #F44336;
+    background: #c5221f;
 }
 
 #rewardButton span:hover {
