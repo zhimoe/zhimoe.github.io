@@ -2,14 +2,50 @@
     font-family: 'Alegreya Sans';
     font-display: swap;
     font-weight: normal;
-    src: url("https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/files/alegreya-sans-latin-400italic.woff2");
+    src: url("/font/alegreya-sans-latin-400italic.woff2");
 }
 
 @font-face {
     font-family: 'Alegreya Sans';
     font-display: swap;
     font-weight: bold;
-    src: url("https://cdn.jsdelivr.net/npm/typeface-alegreya-sans@1.1.13/files/alegreya-sans-latin-700italic.woff2");
+    src: url("/font/alegreya-sans-latin-700italic.woff2");
+}
+
+/* Lato (normal, regular) */
+@font-face {
+    font-family: Lato;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url("https://lib.baomitu.com/lato-font/latest/fonts/lato-normal/lato-normal.woff2");
+}
+
+/* Lato (normal, italic) */
+@font-face {
+    font-family: Lato;
+    font-weight: 400;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url("https://lib.baomitu.com/lato-font/latest/fonts/lato-normal-italic/lato-normal-italic.woff2");
+}
+
+/* Lato (bold, regular) */
+@font-face {
+    font-family: Lato;
+    font-weight: bold;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    src: url("https://lib.baomitu.com/lato-font/latest/fonts/lato-bold/lato-bold.woff2");
+}
+
+/* Lato (bold, italic) */
+@font-face {
+    font-family: Lato;
+    font-weight: bold;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+    src: url("https://lib.baomitu.com/lato-font/latest/fonts/lato-bold-italic/lato-bold-italic.woff2");
 }
 
 
