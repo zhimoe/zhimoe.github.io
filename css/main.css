@@ -12,43 +12,6 @@
     src: url("/font/alegreya-sans-latin-700italic.woff2");
 }
 
-/* Lato (normal, regular) */
-@font-face {
-    font-family: Lato;
-    font-weight: 400;
-    font-style: normal;
-    text-rendering: optimizeLegibility;
-    src: url("https://lib.baomitu.com/lato-font/latest/fonts/lato-normal/lato-normal.woff2");
-}
-
-/* Lato (normal, italic) */
-@font-face {
-    font-family: Lato;
-    font-weight: 400;
-    font-style: italic;
-    text-rendering: optimizeLegibility;
-    src: url("https://lib.baomitu.com/lato-font/latest/fonts/lato-normal-italic/lato-normal-italic.woff2");
-}
-
-/* Lato (bold, regular) */
-@font-face {
-    font-family: Lato;
-    font-weight: bold;
-    font-style: normal;
-    text-rendering: optimizeLegibility;
-    src: url("https://lib.baomitu.com/lato-font/latest/fonts/lato-bold/lato-bold.woff2");
-}
-
-/* Lato (bold, italic) */
-@font-face {
-    font-family: Lato;
-    font-weight: bold;
-    font-style: italic;
-    text-rendering: optimizeLegibility;
-    src: url("https://lib.baomitu.com/lato-font/latest/fonts/lato-bold-italic/lato-bold-italic.woff2");
-}
-
-
 /* normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
     font-family: sans-serif; /* 1 */
@@ -58,6 +21,15 @@ html {
 
 body {
     margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "kern";
+    position: relative;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,system-ui,PingFang SC,Hiragino Sans GB,Source Han Sans SC,Noto Sans CJK SC,Noto Sans SC,Helvetica Neue,Microsoft YaHei,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 14px;
+    line-height: 1.5rem;
+    color: #555;
+    background: #fff;
 }
 
 article,
@@ -267,15 +239,6 @@ th {
     color: #fff;
 }
 
-body {
-    position: relative;
-    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-    font-size: 14px;
-    line-height: 1.5rem;
-    color: #555;
-    background: #fff;
-}
-
 @media (max-width: 767px) {
     body {
         padding-right: 0 !important;
@@ -298,7 +261,6 @@ h6 {
     padding: 0;
     font-weight: bold;
     line-height: 1.5;
-    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 h2,
@@ -1112,14 +1074,14 @@ pre .javascript .function {
     font-size: 24px;
     font-weight: bold;
     font-weight: normal;
-    font-family: "Alegreya Sans", 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: "Alegreya Sans",sans-serif;
 }
 
 .site-subtitle {
     margin-top: 15px;
     font-size: 16px;
     color: #ddd;
-    font-family: "Alegreya Sans", 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: "Alegreya Sans",sans-serif;
 }
 
 .use-motion .brand {
@@ -1212,9 +1174,6 @@ pre .javascript .function {
     opacity: 0;
 }
 
-.post-body {
-    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-}
 
 .post-body h1 {
     border-left: solid 5px #428bca;
@@ -1522,7 +1481,6 @@ pre .javascript .function {
 .posts-expand .post-meta {
     margin: 3px 0 15px 0;
     color: #999;
-    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 12px;
     text-align: center;
 }
@@ -1795,7 +1753,7 @@ pre .javascript .function {
     text-align: center;
     color: #222;
     font-weight: bold;
-    font-family: "Alegreya Sans", 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: "Alegreya Sans",sans-serif;
 }
 
 .site-description {
@@ -1803,7 +1761,7 @@ pre .javascript .function {
     text-align: center;
     font-size: 13px;
     color: #999;
-    font-family: "Alegreya Sans", 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: "Alegreya Sans",sans-serif;
 }
 
 .site-state {
@@ -3566,7 +3524,6 @@ body {
     font-variant: normal;
     font-stretch: normal;
     font-size: 16px;
-    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
     background: #c5221f;
 }
 
