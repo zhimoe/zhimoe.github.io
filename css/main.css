@@ -1301,7 +1301,7 @@ pre .javascript .function {
 
 .posts-collapse .collection-title {
     position: relative;
-    margin: 60px 0;
+    margin: 30px 0;
 }
 
 .posts-collapse .collection-title h2 {
@@ -1365,7 +1365,7 @@ pre .javascript .function {
 
 .posts-collapse .post-meta {
     position: absolute;
-    font-size: 12px;
+    font-size: 14px;
     left: 20px;
     top: 5px;
 }
@@ -1389,6 +1389,7 @@ pre .javascript .function {
 .posts-collapse .post-title a {
     color: #666;
     border-bottom: none;
+    margin-left: 10px;
 }
 
 .page-home .post-type-quote .post-header,
