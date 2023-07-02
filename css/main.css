@@ -25,7 +25,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: "kern";
     position: relative;
-    font-family: -apple-system,BlinkMacSystemFont,system-ui,PingFang SC,Hiragino Sans GB,Source Han Sans SC,Noto Sans CJK SC,Microsoft YaHei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-family: -apple-system, system-ui, PingFang SC, Hiragino Sans GB, Source Han Sans SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     font-size: 14px;
     line-height: 1.5rem;
     color: #555;
@@ -239,12 +239,14 @@ th {
     color: #fff;
 }
 
+/* w <= 767的设备 手机 */
 @media (max-width: 767px) {
     body {
         padding-right: 0 !important;
     }
 }
 
+/* 767 <= w <= 991 的设备 平板 */
 @media (min-width: 768px) and (max-width: 991px) {
     body {
         padding-right: 0 !important;
@@ -275,50 +277,22 @@ h1 {
     font-size: 22px;
 }
 
-@media (max-width: 767px) {
-    h1 {
-        font-size: 18px;
-    }
-}
-
 h2 {
     font-size: 20px;
 }
 
-@media (max-width: 767px) {
-    h2 {
-        font-size: 16px;
-    }
-}
 
 h3 {
     font-size: 18px;
 }
 
-@media (max-width: 767px) {
-    h3 {
-        font-size: 14px;
-    }
-}
 
 h4 {
     font-size: 16px;
 }
 
-@media (max-width: 767px) {
-    h4 {
-        font-size: 12px;
-    }
-}
-
 h5 {
     font-size: 14px;
-}
-
-@media (max-width: 767px) {
-    h5 {
-        font-size: 10px;
-    }
 }
 
 h6 {
@@ -326,6 +300,26 @@ h6 {
 }
 
 @media (max-width: 767px) {
+    h1 {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+
+    h4 {
+        font-size: 12px;
+    }
+
+    h5 {
+        font-size: 10px;
+    }
+
     h6 {
         font-size: 8px;
     }
@@ -552,7 +546,7 @@ pre,
     overflow: auto;
     margin: 0;
     padding: 0;
-    font-size: 13px;
+    font-size: 12px;
     color: #4d4d4c;
     background: #f7f7f7;
     line-height: 1.6;
@@ -571,7 +565,7 @@ code {
     color: #555;
     background: #eee;
     border-radius: 4px;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 pre code {
@@ -725,6 +719,7 @@ pre .javascript .function {
     margin: 20px auto;
 }
 
+/* PC下图片 */
 @media (min-width: 992px) {
     .full-image.full-image.full-image {
         max-width: none;
@@ -889,6 +884,7 @@ pre .javascript .function {
     line-height: 30px;
 }
 
+/* 手机 */
 @media (max-width: 767px) {
     .page-number-basic,
     .pagination .prev,
@@ -990,13 +986,8 @@ pre .javascript .function {
     transition-delay: 0s;
 }
 
-@media (max-width: 767px) {
-    .back-to-top {
-        display: none;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
+/* 手机或者平板 */
+@media (max-width: 992px) {
     .back-to-top {
         display: none;
     }
@@ -1026,6 +1017,7 @@ pre .javascript .function {
     padding: 30px 0;
 }
 
+/* 手机 */
 @media (max-width: 767px) {
     .site-meta {
         padding: 10px 0;
@@ -1058,14 +1050,14 @@ pre .javascript .function {
     line-height: 40px;
     font-size: 24px;
     font-weight: bold;
-    font-family: "Alegreya Sans",sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
 }
 
 .site-subtitle {
     margin-top: 15px;
     font-size: 16px;
     color: #ddd;
-    font-family: "Alegreya Sans",sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
 }
 
 .use-motion .brand {
@@ -1084,9 +1076,7 @@ pre .javascript .function {
     .site-nav-toggle {
         display: block;
     }
-}
 
-@media (max-width: 767px) {
     .site-nav {
         display: none;
         margin: 0 -10px;
@@ -1135,7 +1125,7 @@ pre .javascript .function {
 
 .menu .menu-item a {
     display: block;
-    font-size: 13px;
+    font-size: 14px;
     text-transform: capitalize;
     line-height: inherit;
     border-bottom: 1px solid transparent;
@@ -1533,7 +1523,7 @@ pre .javascript .function {
 
 .posts-expand .post-tags a {
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
     padding: 1px 5px;
     background: #f5f5f5;
     border-bottom: none;
@@ -1737,15 +1727,15 @@ pre .javascript .function {
     text-align: center;
     color: #222;
     font-weight: bold;
-    font-family: "Alegreya Sans",sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
 }
 
 .site-description {
     margin-top: 0;
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
     color: #999;
-    font-family: "Alegreya Sans",sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
 }
 
 .site-state {
@@ -1778,7 +1768,7 @@ pre .javascript .function {
 }
 
 .site-state-item-name {
-    font-size: 13px;
+    font-size: 12px;
     color: #999;
 }
 
@@ -1817,8 +1807,7 @@ pre .javascript .function {
     vertical-align: middle;
     margin-right: 10px;
     margin-bottom: 10px;
-    border-bottom-color: #555;
-    font-size: 13px;
+    font-size: 12px;
     border-bottom: 1px solid #999;
 }
 
@@ -1853,7 +1842,7 @@ pre .javascript .function {
 }
 
 .tagcloud-of-blogroll {
-    font-size: 13px;
+    font-size: 12px;
     margin-top: 20px;
     padding: 3px 0 0;
     border-top: 1px dotted #ccc;
@@ -2408,30 +2397,12 @@ pre .javascript .function {
     text-align: center;
 }
 
-.jiathis_style {
-    display: inline-block;
-}
-
-.jiathis_style a {
-    border: none;
-}
 
 .post-spread {
     margin-top: 20px;
     text-align: center;
 }
 
-.bdshare-slide-button-box a {
-    border: none;
-}
-
-.bdsharebuttonbox {
-    display: inline-block;
-}
-
-.bdsharebuttonbox a {
-    border: none;
-}
 
 ul.search-result-list {
     padding-left: 0px;
@@ -3454,24 +3425,6 @@ a.search-result {
     color: #ff0000;
 }
 
-.article-copyright {
-    border: 1px dashed #e0e0e0;
-    padding: 10px;
-    font-size: 13px;
-    background-color: #fffeee;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: 1% 50%;
-    -moz-background-size: auto auto;
-    -moz-background-clip: -moz-initial;
-    -moz-background-origin: -moz-initial;
-    -moz-background-inline-policy: -moz-initial;
-}
-
-
-.article-copyright-info p span {
-    font-weight: bold;
-}
 
 .reward-qr-info {
     text-align: center;
