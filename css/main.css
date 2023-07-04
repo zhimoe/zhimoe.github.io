@@ -1366,8 +1366,8 @@ pre .javascript .function {
 .posts-collapse .post-meta {
     position: absolute;
     font-size: 14px;
-    left: 20px;
-    top: 5px;
+    left: 10px;
+    top: 2px;
 }
 
 .posts-collapse .post-comments-count {
@@ -1389,7 +1389,6 @@ pre .javascript .function {
 .posts-collapse .post-title a {
     color: #666;
     border-bottom: none;
-    margin-left: 10px;
 }
 
 .page-home .post-type-quote .post-header,
