@@ -457,10 +457,6 @@ dd {
     opacity: 0;
 }
 
-.search-icon {
-    position: absolute;
-    top: 9px;
-}
 
 table {
     margin: 20px 0;
@@ -925,8 +921,7 @@ pre .javascript .function {
     margin-right: 0;
 }
 
-.pagination .page-number.current,
-.algolia-pagination .current .page-number {
+.pagination .page-number.current{
     color: #fff;
     background: #ccc;
     border-top-color: #ccc;
@@ -2478,16 +2473,6 @@ a.search-result {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.popup-btn-close {
-    position: absolute;
-    top: 6px;
-    right: 14px;
-    color: #4ebd79;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-}
 
 #no-result {
     position: absolute;
@@ -2550,123 +2535,6 @@ a.search-result {
     }
 }
 
-.algolia-popup {
-    overflow: hidden;
-    padding: 0;
-}
-
-.algolia-popup .popup-btn-close {
-    padding-left: 15px;
-    border-left: 1px solid #eee;
-    top: 10px;
-}
-
-.algolia-popup .popup-btn-close .fa {
-    color: #999;
-    font-size: 18px;
-}
-
-.algolia-popup .popup-btn-close:hover .fa {
-    color: #222;
-}
-
-.algolia-search {
-    padding: 10px 15px 5px;
-    max-height: 50px;
-    border-bottom: 1px solid #ccc;
-    background: #f5f5f5;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.algolia-search-input-icon {
-    display: inline-block;
-    width: 20px;
-}
-
-.algolia-search-input-icon .fa {
-    font-size: 18px;
-}
-
-.algolia-search-input {
-    display: inline-block;
-    width: calc(90% - 20px);
-}
-
-.algolia-search-input input {
-    padding: 5px 0;
-    width: 100%;
-    outline: none;
-    border: none;
-    background: transparent;
-}
-
-.algolia-powered {
-    float: right;
-}
-
-.algolia-powered img {
-    display: inline-block;
-    height: 18px;
-    vertical-align: middle;
-}
-
-.algolia-results {
-    position: relative;
-    overflow: auto;
-    padding: 10px 30px;
-    height: calc(100% - 50px);
-}
-
-.algolia-results hr {
-    margin: 10px 0;
-}
-
-.algolia-results .highlight {
-    font-style: normal;
-    margin: 0;
-    padding: 0 2px;
-    font-size: inherit;
-    color: #f00;
-}
-
-.algolia-hits {
-    margin-top: 20px;
-}
-
-.algolia-hit-item {
-    margin: 15px 0;
-}
-
-.algolia-hit-item-link {
-    display: block;
-    border-bottom: 1px dashed #ccc;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
-    transition-delay: 0s;
-}
-
-.algolia-pagination .pagination {
-    margin-top: 40px;
-    border-top: none;
-    padding: 0;
-}
-
-.algolia-pagination .pagination-item {
-    display: inline-block;
-}
-
-.algolia-pagination .page-number {
-    border-top: none;
-}
-
-.algolia-pagination .page-number:hover {
-    border-bottom: 1px solid #222;
-}
-
-.algolia-pagination .disabled-item {
-    visibility: hidden;
-}
 
 .use-motion .post {
     opacity: 0;
@@ -3346,49 +3214,42 @@ a.search-result {
 }
 
 .local-search-popup .local-search-header {
-    padding: 5px;
     height: 36px;
+    padding: 10px;
     background: #f5f5f5;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-}
-
-.local-search-popup .search-icon {
-    float: left;
-    margin-top: -5px;
+    /*  flex实现水平轴中心对齐  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .local-search-popup .popup-btn-close, .local-search-popup .search-icon {
-    display: inline-block;
     font-size: 18px;
     color: #999;
     height: 36px;
     width: 18px;
-    padding-left: 10px;
-    padding-right: 10px;
+}
+
+.local-search-popup .search-icon {
+
 }
 
 .local-search-popup .popup-btn-close {
-    border-left: 1px solid #eee;
-    float: right;
     cursor: pointer;
-    margin-right: -10px;
 }
 
 .local-search-popup .local-search-input-wrapper {
-    display: inline-block;
     width: calc(100% - 90px);
     height: 36px;
-    line-height: 36px;
-    padding: 0 5px;
+    margin-left: 10px;
 }
 
 
 .local-search-popup .local-search-input-wrapper input {
-    margin-left: 34px;
-    padding: 8px 0;
     height: 20px;
-    display: block;
+    display: inline-block;
     width: 100%;
     outline: 0;
     border: none;
