@@ -926,32 +926,33 @@ class DepositSvcTest { @InjectMocks private DepositSvc depositSvc; @Mock private
 Write user stories in daily job.
 Customize programming fonts for fun.
 email: me#zhi.moe</content></entry><entry><title>java generic</title><url>https://zhimoe.github.io/post/java-generic/</url><categories><category>编程</category></categories><tags><tag>java</tag><tag>code</tag></tags><content type="html"> 泛型 // 类 class Tuple&lt;T, S> { private T first; private S second; } // 泛型方法也可在非泛型类里面 class ArrayAlg { public static &lt;T> T getMiddle(T... a) { return a[a.length / 2]; } } String middle = ArrayAlg.&lt;String>getMiddle("]ohnM, "Q.n, "Public");// right,&lt;String>可以省略 String middle = GenericCls.getMiddle("hello",0,null);// error // Errr:(7, 45) java: 不兼容的类型: 推断类型不符合上限 // 推断: java.lang.Object&amp;java.io.Serializable&amp;java.lang.Comparable&lt;? extends java.lang.Object&amp;java.io.Serializable&amp;java.lang.Comparable&lt;?>> // 上限: java.lang.String,java.lang.Object 类型限定 public static &lt;T extends Comparable> T min(T a) // 如果多个类型,则：T extends Comparable &amp; Serializable // 只能有一个类,且类必须紧跟extends,但是可以有多个接口 类型擦除 //Tuple&lt;T,S>在虚拟机变为 class Tuple { private Object first;//当调用getFirst时,则发生强制转换 private Object second; } //泛型方法同样有擦除 public static &lt;T extends Comparable> T min(T a) // => public static Comparable min(Comparable a) 约束 不能用基本类型实例化泛型,Pair&lt;double>不允许 运行时参数类型检查只能检查原始类型 if (a instanceof Pair&lt;String>) // Error if (a instanceof Pair&lt;T>) // Error Pair&lt;String> p = (Pair&lt;String>) a; //warning 不能创建参数化类型的数组 Pair&lt;String>[] table = new Pair&lt;String>[10]; // Error Pair&lt;String>[] table; //声明是合法的,只是无法实例化 借助@SafeVarargs参数化类型的数组 @SafeVarargs public static &lt;T> void addAll(Collection&lt;T> coll, T... ts) Class类本身是泛型. 例如,String.daSS 是一个 Class 的实例（事实上,它是唯一的实例.) 因此,makePair 方法能够推断出 pair 的类型 泛型类的静态上下文中类型变量无效 public class Singleton&lt;T> { private static T singlelnstance; // Error public static T getSinglelnstance{// Error if (singleinstance == null) {//construct new instance of T return singlelnstance; } } } 不能抛出或捕获泛型类的实例 public class Problem&lt;T> extends Exception { /* . . . */ } // Error can't extend Throwable 泛型擦除的方法冲突 public class Pair&lt;T> { T first; T second; public boolean equals(T value) { //error 和Object.equals冲突 return first.equals(value) &amp;&amp; second, equals(value); } } 泛型继承 class Employee class Manager extends Employee //Pair&lt;Employee> 和Pair&lt;Manager> 没用任何继承关系 通配符 和 PECS Pair&lt;? extends Employee〉 Pair&lt;? super Manager 反射和泛型</content></entry><entry><title>IO-Java-Stream-Write-Reader</title><url>https://zhimoe.github.io/post/io-java-stream-write-reader/</url><categories><category>编程</category></categories><tags><tag>java</tag><tag>code</tag></tags><content type="html"> 上次总结了java中不同读写文件的方法,这次总结一下基本的IO流.网上的总结大部分是以Stream和Reader、Writer来介绍的.这次从封装层次来介绍.
-java reader writer stream 首先是byte流,每次read()读取8 bits,并用一个int的低八位保存：
+概览 首先理解计算机文件格式都是二进制数据，例如文本，图片，视频，音频等，但是文本非常特殊，所以单独有一类封装设计。
+对于非文本类的文件，一般是读取字节(stream)，而对于文本类文件，则可以读取字符(reader)
+当然，文本文件也可以使用inputstream读取后再转换Reader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+stream 首先是byte流,每次read()读取8 bits,并用一个int的低八位保存：
 FileInputStream in = null; FileOutputStream out = null; try { in = new FileInputStream("xanadu.txt"); out = new FileOutputStream("outagain.txt"); int c; while ((c = in.read()) != -1) { out.write(c); } } finally { if (in != null) { in.close(); } if (out != null) { out.close(); } } byte流是很基础的流,接下来是字符流,使用int的低16位保存读取内容,一个汉字,使用上面那个字节流,需要读取2次,使用下面的字符流,只用一次.其实背后还是一个桥接
 具体的对象体现：
 FileReader extemds InputStreamReader,
 FileWriter extends OutputStreamWriter
 InputStreamReader:字节到字符的桥梁
 OutputStreamWriter:字符到字节的桥梁：
-FileReader inputStream = null; FileWriter outputStream = null; try { inputStream = new FileReader("xanadu.txt"); outputStream = new FileWriter("characteroutput.txt"); int c; while ((c = inputStream.read()) != -1) { outputStream.write(c); } } finally { if (inputStream != null) { inputStream.close(); } if (outputStream != null) { outputStream.close(); } } ByteArrayInputStream、StringBufferInputStream、FileInputStream 是三种基本的介质流,它们分别从Byte 数组、StringBuffer、和本地文件中读取数据.StringBufferInputStream 已经被Deprecated,设计错误,只是为了兼容.
+FileReader inputReader = null; FileWriter outputStream = null; try { inputReader = new FileReader("xanadu.txt"); outputStream = new FileWriter("characteroutput.txt"); int c; while ((c = inputReader.read()) != -1) { outputStream.write(c); } } finally { if (inputReader != null) { inputReader.close(); } if (outputStream != null) { outputStream.close(); } } ByteArrayInputStream、StringBufferInputStream、FileInputStream 是三种基本的介质流,它们分别从Byte 数组、StringBuffer、和本地文件中读取数据.StringBufferInputStream 已经被Deprecated,设计错误,只是为了兼容.
 File I/O现在已经不推荐使用了,推荐nio2的Path及其工具类Files,Paths;
 Path 官方教程
 ObjectInputStream 和所有FilterInputStream 的子类都是装饰流（装饰器模式的主角）
-注意：OutputStream子类中没有StringBuffer为目的地的.ObjectOutputStream 和所有FilterOutputStream 的子类都是装饰流.
+注意：OutputStream子类中没有StringBuffer为目的地的. ObjectOutputStream 和所有FilterOutputStream 的子类都是装饰流.
 几个特殊的类：
 PushbackInputStream 的功能是查看最后一个字节,不满意就放入缓冲区.主要用在编译器的语法、词法分析部分.输出部分的BufferedOutputStream 几乎实现相近的功能.
-PrintStream 也可以认为是一个辅助工具.主要可以向其他输出流,或者FileInputStream 写入数据,本身内部实现还是带缓冲的.本质上是对其它流的综合运用的一个工具而已.一样可以踢出IO 包！System.out 和System.err 就是PrintStream 的实例！ System.in是inputStream的实例！
+PrintStream 也可以认为是一个辅助工具.主要可以向其他输出流,或者FileInputStream 写入数据,本身内部实现还是带缓冲的.本质上是对其它流的综合运用的一个工具而已.一样可以踢出IO 包！System.out 和System.err 就是PrintStream 的实例！ System.in是InputStream的实例！
 你永远不应该new PrintStream,请用PrintWriter
-看看字符流Reader/Writer相关子类：
-CharReader、StringReader 是两种基本的介质流,它们分别将Char 数组、String中读取数据.PipedReader 是从与其它线程共用的管道中读取数据.
+reader writer CharReader、StringReader 是两种基本的介质流,它们分别将Char 数组、String中读取数据.PipedReader 是从与其它线程共用的管道中读取数据.
 BufferedReader 很明显就是一个装饰器,它和其子类负责装饰其它Reader 对象.
 FilterReader 是所有自定义具体装饰流的父类,其子类PushbackReader 对Reader 对象进行装饰,会增加一个行号.
 InputStreamReader 是一个连接字节流和字符流的桥梁,它将字节流转变为字符流.FileReader 可以说是一个达到此功能、常用的工具类,在其源代码中明显使用了将FileInputStream 转变为Reader 的方法.我们可以从这个类中得到一定的技巧.Reader 中各个类的用途和使用方法基本和InputStream 中的类使用一致.后面会有Reader 与InputStream 的对应关系.
 OutputStreamWriter 是OutputStream 到Writer 转换的桥梁,它的子类FileWriter 其实就是一个实现此功能的具体类（具体可以研究一SourceCode）.功能和使用和OutputStream 极其类似,后面会有它们的对应图.
 PrintWriter 和PrintStream 极其类似,功能和使用也非常相似.但是还是有不同的,PrintStream prints to an OutputStream, and PrintWriter prints to a Writer.
 你永远不应该new PrintStream,请用PrintWriter
-PrintStream stream = new PrintStream(outputStream); //With the PrintWriter you can however pass an OutputStreamWriter with a specific encoding. PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream, "UTF-8")); Piped流 这是线程之间通信使用的.后面介绍.
-RandomAccessFile类 该对象并不是流体系中的一员,其封装了字节流,同时还封装了一个缓冲区（字符数组）,通过内部的指针来操作字符数组中的数据. 该对象特点：
+PrintStream stream = new PrintStream(outputStream); //With the PrintWriter you can however pass an OutputStreamWriter with a specific encoding. PrintWriter writer = new PrintWriter(new OutputStreamWriter(outputStream, "UTF-8")); RandomAccessFile类 该对象并不是流体系中的一员,其封装了字节流,同时还封装了一个缓冲区（字符数组）,通过内部的指针来操作字符数组中的数据. 该对象特点：
 该对象只能操作文件,所以构造函数接收两种类型的参数：a.字符串文件路径；b.File对象.
 该对象既可以对文件进行读操作,也能进行写操作,在进行对象实例化时可指定操作模式(r,rw)
 注意：该对象在实例化时,如果要操作的文件不存在,会自动创建；如果文件存在,写数据未指定位置,会从头开始写,即覆盖原有的内容. 可以用于多线程下载或多个线程同时写数据到文件.
@@ -959,14 +960,12 @@ Scanning and formatting The scanner API breaks input into individual tokens asso
 formatting
 int i = 2; double r = Math.sqrt(i); System.out.format("The square root of %d is %f.%n", i, r); Scanner s = new Scanner(new BufferedReader(new FileReader("xanadu.txt"))); By default, a scanner uses white space to separate tokens. also,u can set :
 s.useDelimiter(",\\s*");
-I/O from commandline You might expect the Standard Streams to be character streams, but, for historical reasons, they are byte streams. System.out and System.err are defined as PrintStream objects. Although it is technically a byte stream, PrintStream utilizes an internal character stream object to emulate many of the features of character streams.
+I/O from commandline You might expect the Standard Streams to be character streams, but, for historical reasons, they are byte streams. System.out and System.err are defined as PrintStream objects. Although it is technically a byte stream, PrintStream utilizes an internal character stream object to emulate many of the features of character streams.(！！！妈的,老子开始就困惑很久了,一直不明白System.out怎么可以直接打印出中文.)
 By contrast, System.in is a byte stream with no character stream features. To use Standard Input as a character stream, wrap System.in in InputStreamReader.
 InputStreamReader cin = new InputStreamReader(System.in);
-！！！！妈的,老子开始就困惑很久了,一直不明白System.out怎么可以直接打印出中文.
 jdk1.5开始读写控制台以前常用的是Scanner：
 Scanner scanner = new Scanner(System.in); scanner.nextLine(); 从 JDK1.6开始,基本类库中增加了java.io.Console 类,用于获得与当前 Java 虚拟机关联的基于字符的控制台设备.在纯字符的控制台界面下,可以更加方便地读取数据.
-Console console = System.console(); if (console == null) { throw new IllegalStateException("不能使用控制台"); } return console.readLine(prompt); Data Streams Data streams support binary I/O of primitive data type values (boolean, char, byte, short, int, long, float, and double) as well as String values. All data streams implement either the DataInput interface or the DataOutput interface. This section focuses on the most widely-used implementations of these interfaces, DataInputStream and DataOutputStream.
-致谢：Oubo的博客</content></entry><entry><title>Java 6/7/8中文件读写</title><url>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</url><categories><category>编程</category></categories><tags><tag>java</tag><tag>code</tag></tags><content type="html"> 如何在Java中读写文件,这里保留Java6/7版本,但是你永远不应该使用它们,优先使用Path,Files,Paths三个类.
+Console console = System.console(); if (console == null) { throw new IllegalStateException("不能使用控制台"); } return console.readLine(prompt); Data Streams Data streams support binary I/O of primitive data type values (boolean, char, byte, short, int, long, float, and double) as well as String values. All data streams implement either the DataInput interface or the DataOutput interface. This section focuses on the most widely-used implementations of these interfaces, DataInputStream and DataOutputStream.</content></entry><entry><title>Java 6/7/8中文件读写</title><url>https://zhimoe.github.io/post/io-java-6-7-8-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99/</url><categories><category>编程</category></categories><tags><tag>java</tag><tag>code</tag></tags><content type="html"> 如何在Java中读写文件,这里保留Java6/7版本,但是你永远不应该使用它们,优先使用Path,Files,Paths三个类.
 资料：Reading and writing text files
 Java8最佳实践 不要用File对象,改用Path对象,该对象既表示文件路径,也表示文件文本（应该认为文件也是路径的一部分）,对于以前的File,可以File.toPath()得到一个Path对象.
 Files是一个静态类,操作文件内容.Paths是静态工具类,操作文件路径,例如拼接文件路径,以前要使用平台无关的分隔符表示：File.pathSeparator, File.separator.
