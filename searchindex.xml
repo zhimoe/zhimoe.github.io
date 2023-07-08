@@ -942,7 +942,7 @@ ObjectInputStream 和所有FilterInputStream 的子类都是装饰流（装饰�
 PushbackInputStream 的功能是查看最后一个字节,不满意就放入缓冲区.主要用在编译器的语法、词法分析部分.输出部分的BufferedOutputStream 几乎实现相近的功能.
 PrintStream 也可以认为是一个辅助工具.主要可以向其他输出流,或者FileInputStream 写入数据,本身内部实现还是带缓冲的.本质上是对其它流的综合运用的一个工具而已.一样可以踢出IO 包！System.out 和System.err 就是PrintStream 的实例！ System.in是inputStream的实例！
 你永远不应该new PrintStream,请用PrintWriter
-看看字符流的对比：
+看看字符流Reader/Writer相关子类：
 CharReader、StringReader 是两种基本的介质流,它们分别将Char 数组、String中读取数据.PipedReader 是从与其它线程共用的管道中读取数据.
 BufferedReader 很明显就是一个装饰器,它和其子类负责装饰其它Reader 对象.
 FilterReader 是所有自定义具体装饰流的父类,其子类PushbackReader 对Reader 对象进行装饰,会增加一个行号.
