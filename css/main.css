@@ -2929,6 +2929,7 @@ a.search-result {
     outline: 0;
     border: none;
     background: 0 0;
+    width: 98%;
 }
 
 .local-search-popup #local-search-result {
