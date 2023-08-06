@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>[翻译]Git内部原理图解——对象、分支以及如何从零开始建仓库</title><url>https://zhimoe.github.io/post/git-internal/</url><categories><category>编程</category></categories><tags><tag>git</tag><tag>翻译</tag></tags><content type="html"> 我们中的许多人每天都在使用 git，但是有多少人知道它的内部是怎么运作的呢？
 例如我们使用 git commit 时发生了什么？提交（commit）与提交之间保存的是什么？两次提交之间难道只是文件的差异（diff）吗？如果是，这个差异是如何编码的？还是说每次提交都会保存一个当前仓库的完整快照（snapshot）呢？我们使用 git init 时到底发生了什么？
-发现一篇非常精彩的Git内部原理文章以及对应的中文翻译Git内部原理图解——对象、分支以及如何从零开始建仓库
-文章作者甚至制作了配套讲解视频
-文章里面提到了很多git内部原理和概念:
-Git 内部原理 - 底层命令与上层命令
-Git 内部原理 - Git 对象
-下面是简单的笔记
+发现一篇非常精彩的Git内部原理文章Git内部原理图解——对象、分支以及如何从零开始建仓库,文章作者甚至制作了配套讲解视频
+中文翻译
 Git对象 git内部有三种对象：
 blob: 文件的内容，不包含metadata信息（创建时间，修改时间，作者等） tree: 一个目录，包含blobs或者trees commit: a snapshot of the working tree，一个tree的快照。 三种git对象都是通过SHA-1哈希值来唯一标识，如下图所示。每个commit对象中，对于tree里面那些没有改动的内容，继续通过原hash引用。
 分支 A branch is just a named reference to a commit.
@@ -18,7 +14,10 @@ git底层命令(plumbing)和上层命令(porcelain) 区分 底层（plumbing） 
 .git目录 一个.git目录至少包含三个内容
 ✔ tree .git .git ├── HEAD 当前指向分支，默认内容是 ref: refs/heads/main ├── objects git对象 blob、tree、commit的一种，其中对象的hash值前两个字符用于目录名，剩余的用于对象名 └── refs 分支和tag └── heads 当前working dir所有分支 默认分支不展示，只有多于一个分支才会展示 添加一个文件并commit，然后创建一个新分支，再次检查.git目录
 ✔ tree .git .git ├── HEAD ├── index ├── objects │ ├── 8d │ │ └── 0e41234f24b6da002d962a26c2495ea16a425f │ ├── af │ │ └── 7e0d93b83f49f601f5ef35edf5f9330fb4d7fd │ └── c8 │ └── bcfef1da123a980537a5fa4cf9b7c4f387d451 └── refs └── heads ├── main └── test_branch 7 directories, 7 files 上面删除了logs目录,index文件保存的是staging area信息。打印objects目录下的三个文件
-✔ git cat-file -p 8d0e41234f24b6da002d962a26c2495ea16a425f hello git :~/code/temp (main) ✔ git cat-file -p c8bcfef1da123a980537a5fa4cf9b7c4f387d451 100644 blob 8d0e41234f24b6da002d962a26c2495ea16a425f file.txt :~/code/temp (main) ✔ git cat-file -p af7e0d93b83f49f601f5ef35edf5f9330fb4d7fd tree c8bcfef1da123a980537a5fa4cf9b7c4f387d451 author zhimoe &lt;xx@gmail.com> 1691313901 +0800 committer zhimoe &lt;xx@gmail.com> 1691313901 +0800 first commit 可以看到分别是一个blob对象（file.txt)、一个tree对象和一个commit对象，后者依次引用前者。</content></entry><entry><title>Rust Error Handling Notes</title><url>https://zhimoe.github.io/post/rust-error-handling-notes/</url><categories><category>编程</category></categories><tags><tag>rust</tag><tag>notes</tag></tags><content type="html"> 初学rust的时候，上手写代码总是遇到很多不一样的rust的Result类型，不同crate中的函数返回的Result&lt;T, E>的E都不一样，刚开始都是unwrap或者expect来处理。如果使用try!或者?的话总是编译不通过，还是对Error转换和处理不熟练。
+✔ git cat-file -p 8d0e41234f24b6da002d962a26c2495ea16a425f hello git :~/code/temp (main) ✔ git cat-file -p c8bcfef1da123a980537a5fa4cf9b7c4f387d451 100644 blob 8d0e41234f24b6da002d962a26c2495ea16a425f file.txt :~/code/temp (main) ✔ git cat-file -p af7e0d93b83f49f601f5ef35edf5f9330fb4d7fd tree c8bcfef1da123a980537a5fa4cf9b7c4f387d451 author zhimoe &lt;xx@gmail.com> 1691313901 +0800 committer zhimoe &lt;xx@gmail.com> 1691313901 +0800 first commit 可以看到分别是一个blob对象（file.txt)、一个tree对象和一个commit对象，后者依次引用前者。
+参考 文章里面提到了很多git内部原理和概念:
+Git 内部原理 - 底层命令与上层命令
+Git 内部原理 - Git 对象</content></entry><entry><title>Rust Error Handling Notes</title><url>https://zhimoe.github.io/post/rust-error-handling-notes/</url><categories><category>编程</category></categories><tags><tag>rust</tag><tag>notes</tag></tags><content type="html"> 初学rust的时候，上手写代码总是遇到很多不一样的rust的Result类型，不同crate中的函数返回的Result&lt;T, E>的E都不一样，刚开始都是unwrap或者expect来处理。如果使用try!或者?的话总是编译不通过，还是对Error转换和处理不熟练。
 Error转换 在一个方法中，调用不同的函数会返回不同的error类型，需要你将这些类型转换成统一的自定义error类型再返回。你有以下几种途径
 使用map_err fn cook_pasta() -> Result&lt;Pasta, CookingError> { let water = boil_water().map_err(|_| CookingError::BoilWaterError)?; let pasta = add_pasta(&amp;water).map_err(|_| CookingError::AddPastaError)?; Ok(pasta) } // 通过map_err将boil_water()和add_pasta(&amp;water)返回的error都转换成了CookingError类型 使用std::error::Error+From trait 定义自己的Error类型并实现From trait。 From trait用于将boil_water()和add_pasta(&amp;water)的error转换成自定义的Error。其实就是将map_err的逻辑移动到From trait中实现，使得方法调用处看起来更简洁。
 pub enum CookingError{ BoilWaterError(String), AddPastaError } impl std::error::Error for CookingError{ // ... } impl Display for CookingError{ // ... } // 假设boil_water返回的error是NoWaterError impl From&lt;NoWaterError> for CookingError { fn from(s: NoWaterError) -> Self { CookingError::BoilWaterError(s) } } // 假设add_pasta返回的error是IoError impl From&lt;IoError> for CustomError { fn from(s: std::io::Error) -> Self { CookingError::AddPastaError(s) } } // 无需map_err fn cook_pasta() -> Result&lt;Pasta, CookingError> { let water = boil_water()?; // 如果抛出NoWaterError，自动转成CookingError::BoilWaterError，下面同理 let pasta = add_pasta(&amp;water)?; Ok(pasta) } thiserror thiserror 可以看作是定义 Error 的一个工具，它只帮你生成一些定义 Error 的代码，别的什么都不做，相当纯粹。如果你在开发一个crate，那么建议使用thiserror。
