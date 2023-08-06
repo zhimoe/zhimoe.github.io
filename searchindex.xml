@@ -7,7 +7,7 @@ Git 内部原理 - 底层命令与上层命令
 Git 内部原理 - Git 对象
 下面是简单的笔记
 Git对象 git内部有三种对象：
-blob: 文件的内容，不包含metadata：创建时间，修改时间，作者等 tree: 一个目录，包含blobs或者trees commit: a snapshot of the working tree，一个tree的快照。 三种git对象都是通过SHA-1哈希值来唯一标识，如下图所示。每个commit对象中，对于tree里面那些没有改动的内容，继续通过原hash引用。
+blob: 文件的内容，不包含metadata信息（创建时间，修改时间，作者等） tree: 一个目录，包含blobs或者trees commit: a snapshot of the working tree，一个tree的快照。 三种git对象都是通过SHA-1哈希值来唯一标识，如下图所示。每个commit对象中，对于tree里面那些没有改动的内容，继续通过原hash引用。
 分支 A branch is just a named reference to a commit.
 在上面的图片中，可以通过哈希值来引用一个commit，但是不方便，所以分支用来引用commit。可以理解为分支是一个指针，指向一个commit，一般默认是指向最后一个commit（也可以不是最后一个commit）。
 git通过HEAD指针来确认当前所在分支。HEAD指针其实是.git目录下的一个HEAD文件,内容如下
