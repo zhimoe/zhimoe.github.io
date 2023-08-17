@@ -32,6 +32,10 @@ body {
     background: #f5f7f9;
 }
 
+article {
+    margin: 1.5rem 0;
+}
+
 article,
 aside,
 details,
@@ -716,7 +720,7 @@ pre .javascript .function {
     margin: 20px auto;
 }
 
-/* PC下图片 */
+/* PC图片 */
 @media (min-width: 992px) {
     .full-image.full-image.full-image {
         max-width: none;
@@ -1502,14 +1506,14 @@ pre .javascript .function {
 }
 
 .post-more-link {
-    margin-top: 50px;
+    margin-bottom: 2.5rem;
 }
 
 .post-more-link .btn {
     color: #555;
     font-size: 14px;
     background: #fff;
-    border-radius: 2px;
+    border: none;
     line-height: 2;
 }
 
@@ -1529,7 +1533,7 @@ pre .javascript .function {
 
 .post-nav {
     display: table;
-    margin: 25px 0px;
+    margin: 25px 0;
     width: 100%;
     border-top: 1px solid #eee;
 }
@@ -2083,8 +2087,8 @@ pre .javascript .function {
 
 
 ul.search-result-list {
-    padding-left: 0px;
-    margin: 0px 5px 0px 8px;
+    padding-left: 0;
+    margin: 0 5px 0 8px;
 }
 
 p.search-result {
@@ -2142,7 +2146,7 @@ a.search-result {
         margin: 0;
         width: 100%;
         height: 100%;
-        border-radius: 0px;
+        border-radius: 0;
     }
 }
 
@@ -2150,8 +2154,8 @@ a.search-result {
     position: fixed;
     width: 100%;
     height: 100%;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     z-index: 2080;
     background-color: rgba(0, 0, 0, 0.3);
 }
@@ -2164,58 +2168,19 @@ a.search-result {
     color: #ccc;
 }
 
-.cnzz_icon {
-    position: absolute;
-    padding-left: 14%;
-}
 
 @media (min-width: 767px) and (max-width: 991px) {
-    .busuanzi-count {
-        width: auto;
-    }
-
-    .busuanzi-count:before {
-        display: none;
-    }
-
     .footer {
-        margin-left: 0px;
-    }
-
-    .cnzz_icon {
-        position: absolute;
-        padding-left: 30%;
+        margin-left: 0;
     }
 }
 
-.busuanzi-value {
-    margin: 0 0 0 8px;
-}
-
-@media (min-width: 400px) and (max-width: 767px) {
-    .cnzz_icon {
-        position: absolute;
-        padding-left: 14%;
-    }
-}
 
 @media (max-width: 767px) {
-    .busuanzi-count {
-        width: auto;
-    }
-
-    .busuanzi-count:before {
-        display: none;
-    }
-
     .footer {
         margin: -100px 0 0 0;
     }
-
-    .cnzz_icon {
-        position: absolute;
-        padding-left: 20%;
-    }
+    
 }
 
 
@@ -2392,7 +2357,7 @@ a.search-result {
 .content-wrap {
     float: right;
     box-sizing: border-box;
-    padding: 0px 50px;
+    padding: 0 50px;
     width: 840px;
     background: #fff;
     height: auto;
@@ -2833,7 +2798,7 @@ a.search-result {
     margin: 5px 0 0;
     width: 50%;
     display: list-item;
-    padding: 0px;
+    padding: 0;
     text-align: center;
 }
 
@@ -2976,22 +2941,20 @@ a.search-result {
     margin: 5px;
     letter-spacing: normal;
     text-transform: none;
-    text-indent: 0px;
+    /*text-indent: 0;*/
     text-shadow: none;
-    line-height: 2rem;
+    /*line-height: 2rem;*/
 }
 
 #rewardButton span {
-    display: inline-block;
-    width: 80px;
-    height: 35px;
+    height: 40px;
+    width: 60px;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center; /*上下居中*/
+    justify-content: center; /*左右居中*/
     border-radius: 5px;
     color: #fff;
-    font-weight: normal;
-    font-style: normal;
-    font-variant: normal;
-    font-stretch: normal;
-    font-size: 16px;
     background: #c5221f;
 }
 

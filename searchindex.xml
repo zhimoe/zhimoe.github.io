@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><search><entry><title>[翻译]Git内部原理图解——对象、分支以及如何从零开始建仓库</title><url>https://zhimoe.github.io/post/git-internal/</url><categories><category>编程</category></categories><tags><tag>git</tag><tag>翻译</tag></tags><content type="html"> 我们中的许多人每天都在使用 git，但是有多少人知道它的内部是怎么运作的呢？
 例如我们使用 git commit 时发生了什么？提交（commit）与提交之间保存的是什么？两次提交之间难道只是文件的差异（diff）吗？如果是，这个差异是如何编码的？还是说每次提交都会保存一个当前仓库的完整快照（snapshot）呢？我们使用 git init 时到底发生了什么？
-发现一篇非常精彩的Git内部原理文章Git内部原理图解——对象、分支以及如何从零开始建仓库,文章作者甚至制作了配套讲解视频
-中文翻译
+发现一篇非常精彩的Git内部原理文章Git内部原理图解——对象、分支以及如何从零开始建仓库，中文翻译。文章作者甚至制作了配套讲解视频
 Git对象 git内部有三种对象：
 blob: 文件的内容，不包含metadata信息（创建时间，修改时间，作者等） tree: 一个目录，包含blobs或者trees commit: a snapshot of the working tree，一个tree的快照。 三种git对象都是通过SHA-1哈希值来唯一标识，如下图所示。每个commit对象中，对于tree里面那些没有改动的内容，继续通过原hash引用。
 分支 A branch is just a named reference to a commit.
