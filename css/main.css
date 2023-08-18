@@ -14,7 +14,7 @@
 
 /* normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
-    font-family: sans-serif; /* 1 */
+    font-family: Palatino, 'Source Han Serif SC VF', serif;
     -ms-text-size-adjust: 100%; /* 2 */
     -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -25,7 +25,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     -moz-font-feature-settings: "kern";
     position: relative;
-    font-family: -apple-system, system-ui, PingFang SC, Hiragino Sans GB, Source Han Sans SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     font-size: 14px;
     line-height: 1.5rem;
     color: #555;
@@ -557,7 +556,7 @@ kbd,
 samp,
 pre,
 code {
-    font-family: ui-monospace, monospace;
+    font-family: ui-monospace, monospace, stkaiti, kaiti sc, kaiti, serif;
 }
 
 code {
@@ -2180,7 +2179,7 @@ a.search-result {
     .footer {
         margin: -100px 0 0 0;
     }
-    
+
 }
 
 
