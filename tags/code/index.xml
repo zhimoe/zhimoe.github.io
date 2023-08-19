@@ -140,7 +140,7 @@ source:&lt;a href="https://gtmetrix.com/blog/how-to-optimize-images-a-practical-
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> await future result&lt;/li>
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> callback&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> recover&lt;/li>
-&lt;/ul></description></item><item><title>Spring Boot Notes</title><link>https://zhimoe.github.io/post/spring-boot-notes/</link><pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-boot-notes/</guid><description>&lt;p>一些容易忘记的spring boot知识要点.&lt;/p>
+&lt;/ul></description></item><item><title>Spring Cache Notes</title><link>https://zhimoe.github.io/post/draft/spring-cache-notes/</link><pubDate>Thu, 18 Apr 2019 09:42:12 +0800</pubDate><guid>https://zhimoe.github.io/post/draft/spring-cache-notes/</guid><description>&lt;p>spring的缓存一些技巧和陷阱&lt;/p></description></item><item><title>Spring Boot Notes</title><link>https://zhimoe.github.io/post/spring-boot-notes/</link><pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-boot-notes/</guid><description>&lt;p>一些容易忘记的spring boot知识要点.&lt;/p>
 &lt;blockquote>
 &lt;p>注意,.yaml和.yml文件没任何区别.&lt;/p>
 &lt;/blockquote>

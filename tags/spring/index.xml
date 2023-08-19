@@ -3,7 +3,7 @@
 &lt;p>spring.io提供了一个boot应用的&lt;a href="https://spring.io/guides/topicals/spring-boot-docker">Dockerfile&lt;/a>指导.&lt;br>
 不过有个问题,这个Dockerfile使用的maven是项目源码里面copy过去的.在一般企业项目中这么做显然不规范,直接使用maven基础镜像更合理.&lt;/p></description></item><item><title>Spring FactoryBean and ContextAware</title><link>https://zhimoe.github.io/post/spring-factorybean-contextaware/</link><pubDate>Thu, 16 May 2019 22:44:38 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-factorybean-contextaware/</guid><description>&lt;p>理解Spring的FactoryBean 和 ContextAware接口.&lt;/p>
 &lt;h2 id="factorybean">FactoryBean&lt;/h2>
-&lt;p>一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例.&lt;/p></description></item><item><title>Spring Boot Notes</title><link>https://zhimoe.github.io/post/spring-boot-notes/</link><pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-boot-notes/</guid><description>&lt;p>一些容易忘记的spring boot知识要点.&lt;/p>
+&lt;p>一句话就是FactoryBean用于返回其他对象实例的,而不是自身类型的实例.&lt;/p></description></item><item><title>Spring Cache Notes</title><link>https://zhimoe.github.io/post/draft/spring-cache-notes/</link><pubDate>Thu, 18 Apr 2019 09:42:12 +0800</pubDate><guid>https://zhimoe.github.io/post/draft/spring-cache-notes/</guid><description>&lt;p>spring的缓存一些技巧和陷阱&lt;/p></description></item><item><title>Spring Boot Notes</title><link>https://zhimoe.github.io/post/spring-boot-notes/</link><pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-boot-notes/</guid><description>&lt;p>一些容易忘记的spring boot知识要点.&lt;/p>
 &lt;blockquote>
 &lt;p>注意,.yaml和.yml文件没任何区别.&lt;/p>
 &lt;/blockquote>
