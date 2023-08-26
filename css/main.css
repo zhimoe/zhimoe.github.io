@@ -2926,55 +2926,16 @@ a.search-result {
     color: #ff0000;
 }
 
-
-.reward-qr-info {
+#buymeacoffee {
     text-align: center;
-    margin-bottom: 10px;
+    margin: 0 auto; /*左右居中*/
 }
 
-#rewardButton {
-    cursor: pointer;
-    border: 0;
-    outline: 0;
-    border-radius: 100%;
-    padding: 0;
-    margin: 5px;
-    letter-spacing: normal;
-    text-transform: none;
-    /*text-indent: 0;*/
-    text-shadow: none;
-    /*line-height: 2rem;*/
-}
-
-#rewardButton span {
-    height: 40px;
-    width: 60px;
-    font-size: 18px;
-    display: inline-flex;
-    align-items: center; /*上下居中*/
-    justify-content: center; /*左右居中*/
-    border-radius: 5px;
-    color: #fff;
-    background: #c5221f;
-}
-
-#rewardButton span:hover {
-    background: #F7877F;
-}
-
-#QR {
-    padding-top: 10px;
-}
-
-#QR a {
-    border: 0;
-}
-
-#QR img {
+#buymeacoffee img {
+    display: inline-block;
     width: 180px;
     max-width: 100%;
-    display: inline-block;
-    margin: 0.8em 2em 0 2em;
+
 }
 
 
@@ -2987,19 +2948,6 @@ a.search-result {
     }
 }
 
-#wechat:hover p {
-    color: #ff0000;
-    animation: roll 0.2s infinite linear;
-    -webkit-animation: roll 0.2s infinite linear;
-    -moz-animation: roll 0.2s infinite linear;
-}
-
-#alipay:hover p {
-    color: #ff0000;
-    animation: roll 0.2s infinite linear;
-    -webkit-animation: roll 0.2s infinite linear;
-    -moz-animation: roll 0.15s infinite linear;
-}
 
 .tag-cloud-tags {
     margin: 40px 20px;
