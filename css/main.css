@@ -1717,7 +1717,7 @@ pre .javascript .function {
 .site-author-image {
     display: block;
     margin: 0 auto;
-    padding: 2px;
+    /*padding: 2px;*/
     max-width: 120px;
     height: auto;
     border: 1px solid #eee;
