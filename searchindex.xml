@@ -602,8 +602,7 @@ Ian安全结想要好看的诀窍在于,在快要拉紧绳结之前,先拉住鞋
 链接：https://www.zhihu.com/question/19728687/answer/501699533
 补充：
 实际上Ian结就是普通的蝴蝶结，也是目前最快的系鞋带方法，缺点就是会松动。而Ian安全结学名是双打结（Double Slip Knot）。
-这里有Ian结发明者的官方网站，里面有超级多系鞋带方法，我自己在25岁之前都是用的蝴蝶结，学会安全结之后就再也没有松鞋带的烦恼了。
-Ï</content></entry><entry><title>Java 8 Lambda笔记</title><url>https://zhimoe.github.io/post/java-lambda/</url><categories><category>编程</category></categories><tags><tag>code</tag><tag>java</tag><tag>lambda</tag></tags><content type="html"> 问题 Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：
+这里有Ian结发明者的官方网站，里面有超级多系鞋带方法，我在25岁之前都是用的蝴蝶结，学会安全结之后就再也没有松鞋带的烦恼了。</content></entry><entry><title>Java 8 Lambda笔记</title><url>https://zhimoe.github.io/post/java-lambda/</url><categories><category>编程</category></categories><tags><tag>code</tag><tag>java</tag><tag>lambda</tag></tags><content type="html"> 问题 Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：
 // 监听器接口 public interface ActionListener { void actionPerformed(ActionEvent e); } // 使用匿名类传递一个行为 button.addActionListener(new ActionListener(){ public void actionPerformed(Event e){ System.out.println("button clicked"); } }); 上面的代码主要的问题在于addActionListener方法期望的是一个行为,为了描述这个行为（代码即数据的概念）,在Java中不得不传入一个对象. 除了代码冗余,还存在下面问题
 业务逻辑淹没在匿名类语法中,就像Go语言的if err != nil一样 匿名类中的 this 和变量名容易使人产生误解 类型载入和实例创建语义不够灵活 无法捕获非 final 的局部变量 lambda表达式 为了解决上面的问题,Java8推出了lambda表达式——当接口只有一个抽象方法时,称为函数式接口（也叫单抽象方法类型,SAM类型）,可以使用lambda表达式表示这个接口的实现方法.
 button.addActionListener(e -> System.out.println("button clicked")); 其中的e是actionPerformed(Event e)方法的参数,-> 后面的是方法体. 注意这里我们并没有提供e的类型,这是由类型推导技术实现的——javac根据addActionListener方法签名和actionPerformed方法签名推导出参数类型只能是Event.
