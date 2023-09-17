@@ -596,10 +596,14 @@ Serif类 一般宋体中文适合搭配衬线英文字体，推荐Palatino和Mer
 手写体 大部分手写体都不适合阅读，但是Alegreya Sans斜体比较合适，在手写风格和可读性达到较好平衡。</content></entry><entry><title>如何正确地系鞋带</title><url>https://zhimoe.github.io/post/how-to-tie-shoelace/</url><categories><category>生活</category></categories><tags><tag>鞋带</tag></tags><content type="html"> Ian安全结是登山系鞋带的首选,它越穿越紧,不会松开.解鞋带轻轻一拉即开. 而且对称美观,上手简单.值得每个人花十分钟学习.
 本篇不仅给出Ian安全结示意图,还告诉大家如何让安全结和蝴蝶结水平对称,尽可能美观的秘诀.
 以上是Ian结的步骤.下面是重点：
-无论是蝴蝶结还是Ian安全结,如果你发现自己的鞋带系完是斜的而非水平,原因是第一个辅助结和第二个结上下关系反了. 即图1的那个结是辅助结,黄色在上,蓝色在下,那么第二个结必须和图2中一样,黄色在上,蓝色在下, 如果你在第二步黄蓝反了,最后成结就是斜的!!! 这是我毕生绝学了.
+无论是Ian蝴蝶结还是安全结,如果你发现自己的鞋带系完是斜的而非水平,原因是第一个辅助结和第二个结上下关系反了. 即图1的那个结是辅助结,黄色在上,蓝色在下,那么第二个结必须和图2中一样,黄色在上,蓝色在下, 如果你在第二步黄蓝反了,最后成结就是斜的!!! 这是我毕生绝学了.
 Ian安全结想要好看的诀窍在于,在快要拉紧绳结之前,先拉住鞋带两端松一下结,假装要扯开鞋带,这样安全结内部会变整齐,然后抓住8字环两端拉紧鞋带.注意,是快要拉紧之前扯松一下,扯的时候绳结应该已经有点摩擦了,太松了外扯整理不到结的内部,太紧了外扯结也不会改变形状了,就是拉紧之前反复整理一下,注意,如果这里你辅助结上下关系错了,最后很难整理出来满意的效果.最后的效果应该是最后一幅图的效果,而不是第一幅的图6那么丑的.
 作者：zhimoe
-链接：https://www.zhihu.com/question/19728687/answer/501699533</content></entry><entry><title>Java 8 Lambda笔记</title><url>https://zhimoe.github.io/post/java-lambda/</url><categories><category>编程</category></categories><tags><tag>code</tag><tag>java</tag><tag>lambda</tag></tags><content type="html"> 问题 Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：
+链接：https://www.zhihu.com/question/19728687/answer/501699533
+补充：
+实际上Ian结就是普通的蝴蝶结，也是目前最快的系鞋带方法，缺点就是会松动。而Ian安全结学名是双打结（Double Slip Knot）。
+这里有Ian结发明者的官方网站，里面有超级多系鞋带方法，我自己在25岁之前都是用的蝴蝶结，学会安全结之后就再也没有松鞋带的烦恼了。
+Ï</content></entry><entry><title>Java 8 Lambda笔记</title><url>https://zhimoe.github.io/post/java-lambda/</url><categories><category>编程</category></categories><tags><tag>code</tag><tag>java</tag><tag>lambda</tag></tags><content type="html"> 问题 Java是OOP语言,使用对象封装.由于函数不是一等公民,无法在方法中传递函数/方法. 在Java 8之前,使用匿名类表示行为：
 // 监听器接口 public interface ActionListener { void actionPerformed(ActionEvent e); } // 使用匿名类传递一个行为 button.addActionListener(new ActionListener(){ public void actionPerformed(Event e){ System.out.println("button clicked"); } }); 上面的代码主要的问题在于addActionListener方法期望的是一个行为,为了描述这个行为（代码即数据的概念）,在Java中不得不传入一个对象. 除了代码冗余,还存在下面问题
 业务逻辑淹没在匿名类语法中,就像Go语言的if err != nil一样 匿名类中的 this 和变量名容易使人产生误解 类型载入和实例创建语义不够灵活 无法捕获非 final 的局部变量 lambda表达式 为了解决上面的问题,Java8推出了lambda表达式——当接口只有一个抽象方法时,称为函数式接口（也叫单抽象方法类型,SAM类型）,可以使用lambda表达式表示这个接口的实现方法.
 button.addActionListener(e -> System.out.println("button clicked")); 其中的e是actionPerformed(Event e)方法的参数,-> 后面的是方法体. 注意这里我们并没有提供e的类型,这是由类型推导技术实现的——javac根据addActionListener方法签名和actionPerformed方法签名推导出参数类型只能是Event.
