@@ -149,8 +149,8 @@ scala-for-impatient章节摘要, 这本书对于Java开发者快速上手Scala�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>• Exceptions work just like in Java or C++, but you use a “pattern matching” syntax for catch.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>• Scala has no checked exceptions.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Rust Packages Crates Mod Notes</title><link>https://zhimoe.github.io/post/rust-packages-crates-mod/</link><pubDate>Sun, 12 Jan 2020 20:03:33 +0800</pubDate><guid>https://zhimoe.github.io/post/rust-packages-crates-mod/</guid><description>&lt;p>初学rust对于项目的package和crate的关系,module和文件的关系有点理不清.做了一点笔记.&lt;/p>
-&lt;h2 id="packages-crates-and-modules">packages, crates and modules&lt;/h2>
-&lt;p>A Cargo.toml is a package. and must have a package name, like&lt;/p>
+&lt;h2 id="packages-and-crates">packages and crates&lt;/h2>
+&lt;p>A Cargo.toml is a package. and must have a package name, defined in &lt;code>[package]&lt;/code> table:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>[&lt;span style="color:#000">package&lt;/span>]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">name&lt;/span> = &lt;span style="color:#c41a16">&amp;#34;actix-web&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>git 常用命令备忘录</title><link>https://zhimoe.github.io/post/git-useful-tips/</link><pubDate>Sun, 01 Sep 2019 21:01:06 +0800</pubDate><guid>https://zhimoe.github.io/post/git-useful-tips/</guid><description>&lt;p>记录日常开发中偶尔会遇到的但是总是记不住的git命令.&lt;br>
