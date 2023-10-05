@@ -12,6 +12,14 @@
     src: url("/font/alegreya-sans-latin-700italic.woff2");
 }
 
+:root {
+    --white-fdfdfd: #fdfdfd;
+    --seashell-f1f1f1: #f1f1f1;
+    --lightgray-dddddd: #dddddd;
+    --dovegray-666666: #666666;
+    --black-363636: #363636;
+}
+
 /* normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
     font-family: sans-serif; /* 1 */
@@ -28,8 +36,8 @@ body {
     font-family: -apple-system, system-ui, PingFang SC, Hiragino Sans GB, Source Han Sans SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
     font-size: 14px;
     line-height: 1.5rem;
-    color: #555;
-    background: #f5f7f9;
+    color: var(--black-363636);
+    background: var(--seashell-f1f1f1);
 }
 
 article {
@@ -239,8 +247,8 @@ th {
 }
 
 ::selection {
-    background: #262a30;
-    color: #fff;
+    background: var(--black-363636);
+    color: var(--white-fdfdfd);
 }
 
 /* w <= 767的设备 手机 */
@@ -367,14 +375,14 @@ hr {
     margin: 40px 0;
     height: 3px;
     border: none;
-    background-color: #ddd;
+    background-color: var(--lightgray-dddddd);
     background-image: repeating-linear-gradient(-45deg, #fff, #fff 4px, transparent 4px, transparent 8px);
 }
 
 blockquote {
     padding: 0 15px;
     color: #666;
-    border-left: 4px solid #ddd;
+    border-left: 4px solid var(--lightgray-dddddd);
 }
 
 blockquote cite::before {
@@ -447,7 +455,7 @@ dd {
 .translation {
     margin-top: -20px;
     font-size: 14px;
-    color: #999;
+    color: var(--dovegray-666666);
 }
 
 .scrollbar-measure {
@@ -468,7 +476,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    border: 1px solid #ddd;
+    border: 1px solid var(--lightgray-dddddd);
     font-size: 14px;
     table-layout: fixed;
     word-break: break-all;
@@ -493,7 +501,7 @@ td {
 
 th,
 td {
-    border-bottom: 3px solid #ddd;
+    border-bottom: 3px solid var(--lightgray-dddddd);
     border-right: 1px solid #eee;
 }
 
@@ -533,7 +541,7 @@ body {
 
 .footer {
     font-size: 14px;
-    color: #999;
+    color: var(--dovegray-666666);
 }
 
 .footer-inner {
@@ -836,7 +844,7 @@ pre .javascript .function {
     display: inline-block;
     padding: 0 20px;
     font-size: 14px;
-    color: #fff;
+    color: var(--white-fdfdfd);
     background: #222;
     border: 1px solid #555;
     text-decoration: none;
@@ -850,7 +858,7 @@ pre .javascript .function {
 .btn:hover,
 .post-more-link .btn:hover {
     border-color: #222;
-    color: #fff;
+    color: var(--white-fdfdfd);
     background: #222;
 }
 
@@ -927,7 +935,7 @@ pre .javascript .function {
 }
 
 .pagination .page-number.current {
-    color: #fff;
+    color: var(--white-fdfdfd);
     background: #ccc;
     border-top-color: #ccc;
 }
@@ -976,7 +984,7 @@ pre .javascript .function {
     background: #222;
     font-size: 12px;
     opacity: 0.6;
-    color: #fff;
+    color: var(--white-fdfdfd);
     cursor: pointer;
     text-align: center;
     -webkit-transform: translateZ(0);
@@ -998,7 +1006,7 @@ pre .javascript .function {
 }
 
 .header {
-    background: #fff;
+    background: var(--white-fdfdfd);
 }
 
 .header-inner {
@@ -1013,7 +1021,7 @@ pre .javascript .function {
 .site-meta {
     flex-grow: 1;
     text-align: center;
-    color: #fff;
+    color: var(--white-fdfdfd);
     padding: 30px 0;
 }
 
@@ -1028,13 +1036,13 @@ pre .javascript .function {
     position: relative;
     display: inline-block;
     padding: 0 40px;
-    color: #fff;
+    color: var(--white-fdfdfd);
     background: #222;
     border-bottom: none;
 }
 
 .brand:hover {
-    color: #fff;
+    color: var(--white-fdfdfd);
 }
 
 .logo {
@@ -1056,7 +1064,7 @@ pre .javascript .function {
 .site-subtitle {
     margin-top: 15px;
     font-size: 16px;
-    color: #ddd;
+    color: var(--lightgray-dddddd);
     font-family: "Alegreya Sans", sans-serif;
 }
 
@@ -1174,7 +1182,7 @@ pre .javascript .function {
     margin: 10px auto 15px;
     text-align: center;
     font-size: 14px;
-    color: #999;
+    color: var(--dovegray-666666);
     font-weight: bold;
     line-height: 1;
 }
@@ -1454,7 +1462,7 @@ pre .javascript .function {
 
 .posts-expand .post-meta {
     margin: 3px 0 15px 0;
-    color: #999;
+    color: var(--dovegray-666666);
     font-size: 12px;
     text-align: center;
 }
@@ -1466,7 +1474,7 @@ pre .javascript .function {
 }
 
 .posts-expand .post-meta .post-category-list-link {
-    color: #999;
+    color: var(--dovegray-666666);
 }
 
 
@@ -1512,7 +1520,7 @@ pre .javascript .function {
 .post-more-link .btn {
     color: #555;
     font-size: 14px;
-    background: #fff;
+    background: var(--white-fdfdfd);
     border: none;
     line-height: 2;
 }
@@ -1647,7 +1655,7 @@ pre .javascript .function {
 }
 
 .sidebar a {
-    color: #999;
+    color: var(--dovegray-666666);
     border-bottom-color: #555;
 }
 
@@ -1670,7 +1678,7 @@ pre .javascript .function {
 .sidebar-inner {
     position: relative;
     padding: 20px 10px;
-    color: #999;
+    color: var(--dovegray-666666);
     text-align: center;
 }
 
@@ -1706,7 +1714,7 @@ pre .javascript .function {
     vertical-align: top;
     height: 2px;
     width: 100%;
-    background: #fff;
+    background: var(--white-fdfdfd);
     margin-top: 3px;
 }
 
@@ -1735,7 +1743,7 @@ pre .javascript .function {
     margin-top: 0;
     text-align: center;
     font-size: 12px;
-    color: #999;
+    color: var(--dovegray-666666);
     font-family: "Alegreya Sans", sans-serif;
 }
 
@@ -1770,7 +1778,7 @@ pre .javascript .function {
 
 .site-state-item-name {
     font-size: 12px;
-    color: #999;
+    color: var(--dovegray-666666);
 }
 
 .feed-link {
@@ -1791,12 +1799,12 @@ pre .javascript .function {
 }
 
 .feed-link a:hover {
-    color: #fff;
+    color: var(--white-fdfdfd);
     background: #fc6423;
 }
 
 .feed-link a:hover i {
-    color: #fff;
+    color: var(--white-fdfdfd);
 }
 
 .links-of-author {
@@ -2132,7 +2140,7 @@ a.search-result {
     height: 80%;
     margin-left: -350px;
     padding: 3px 0 0 10px;
-    background: #fff;
+    background: var(--white-fdfdfd);
     color: #333;
     z-index: 9999;
     border-radius: 5px;
@@ -2286,7 +2294,7 @@ a.search-result {
     overflow: hidden;
     padding: 0;
     width: 260px;
-    background: #fff;
+    background: var(--white-fdfdfd);
 }
 
 .site-brand-container {
@@ -2359,7 +2367,7 @@ a.search-result {
     box-sizing: border-box;
     padding: 0 50px;
     width: 840px;
-    background: #fff;
+    background-color: var(--white-fdfdfd);
     height: auto;
 }
 
@@ -2383,7 +2391,7 @@ a.search-result {
     float: left;
     margin-top: 300px;
     width: 260px;
-    background: #fff;
+    background: var(--white-fdfdfd);
     box-shadow: none;
 }
 
@@ -2446,7 +2454,7 @@ a.search-result {
 }
 
 .brand:hover {
-    color: #fff;
+    color: var(--white-fdfdfd);
 }
 
 .site-subtitle {
@@ -2494,7 +2502,7 @@ a.search-result {
 .menu .menu-item a:hover,
 .menu-item-active a {
     background: #f9f9f9;
-    border-bottom-color: #fff;
+    border-bottom-color: var(--white-fdfdfd);
 }
 
 .menu .menu-item br {
@@ -2514,7 +2522,7 @@ a.search-result {
 }
 
 .btn-bar {
-    background-color: #fff;
+    background-color: var(--white-fdfdfd);
 }
 
 .site-nav-toggle,
@@ -2541,16 +2549,16 @@ a.search-result {
 
 .site-nav-toggle .toggle,
 .site-nav-right .toggle {
-    color: #fff;
+    color: var(--white-fdfdfd);
 }
 
 .site-nav-toggle .toggle .toggle-line,
 .site-nav-right .toggle .toggle-line {
-    background: #fff;
+    background: var(--white-fdfdfd);
 }
 
 .toggle .toggle-line {
-    background: #fff;
+    background: var(--white-fdfdfd);
     display: block;
     height: 2px;
     left: 0;
@@ -2659,7 +2667,7 @@ a.search-result {
     box-sizing: border-box;
     width: 260px;
     color: #555;
-    background: #fff;
+    background: var(--white-fdfdfd);
 }
 
 .sidebar-inner.affix {
@@ -2838,7 +2846,7 @@ a.search-result {
     left: 25%;
     margin: auto;
     padding: 0;
-    background: #fff;
+    background: var(--white-fdfdfd);
     border-radius: 5px;
     height: 80%;
     width: 50%;
@@ -2875,7 +2883,7 @@ a.search-result {
 
 .local-search-popup .popup-btn-close, .local-search-popup .search-icon {
     font-size: 18px;
-    color: #999;
+    color: var(--dovegray-666666);
     padding: 0 10px;
 }
 
@@ -2966,12 +2974,12 @@ a.search-result {
 }
 
 .lang-link {
-    color: #fff;
+    color: var(--white-fdfdfd);
 }
 
 .lang-link:hover {
     font-weight: bold;
-    color: #fff;
+    color: var(--white-fdfdfd);
     text-decoration: underline;
 }
 
@@ -2983,3 +2991,26 @@ a.search-result {
 ul, ol {
     padding-left: 10px !important;
 }
+
+/*404 page*/
+
+.not_found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    font-family: "Alegreya Sans", sans-serif;
+    line-height: normal;
+}
+
+.not_found_404 {
+    font-size: 128px;
+    font-family: "Fira Code", ui-monospace, monospace;
+}
+
+.not_found_sorry,
+.not_found_home a {
+    font-size: 36px;
+}
+
+/*404 page end*/
