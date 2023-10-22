@@ -37,11 +37,11 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>IO-Java-Stream-Write-Reader</title><link>https://zhimoe.github.io/post/java-io-basic/</link><pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-io-basic/</guid><description>&lt;p>上次总结了 java 中不同读写文件的方法，这次总结一下基本的 IO 流。网上的总结大部分是以 Stream 和 Reader、Writer 来介绍的。这次从封装层次来介绍。&lt;/p></description></item><item><title>Java 6/7/8 中文件读写</title><link>https://zhimoe.github.io/post/java-file-in-v678/</link><pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-file-in-v678/</guid><description>&lt;p>如何在 Java 中读写文件，这里保留 Java6/7 版本，但是你永远不应该使用它们，优先使用 Path,Files,Paths 三个类。&lt;br>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>IO-Java-Stream-Write-Reader</title><link>https://zhimoe.github.io/post/java-io-basic/</link><pubDate>Tue, 01 Mar 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-io-basic/</guid><description>&lt;p>上次总结了 java 中不同读写文件的方法，这次总结一下基本的 IO 流。网上的总结大部分是以 Stream 和 Reader、Writer 来介绍的。这次从封装层次来介绍。&lt;/p></description></item><item><title>Java 6/7/8 中文件读写</title><link>https://zhimoe.github.io/post/java-file-in-v678/</link><pubDate>Mon, 01 Feb 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-file-in-v678/</guid><description>&lt;p>如何在 Java 中读写文件，这里保留 Java6/7 版本，但是你永远不应该使用它们，优先使用 Path、Files、Paths 三个类。&lt;br>
 资料：&lt;a href="http://www.javapractices.com/topic/TopicAction.do?Id=42">Reading and writing text files&lt;/a>&lt;/p>
 &lt;h2 id="java8-最佳实践">Java8 最佳实践&lt;/h2>
-&lt;p>不要用 File 对象，改用 Path 对象，该对象既表示文件路径，也表示文件文本（应该认为文件也是路径的一部分）,对于以前的 File，可以 File.toPath() 得到一个 Path 对象。&lt;br>
-Files 是一个静态类，操作文件内容.Paths 是静态工具类，操作文件路径，例如拼接文件路径，以前要使用平台无关的分隔符表示：File.pathSeparator, File.separator.&lt;br>
+&lt;p>不要用 File 对象，改用 Path 对象，该对象既表示文件路径，也表示文件文本（应该认为文件也是路径的一部分），对于以前的 File，可以 File.toPath() 得到一个 Path 对象。&lt;br>
+Files 是一个静态类，操作文件内容.Paths 是静态工具类，操作文件路径，例如拼接文件路径，以前要使用平台无关的分隔符表示：File.pathSeparator、File.separator.&lt;br>
 例如，构建一个文件对象：&lt;code>Path path = Paths.get(&amp;quot;~/test/&amp;quot;, &amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;, &amp;quot;a.txt&amp;quot;);&lt;/code>&lt;/p></description></item><item><title>Java AOP example</title><link>https://zhimoe.github.io/post/java-aop-example/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/java-aop-example/</guid><description>&lt;p>Java AOP: 找到一个最简单的介绍，不怎么想翻译，直接看原文吧：&lt;br>
 &lt;a href="https://www.javacodegeeks.com/2012/06/simple-introduction-to-aop.html">A Simple Introduction to AOP&lt;/a>&lt;/p>
 &lt;p>提醒个点，使用注解的方式写切面时，增加了一个空方法，即：&lt;/p>
