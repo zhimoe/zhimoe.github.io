@@ -54,7 +54,7 @@
 </span></span></code></pre></div><p>可以看到此时 HEAD 和 master 分支还是分离的。</p><h3 id=真实场景复现>真实场景复现</h3><p>上面复现的方式很刻意，毕竟极少情况你会 checkout 一个具体的 commit 而不手动创建一个分支。日常工作中最可能遇到这个 detached HEAD 的场景是你使用<code>Git submodule</code>的时候。<br>敢说每个新手在使用 submodule 都会碰到 detached HEAD 问题。<br>原因是你的 submodule 没有记录正确的分支，即你在使用<code>git submodule add</code>时没有指定<code>-b &lt;branch></code>参数。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>git submodule add -b main https://github.com/zhimoe/hugo-theme-next.git themes/next
 </span></span></code></pre></div><p>或者直接在项目根目录下的<code>.gitmodules</code>文件中加上一行</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>branch = main
 </span></span><span style=display:flex><span># or branch = master
-</span></span></code></pre></div><h3 id=解决方法>解决方法</h3><p>1、预防的方法就是没有 commit 的时候及时切回一个具体分支<code>git checkout master</code></p><p>2.1、如果已经提交了的话，给当前游离的 commit 创建一个分支，切换到该分支</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>Prj <span style=color:#000>(</span>09fb4a5<span style=color:#000>)</span>
+</span></span></code></pre></div><h3 id=解决方法>解决方法</h3><p>1、预防的方法就是没有 commit 的时候及时切回一个具体分支<code>git checkout master</code></p><p>2、如果已经提交了的话，给当前游离的 commit 创建一个分支，切换到该分支</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>Prj <span style=color:#000>(</span>09fb4a5<span style=color:#000>)</span>
 </span></span><span style=display:flex><span>❯ git branch oops 09fb4a5
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>Prj <span style=color:#000>(</span>09fb4a5<span style=color:#000>)</span>
@@ -66,7 +66,7 @@
 </span></span><span style=display:flex><span>Prj <span style=color:#000>(</span>09fb4a5<span style=color:#000>)</span>
 </span></span><span style=display:flex><span>❯ git checkout oops
 </span></span><span style=display:flex><span>Switched to branch <span style=color:#c41a16>&#39;oops&#39;</span>
-</span></span></code></pre></div><p>2.2、接着使用 rebase 将 oops 分支接在 master 分支的末尾 commit 之后</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>Prj on  oops
+</span></span></code></pre></div><p>接着使用 rebase 将 oops 分支接在 master 分支的末尾 commit 之后</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>Prj on  oops
 </span></span><span style=display:flex><span>❯ git rebase master
 </span></span><span style=display:flex><span>Current branch oops is up to date.
 </span></span><span style=display:flex><span>

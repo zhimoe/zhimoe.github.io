@@ -34,21 +34,23 @@
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>RUN</span> <span style=color:#000>USER</span><span style=color:#000>=</span>root cargo new --bin prj<span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>WORKDIR</span><span style=color:#c41a16> /prj</span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000>
-</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># copy over your manifests</span><span style=color:#000>
+</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># copy the manifests to WORKDIR/src</span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>COPY</span> ./Cargo.lock ./Cargo.toml ./<span style=color:#000>
-</span></span></span><span style=display:flex><span><span style=color:#000>
-</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># change the crate.io source</span><span style=color:#000>
+</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># change the crate.io source url if in China mainland</span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>COPY</span> ./config <span style=color:#000>$CARGO_HOME</span>/<span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000>
+</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># build without project source code</span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># this build step will cache your dependencies</span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>RUN</span> cargo build --release<span style=color:#000>
-</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>RUN</span> rm -r src/*<span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000>
+</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># remove the WORKDIR/src</span><span style=color:#000>
+</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>RUN</span> rm -r src/*<span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># copy your source files to WORKDIR/src</span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>COPY</span> ./src ./src<span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>COPY</span> ./static ./static<span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000>
-</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># build for release, note! the Cargo.toml package name in deps is _, not -</span><span style=color:#000>
+</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># build for release, </span><span style=color:#000>
+</span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># note! the Cargo.toml package name in deps is _, not -</span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>RUN</span> rm ./target/release/deps/rs_notes*<span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>RUN</span> cargo build --release<span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000>
@@ -68,12 +70,12 @@
 </span></span></span><span style=display:flex><span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#177500># set the startup command to run your binary</span><span style=color:#000>
 </span></span></span><span style=display:flex><span><span style=color:#000></span><span style=color:#a90d91>CMD</span> [<span style=color:#c41a16>&#34;./rs-notes&#34;</span>]<span style=color:#000>
-</span></span></span></code></pre></div><p>要点：</p><ol><li>如果使用 scratch 或者 alpine 镜像，那么需要将编译目标设置为<code>MUSL</code>，网络上有教程，个人感觉不需要.rust 应用使用 debian-slim 基本在 60M 左右，只有 spring boot 应用镜像的一半大小。</li><li>在国内由于网络问题，所以修改了 cargo 的 crate.io mirror 地址：<code>COPY ./config $CARGO_HOME/</code>. config 内容如下：</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#a90d91>[source.crates-io]</span>
+</span></span></span></code></pre></div><p>要点：</p><ol><li>如果使用 scratch 或者 alpine 镜像，那么需要将编译目标设置为<code>MUSL</code>，网络上有教程，感觉不需要考虑这个体积问题。rust 应用使用 debian-slim 基本在 60M 左右，只有 spring boot 应用镜像的一半大小。</li><li>在国内由于网络问题，所以修改了 cargo 的 crate.io mirror 地址：<code>COPY ./config $CARGO_HOME/</code>. config 内容如下：</li></ol><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=display:flex><span><span style=color:#a90d91>[source.crates-io]</span>
 </span></span><span style=display:flex><span><span style=color:#836c28>registry</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;https://github.com/rust-lang/crates.io-index&#34;</span>
 </span></span><span style=display:flex><span><span style=color:#836c28>replace-with</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#39;ustc&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#a90d91>[source.ustc]</span>
 </span></span><span style=display:flex><span><span style=color:#836c28>registry</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;git://mirrors.ustc.edu.cn/crates.io-index&#34;</span>
-</span></span></code></pre></div><ol start=3><li>build 中使用了 cargo 缓存，即先将项目 Cargo.toml 和 Cargo.lock 复制到一个空项目中编译，然后再将源码复制进去编译。</li><li><code>RUN rm ./target/release/deps/rs_notes*</code>,注意这里的<code>rs_notes</code>是下划线.cargo 中 package name 转换为 crate name 的默认规则。</li></ol></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code</a>
+</span></span></code></pre></div><ol start=3><li>build 中使用了 cargo 缓存，即先将项目 Cargo.toml 和 Cargo.lock 复制到一个空项目中编译，然后再将源码复制进去编译。</li><li><code>RUN rm ./target/release/deps/rs_notes*</code>，注意这里的<code>rs_notes</code>是下划线，是 cargo 中 package name 转换为 crate name 的默认规则。</li></ol></div><footer class=post-footer><div class=post-tags><a href=https://zhimoe.github.io/tags/code rel=tag title=code>#code</a>
 <a href=https://zhimoe.github.io/tags/docker rel=tag title=docker>#docker</a>
 <a href=https://zhimoe.github.io/tags/spring rel=tag title=spring>#spring</a>
 <a href=https://zhimoe.github.io/tags/rust rel=tag title=rust>#rust</a></div><div id=buymeacoffee><img src=https://zhimoe.github.io/img/buymeacoffee.67z8f89vpuo0.webp alt="Buy me a coffee"></div><div class=post-nav><div class="post-nav-next post-nav-item"><a href=https://zhimoe.github.io/post/rust-ownership-lifetimes/ rel=next title="Rust Ownerships Lifetimes 教程"><i class="fa fa-chevron-left"></i> Rust Ownerships Lifetimes 教程</a></div><div class="post-nav-prev post-nav-item"><a href=https://zhimoe.github.io/post/docker-cmd-entrypoint-diff/ rel=prev title="Docker CMD ENTRYPOINT 区别">Docker CMD ENTRYPOINT 区别

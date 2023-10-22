@@ -6,7 +6,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Executor (java.util.concurrent)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|---ExecutorService (java.util.concurrent)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |---AbstractExecutorService (java.util.concurrent)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | |---AbstractEventExecutor (io.netty.util.concurrent)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | |---ForkJoinPool (java.util.concurrent)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | |---ThreadPoolExecutor (java.util.concurrent)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> | | |---ScheduledThreadPoolExecutor (java.util.concurrent)

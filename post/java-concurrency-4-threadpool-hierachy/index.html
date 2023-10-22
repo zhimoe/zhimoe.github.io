@@ -10,17 +10,17 @@
 </span></span><span style=display:flex><span>Executor (java.util.concurrent)
 </span></span><span style=display:flex><span>|---ExecutorService (java.util.concurrent)
 </span></span><span style=display:flex><span>    |---AbstractExecutorService (java.util.concurrent)
-</span></span><span style=display:flex><span>    |   |---AbstractEventExecutor (io.netty.util.concurrent)
 </span></span><span style=display:flex><span>    |   |---ForkJoinPool (java.util.concurrent)
 </span></span><span style=display:flex><span>    |   |---ThreadPoolExecutor (java.util.concurrent)
 </span></span><span style=display:flex><span>    |   |   |---ScheduledThreadPoolExecutor (java.util.concurrent)
 </span></span><span style=display:flex><span>    |---DelegatedExecutorService in Executors (java.util.concurrent)
 </span></span><span style=display:flex><span>    |---ScheduledExecutorService (java.util.concurrent)
-</span></span></code></pre></div><h3 id=three-thread-pool-interfaces>three thread pool interfaces</h3><p><code>Executor</code>, a simple interface that supports launching new tasks.<br><code>ExecutorService</code>, a sub-interface of Executor, which adds features that help manage the life cycle, both of the<br>individual tasks and of the executor itself.<br><code>ScheduledExecutorService</code>, a sub-interface of ExecutorService, supports future and/or periodic execution of tasks.</p><h3 id=common-thread-pool-implements>common thread pool implements</h3><p><code>ThreadPoolExecutor</code>是 thread pool 最常用的实现。一般通过<code>Executors</code>静态工厂方法来创建。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#177500>//Executors.newFixedThreadPool
+</span></span></code></pre></div><h3 id=three-thread-pool-interfaces>three thread pool interfaces</h3><p><code>Executor</code>, a simple interface that supports launching new tasks.</p><p><code>ExecutorService</code>, a sub-interface of Executor, which adds features that help manage the life cycle, both of the<br>individual tasks and of the executor itself.</p><p><code>ScheduledExecutorService</code>, a sub-interface of ExecutorService, supports future and/or periodic execution of tasks.</p><h3 id=common-thread-pool-implements>common thread pool implements</h3><p><code>ThreadPoolExecutor</code>是 thread pool 最常用的实现。一般通过<code>Executors</code>静态工厂方法来创建。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#177500>//Executors.newFixedThreadPool
 </span></span></span><span style=display:flex><span><span style=color:#177500>//Executors.newCachedThreadPool
 </span></span></span><span style=display:flex><span><span style=color:#177500>//Executors.newSingleThreadExecutor
-</span></span></span><span style=display:flex><span><span style=color:#177500>//同样的，Executors 还提供了 ScheduledExecutorService 的工具方法
-</span></span></span><span style=display:flex><span><span style=color:#177500>// Executors.newSingleThreadScheduledExecutor
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>
+</span></span><span style=display:flex><span><span style=color:#177500>//同样的，Executors 还提供了 ScheduledExecutorService 的工具方法
+</span></span></span><span style=display:flex><span><span style=color:#177500>//Executors.newSingleThreadScheduledExecutor
 </span></span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#177500>/**
 </span></span></span><span style=display:flex><span><span style=color:#177500> * corePoolSize - 保留存活的线程个数
 </span></span></span><span style=display:flex><span><span style=color:#177500> * maximumPoolSize - 最大线程个数
