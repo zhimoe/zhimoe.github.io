@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>firacode on zhimoe</title><link>https://zhimoe.github.io/tags/firacode/</link><description>Recent content in firacode on zhimoe</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Fri, 21 Aug 2020 22:02:50 +0800</lastBuildDate><atom:link href="https://zhimoe.github.io/tags/firacode/index.xml" rel="self" type="application/rss+xml"/><item><title>最佳编程字体</title><link>https://zhimoe.github.io/post/programming-fonts/</link><pubDate>Fri, 21 Aug 2020 22:02:50 +0800</pubDate><guid>https://zhimoe.github.io/post/programming-fonts/</guid><description>&lt;p>个人对于编程字体有一点点洁癖，在尝试十几个字体后，终于使用 FontForge 和 fontline.py 动手修改制作自己的编程字体:Aurulent 和 Fira Code。&lt;/p>
-&lt;h3 id="aurulent">Aurulent&lt;/h3>
-&lt;p>&lt;a href="https://github.com/zhimoe/programming-fonts">字体下载&lt;/a>&lt;/p>
-&lt;ol>
-&lt;li>小写字母来自 Aurulent Sans Mono，其他基于 Fira Code.Aurulent Sans Mono 风格和 SourceCodePro 非常像，胖宽型，大开大合，简单却有具有设计，特别是字符 g，a，p，y，s。&lt;/li>
-&lt;li>字母 r 的思路来自&lt;a href="https://www.programmingfonts.org/#gintronic">gintronic&lt;/a>. 优点是在低分辨率屏，r 的末尾不会被 hint 只剩下尖尖。&lt;/li>
-&lt;li>问号？也来自 gintronic 字体，非常漂亮。&lt;/li>
-&lt;/ol></description></item></channel></rss>
