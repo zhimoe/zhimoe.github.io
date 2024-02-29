@@ -100,6 +100,7 @@ a {
   text-decoration: none;
   border-bottom: 1px dashed;
   color: initial;
+  word-wrap:break-word;
 }
 @media (hover: hover) and (pointer: fine) {
   :not(.logo) > a:hover {
@@ -232,9 +233,11 @@ h1.title::before {
   max-width: 20em;
   margin-left: 0;
 }
+
 .terms, #TableOfContents > ul > li > ul {
   display: flex;
   flex-wrap: wrap;
+  padding-inline-start: 0;
 }
 .terms li, .term {
   margin-left: 2em;
