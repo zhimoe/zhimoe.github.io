@@ -83,11 +83,6 @@ pre code:not([class]) {
 code {
   hyphens: none;
 }
-/*todo: 优化代码换行设置*/
-pre code, pre code:hover {
-  white-space: pre-wrap;
-  /*word-break: break-all;*/
-}
 
 /* misc elements */
 .main, .home {
