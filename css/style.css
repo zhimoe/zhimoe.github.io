@@ -23,7 +23,7 @@ body {
 }
 
 /* header and footer areas */
-.nav-top, .single .meta-line, .nav-bottom, .post-nav {
+.nav-top, .single .meta-line, .nav-bottom {
   display: flex;
   justify-content: space-between;
 }
@@ -157,14 +157,15 @@ blockquote, .toc-list, .toc-list ul {
   padding: 3px 1em 3px;
   margin-inline: 0; /*引用行左右margin去掉*/
 }
+
 .post-nav {
   margin-top: 2rem; /*上一篇下一篇下移多点*/
+  display: flex;
+  flex-direction: column;
 }
-.post-nav span {
-  width: calc(50% - 1em);
-}
-.post-nav span + span {
-  text-align: right;
+.post-nav-next{
+  align-self: end;
+  text-align: end;
 }
 table {
   min-width: 50%;
