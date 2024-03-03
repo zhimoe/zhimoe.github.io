@@ -1,9 +1,9 @@
-<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Java 并发 3-ThreadLocal - 新街记事</title>
-<meta property="og:title" content="Java 并发 3-ThreadLocal - 新街记事"><meta name=twitter:card content="summary"><meta property="description" content="在通常的业务开发中，ThreadLocal 有两种典型的使用场景。
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Java 并发 3-ThreadLocal - 香取海</title>
+<meta property="og:title" content="Java 并发 3-ThreadLocal - 香取海"><meta name=twitter:card content="summary"><meta property="description" content="在通常的业务开发中，ThreadLocal 有两种典型的使用场景。
 [&amp;hellip;] 场景 1，ThreadLocal 用作保存每个线程独享的对象，为每个线程都创建一个副本，这样每个线程都可以修改自己所拥有的副本，而不会影响其他线程的副本，确保了线程安全。
 [&amp;hellip;] 场景 2，ThreadLocal 用作每个线程内需要独立保存信息，以便供其他方法更方便地获取该信息的场景。每个线程获 &amp;hellip;"><meta property="og:description" content="在通常的业务开发中，ThreadLocal 有两种典型的使用场景。
 [&amp;hellip;] 场景 1，ThreadLocal 用作保存每个线程独享的对象，为每个线程都创建一个副本，这样每个线程都可以修改自己所拥有的副本，而不会影响其他线程的副本，确保了线程安全。
-[&amp;hellip;] 场景 2，ThreadLocal 用作每个线程内需要独立保存信息，以便供其他方法更方便地获取该信息的场景。每个线程获 &amp;hellip;"><link rel=stylesheet href=../../css/style.css><link rel=stylesheet href=../../css/fonts.css><link rel=stylesheet href=../../css/custom.css><link rel=icon type=image/png href=../../img/logo.png><link rel=apple-touch-icon href=../../img/logo.png><link rel=apple-touch-icon-precomposed href=../../img/logo.png></head><body class="single post"><div class=crop-h></div><div class=crop-v></div><div class=crop-c></div><nav class="nav-top small"><div class=logo><a href=../../>新街记事</a></div><div class=menu><span class=active><a href=../../post/>博客</a></span>
+[&amp;hellip;] 场景 2，ThreadLocal 用作每个线程内需要独立保存信息，以便供其他方法更方便地获取该信息的场景。每个线程获 &amp;hellip;"><link rel=stylesheet href=../../css/style.css><link rel=stylesheet href=../../css/fonts.css><link rel=stylesheet href=../../css/custom.css><link rel=icon type=image/png href=../../img/logo.png><link rel=apple-touch-icon href=../../img/logo.png><link rel=apple-touch-icon-precomposed href=../../img/logo.png></head><body class="single post"><div class=crop-h></div><div class=crop-v></div><div class=crop-c></div><nav class="nav-top small"><div class=logo><a href=../../>香取海</a></div><div class=menu><span class=active><a href=../../post/>博客</a></span>
 <span><a href=../../categories/%E7%BC%96%E7%A8%8B/>编程</a></span>
 <span><a href=../../categories/%E7%BF%BB%E8%AF%91/>翻译</a></span>
 <span><a href=../../categories/%E9%9A%8F%E6%83%B3/>随想</a></span>
