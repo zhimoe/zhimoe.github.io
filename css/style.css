@@ -210,6 +210,12 @@ blockquote,
   text-align: end;
 }
 
+/* 上一篇下一篇的链接和箭头水平轴线对齐 */
+.post-nav-next, .post-nav-pre {
+  display: flex;
+  align-items: center;
+}
+
 table {
   min-width: 50%;
   margin: auto;
@@ -471,3 +477,32 @@ kbd:hover {
   left: 2px
 }
 
+
+/* arrow icon */
+.i-mdi-chevron-double-left {
+  --un-icon: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1.2em' height='1.2em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M18.41 7.41L17 6l-6 6l6 6l1.41-1.41L13.83 12zm-6 0L11 6l-6 6l6 6l1.41-1.41L7.83 12z'/%3E%3C/svg%3E");
+  -webkit-mask: var(--un-icon) no-repeat;
+  mask: var(--un-icon) no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  background-color: currentColor;
+  color: inherit;
+  width: 1.2em;
+  height: 1.2em
+}
+
+.i-mdi-chevron-double-right {
+  --un-icon: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 24 24' width='1.2em' height='1.2em' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath fill='currentColor' d='M5.59 7.41L7 6l6 6l-6 6l-1.41-1.41L10.17 12zm6 0L13 6l6 6l-6 6l-1.41-1.41L16.17 12z'/%3E%3C/svg%3E");
+  -webkit-mask: var(--un-icon) no-repeat;
+  mask: var(--un-icon) no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  background-color: currentColor;
+  color: inherit;
+  width: 1.4em;
+  height: 1.4em
+}
+
+.icon,[icon=""] {
+  display: inline-block
+}
