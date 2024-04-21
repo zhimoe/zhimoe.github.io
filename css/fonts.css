@@ -22,7 +22,7 @@ body {
 }
 
 code {
-    font-family: FangSongCode, MonoLisa, "Fira Code", Consolas, ui-monospace, monospace, stkaiti, kaiti, sans-serif;
+    font-family: MonoLisa, "Fira Code", FangSongCode, Consolas, ui-monospace, monospace, stkaiti, kaiti, sans-serif;
     font-size: 85%;
 }
 
