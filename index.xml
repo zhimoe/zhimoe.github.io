@@ -59,11 +59,11 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#177500">&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a90d91">fn&lt;/span> &lt;span style="color:#000">next&lt;/span>(&lt;span style="color:#000">&amp;amp;&lt;/span>&lt;span style="color:#a90d91">mut&lt;/span> &lt;span style="color:#5b269a">self&lt;/span>) -&amp;gt; &lt;span style="color:#a90d91">Option&lt;/span>&lt;span style="color:#000">&amp;lt;&lt;/span>&lt;span style="color:#5b269a">Self&lt;/span>::&lt;span style="color:#000">Item&lt;/span>&lt;span style="color:#000">&amp;gt;&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>一些英文字体推荐</title><link>https://zhimoe.github.io/post/programming-fonts/</link><pubDate>Fri, 21 Aug 2020 22:02:50 +0800</pubDate><guid>https://zhimoe.github.io/post/programming-fonts/</guid><description>&lt;p>个人对于编程字体有一点点洁癖，在尝试十几个字体后，终于使用 FontForge 和 fontline.py 动手修改制作自己的编程字体:Aurulent 和 Fira Code。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>编程字体推荐</title><link>https://zhimoe.github.io/post/programming-fonts/</link><pubDate>Fri, 21 Aug 2020 22:02:50 +0800</pubDate><guid>https://zhimoe.github.io/post/programming-fonts/</guid><description>&lt;p>个人对于编程字体有一点点强迫症，入行以来几乎一直在关注编程新的字体。常见的搜索方式就是“best programming font in 202x”或者看 &lt;a href="programmingfonts.org">programmingfonts.org&lt;/a>上面有没有上新。下面总结自己曾经用的比较久的字体，主要是编程等宽字体。&lt;/p>
 &lt;h3 id="aurulent">Aurulent&lt;/h3>
-&lt;p>&lt;a href="https://github.com/zhimoe/programming-fonts">字体下载&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/zhimoe/programming-fonts">Aurulent 下载&lt;/a>&lt;/p>
 &lt;ol>
-&lt;li>小写字母来自 Aurulent Sans Mono，其他基于 Fira Code.Aurulent Sans Mono 风格和 SourceCodePro 非常像，胖宽型，大开大合，简单却有具有设计，特别是字符 g，a，p，y，s。&lt;/li>
+&lt;li>小写字母来自 Aurulent Sans Mono，其他字符基于 Fira Code. Aurulent Sans Mono 风格和 SourceCodePro 非常像，胖宽型，大开大合，简单却有具有设计，特别是字符 g，a，p，y，s。&lt;/li>
 &lt;li>字母 r 的思路来自&lt;a href="https://www.programmingfonts.org/#gintronic">gintronic&lt;/a>. 优点是在低分辨率屏，r 的末尾不会被 hint 只剩下尖尖。&lt;/li>
 &lt;li>问号？也来自 gintronic 字体，非常漂亮。&lt;/li>
 &lt;/ol></description></item><item><title>如何正确地系鞋带</title><link>https://zhimoe.github.io/post/how-to-tie-shoelace/</link><pubDate>Fri, 21 Aug 2020 21:42:38 +0800</pubDate><guid>https://zhimoe.github.io/post/how-to-tie-shoelace/</guid><description>&lt;p>Ian 安全结是登山系鞋带的首选，它越穿越紧，不会松开。解鞋带轻轻一拉即开。而且对称美观，上手简单。值得每个人花十分钟学习。&lt;br>
