@@ -100,7 +100,8 @@
 </span></span><span style=display:flex><span>  <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`lines </span><span style=color:#c41a16>${</span><span style=color:#000>lines</span><span style=color:#c41a16>}</span><span style=color:#c41a16>`</span>);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#a90d91>for</span> (<span style=color:#a90d91>const</span> <span style=color:#000>line</span> <span style=color:#a90d91>of</span> <span style=color:#000>lines</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#a90d91>await</span> <span style=color:#000>checkTheBox</span>(<span style=color:#000>input</span>, <span style=color:#000>line</span>);
+</span></span><span style=display:flex><span>    <span style=color:#177500>// 等待 resolve() 执行才会继续下一行
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>    <span style=color:#a90d91>await</span> <span style=color:#000>checkTheBox</span>(<span style=color:#000>input</span>, <span style=color:#000>line</span>);
 </span></span><span style=display:flex><span>  }
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
@@ -112,9 +113,11 @@
 </span></span><span style=display:flex><span>      <span style=color:#a90d91>let</span> <span style=color:#000>checkbox</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#34;re-checkbox &gt; label &gt; input&#34;</span>);
 </span></span><span style=display:flex><span>      <span style=color:#a90d91>if</span> (<span style=color:#000>checkbox</span>) {
 </span></span><span style=display:flex><span>        <span style=color:#000>checkbox</span>.<span style=color:#000>click</span>();
-</span></span><span style=display:flex><span>        <span style=color:#000>clearInterval</span>(<span style=color:#000>checkInterval</span>);
-</span></span><span style=display:flex><span>        <span style=color:#000>resolve</span>(); <span style=color:#177500>// 这里是关键~~~
-</span></span></span><span style=display:flex><span><span style=color:#177500></span>      }
+</span></span><span style=display:flex><span>        <span style=color:#177500>// 轮循检查实现方式
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>        <span style=color:#000>clearInterval</span>(<span style=color:#000>checkInterval</span>);
+</span></span><span style=display:flex><span>        <span style=color:#177500>// 这里是关键，利用 Promise + resolve 信号 + await 实现同步等待的效果。
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>        <span style=color:#000>resolve</span>(); 
+</span></span><span style=display:flex><span>      }
 </span></span><span style=display:flex><span>    }, <span style=color:#1c01ce>400</span>);
 </span></span><span style=display:flex><span>  });
 </span></span><span style=display:flex><span>}
