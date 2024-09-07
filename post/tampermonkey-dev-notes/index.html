@@ -1,0 +1,143 @@
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>油猴脚本开发笔记 - 香取海</title>
+<meta property="og:title" content="油猴脚本开发笔记 - 香取海"><meta name=twitter:card content="summary"><meta property="description" content="以前都是用别人的油猴脚本，这次自己开发了一个自动化脚本，记录一些笔记。
+[&amp;hellip;] 直接油猴编辑器里面编写代码实际体验很差，包括代码补全等，理想的方式应该是在 vs code 开发，让 chrome 实时获取本地脚本。
+[&amp;hellip;] // ==UserScript== // @name DevInLocal // @namespace &amp;hellip;"><meta property="og:description" content="以前都是用别人的油猴脚本，这次自己开发了一个自动化脚本，记录一些笔记。
+[&amp;hellip;] 直接油猴编辑器里面编写代码实际体验很差，包括代码补全等，理想的方式应该是在 vs code 开发，让 chrome 实时获取本地脚本。
+[&amp;hellip;] // ==UserScript== // @name DevInLocal // @namespace &amp;hellip;"><link rel=stylesheet href=../../css/style.css><link rel=stylesheet href=../../css/fonts.css><link rel=stylesheet href=../../css/custom.css><link rel=icon type=image/png href=../../img/logo.png><link rel=apple-touch-icon href=../../img/logo.png><link rel=apple-touch-icon-precomposed href=../../img/logo.png></head><body class="single post"><div class=crop-h></div><div class=crop-v></div><div class=crop-c></div><nav class="nav-top small"><div class=logo><a href=../../>香取海</a></div><div class=menu><span class=active><a href=../../post/>博客</a></span>
+<span><a href=../../categories/%E7%BC%96%E7%A8%8B/>编程</a></span>
+<span><a href=../../categories/%E7%BF%BB%E8%AF%91/>翻译</a></span>
+<span><a href=../../categories/%E9%9A%8F%E6%83%B3/>随想</a></span>
+<span><a href=../../search/>搜索</a></span></div></nav><div class=article-meta><h2 class=title>油猴脚本开发笔记</h2><h3 class=meta-line><span><span class=date>24-09-07</span>
+</span><span class=term><a href=../../categories/%E7%BC%96%E7%A8%8B/ class=term-cat>编程</a>
+<a href=../../tags/code/ class=term-tag>#code </a><a href=../../tags/%E6%B2%B9%E7%8C%B4/ class=term-tag>#油猴</a></span></h3></div><div class=main><nav id=TableOfContents><ul><li><a href=#开发模式>开发模式</a><ul><li><a href=#hot-reload>hot-reload</a></li><li><a href=#脚手架>脚手架</a></li><li><a href=#剪切板>剪切板</a></li></ul></li><li><a href=#js-相关的经验>js 相关的经验</a><ul><li><a href=#处理-iframe-的内容>处理 iframe 的内容</a></li><li><a href=#div-选择器>div 选择器</a></li><li><a href=#脚本执行时机>脚本执行时机</a></li><li><a href=#input-事件和回车事件>input 事件和回车事件</a></li><li><a href=#异步方法处理循环动作>异步方法处理循环动作</a></li></ul></li></ul></nav><p>以前都是用别人的油猴脚本，这次自己开发了一个自动化脚本，记录一些笔记。</p><h2 id=开发模式>开发模式</h2><p>直接油猴编辑器里面编写代码实际体验很差，包括代码补全等，理想的方式应该是在 vs code 开发，让 chrome 实时获取本地脚本。</p><ol><li>打开 chrome 扩展管理界面 - 油猴 详情页 - 打开“允许访问文件网址（Allow access to file URLs）”</li><li>在油猴管理面板新增一个脚本，将<code>require</code>指向本地脚本。<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span> <span style=color:#177500>// ==UserScript==
+</span></span></span><span style=display:flex><span><span style=color:#177500></span> <span style=color:#177500>// @name         DevInLocal
+</span></span></span><span style=display:flex><span><span style=color:#177500></span> <span style=color:#177500>// @namespace    http://tampermonkey.net/
+</span></span></span><span style=display:flex><span><span style=color:#177500></span> <span style=color:#177500>// @match        *//example.com
+</span></span></span><span style=display:flex><span><span style=color:#177500></span> <span style=color:#177500>// @require      file:///path/to/userscript.user.js
+</span></span></span><span style=display:flex><span><span style=color:#177500></span> <span style=color:#177500>// ==/UserScript==
+</span></span></span></code></pre></div>注意路径格式：<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#177500>// windows
+</span></span></span><span style=display:flex><span><span style=color:#177500>// @require      file://C:\path\to\userscript.user.js
+</span></span></span><span style=display:flex><span><span style=color:#177500>// unix
+</span></span></span><span style=display:flex><span><span style=color:#177500>// @require      file:///path/to/userscript.user.js
+</span></span></span></code></pre></div></li></ol><h3 id=hot-reload>hot-reload</h3><p>如何让 match 的网页自动更新 dev 环境的脚本呢？<a href=https://bbs.tampermonkey.net.cn/thread-5575-1-1.html>油猴脚本自动更新</a></p><h3 id=脚手架>脚手架</h3><p>目前项目比较小，直接使用 js 更方面也容易维护。但是如果是需要在网页上面增加很多样式或者卡片的脚本，建议还是找一些脚手架。将项目编译后得到一个脚本发布或者复制到油猴扩展上面。</p><h3 id=剪切板>剪切板</h3><p>读取剪切板这个动作的代码必须通过用户事件去触发，在用户脚本中执行读取剪切板会被 chrome 拦截（安全考虑）。</p><h2 id=js-相关的经验>js 相关的经验</h2><h3 id=处理-iframe-的内容>处理 iframe 的内容</h3><p>无论是否同源，如果只是单纯处理 iframe 部分，则直接在@match 中 设置 iframe src 即可，脚本能自动匹配（其实就是两个不同的网页）。<br>对于非同源的 iframe，如果想要在主站读取 iframe 内容或者根据条件修改 iframe 内容则无法实现。唯一的方法是创建两个脚本，主站脚本发送 postMessage，iframe 脚本接收消息，参考如下</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#177500>// iframe.js
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>window</span>.<span style=color:#000>addEventListener</span>(<span style=color:#c41a16>&#39;message&#39;</span>, <span style=color:#a90d91>function</span>(<span style=color:#000>event</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#177500>// 验证消息的来源域名，确保安全
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>  <span style=color:#a90d91>if</span> (<span style=color:#000>event</span>.<span style=color:#000>origin</span> <span style=color:#000>===</span> <span style=color:#c41a16>&#39;https://your-main-site.com&#39;</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>if</span> (<span style=color:#000>event</span>.<span style=color:#000>data</span> <span style=color:#000>===</span> <span style=color:#c41a16>&#39;clickButton&#39;</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#177500>// 获取并点击按钮
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>      <span style=color:#a90d91>const</span> <span style=color:#000>button</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;button&#39;</span>); <span style=color:#177500>// 假设是第一个 button
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>      <span style=color:#a90d91>if</span> (<span style=color:#000>button</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#000>button</span>.<span style=color:#000>click</span>();
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#177500>// main.js
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>(<span style=color:#a90d91>function</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#c41a16>&#39;use strict&#39;</span>;
+</span></span><span style=display:flex><span>  <span style=color:#177500>// 获取 iframe 元素
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>  <span style=color:#a90d91>const</span> <span style=color:#000>iframe</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;iframe&#39;</span>); 
+</span></span><span style=display:flex><span>  <span style=color:#177500>// 每隔几秒发送消息到 iframe 让其点击按钮
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>  <span style=color:#000>setInterval</span>(() =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>if</span> (<span style=color:#000>iframe</span> <span style=color:#000>&amp;&amp;</span> <span style=color:#000>iframe</span>.<span style=color:#000>contentWindow</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#000>iframe</span>.<span style=color:#000>contentWindow</span>.<span style=color:#000>postMessage</span>(<span style=color:#c41a16>&#39;clickButton&#39;</span>, <span style=color:#c41a16>&#39;https://iframe-domain.com&#39;</span>); <span style=color:#177500>// 指定 iframe 的域名
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>    }
+</span></span><span style=display:flex><span>  }, <span style=color:#1c01ce>5000</span>); <span style=color:#177500>// 每隔 5 秒点击一次按钮
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>})();
+</span></span></code></pre></div><h3 id=div-选择器>div 选择器</h3><p>现在的网页大部分是 react 或者 vue 编译生成的，里面的 class 大部分是动态变化的，也基本没有 id，所以大部分情况只能使用层级加一些特殊 class 来定位 div，所以最好用的其实是<code>querySelector</code>和<code>querySelectorAll</code>。注意前者返回的是第一个匹配，非数组。配合 css 选择器非常好用，例如下面示例：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#177500>// div with name
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>input</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input[name=&#34;pipelineName&#34;]&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#177500>// div with id
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>input</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input#pipelineNameSearchForm_customizeSearchInput&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#177500>// 带 css 伪类的，注意 这里 div &gt; button.tab___3x3nt 返回的还是一个嵌套元素（不是 element 数组），取嵌套元素的第二个（从 1 开始）
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>let</span> <span style=color:#000>btn</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;div &gt; button.tab___3x3nt:nth-child(2)&#39;</span>)
+</span></span></code></pre></div><h3 id=脚本执行时机>脚本执行时机</h3><p>什么时候执行用户脚本一般通过一些<code>load</code>事件注册，但是好像大部分事件注册都不如下面的脚本来得有效：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>function main(){
+</span></span><span style=display:flex><span>    if (
+</span></span><span style=display:flex><span>        document.readyState === &#34;complete&#34; &amp;&amp;
+</span></span><span style=display:flex><span>        document.querySelector(&#39;div &gt; button.tab___3x3nt:nth-child(2)&#39;)
+</span></span><span style=display:flex><span>    ) {
+</span></span><span style=display:flex><span>        // your script 
+</span></span><span style=display:flex><span>    } else {
+</span></span><span style=display:flex><span>        console.log(`document unready, try later`);
+</span></span><span style=display:flex><span>        setTimeout(main, 500);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=input-事件和回车事件>input 事件和回车事件</h3><p>由于现在的网站都是通过 react 或者 vue 开发的，input 默认的 input/change 事件被屏蔽了，直接修改 input 的 value 并不会真的修改输入框的值（只是输入框展示变化了）。所以需要通过 event 触发 input 事件。回车事件（KeyboardEvent）也类似：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#a90d91>let</span> <span style=color:#000>input</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input[name=&#34;pipelineName&#34;]&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#000>input</span>.<span style=color:#000>value</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;NewProject&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>let</span> <span style=color:#000>ev</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>Event</span>(<span style=color:#c41a16>&#34;input&#34;</span>, { <span style=color:#000>bubbles</span><span style=color:#000>:</span> <span style=color:#a90d91>true</span>, <span style=color:#000>cancelable</span><span style=color:#000>:</span> <span style=color:#a90d91>false</span> });
+</span></span><span style=display:flex><span><span style=color:#000>input</span>.<span style=color:#000>dispatchEvent</span>(<span style=color:#000>ev</span>);
+</span></span></code></pre></div><h3 id=异步方法处理循环动作>异步方法处理循环动作</h3><p>由于 js 是单线程异步的，对于那种需要等待返回再执行下一次循环的场景需要特殊处理。<br>假设场景如下：向一个 input 输入一个项目名称，搜索后等待网页更新，检查搜索结果的 div，勾选第一个 checkbox，然后再输入下一个项目名称搜索，如此循环。每次循环需要等网页更新勾选完成后才能触发下一次搜索，否则搜索结果就被覆盖了。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span>(<span style=color:#a90d91>function</span> () {
+</span></span><span style=display:flex><span>  <span style=color:#c41a16>&#34;use strict&#34;</span>;
+</span></span><span style=display:flex><span>  <span style=color:#000>main</span>();
+</span></span><span style=display:flex><span>})();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>async</span> <span style=color:#a90d91>function</span> <span style=color:#000>main</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>if</span> (
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>document</span>.<span style=color:#000>readyState</span> <span style=color:#000>===</span> <span style=color:#c41a16>&#34;complete&#34;</span> <span style=color:#000>&amp;&amp;</span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input[name=&#34;pipelineName&#34;]&#39;</span>)) {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>let</span> <span style=color:#000>element</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(
+</span></span><span style=display:flex><span>      <span style=color:#c41a16>&#34;div.page-title.highlight &gt; span.text-right&#34;</span>
+</span></span><span style=display:flex><span>    );
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>let</span> <span style=color:#000>button</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>createElement</span>(<span style=color:#c41a16>&#34;button&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#000>button</span>.<span style=color:#000>id</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;copyButton&#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#000>button</span>.<span style=color:#000>textContent</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;从剪切板复制&#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#000>element</span>.<span style=color:#000>parentNode</span>.<span style=color:#000>insertBefore</span>(<span style=color:#000>button</span>, <span style=color:#000>element</span>);
+</span></span><span style=display:flex><span>    <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`button added`</span>);
+</span></span><span style=display:flex><span>    <span style=color:#000>button</span>.<span style=color:#000>addEventListener</span>(<span style=color:#c41a16>&#34;click&#34;</span>, <span style=color:#000>checkFromClipboard</span>);
+</span></span><span style=display:flex><span>  } <span style=color:#a90d91>else</span> {
+</span></span><span style=display:flex><span>    <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`document unready, try later in 500ms`</span>);
+</span></span><span style=display:flex><span>    <span style=color:#000>setTimeout</span>(<span style=color:#000>main</span>, <span style=color:#1c01ce>5000</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>async</span> <span style=color:#a90d91>function</span> <span style=color:#000>checkFromClipboard</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>input</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input[name=&#34;pipelineName&#34;]&#39;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>text</span> <span style=color:#000>=</span> <span style=color:#a90d91>await</span> <span style=color:#000>navigator</span>.<span style=color:#000>clipboard</span>.<span style=color:#000>readText</span>();
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>const</span> <span style=color:#000>lines</span> <span style=color:#000>=</span> <span style=color:#000>text</span>.<span style=color:#000>split</span>(<span style=color:#c41a16>&#34;\n&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`lines </span><span style=color:#c41a16>${</span><span style=color:#000>lines</span><span style=color:#c41a16>}</span><span style=color:#c41a16>`</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>for</span> (<span style=color:#a90d91>const</span> <span style=color:#000>line</span> <span style=color:#a90d91>of</span> <span style=color:#000>lines</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>await</span> <span style=color:#000>checkTheBox</span>(<span style=color:#000>input</span>, <span style=color:#000>line</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>async</span> <span style=color:#a90d91>function</span> <span style=color:#000>checkTheBox</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>return</span> <span style=color:#a90d91>new</span> <span style=color:#a90d91>Promise</span>((<span style=color:#000>resolve</span>) =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#000>inputThenSearch</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>);
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>const</span> <span style=color:#000>checkInterval</span> <span style=color:#000>=</span> <span style=color:#000>setInterval</span>(() =&gt; {
+</span></span><span style=display:flex><span>      <span style=color:#a90d91>let</span> <span style=color:#000>checkbox</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#34;re-checkbox &gt; label &gt; input&#34;</span>);
+</span></span><span style=display:flex><span>      <span style=color:#a90d91>if</span> (<span style=color:#000>checkbox</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#000>checkbox</span>.<span style=color:#000>click</span>();
+</span></span><span style=display:flex><span>        <span style=color:#000>clearInterval</span>(<span style=color:#000>checkInterval</span>);
+</span></span><span style=display:flex><span>        <span style=color:#000>resolve</span>(); <span style=color:#177500>// 这里是关键~~~
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>      }
+</span></span><span style=display:flex><span>    }, <span style=color:#1c01ce>400</span>);
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>inputThenSearch</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#000>input</span>.<span style=color:#000>value</span> <span style=color:#000>=</span> <span style=color:#000>value</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>ev</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>Event</span>(<span style=color:#c41a16>&#34;input&#34;</span>, { <span style=color:#000>bubbles</span><span style=color:#000>:</span> <span style=color:#a90d91>true</span>, <span style=color:#000>cancelable</span><span style=color:#000>:</span> <span style=color:#a90d91>false</span> });
+</span></span><span style=display:flex><span>  <span style=color:#000>input</span>.<span style=color:#000>dispatchEvent</span>(<span style=color:#000>ev</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>event</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>KeyboardEvent</span>(<span style=color:#c41a16>&#34;keydown&#34;</span>, {
+</span></span><span style=display:flex><span>    <span style=color:#000>key</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;Enter&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#000>code</span><span style=color:#000>:</span> <span style=color:#c41a16>&#34;Enter&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#000>keyCode</span><span style=color:#000>:</span> <span style=color:#1c01ce>13</span>,
+</span></span><span style=display:flex><span>    <span style=color:#000>which</span><span style=color:#000>:</span> <span style=color:#1c01ce>13</span>,
+</span></span><span style=display:flex><span>    <span style=color:#000>bubbles</span><span style=color:#000>:</span> <span style=color:#a90d91>true</span>,
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#000>input</span>.<span style=color:#000>focus</span>();
+</span></span><span style=display:flex><span>  <span style=color:#000>input</span>.<span style=color:#000>dispatchEvent</span>(<span style=color:#000>event</span>);
+</span></span><span style=display:flex><span>  <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>&#34;keydown dispatched&#34;</span>);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><nav class="post-nav fullwidth"><span class=post-nav-pre></span>
+<span class=post-nav-next><a href=../../post/puppeteer-config-notes/>在 CI 环境配置 puppeteer 以及 bun 的使用</a> <i class="i-mdi-chevron-double-right icon"></i></span></nav></div><footer class=small><script src=//cdn.jsdelivr.net/npm/@xiee/utils/js/fix-toc.min.js defer></script><link rel=stylesheet href=//cdn.jsdelivr.net/gh/rstudio/markdown/inst/resources/prism-xcode.css><script src=//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js defer></script><script src=//cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js defer></script><script src=//cdn.jsdelivr.net/npm/@xiee/utils/js/copy-button.min.js defer></script><script src=//cdn.jsdelivr.net/npm/@xiee/utils/js/key-buttons.min.js defer></script><script src=//cdn.jsdelivr.net/npm/@xiee/utils/js/heading-anchor.min.js defer></script><script src=//cdn.jsdelivr.net/npm/@xiee/utils/js/external-link.min.js defer></script><script src=//cdn.jsdelivr.net/npm/@xiee/utils/js/ol-id.min.js defer></script><script src=//cdn.jsdelivr.net/npm/@xiee/utils/js/fullwidth.min.js defer></script><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2024</span>
+<span class=menu-bottom><a href=../../categories/>分类</a> <a href=../../tags/>标签</a>
+<a href=../../post/index.xml type=application/rss+xml title="RSS feed">订阅</a>
+<a href=#>回到顶部</a></span></p></footer></body></html>
