@@ -68,61 +68,72 @@
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#a90d91>let</span> <span style=color:#000>ev</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>Event</span>(<span style=color:#c41a16>&#34;input&#34;</span>, { <span style=color:#000>bubbles</span><span style=color:#000>:</span> <span style=color:#a90d91>true</span>, <span style=color:#000>cancelable</span><span style=color:#000>:</span> <span style=color:#a90d91>false</span> });
 </span></span><span style=display:flex><span><span style=color:#000>input</span>.<span style=color:#000>dispatchEvent</span>(<span style=color:#000>ev</span>);
-</span></span></code></pre></div><h3 id=异步方法处理循环动作>异步方法处理循环动作</h3><p>由于 js 是单线程异步的，对于那种需要等待返回再执行下一次循环的场景需要特殊处理。<br>假设场景如下：向一个 input 输入一个项目名称，搜索后等待网页更新，检查搜索结果的 div，勾选第一个 checkbox，然后再输入下一个项目名称搜索，如此循环。每次循环需要等网页更新勾选完成后才能触发下一次搜索，否则搜索结果就被覆盖了。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span>(<span style=color:#a90d91>function</span> () {
+</span></span></code></pre></div><h3 id=异步方法处理循环动作>异步方法处理循环动作</h3><p>由于 js 是单线程异步的，对于那种需要等待返回再执行下一次循环的场景需要特殊处理。<br>假设场景如下：向一个 input 输入一个项目名称，搜索后等待网页更新，检查搜索结果的 div，勾选第一个 checkbox，然后再输入下一个项目名称搜索，如此循环。每次循环需要等网页更新勾选完成后才能触发下一次搜索，否则搜索结果就被覆盖了。<br>下面是一个完整示例：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span>
+</span></span><span style=display:flex><span>(() =&gt; {
 </span></span><span style=display:flex><span>  <span style=color:#c41a16>&#34;use strict&#34;</span>;
 </span></span><span style=display:flex><span>  <span style=color:#000>main</span>();
 </span></span><span style=display:flex><span>})();
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#a90d91>async</span> <span style=color:#a90d91>function</span> <span style=color:#000>main</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a90d91>if</span> (
-</span></span><span style=display:flex><span>    <span style=color:#a90d91>document</span>.<span style=color:#000>readyState</span> <span style=color:#000>===</span> <span style=color:#c41a16>&#34;complete&#34;</span> <span style=color:#000>&amp;&amp;</span>
-</span></span><span style=display:flex><span>    <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input[name=&#34;pipelineName&#34;]&#39;</span>)) {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#a90d91>let</span> <span style=color:#000>element</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(
-</span></span><span style=display:flex><span>      <span style=color:#c41a16>&#34;div.page-title.highlight &gt; span.text-right&#34;</span>
-</span></span><span style=display:flex><span>    );
-</span></span><span style=display:flex><span>    <span style=color:#a90d91>let</span> <span style=color:#000>button</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>createElement</span>(<span style=color:#c41a16>&#34;button&#34;</span>);
-</span></span><span style=display:flex><span>    <span style=color:#000>button</span>.<span style=color:#000>id</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;copyButton&#34;</span>;
-</span></span><span style=display:flex><span>    <span style=color:#000>button</span>.<span style=color:#000>textContent</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;从剪切板复制&#34;</span>;
-</span></span><span style=display:flex><span>    <span style=color:#000>element</span>.<span style=color:#000>parentNode</span>.<span style=color:#000>insertBefore</span>(<span style=color:#000>button</span>, <span style=color:#000>element</span>);
-</span></span><span style=display:flex><span>    <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`button added`</span>);
-</span></span><span style=display:flex><span>    <span style=color:#000>button</span>.<span style=color:#000>addEventListener</span>(<span style=color:#c41a16>&#34;click&#34;</span>, <span style=color:#000>checkFromClipboard</span>);
-</span></span><span style=display:flex><span>  } <span style=color:#a90d91>else</span> {
-</span></span><span style=display:flex><span>    <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`document unready, try later in 500ms`</span>);
-</span></span><span style=display:flex><span>    <span style=color:#000>setTimeout</span>(<span style=color:#000>main</span>, <span style=color:#1c01ce>5000</span>);
-</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>await</span> <span style=color:#000>waitForDocReady</span>();
+</span></span><span style=display:flex><span>  <span style=color:#000>addCopyBtn</span>();
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a90d91>async</span> <span style=color:#a90d91>function</span> <span style=color:#000>checkFromClipboard</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>input</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input[name=&#34;pipelineName&#34;]&#39;</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>text</span> <span style=color:#000>=</span> <span style=color:#a90d91>await</span> <span style=color:#000>navigator</span>.<span style=color:#000>clipboard</span>.<span style=color:#000>readText</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a90d91>const</span> <span style=color:#000>lines</span> <span style=color:#000>=</span> <span style=color:#000>text</span>.<span style=color:#000>split</span>(<span style=color:#c41a16>&#34;\n&#34;</span>);
-</span></span><span style=display:flex><span>  <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`lines </span><span style=color:#c41a16>${</span><span style=color:#000>lines</span><span style=color:#c41a16>}</span><span style=color:#c41a16>`</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a90d91>for</span> (<span style=color:#a90d91>const</span> <span style=color:#000>line</span> <span style=color:#a90d91>of</span> <span style=color:#000>lines</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#177500>// 等待 resolve() 执行才会继续下一行
-</span></span></span><span style=display:flex><span><span style=color:#177500></span>    <span style=color:#a90d91>await</span> <span style=color:#000>checkTheBox</span>(<span style=color:#000>input</span>, <span style=color:#000>line</span>);
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a90d91>async</span> <span style=color:#a90d91>function</span> <span style=color:#000>checkTheBox</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>) {
+</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>waitForDocReady</span>() {
 </span></span><span style=display:flex><span>  <span style=color:#a90d91>return</span> <span style=color:#a90d91>new</span> <span style=color:#a90d91>Promise</span>((<span style=color:#000>resolve</span>) =&gt; {
-</span></span><span style=display:flex><span>    <span style=color:#000>inputThenSearch</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>);
-</span></span><span style=display:flex><span>    
-</span></span><span style=display:flex><span>    <span style=color:#a90d91>const</span> <span style=color:#000>checkInterval</span> <span style=color:#000>=</span> <span style=color:#000>setInterval</span>(() =&gt; {
-</span></span><span style=display:flex><span>      <span style=color:#a90d91>let</span> <span style=color:#000>checkbox</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#34;re-checkbox &gt; label &gt; input&#34;</span>);
-</span></span><span style=display:flex><span>      <span style=color:#a90d91>if</span> (<span style=color:#000>checkbox</span>) {
-</span></span><span style=display:flex><span>        <span style=color:#000>checkbox</span>.<span style=color:#000>click</span>();
-</span></span><span style=display:flex><span>        <span style=color:#177500>// 轮循检查实现方式
-</span></span></span><span style=display:flex><span><span style=color:#177500></span>        <span style=color:#000>clearInterval</span>(<span style=color:#000>checkInterval</span>);
-</span></span><span style=display:flex><span>        <span style=color:#177500>// 这里是关键，利用 Promise + resolve 信号 + await 实现同步等待的效果。
-</span></span></span><span style=display:flex><span><span style=color:#177500></span>        <span style=color:#000>resolve</span>(); 
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>const</span> <span style=color:#000>docReadyInterval</span> <span style=color:#000>=</span> <span style=color:#000>setInterval</span>(() =&gt; {
+</span></span><span style=display:flex><span>      <span style=color:#a90d91>if</span> (
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>document</span>.<span style=color:#000>readyState</span> <span style=color:#000>===</span> <span style=color:#c41a16>&#34;complete&#34;</span> <span style=color:#000>&amp;&amp;</span>
+</span></span><span style=display:flex><span>        <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input[name=&#34;pipelineName&#34;]&#39;</span>)
+</span></span><span style=display:flex><span>      ) {
+</span></span><span style=display:flex><span>        <span style=color:#000>clearInterval</span>(<span style=color:#000>docReadyInterval</span>);
+</span></span><span style=display:flex><span>        <span style=color:#000>resolve</span>();
 </span></span><span style=display:flex><span>      }
 </span></span><span style=display:flex><span>    }, <span style=color:#1c01ce>400</span>);
 </span></span><span style=display:flex><span>  });
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>inputThenSearch</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>) {
+</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>addCopyBtn</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>button</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>createElement</span>(<span style=color:#c41a16>&#34;button&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#000>button</span>.<span style=color:#000>id</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;copyButton&#34;</span>;
+</span></span><span style=display:flex><span>  <span style=color:#000>button</span>.<span style=color:#000>textContent</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#34;从剪切板复制&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>element</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(
+</span></span><span style=display:flex><span>    <span style=color:#c41a16>&#34;div.page-title.highlight &gt; span.text-right&#34;</span>
+</span></span><span style=display:flex><span>  );
+</span></span><span style=display:flex><span>  <span style=color:#000>element</span>.<span style=color:#000>parentNode</span>.<span style=color:#000>insertBefore</span>(<span style=color:#000>button</span>, <span style=color:#000>element</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#000>button</span>.<span style=color:#000>addEventListener</span>(<span style=color:#c41a16>&#34;click&#34;</span>, <span style=color:#000>copyBtnHandler</span>);
+</span></span><span style=display:flex><span>  <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`button added`</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>async</span> <span style=color:#a90d91>function</span> <span style=color:#000>copyBtnHandler</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>input</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#39;input[name=&#34;pipelineName&#34;]&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>text</span> <span style=color:#000>=</span> <span style=color:#a90d91>await</span> <span style=color:#000>navigator</span>.<span style=color:#000>clipboard</span>.<span style=color:#000>readText</span>();
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>const</span> <span style=color:#000>lines</span> <span style=color:#000>=</span> <span style=color:#000>text</span>.<span style=color:#000>split</span>(<span style=color:#c41a16>&#34;\n&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#000>console</span>.<span style=color:#000>log</span>(<span style=color:#c41a16>`lines </span><span style=color:#c41a16>${</span><span style=color:#000>lines</span><span style=color:#c41a16>}</span><span style=color:#c41a16>`</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>for</span> (<span style=color:#a90d91>const</span> <span style=color:#000>value</span> <span style=color:#a90d91>of</span> <span style=color:#000>lines</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>await</span> <span style=color:#000>searchAndCheck</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>async</span> <span style=color:#a90d91>function</span> <span style=color:#000>searchAndCheck</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>) {
+</span></span><span style=display:flex><span>  <span style=color:#a90d91>return</span> <span style=color:#a90d91>new</span> <span style=color:#a90d91>Promise</span>((<span style=color:#000>resolve</span>) =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#000>searchByInput</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a90d91>const</span> <span style=color:#000>checkInterval</span> <span style=color:#000>=</span> <span style=color:#000>setInterval</span>(() =&gt; {
+</span></span><span style=display:flex><span>      <span style=color:#a90d91>let</span> <span style=color:#000>checkbox</span> <span style=color:#000>=</span> <span style=color:#a90d91>document</span>.<span style=color:#000>querySelector</span>(<span style=color:#c41a16>&#34;re-checkbox &gt; label &gt; input&#34;</span>);
+</span></span><span style=display:flex><span>      <span style=color:#a90d91>if</span> (<span style=color:#000>checkbox</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#000>checkbox</span>.<span style=color:#000>click</span>();
+</span></span><span style=display:flex><span>        <span style=color:#000>clearInterval</span>(<span style=color:#000>checkInterval</span>);
+</span></span><span style=display:flex><span>        <span style=color:#000>resolve</span>();<span style=color:#177500>//这里很巧妙
+</span></span></span><span style=display:flex><span><span style=color:#177500></span>      }
+</span></span><span style=display:flex><span>    }, <span style=color:#1c01ce>400</span>);
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>searchByInput</span>(<span style=color:#000>input</span>, <span style=color:#000>value</span>) {
 </span></span><span style=display:flex><span>  <span style=color:#000>input</span>.<span style=color:#000>value</span> <span style=color:#000>=</span> <span style=color:#000>value</span>;
 </span></span><span style=display:flex><span>  <span style=color:#a90d91>let</span> <span style=color:#000>ev</span> <span style=color:#000>=</span> <span style=color:#a90d91>new</span> <span style=color:#000>Event</span>(<span style=color:#c41a16>&#34;input&#34;</span>, { <span style=color:#000>bubbles</span><span style=color:#000>:</span> <span style=color:#a90d91>true</span>, <span style=color:#000>cancelable</span><span style=color:#000>:</span> <span style=color:#a90d91>false</span> });
 </span></span><span style=display:flex><span>  <span style=color:#000>input</span>.<span style=color:#000>dispatchEvent</span>(<span style=color:#000>ev</span>);
