@@ -5,8 +5,7 @@
 &lt;h2 id="factorybean">FactoryBean&lt;/h2>
 &lt;p>一句话就是 FactoryBean 用于返回其他对象实例的，而不是自身类型的实例。&lt;/p></description></item><item><title>Spring Cache Notes</title><link>https://zhimoe.github.io/post/draft/spring-cache-notes/</link><pubDate>Thu, 18 Apr 2019 09:42:12 +0800</pubDate><guid>https://zhimoe.github.io/post/draft/spring-cache-notes/</guid><description>&lt;p>spring 的缓存一些技巧和陷阱&lt;/p></description></item><item><title>Spring Boot Notes</title><link>https://zhimoe.github.io/post/spring-boot-notes/</link><pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-boot-notes/</guid><description>&lt;p>一些容易忘记的 spring boot 知识要点。&lt;/p>
 &lt;blockquote>
-&lt;p>注意，.yaml 和.yml 文件没任何区别。&lt;/p>
-&lt;/blockquote>
+&lt;p>注意，.yaml 和.yml 文件没任何区别。&lt;/p>&lt;/blockquote>
 &lt;h2 id="配置">配置&lt;/h2>
 &lt;h2 id="springbootapplication-注解">SpringBootApplication 注解&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">@SpringBootApplication&lt;/span>

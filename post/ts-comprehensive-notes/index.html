@@ -387,7 +387,7 @@
 </span></span></span><span style=display:flex><span><span style=color:#177500>// Function using type parameters
 </span></span></span><span style=display:flex><span><span style=color:#177500></span>&lt;<span style=color:#000>T</span>&gt;(<span style=color:#000>items</span>: <span style=color:#a90d91>T</span>[], <span style=color:#000>callback</span><span style=color:#000>:</span> (<span style=color:#000>item</span>: <span style=color:#a90d91>T</span>) <span style=color:#000>=&gt;</span> <span style=color:#000>T</span>)<span style=color:#000>:</span> <span style=color:#000>T</span>[]
 </span></span><span style=display:flex><span><span style=color:#177500>// Interface with multiple types  
-</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>interface</span> <span style=color:#000>Pair</span>&lt;<span style=color:#000>T1</span><span style=color:#000>,</span> <span style=color:#836c28>T2</span>&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>interface</span> <span style=color:#000>Pair</span>&lt;<span style=color:#000>T1</span>, <span style=color:#836c28>T2</span>&gt; {
 </span></span><span style=display:flex><span>    <span style=color:#000>first</span>: <span style=color:#a90d91>T1</span>;
 </span></span><span style=display:flex><span>    <span style=color:#000>second</span>: <span style=color:#a90d91>T2</span>;
 </span></span><span style=display:flex><span>}
@@ -400,7 +400,7 @@
 </span></span><span style=display:flex><span><span style=color:#177500>// Generic tuples
 </span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>type</span> <span style=color:#000>Arr</span> <span style=color:#000>=</span> <span style=color:#a90d91>readonly</span> <span style=color:#a90d91>any</span>[];
 </span></span><span style=display:flex><span> 
-</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>concat</span>&lt;<span style=color:#000>U</span> <span style=color:#836c28>extends</span> <span style=color:#836c28>Arr</span><span style=color:#000>,</span> <span style=color:#836c28>V</span> <span style=color:#836c28>extends</span> <span style=color:#836c28>Arr</span>&gt;(<span style=color:#000>a</span>: <span style=color:#a90d91>U</span>, <span style=color:#000>b</span>: <span style=color:#a90d91>V</span>)<span style=color:#000>:</span>
+</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>concat</span>&lt;<span style=color:#000>U</span> <span style=color:#836c28>extends</span> <span style=color:#836c28>Arr</span>, <span style=color:#836c28>V</span> <span style=color:#836c28>extends</span> <span style=color:#836c28>Arr</span>&gt;(<span style=color:#000>a</span>: <span style=color:#a90d91>U</span>, <span style=color:#000>b</span>: <span style=color:#a90d91>V</span>)<span style=color:#000>:</span>
 </span></span><span style=display:flex><span>[...<span style=color:#000>U</span>, ...<span style=color:#000>V</span>] { <span style=color:#a90d91>return</span> [...<span style=color:#000>a</span>, ...<span style=color:#000>b</span>] }
 </span></span><span style=display:flex><span> 
 </span></span><span style=display:flex><span><span style=color:#a90d91>const</span> <span style=color:#000>strictResult</span> <span style=color:#000>=</span> <span style=color:#000>concat</span>([<span style=color:#1c01ce>1</span>, <span style=color:#1c01ce>2</span>] <span style=color:#a90d91>as</span> <span style=color:#a90d91>const</span>, [<span style=color:#c41a16>&#39;3&#39;</span>, <span style=color:#c41a16>&#39;4&#39;</span>] <span style=color:#a90d91>as</span> <span style=color:#a90d91>const</span>);
@@ -414,7 +414,7 @@
 </span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>type</span> <span style=color:#000>Point</span> <span style=color:#000>=</span> { <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>, <span style=color:#000>y</span>: <span style=color:#a90d91>number</span> };
 </span></span><span style=display:flex><span><span style=color:#a90d91>let</span> <span style=color:#000>pointProp</span>: <span style=color:#a90d91>keyof</span> <span style=color:#000>Point</span> <span style=color:#000>=</span> <span style=color:#c41a16>&#39;x&#39;</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>getProp</span>&lt;<span style=color:#000>T</span><span style=color:#000>,</span> <span style=color:#836c28>K</span> <span style=color:#836c28>extends</span> <span style=color:#836c28>keyof</span> <span style=color:#836c28>T</span>&gt;(
+</span></span><span style=display:flex><span><span style=color:#a90d91>function</span> <span style=color:#000>getProp</span>&lt;<span style=color:#000>T</span>, <span style=color:#836c28>K</span> <span style=color:#836c28>extends</span> <span style=color:#836c28>keyof</span> <span style=color:#836c28>T</span>&gt;(
 </span></span><span style=display:flex><span>    <span style=color:#000>val</span>: <span style=color:#a90d91>T</span>,
 </span></span><span style=display:flex><span>    <span style=color:#000>propName</span>: <span style=color:#a90d91>K</span>
 </span></span><span style=display:flex><span>
@@ -472,12 +472,12 @@
 </span></span></span><span style=display:flex><span><span style=color:#177500></span>{ <span style=color:#000>x</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>y</span>: <span style=color:#a90d91>number</span>; <span style=color:#000>z</span>: <span style=color:#a90d91>number</span>; }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#177500>// Exclude  
-</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>type</span> <span style=color:#000>Excluded</span> <span style=color:#000>=</span> <span style=color:#000>Exclude</span>&lt;<span style=color:#000>string</span> <span style=color:#000>|</span> <span style=color:#836c28>number</span><span style=color:#000>,</span> <span style=color:#836c28>string</span>&gt;;
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>type</span> <span style=color:#000>Excluded</span> <span style=color:#000>=</span> <span style=color:#000>Exclude</span>&lt;<span style=color:#000>string</span> <span style=color:#000>|</span> <span style=color:#836c28>number</span>, <span style=color:#836c28>string</span>&gt;;
 </span></span><span style=display:flex><span><span style=color:#177500>// is equivalent to
 </span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>number</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#177500>// Extract  
-</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>type</span> <span style=color:#000>Extracted</span> <span style=color:#000>=</span> <span style=color:#000>Extract</span>&lt;<span style=color:#000>string</span> <span style=color:#000>|</span> <span style=color:#836c28>number</span><span style=color:#000>,</span> <span style=color:#836c28>string</span>&gt;;
+</span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>type</span> <span style=color:#000>Extracted</span> <span style=color:#000>=</span> <span style=color:#000>Extract</span>&lt;<span style=color:#000>string</span> <span style=color:#000>|</span> <span style=color:#836c28>number</span>, <span style=color:#836c28>string</span>&gt;;
 </span></span><span style=display:flex><span><span style=color:#177500>// is equivalent to
 </span></span></span><span style=display:flex><span><span style=color:#177500></span><span style=color:#a90d91>string</span>
 </span></span><span style=display:flex><span>

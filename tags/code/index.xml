@@ -147,8 +147,7 @@ source:&lt;a href="https://gtmetrix.com/blog/how-to-optimize-images-a-practical-
 &lt;li>&lt;input disabled="" type="checkbox"> recover&lt;/li>
 &lt;/ul></description></item><item><title>Spring Cache Notes</title><link>https://zhimoe.github.io/post/draft/spring-cache-notes/</link><pubDate>Thu, 18 Apr 2019 09:42:12 +0800</pubDate><guid>https://zhimoe.github.io/post/draft/spring-cache-notes/</guid><description>&lt;p>spring 的缓存一些技巧和陷阱&lt;/p></description></item><item><title>Spring Boot Notes</title><link>https://zhimoe.github.io/post/spring-boot-notes/</link><pubDate>Sun, 14 Apr 2019 18:33:22 +0800</pubDate><guid>https://zhimoe.github.io/post/spring-boot-notes/</guid><description>&lt;p>一些容易忘记的 spring boot 知识要点。&lt;/p>
 &lt;blockquote>
-&lt;p>注意，.yaml 和.yml 文件没任何区别。&lt;/p>
-&lt;/blockquote>
+&lt;p>注意，.yaml 和.yml 文件没任何区别。&lt;/p>&lt;/blockquote>
 &lt;h2 id="配置">配置&lt;/h2>
 &lt;h2 id="springbootapplication-注解">SpringBootApplication 注解&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">@SpringBootApplication&lt;/span>
@@ -216,8 +215,7 @@ source:&lt;a href="https://gtmetrix.com/blog/how-to-optimize-images-a-practical-
 &lt;li>&lt;input checked="" disabled="" type="checkbox"> 在 wsl 使用 docker&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>以下内容中 &lt;code>wsl&lt;/code>和&lt;code>ubuntu&lt;/code>含义相同，&lt;code>console&lt;/code>和&lt;code>命令行&lt;/code>含义相同。&lt;/p>
-&lt;/blockquote></description></item><item><title>Neo4j 入门</title><link>https://zhimoe.github.io/post/neo4j-intro/</link><pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/neo4j-intro/</guid><description>&lt;h3 id="neo4j-图数据库介绍">neo4j 图数据库介绍&lt;/h3>
+&lt;p>以下内容中 &lt;code>wsl&lt;/code>和&lt;code>ubuntu&lt;/code>含义相同，&lt;code>console&lt;/code>和&lt;code>命令行&lt;/code>含义相同。&lt;/p>&lt;/blockquote></description></item><item><title>Neo4j 入门</title><link>https://zhimoe.github.io/post/neo4j-intro/</link><pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/post/neo4j-intro/</guid><description>&lt;h3 id="neo4j-图数据库介绍">neo4j 图数据库介绍&lt;/h3>
 &lt;p>neo4j 是目前排名最高的图数据库，分为商业和社区版本，社区版只支持单机，而且查询的运行时 (runtime) 不同 (cypher runtime:interpreted(社区版),slotted(企业版)). 数据库排名可以在 &lt;a href="https://db-engines.com/en/ranking/graph+dbms">https://db-engines.com/en/ranking/graph+dbms&lt;/a> 查看，下一代最有前景的开源图数据库是 dgraph，目前还积极开发中，生产未就绪，等他的 Java 客户端再成熟一点可以试用。&lt;/p>
 &lt;p>neo4j 数据库中只有 3 个概念：Node, Relationship, Properties. Node 表示实体类别，使用 Label 区分，例如一个节点可以有 Person/Father 等多个标签，Relationship 即关系，雇佣关系，父子关系，投资关系，交易关系等。Node 和 Relationship 都可以有 Proerties，属性自身不分是属于节点还是属于关系，例如 Person 可以有属性 name，关系也可以用属性 name.你可以在 neo4j browser 左侧看到当前数据库的所有 Node Label,Relationship Type,Properties.&lt;/p></description></item><item><title>Jupyter Notebook Install New Package[翻译]</title><link>https://zhimoe.github.io/post/python-jupyter-notebook-install-new-package/</link><pubDate>Thu, 01 Nov 2018 19:04:32 +0800</pubDate><guid>https://zhimoe.github.io/post/python-jupyter-notebook-install-new-package/</guid><description>&lt;h3 id="notes">notes&lt;/h3>
 &lt;p>在 pycharm 写代码中如果使用到新的 package，例如&lt;code>numpy&lt;/code>,只需要输入&lt;code>import numpy&lt;/code> 然后 ALT+ENTER 在提示中选择 install new package 即可。&lt;/p>
