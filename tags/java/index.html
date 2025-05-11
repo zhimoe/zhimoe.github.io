@@ -4,52 +4,24 @@
 <span><a href=../../categories/%E7%BF%BB%E8%AF%91/>翻译</a></span>
 <span><a href=../../categories/%E9%9A%8F%E6%83%B3/>随想</a></span>
 <span><a href=../../search/>搜索</a></span></div></nav><h1 class=title>Java<span class="small subtitle"> | <a href=../../tags/>tags</a></span></h1><div class="main archive"><h2 class=toc-line><a href=../../post/java-vector-api-with-es/>Java Vector Api 和 Elasticsearch 性能提升</a><span class=dots></span>
-<span class=date>23-11-18</span></h2><blockquote>OpenJDK project panama 中一个重点功能就是 vector api，可以显著提升矩阵计算密集型程序的性能，例如在图形计算、机器学习、大规模计算（Lucene）等。
-[&mldr;] CPU 的每个处理单元一次运算只能计算一个值，这个值成为标量值（scalar value）。处理单元需要 0 或多个周期（即 CPU 频率）完成一次操作计算。现代 CPU 包含多个核心，每个核心 &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-5-virtualthread/>Java 并发 5-虚拟线程（VirtualThread）</a><span class=dots></span>
-<span class=date>23-09-13</span></h2><blockquote>回调和反应式编程都可以实现系统吞吐量有效提升，但是这两种编程模式存在阅读、编写、调试困难的问题，所以实际项目中还是以线程池为主。但是 java 的线程是平台线程，可以理解为并行线程数最多等于 CPU 核数 (macOS 查看核数sysctl hw.physicalcpu hw.logicalcpu)，并且存在线程内存占用大，上下文切换耗时高问题，所以在高并发请求中表现不如前面两种模式（spring &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-lambda/>Java 8 Lambda 笔记</a><span class=dots></span>
-<span class=date>20-08-06</span></h2><blockquote>Java 是 OOP 语言，使用对象封装。由于函数不是一等公民，无法在方法中传递函数/方法。在 Java 8 之前，使用匿名类表示行为：
-[&mldr;] // 监听器接口 public interface ActionListener { void actionPerformed(ActionEvent e); } // &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-4-threadpool-hierachy/>Java 并发 4-线程池与执行器</a><span class=dots></span>
-<span class=date>18-06-13</span></h2><blockquote>java thread pool class hierarchy Executor (java.util.concurrent) |---ExecutorService (java.util.concurrent) |---AbstractExecutorService (java.util.concurrent) | |---ForkJoinPool (java.util.concurrent) &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-how-test-void-method-with-parameter/>Java 单元测试如何 Mock 有参数的 void 方法</a><span class=dots></span>
-<span class=date>17-04-23</span></h2><blockquote>测试中如果遇到被测试方法调用 void 方法，在 Mockito 中改如何处理？
-[&mldr;] 假设有如下的服务依赖：
-[&mldr;] @Service class DepositSvc { @Autowired private AccountSvc accSvc; public List&lt;Account> dps(String user) { &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-generic/>Java Generic</a><span class=dots></span>
-<span class=date>16-05-01</span></h2><blockquote></blockquote><h2 class=toc-line><a href=../../post/java-io-basic/>Java Stream Write Reader notes</a><span class=dots></span>
-<span class=date>16-03-01</span></h2><blockquote>上次总结了 java 中不同读写文件的方法，这次总结一下基本的 IO 流。网上的总结大部分是以 Stream 和 Reader、Writer 来介绍的。这次从封装层次来介绍。
-[&mldr;] [&mldr;] 首先理解计算机文件格式都是二进制数据，例如文本，图片，视频，音频等，但是文本非常特殊，所以单独有一类封装设计。
-对于非文本类的文件，一般是读取字节 (stream)，而对于文本类文 &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-file-in-v678/>Java 6/7/8 中文件读写</a><span class=dots></span>
-<span class=date>16-02-01</span></h2><blockquote>如何在 Java 中读写文件，这里保留 Java6/7 版本，但是你永远不应该使用它们，优先使用 Path、Files、Paths 三个类。
-资料：Reading and writing text files
-[&mldr;] 不要用 File 对象，改用 Path 对象，该对象既表示文件路径，也表示文件文本（应该认为文件也是路径的一部分），对于以前的 File， &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-aop-example/>Java AOP 举例</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>Java AOP: 找到一个最简单的介绍，不怎么想翻译，直接看原文吧：
-A Simple Introduction to AOP
-[&mldr;] 注意，使用注解的方式声明切面时，增加了一个空方法去定义 Pointcut，即：
-[&mldr;] class Test{ @Pointcut("execution(* &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-1-thread/>Java 并发 1-线程与任务</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>线程：任务执行的环境，可以理解为传送带。注意任务必须在线程上面被执行。
-[&mldr;] 任务：Runnable/Callable 的实现，可以理解为传送带上面的工序。
-[&mldr;] 资源：线程在处理任务具体工序时需要使用的对象，例如信号量，锁，并发集合。需要注意，任务本身描述也是一个对象（即 Runnable/Callable 子类实例），所以在 Runnable &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-2-control/>Java 并发 2-同步与锁</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>这三个方法是在 class Object 上面的，也就是所有对象都有这个方法。这里对象就是上一篇中类比的资源，可以当成一个信号量。
-Object.wait() to suspend a thread（等价于sem.wait()）。将当前线程暂停并释放当前对象锁，直到其他线程调用了当前对象的 notify/notifyAll 方法。
-Object.notify() to wake a thread &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-3-threadlocal/>Java 并发 3-ThreadLocal</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>在通常的业务开发中，ThreadLocal 有两种典型的使用场景。
-[&mldr;] 场景 1，ThreadLocal 用作保存每个线程独享的对象，为每个线程都创建一个副本，这样每个线程都可以修改自己所拥有的副本，而不会影响其他线程的副本，确保了线程安全。
-[&mldr;] 场景 2，ThreadLocal 用作每个线程内需要独立保存信息，以便供其他方法更方便地获取该信息的场景。每个线程获 &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-proxy/>Java 动态代理</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>Java 动态代理机制分析及扩展，更深入的一篇：java 设计模式 - 动态代理模式
-[&mldr;] 相比 静态代理，动态代理具有更强的 灵活性，因为它不用在我们设计实现的时候就指定 某一个代理类来代理哪一个被代理对象，我们可以把这种指定延迟到程序运行时由 JVM 来实现。
-[&mldr;] 动态代理类接口，接口规范方法。
-[&mldr;] package &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-annotation-processing/>Java 注解和注解处理器</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>注解是 jdk1.5 出现的，但是自定义处理注解的功能是 1.6 才有的。Element 等关于注解源码抽象的支持类都是 1.6 出现的。
-[&mldr;] annotation processing integrated into javac compiler since Java 6.0, known as pluggable annotation processing. compiler &mldr;</blockquote><h2 class=toc-line><a href=../../post/java--and-equal/>Java-==-and-equals</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>samples code and notes on java == and equals</blockquote><h2 class=toc-line><a href=../../post/java-class-load-super-method-call/>Java类加载过程和子类重写父类方法的调用</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>最近非常火的一道携程面试题 Java
-[&mldr;] public class Base { private String baseName = "base"; public Base() { callName(); } public void callName() { System.out.println(baseName); } static class Sub &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-singleton/>单例模式和序列化</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><blockquote>Java 单例模式的各种写法和序列化
-参考资料
-[&mldr;] public class Singleton { private static Singleton instance = null private Singleton (){} public static Singleton getInstance() { if(instance == null) instance = new &mldr;</blockquote><h2 class=toc-line><a href=../../post/how-do-newbie-learn-spring/>Java 新手如何学习 SpringMVC 框架</a><span class=dots></span>
-<span class=date>15-08-21</span></h2><blockquote>知乎回答备份，原答案写于 15 年
-6,404 人赞同了该回答
-[&mldr;] 4 年之后感觉自己当年写的真好。O(∩_∩)O 哈哈~
-[&mldr;] 评论里面有人写到现在都用 spring boot，个人觉得 boot 只要搞清楚一个 autoconfig 就懂了小半了。
-[&mldr;] 学习框架的同时还是需要针对性地深入学习一些 Java 基础，例如反 &mldr;</blockquote></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
+<span class=date>23-11-18</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-5-virtualthread/>Java 并发 5-虚拟线程（VirtualThread）</a><span class=dots></span>
+<span class=date>23-09-13</span></h2><h2 class=toc-line><a href=../../post/java-lambda/>Java 8 Lambda 笔记</a><span class=dots></span>
+<span class=date>20-08-06</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-4-threadpool-hierachy/>Java 并发 4-线程池与执行器</a><span class=dots></span>
+<span class=date>18-06-13</span></h2><h2 class=toc-line><a href=../../post/java-how-test-void-method-with-parameter/>Java 单元测试如何 Mock 有参数的 void 方法</a><span class=dots></span>
+<span class=date>17-04-23</span></h2><h2 class=toc-line><a href=../../post/java-generic/>Java Generic</a><span class=dots></span>
+<span class=date>16-05-01</span></h2><h2 class=toc-line><a href=../../post/java-io-basic/>Java Stream Write Reader notes</a><span class=dots></span>
+<span class=date>16-03-01</span></h2><h2 class=toc-line><a href=../../post/java-file-in-v678/>Java 6/7/8 中文件读写</a><span class=dots></span>
+<span class=date>16-02-01</span></h2><h2 class=toc-line><a href=../../post/java-aop-example/>Java AOP 举例</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-1-thread/>Java 并发 1-线程与任务</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-2-control/>Java 并发 2-同步与锁</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-3-threadlocal/>Java 并发 3-ThreadLocal</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-proxy/>Java 动态代理</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-annotation-processing/>Java 注解和注解处理器</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java--and-equal/>Java-==-and-equals</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-class-load-super-method-call/>Java类加载过程和子类重写父类方法的调用</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-singleton/>单例模式和序列化</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/how-do-newbie-learn-spring/>Java 新手如何学习 SpringMVC 框架</a><span class=dots></span>
+<span class=date>15-08-21</span></h2></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
 <span class=menu-bottom><a href=../../categories/>分类</a> <a href=../../tags/>标签</a>
 <a href=../../tags/index.xml type=application/rss+xml title="RSS feed">订阅</a>
 <a href=#>回到顶部</a></span></p></footer></body></html>
