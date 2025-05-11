@@ -4,11 +4,23 @@
 <span><a href=../../categories/%E7%BF%BB%E8%AF%91/>翻译</a></span>
 <span><a href=../../categories/%E9%9A%8F%E6%83%B3/>随想</a></span>
 <span><a href=../../search/>搜索</a></span></div></nav><h1 class=title>Spring<span class="small subtitle"> | <a href=../../tags/>tags</a></span></h1><div class="main archive"><h2 class=toc-line><a href=../../post/dockerfile-best-practices/>SpringBoot & Rust 应用的 Dockerfile 优化</a><span class=dots></span>
-<span class=date>20-02-03</span></h2><h2 class=toc-line><a href=../../post/spring-factorybean-contextaware/>Spring FactoryBean and ContextAware</a><span class=dots></span>
-<span class=date>19-05-16</span></h2><h2 class=toc-line><a href=../../post/draft/spring-cache-notes/>Spring Cache Notes</a><span class=dots></span>
-<span class=date>19-04-18</span></h2><h2 class=toc-line><a href=../../post/spring-boot-notes/>Spring Boot Notes</a><span class=dots></span>
-<span class=date>19-04-14</span></h2><h2 class=toc-line><a href=../../post/how-do-newbie-learn-spring/>Java 新手如何学习 SpringMVC 框架</a><span class=dots></span>
-<span class=date>15-08-21</span></h2></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
+<span class=date>20-02-03</span></h2><blockquote>记录 spring boot 和 rust 项目的 Dockerfile 的最佳实践。
+[&mldr;] spring.io 提供了一个 boot 应用的Dockerfile指导。
+不过有个问题，这个 Dockerfile 使用的 maven 是项目源码里面 copy 过去的。在一般企业项目中这么做显然不规范，直接使用 maven 基础镜像更合理。
+[&mldr;] Dockerfile &mldr;</blockquote><h2 class=toc-line><a href=../../post/spring-factorybean-contextaware/>Spring FactoryBean and ContextAware</a><span class=dots></span>
+<span class=date>19-05-16</span></h2><blockquote>理解 Spring 的 FactoryBean 和 ContextAware 接口。
+[&mldr;] 一句话就是 FactoryBean 用于返回其他对象实例的，而不是自身类型的实例。
+[&mldr;] public class Tool { private int id; // standard constructors, getters and setters } public &mldr;</blockquote><h2 class=toc-line><a href=../../post/draft/spring-cache-notes/>Spring Cache Notes</a><span class=dots></span>
+<span class=date>19-04-18</span></h2><blockquote>spring 的缓存一些技巧和陷阱
+[&mldr;] spring 的缓存</blockquote><h2 class=toc-line><a href=../../post/spring-boot-notes/>Spring Boot Notes</a><span class=dots></span>
+<span class=date>19-04-14</span></h2><blockquote>一些容易忘记的 spring boot 知识要点。
+[&mldr;] 注意，.yaml 和.yml 文件没任何区别。
+[&mldr;] @SpringBootApplication // &lt;=等价=> @Configuration @ComponentScan @EnableAutoConfiguration 自动配置 spring 的自动配置依赖以下注解： &mldr;</blockquote><h2 class=toc-line><a href=../../post/how-do-newbie-learn-spring/>Java 新手如何学习 SpringMVC 框架</a><span class=dots></span>
+<span class=date>15-08-21</span></h2><blockquote>知乎回答备份，原答案写于 15 年
+6,404 人赞同了该回答
+[&mldr;] 4 年之后感觉自己当年写的真好。O(∩_∩)O 哈哈~
+[&mldr;] 评论里面有人写到现在都用 spring boot，个人觉得 boot 只要搞清楚一个 autoconfig 就懂了小半了。
+[&mldr;] 学习框架的同时还是需要针对性地深入学习一些 Java 基础，例如反 &mldr;</blockquote></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
 <span class=menu-bottom><a href=../../categories/>分类</a> <a href=../../tags/>标签</a>
 <a href=../../tags/index.xml type=application/rss+xml title="RSS feed">订阅</a>
 <a href=#>回到顶部</a></span></p></footer></body></html>
