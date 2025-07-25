@@ -4,11 +4,17 @@
 <span><a href=../../categories/%E7%BF%BB%E8%AF%91/>翻译</a></span>
 <span><a href=../../categories/%E9%9A%8F%E6%83%B3/>随想</a></span>
 <span><a href=../../search/>搜索</a></span></div></nav><h1 class=title>并发<span class="small subtitle"> | <a href=../../tags/>tags</a></span></h1><div class="main archive"><h2 class=toc-line><a href=../../post/java-concurrency-5-virtualthread/>Java 并发 5-虚拟线程（VirtualThread）</a><span class=dots></span>
-<span class=date>23-09-13</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-4-threadpool-hierachy/>Java 并发 4-线程池与执行器</a><span class=dots></span>
-<span class=date>18-06-13</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-1-thread/>Java 并发 1-线程与任务</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-2-control/>Java 并发 2-同步与锁</a><span class=dots></span>
-<span class=date>16-01-01</span></h2><h2 class=toc-line><a href=../../post/java-concurrency-3-threadlocal/>Java 并发 3-ThreadLocal</a><span class=dots></span>
-<span class=date>16-01-01</span></h2></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
+<span class=date>23-09-13</span></h2><blockquote>回调和反应式编程都可以实现系统吞吐量有效提升，但是这两种编程模式存在阅读、编写、调试困难的问题，所以实际项目中还是以线程池为主。但是 java 的线程是平台线程，可以理解为并行线程数最多等于 CPU 核数 (macOS 查看核数sysctl hw.physicalcpu hw.logicalcpu)，并且存在线程内存占用大，上下文切换耗时高问题，所以在高并发请求中表现不如前面两种模式（spring &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-4-threadpool-hierachy/>Java 并发 4-线程池与执行器</a><span class=dots></span>
+<span class=date>18-06-13</span></h2><blockquote>java thread pool class hierarchy Executor (java.util.concurrent) |---ExecutorService (java.util.concurrent) |---AbstractExecutorService (java.util.concurrent) | |---ForkJoinPool (java.util.concurrent) &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-1-thread/>Java 并发 1-线程与任务</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><blockquote>线程：任务执行的环境，可以理解为传送带。注意任务必须在线程上面被执行。
+[&mldr;] 任务：Runnable/Callable 的实现，可以理解为传送带上面的工序。
+[&mldr;] 资源：线程在处理任务具体工序时需要使用的对象，例如信号量，锁，并发集合。需要注意，任务本身描述也是一个对象（即 Runnable/Callable 子类实例），所以在 Runnable &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-2-control/>Java 并发 2-同步与锁</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><blockquote>这三个方法是在 class Object 上面的，也就是所有对象都有这个方法。这里对象就是上一篇中类比的资源，可以当成一个信号量。
+Object.wait() to suspend a thread（等价于sem.wait()）。将当前线程暂停并释放当前对象锁，直到其他线程调用了当前对象的 notify/notifyAll 方法。
+Object.notify() to wake a thread &mldr;</blockquote><h2 class=toc-line><a href=../../post/java-concurrency-3-threadlocal/>Java 并发 3-ThreadLocal</a><span class=dots></span>
+<span class=date>16-01-01</span></h2><blockquote>在通常的业务开发中，ThreadLocal 有两种典型的使用场景。
+[&mldr;] 场景 1，ThreadLocal 用作保存每个线程独享的对象，为每个线程都创建一个副本，这样每个线程都可以修改自己所拥有的副本，而不会影响其他线程的副本，确保了线程安全。
+[&mldr;] 场景 2，ThreadLocal 用作每个线程内需要独立保存信息，以便供其他方法更方便地获取该信息的场景。每个线程获 &mldr;</blockquote></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
 <span class=menu-bottom><a href=../../categories/>分类</a> <a href=../../tags/>标签</a>
 <a href=../../tags/index.xml type=application/rss+xml title="RSS feed">订阅</a>
 <a href=#>回到顶部</a></span></p></footer></body></html>

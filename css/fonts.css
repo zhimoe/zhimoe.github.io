@@ -22,7 +22,7 @@ body {
 }
 
 code {
-    font-family: Bloomberg, "SF Mono", FangSongCode, Consolas, ui-monospace, monospace, stkaiti, kaiti, sans-serif;
+    font-family: CommitMono, "SF Mono", Consolas, ui-monospace, monospace, ArgonHan, stkaiti, kaiti, sans-serif;
     font-size: 85%;
 }
 

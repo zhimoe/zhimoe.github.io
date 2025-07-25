@@ -4,13 +4,28 @@
 <span><a href=../../categories/%E7%BF%BB%E8%AF%91/>翻译</a></span>
 <span><a href=../../categories/%E9%9A%8F%E6%83%B3/>随想</a></span>
 <span><a href=../../search/>搜索</a></span></div></nav><h1 class=title>Rust<span class="small subtitle"> | <a href=../../tags/>tags</a></span></h1><div class="main archive"><h2 class=toc-line><a href=../../post/rust-error-handling-notes/>Rust Error Handling Notes</a><span class=dots></span>
-<span class=date>23-07-22</span></h2><h2 class=toc-line><a href=../../post/rust-standard-library-traits-tour/>Tour of Rusts Standard Library Traits[翻译]</a><span class=dots></span>
-<span class=date>21-04-11</span></h2><h2 class=toc-line><a href=../../post/rust-associated-types/>Associated Type in Rust</a><span class=dots></span>
-<span class=date>20-09-20</span></h2><h2 class=toc-line><a href=../../post/python-mdict-web/>基于 MDX 的 web 词典</a><span class=dots></span>
-<span class=date>20-07-01</span></h2><h2 class=toc-line><a href=../../post/rust-ownership-lifetimes/>Rust Ownerships Lifetimes 教程</a><span class=dots></span>
-<span class=date>20-02-22</span></h2><h2 class=toc-line><a href=../../post/dockerfile-best-practices/>SpringBoot & Rust 应用的 Dockerfile 优化</a><span class=dots></span>
-<span class=date>20-02-03</span></h2><h2 class=toc-line><a href=../../post/rust-packages-crates-mod/>Rust Packages Crates Mod Notes</a><span class=dots></span>
-<span class=date>20-01-12</span></h2></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
+<span class=date>23-07-22</span></h2><blockquote>初学 rust 的时候，上手写代码总是遇到很多不一样的 rust 的Result类型，不同 crate 中的函数返回的Result&lt;T, E>的E都不一样，刚开始都是unwrap或者expect来处理。如果使用try!或者?的话总是编译不通过，还是对 Error 转换和处理不熟练。
+[&mldr;] 在一个方法中，调用不同的函数会返回不同的 error 类型，需要你将这些类型转换成 &mldr;</blockquote><h2 class=toc-line><a href=../../post/rust-standard-library-traits-tour/>Tour of Rusts Standard Library Traits[翻译]</a><span class=dots></span>
+<span class=date>21-04-11</span></h2><blockquote>关于 rust trait 非常好的介绍，比 rust book 详细，系统。
+[&mldr;] Have you ever wondered what&rsquo;s the difference between:
+[&mldr;] Or ever asked yourself the questions:
+[&mldr;] Well then this is the article &mldr;</blockquote><h2 class=toc-line><a href=../../post/rust-associated-types/>Associated Type in Rust</a><span class=dots></span>
+<span class=date>20-09-20</span></h2><blockquote>Associated Type and generic diff in rust
+[&mldr;] a type Foo = Bar outside is just type alias. most used in generic type.
+[&mldr;] like: type Thunk = Box&lt;dyn Fn() + Send + 'static>; &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-mdict-web/>基于 MDX 的 web 词典</a><span class=dots></span>
+<span class=date>20-07-01</span></h2><blockquote>Mdict 项目是一个糅合了 MDX 词典、ES 例句搜索和 AI 模型翻译的多源搜索功能 Web 词典。特别适合部署在内网中学习使用或者给孩子学习使用。
+python 版本增加了一个机器学习模型翻译.rust 版本也有模型，但是还没来得及加。
+[&mldr;] mdict-py 源码
+[&mldr;] Mdict 项目是一个糅合了 MDX 词典、ES 例句搜索和 AI 模型翻译的多源搜索 &mldr;</blockquote><h2 class=toc-line><a href=../../post/rust-ownership-lifetimes/>Rust Ownerships Lifetimes 教程</a><span class=dots></span>
+<span class=date>20-02-22</span></h2><blockquote>some notes on rust ownership,reference,string and &str, and lifetimes
+[&hellip;] //heap and stack: stack is store data that known,fixed size. //memory manager keeping track of what parts of code &mldr;</blockquote><h2 class=toc-line><a href=../../post/dockerfile-best-practices/>SpringBoot & Rust 应用的 Dockerfile 优化</a><span class=dots></span>
+<span class=date>20-02-03</span></h2><blockquote>记录 spring boot 和 rust 项目的 Dockerfile 的最佳实践。
+[&mldr;] spring.io 提供了一个 boot 应用的Dockerfile指导。
+不过有个问题，这个 Dockerfile 使用的 maven 是项目源码里面 copy 过去的。在一般企业项目中这么做显然不规范，直接使用 maven 基础镜像更合理。
+[&mldr;] Dockerfile &mldr;</blockquote><h2 class=toc-line><a href=../../post/rust-packages-crates-mod/>Rust Packages Crates Mod Notes</a><span class=dots></span>
+<span class=date>20-01-12</span></h2><blockquote>初学 rust 对于项目的 package 和 crate 的关系，module 和文件的关系有点理不清。做了一点笔记。
+[&mldr;] A Cargo.toml is a package. and must have a package name, defined in [package] table:
+[&mldr;] [package] name = &mldr;</blockquote></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
 <span class=menu-bottom><a href=../../categories/>分类</a> <a href=../../tags/>标签</a>
 <a href=../../tags/index.xml type=application/rss+xml title="RSS feed">订阅</a>
 <a href=#>回到顶部</a></span></p></footer></body></html>
