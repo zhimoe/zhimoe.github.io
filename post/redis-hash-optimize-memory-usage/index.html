@@ -1,5 +1,4 @@
-<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>使用 Redis 的 hash 优化内存使用[翻译] - 香取海</title>
-<meta property="og:title" content="使用 Redis 的 hash 优化内存使用[翻译] - 香取海"><meta name=twitter:card content="summary"><meta property="description" content="使用 redis 的 hash 优化内存使用
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>使用 Redis 的 hash 优化内存使用[翻译] - 香取海</title><meta property="og:title" content="使用 Redis 的 hash 优化内存使用[翻译] - 香取海"><meta name=twitter:card content="summary"><meta property="description" content="使用 redis 的 hash 优化内存使用
 [&amp;hellip;] 场景：有 3 亿张图片放在对象存储 (DELL ECS/AMAZON EC2) 上面，现在需要保存图片的 id-&amp;gt;用户 id 的映射。最直接的思路是：
 [&amp;hellip;] set &amp;#34;media:1155220&amp;#34; &amp;#34;user1&amp;#34; set &amp;#34;media:1155221&amp;#34; &amp;hellip;"><meta property="og:description" content="使用 redis 的 hash 优化内存使用
 [&amp;hellip;] 场景：有 3 亿张图片放在对象存储 (DELL ECS/AMAZON EC2) 上面，现在需要保存图片的 id-&amp;gt;用户 id 的映射。最直接的思路是：

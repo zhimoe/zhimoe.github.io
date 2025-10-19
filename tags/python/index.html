@@ -1,40 +1,21 @@
-<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Python - 香取海</title>
-<meta property="og:title" content="Python - 香取海"><meta name=twitter:card content="summary"><link href=../../tags/python/index.xml rel=alternate type=application/rss+xml title=香取海><link rel=stylesheet href=../../css/style.css><link rel=stylesheet href=../../css/fonts.css><link rel=stylesheet href=../../css/custom.css><link rel=icon type=image/png href=../../img/logo.png><link rel=apple-touch-icon href=../../img/logo.png><link rel=apple-touch-icon-precomposed href=../../img/logo.png><script async src="https://www.googletagmanager.com/gtag/js?id=G-CJJZFN2DZR"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CJJZFN2DZR")</script></head><script>const apiEndpoint="https://pageview.zhimoe.workers.dev/write",payload={url:document.location.href,title:document.title,referrer:window.frames.top.document.referrer};fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`,{mode:"no-cors"}).catch(console.log)</script><body class=tags><div class=crop-h></div><div class=crop-v></div><div class=crop-c></div><nav class="nav-top small"><div class=logo><a href=../../>香取海</a></div><div class=menu><span><a href=../../post/>博客</a></span>
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Python - 香取海</title><meta property="og:title" content="Python - 香取海"><meta name=twitter:card content="summary"><link href=../../tags/python/index.xml rel=alternate type=application/rss+xml title=香取海><link rel=stylesheet href=../../css/style.css><link rel=stylesheet href=../../css/fonts.css><link rel=stylesheet href=../../css/custom.css><link rel=icon type=image/png href=../../img/logo.png><link rel=apple-touch-icon href=../../img/logo.png><link rel=apple-touch-icon-precomposed href=../../img/logo.png><script async src="https://www.googletagmanager.com/gtag/js?id=G-CJJZFN2DZR"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-CJJZFN2DZR")</script></head><script>const apiEndpoint="https://pageview.zhimoe.workers.dev/write",payload={url:document.location.href,title:document.title,referrer:window.frames.top.document.referrer};fetch(`${apiEndpoint}?${new URLSearchParams(payload)}`,{mode:"no-cors"}).catch(console.log)</script><body class=tags><div class=crop-h></div><div class=crop-v></div><div class=crop-c></div><nav class="nav-top small"><div class=logo><a href=../../>香取海</a></div><div class=menu><span><a href=../../post/>博客</a></span>
 <span><a href=../../categories/%E7%BC%96%E7%A8%8B/>编程</a></span>
 <span><a href=../../categories/%E7%BF%BB%E8%AF%91/>翻译</a></span>
 <span><a href=../../categories/%E9%9A%8F%E6%83%B3/>随想</a></span>
 <span><a href=../../search/>搜索</a></span></div></nav><h1 class=title>Python<span class="small subtitle"> | <a href=../../tags/>tags</a></span></h1><div class="main archive"><h2 class=toc-line><a href=../../post/fastapi-dev-tips/>Fastapi 开发笔记</a><span class=dots></span>
-<span class=date>25-09-14</span></h2><blockquote>最近使用一个 fastapi 后端应用遇到一些性能问题，借助 GPT 和文档学习了一些框架底层知识，记录以便温习。
-[&mldr;] fastapi 可以无缝支持 sync 和 async 两种风格的 api，但是选择哪种风格有很多需要考量。sync api 是通过anyio 在线程池里面执行，starlette(fastapi 底层 http web 组件）默认是开启 40 个线程池。所以单 &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-contextual-logging/>Python 结构化日志设置[翻译]</a><span class=dots></span>
-<span class=date>25-07-06</span></h2><blockquote>在日常开发中，python 项目常用的 log 方法就是 logger.info(f"xxx failed, {user=}, {filename=}"), 这样的日志包含一定的信息，在大多数情况下是够用的，但是在大型、可观测性要求较高的情况，还需要更多的上下文信息才能定位问题，例如，这个日志属于哪个请求，如果日志里面充满了相同用户的不同文件名称的日志，还是无法定位上一步某个关 &mldr;</blockquote><h2 class=toc-line><a href=../../post/pydantic-sqlalchemy-notes/>Pydantic v2 Sqlalchemy v2 项目开发总结</a><span class=dots></span>
-<span class=date>24-08-10</span></h2><blockquote>最近使用 fastapi pydantic(v2) sqlalchemy(v2) 写了一个两千行左右的 API 项目，这是第一次面向 class 写 python 项目，和以前使用 requests、pandas 写数据处理脚本有很大区别，特别是 sqlalchemy 第一次使用，看文档内容非常多，在和 pydantic 的 schema 相互转换遇到很多问题，所以做一个笔记。 &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-contextlib/>Python @contextmanager 的使用</a><span class=dots></span>
-<span class=date>23-11-05</span></h2><blockquote>日常开发中使用这个注解的情况比较少，今天发现其实有一个临时环境变量设置的使用方式。</blockquote><h2 class=toc-line><a href=../../post/python-async-programming/>Python 异步编程</a><span class=dots></span>
-<span class=date>23-09-24</span></h2><blockquote>异步编程很难，但却是最近十年所有编程语言在发力的方向。
-在面向 CPU 计算的场景下，多线程基本都能吃满 CPU 资源。但是在 IO 场景下，多线程并不能解决问题，大部分时间线程都在等待 IO 调用的返回。
-实际上 python 的官方教程里面并没有 async 编程的内容，而是在std lib doc 中网络编程章节介绍了 asyncio 这个 lib，实际上这也是异步编程的最佳使用场景。 &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-read-large-excel-file/>使用 OpenPyXL 读写 excel 大文件</a><span class=dots></span>
-<span class=date>23-05-07</span></h2><blockquote>使用 python OpenPyXL 读写 excel 大文件时，有专门的 read_only write-only 模式来提升读写效率。
-[&mldr;] from openpyxl import load_workbook wb = load_workbook(filename='large_file.xlsx', read_only=True) ws = &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-tips-for-impatient-dev/>Python Tips for Impatient Dev</a><span class=dots></span>
-<span class=date>22-01-31</span></h2><blockquote>py3.6 开始，推荐使用 f-string，不要使用 %s或者 "".format().如果接收用户输入，使用 Template 做安全校验。
-在 python f-string 中可以通过变量或者表达式后面加=实现打印变量名或者表达式：
-[&mldr;] print(f'{v=}') # 等价 print(f'v={v}') &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-spell-correct/>Python 如何实现一个拼写检查器[翻译]</a><span class=dots></span>
-<span class=date>20-10-25</span></h2><blockquote>谷歌 AI 负责人 norvig 在 07 年写的如何实现一个拼写纠正器的经典博文How to Write a Spelling Corrector.
-上面的链接已经是 16 年更新过了，程序也更新到了 python3.
-中文版的翻译 如何实现一个拼写纠正器 还是基于 07 年版本的。
-[&mldr;] 博文最有意思的地方是大牛记录了如何在飞机上面没有网络的条件下徒手写一个准确率超过 70% &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-mdict-web/>基于 MDX 的 web 词典</a><span class=dots></span>
-<span class=date>20-07-01</span></h2><blockquote>Mdict 项目是一个糅合了 MDX 词典、ES 例句搜索和 AI 模型翻译的多源搜索功能 Web 词典。特别适合部署在内网中学习使用或者给孩子学习使用。
-python 版本增加了一个机器学习模型翻译.rust 版本也有模型，但是还没来得及加。
-[&mldr;] mdict-py 源码
-[&mldr;] Mdict 项目是一个糅合了 MDX 词典、ES 例句搜索和 AI 模型翻译的多源搜索 &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-interview-questions/>Python 4 道笔试题</a><span class=dots></span>
-<span class=date>20-06-04</span></h2><blockquote>4 道常见的 python 面试题和解答，以及一些 python 陷阱的链接。
-[&mldr;] def change(v): v[1] = 4 return v a = [1, 2, 3] print(change(a)) print(a) 题目 2 def append1(x=[]): x.append(1) return x def now(n=time.time()): &mldr;</blockquote><h2 class=toc-line><a href=../../post/scala-python-file-encoding-escape/>Scala Python 文件读取跳过转义字符</a><span class=dots></span>
-<span class=date>20-06-04</span></h2><blockquote>在文件读取的时候，会遇到非法转义字符，导致文件按行读取失败。此时可以通过忽略转义字符来解决。本文记录了 scala 和 python 的方法。
-[&mldr;] 有 50G 的服务器日志，拆分为几千个 txt 文件，编码是 utf8，使用 scala 和 python 按行处理：
-[&mldr;] def main(args: Array[String]): Unit = { for &mldr;</blockquote><h2 class=toc-line><a href=../../post/python-matplotlib-chinese-garbled-solution/>Matplotlib 图例中文乱码解决方案</a><span class=dots></span>
-<span class=date>20-05-01</span></h2><blockquote>很久以前写的一个答案，四年来一直有人评论感谢，说只有我的方法是有效的。非常意外也很高兴。也放到博客中里备份吧。
-zhihu.com</blockquote><h2 class=toc-line><a href=../../post/python-jupyter-notebook-install-new-package/>Jupyter Notebook Install New Package[翻译]</a><span class=dots></span>
-<span class=date>18-11-01</span></h2><blockquote>在 pycharm 写代码中如果使用到新的 package，例如numpy,只需要输入import numpy 然后 ALT+ENTER 在提示中选择 install new package 即可。
-[&mldr;] 在 notebook 中，网上的教程都说是!pip install numpy. 但是这个可能有坑。究其原因是因为：
-[&mldr;] 通过 bash &mldr;</blockquote></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
+<span class=date>25-09-14</span></h2><h2 class=toc-line><a href=../../post/python-contextual-logging/>Python 结构化日志设置[翻译]</a><span class=dots></span>
+<span class=date>25-07-06</span></h2><h2 class=toc-line><a href=../../post/pydantic-sqlalchemy-notes/>Pydantic v2 Sqlalchemy v2 项目开发总结</a><span class=dots></span>
+<span class=date>24-08-10</span></h2><h2 class=toc-line><a href=../../post/python-contextlib/>Python @contextmanager 的使用</a><span class=dots></span>
+<span class=date>23-11-05</span></h2><h2 class=toc-line><a href=../../post/python-async-programming/>Python 异步编程</a><span class=dots></span>
+<span class=date>23-09-24</span></h2><h2 class=toc-line><a href=../../post/python-read-large-excel-file/>使用 OpenPyXL 读写 excel 大文件</a><span class=dots></span>
+<span class=date>23-05-07</span></h2><h2 class=toc-line><a href=../../post/python-tips-for-impatient-dev/>Python Tips for Impatient Dev</a><span class=dots></span>
+<span class=date>22-01-31</span></h2><h2 class=toc-line><a href=../../post/python-spell-correct/>Python 如何实现一个拼写检查器[翻译]</a><span class=dots></span>
+<span class=date>20-10-25</span></h2><h2 class=toc-line><a href=../../post/python-mdict-web/>基于 MDX 的 web 词典</a><span class=dots></span>
+<span class=date>20-07-01</span></h2><h2 class=toc-line><a href=../../post/python-interview-questions/>Python 4 道笔试题</a><span class=dots></span>
+<span class=date>20-06-04</span></h2><h2 class=toc-line><a href=../../post/scala-python-file-encoding-escape/>Scala Python 文件读取跳过转义字符</a><span class=dots></span>
+<span class=date>20-06-04</span></h2><h2 class=toc-line><a href=../../post/python-matplotlib-chinese-garbled-solution/>Matplotlib 图例中文乱码解决方案</a><span class=dots></span>
+<span class=date>20-05-01</span></h2><h2 class=toc-line><a href=../../post/python-jupyter-notebook-install-new-package/>Jupyter Notebook Install New Package[翻译]</a><span class=dots></span>
+<span class=date>18-11-01</span></h2></div><footer class=small><hr><p class=nav-bottom><span><a href=https://zhi.moe>xdh</a> © 2025</span>
 <span class=menu-bottom><a href=../../categories/>分类</a> <a href=../../tags/>标签</a>
 <a href=../../tags/index.xml type=application/rss+xml title="RSS feed">订阅</a>
 <a href=#>回到顶部</a></span></p></footer></body></html>

@@ -1,5 +1,4 @@
-<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Java Stream Write Reader notes - 香取海</title>
-<meta property="og:title" content="Java Stream Write Reader notes - 香取海"><meta name=twitter:card content="summary"><meta property="description" content="上次总结了 java 中不同读写文件的方法，这次总结一下基本的 IO 流。网上的总结大部分是以 Stream 和 Reader、Writer 来介绍的。这次从封装层次来介绍。
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Java Stream Write Reader notes - 香取海</title><meta property="og:title" content="Java Stream Write Reader notes - 香取海"><meta name=twitter:card content="summary"><meta property="description" content="上次总结了 java 中不同读写文件的方法，这次总结一下基本的 IO 流。网上的总结大部分是以 Stream 和 Reader、Writer 来介绍的。这次从封装层次来介绍。
 [&amp;hellip;] [&amp;hellip;] 首先理解计算机文件格式都是二进制数据，例如文本，图片，视频，音频等，但是文本非常特殊，所以单独有一类封装设计。
 对于非文本类的文件，一般是读取字节 (stream)，而对于文本类文 &amp;hellip;"><meta property="og:description" content="上次总结了 java 中不同读写文件的方法，这次总结一下基本的 IO 流。网上的总结大部分是以 Stream 和 Reader、Writer 来介绍的。这次从封装层次来介绍。
 [&amp;hellip;] [&amp;hellip;] 首先理解计算机文件格式都是二进制数据，例如文本，图片，视频，音频等，但是文本非常特殊，所以单独有一类封装设计。

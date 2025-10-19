@@ -1,5 +1,4 @@
-<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Java 并发 2-同步与锁 - 香取海</title>
-<meta property="og:title" content="Java 并发 2-同步与锁 - 香取海"><meta name=twitter:card content="summary"><meta property="description" content="这三个方法是在 class Object 上面的，也就是所有对象都有这个方法。这里对象就是上一篇中类比的资源，可以当成一个信号量。
+<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Java 并发 2-同步与锁 - 香取海</title><meta property="og:title" content="Java 并发 2-同步与锁 - 香取海"><meta name=twitter:card content="summary"><meta property="description" content="这三个方法是在 class Object 上面的，也就是所有对象都有这个方法。这里对象就是上一篇中类比的资源，可以当成一个信号量。
 Object.wait() to suspend a thread（等价于sem.wait()）。将当前线程暂停并释放当前对象锁，直到其他线程调用了当前对象的 notify/notifyAll 方法。
 Object.notify() to wake a thread &amp;hellip;"><meta property="og:description" content="这三个方法是在 class Object 上面的，也就是所有对象都有这个方法。这里对象就是上一篇中类比的资源，可以当成一个信号量。
 Object.wait() to suspend a thread（等价于sem.wait()）。将当前线程暂停并释放当前对象锁，直到其他线程调用了当前对象的 notify/notifyAll 方法。
