@@ -1,4 +1,5 @@
 :root {
+  text-autospace: normal;
   --body-width: 800px;
   --bg-body: white;
   --bg-block: #f9f9f9;
@@ -329,11 +330,11 @@ li li {
     padding: 3.5em 2.5em;
   }
 
-  /* 
+  /*
   .main {
     margin: auto;
     width: var(--text-width);
-  } 
+  }
   */
 
   pre,
