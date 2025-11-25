@@ -661,13 +661,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;4th Of July - Joanna
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Fastapi 开发笔记</title><link>https://zhimoe.github.io/post/fastapi-dev-tips/</link><pubDate>Sun, 14 Sep 2025 14:51:25 +0800</pubDate><guid>https://zhimoe.github.io/post/fastapi-dev-tips/</guid><description>&lt;p&gt;最近使用一个 fastapi 后端应用遇到一些性能问题，借助 GPT 和文档学习了一些框架底层知识，记录以便温习。&lt;/p&gt;</description></item><item><title>Python 结构化日志设置[翻译]</title><link>https://zhimoe.github.io/post/python-contextual-logging/</link><pubDate>Sun, 06 Jul 2025 16:27:38 +0800</pubDate><guid>https://zhimoe.github.io/post/python-contextual-logging/</guid><description>&lt;p&gt;在日常开发中，python 项目常用的 log 方法就是 &lt;code&gt;logger.info(f&amp;quot;xxx failed, {user=}, {filename=}&amp;quot;)&lt;/code&gt;, 这样的日志包含一定的信息，在大多数情况下是够用的，但是在大型、可观测性要求较高的情况，还需要更多的上下文信息才能定位问题，例如，这个日志属于哪个请求，如果日志里面充满了相同用户的不同文件名称的日志，还是无法定位上一步某个关键信息（缺乏关联）和这个日志属于同一个请求。这时候结构化日志就很有必要。&lt;/p&gt;</description></item><item><title>Golang 错误处理和日志</title><link>https://zhimoe.github.io/post/golang-error-handling-and-logging-notes/</link><pubDate>Sun, 11 May 2025 08:30:13 +0800</pubDate><guid>https://zhimoe.github.io/post/golang-error-handling-and-logging-notes/</guid><description>&lt;p&gt;Go 语言的错误处理和日志规范。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;大部分情况下包装 error 使用 %w，而不是%v，另外有了%w后 pkg/errors 这个包也需要了。&lt;/li&gt;
+&lt;li&gt;大部分情况下包装 error 使用 %w，而不是%v，另外有了%w后 pkg/errors 这个包（大部分情况）也需要了。&lt;/li&gt;
 &lt;li&gt;错误包装需要避免 failed to 这种前缀，只需要模块名：err 即可。参考 &lt;a href="https://github.com/uber-go/guide/blob/master/style.md#error-wrapping"&gt;uber-golang-style&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;错误包装可以添加额外的变量信息：return fmt.Errorf(&amp;ldquo;get user %q: %w&amp;rdquo;, id, err)&lt;/li&gt;
 &lt;li&gt;全局错误变量使用 Err 开头，例如 ErrBrokenLink = errors.New(&amp;ldquo;link is broken&amp;rdquo;)&lt;/li&gt;
 &lt;li&gt;如果是自定义错误 struct 类型 则使用 Error 结尾 type NotFoundError struct {}&lt;/li&gt;
 &lt;li&gt;logging 优先使用 slog 即可。&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Golang 编程初体验</title><link>https://zhimoe.github.io/post/golang-first-impressions/</link><pubDate>Mon, 05 May 2025 21:50:27 +0800</pubDate><guid>https://zhimoe.github.io/post/golang-first-impressions/</guid><description>&lt;p&gt;总结一下最近使用 golang 写了几个简单的工具和项目的初体验。总体感觉 golang 在语法设计上面非常糟糕，不喜欢，但是在运行时和标准库上面，确实解决了之前编程语言的很多痛点，所以目前 golang 在业务项目蚕食 Java 的地盘。但是 JVM + Kotlin 还是目前最好的业务技术栈，如果不需要计算性能的话，有了 typing 提示后 web 项目用 Python 也是很好的选择，千万不要信了 golang 那些不需要 ORM/使用标准库就够了/显式处理error才是最佳实践的鬼话。&lt;/p&gt;</description></item><item><title>Modern Javascript Features</title><link>https://zhimoe.github.io/post/js-nodejs-dev-notes/</link><pubDate>Sun, 12 Jan 2025 15:03:05 +0800</pubDate><guid>https://zhimoe.github.io/post/js-nodejs-dev-notes/</guid><description>&lt;p&gt;一些很甜的 JS 语法糖。&lt;/p&gt;</description></item><item><title>油猴脚本开发笔记</title><link>https://zhimoe.github.io/post/tampermonkey-dev-notes/</link><pubDate>Sat, 07 Sep 2024 13:11:44 +0800</pubDate><guid>https://zhimoe.github.io/post/tampermonkey-dev-notes/</guid><description>&lt;p&gt;以前都是用别人的油猴脚本，这次自己开发了一个自动化脚本，记录一些笔记。&lt;/p&gt;</description></item><item><title>在 CI 环境配置 puppeteer 以及 bun 的使用</title><link>https://zhimoe.github.io/post/puppeteer-config-notes/</link><pubDate>Sun, 11 Aug 2024 15:21:54 +0800</pubDate><guid>https://zhimoe.github.io/post/puppeteer-config-notes/</guid><description>&lt;p&gt;在流水线 CI-CD 环境中打包部署 puppeteer 服务的一些注意事项。&lt;/p&gt;</description></item><item><title>Pydantic v2 Sqlalchemy v2 项目开发总结</title><link>https://zhimoe.github.io/post/pydantic-sqlalchemy-notes/</link><pubDate>Sat, 10 Aug 2024 22:32:37 +0800</pubDate><guid>https://zhimoe.github.io/post/pydantic-sqlalchemy-notes/</guid><description>&lt;p&gt;最近使用 fastapi pydantic(v2) sqlalchemy(v2) 写了一个两千行左右的 API 项目，这是第一次面向 class 写 python 项目，和以前使用 requests、pandas 写数据处理脚本有很大区别，特别是 sqlalchemy 第一次使用，看文档内容非常多，在和 pydantic 的 schema 相互转换遇到很多问题，所以做一个笔记。&lt;/p&gt;</description></item><item><title>Java Vector Api 和 Elasticsearch 性能提升</title><link>https://zhimoe.github.io/post/java-vector-api-with-es/</link><pubDate>Sat, 18 Nov 2023 09:45:54 +0800</pubDate><guid>https://zhimoe.github.io/post/java-vector-api-with-es/</guid><description>&lt;p&gt;OpenJDK project panama 中一个重点功能就是 vector api，可以显著提升矩阵计算密集型程序的性能，例如在图形计算、机器学习、大规模计算（Lucene）等。&lt;/p&gt;</description></item><item><title>Python @contextmanager 的使用</title><link>https://zhimoe.github.io/post/python-contextlib/</link><pubDate>Sun, 05 Nov 2023 21:45:24 +0800</pubDate><guid>https://zhimoe.github.io/post/python-contextlib/</guid><description>&lt;p&gt;日常开发中使用这个注解的情况比较少，今天发现其实有一个临时环境变量设置的使用方式。&lt;/p&gt;
+&lt;/ul&gt;</description></item><item><title>Golang 编程初体验</title><link>https://zhimoe.github.io/post/golang-first-impressions/</link><pubDate>Mon, 05 May 2025 21:50:27 +0800</pubDate><guid>https://zhimoe.github.io/post/golang-first-impressions/</guid><description>&lt;p&gt;总结一下最近使用 golang 写了几个简单的工具和项目的初体验。总体感觉 golang 在语法设计上面非常糟糕，不喜欢，但是在运行时和标准库上面，确实解决了之前编程语言的很多痛点，所以目前 golang 在业务项目蚕食 Java 的地盘。但是 JVM + Kotlin 还是目前最好的业务技术栈，如果不需要计算性能的话，有了 typing 提示后简单的 web 项目用 Python 也是很好的选择，千万不要信了 golang 那些不需要 ORM/使用标准库就够了/显式处理error才是最佳实践的鬼话。&lt;/p&gt;</description></item><item><title>Modern Javascript Features</title><link>https://zhimoe.github.io/post/js-nodejs-dev-notes/</link><pubDate>Sun, 12 Jan 2025 15:03:05 +0800</pubDate><guid>https://zhimoe.github.io/post/js-nodejs-dev-notes/</guid><description>&lt;p&gt;一些很甜的 JS 语法糖。&lt;/p&gt;</description></item><item><title>油猴脚本开发笔记</title><link>https://zhimoe.github.io/post/tampermonkey-dev-notes/</link><pubDate>Sat, 07 Sep 2024 13:11:44 +0800</pubDate><guid>https://zhimoe.github.io/post/tampermonkey-dev-notes/</guid><description>&lt;p&gt;以前都是用别人的油猴脚本，这次自己开发了一个自动化脚本，记录一些笔记。&lt;/p&gt;</description></item><item><title>在 CI 环境配置 puppeteer 以及 bun 的使用</title><link>https://zhimoe.github.io/post/puppeteer-config-notes/</link><pubDate>Sun, 11 Aug 2024 15:21:54 +0800</pubDate><guid>https://zhimoe.github.io/post/puppeteer-config-notes/</guid><description>&lt;p&gt;在流水线 CI-CD 环境中打包部署 puppeteer 服务的一些注意事项。&lt;/p&gt;</description></item><item><title>Pydantic v2 Sqlalchemy v2 项目开发总结</title><link>https://zhimoe.github.io/post/pydantic-sqlalchemy-notes/</link><pubDate>Sat, 10 Aug 2024 22:32:37 +0800</pubDate><guid>https://zhimoe.github.io/post/pydantic-sqlalchemy-notes/</guid><description>&lt;p&gt;最近使用 fastapi pydantic(v2) sqlalchemy(v2) 写了一个两千行左右的 API 项目，这是第一次面向 class 写 python 项目，和以前使用 requests、pandas 写数据处理脚本有很大区别，特别是 sqlalchemy 第一次使用，看文档内容非常多，在和 pydantic 的 schema 相互转换遇到很多问题，所以做一个笔记。&lt;/p&gt;</description></item><item><title>Java Vector Api 和 Elasticsearch 性能提升</title><link>https://zhimoe.github.io/post/java-vector-api-with-es/</link><pubDate>Sat, 18 Nov 2023 09:45:54 +0800</pubDate><guid>https://zhimoe.github.io/post/java-vector-api-with-es/</guid><description>&lt;p&gt;OpenJDK project panama 中一个重点功能就是 vector api，可以显著提升矩阵计算密集型程序的性能，例如在图形计算、机器学习、大规模计算（Lucene）等。&lt;/p&gt;</description></item><item><title>Python @contextmanager 的使用</title><link>https://zhimoe.github.io/post/python-contextlib/</link><pubDate>Sun, 05 Nov 2023 21:45:24 +0800</pubDate><guid>https://zhimoe.github.io/post/python-contextlib/</guid><description>&lt;p&gt;日常开发中使用这个注解的情况比较少，今天发现其实有一个临时环境变量设置的使用方式。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#a90d91"&gt;with&lt;/span&gt; &lt;span style="color:#000"&gt;set_environ&lt;/span&gt;(&lt;span style="color:#000"&gt;env_name&lt;/span&gt;, &lt;span style="color:#000"&gt;value&lt;/span&gt;):
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#177500"&gt;# 使用后自动清除 env_name 变量&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#000"&gt;...&lt;/span&gt;
@@ -1051,111 +1051,6 @@ Files 是一个静态类，操作文件内容.Paths 是静态工具类，操作�
 
 &lt;/body&gt;
 
-&lt;/html&gt;</description></item><item><title/><link>https://zhimoe.github.io/rose/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/rose/</guid><description>&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-
-&lt;head&gt;
- &lt;title&gt;玫瑰&lt;/title&gt;
- &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
-&lt;/head&gt;
-
-&lt;body style="margin-left:10px;background-color:whitesmoke"&gt;
- &lt;div style="text-align: center"&gt;
- &lt;canvas id="c"&gt;&lt;/canvas&gt;
- &lt;p&gt;你是不是也觉得,&lt;/p&gt;
- &lt;p&gt;这里应该放一句情话&lt;/p&gt;
- &lt;/div&gt;
-
- &lt;script type="text/javascript"&gt;
- let canvas = document.getElementsByTagName('canvas')[0];
- let context = canvas.getContext('2d');
-
- let a = context;
- let b = document.body;
- let c = canvas;
-
- document.body.clientWidth;
- let zBuffer = [];
- let SIZE = 777;
- canvas.width = canvas.height = SIZE;
- let h = -350;
-
- function surface(a, b, c) {
- if (c &gt; 60) {
- return {
- x: Math.sin(a * 7) * (13 + 5 / (.2 + Math.pow(b * 4, 4))) - Math.sin(b) * 50,
- y: b * SIZE + 50,
- z: 625 + Math.cos(a * 7) * (13 + 5 / (.2 + Math.pow(b * 4, 4))) + b * 400,
- r: a * 1 - b / 2, g: a
- };
- }
-
- let A = a * 2 - 1;
- let B = b * 2 - 1;
-
- if (A * A + B * B &lt; 1) {
- if (c &gt; 37) {
- let j = c &amp; 1;
- let n = j ? 6 : 4;
- let o = .5 / (a + .01) + Math.cos(b * 125) * 3 - a * 300;
- let w = b * h;
- return {
- x: o * Math.cos(n) + w * Math.sin(n) + j * 610 - 390,
- y: o * Math.sin(n) - w * Math.cos(n) + 550 - j * 350,
- z: 1180 + Math.cos(B + A) * 99 - j * 300,
- r: .4 - a * .1 + Math.pow(1 - B * B, -h * 6) * .15 - a * b * .4 + Math.cos(a + b) / 5 + Math.pow(Math.cos((o * (a + 1) + (B &gt; 0 ? w : -w)) / 25), 30) * .1 * (1 - B * B), g: o / 1e3 + .7 - o * w * 3e-6
- };
- }
-
- if (c &gt; 32) {
- c = c * 1.16 - .15;
- let o = a * 45 - 20;
- let w = b * b * h;
- let z = o * Math.sin(c) + w * Math.cos(c) + 620;
- return {
- x: o * Math.cos(c) - w * Math.sin(c),
- y: 28 + Math.cos(B * .5) * 99 - b * b * b * 60 - z / 2 - h,
- z: z,
- r: (b * b * .3 + Math.pow((1 - (A * A)), 7) * .15 + .3) * b,
- g: b * .7
- };
- }
-
- let o = A * (2 - b) * (80 - c * 2);
- let w = 99 - Math.cos(A) * 120 - Math.cos(b) * (-h - c * 4.9) + Math.cos(Math.pow(1 - b, 7)) * 50 + c * 2;
- let z = o * Math.sin(c) + w * Math.cos(c) + 700;
- return {
- x: o * Math.cos(c) - w * Math.sin(c),
- y: B * 99 - Math.cos(Math.pow(b, 7)) * 50 - c / 3 - z / 1.35 + 450, z: z,
- r: (1 - b / 1.2) * .9 + a * .1,
- g: Math.pow((1 - b), 20) / 4 + .05
- };
- }
- }
-
- setInterval(function () {
- for (let i = 0; i &lt; 10000; i++) {
- let part = i % 46;
- let c = part / .74;
- let point = surface(Math.random(), Math.random(), c);
- if (point) {
- let z = point.z;
- let x = parseInt(point.x * SIZE / z - h);
- let y = parseInt(point.y * SIZE / z - h);
- let zBufferIndex = y * SIZE + x;
- if ((typeof zBuffer[zBufferIndex] === "undefined") || (zBuffer[zBufferIndex] &gt; z)) {
- zBuffer[zBufferIndex] = z;
- let r = -parseInt(point.r * h); let g = -parseInt(point.g * h);
- let b = -parseInt(point.r * point.r * -80);
- context.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
- context.fillRect(x, y, 1, 1);
- }
- }
- }
- }, 0);
-
- &lt;/script&gt;
-&lt;/body&gt;
 &lt;/html&gt;</description></item><item><title>搜索</title><link>https://zhimoe.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zhimoe.github.io/search/</guid><description>&lt;p&gt;Powered by &lt;code&gt;fuse.js&lt;/code&gt;. support search operators: &lt;code&gt;hello | world&lt;/code&gt; (or), &lt;code&gt;hello world&lt;/code&gt; (and), &lt;code&gt;&amp;quot;hello world&amp;quot;&lt;/code&gt;(exact phrase)&lt;/p&gt;
 &lt;style&gt;
 .main {
