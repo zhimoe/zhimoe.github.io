@@ -1,0 +1,30 @@
+# 香取海 (zhi.moe)
+
+> 一个关于编程、技术与生活的中文博客，由 zhimoe 维护。内容涵盖 Java、Scala、Python、Rust、TypeScript 等技术笔记，以及随想与翻译。
+
+## Links
+
+- [博客首页](https://zhi.moe/)
+- [文章列表](https://zhi.moe/post/)
+- [GitHub](https://github.com/zhimoe/)
+- [编程字体项目](https://github.com/zhimoe/programming-fonts)
+
+## About
+
+香取海（zhi.moe）是 zhimoe 的个人博客，创建于 2010 年左右，主要记录技术学习笔记、编程实践心得与生活随想。
+
+定居杭州，主要技术栈为 Java、TypeScript 和 Python，个人偏好 Scala、Rust、Zig 与 Clojure。博客文章以中文为主，部分为翻译。
+
+### 主要内容分类
+
+- **编程**：Java、Scala、Python、Rust、TypeScript、Node.js、Git、Docker、Elasticsearch、Redis、Neo4j 等技术笔记
+- **翻译**：国外技术文章的中文翻译
+- **随想**：生活感悟、读书随笔、技术思考
+
+### 特色系列
+
+- Java 并发系列（线程、控制、ThreadLocal、线程池、虚拟线程）
+- Scala 系列（集合、隐式、模式匹配、类型类、Scala3 新特性）
+- Rust 系列（所有权与生命周期、包与模块、关联类型、标准库 Trait、错误处理）
+- Python 系列（异步编程、上下文管理器、Pydantic、FastAPI、数据处理）
+- Git 系列（内部原理、使用技巧、detached HEAD）

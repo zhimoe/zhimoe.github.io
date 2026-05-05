@@ -1,0 +1,54 @@
+# 香取海 (zhi.moe) - 完整站点索引
+
+## 站点概览
+
+- **名称**：香取海
+- **域名**：https://zhi.moe
+- **作者**：zhimoe
+- **定位**：个人技术博客，记录编程学习笔记与生活随想
+- **语言**：中文为主，部分英文翻译
+- **主要技术方向**：Java、Scala、Python、Rust、TypeScript、Git、Docker、Elasticsearch
+- **创建时间**：2010 年左右
+- **GitHub**：https://github.com/zhimoe/
+- **编程字体项目**：https://github.com/zhimoe/programming-fonts
+
+## 内容分类
+
+### 编程
+
+| 文章 | 描述 |
+|------|------|
+| [Java 并发系列](https://zhi.moe/post/java-concurrency-1-thread/) | 线程基础、并发控制、ThreadLocal、线程池层级、虚拟线程 |
+| [Scala 系列](https://zhi.moe/post/scala-collection-tips/) | 集合技巧、隐式转换、模式匹配与匿名函数、类型类、统一访问原则、Scala3 缩进语法、Scala2 笔记、常用代码片段 |
+| [Rust 系列](https://zhi.moe/post/rust-ownership-lifetimes/) | 所有权与生命周期、包/模块/Crate、关联类型、标准库 Trait 巡礼、错误处理 |
+| [Python 系列](https://zhi.moe/post/python-async-programming/) | 异步编程、上下文管理器、拼写纠错、Matplotlib 中文乱码解决、Pydantic + SQLAlchemy、FastAPI 开发技巧、处理大 Excel 文件 |
+| [TypeScript / 前端](https://zhi.moe/post/ts-comprehensive-notes/) | TS 全面笔记、加速 Angular 构建、前端资源优化、Puppeteer 配置 |
+| [Git 系列](https://zhi.moe/post/git-internal/) | Git 内部原理、实用技巧、detached HEAD |
+| [Docker](https://zhi.moe/post/dockerfile-best-practices/) | Dockerfile 最佳实践、CMD 与 ENTRYPOINT 区别 |
+| [Elasticsearch](https://zhi.moe/post/elasticsearch-query-dsl/) | Query DSL、添加 zstd 压缩、Vector API |
+| [其他](https://zhi.moe/post/redis-hash-optimize-memory-usage/) | Redis Hash 内存优化、Neo4j 入门、Spark 基础、DevOps 成熟度模型 |
+
+### 翻译
+
+| 文章 | 来源 |
+|------|------|
+| [开源与心理健康](https://zhi.moe/post/open-source-mental-health/) | 技术文化 |
+
+### 随想
+
+| 文章 | 主题 |
+|------|------|
+| [如何系鞋带](https://zhi.moe/post/how-to-tie-shoelace/) | 生活技巧 |
+| [关于母亲](https://zhi.moe/post/essay-memories-about-mother/) | 亲情回忆 |
+| [小镇](https://zhi.moe/post/essay-small-town/) | 故乡随笔 |
+| [花水木影评](https://zhi.moe/post/movie-review-hanamizuki/) | 电影 |
+| [告别 2012](https://zhi.moe/post/goodbye-2012/) | 年度总结 |
+| [杭州买房记](https://zhi.moe/post/hangzhou-house-tip/) | 生活经验 |
+
+## 技术栈与工具
+
+- 博客引擎：Hugo（静态站点生成器）
+- 主题：paged
+- 部署：GitHub Pages
+- 统计：Google Analytics + Cloudflare Worker
+- 字体：自定制编程字体
