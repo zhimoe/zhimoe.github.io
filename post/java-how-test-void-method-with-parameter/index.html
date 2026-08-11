@@ -8,7 +8,7 @@
 <span><a href=../../categories/%E9%9A%8F%E6%83%B3/>随想</a></span>
 <span><a href=../../search/>搜索</a></span></div></nav><div class=article-meta><h2 class=title>Java 单元测试如何 Mock 有参数的 void 方法</h2><h3 class=meta-line><span><span class=date>17-04-23</span>
 </span><span class=term><a href=../../categories/%E7%BC%96%E7%A8%8B/ class=term-cat>编程</a>
-<a href=../../tags/code/ class=term-tag>#code </a><a href=../../tags/java/ class=term-tag>#java </a><a href=../../tags/test/ class=term-tag>#test</a></span></h3></div><div class=main><p>测试中如果遇到被测试方法调用 void 方法，在 Mockito 中改如何处理？</p><p>假设有如下的服务依赖：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#000>@Service</span>
+<a href=../../tags/code/ class=term-tag>#code </a><a href=../../tags/java/ class=term-tag>#java </a><a href=../../tags/test/ class=term-tag>#test</a></span></h3></div><div class=main><p>测试中如果遇到被测试方法调用 void 方法，在 Mockito 中改如何处理？</p><p>假设有如下的服务依赖：</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#000>@Service</span>
 </span></span><span style=display:flex><span><span style=color:#a90d91>class</span> <span style=color:#3f6e75>DepositSvc</span> {
 </span></span><span style=display:flex><span>    <span style=color:#000>@Autowired</span>
 </span></span><span style=display:flex><span>    <span style=color:#a90d91>private</span> <span style=color:#000>AccountSvc</span> <span style=color:#000>accSvc</span>;
@@ -34,7 +34,7 @@
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>这里的 AccountSvc 只是提供了一个 void 方法处理了入参 accounts，虽然修改入参是被我所不齿的，但是有时改写这类方法挺麻烦的，特别如果方法修改了两个入参的话。<br>这种情况下如何测试 DepositSvc.dps 方法呢？mockito 的 <code>doAnswer</code>就是用于模拟 void 方法回调的。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a90d91>class</span> <span style=color:#3f6e75>DepositSvcTest</span> {
+</span></span></code></pre></div><p>这里的 AccountSvc 只是提供了一个 void 方法处理了入参 accounts，虽然修改入参是被我所不齿的，但是有时改写这类方法挺麻烦的，特别如果方法修改了两个入参的话。<br>这种情况下如何测试 DepositSvc.dps 方法呢？mockito 的 <code>doAnswer</code>就是用于模拟 void 方法回调的。</p><div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a90d91>class</span> <span style=color:#3f6e75>DepositSvcTest</span> {
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#000>@InjectMocks</span>
 </span></span><span style=display:flex><span>    <span style=color:#a90d91>private</span> <span style=color:#000>DepositSvc</span> <span style=color:#000>depositSvc</span>;

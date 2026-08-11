@@ -2,7 +2,7 @@
 &lt;a href="https://openjdk.org/jeps/444"&gt;JEP 444: Virtual Threads&lt;/a&gt; 主要目标在优化 IO 密集型任务时创建平台线程会消耗过多内存以及线程上下文切换耗时问题。&lt;/p&gt;
 &lt;p&gt;虚拟线程的优势：1. 和线程 API 兼容（大部分兼容）2. 降低应用内存使用，提升系统可用性，减少内存不足异常 OutOfMemoryError: unable to create new native thread 3. 提升代码可读性（相比 reactive 编程）。&lt;/p&gt;
 &lt;p&gt;本文是 VirtualThread 快速笔记，包含 API 使用、限制和在 Spring Boot 的实际使用以及与 Kotlin 协程的对比。&lt;/p&gt;</description></item><item><title>Java 并发 4-线程池与执行器</title><link>https://zhimoe.github.io/post/java-concurrency-4-threadpool-hierachy/</link><pubDate>Wed, 13 Jun 2018 09:57:52 +0800</pubDate><guid>https://zhimoe.github.io/post/java-concurrency-4-threadpool-hierachy/</guid><description>&lt;h3 id="thread-pool-classes-hierarchy"&gt;thread pool classes hierarchy&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;java thread pool class hierarchy
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;java thread pool class hierarchy
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Executor (java.util.concurrent)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;|---ExecutorService (java.util.concurrent)
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; |---AbstractExecutorService (java.util.concurrent)
