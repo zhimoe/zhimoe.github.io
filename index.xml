@@ -1073,8 +1073,11 @@ Files 是一个静态类，操作文件内容.Paths 是静态工具类，操作�
 .single .main a, .single .main h2 {
  border-bottom: none;
 }
+.search .article-meta .meta-line {
+ display: none;
+}
 &lt;/style&gt;
-&lt;input type="search" id="search-input"&gt;
+&lt;input type="search" id="search-input" autofocus&gt;
 &lt;div class="search-results"&gt;
 &lt;section&gt;
 &lt;h2 class="toc-line"&gt;&lt;a target="_blank"&gt;&lt;/a&gt;&lt;span class="dots"&gt;&lt;/span&gt;&lt;span class="page-num small"&gt;&lt;/span&gt;&lt;/h2&gt;
