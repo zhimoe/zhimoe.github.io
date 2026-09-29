@@ -1063,6 +1063,13 @@ Files 是一个静态类，操作文件内容.Paths 是静态工具类，操作�
  width: 100%;
  font-size: 1.2em;
  padding: .5em;
+ box-sizing: border-box;
+ border: 1px solid var(--border-color);
+ color: var(--ink-color);
+}
+#search-input:focus {
+ border-color: #aaa193;
+ outline: none;
 }
 .search-results b {
  background-color: yellow;
