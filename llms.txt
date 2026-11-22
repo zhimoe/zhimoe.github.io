@@ -6,6 +6,7 @@
 
 - [博客首页](https://zhi.moe/)
 - [文章列表](https://zhi.moe/post/)
+- [项目](https://zhi.moe/projects/)
 - [GitHub](https://github.com/zhimoe/)
 - [编程字体项目](https://github.com/zhimoe/programming-fonts)
 

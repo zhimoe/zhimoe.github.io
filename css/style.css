@@ -368,12 +368,33 @@ code {
   font-variant-numeric: tabular-nums;
 }
 
+.meta-line {
+  margin: 1em 0;
+}
+
 .author+.date::before {
   content: " / ";
 }
 
 h1.title {
   margin-top: 1em;
+}
+
+.single .title {
+  font-size: 1.5em;
+  margin-block: .83em;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 body.list-page::before {
