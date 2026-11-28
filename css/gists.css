@@ -1,0 +1,214 @@
+/* gist notes page */
+.main {
+  min-width: 0;
+}
+
+.gist-notes {
+  min-width: 0;
+  margin: 1.5rem 0 2rem;
+}
+
+.gist-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem .9rem;
+  margin-bottom: .8rem;
+}
+
+.gist-filter-wrap {
+  flex: 1 1 13rem;
+}
+
+.gist-source {
+  margin-left: auto;
+  font-size: small;
+  white-space: nowrap;
+  border-bottom: none;
+}
+
+.gist-filter {
+  width: 100%;
+  padding: .45em .65em;
+  font: inherit;
+  font-size: .95em;
+  color: var(--ink-color);
+  background: var(--bg-body);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.gist-filter:focus {
+  border-color: #aaa193;
+  outline: 2px solid rgb(170 161 147 / 25%);
+  outline-offset: 1px;
+}
+
+.gist-filter::placeholder {
+  color: #9a9184;
+}
+
+.gist-status {
+  min-height: 1.4em;
+  margin: 0 0 .8rem;
+  font-size: small;
+  color: #7b7264;
+}
+
+.gist-status.is-error {
+  color: #8a3b2e;
+}
+
+.gist-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .65rem;
+  min-width: 0;
+}
+
+.gist-note {
+  min-width: 0;
+  border: 1px solid var(--border-color);
+  background: var(--bg-block);
+}
+
+.gist-note[hidden] {
+  display: none;
+}
+
+.gist-note[open] {
+  background: var(--bg-body);
+  box-shadow: 2px 2px 0 rgb(201 193 179 / 35%);
+}
+
+.gist-note > summary {
+  display: flex;
+  align-items: baseline;
+  gap: .55rem;
+  padding: .6rem .75rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.gist-note > summary::-webkit-details-marker {
+  display: none;
+}
+
+.gist-note > summary::before {
+  content: "▸";
+  flex: none;
+  color: #8d8475;
+  font-size: .8em;
+  line-height: 1.6;
+  transition: transform .15s ease;
+}
+
+.gist-note[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.gist-note > summary:focus-visible {
+  outline: 2px solid #aaa193;
+  outline-offset: -2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gist-note > summary:hover {
+    background: rgb(201 193 179 / 16%);
+  }
+}
+
+.gist-note-title {
+  font-family: 'MonoLisa', "SF Mono", Consolas, monospace, FangSongCode, stkaiti, kaiti, sans-serif;
+  font-size: .9em;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.gist-note-meta {
+  display: flex;
+  align-items: baseline;
+  gap: .75em;
+  margin-left: auto;
+  color: #7b7264;
+  font-size: small;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.gist-note-lang {
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.gist-note-body {
+  min-width: 0;
+  padding: .1rem .9rem 1rem;
+  border-top: 1px dashed var(--border-color);
+  overflow: hidden;
+}
+
+.gist-note-body > :first-child {
+  margin-top: .8rem;
+}
+
+.gist-note-body h1 {
+  font-size: 1.3em;
+}
+
+.gist-note-body h2 {
+  font-size: 1.15em;
+}
+
+.gist-note-body h3 {
+  font-size: 1.05em;
+}
+
+.gist-note-body h4,
+.gist-note-body h5,
+.gist-note-body h6 {
+  font-size: 1em;
+}
+
+/* Keep code blocks inside the card instead of the theme's full-bleed style. */
+.gist-note-body pre {
+  width: auto;
+  max-width: 100%;
+  margin: .8rem 0;
+  padding: .1rem .75rem .1rem 0;
+  background: var(--bg-block);
+  border: 1px solid var(--border-color);
+  overflow-x: auto;
+}
+
+.gist-note-body pre code {
+  padding: .75rem 0 .75rem .75rem;
+  background: none;
+  font-size: .8rem;
+}
+
+.gist-note-body :not(pre) > code {
+  padding: .1em .25em;
+}
+
+.gist-note-body table {
+  width: 100%;
+  margin: .8rem 0;
+}
+
+.gist-note-body img {
+  height: auto;
+}
+
+@media (max-width: 520px) {
+  .gist-note-meta {
+    gap: .5em;
+  }
+
+  .gist-note-lang {
+    display: none;
+  }
+}
